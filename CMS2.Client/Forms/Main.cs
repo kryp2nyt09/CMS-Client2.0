@@ -179,6 +179,10 @@ namespace CMS2.Client
         #endregion
 
         #region PaymentSummary
+        private AutoCompleteStringCollection autoComprevenueUnitName;
+        private AutoCompleteStringCollection autoComp_empName;
+        private AutoCompleteStringCollection autoComp_revenueUnitType;
+
         Employee employee;
         Entities.PaymentSummary paymentSummary;
         PaymentSummaryStatus paymentSummaryStatus;
@@ -187,7 +191,10 @@ namespace CMS2.Client
         private List<Payment> paymentPrepaid;
         private List<Payment> paymentFreightCollect;
         private List<Payment> paymentCorpAcctConsignee;
-
+        private List<RevenueUnit> paymentSummary_revenueUnits;
+        private List<Employee> paymentSummary_employee;
+        private List<Employee> paymentSummary_remittedBy;
+        private List<RevenueUnitType> paymentSummary_revenueUnitType;
 
         public List<PaymentSummaryModel> listPaymentSummary = new List<PaymentSummaryModel>();
         public List<PaymentSummaryDetails> listpaymentSummaryDetails = new List<PaymentSummaryDetails>();
@@ -324,6 +331,7 @@ namespace CMS2.Client
                     soa = null;
 
                     datePaymentDate.Value = DateTime.Now;
+                    dateCheckDate.Value = DateTime.Now;
 
                     bsPaymentType.DataSource = paymentTypeService.FilterActive().OrderBy(x => x.PaymentTypeName).ToList();
                     lstPaymentType.DataSource = bsPaymentType;
@@ -349,7 +357,14 @@ namespace CMS2.Client
                     break;
                 case "Payment Summary":
                     PaymentSummaryLoadData();
-                    // PopulateGrid_Prepaid();
+                    PopulateGrid_Prepaid();
+                    PopulateGrid_FreightCollect();
+                    PopulateGrid_CorpAcctConsignee();
+                    gridPrepaid.Columns["Validate"].PinPosition = Telerik.WinControls.UI.PinnedColumnPosition.Right;
+                    gridPrepaid.Columns["Client"].PinPosition = Telerik.WinControls.UI.PinnedColumnPosition.Left;
+
+                    gridFreightCollect.Columns["Validate"].PinPosition = Telerik.WinControls.UI.PinnedColumnPosition.Right;
+                    gridFreightCollect.Columns["Client"].PinPosition = Telerik.WinControls.UI.PinnedColumnPosition.Left;
                     break;
                 case "Tracking":
                     PopulateGrid_FreightCollect();
@@ -1584,6 +1599,30 @@ namespace CMS2.Client
             btnReset.Enabled = true;
         }
 
+        private void lstCommodityType_Enter(object sender, EventArgs e)
+        {
+            commodityTypeCollection = new AutoCompleteStringCollection();
+            var ctypes = commodityTypes.OrderBy(x => x.CommodityTypeName).Where(x => x.RecordStatus == 1).Select(x => x.CommodityTypeName).ToList();
+            foreach (var item in ctypes)
+            {
+                commodityTypeCollection.Add(item);
+            }
+            lstCommodityType.AutoCompleteDataSource = commodityTypeCollection;
+        }
+
+        private void lstServiceType_Enter(object sender, EventArgs e)
+        {
+            serviceTypeCollection = new AutoCompleteStringCollection();
+            var servicetype = serviceTypes.OrderBy(x => x.ServiceTypeName).Where(x => x.RecordStatus == 1).Select(x => x.ServiceTypeName).ToList();
+            foreach (var item in servicetype)
+            {
+                serviceTypeCollection.Add(item);
+            }
+            lstServiceType.AutoCompleteDataSource = serviceTypeCollection;
+        }
+
+
+
         #endregion
 
         #region Payment
@@ -1624,7 +1663,7 @@ namespace CMS2.Client
                         soaPayment.CheckNo = txtCheckNo.Text.Trim();
                     }
                     soaPayment.ReceivedById = AppUser.Employee.EmployeeId;
-                    soaPayment.Remarks = txtRemarks.Text;
+                    soaPayment.Remarks = cmb_PaymentRemarks.Text;
                     soaPayment.CreatedBy = AppUser.User.UserId;
                     soaPayment.CreatedDate = DateTime.Now;
                     soaPayment.ModifiedBy = AppUser.User.UserId;
@@ -1670,7 +1709,7 @@ namespace CMS2.Client
                         payment.CheckNo = txtCheckNo.Text.Trim();
                     }
                     payment.ReceivedById = AppUser.Employee.EmployeeId;
-                    payment.Remarks = txtRemarks.Text;
+                    payment.Remarks = cmb_PaymentRemarks.Text;
                     payment.CreatedBy = AppUser.User.UserId;
                     payment.CreatedDate = DateTime.Now;
                     payment.ModifiedBy = AppUser.User.UserId;
@@ -1751,6 +1790,26 @@ namespace CMS2.Client
             }
             txtAwb.AutoCompleteCustomSource = AirwayBill;
         }
+
+        private void txtAwb_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                List<Shipment> _shipment = shipmentService.FilterActiveBy(x => x.AirwayBillNo.Equals(txtAwb.Text.ToString()));
+                if (_shipment != null && _shipment.Count > 0)
+                {
+                    shipment = shipmentService.EntityToModel(_shipment.FirstOrDefault());
+                    LoadPayment();
+                }
+                else
+                {
+                    MessageBox.Show("No record found.", "Airwaybill Search");
+                }
+
+            }
+
+            shipmentModel = shipment;
+        }
         #endregion
 
         #region Payment Summary
@@ -1758,14 +1817,13 @@ namespace CMS2.Client
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-
             PopulateGrid_Prepaid();
             PopulateGrid_FreightCollect();
             PopulateGrid_CorpAcctConsignee();
             TotalPaymentSummary();
             clearPaymentSummaryData();
-
-
+            chk_ReceivedAll.Checked = false;
+            listPaymentSummary = new List<PaymentSummaryModel>();
         }
 
         private void lstRevenueUnitType_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
@@ -1877,11 +1935,11 @@ namespace CMS2.Client
 
                     }
 
-                    var itemToRemove = listPaymentSummary.SingleOrDefault(r => r.ClientId == clientId);
+                    var itemToRemove = listPaymentSummary.Find(r => r.ClientId == clientId);
                     if (itemToRemove != null)
                         listPaymentSummary.Remove(itemToRemove);
 
-                    var removeDetails = listpaymentSummaryDetails.SingleOrDefault(r => r.AwbNo == awbsoa);
+                    var removeDetails = listpaymentSummaryDetails.Find(r => r.AwbNo == awbsoa);
                     if (removeDetails != null)
                         listpaymentSummaryDetails.Remove(removeDetails);
 
@@ -1966,11 +2024,11 @@ namespace CMS2.Client
 
                     }
 
-                    var itemToRemove = listPaymentSummary.SingleOrDefault(r => r.ClientId == clientId);
+                    var itemToRemove = listPaymentSummary.Find(r => r.ClientId == clientId);
                     if (itemToRemove != null)
                         listPaymentSummary.Remove(itemToRemove);
 
-                    var removeDetails = listpaymentSummaryDetails.SingleOrDefault(r => r.AwbNo == awbsoa);
+                    var removeDetails = listpaymentSummaryDetails.Find(r => r.AwbNo == awbsoa);
                     if (removeDetails != null)
                         listpaymentSummaryDetails.Remove(removeDetails);
 
@@ -2083,7 +2141,9 @@ namespace CMS2.Client
             PopulateGrid_Prepaid();
             PopulateGrid_FreightCollect();
             PopulateGrid_CorpAcctConsignee();
+            TotalPaymentSummary();
             btnPrintPaymentSummary.Enabled = true;
+            chk_ReceivedAll.Checked = false;
         }
 
         private void img_Signature_MouseDown(object sender, MouseEventArgs e)
@@ -2130,12 +2190,231 @@ namespace CMS2.Client
             psummaryForm.passListofMainDetails(listMainDetails);
             psummaryForm.Show();
             clearListofPaymentSummary();
+
         }
 
         private void btnReset_CancelPaymentSummary_Click(object sender, EventArgs e)
         {
             clearSummaryData();
         }
+
+        private void chk_ReceivedAll_CheckStateChanged(object sender, EventArgs e)
+        {
+            clearPaymentSummaryData();
+            string awbsoa;
+            string clientName;
+            string paymentType;
+            decimal amountDue;
+            decimal amountPaid;
+            decimal taxWithheld;
+            string OrNo;
+            string PrNo;
+            string ValidatedBy;
+
+            Guid clientId = new Guid();
+            Guid paymentId = new Guid();
+            Guid validatedById = new Guid();
+            string paymentModeCode;
+
+            if (chk_ReceivedAll.Checked)
+            {
+                #region Prepaid Payment
+
+                for (int i = 0; i < gridPrepaid.Rows.Count; i++)
+                {
+                    gridPrepaid.Rows[i].Cells["Validate"].Value = true;
+                    awbsoa = gridPrepaid.Rows[i].Cells["AWB No"].Value.ToString();
+                    clientName = gridPrepaid.Rows[i].Cells["Client"].Value.ToString();
+                    amountDue = Convert.ToDecimal(gridPrepaid.Rows[i].Cells["Amount Due"].Value);
+                    taxWithheld = Convert.ToDecimal(gridPrepaid.Rows[i].Cells["Tax Withheld"].Value);
+                    OrNo = gridPrepaid.Rows[i].Cells["OR No"].Value.ToString();
+                    PrNo = gridPrepaid.Rows[i].Cells["PR No"].Value.ToString();
+                    ValidatedBy = gridPrepaid.Rows[i].Cells["Validated By"].Value.ToString();
+                    paymentModeCode = "PP";
+
+                    amountPaid = Convert.ToDecimal(gridPrepaid.Rows[i].Cells["Amount Paid"].Value);
+                    paymentType = gridPrepaid.Rows[i].Cells["Payment Type"].Value.ToString();
+                    clientId = Guid.Parse(gridPrepaid.Rows[i].Cells["ClientId"].Value.ToString());
+                    paymentId = Guid.Parse(gridPrepaid.Rows[i].Cells["PaymentId"].Value.ToString());
+                    validatedById = Guid.Parse(gridPrepaid.Rows[i].Cells["ValidatedById"].Value.ToString());
+
+                    if (paymentType.Equals("Cash"))
+                    {
+                        totalCashReceived += amountPaid;
+                    }
+                    else
+                    {
+                        totalCheckReceived += amountPaid;
+                    }
+
+                    listofPaymentSummary(clientId, paymentId, validatedById, paymentModeCode);
+                    summaryDetails(awbsoa, clientName, paymentType, amountDue, amountPaid, taxWithheld, OrNo, PrNo, ValidatedBy, paymentModeCode);
+                }
+
+                #endregion
+
+                #region Freight Collect
+                for (int j = 0; j < gridFreightCollect.Rows.Count; j++)
+                {
+                    gridFreightCollect.Rows[j].Cells["Validate"].Value = true;
+
+                    awbsoa = gridFreightCollect.Rows[j].Cells["AWB No"].Value.ToString();
+                    clientName = gridFreightCollect.Rows[j].Cells["Client"].Value.ToString();
+                    amountDue = Convert.ToDecimal(gridFreightCollect.Rows[j].Cells["Amount Due"].Value);
+                    taxWithheld = Convert.ToDecimal(gridFreightCollect.Rows[j].Cells["Tax Withheld"].Value);
+                    OrNo = gridFreightCollect.Rows[j].Cells["OR No"].Value.ToString();
+                    PrNo = gridFreightCollect.Rows[j].Cells["PR No"].Value.ToString();
+                    ValidatedBy = gridFreightCollect.Rows[j].Cells["Validated By"].Value.ToString();
+                    paymentModeCode = "FC";
+
+
+                    amountPaid = Convert.ToDecimal(gridFreightCollect.Rows[j].Cells["Amount Paid"].Value);
+                    paymentType = gridFreightCollect.Rows[j].Cells["Payment Type"].Value.ToString();
+                    clientId = Guid.Parse(gridFreightCollect.Rows[j].Cells["ClientId"].Value.ToString());
+                    paymentId = Guid.Parse(gridFreightCollect.Rows[j].Cells["PaymentId"].Value.ToString());
+                    validatedById = Guid.Parse(gridFreightCollect.Rows[j].Cells["ValidatedById"].Value.ToString());
+
+                    if (paymentType.Equals("Cash"))
+                    {
+                        totalCashReceived += amountPaid;
+                    }
+                    else
+                    {
+                        totalCheckReceived += amountPaid;
+                    }
+
+                    listofPaymentSummary(clientId, paymentId, validatedById, paymentModeCode);
+                    summaryDetails(awbsoa, clientName, paymentType, amountDue, amountPaid, taxWithheld, OrNo, PrNo, ValidatedBy, paymentModeCode);
+                }
+
+                #endregion
+
+            }
+            else
+            {
+                #region Prepaid
+                for (int i = 0; i < gridPrepaid.Rows.Count; i++)
+                {
+                    gridPrepaid.Rows[i].Cells["Validate"].Value = false;
+                    awbsoa = gridPrepaid.Rows[i].Cells["AWB No"].Value.ToString();
+                    clientId = Guid.Parse(gridPrepaid.Rows[i].Cells["ClientId"].Value.ToString());
+                    paymentType = gridPrepaid.Rows[i].Cells["Payment Type"].Value.ToString();
+                    amountPaid = Convert.ToDecimal(gridPrepaid.Rows[i].Cells["Amount Paid"].Value);
+
+                    //if (paymentType.Equals("Cash"))
+                    //{
+                    //    totalCashReceived -= amountPaid;
+                    //}
+                    //else
+                    //{
+                    //    totalCheckReceived -= amountPaid;
+                    //}
+
+
+                    var itemRemovePrepaid = listPaymentSummary.Find(r => r.ClientId == clientId);
+                    if (itemRemovePrepaid != null)
+                        listPaymentSummary.Remove(itemRemovePrepaid);
+
+                    var removePrepaidDetails = listpaymentSummaryDetails.Find(r => r.AwbNo == awbsoa);
+                    if (removePrepaidDetails != null)
+                        listpaymentSummaryDetails.Remove(removePrepaidDetails);
+                }
+
+                #endregion
+
+                #region Freight Collect
+                for (int j = 0; j < gridFreightCollect.Rows.Count; j++)
+                {
+                    gridFreightCollect.Rows[j].Cells["Validate"].Value = false;
+                    clientId = Guid.Parse(gridFreightCollect.Rows[j].Cells["ClientId"].Value.ToString());
+                    awbsoa = gridFreightCollect.Rows[j].Cells["AWB No"].Value.ToString();
+                    paymentType = gridFreightCollect.Rows[j].Cells["Payment Type"].Value.ToString();
+                    amountPaid = Convert.ToDecimal(gridFreightCollect.Rows[j].Cells["Amount Paid"].Value);
+                    //if (paymentType.Equals("Cash"))
+                    //{
+                    //    totalCashReceived -= amountPaid;
+                    //}
+                    //else
+                    //{
+                    //    totalCheckReceived -= amountPaid;
+                    //}
+                    var itemRemoveFreight = listPaymentSummary.Find(r => r.ClientId == clientId);
+                    if (itemRemoveFreight != null)
+                        listPaymentSummary.Remove(itemRemoveFreight);
+
+                    var removeFCDetails = listpaymentSummaryDetails.Find(r => r.AwbNo == awbsoa);
+                    if (removeFCDetails != null)
+                        listpaymentSummaryDetails.Remove(removeFCDetails);
+                }
+                #endregion
+
+                clearPaymentSummaryData();
+            }
+
+            totalAmountReceived = totalCashReceived + totalCheckReceived;
+            txtTotalCashReceived.Text = totalCashReceived.ToString();
+            txtTotalCheckReceived.Text = totalCheckReceived.ToString();
+            txtTotalAmntReceived.Text = totalAmountReceived.ToString();
+        }
+
+        private void lstRevenueUnitType_Enter(object sender, EventArgs e)
+        {
+            autoComp_revenueUnitType = new AutoCompleteStringCollection();
+            var revenueUnittype = paymentSummary_revenueUnitType.OrderBy(x => x.RevenueUnitTypeName).Where(x => x.RecordStatus == 1).Select(x => x.RevenueUnitTypeName).ToList();
+            foreach (var item in revenueUnittype)
+            {
+                autoComp_revenueUnitType.Add(item);
+            }
+            lstOriginBco.AutoCompleteDataSource = autoComp_revenueUnitType;
+        }
+
+        private void lstRevenueUnitName_Enter(object sender, EventArgs e)
+        {
+            if (lstRevenueUnitType.SelectedIndex >= 0)
+            {
+                var rUnitType = Guid.Parse(lstRevenueUnitType.SelectedValue.ToString());
+                List<string> _unitName = paymentSummary_revenueUnits.Where(x => x.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.RevenueUnitType.RevenueUnitTypeId == rUnitType).Select(x => x.RevenueUnitName).ToList();
+                autoComprevenueUnitName = new AutoCompleteStringCollection();
+                foreach (var item in _unitName)
+                {
+                    autoComprevenueUnitName.Add(item);
+                }
+                lstRevenueUnitName.AutoCompleteDataSource = autoComprevenueUnitName;
+            }
+        }
+
+        private void lstUser_Enter(object sender, EventArgs e)
+        {
+            if (lstRevenueUnitType.SelectedIndex >= 0 && lstRevenueUnitName.SelectedIndex >= 0)
+            {
+                var rUnitType = Guid.Parse(lstRevenueUnitType.SelectedValue.ToString());
+                var rUnitname = Guid.Parse(lstRevenueUnitName.SelectedValue.ToString());
+                List<string> _empName = paymentSummary_employee.Where(x => x.AssignedToArea.City.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.AssignedToArea.RevenueUnitId == rUnitname).Select(x => x.FullName).ToList();
+                autoComp_empName = new AutoCompleteStringCollection();
+                foreach (var item in _empName)
+                {
+                    autoComp_empName.Add(item);
+                }
+                lstUser.AutoCompleteDataSource = autoComp_empName;
+            }
+        }
+
+        private void lstRemittedBy_Enter(object sender, EventArgs e)
+        {
+            if (lstRevenueUnitType.SelectedIndex >= 0 && lstRevenueUnitName.SelectedIndex >= 0)
+            {
+                var rUnitType = Guid.Parse(lstRevenueUnitType.SelectedValue.ToString());
+                var rUnitname = Guid.Parse(lstRevenueUnitName.SelectedValue.ToString());
+                List<string> _empName = paymentSummary_employee.Where(x => x.AssignedToArea.City.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.AssignedToArea.RevenueUnitId == rUnitname && x.AssignedToArea.RevenueUnitType.RevenueUnitTypeId == rUnitType).Select(x => x.FullName).ToList();
+                autoComp_empName = new AutoCompleteStringCollection();
+                foreach (var item in _empName)
+                {
+                    autoComp_empName.Add(item);
+                }
+                lstRemittedBy.AutoCompleteDataSource = autoComp_empName;
+            }
+        }
+
         #endregion
 
         #endregion
@@ -3794,8 +4073,11 @@ namespace CMS2.Client
                 txtRfa.Text = (shipment.Discount * 100).ToString();
                 txtNotes.Text = shipment.Notes;
                 chkNonVatable.Checked = false;
-                if ((shipment.EvatId == null || shipment.EvatId == Guid.Empty) || shipment.EVat == null)
-                    chkNonVatable.Checked = true;
+                //if ((shipment.EvatId == null || shipment.EvatId == Guid.Empty) || shipment.EVat == null)
+                //{
+                //    chkNonVatable.Checked = true;
+                //}
+                   
                 shipment.AcceptedAreaId = AppUser.User.Employee.AssignedToAreaId;
                 shipment.AcceptedArea = AppUser.Employee.AssignedToArea;
 
@@ -4393,9 +4675,9 @@ namespace CMS2.Client
             txtCheckBank.Enabled = false;
             txtCheckNo.Text = "";
             txtCheckNo.Enabled = false;
-            datePaymentDate.Value = DateTime.Now;
-            datePaymentDate.Enabled = false;
-            txtRemarks.Text = "";
+            dateCheckDate.Value = DateTime.Now;
+            dateCheckDate.Enabled = false;
+            cmb_PaymentRemarks.Text = "";
         }
 
         private void SavePayment(object sender, DoWorkEventArgs e)
@@ -4434,6 +4716,14 @@ namespace CMS2.Client
             }
         }
 
+        private void LoadPayment()
+        {
+            if (shipment != null)
+            {
+                txtAmountDue.Text = Convert.ToString(shipment.ShipmentTotal);
+            }
+        }
+
 
         #endregion
 
@@ -4451,6 +4741,9 @@ namespace CMS2.Client
             paymentPrepaid = new List<Payment>();
             paymentFreightCollect = new List<Payment>();
             paymentCorpAcctConsignee = new List<Payment>();
+            paymentSummary_revenueUnits = new List<RevenueUnit>();
+            paymentSummary_revenueUnitType = new List<RevenueUnitType>();
+            paymentSummary_employee = new List<Employee>();
 
             employeeService = new EmployeeBL(GlobalVars.UnitOfWork);
             paymentService = new PaymentBL(GlobalVars.UnitOfWork);
@@ -5111,7 +5404,7 @@ namespace CMS2.Client
             paymentSummary = new Entities.PaymentSummary();
             Guid paymentStatusId = new Guid();
             Guid checkById = new Guid();
-            paymentStatusId = paymentSummaryStatusService.GetAll().Where(x => x.PaymentSummaryName == "Validated").Select(x => x.PaymentSummaryStatusId).First();
+            paymentStatusId = paymentSummaryStatusService.GetAll().Where(x => x.PaymentSummaryStatusName == "Validated").Select(x => x.PaymentSummaryStatusId).First();
             checkById = userService.GetAllActiveUsers().Where(x => x.UserId == AppUser.User.UserId).Select(x => x.EmployeeId).First();
 
             Guid remittedById = Guid.Parse(lstUser.SelectedValue.ToString());
@@ -7395,5 +7688,7 @@ namespace CMS2.Client
             gridSegregation.EnableFiltering = false;
             getSegregationData();
         }
+
+       
     }
 }

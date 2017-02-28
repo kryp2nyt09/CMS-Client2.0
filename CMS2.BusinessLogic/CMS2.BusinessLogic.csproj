@@ -49,8 +49,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BarcodeLib, Version=1.0.0.20, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\AP CARGO Local Repo\CMS2.BusinessLogic\Helpers\bin\Debug\BarcodeLib.dll</HintPath>
-      <Private>True</Private>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Users\Dev - Kim\Desktop\CMS2 Client Source Code\CMS Client Source Code\CMS2.BusinessLogic\bin\Debug\BarcodeLib.dll</HintPath>
     </Reference>
     <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
       <HintPath>..\..\AP CARGO Local Repo\CMS2.BusinessLogic\Helpers\bin\Debug\CrystalDecisions.CrystalReports.Engine.dll</HintPath>
@@ -62,16 +62,11 @@
       <HintPath>..\..\AP CARGO Local Repo\CMS2.BusinessLogic\Helpers\bin\Debug\CrystalDecisions.Shared.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\..\AP CARGO Local Repo\CMS2.BusinessLogic\Helpers\bin\Debug\EntityFramework.dll</HintPath>
-      <Private>True</Private>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Users\Dev - Kim\Desktop\CMS2 Client Source Code\CMS Client Source Code\CMS2.BusinessLogic\bin\Debug\EntityFramework.dll</HintPath>
     </Reference>
-    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\..\AP CARGO Local Repo\CMS2.BusinessLogic\Helpers\bin\Debug\EntityFramework.SqlServer.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\AP CARGO Local Repo\CMS2.BusinessLogic\Helpers\bin\Debug\Microsoft.AspNet.Identity.Core.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>C:\Users\Dev - Kim\Desktop\CMS Repository\CMS2.BusinessLogic\Helpers\bin\Debug\Microsoft.AspNet.Identity.Core.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
