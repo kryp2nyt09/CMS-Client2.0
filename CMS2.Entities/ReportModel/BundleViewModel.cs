@@ -23,5 +23,7 @@ namespace CMS2.Entities.ReportModel
 
         public DateTime CreatedDate { get; set; }
         public string Destination { get; set; }
+        public string BCO { get; set; }
+        public string BSO { get; set; }
     }
 }

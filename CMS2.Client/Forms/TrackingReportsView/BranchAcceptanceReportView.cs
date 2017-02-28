@@ -15,9 +15,6 @@ namespace CMS2.Client.Forms.TrackingReportsView
     {
         public BranchAcceptanceReportView()
         {
-            //
-            // Required for telerik Reporting designer support
-            //
             InitializeComponent();
 
             var objectDataSource = new Telerik.Reporting.ObjectDataSource();
@@ -26,11 +23,13 @@ namespace CMS2.Client.Forms.TrackingReportsView
             table1.DataSource = objectDataSource;
 
             txtDate.Value = TrackingReportGlobalModel.Date;
-            txtArea.Value = TrackingReportGlobalModel.Area;
+            txtArea.Value = TrackingReportGlobalModel.Branch; //BRANCH
             txtDriver.Value = TrackingReportGlobalModel.Driver;
             txtChecker.Value = TrackingReportGlobalModel.Checker;
             txtBatch.Value = TrackingReportGlobalModel.Batch;
             txtPlateNo.Value = TrackingReportGlobalModel.PlateNo;
+
+            txtScannedBy.Value = TrackingReportGlobalModel.ScannedBy;
         }
     }
 }

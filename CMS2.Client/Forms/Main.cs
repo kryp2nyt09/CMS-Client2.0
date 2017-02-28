@@ -5111,7 +5111,7 @@ namespace CMS2.Client
             paymentSummary = new Entities.PaymentSummary();
             Guid paymentStatusId = new Guid();
             Guid checkById = new Guid();
-            paymentStatusId = paymentSummaryStatusService.GetAll().Where(x => x.PaymentSummaryStatusName == "Validated").Select(x => x.PaymentSummaryStatusId).First();
+            paymentStatusId = paymentSummaryStatusService.GetAll().Where(x => x.PaymentSummaryName == "Validated").Select(x => x.PaymentSummaryStatusId).First();
             checkById = userService.GetAllActiveUsers().Where(x => x.UserId == AppUser.User.UserId).Select(x => x.EmployeeId).First();
 
             Guid remittedById = Guid.Parse(lstUser.SelectedValue.ToString());
@@ -5225,11 +5225,7 @@ namespace CMS2.Client
                     //DATE
                     dateTimePickerBranchAcceptance_Date.Value = DateTime.Now;
                     //SET DROPDOWN BRANCH IF BCO or BSO
-                    dropDownBranchAcceptance_Branch.DataSource = getRevenueUnitType();
-                    dropDownBranchAcceptance_Branch.DisplayMember = "RevenueUnitTypeName";
-                    dropDownBranchAcceptance_Branch.ValueMember = "RevenueUnitTypeId";
-                    dropDownBranchAcceptance_Branch.Items.Add("Branch Corporate Office");
-                    dropDownBranchAcceptance_Branch.SelectedValue = "Branch Corporate Office";
+                    dropDownBranchAcceptance_Branch.SelectedIndex = 0;
                     //CALL METHOD GET DATA - BRANCH ACCEPTANCE
                     getBrancAcceptanceData();
 
@@ -5238,12 +5234,12 @@ namespace CMS2.Client
                     //DATE 
                     dateTimeBundle_Date.Value = DateTime.Now;
 
-                    //SET DROPDOWN BRANCH IF BCO or BSO
-                    dropDownBundle_Branch.DataSource = getRevenueUnitType();
-                    dropDownBundle_Branch.DisplayMember = "RevenueUnitTypeName";
-                    dropDownBundle_Branch.ValueMember = "RevenueUnitTypeId";
-                    dropDownBundle_Branch.Items.Add("Branch Corporate Office");
-                    dropDownBundle_Branch.SelectedValue = "Branch Corporate Office";
+                    ////SET DROPDOWN BRANCH IF BCO or BSO
+                    //dropDownBundle_Branch.DataSource = getRevenueUnitType();
+                    //dropDownBundle_Branch.DisplayMember = "RevenueUnitTypeName";
+                    //dropDownBundle_Branch.ValueMember = "RevenueUnitTypeId";
+                    //dropDownBundle_Branch.Items.Add("Branch Corporate Office");
+                    dropDownBundle_Branch.SelectedIndex = 0;
 
                     //CALL METHOD GET DATA - BUNDLE
                     getBundleData();
@@ -5353,7 +5349,6 @@ namespace CMS2.Client
 
         public DataTable getBranchAcceptanceGrid()
         {
-            
             DataTable dt = new DataTable();
 
             foreach (GridViewColumn col in gridBranchAcceptance.Columns)
@@ -5578,9 +5573,9 @@ namespace CMS2.Client
             //FC - Freight Collect
             //CAC - Corporate Account Consignee
             DataView view = new DataView(dt);
-            view.RowFilter = "[Payment Mode] LIKE '%"  + _paymentmode + "%'";
-            DataTable table = view.ToTable();
-            return table;
+            view.RowFilter = "[Payment Mode] = '"  + _paymentmode + "'";
+            dt = view.ToTable();
+            return dt;
         }
         #endregion
 
@@ -5593,7 +5588,20 @@ namespace CMS2.Client
 
             PickupCargoManifestReport pickup = new PickupCargoManifestReport();
             List<RevenueUnit> _revenueUnit = getRevenueList();
-            gridPickupCargo.DataSource = pickup.getData(); //pickup.getPickUpCargoData(_revenueUnit.Find(x => x.RevenueUnitName == dropDownPickUpCargo_Area.SelectedItem.ToString()), dateTimePicker_PickupCargo.Value);
+
+            DataTable dataTable = pickup.getPickUpCargoData(dateTimePicker_PickupCargo.Value);
+            DataView view = new DataView(dataTable);
+            gridPickupCargo.DataSource = dataTable;
+
+            //AREA
+            DataTable table = view.ToTable(true, "Area");
+            dropDownPickUpCargo_Area.Items.Clear();
+            dropDownPickUpCargo_Area.Items.Add("All");
+            foreach (DataRow x in table.Rows)
+            {
+                dropDownPickUpCargo_Area.Items.Add(x["Area"].ToString());
+            }
+            dropDownPickUpCargo_Area.SelectedIndex = 0;
 
             #region PickupCargo Grid Design
             if (gridPickupCargo.DataSource != null)
@@ -5602,6 +5610,7 @@ namespace CMS2.Client
                 int ctr = 0;
                 foreach (int x in width)
                 {
+                    if(x == 0) { gridPickupCargo.Columns[ctr].IsVisible = false; }
                     gridPickupCargo.Columns[ctr].Width = x;
                     ctr++;
                 }
@@ -5612,7 +5621,6 @@ namespace CMS2.Client
             }
             #endregion PickupCargo Grid Design
         }
-
         /// <summary>
         /// BRANCH ACCEPTANCE
         /// </summary>
@@ -5621,7 +5629,7 @@ namespace CMS2.Client
             BranchAcceptanceReport branchAccept = new BranchAcceptanceReport();
             DataTable dataTable = branchAccept.getBranchAcceptanceData(dateTimePickerBranchAcceptance_Date.Value);
             DataView view = new DataView(dataTable);
-
+            
             //DRIVER
             DataTable table = view.ToTable(true, "Driver");
             dropDownBranchAcceptance_Driver.Items.Clear();
@@ -5642,7 +5650,9 @@ namespace CMS2.Client
             }
             dropDownBranchAcceptance_Batch.SelectedIndex = 0;
 
-
+            dropDownBranchAcceptance_BCO_BSO.Items.Clear();
+            dropDownBranchAcceptance_BCO_BSO.Items.Add("All");
+            
             gridBranchAcceptance.DataSource = dataTable;
 
             #region Branch Acceptance Grid Design
@@ -5698,8 +5708,10 @@ namespace CMS2.Client
             }
             dropDownBundle_Destination.SelectedIndex = 0;
 
-            gridBundle.DataSource = dataTable;
+            dropDownBundle_BCO_BSO.Items.Clear();
+            dropDownBundle_BCO_BSO.Items.Add("All");
 
+            gridBundle.DataSource = dataTable;
             gridBundle.Columns["SackNo"].IsVisible = false;
 
             #region Bundle Grid Design
@@ -6015,8 +6027,7 @@ namespace CMS2.Client
                 }
             }
             #endregion Cargo Transfer Grid Design
-        }
-       
+        }    
         /// <summary>
         /// SEGREGATION
         /// </summary>
@@ -6322,6 +6333,7 @@ namespace CMS2.Client
             TrackingReportGlobalModel.table = getPickupCargoGrid();
             TrackingReportGlobalModel.Date = dateTimePicker_PickupCargo.Value.ToLongDateString();
             TrackingReportGlobalModel.Area = dropDownPickUpCargo_Area.SelectedItem.ToString();
+
             TrackingReportGlobalModel.Driver = "";
             TrackingReportGlobalModel.Checker = "";
 
@@ -6333,14 +6345,33 @@ namespace CMS2.Client
        
         private void btnSearch_PicupCargo_Click(object sender, EventArgs e)
         {
-            getPickupCargoData();
+            this.gridPickupCargo.FilterDescriptors.Clear();
+            gridPickupCargo.EnableFiltering = true;
+            this.gridPickupCargo.ShowFilteringRow = false;
+            CompositeFilterDescriptor compositeFilter = new CompositeFilterDescriptor();
+            String Area = dropDownPickUpCargo_Area.SelectedItem.ToString();
+            if(Area == "All")
+            {
+                gridPickupCargo.EnableFiltering = false;
+                getPickupCargoData();
+            }
+            else if(Area != null)
+            {
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Area));
+            }
+            compositeFilter.LogicalOperator = FilterLogicalOperator.And;
+            this.gridPickupCargo.FilterDescriptors.Add(compositeFilter);
+
         }
 
         // **** BRANCH ACCEPTANCE **** //
         private void dropDownBranchAcceptance_Branch_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
         {
+            BranchAcceptanceReport branchAccept = new BranchAcceptanceReport();
+            DataTable dataTable = branchAccept.getBranchAcceptanceData(dateTimePickerBranchAcceptance_Date.Value);
+            DataView view = new DataView(dataTable);
 
-            if (dropDownBranchAcceptance_Branch.SelectedItem.ToString().Contains("Branch Corporate Office"))
+            if (dropDownBranchAcceptance_Branch.SelectedIndex == 0)
             {
                 label100.Text = "BCO:";
                 List<BranchCorpOffice> branchCorpOffices = getBranchCorpOffice().OrderBy(x => x.BranchCorpOfficeName).ToList();
@@ -6353,25 +6384,17 @@ namespace CMS2.Client
             else
             {
                 label100.Text = "BSO:";
-                dropDownBranchAcceptance_BCO_BSO.Enabled = true;
-                Guid revenueUnitTypeId = new Guid();
-                try
+                dropDownBranchAcceptance_BCO_BSO.Enabled = true; 
+                //BSO
+                DataTable table = view.ToTable(true, "BSO");
+                dropDownBranchAcceptance_BCO_BSO.Items.Clear();
+                dropDownBranchAcceptance_BCO_BSO.Items.Add("All");
+                foreach (DataRow x in table.Rows)
                 {
-                    revenueUnitTypeId = Guid.Parse(dropDownBranchAcceptance_Branch.SelectedValue.ToString());
+                    dropDownBranchAcceptance_BCO_BSO.Items.Add(x["BSO"].ToString());
                 }
-                catch (Exception)
-                {
-                    return;
-                }
-
-                RevenueUnitBL revenueUnitservice = new RevenueUnitBL();
-                dropDownBranchAcceptance_BCO_BSO.DataSource = null;
-                List<RevenueUnit> _revenueUnit = revenueUnitservice.GetAll().Where(x => x.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.RevenueUnitTypeId == revenueUnitTypeId).OrderBy(x => x.RevenueUnitName).ToList();
-                dropDownBranchAcceptance_BCO_BSO.DataSource = _revenueUnit;
-                dropDownBranchAcceptance_BCO_BSO.DisplayMember = "RevenueUnitName";
-                dropDownBranchAcceptance_BCO_BSO.ValueMember = "RevenueUnitId";
+                dropDownBranchAcceptance_BCO_BSO.SelectedIndex = 0;
             }
-
         }
 
         private void btnBranchAcceptance_Search_Click(object sender, EventArgs e)
@@ -6385,9 +6408,6 @@ namespace CMS2.Client
             String Branch_Area = dropDownBranchAcceptance_BCO_BSO.SelectedItem.ToString();
             String Driver = dropDownBranchAcceptance_Driver.SelectedItem.ToString();
             String Batch = dropDownBranchAcceptance_Batch.SelectedItem.ToString();
-            //String PlateNo = dropDownBranchAcceptance_PlateNo.SelectedItem.ToString();
-
-            String CreatedBy = dateTimePickerBranchAcceptance_Date.Value.ToShortDateString();
 
             if (Branch_Area == "All" && Driver == "All" && Batch == "All")
             {
@@ -6396,7 +6416,14 @@ namespace CMS2.Client
             }
             if (Branch_Area != null && Driver == "All" && Batch == "All")
             {
-                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area/Branch", FilterOperator.IsEqualTo, Branch_Area));
+                if (dropDownBranchAcceptance_Branch.SelectedIndex == 0)
+                {
+                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, Branch_Area));
+                }
+                else
+                {
+                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BSO", FilterOperator.IsEqualTo, Branch_Area));
+                }
             }
             else if (Branch_Area == "All" && Driver != null && Batch == "All")
             {
@@ -6408,12 +6435,26 @@ namespace CMS2.Client
             }
             else if (Branch_Area != null && Driver != null && Batch == "All")
             {
-                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area/Branch", FilterOperator.IsEqualTo, Branch_Area));
+                if (dropDownBranchAcceptance_Branch.SelectedIndex == 0)
+                {
+                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, Branch_Area));
+                }
+                else
+                {
+                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BSO", FilterOperator.IsEqualTo, Branch_Area));
+                }
                 compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
             }
             else if (Branch_Area != null && Driver == "All" && Batch != null)
             {
-                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area/Branch", FilterOperator.IsEqualTo, Branch_Area));
+                if (dropDownBranchAcceptance_Branch.SelectedIndex == 0)
+                {
+                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, Branch_Area));
+                }
+                else
+                {
+                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BSO", FilterOperator.IsEqualTo, Branch_Area));
+                }
                 compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Batch", FilterOperator.IsEqualTo, Batch));
             }
             else if (Branch_Area == "All" && Driver != null && Batch != null)
@@ -6423,18 +6464,21 @@ namespace CMS2.Client
             }
             else if (Branch_Area != null && Driver != null && Batch != null)
             {
-                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area/Branch", FilterOperator.IsEqualTo, Branch_Area));
+                if (dropDownBranchAcceptance_Branch.SelectedIndex == 0)
+                {
+                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, Branch_Area));
+                }
+                else
+                {
+                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BSO", FilterOperator.IsEqualTo, Branch_Area));
+                }
                 compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
                 compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Batch", FilterOperator.IsEqualTo, Batch));
             }
 
-            //compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Plate #", FilterOperator.IsEqualTo, PlateNo));
-            compositeFilter.FilterDescriptors.Add(new FilterDescriptor("CreatedBy", FilterOperator.IsEqualTo, CreatedBy));
-
             compositeFilter.LogicalOperator = FilterLogicalOperator.And;
 
             this.gridBranchAcceptance.FilterDescriptors.Add(compositeFilter);
-
         }
 
 
@@ -6442,14 +6486,17 @@ namespace CMS2.Client
         private void dropDownBundle_Branch_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
         {
 
-            if (dropDownBundle_Branch.SelectedItem.ToString().Contains("Branch Corporate Office"))
+            BundleReport bundle = new BundleReport();
+            DataTable dataTable = bundle.getBundleData(dateTimeBundle_Date.Value);
+            DataView view = new DataView(dataTable);
+
+            if (dropDownBundle_Branch.SelectedIndex == 0)
             {
                 label113.Text = "BCO:";
-                List<BranchCorpOffice> branchCorpOffices = getBranchCorpOffice();
+                List<BranchCorpOffice> branchCorpOffices = getBranchCorpOffice().OrderBy(x => x.BranchCorpOfficeName).ToList();
                 dropDownBundle_BCO_BSO.DataSource = branchCorpOffices;
                 dropDownBundle_BCO_BSO.DisplayMember = "BranchCorpOfficeName";
                 dropDownBundle_BCO_BSO.ValueMember = "BranchCorpOfficeId";
-                dropDownBundle_BCO_BSO.SelectedIndex = 0;
                 dropDownBundle_BCO_BSO.SelectedValue = GlobalVars.DeviceBcoId;
                 dropDownBundle_BCO_BSO.Enabled = false;
             }
@@ -6457,14 +6504,15 @@ namespace CMS2.Client
             {
                 label113.Text = "BSO:";
                 dropDownBundle_BCO_BSO.Enabled = true;
-                revenueUnitService = new RevenueUnitBL();
-                //string revenueUnitTypeID = 
-                List<RevenueUnit> _revenueUnit = revenueUnitService.GetAll().Distinct().OrderBy(x => x.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId).ToList();
-                dropDownBundle_BCO_BSO.DataSource = _revenueUnit;
-                dropDownBundle_BCO_BSO.DisplayMember = "RevenueUnitName";
-                dropDownBundle_BCO_BSO.ValueMember = "RevenueUnitId";
+                //BSO
+                DataTable table = view.ToTable(true, "BSO");
+                dropDownBundle_BCO_BSO.Items.Clear();
                 dropDownBundle_BCO_BSO.Items.Add("All");
-
+                foreach (DataRow x in table.Rows)
+                {
+                    dropDownBundle_BCO_BSO.Items.Add(x["BSO"].ToString());
+                }
+                dropDownBundle_BCO_BSO.SelectedIndex = 0;
             }
         }
 
@@ -6479,7 +6527,6 @@ namespace CMS2.Client
             String Area = dropDownBundle_BCO_BSO.SelectedItem.ToString();
             String SackNo = dropDownBundle_SackNo.SelectedItem.ToString();
             String Destination = dropDownBundle_Destination.SelectedItem.ToString();
-            String CreatedDate = dateTimeBundle_Date.Value.ToShortDateString();
 
             if(Area == "All" && SackNo == "All" && Destination == "All")
             {
@@ -6489,16 +6536,20 @@ namespace CMS2.Client
 
             if (Area != null && SackNo == "All" && Destination == "All")
             {
-                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Area));
+                if(dropDownBundle_Branch.SelectedIndex == 0) { compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, Area)); }
+                else { compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BSO", FilterOperator.IsEqualTo, Area)); }
+                
             }
             else if (Area != null && SackNo != null && Destination == "All")
             {
-                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Area));
+                if (dropDownBundle_Branch.SelectedIndex == 0) { compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, Area)); }
+                else { compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BSO", FilterOperator.IsEqualTo, Area)); }
                 compositeFilter.FilterDescriptors.Add(new FilterDescriptor("SackNo", FilterOperator.IsEqualTo, SackNo));
             }
             else if (Area != null && SackNo == "All" && Destination != null)
             {
-                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Area));
+                if (dropDownBundle_Branch.SelectedIndex == 0) { compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, Area)); }
+                else { compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BSO", FilterOperator.IsEqualTo, Area)); }
                 compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Destination", FilterOperator.IsEqualTo, Destination));
             }
             else if (Area == "All" && SackNo != null && Destination != null)
@@ -6516,12 +6567,13 @@ namespace CMS2.Client
             }
             else if (Area != null && SackNo != null && Destination != null)
             {
-                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Area));
+                if (dropDownBundle_Branch.SelectedIndex == 0) { compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, Area)); }
+                else { compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BSO", FilterOperator.IsEqualTo, Area)); }
                 compositeFilter.FilterDescriptors.Add(new FilterDescriptor("SackNo", FilterOperator.IsEqualTo, SackNo));
                 compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Destination", FilterOperator.IsEqualTo, Destination));
             }
             
-            compositeFilter.FilterDescriptors.Add(new FilterDescriptor("CreatedDate", FilterOperator.IsEqualTo, CreatedDate));
+            //compositeFilter.FilterDescriptors.Add(new FilterDescriptor("CreatedDate", FilterOperator.IsEqualTo, CreatedDate));
             compositeFilter.LogicalOperator = FilterLogicalOperator.And;
 
             this.gridBundle.FilterDescriptors.Add(compositeFilter);
@@ -6538,7 +6590,6 @@ namespace CMS2.Client
             CompositeFilterDescriptor compositeFilter = new CompositeFilterDescriptor();
             String Branch = dropDownUnbundle_BCO.SelectedItem.ToString();
             String SackNo = dropDownUnbundle_SackNo.SelectedItem.ToString();
-            String CreatedDate = dateTimeUnbunde_Date.Value.ToShortDateString();
 
             if (Branch == "All" && SackNo == "All")
             {
@@ -6555,14 +6606,10 @@ namespace CMS2.Client
             }
             else if (Branch != null && SackNo != null)
             {
-                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Branch ));
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Branch", FilterOperator.IsEqualTo, Branch ));
                 compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Sack No", FilterOperator.IsEqualTo, SackNo));
             }
-
-            compositeFilter.FilterDescriptors.Add(new FilterDescriptor("CreatedDate", FilterOperator.IsEqualTo, CreatedDate));
-
             compositeFilter.LogicalOperator = FilterLogicalOperator.And;
-
             this.gridUnbundle.FilterDescriptors.Add(compositeFilter);
         }
 
@@ -6629,10 +6676,7 @@ namespace CMS2.Client
                     compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Batch", FilterOperator.IsEqualTo, Batch));
                 }
             }
-        
-            compositeFilter.FilterDescriptors.Add(new FilterDescriptor("CreatedDate", FilterOperator.IsEqualTo, CreatedDate));
             compositeFilter.LogicalOperator = FilterLogicalOperator.And;
-
             this.gridGatewayTransmital.FilterDescriptors.Add(compositeFilter);
         }
         // **** GATEWAT OUTBOUND **** //
@@ -6666,7 +6710,7 @@ namespace CMS2.Client
                 compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Batch", FilterOperator.IsEqualTo, Batch));
             }
            
-            compositeFilter.FilterDescriptors.Add(new FilterDescriptor("CreatedDate", FilterOperator.IsEqualTo, CreatedDate));
+            //compositeFilter.FilterDescriptors.Add(new FilterDescriptor("CreatedDate", FilterOperator.IsEqualTo, CreatedDate));
 
             compositeFilter.LogicalOperator = FilterLogicalOperator.And;
 
@@ -6736,7 +6780,7 @@ namespace CMS2.Client
                 }
 
             }
-            compositeFilter.FilterDescriptors.Add(new FilterDescriptor("CreatedDate", FilterOperator.IsEqualTo, dateTimePickerGatewayInbound_Date.Value.ToShortDateString()));
+            //compositeFilter.FilterDescriptors.Add(new FilterDescriptor("CreatedDate", FilterOperator.IsEqualTo, dateTimePickerGatewayInbound_Date.Value.ToShortDateString()));
             
             compositeFilter.LogicalOperator = FilterLogicalOperator.And;
 
@@ -6805,7 +6849,7 @@ namespace CMS2.Client
                 compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Destination", FilterOperator.IsEqualTo, destination));
                 compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Origin", FilterOperator.IsEqualTo, origin)); 
             }
-            compositeFilter.FilterDescriptors.Add(new FilterDescriptor("CreatedDate", FilterOperator.IsEqualTo, dateTimeCargoTransfer_Date.Value.ToShortDateString()));
+            //compositeFilter.FilterDescriptors.Add(new FilterDescriptor("CreatedDate", FilterOperator.IsEqualTo, dateTimeCargoTransfer_Date.Value.ToShortDateString()));
             compositeFilter.LogicalOperator = FilterLogicalOperator.And;
             this.gridCargoTransfer.FilterDescriptors.Add(compositeFilter);
         }
@@ -6995,11 +7039,21 @@ namespace CMS2.Client
                 gridHoldCargo.EnableFiltering = false;
                 getHoldCargoData();
             }
-
-            compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Branch", FilterOperator.IsEqualTo, Branch));
-            compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Status", FilterOperator.IsEqualTo, Status));
-
-            compositeFilter.LogicalOperator = FilterLogicalOperator.Or;
+            if (Branch != null && Status == "All")
+            {
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Branch", FilterOperator.IsEqualTo, Branch));
+            }
+            else if (Branch == "All" && Status != null)
+            {
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Status", FilterOperator.IsEqualTo, Status));
+            }
+            else if(Branch != null && Status != null)
+            {
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Branch", FilterOperator.IsEqualTo, Branch));
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Status", FilterOperator.IsEqualTo, Status));
+            }
+            
+            compositeFilter.LogicalOperator = FilterLogicalOperator.And;
 
             this.gridHoldCargo.FilterDescriptors.Add(compositeFilter);
         }
@@ -7103,7 +7157,7 @@ namespace CMS2.Client
             TrackingReportGlobalModel.Date = dateTimeUnbunde_Date.Value.ToLongDateString();
             TrackingReportGlobalModel.SackNo = dropDownUnbundle_SackNo.SelectedItem.ToString();
             TrackingReportGlobalModel.Origin = get_Column_DataView(dataTable, "Origin");
-
+            TrackingReportGlobalModel.ScannedBy = UserTxt.Text.Replace("Welcome!" ,"");
             TrackingReportGlobalModel.Report = "Unbundle";
 
             ReportViewer viewer = new ReportViewer();
@@ -7158,11 +7212,12 @@ namespace CMS2.Client
             DataTable dataTable = getBranchAcceptanceGrid();
             TrackingReportGlobalModel.table = dataTable;
             TrackingReportGlobalModel.Date = dateTimeGatewayTransmital_Date.Value.ToLongDateString();
-            //TrackingReportGlobalModel.Branch = dropDownBranchAcceptance_BCO_BSO.SelectedItem.ToString();
+            TrackingReportGlobalModel.Branch = get_Column_DataView(dataTable, "BCO");
             TrackingReportGlobalModel.Driver = dropDownBranchAcceptance_Driver.SelectedItem.ToString();
             TrackingReportGlobalModel.Checker = get_Column_DataView(dataTable, "Checker");
             TrackingReportGlobalModel.PlateNo = get_Column_DataView(dataTable, "Plate #");
             TrackingReportGlobalModel.Batch = dropDownBranchAcceptance_Batch.SelectedItem.ToString();
+            TrackingReportGlobalModel.ScannedBy = UserTxt.Text.Replace("Welcome!" , "");
 
             TrackingReportGlobalModel.Report = "BranchAcceptance";
 
@@ -7246,7 +7301,7 @@ namespace CMS2.Client
 
         private void btnHoldCargo_Export_Click(object sender, EventArgs e)
         {
-            string exportFile = @"E:\Samples\" + "HoldCargo_" + DateTime.Now + ".xlsx";
+            string exportFile = @"E:\\Samples\\" + "HoldCargo_" + DateTime.Now + ".xlsx";
             using (System.IO.MemoryStream ms = new System.IO.MemoryStream())
             {
                 Telerik.WinControls.Export.GridViewSpreadExport exporter = new Telerik.WinControls.Export.GridViewSpreadExport(this.gridHoldCargo);
@@ -7278,8 +7333,67 @@ namespace CMS2.Client
         }
 
 
+
         #endregion
 
-        
+        private void dateTimePicker_PickupCargo_ValueChanged(object sender, EventArgs e)
+        {
+            dropDownPickUpCargo_Area.SelectedIndex = 0;
+            gridPickupCargo.EnableFiltering = false;
+            getPickupCargoData();
+        }
+
+        private void dateTimePickerBranchAcceptance_Date_ValueChanged(object sender, EventArgs e)
+        {
+            dropDownBranchAcceptance_Branch.SelectedIndex = 0;
+            dropDownBranchAcceptance_BCO_BSO.Items.Clear();
+            dropDownBranchAcceptance_BCO_BSO.Items.Add("All");
+            dropDownBranchAcceptance_Driver.SelectedIndex = 0;
+            dropDownBranchAcceptance_Batch.SelectedIndex = 0;
+            gridBranchAcceptance.EnableFiltering = false;
+            getBrancAcceptanceData();
+        }
+
+        private void dateTimeBundle_Date_ValueChanged(object sender, EventArgs e)
+        {
+            gridBundle.EnableFiltering = false;
+            getBundleData();
+        }
+
+        private void dateTimeUnbunde_Date_ValueChanged(object sender, EventArgs e)
+        {
+            gridUnbundle.EnableFiltering = false;
+            getUnbundle();
+        }
+
+        private void dateTimeGatewayTransmital_Date_ValueChanged(object sender, EventArgs e)
+        {
+            gridGatewayTransmital.EnableFiltering = false;
+            getGatewayTransmitalData();
+        }
+
+        private void dateTimeGatewayOutbound_Date_ValueChanged(object sender, EventArgs e)
+        {
+            gridGatewayOutbound.EnableFiltering = false;
+            getGatewayOutBoundData();
+        }
+
+        private void dateTimePickerGatewayInbound_Date_ValueChanged(object sender, EventArgs e)
+        {
+            gridGatewayInbound.EnableFiltering = false;
+            getGatewayInBoundData();
+        }
+
+        private void dateTimeCargoTransfer_Date_ValueChanged(object sender, EventArgs e)
+        {
+            gridCargoTransfer.EnableFiltering = false;
+            getCargoTransferData();
+        }
+
+        private void dateTimeSegregation_Date_ValueChanged(object sender, EventArgs e)
+        {
+            gridSegregation.EnableFiltering = false;
+            getSegregationData();
+        }
     }
 }

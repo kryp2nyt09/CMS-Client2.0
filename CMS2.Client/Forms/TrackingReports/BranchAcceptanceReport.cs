@@ -12,14 +12,7 @@ namespace CMS2.Client.Forms.TrackingReports
 {
     public class BranchAcceptanceReport
     {
-
-        //public List<BranchAcceptanceViewModel> getData()
-        //{
-        //    List<BranchAcceptanceViewModel> _results = new List<BranchAcceptanceViewModel>();
-
-        //    return _results;
-
-        //}
+       
         public DataTable getBranchAcceptanceData(DateTime date)
         {
             BranchAcceptanceBL branchAcceptanceBl = new BranchAcceptanceBL();               
@@ -43,7 +36,9 @@ namespace CMS2.Client.Forms.TrackingReports
             dt.Columns.Add(new DataColumn("Dicrepency(Qty)", typeof(string)));
             dt.Columns.Add(new DataColumn("Total Qty", typeof(string)));
 
-            dt.Columns.Add(new DataColumn("CreatedBy", typeof(string)));
+            dt.Columns.Add(new DataColumn("BCO", typeof(string)));
+            dt.Columns.Add(new DataColumn("BSO", typeof(string)));
+
 
             dt.BeginLoadData();
             int ctr = 1;
@@ -60,7 +55,10 @@ namespace CMS2.Client.Forms.TrackingReports
                 row[7] = item.TotalRecieved.ToString();
                 row[8] = item.TotalDiscrepency.ToString();
                 row[9] = item.Total.ToString();
-                row[10] = item.CreatedBy.ToShortDateString();
+
+                row[10] = item.BCO;
+                row[11] = item.BSO;
+
                 dt.Rows.Add(row);
             }
             dt.EndLoadData();
@@ -71,18 +69,20 @@ namespace CMS2.Client.Forms.TrackingReports
         public List<int> setBranchAcceptanceWidth()
         {
             List<int> width = new List<int>();
-            width.Add(30); //Area/Branch
+            width.Add(25); //No
             width.Add(180); //Area/Branch
             width.Add(150); //Driver
             width.Add(150); //Checker
             width.Add(150); //Plate #
-            width.Add(120); //Batch
+            width.Add(100); //Batch
 
-            width.Add(100); //
-            width.Add(100); //
-            width.Add(100); //
-            width.Add(110); //    
-            width.Add(0); //    
+            width.Add(60); //AWB
+            width.Add(95); //Recieved
+            width.Add(95); //Dis
+            width.Add(60); //Total
+
+            width.Add(0); //BCO
+            width.Add(0); //BSO 
 
 
             return width;
@@ -105,7 +105,7 @@ namespace CMS2.Client.Forms.TrackingReports
                     if (isExist != null)
                     {
                         isExist.TotalRecieved++;
-                        model.Total += model.TotalRecieved;
+                        isExist.Total += model.TotalRecieved;
                         //_results.Add(isExist);
                     }
                     else
@@ -119,6 +119,10 @@ namespace CMS2.Client.Forms.TrackingReports
                         model.TotalRecieved++;
                         model.Total += model.TotalRecieved;
                         model.CreatedBy = cargoTransfer.CreatedDate;
+
+                        model.BCO = cargoTransfer.BranchCorpOffice.BranchCorpOfficeName;
+                        model.BSO = cargoTransfer.RevenueUnit.RevenueUnitName;
+
                         _results.Add(model);
 
                     }
@@ -142,6 +146,10 @@ namespace CMS2.Client.Forms.TrackingReports
                         model.TotalDiscrepency++;
                         model.Total += model.TotalDiscrepency;
                         model.CreatedBy = cargoTransfer.CreatedDate;
+
+                        model.BCO = cargoTransfer.BranchCorpOffice.BranchCorpOfficeName;
+                        model.BSO = cargoTransfer.RevenueUnit.RevenueUnitName;
+
                         _results.Add(model);
 
                     }

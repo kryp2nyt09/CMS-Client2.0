@@ -21,7 +21,10 @@ namespace CMS2.Entities.ReportModel
         public int Total { get; set; }
         public bool Match { get; set; }
         public DateTime CreatedBy { get; set; }
-        
+
+        public string BCO { get; set; }
+        public string BSO { get; set; }
+
     }
 
     

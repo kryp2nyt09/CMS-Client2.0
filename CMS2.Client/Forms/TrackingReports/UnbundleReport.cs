@@ -25,15 +25,14 @@ namespace CMS2.Client.Forms.TrackingReports
             DataTable dt = new DataTable();
             dt.Columns.Add(new DataColumn("No", typeof(string)));
             dt.Columns.Add(new DataColumn("Sack No", typeof(string)));
+
             dt.Columns.Add(new DataColumn("Total Pieces", typeof(string)));
             dt.Columns.Add(new DataColumn("Scanned Pieces", typeof(string)));
+            dt.Columns.Add(new DataColumn("Dicrepency Pieces", typeof(string)));
+
             dt.Columns.Add(new DataColumn("Origin", typeof(string)));
             dt.Columns.Add(new DataColumn("Weight", typeof(string)));
             dt.Columns.Add(new DataColumn("AWB", typeof(string)));
-
-            dt.Columns.Add(new DataColumn("Recieved(Qty)", typeof(string)));
-            dt.Columns.Add(new DataColumn("Dicrepency(Qty)", typeof(string)));
-            dt.Columns.Add(new DataColumn("Total Qty", typeof(string)));
 
             dt.Columns.Add(new DataColumn("CreatedDate", typeof(string)));
             dt.Columns.Add(new DataColumn("Branch", typeof(string)));
@@ -45,16 +44,17 @@ namespace CMS2.Client.Forms.TrackingReports
                 DataRow row = dt.NewRow();
                 row[0] = "" + ctr++;
                 row[1] = item.SackNo;
+
                 row[2] = item.TotalPcs;
                 row[3] = item.ScannedPcs;
-                row[4] = item.Origin;
-                row[5] = item.Weight;
-                row[6] = item.AirwayBillNo;
-                row[7] = item.TotalRecieved;
-                row[8] = item.TotalDiscrepency;
-                row[9] = item.Total;
-                row[10] = item.CreatedDate;
-                row[11] = item.Branch;
+                row[4] = item.TotalDiscrepency;
+
+                row[5] = item.Origin;
+                row[6] = item.Weight;
+                row[7] = item.AirwayBillNo;
+
+                row[8] = item.CreatedDate;
+                row[9] = item.Branch;
                 dt.Rows.Add(row);
             }
             dt.EndLoadData();
@@ -64,16 +64,17 @@ namespace CMS2.Client.Forms.TrackingReports
         public List<int> setBundleWidth()
         {
             List<int> width = new List<int>();
-            width.Add(30);
-            width.Add(130);
-            width.Add(110);
-            width.Add(110);
-            width.Add(210);
-            width.Add(110);
-            width.Add(110);            
+            width.Add(25);
+            width.Add(115);
+
             width.Add(110);
             width.Add(110);
             width.Add(110);
+
+            width.Add(150);
+            width.Add(100);            
+            width.Add(90);
+            
             width.Add(0);
             width.Add(0);
             return width;
@@ -95,19 +96,18 @@ namespace CMS2.Client.Forms.TrackingReports
                 {
                     if (isExist != null)
                     {
-                        isExist.TotalRecieved++;
-                        model.Total += model.TotalRecieved;
+                        isExist.ScannedPcs++;
+                        isExist.TotalPcs += isExist.ScannedPcs;
                     }
 
                     else
                     {
                         model.AirwayBillNo = _airwaybill;
                         model.SackNo = bundle.SackNo;
-                        model.TotalPcs = ""+0;
-                        model.ScannedPcs = "" + 0;
+                        model.ScannedPcs++;
+                        model.Weight += bundle.Weight;
+                        model.TotalPcs += model.ScannedPcs;
                         model.Origin = shipment.GetAll().Find(x => x.AirwayBillNo.Equals(_airwaybill)).OriginCity.CityName;
-                        model.TotalRecieved++;
-                        model.Total += model.TotalRecieved;
                         model.CreatedDate = bundle.CreatedDate;
                         model.Branch = bundle.BranchCorpOffice.BranchCorpOfficeName;
                         _results.Add(model);
@@ -120,18 +120,17 @@ namespace CMS2.Client.Forms.TrackingReports
                     if (isExist != null)
                     {
                         isExist.TotalDiscrepency++;
-                        model.Total += model.TotalDiscrepency;
+                        isExist.TotalPcs += isExist.TotalDiscrepency;
                     }
 
                     else
                     {
                         model.AirwayBillNo = _airwaybill;
                         model.SackNo = bundle.SackNo;
-                        model.TotalPcs = "" + 0;
-                        model.ScannedPcs = "" + 0;
-                        model.Origin = shipment.GetAll().Find(x => x.AirwayBillNo.Equals(_airwaybill)).OriginCity.CityName;
                         model.TotalDiscrepency++;
-                        model.Total += model.TotalDiscrepency;
+                        model.TotalPcs += model.TotalDiscrepency;
+                        model.Weight += bundle.Weight;
+                        model.Origin = shipment.GetAll().Find(x => x.AirwayBillNo.Equals(_airwaybill)).OriginCity.CityName;
                         model.CreatedDate = bundle.CreatedDate;
                         model.Branch = bundle.BranchCorpOffice.BranchCorpOfficeName;
                         _results.Add(model);

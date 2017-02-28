@@ -38,6 +38,10 @@ namespace CMS2.Client.Forms.TrackingReports
 
             dt.Columns.Add(new DataColumn("CreatedDate", typeof(string)));
             dt.Columns.Add(new DataColumn("Destination", typeof(string)));
+
+            dt.Columns.Add(new DataColumn("BCO", typeof(string)));
+            dt.Columns.Add(new DataColumn("BSO", typeof(string)));
+
             dt.BeginLoadData();
             int ctr = 1;
             foreach (BundleViewModel item in bundleList)
@@ -58,6 +62,10 @@ namespace CMS2.Client.Forms.TrackingReports
                 row[12] = item.SackNo;
                 row[13] = item.CreatedDate.ToShortDateString();
                 row[14] = item.Destination;
+
+                row[15] = item.BCO;
+                row[16] = item.BSO;
+
                 dt.Rows.Add(row);
             }
             dt.EndLoadData();
@@ -82,6 +90,9 @@ namespace CMS2.Client.Forms.TrackingReports
 
             width.Add(0);
             width.Add(0);
+            width.Add(0);
+            width.Add(0);
+
             width.Add(0);
             width.Add(0);
 
@@ -125,10 +136,10 @@ namespace CMS2.Client.Forms.TrackingReports
                         model.Area = ship.OriginCity.CityName;
                         model.CreatedDate = ship.CreatedDate;
                         model.Destination = ship.DestinationCity.BranchCorpOffice.BranchCorpOfficeName;
-
+                        model.BSO = ship.OriginCity.CityName;
                     }
                     model.SackNo = _bundle.SackNo;
-                    
+                    model.BCO = _bundle.BranchCorpOffice.BranchCorpOfficeName;
                     _results.Add(model);
                 }
            }

@@ -13,31 +13,12 @@ namespace CMS2.Client.Forms.TrackingReports
 {
     public class PickupCargoManifestReport
     {
-        [DataObjectMethod(DataObjectMethodType.Select)]
-        public List<Shipment> getData()
-        {
-            //List<Shipment> _results = new List<Shipment>();
-
-            ShipmentBL _shipmentService = new ShipmentBL();
-            List<Shipment> _shipments = _shipmentService.GetAll().Where(x => x.Booking.BookingStatus.BookingStatusName == "Picked-up" && x.RecordStatus == 1).ToList();
-
-            return _shipments;
-        }
-
-
-        public DataTable getPickUpCargoData(RevenueUnit area , DateTime date)
+        
+        public DataTable getPickUpCargoData(DateTime date)
         {
             //GET LIST 
             ShipmentBL _shipmentService = new ShipmentBL();
-            List<Shipment> _shipments;
-            if (area == null) {
-                //(x.CreatedDate).ToShortDateString() == date.ToShortDateString()
-                _shipments = _shipmentService.GetAll().Where(x => x.Booking.BookingStatus.BookingStatusName == "Picked-up" && x.RecordStatus == 1 && (x.CreatedDate).ToShortDateString() == date.ToShortDateString()).ToList();
-            }
-            else
-            {
-                _shipments = _shipmentService.GetAll().Where(x => x.Booking.BookingStatus.BookingStatusName == "Picked-up" && x.RecordStatus == 1 && x.Booking.AssignedToAreaId == area.RevenueUnitId && (x.CreatedDate).ToShortDateString() == date.ToShortDateString()).ToList();
-            }
+            List<Shipment> _shipments = _shipmentService.GetAll().Where(x => x.Booking.BookingStatus.BookingStatusName == "Picked-up" && x.RecordStatus == 1 && (x.CreatedDate).ToShortDateString() == date.ToShortDateString()).ToList();
             DataTable dt = new DataTable();
 
             dt.Columns.Add(new DataColumn("No", typeof(string)));
@@ -52,6 +33,8 @@ namespace CMS2.Client.Forms.TrackingReports
             dt.Columns.Add(new DataColumn("Service Mode", typeof(string)));
             dt.Columns.Add(new DataColumn("Payment Mode", typeof(string)));
             dt.Columns.Add(new DataColumn("Amount", typeof(decimal)));
+
+            dt.Columns.Add(new DataColumn("Area", typeof(string)));
 
             dt.BeginLoadData();
             int ctr = 1;
@@ -70,6 +53,8 @@ namespace CMS2.Client.Forms.TrackingReports
                 row[9] = item.ServiceMode.ServiceModeName.ToString();
                 row[10] = item.PaymentMode.PaymentModeName.ToString();
                 row[11] = item.TotalAmount;
+                row[12] = item.Booking.AssignedToArea.City.CityName;
+
                 dt.Rows.Add(row);
             }
             dt.EndLoadData();
@@ -81,7 +66,7 @@ namespace CMS2.Client.Forms.TrackingReports
         {
             List<int> width = new List<int>();
             width.Add(25); //No
-            width.Add(100); //AWB
+            width.Add(60); //AWB
             width.Add(110); //Shipper
             width.Add(150); //Address
             width.Add(110); //Consignee
@@ -90,8 +75,9 @@ namespace CMS2.Client.Forms.TrackingReports
             width.Add(30); //Qty
             width.Add(50); //AGW
             width.Add(100); //Servicemode
-            width.Add(110); //Paymentmode
-            width.Add(100); //Amount
+            width.Add(100); //Paymentmode
+            width.Add(95); //Amount
+            width.Add(0); //Area
             return width;
         }
     }

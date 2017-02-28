@@ -40,7 +40,6 @@ namespace CMS2.Client.Forms.TrackingReportsView
             this.txtPlateNo = new Telerik.Reporting.TextBox();
             this.txtMAWB = new Telerik.Reporting.TextBox();
             this.pictureBox1 = new Telerik.Reporting.PictureBox();
-            this.pictureBox2 = new Telerik.Reporting.PictureBox();
             this.shape1 = new Telerik.Reporting.Shape();
             this.textBox7 = new Telerik.Reporting.TextBox();
             this.txtDriver = new Telerik.Reporting.TextBox();
@@ -232,7 +231,6 @@ namespace CMS2.Client.Forms.TrackingReportsView
             this.txtPlateNo,
             this.txtMAWB,
             this.pictureBox1,
-            this.pictureBox2,
             this.shape1,
             this.textBox7,
             this.txtDriver,
@@ -247,7 +245,7 @@ namespace CMS2.Client.Forms.TrackingReportsView
             // 
             // textBox3
             // 
-            this.textBox3.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(0.74166661500930786D), Telerik.Reporting.Drawing.Unit.Inch(1.0021622180938721D));
+            this.textBox3.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(0.1961711198091507D), Telerik.Reporting.Drawing.Unit.Inch(1.0001577138900757D));
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(6.2999610900878906D), Telerik.Reporting.Drawing.Unit.Inch(0.49351340532302856D));
             this.textBox3.Style.Font.Bold = true;
@@ -320,15 +318,6 @@ namespace CMS2.Client.Forms.TrackingReportsView
             this.pictureBox1.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(2.3395426273345947D), Telerik.Reporting.Drawing.Unit.Inch(0.90007877349853516D));
             this.pictureBox1.Sizing = Telerik.Reporting.Drawing.ImageSizeMode.Stretch;
             this.pictureBox1.Value = ((object)(resources.GetObject("pictureBox1.Value")));
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(0.19999997317790985D), Telerik.Reporting.Drawing.Unit.Inch(0.99583333730697632D));
-            this.pictureBox2.MimeType = "image/jpeg";
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(0.54158741235733032D), Telerik.Reporting.Drawing.Unit.Inch(0.4998423159122467D));
-            this.pictureBox2.Sizing = Telerik.Reporting.Drawing.ImageSizeMode.Stretch;
-            this.pictureBox2.Value = ((object)(resources.GetObject("pictureBox2.Value")));
             // 
             // shape1
             // 
@@ -484,7 +473,7 @@ namespace CMS2.Client.Forms.TrackingReportsView
             this.table1.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Inch(1.047371506690979D)));
             this.table1.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Inch(1.047371506690979D)));
             this.table1.Body.Rows.Add(new Telerik.Reporting.TableBodyRow(Telerik.Reporting.Drawing.Unit.Inch(0.28000003099441528D)));
-            this.table1.Body.Rows.Add(new Telerik.Reporting.TableBodyRow(Telerik.Reporting.Drawing.Unit.Inch(0.40000003576278687D)));
+            this.table1.Body.Rows.Add(new Telerik.Reporting.TableBodyRow(Telerik.Reporting.Drawing.Unit.Inch(0.40000006556510925D)));
             this.table1.Body.SetCellContent(0, 0, this.textBox22);
             this.table1.Body.SetCellContent(0, 1, this.txtAwb);
             this.table1.Body.SetCellContent(0, 2, this.textBox11);
@@ -988,7 +977,6 @@ namespace CMS2.Client.Forms.TrackingReportsView
         private Telerik.Reporting.TextBox txtPlateNo;
         private Telerik.Reporting.TextBox txtMAWB;
         private Telerik.Reporting.PictureBox pictureBox1;
-        private Telerik.Reporting.PictureBox pictureBox2;
         private Telerik.Reporting.Shape shape1;
         private Telerik.Reporting.TextBox textBox7;
         private Telerik.Reporting.TextBox txtDriver;

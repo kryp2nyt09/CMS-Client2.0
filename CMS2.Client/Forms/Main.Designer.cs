@@ -42,7 +42,11 @@
             Telerik.WinControls.UI.TableViewDefinition tableViewDefinition25 = new Telerik.WinControls.UI.TableViewDefinition();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             Telerik.WinControls.UI.TableViewDefinition tableViewDefinition26 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.RadListDataItem radListDataItem5 = new Telerik.WinControls.UI.RadListDataItem();
+            Telerik.WinControls.UI.RadListDataItem radListDataItem6 = new Telerik.WinControls.UI.RadListDataItem();
             Telerik.WinControls.UI.TableViewDefinition tableViewDefinition27 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.RadListDataItem radListDataItem1 = new Telerik.WinControls.UI.RadListDataItem();
+            Telerik.WinControls.UI.RadListDataItem radListDataItem2 = new Telerik.WinControls.UI.RadListDataItem();
             Telerik.WinControls.UI.TableViewDefinition tableViewDefinition28 = new Telerik.WinControls.UI.TableViewDefinition();
             Telerik.WinControls.UI.TableViewDefinition tableViewDefinition29 = new Telerik.WinControls.UI.TableViewDefinition();
             Telerik.WinControls.UI.TableViewDefinition tableViewDefinition30 = new Telerik.WinControls.UI.TableViewDefinition();
@@ -548,7 +552,7 @@
             this.label109 = new System.Windows.Forms.Label();
             this.dropDownDailyTrip_Area = new Telerik.WinControls.UI.RadDropDownList();
             this.label122 = new System.Windows.Forms.Label();
-            this.radDropDownList3 = new Telerik.WinControls.UI.RadDropDownList();
+            this.dropDownDailyTrip_BCO = new Telerik.WinControls.UI.RadDropDownList();
             this.label123 = new System.Windows.Forms.Label();
             this.label110 = new System.Windows.Forms.Label();
             this.label111 = new System.Windows.Forms.Label();
@@ -1014,7 +1018,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dropDownDailyTrip_Driver)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateTimeDailyTrip_Date)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dropDownDailyTrip_Area)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radDropDownList3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dropDownDailyTrip_BCO)).BeginInit();
             this.radPageViewPage17.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridHoldCargo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridHoldCargo.MasterTemplate)).BeginInit();
@@ -4774,7 +4778,7 @@
             // txtTotalCash
             // 
             this.txtTotalCash.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtTotalCash.Location = new System.Drawing.Point(132, 3);
+            this.txtTotalCash.Location = new System.Drawing.Point(145, 3);
             this.txtTotalCash.Name = "txtTotalCash";
             this.txtTotalCash.ReadOnly = true;
             this.txtTotalCash.Size = new System.Drawing.Size(145, 20);
@@ -4786,7 +4790,7 @@
             // txtTotalPending
             // 
             this.txtTotalPending.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtTotalPending.Location = new System.Drawing.Point(132, 133);
+            this.txtTotalPending.Location = new System.Drawing.Point(145, 133);
             this.txtTotalPending.Name = "txtTotalPending";
             this.txtTotalPending.ReadOnly = true;
             this.txtTotalPending.Size = new System.Drawing.Size(145, 20);
@@ -4799,7 +4803,7 @@
             // txtTotalPdc
             // 
             this.txtTotalPdc.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtTotalPdc.Location = new System.Drawing.Point(132, 107);
+            this.txtTotalPdc.Location = new System.Drawing.Point(145, 107);
             this.txtTotalPdc.Name = "txtTotalPdc";
             this.txtTotalPdc.ReadOnly = true;
             this.txtTotalPdc.Size = new System.Drawing.Size(145, 20);
@@ -4814,7 +4818,7 @@
             this.label42.AutoSize = true;
             this.label42.Location = new System.Drawing.Point(3, 110);
             this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(55, 13);
+            this.label42.Size = new System.Drawing.Size(61, 14);
             this.label42.TabIndex = 2;
             this.label42.Text = "Total PDC";
             // 
@@ -4824,7 +4828,7 @@
             this.label47.AutoSize = true;
             this.label47.Location = new System.Drawing.Point(3, 84);
             this.label47.Name = "label47";
-            this.label47.Size = new System.Drawing.Size(101, 13);
+            this.label47.Size = new System.Drawing.Size(113, 14);
             this.label47.TabIndex = 1;
             this.label47.Text = "Total Tax WithHeld";
             // 
@@ -4834,14 +4838,14 @@
             this.label62.AutoSize = true;
             this.label62.Location = new System.Drawing.Point(3, 58);
             this.label62.Name = "label62";
-            this.label62.Size = new System.Drawing.Size(86, 13);
+            this.label62.Size = new System.Drawing.Size(91, 14);
             this.label62.TabIndex = 10;
             this.label62.Text = "Total Collection";
             // 
             // txtRemarksPaymentSummary
             // 
             this.txtRemarksPaymentSummary.AutoSize = false;
-            this.txtRemarksPaymentSummary.Location = new System.Drawing.Point(132, 263);
+            this.txtRemarksPaymentSummary.Location = new System.Drawing.Point(145, 263);
             this.txtRemarksPaymentSummary.Multiline = true;
             this.txtRemarksPaymentSummary.Name = "txtRemarksPaymentSummary";
             this.txtRemarksPaymentSummary.Size = new System.Drawing.Size(145, 44);
@@ -4851,7 +4855,7 @@
             // 
             // txtTotalCheckReceived
             // 
-            this.txtTotalCheckReceived.Location = new System.Drawing.Point(132, 185);
+            this.txtTotalCheckReceived.Location = new System.Drawing.Point(145, 185);
             this.txtTotalCheckReceived.Name = "txtTotalCheckReceived";
             this.txtTotalCheckReceived.ReadOnly = true;
             this.txtTotalCheckReceived.Size = new System.Drawing.Size(145, 20);
@@ -4862,7 +4866,7 @@
             // 
             // txtDifference
             // 
-            this.txtDifference.Location = new System.Drawing.Point(132, 237);
+            this.txtDifference.Location = new System.Drawing.Point(145, 237);
             this.txtDifference.Name = "txtDifference";
             this.txtDifference.ReadOnly = true;
             this.txtDifference.Size = new System.Drawing.Size(145, 20);
@@ -4877,13 +4881,13 @@
             this.label63.AutoSize = true;
             this.label63.Location = new System.Drawing.Point(3, 32);
             this.label63.Name = "label63";
-            this.label63.Size = new System.Drawing.Size(65, 13);
+            this.label63.Size = new System.Drawing.Size(72, 14);
             this.label63.TabIndex = 0;
             this.label63.Text = "Total Check";
             // 
             // txtTotalAmntReceived
             // 
-            this.txtTotalAmntReceived.Location = new System.Drawing.Point(132, 211);
+            this.txtTotalAmntReceived.Location = new System.Drawing.Point(145, 211);
             this.txtTotalAmntReceived.Name = "txtTotalAmntReceived";
             this.txtTotalAmntReceived.ReadOnly = true;
             this.txtTotalAmntReceived.Size = new System.Drawing.Size(145, 20);
@@ -4898,7 +4902,7 @@
             this.label64.AutoSize = true;
             this.label64.Location = new System.Drawing.Point(3, 188);
             this.label64.Name = "label64";
-            this.label64.Size = new System.Drawing.Size(113, 13);
+            this.label64.Size = new System.Drawing.Size(125, 14);
             this.label64.TabIndex = 28;
             this.label64.Text = "Total Check Received";
             // 
@@ -4908,7 +4912,7 @@
             this.label65.AutoSize = true;
             this.label65.Location = new System.Drawing.Point(3, 6);
             this.label65.Name = "label65";
-            this.label65.Size = new System.Drawing.Size(59, 13);
+            this.label65.Size = new System.Drawing.Size(64, 14);
             this.label65.TabIndex = 24;
             this.label65.Text = "Total Cash";
             // 
@@ -4918,7 +4922,7 @@
             this.label66.AutoSize = true;
             this.label66.Location = new System.Drawing.Point(3, 136);
             this.label66.Name = "label66";
-            this.label66.Size = new System.Drawing.Size(77, 13);
+            this.label66.Size = new System.Drawing.Size(83, 14);
             this.label66.TabIndex = 27;
             this.label66.Text = "Total Pending";
             this.label66.Visible = false;
@@ -4926,7 +4930,7 @@
             // txtTotalCashReceived
             // 
             this.txtTotalCashReceived.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtTotalCashReceived.Location = new System.Drawing.Point(132, 159);
+            this.txtTotalCashReceived.Location = new System.Drawing.Point(145, 159);
             this.txtTotalCashReceived.Name = "txtTotalCashReceived";
             this.txtTotalCashReceived.ReadOnly = true;
             this.txtTotalCashReceived.Size = new System.Drawing.Size(145, 20);
@@ -4941,7 +4945,7 @@
             this.label69.AutoSize = true;
             this.label69.Location = new System.Drawing.Point(3, 278);
             this.label69.Name = "label69";
-            this.label69.Size = new System.Drawing.Size(50, 13);
+            this.label69.Size = new System.Drawing.Size(52, 14);
             this.label69.TabIndex = 3;
             this.label69.Text = "Remarks";
             // 
@@ -4951,7 +4955,7 @@
             this.label70.AutoSize = true;
             this.label70.Location = new System.Drawing.Point(3, 240);
             this.label70.Name = "label70";
-            this.label70.Size = new System.Drawing.Size(60, 13);
+            this.label70.Size = new System.Drawing.Size(63, 14);
             this.label70.TabIndex = 1;
             this.label70.Text = "Difference";
             // 
@@ -4961,7 +4965,7 @@
             this.label71.AutoSize = true;
             this.label71.Location = new System.Drawing.Point(3, 214);
             this.label71.Name = "label71";
-            this.label71.Size = new System.Drawing.Size(123, 13);
+            this.label71.Size = new System.Drawing.Size(136, 14);
             this.label71.TabIndex = 26;
             this.label71.Text = "Total Amount Received";
             // 
@@ -4971,14 +4975,14 @@
             this.label72.AutoSize = true;
             this.label72.Location = new System.Drawing.Point(3, 162);
             this.label72.Name = "label72";
-            this.label72.Size = new System.Drawing.Size(107, 13);
+            this.label72.Size = new System.Drawing.Size(117, 14);
             this.label72.TabIndex = 30;
             this.label72.Text = "Total Cash Received";
             // 
             // txtTotalTax
             // 
             this.txtTotalTax.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtTotalTax.Location = new System.Drawing.Point(132, 81);
+            this.txtTotalTax.Location = new System.Drawing.Point(145, 81);
             this.txtTotalTax.Name = "txtTotalTax";
             this.txtTotalTax.ReadOnly = true;
             this.txtTotalTax.Size = new System.Drawing.Size(145, 20);
@@ -4990,7 +4994,7 @@
             // txtTotalCheck
             // 
             this.txtTotalCheck.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtTotalCheck.Location = new System.Drawing.Point(132, 29);
+            this.txtTotalCheck.Location = new System.Drawing.Point(145, 29);
             this.txtTotalCheck.Name = "txtTotalCheck";
             this.txtTotalCheck.ReadOnly = true;
             this.txtTotalCheck.Size = new System.Drawing.Size(145, 20);
@@ -5002,7 +5006,7 @@
             // txtTotalCollection
             // 
             this.txtTotalCollection.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtTotalCollection.Location = new System.Drawing.Point(132, 55);
+            this.txtTotalCollection.Location = new System.Drawing.Point(145, 55);
             this.txtTotalCollection.Name = "txtTotalCollection";
             this.txtTotalCollection.ReadOnly = true;
             this.txtTotalCollection.Size = new System.Drawing.Size(145, 20);
@@ -5386,9 +5390,9 @@
             // 
             this.radPageViewPage6.Controls.Add(this.pageViewTracking);
             this.radPageViewPage6.ItemSize = new System.Drawing.SizeF(70F, 30F);
-            this.radPageViewPage6.Location = new System.Drawing.Point(12, 34);
+            this.radPageViewPage6.Location = new System.Drawing.Point(12, 40);
             this.radPageViewPage6.Name = "radPageViewPage6";
-            this.radPageViewPage6.Size = new System.Drawing.Size(1231, 577);
+            this.radPageViewPage6.Size = new System.Drawing.Size(1231, 571);
             this.radPageViewPage6.Text = "Tracking";
             // 
             // pageViewTracking
@@ -5409,7 +5413,7 @@
             this.pageViewTracking.Location = new System.Drawing.Point(0, 0);
             this.pageViewTracking.Name = "pageViewTracking";
             this.pageViewTracking.SelectedPage = this.radPageViewPage16;
-            this.pageViewTracking.Size = new System.Drawing.Size(1231, 577);
+            this.pageViewTracking.Size = new System.Drawing.Size(1231, 571);
             this.pageViewTracking.TabIndex = 0;
             this.pageViewTracking.Text = " ";
             this.pageViewTracking.ThemeName = "Office2010Black";
@@ -5422,6 +5426,7 @@
             // 
             this.radPageViewPage7.Controls.Add(this.radPanel14);
             this.radPageViewPage7.Controls.Add(this.radPanel13);
+            this.radPageViewPage7.ItemSize = new System.Drawing.SizeF(126F, 30F);
             this.radPageViewPage7.Location = new System.Drawing.Point(136, 12);
             this.radPageViewPage7.Name = "radPageViewPage7";
             this.radPageViewPage7.Size = new System.Drawing.Size(1083, 547);
@@ -5529,9 +5534,9 @@
             // dropDownPickUpCargo_Area
             // 
             this.dropDownPickUpCargo_Area.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.dropDownPickUpCargo_Area.Location = new System.Drawing.Point(354, 80);
+            this.dropDownPickUpCargo_Area.Location = new System.Drawing.Point(407, 78);
             this.dropDownPickUpCargo_Area.Name = "dropDownPickUpCargo_Area";
-            this.dropDownPickUpCargo_Area.Size = new System.Drawing.Size(153, 20);
+            this.dropDownPickUpCargo_Area.Size = new System.Drawing.Size(182, 20);
             this.dropDownPickUpCargo_Area.TabIndex = 75;
             this.dropDownPickUpCargo_Area.ThemeName = "Office2010Black";
             // 
@@ -5549,7 +5554,7 @@
             // btnSearch_PicupCargo
             // 
             this.btnSearch_PicupCargo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnSearch_PicupCargo.Location = new System.Drawing.Point(513, 78);
+            this.btnSearch_PicupCargo.Location = new System.Drawing.Point(595, 76);
             this.btnSearch_PicupCargo.Name = "btnSearch_PicupCargo";
             this.btnSearch_PicupCargo.Size = new System.Drawing.Size(70, 22);
             this.btnSearch_PicupCargo.TabIndex = 76;
@@ -5563,7 +5568,7 @@
             this.label19.AutoSize = true;
             this.label19.Location = new System.Drawing.Point(189, 60);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(38, 14);
+            this.label19.Size = new System.Drawing.Size(36, 13);
             this.label19.TabIndex = 74;
             this.label19.Text = "BCO :";
             // 
@@ -5574,7 +5579,7 @@
             this.dropDownPickUpCargo_BCO.Location = new System.Drawing.Point(192, 80);
             this.dropDownPickUpCargo_BCO.Name = "dropDownPickUpCargo_BCO";
             this.dropDownPickUpCargo_BCO.ReadOnly = true;
-            this.dropDownPickUpCargo_BCO.Size = new System.Drawing.Size(156, 20);
+            this.dropDownPickUpCargo_BCO.Size = new System.Drawing.Size(209, 20);
             this.dropDownPickUpCargo_BCO.TabIndex = 73;
             this.dropDownPickUpCargo_BCO.ThemeName = "Office2010Black";
             // 
@@ -5582,9 +5587,9 @@
             // 
             this.label73.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label73.AutoSize = true;
-            this.label73.Location = new System.Drawing.Point(351, 60);
+            this.label73.Location = new System.Drawing.Point(404, 58);
             this.label73.Name = "label73";
-            this.label73.Size = new System.Drawing.Size(36, 14);
+            this.label73.Size = new System.Drawing.Size(33, 13);
             this.label73.TabIndex = 69;
             this.label73.Text = "Area:";
             // 
@@ -5598,6 +5603,7 @@
             this.dateTimePicker_PickupCargo.Text = "Thursday, December 29, 2016";
             this.dateTimePicker_PickupCargo.ThemeName = "Office2010Black";
             this.dateTimePicker_PickupCargo.Value = new System.DateTime(2016, 12, 29, 16, 31, 36, 782);
+            this.dateTimePicker_PickupCargo.ValueChanged += new System.EventHandler(this.dateTimePicker_PickupCargo_ValueChanged);
             // 
             // label76
             // 
@@ -5605,7 +5611,7 @@
             this.label76.AutoSize = true;
             this.label76.Location = new System.Drawing.Point(10, 60);
             this.label76.Name = "label76";
-            this.label76.Size = new System.Drawing.Size(37, 14);
+            this.label76.Size = new System.Drawing.Size(34, 13);
             this.label76.TabIndex = 72;
             this.label76.Text = "Date:";
             // 
@@ -5635,9 +5641,10 @@
             // 
             this.radPageViewPage8.Controls.Add(this.gridBranchAcceptance);
             this.radPageViewPage8.Controls.Add(this.radPanel15);
-            this.radPageViewPage8.Location = new System.Drawing.Point(120, 12);
+            this.radPageViewPage8.ItemSize = new System.Drawing.SizeF(126F, 30F);
+            this.radPageViewPage8.Location = new System.Drawing.Point(136, 12);
             this.radPageViewPage8.Name = "radPageViewPage8";
-            this.radPageViewPage8.Size = new System.Drawing.Size(1099, 553);
+            this.radPageViewPage8.Size = new System.Drawing.Size(1083, 547);
             this.radPageViewPage8.Text = "Branch Acceptance";
             // 
             // gridBranchAcceptance
@@ -5654,7 +5661,7 @@
             this.gridBranchAcceptance.MasterTemplate.ViewDefinition = tableViewDefinition26;
             this.gridBranchAcceptance.Name = "gridBranchAcceptance";
             this.gridBranchAcceptance.ShowItemToolTips = false;
-            this.gridBranchAcceptance.Size = new System.Drawing.Size(1099, 445);
+            this.gridBranchAcceptance.Size = new System.Drawing.Size(1083, 439);
             this.gridBranchAcceptance.TabIndex = 3;
             this.gridBranchAcceptance.Text = "radGridView2";
             this.gridBranchAcceptance.ThemeName = "Office2010Black";
@@ -5678,7 +5685,7 @@
             this.radPanel15.Dock = System.Windows.Forms.DockStyle.Top;
             this.radPanel15.Location = new System.Drawing.Point(0, 0);
             this.radPanel15.Name = "radPanel15";
-            this.radPanel15.Size = new System.Drawing.Size(1099, 108);
+            this.radPanel15.Size = new System.Drawing.Size(1083, 108);
             this.radPanel15.TabIndex = 2;
             this.radPanel15.ThemeName = "Office2010Black";
             // 
@@ -5697,17 +5704,17 @@
             // 
             this.label100.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label100.AutoSize = true;
-            this.label100.Location = new System.Drawing.Point(335, 58);
+            this.label100.Location = new System.Drawing.Point(366, 58);
             this.label100.Name = "label100";
-            this.label100.Size = new System.Drawing.Size(62, 14);
+            this.label100.Size = new System.Drawing.Size(59, 13);
             this.label100.TabIndex = 82;
             this.label100.Text = "BCO/BSO:";
             // 
             // dropDownBranchAcceptance_Driver
             // 
-            this.dropDownBranchAcceptance_Driver.Location = new System.Drawing.Point(514, 79);
+            this.dropDownBranchAcceptance_Driver.Location = new System.Drawing.Point(545, 79);
             this.dropDownBranchAcceptance_Driver.Name = "dropDownBranchAcceptance_Driver";
-            this.dropDownBranchAcceptance_Driver.Size = new System.Drawing.Size(116, 20);
+            this.dropDownBranchAcceptance_Driver.Size = new System.Drawing.Size(135, 20);
             this.dropDownBranchAcceptance_Driver.TabIndex = 81;
             this.dropDownBranchAcceptance_Driver.ThemeName = "Office2010Black";
             // 
@@ -5715,16 +5722,16 @@
             // 
             this.label97.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label97.AutoSize = true;
-            this.label97.Location = new System.Drawing.Point(511, 58);
+            this.label97.Location = new System.Drawing.Point(542, 58);
             this.label97.Name = "label97";
-            this.label97.Size = new System.Drawing.Size(42, 14);
+            this.label97.Size = new System.Drawing.Size(40, 13);
             this.label97.TabIndex = 80;
             this.label97.Text = "Driver:";
             // 
             // btnBranchAcceptance_Search
             // 
             this.btnBranchAcceptance_Search.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnBranchAcceptance_Search.Location = new System.Drawing.Point(758, 75);
+            this.btnBranchAcceptance_Search.Location = new System.Drawing.Point(808, 75);
             this.btnBranchAcceptance_Search.Name = "btnBranchAcceptance_Search";
             this.btnBranchAcceptance_Search.Size = new System.Drawing.Size(70, 22);
             this.btnBranchAcceptance_Search.TabIndex = 79;
@@ -5738,16 +5745,20 @@
             this.label45.AutoSize = true;
             this.label45.Location = new System.Drawing.Point(184, 58);
             this.label45.Name = "label45";
-            this.label45.Size = new System.Drawing.Size(48, 14);
+            this.label45.Size = new System.Drawing.Size(46, 13);
             this.label45.TabIndex = 78;
             this.label45.Text = "Branch:";
             // 
             // dropDownBranchAcceptance_Branch
             // 
             this.dropDownBranchAcceptance_Branch.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            radListDataItem5.Text = "Branch Corporate Office";
+            radListDataItem6.Text = "Branch Satellite Office";
+            this.dropDownBranchAcceptance_Branch.Items.Add(radListDataItem5);
+            this.dropDownBranchAcceptance_Branch.Items.Add(radListDataItem6);
             this.dropDownBranchAcceptance_Branch.Location = new System.Drawing.Point(187, 79);
             this.dropDownBranchAcceptance_Branch.Name = "dropDownBranchAcceptance_Branch";
-            this.dropDownBranchAcceptance_Branch.Size = new System.Drawing.Size(145, 20);
+            this.dropDownBranchAcceptance_Branch.Size = new System.Drawing.Size(176, 20);
             this.dropDownBranchAcceptance_Branch.TabIndex = 77;
             this.dropDownBranchAcceptance_Branch.ThemeName = "Office2010Black";
             this.dropDownBranchAcceptance_Branch.SelectedIndexChanged += new Telerik.WinControls.UI.Data.PositionChangedEventHandler(this.dropDownBranchAcceptance_Branch_SelectedIndexChanged);
@@ -5762,6 +5773,7 @@
             this.dateTimePickerBranchAcceptance_Date.Text = "Thursday, December 29, 2016";
             this.dateTimePickerBranchAcceptance_Date.ThemeName = "Office2010Black";
             this.dateTimePickerBranchAcceptance_Date.Value = new System.DateTime(2016, 12, 29, 16, 31, 36, 782);
+            this.dateTimePickerBranchAcceptance_Date.ValueChanged += new System.EventHandler(this.dateTimePickerBranchAcceptance_Date_ValueChanged);
             // 
             // label48
             // 
@@ -5769,13 +5781,14 @@
             this.label48.AutoSize = true;
             this.label48.Location = new System.Drawing.Point(10, 58);
             this.label48.Name = "label48";
-            this.label48.Size = new System.Drawing.Size(37, 14);
+            this.label48.Size = new System.Drawing.Size(34, 13);
             this.label48.TabIndex = 76;
             this.label48.Text = "Date:";
             // 
             // dropDownBranchAcceptance_BCO_BSO
             // 
-            this.dropDownBranchAcceptance_BCO_BSO.Location = new System.Drawing.Point(338, 79);
+            this.dropDownBranchAcceptance_BCO_BSO.Enabled = false;
+            this.dropDownBranchAcceptance_BCO_BSO.Location = new System.Drawing.Point(369, 79);
             this.dropDownBranchAcceptance_BCO_BSO.Name = "dropDownBranchAcceptance_BCO_BSO";
             this.dropDownBranchAcceptance_BCO_BSO.Size = new System.Drawing.Size(170, 20);
             this.dropDownBranchAcceptance_BCO_BSO.TabIndex = 73;
@@ -5783,7 +5796,7 @@
             // 
             // dropDownBranchAcceptance_Batch
             // 
-            this.dropDownBranchAcceptance_Batch.Location = new System.Drawing.Point(636, 77);
+            this.dropDownBranchAcceptance_Batch.Location = new System.Drawing.Point(686, 77);
             this.dropDownBranchAcceptance_Batch.Name = "dropDownBranchAcceptance_Batch";
             this.dropDownBranchAcceptance_Batch.Size = new System.Drawing.Size(116, 20);
             this.dropDownBranchAcceptance_Batch.TabIndex = 70;
@@ -5793,9 +5806,9 @@
             // 
             this.label77.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label77.AutoSize = true;
-            this.label77.Location = new System.Drawing.Point(633, 56);
+            this.label77.Location = new System.Drawing.Point(683, 56);
             this.label77.Name = "label77";
-            this.label77.Size = new System.Drawing.Size(38, 14);
+            this.label77.Size = new System.Drawing.Size(36, 13);
             this.label77.TabIndex = 69;
             this.label77.Text = "Batch";
             // 
@@ -5825,9 +5838,10 @@
             // 
             this.radPageViewPage9.Controls.Add(this.gridBundle);
             this.radPageViewPage9.Controls.Add(this.radPanel16);
-            this.radPageViewPage9.Location = new System.Drawing.Point(120, 12);
+            this.radPageViewPage9.ItemSize = new System.Drawing.SizeF(126F, 30F);
+            this.radPageViewPage9.Location = new System.Drawing.Point(136, 12);
             this.radPageViewPage9.Name = "radPageViewPage9";
-            this.radPageViewPage9.Size = new System.Drawing.Size(1099, 553);
+            this.radPageViewPage9.Size = new System.Drawing.Size(1083, 547);
             this.radPageViewPage9.Text = "Bundle";
             // 
             // gridBundle
@@ -5845,7 +5859,7 @@
             this.gridBundle.MasterTemplate.ViewDefinition = tableViewDefinition27;
             this.gridBundle.Name = "gridBundle";
             this.gridBundle.ShowItemToolTips = false;
-            this.gridBundle.Size = new System.Drawing.Size(1099, 445);
+            this.gridBundle.Size = new System.Drawing.Size(1083, 439);
             this.gridBundle.TabIndex = 3;
             this.gridBundle.Text = "radGridView2";
             this.gridBundle.ThemeName = "Office2010Black";
@@ -5870,7 +5884,7 @@
             this.radPanel16.Dock = System.Windows.Forms.DockStyle.Top;
             this.radPanel16.Location = new System.Drawing.Point(0, 0);
             this.radPanel16.Name = "radPanel16";
-            this.radPanel16.Size = new System.Drawing.Size(1099, 108);
+            this.radPanel16.Size = new System.Drawing.Size(1083, 108);
             this.radPanel16.TabIndex = 2;
             this.radPanel16.ThemeName = "Office2010Black";
             // 
@@ -5887,7 +5901,7 @@
             // 
             // dropDownBundle_Destination
             // 
-            this.dropDownBundle_Destination.Location = new System.Drawing.Point(620, 78);
+            this.dropDownBundle_Destination.Location = new System.Drawing.Point(650, 78);
             this.dropDownBundle_Destination.Name = "dropDownBundle_Destination";
             this.dropDownBundle_Destination.Size = new System.Drawing.Size(155, 20);
             this.dropDownBundle_Destination.TabIndex = 96;
@@ -5897,9 +5911,9 @@
             // 
             this.label125.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label125.AutoSize = true;
-            this.label125.Location = new System.Drawing.Point(617, 55);
+            this.label125.Location = new System.Drawing.Point(647, 55);
             this.label125.Name = "label125";
-            this.label125.Size = new System.Drawing.Size(72, 14);
+            this.label125.Size = new System.Drawing.Size(70, 13);
             this.label125.TabIndex = 95;
             this.label125.Text = "Destination:";
             // 
@@ -5928,7 +5942,7 @@
             // 
             // dropDownBundle_SackNo
             // 
-            this.dropDownBundle_SackNo.Location = new System.Drawing.Point(498, 80);
+            this.dropDownBundle_SackNo.Location = new System.Drawing.Point(528, 80);
             this.dropDownBundle_SackNo.Name = "dropDownBundle_SackNo";
             this.dropDownBundle_SackNo.Size = new System.Drawing.Size(116, 20);
             this.dropDownBundle_SackNo.TabIndex = 93;
@@ -5938,9 +5952,9 @@
             // 
             this.label113.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label113.AutoSize = true;
-            this.label113.Location = new System.Drawing.Point(336, 57);
+            this.label113.Location = new System.Drawing.Point(366, 57);
             this.label113.Name = "label113";
-            this.label113.Size = new System.Drawing.Size(62, 14);
+            this.label113.Size = new System.Drawing.Size(59, 13);
             this.label113.TabIndex = 92;
             this.label113.Text = "BCO/BSO:";
             // 
@@ -5948,16 +5962,16 @@
             // 
             this.label101.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label101.AutoSize = true;
-            this.label101.Location = new System.Drawing.Point(495, 57);
+            this.label101.Location = new System.Drawing.Point(525, 57);
             this.label101.Name = "label101";
-            this.label101.Size = new System.Drawing.Size(55, 14);
+            this.label101.Size = new System.Drawing.Size(51, 13);
             this.label101.TabIndex = 89;
             this.label101.Text = "Sack No:";
             // 
             // btnBundle_Search
             // 
             this.btnBundle_Search.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnBundle_Search.Location = new System.Drawing.Point(781, 76);
+            this.btnBundle_Search.Location = new System.Drawing.Point(811, 76);
             this.btnBundle_Search.Name = "btnBundle_Search";
             this.btnBundle_Search.Size = new System.Drawing.Size(70, 22);
             this.btnBundle_Search.TabIndex = 87;
@@ -5971,16 +5985,20 @@
             this.label23.AutoSize = true;
             this.label23.Location = new System.Drawing.Point(185, 57);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(48, 14);
+            this.label23.Size = new System.Drawing.Size(46, 13);
             this.label23.TabIndex = 86;
             this.label23.Text = "Branch:";
             // 
             // dropDownBundle_Branch
             // 
             this.dropDownBundle_Branch.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            radListDataItem1.Text = "Branch Corporate Office";
+            radListDataItem2.Text = "Branch Satellite Office";
+            this.dropDownBundle_Branch.Items.Add(radListDataItem1);
+            this.dropDownBundle_Branch.Items.Add(radListDataItem2);
             this.dropDownBundle_Branch.Location = new System.Drawing.Point(188, 80);
             this.dropDownBundle_Branch.Name = "dropDownBundle_Branch";
-            this.dropDownBundle_Branch.Size = new System.Drawing.Size(145, 20);
+            this.dropDownBundle_Branch.Size = new System.Drawing.Size(175, 20);
             this.dropDownBundle_Branch.TabIndex = 85;
             this.dropDownBundle_Branch.ThemeName = "Office2010Black";
             this.dropDownBundle_Branch.SelectedIndexChanged += new Telerik.WinControls.UI.Data.PositionChangedEventHandler(this.dropDownBundle_Branch_SelectedIndexChanged);
@@ -5995,6 +6013,7 @@
             this.dateTimeBundle_Date.Text = "Thursday, December 29, 2016";
             this.dateTimeBundle_Date.ThemeName = "Office2010Black";
             this.dateTimeBundle_Date.Value = new System.DateTime(2016, 12, 29, 16, 31, 36, 782);
+            this.dateTimeBundle_Date.ValueChanged += new System.EventHandler(this.dateTimeBundle_Date_ValueChanged);
             // 
             // label24
             // 
@@ -6002,13 +6021,13 @@
             this.label24.AutoSize = true;
             this.label24.Location = new System.Drawing.Point(11, 57);
             this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(37, 14);
+            this.label24.Size = new System.Drawing.Size(34, 13);
             this.label24.TabIndex = 84;
             this.label24.Text = "Date:";
             // 
             // dropDownBundle_BCO_BSO
             // 
-            this.dropDownBundle_BCO_BSO.Location = new System.Drawing.Point(339, 80);
+            this.dropDownBundle_BCO_BSO.Location = new System.Drawing.Point(369, 80);
             this.dropDownBundle_BCO_BSO.Name = "dropDownBundle_BCO_BSO";
             this.dropDownBundle_BCO_BSO.Size = new System.Drawing.Size(153, 20);
             this.dropDownBundle_BCO_BSO.TabIndex = 82;
@@ -6040,6 +6059,7 @@
             // 
             this.radPageViewPage10.Controls.Add(this.gridUnbundle);
             this.radPageViewPage10.Controls.Add(this.radPanel17);
+            this.radPageViewPage10.ItemSize = new System.Drawing.SizeF(126F, 30F);
             this.radPageViewPage10.Location = new System.Drawing.Point(136, 12);
             this.radPageViewPage10.Name = "radPageViewPage10";
             this.radPageViewPage10.Size = new System.Drawing.Size(1083, 547);
@@ -6101,7 +6121,7 @@
             this.label112.AutoSize = true;
             this.label112.Location = new System.Drawing.Point(353, 55);
             this.label112.Name = "label112";
-            this.label112.Size = new System.Drawing.Size(59, 14);
+            this.label112.Size = new System.Drawing.Size(54, 13);
             this.label112.TabIndex = 91;
             this.label112.Text = "Sack No.:";
             // 
@@ -6130,7 +6150,7 @@
             this.label34.AutoSize = true;
             this.label34.Location = new System.Drawing.Point(191, 57);
             this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(38, 14);
+            this.label34.Size = new System.Drawing.Size(36, 13);
             this.label34.TabIndex = 86;
             this.label34.Text = "BCO :";
             // 
@@ -6153,6 +6173,7 @@
             this.dateTimeUnbunde_Date.Text = "Thursday, December 29, 2016";
             this.dateTimeUnbunde_Date.ThemeName = "Office2010Black";
             this.dateTimeUnbunde_Date.Value = new System.DateTime(2016, 12, 29, 16, 31, 36, 782);
+            this.dateTimeUnbunde_Date.ValueChanged += new System.EventHandler(this.dateTimeUnbunde_Date_ValueChanged);
             // 
             // label51
             // 
@@ -6160,7 +6181,7 @@
             this.label51.AutoSize = true;
             this.label51.Location = new System.Drawing.Point(12, 57);
             this.label51.Name = "label51";
-            this.label51.Size = new System.Drawing.Size(37, 14);
+            this.label51.Size = new System.Drawing.Size(34, 13);
             this.label51.TabIndex = 84;
             this.label51.Text = "Date:";
             // 
@@ -6190,6 +6211,7 @@
             // 
             this.radPageViewPage11.Controls.Add(this.gridGatewayTransmital);
             this.radPageViewPage11.Controls.Add(this.radPanel18);
+            this.radPageViewPage11.ItemSize = new System.Drawing.SizeF(126F, 30F);
             this.radPageViewPage11.Location = new System.Drawing.Point(136, 12);
             this.radPageViewPage11.Name = "radPageViewPage11";
             this.radPageViewPage11.Size = new System.Drawing.Size(1083, 547);
@@ -6264,7 +6286,7 @@
             this.label59.AutoSize = true;
             this.label59.Location = new System.Drawing.Point(350, 57);
             this.label59.Name = "label59";
-            this.label59.Size = new System.Drawing.Size(99, 14);
+            this.label59.Size = new System.Drawing.Size(96, 13);
             this.label59.TabIndex = 92;
             this.label59.Text = "BCO Destination:";
             // 
@@ -6274,7 +6296,7 @@
             this.label58.AutoSize = true;
             this.label58.Location = new System.Drawing.Point(534, 56);
             this.label58.Name = "label58";
-            this.label58.Size = new System.Drawing.Size(42, 14);
+            this.label58.Size = new System.Drawing.Size(39, 13);
             this.label58.TabIndex = 91;
             this.label58.Text = "Batch:";
             // 
@@ -6300,7 +6322,7 @@
             this.label55.AutoSize = true;
             this.label55.Location = new System.Drawing.Point(648, 54);
             this.label55.Name = "label55";
-            this.label55.Size = new System.Drawing.Size(78, 14);
+            this.label55.Size = new System.Drawing.Size(72, 13);
             this.label55.TabIndex = 84;
             this.label55.Text = "Master AWB:";
             // 
@@ -6321,7 +6343,7 @@
             this.label35.AutoSize = true;
             this.label35.Location = new System.Drawing.Point(188, 58);
             this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(59, 14);
+            this.label35.Size = new System.Drawing.Size(54, 13);
             this.label35.TabIndex = 81;
             this.label35.Text = "Gateway:";
             // 
@@ -6344,6 +6366,7 @@
             this.dateTimeGatewayTransmital_Date.Text = "Thursday, December 29, 2016";
             this.dateTimeGatewayTransmital_Date.ThemeName = "Office2010Black";
             this.dateTimeGatewayTransmital_Date.Value = new System.DateTime(2016, 12, 29, 16, 31, 36, 782);
+            this.dateTimeGatewayTransmital_Date.ValueChanged += new System.EventHandler(this.dateTimeGatewayTransmital_Date_ValueChanged);
             // 
             // label54
             // 
@@ -6351,7 +6374,7 @@
             this.label54.AutoSize = true;
             this.label54.Location = new System.Drawing.Point(9, 58);
             this.label54.Name = "label54";
-            this.label54.Size = new System.Drawing.Size(37, 14);
+            this.label54.Size = new System.Drawing.Size(34, 13);
             this.label54.TabIndex = 79;
             this.label54.Text = "Date:";
             // 
@@ -6381,9 +6404,10 @@
             // 
             this.radPageViewPage12.Controls.Add(this.gridGatewayOutbound);
             this.radPageViewPage12.Controls.Add(this.radPanel19);
-            this.radPageViewPage12.Location = new System.Drawing.Point(120, 12);
+            this.radPageViewPage12.ItemSize = new System.Drawing.SizeF(126F, 30F);
+            this.radPageViewPage12.Location = new System.Drawing.Point(136, 12);
             this.radPageViewPage12.Name = "radPageViewPage12";
-            this.radPageViewPage12.Size = new System.Drawing.Size(1099, 553);
+            this.radPageViewPage12.Size = new System.Drawing.Size(1083, 547);
             this.radPageViewPage12.Text = "Gateway Outbound";
             // 
             // gridGatewayOutbound
@@ -6401,7 +6425,7 @@
             this.gridGatewayOutbound.MasterTemplate.ViewDefinition = tableViewDefinition30;
             this.gridGatewayOutbound.Name = "gridGatewayOutbound";
             this.gridGatewayOutbound.ShowItemToolTips = false;
-            this.gridGatewayOutbound.Size = new System.Drawing.Size(1099, 445);
+            this.gridGatewayOutbound.Size = new System.Drawing.Size(1083, 439);
             this.gridGatewayOutbound.TabIndex = 4;
             this.gridGatewayOutbound.Text = "radGridView2";
             this.gridGatewayOutbound.ThemeName = "Office2010Black";
@@ -6423,7 +6447,7 @@
             this.radPanel19.Dock = System.Windows.Forms.DockStyle.Top;
             this.radPanel19.Location = new System.Drawing.Point(0, 0);
             this.radPanel19.Name = "radPanel19";
-            this.radPanel19.Size = new System.Drawing.Size(1099, 108);
+            this.radPanel19.Size = new System.Drawing.Size(1083, 108);
             this.radPanel19.TabIndex = 2;
             this.radPanel19.ThemeName = "Office2010Black";
             // 
@@ -6455,7 +6479,7 @@
             this.label78.AutoSize = true;
             this.label78.Location = new System.Drawing.Point(511, 57);
             this.label78.Name = "label78";
-            this.label78.Size = new System.Drawing.Size(42, 14);
+            this.label78.Size = new System.Drawing.Size(39, 13);
             this.label78.TabIndex = 95;
             this.label78.Text = "Batch:";
             // 
@@ -6483,7 +6507,7 @@
             this.label79.AutoSize = true;
             this.label79.Location = new System.Drawing.Point(188, 57);
             this.label79.Name = "label79";
-            this.label79.Size = new System.Drawing.Size(34, 14);
+            this.label79.Size = new System.Drawing.Size(33, 13);
             this.label79.TabIndex = 92;
             this.label79.Text = "BCO:";
             // 
@@ -6493,7 +6517,7 @@
             this.label60.AutoSize = true;
             this.label60.Location = new System.Drawing.Point(349, 57);
             this.label60.Name = "label60";
-            this.label60.Size = new System.Drawing.Size(59, 14);
+            this.label60.Size = new System.Drawing.Size(54, 13);
             this.label60.TabIndex = 85;
             this.label60.Text = "Gateway:";
             // 
@@ -6517,6 +6541,7 @@
             this.dateTimeGatewayOutbound_Date.Text = "Thursday, December 29, 2016";
             this.dateTimeGatewayOutbound_Date.ThemeName = "Office2010Black";
             this.dateTimeGatewayOutbound_Date.Value = new System.DateTime(2016, 12, 29, 16, 31, 36, 782);
+            this.dateTimeGatewayOutbound_Date.ValueChanged += new System.EventHandler(this.dateTimeGatewayOutbound_Date_ValueChanged);
             // 
             // label61
             // 
@@ -6524,7 +6549,7 @@
             this.label61.AutoSize = true;
             this.label61.Location = new System.Drawing.Point(11, 57);
             this.label61.Name = "label61";
-            this.label61.Size = new System.Drawing.Size(37, 14);
+            this.label61.Size = new System.Drawing.Size(34, 13);
             this.label61.TabIndex = 83;
             this.label61.Text = "Date:";
             // 
@@ -6554,9 +6579,10 @@
             // 
             this.radPageViewPage13.Controls.Add(this.gridGatewayInbound);
             this.radPageViewPage13.Controls.Add(this.radPanel20);
-            this.radPageViewPage13.Location = new System.Drawing.Point(120, 12);
+            this.radPageViewPage13.ItemSize = new System.Drawing.SizeF(126F, 30F);
+            this.radPageViewPage13.Location = new System.Drawing.Point(136, 12);
             this.radPageViewPage13.Name = "radPageViewPage13";
-            this.radPageViewPage13.Size = new System.Drawing.Size(1099, 553);
+            this.radPageViewPage13.Size = new System.Drawing.Size(1083, 547);
             this.radPageViewPage13.Text = "Gateway Inbound";
             // 
             // gridGatewayInbound
@@ -6574,7 +6600,7 @@
             this.gridGatewayInbound.MasterTemplate.ViewDefinition = tableViewDefinition31;
             this.gridGatewayInbound.Name = "gridGatewayInbound";
             this.gridGatewayInbound.ShowItemToolTips = false;
-            this.gridGatewayInbound.Size = new System.Drawing.Size(1099, 445);
+            this.gridGatewayInbound.Size = new System.Drawing.Size(1083, 439);
             this.gridGatewayInbound.TabIndex = 5;
             this.gridGatewayInbound.Text = "radGridView2";
             this.gridGatewayInbound.ThemeName = "Office2010Black";
@@ -6598,7 +6624,7 @@
             this.radPanel20.Dock = System.Windows.Forms.DockStyle.Top;
             this.radPanel20.Location = new System.Drawing.Point(0, 0);
             this.radPanel20.Name = "radPanel20";
-            this.radPanel20.Size = new System.Drawing.Size(1099, 108);
+            this.radPanel20.Size = new System.Drawing.Size(1083, 108);
             this.radPanel20.TabIndex = 4;
             this.radPanel20.ThemeName = "Office2010Black";
             // 
@@ -6626,7 +6652,7 @@
             this.label93.AutoSize = true;
             this.label93.Location = new System.Drawing.Point(627, 55);
             this.label93.Name = "label93";
-            this.label93.Size = new System.Drawing.Size(78, 14);
+            this.label93.Size = new System.Drawing.Size(72, 13);
             this.label93.TabIndex = 105;
             this.label93.Text = "Master AWB:";
             // 
@@ -6656,7 +6682,7 @@
             this.label92.AutoSize = true;
             this.label92.Location = new System.Drawing.Point(473, 55);
             this.label92.Name = "label92";
-            this.label92.Size = new System.Drawing.Size(104, 14);
+            this.label92.Size = new System.Drawing.Size(93, 13);
             this.label92.TabIndex = 102;
             this.label92.Text = "Commodity Type:";
             // 
@@ -6666,7 +6692,7 @@
             this.label89.AutoSize = true;
             this.label89.Location = new System.Drawing.Point(313, 55);
             this.label89.Name = "label89";
-            this.label89.Size = new System.Drawing.Size(66, 14);
+            this.label89.Size = new System.Drawing.Size(65, 13);
             this.label89.TabIndex = 101;
             this.label89.Text = "Origin City:";
             // 
@@ -6685,7 +6711,7 @@
             this.label85.AutoSize = true;
             this.label85.Location = new System.Drawing.Point(187, 55);
             this.label85.Name = "label85";
-            this.label85.Size = new System.Drawing.Size(59, 14);
+            this.label85.Size = new System.Drawing.Size(54, 13);
             this.label85.TabIndex = 97;
             this.label85.Text = "Gateway:";
             // 
@@ -6708,6 +6734,7 @@
             this.dateTimePickerGatewayInbound_Date.Text = "Thursday, December 29, 2016";
             this.dateTimePickerGatewayInbound_Date.ThemeName = "Office2010Black";
             this.dateTimePickerGatewayInbound_Date.Value = new System.DateTime(2016, 12, 29, 16, 31, 36, 782);
+            this.dateTimePickerGatewayInbound_Date.ValueChanged += new System.EventHandler(this.dateTimePickerGatewayInbound_Date_ValueChanged);
             // 
             // label88
             // 
@@ -6715,7 +6742,7 @@
             this.label88.AutoSize = true;
             this.label88.Location = new System.Drawing.Point(8, 55);
             this.label88.Name = "label88";
-            this.label88.Size = new System.Drawing.Size(37, 14);
+            this.label88.Size = new System.Drawing.Size(34, 13);
             this.label88.TabIndex = 95;
             this.label88.Text = "Date:";
             // 
@@ -6745,9 +6772,10 @@
             // 
             this.radPageViewPage14.Controls.Add(this.gridCargoTransfer);
             this.radPageViewPage14.Controls.Add(this.radPanel21);
-            this.radPageViewPage14.Location = new System.Drawing.Point(120, 12);
+            this.radPageViewPage14.ItemSize = new System.Drawing.SizeF(126F, 30F);
+            this.radPageViewPage14.Location = new System.Drawing.Point(136, 12);
             this.radPageViewPage14.Name = "radPageViewPage14";
-            this.radPageViewPage14.Size = new System.Drawing.Size(1099, 553);
+            this.radPageViewPage14.Size = new System.Drawing.Size(1083, 547);
             this.radPageViewPage14.Text = "Cargo Transfer";
             // 
             // gridCargoTransfer
@@ -6765,7 +6793,7 @@
             this.gridCargoTransfer.MasterTemplate.ViewDefinition = tableViewDefinition32;
             this.gridCargoTransfer.Name = "gridCargoTransfer";
             this.gridCargoTransfer.ShowItemToolTips = false;
-            this.gridCargoTransfer.Size = new System.Drawing.Size(1099, 445);
+            this.gridCargoTransfer.Size = new System.Drawing.Size(1083, 439);
             this.gridCargoTransfer.TabIndex = 5;
             this.gridCargoTransfer.Text = "radGridView2";
             this.gridCargoTransfer.ThemeName = "Office2010Black";
@@ -6787,7 +6815,7 @@
             this.radPanel21.Dock = System.Windows.Forms.DockStyle.Top;
             this.radPanel21.Location = new System.Drawing.Point(0, 0);
             this.radPanel21.Name = "radPanel21";
-            this.radPanel21.Size = new System.Drawing.Size(1099, 108);
+            this.radPanel21.Size = new System.Drawing.Size(1083, 108);
             this.radPanel21.TabIndex = 4;
             this.radPanel21.ThemeName = "Office2010Black";
             // 
@@ -6808,7 +6836,7 @@
             this.label120.AutoSize = true;
             this.label120.Location = new System.Drawing.Point(335, 57);
             this.label120.Name = "label120";
-            this.label120.Size = new System.Drawing.Size(55, 14);
+            this.label120.Size = new System.Drawing.Size(53, 13);
             this.label120.TabIndex = 90;
             this.label120.Text = "BCO/City";
             // 
@@ -6818,7 +6846,7 @@
             this.label84.AutoSize = true;
             this.label84.Location = new System.Drawing.Point(484, 57);
             this.label84.Name = "label84";
-            this.label84.Size = new System.Drawing.Size(72, 14);
+            this.label84.Size = new System.Drawing.Size(70, 13);
             this.label84.TabIndex = 89;
             this.label84.Text = "Destination:";
             // 
@@ -6847,7 +6875,7 @@
             this.label44.AutoSize = true;
             this.label44.Location = new System.Drawing.Point(184, 57);
             this.label44.Name = "label44";
-            this.label44.Size = new System.Drawing.Size(42, 14);
+            this.label44.Size = new System.Drawing.Size(43, 13);
             this.label44.TabIndex = 86;
             this.label44.Text = "Origin:";
             // 
@@ -6871,6 +6899,7 @@
             this.dateTimeCargoTransfer_Date.Text = "Thursday, December 29, 2016";
             this.dateTimeCargoTransfer_Date.ThemeName = "Office2010Black";
             this.dateTimeCargoTransfer_Date.Value = new System.DateTime(2016, 12, 29, 16, 31, 36, 782);
+            this.dateTimeCargoTransfer_Date.ValueChanged += new System.EventHandler(this.dateTimeCargoTransfer_Date_ValueChanged);
             // 
             // label50
             // 
@@ -6878,7 +6907,7 @@
             this.label50.AutoSize = true;
             this.label50.Location = new System.Drawing.Point(10, 57);
             this.label50.Name = "label50";
-            this.label50.Size = new System.Drawing.Size(37, 14);
+            this.label50.Size = new System.Drawing.Size(34, 13);
             this.label50.TabIndex = 84;
             this.label50.Text = "Date:";
             // 
@@ -6916,9 +6945,10 @@
             // 
             this.radPageViewPage15.Controls.Add(this.gridSegregation);
             this.radPageViewPage15.Controls.Add(this.radPanel22);
-            this.radPageViewPage15.Location = new System.Drawing.Point(120, 12);
+            this.radPageViewPage15.ItemSize = new System.Drawing.SizeF(126F, 30F);
+            this.radPageViewPage15.Location = new System.Drawing.Point(136, 12);
             this.radPageViewPage15.Name = "radPageViewPage15";
-            this.radPageViewPage15.Size = new System.Drawing.Size(1099, 553);
+            this.radPageViewPage15.Size = new System.Drawing.Size(1083, 547);
             this.radPageViewPage15.Text = "Segregation";
             // 
             // gridSegregation
@@ -6936,7 +6966,7 @@
             this.gridSegregation.MasterTemplate.ViewDefinition = tableViewDefinition33;
             this.gridSegregation.Name = "gridSegregation";
             this.gridSegregation.ShowItemToolTips = false;
-            this.gridSegregation.Size = new System.Drawing.Size(1099, 445);
+            this.gridSegregation.Size = new System.Drawing.Size(1083, 439);
             this.gridSegregation.TabIndex = 6;
             this.gridSegregation.Text = "radGridView2";
             this.gridSegregation.ThemeName = "Office2010Black";
@@ -6960,7 +6990,7 @@
             this.radPanel22.Dock = System.Windows.Forms.DockStyle.Top;
             this.radPanel22.Location = new System.Drawing.Point(0, 0);
             this.radPanel22.Name = "radPanel22";
-            this.radPanel22.Size = new System.Drawing.Size(1099, 108);
+            this.radPanel22.Size = new System.Drawing.Size(1083, 108);
             this.radPanel22.TabIndex = 4;
             this.radPanel22.ThemeName = "Office2010Black";
             // 
@@ -6981,7 +7011,7 @@
             this.label83.AutoSize = true;
             this.label83.Location = new System.Drawing.Point(509, 56);
             this.label83.Name = "label83";
-            this.label83.Size = new System.Drawing.Size(51, 14);
+            this.label83.Size = new System.Drawing.Size(45, 13);
             this.label83.TabIndex = 111;
             this.label83.Text = "Plate #:";
             // 
@@ -7012,7 +7042,7 @@
             this.label36.AutoSize = true;
             this.label36.Location = new System.Drawing.Point(606, 56);
             this.label36.Name = "label36";
-            this.label36.Size = new System.Drawing.Size(42, 14);
+            this.label36.Size = new System.Drawing.Size(39, 13);
             this.label36.TabIndex = 108;
             this.label36.Text = "Batch:";
             // 
@@ -7040,7 +7070,7 @@
             this.label56.AutoSize = true;
             this.label56.Location = new System.Drawing.Point(186, 56);
             this.label56.Name = "label56";
-            this.label56.Size = new System.Drawing.Size(34, 14);
+            this.label56.Size = new System.Drawing.Size(33, 13);
             this.label56.TabIndex = 105;
             this.label56.Text = "BCO:";
             // 
@@ -7050,7 +7080,7 @@
             this.label57.AutoSize = true;
             this.label57.Location = new System.Drawing.Point(347, 56);
             this.label57.Name = "label57";
-            this.label57.Size = new System.Drawing.Size(38, 14);
+            this.label57.Size = new System.Drawing.Size(37, 13);
             this.label57.TabIndex = 104;
             this.label57.Text = "Driver";
             // 
@@ -7074,6 +7104,7 @@
             this.dateTimeSegregation_Date.Text = "Thursday, December 29, 2016";
             this.dateTimeSegregation_Date.ThemeName = "Office2010Black";
             this.dateTimeSegregation_Date.Value = new System.DateTime(2016, 12, 29, 16, 31, 36, 782);
+            this.dateTimeSegregation_Date.ValueChanged += new System.EventHandler(this.dateTimeSegregation_Date_ValueChanged);
             // 
             // label80
             // 
@@ -7081,7 +7112,7 @@
             this.label80.AutoSize = true;
             this.label80.Location = new System.Drawing.Point(9, 56);
             this.label80.Name = "label80";
-            this.label80.Size = new System.Drawing.Size(37, 14);
+            this.label80.Size = new System.Drawing.Size(34, 13);
             this.label80.TabIndex = 102;
             this.label80.Text = "Date:";
             // 
@@ -7111,9 +7142,10 @@
             // 
             this.radPageViewPage16.Controls.Add(this.gridDailyTrip);
             this.radPageViewPage16.Controls.Add(this.radPanel23);
+            this.radPageViewPage16.ItemSize = new System.Drawing.SizeF(126F, 30F);
             this.radPageViewPage16.Location = new System.Drawing.Point(136, 12);
             this.radPageViewPage16.Name = "radPageViewPage16";
-            this.radPageViewPage16.Size = new System.Drawing.Size(1083, 553);
+            this.radPageViewPage16.Size = new System.Drawing.Size(1083, 547);
             this.radPageViewPage16.Text = "Daily Trip";
             // 
             // gridDailyTrip
@@ -7131,7 +7163,7 @@
             this.gridDailyTrip.MasterTemplate.ViewDefinition = tableViewDefinition34;
             this.gridDailyTrip.Name = "gridDailyTrip";
             this.gridDailyTrip.ShowItemToolTips = false;
-            this.gridDailyTrip.Size = new System.Drawing.Size(1083, 445);
+            this.gridDailyTrip.Size = new System.Drawing.Size(1083, 439);
             this.gridDailyTrip.TabIndex = 6;
             this.gridDailyTrip.Text = "radGridView2";
             this.gridDailyTrip.ThemeName = "Office2010Black";
@@ -7148,7 +7180,7 @@
             this.radPanel23.Controls.Add(this.label109);
             this.radPanel23.Controls.Add(this.dropDownDailyTrip_Area);
             this.radPanel23.Controls.Add(this.label122);
-            this.radPanel23.Controls.Add(this.radDropDownList3);
+            this.radPanel23.Controls.Add(this.dropDownDailyTrip_BCO);
             this.radPanel23.Controls.Add(this.label123);
             this.radPanel23.Controls.Add(this.label110);
             this.radPanel23.Controls.Add(this.label111);
@@ -7162,7 +7194,7 @@
             // btnDailyTrip_Print
             // 
             this.btnDailyTrip_Print.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnDailyTrip_Print.Location = new System.Drawing.Point(983, 74);
+            this.btnDailyTrip_Print.Location = new System.Drawing.Point(998, 74);
             this.btnDailyTrip_Print.Name = "btnDailyTrip_Print";
             this.btnDailyTrip_Print.Size = new System.Drawing.Size(70, 22);
             this.btnDailyTrip_Print.TabIndex = 94;
@@ -7185,7 +7217,7 @@
             this.label124.AutoSize = true;
             this.label124.Location = new System.Drawing.Point(668, 56);
             this.label124.Name = "label124";
-            this.label124.Size = new System.Drawing.Size(93, 14);
+            this.label124.Size = new System.Drawing.Size(86, 13);
             this.label124.TabIndex = 94;
             this.label124.Text = "Payment Mode:";
             // 
@@ -7215,7 +7247,7 @@
             this.label108.AutoSize = true;
             this.label108.Location = new System.Drawing.Point(509, 56);
             this.label108.Name = "label108";
-            this.label108.Size = new System.Drawing.Size(42, 14);
+            this.label108.Size = new System.Drawing.Size(40, 13);
             this.label108.TabIndex = 91;
             this.label108.Text = "Driver:";
             // 
@@ -7236,7 +7268,7 @@
             this.label109.AutoSize = true;
             this.label109.Location = new System.Drawing.Point(8, 56);
             this.label109.Name = "label109";
-            this.label109.Size = new System.Drawing.Size(37, 14);
+            this.label109.Size = new System.Drawing.Size(34, 13);
             this.label109.TabIndex = 90;
             this.label109.Text = "Date:";
             // 
@@ -7255,20 +7287,20 @@
             this.label122.AutoSize = true;
             this.label122.Location = new System.Drawing.Point(188, 56);
             this.label122.Name = "label122";
-            this.label122.Size = new System.Drawing.Size(38, 14);
+            this.label122.Size = new System.Drawing.Size(36, 13);
             this.label122.TabIndex = 87;
             this.label122.Text = "BCO :";
             // 
-            // radDropDownList3
+            // dropDownDailyTrip_BCO
             // 
-            this.radDropDownList3.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.radDropDownList3.Enabled = false;
-            this.radDropDownList3.Location = new System.Drawing.Point(191, 76);
-            this.radDropDownList3.Name = "radDropDownList3";
-            this.radDropDownList3.ReadOnly = true;
-            this.radDropDownList3.Size = new System.Drawing.Size(156, 20);
-            this.radDropDownList3.TabIndex = 86;
-            this.radDropDownList3.ThemeName = "Office2010Black";
+            this.dropDownDailyTrip_BCO.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.dropDownDailyTrip_BCO.Enabled = false;
+            this.dropDownDailyTrip_BCO.Location = new System.Drawing.Point(191, 76);
+            this.dropDownDailyTrip_BCO.Name = "dropDownDailyTrip_BCO";
+            this.dropDownDailyTrip_BCO.ReadOnly = true;
+            this.dropDownDailyTrip_BCO.Size = new System.Drawing.Size(156, 20);
+            this.dropDownDailyTrip_BCO.TabIndex = 86;
+            this.dropDownDailyTrip_BCO.ThemeName = "Office2010Black";
             // 
             // label123
             // 
@@ -7276,7 +7308,7 @@
             this.label123.AutoSize = true;
             this.label123.Location = new System.Drawing.Point(350, 56);
             this.label123.Name = "label123";
-            this.label123.Size = new System.Drawing.Size(36, 14);
+            this.label123.Size = new System.Drawing.Size(33, 13);
             this.label123.TabIndex = 85;
             this.label123.Text = "Area:";
             // 
@@ -7306,9 +7338,10 @@
             // 
             this.radPageViewPage17.Controls.Add(this.gridHoldCargo);
             this.radPageViewPage17.Controls.Add(this.radPanel24);
+            this.radPageViewPage17.ItemSize = new System.Drawing.SizeF(126F, 30F);
             this.radPageViewPage17.Location = new System.Drawing.Point(136, 12);
             this.radPageViewPage17.Name = "radPageViewPage17";
-            this.radPageViewPage17.Size = new System.Drawing.Size(1083, 553);
+            this.radPageViewPage17.Size = new System.Drawing.Size(1083, 547);
             this.radPageViewPage17.Text = "Hold Cargo";
             // 
             // gridHoldCargo
@@ -7326,7 +7359,7 @@
             this.gridHoldCargo.MasterTemplate.ViewDefinition = tableViewDefinition35;
             this.gridHoldCargo.Name = "gridHoldCargo";
             this.gridHoldCargo.ShowItemToolTips = false;
-            this.gridHoldCargo.Size = new System.Drawing.Size(1083, 445);
+            this.gridHoldCargo.Size = new System.Drawing.Size(1083, 439);
             this.gridHoldCargo.TabIndex = 5;
             this.gridHoldCargo.Text = "radGridView2";
             this.gridHoldCargo.ThemeName = "Office2010Black";
@@ -7371,7 +7404,7 @@
             this.label104.AutoSize = true;
             this.label104.Location = new System.Drawing.Point(524, 55);
             this.label104.Name = "label104";
-            this.label104.Size = new System.Drawing.Size(62, 14);
+            this.label104.Size = new System.Drawing.Size(59, 13);
             this.label104.TabIndex = 89;
             this.label104.Text = "BCO/BSO:";
             // 
@@ -7381,7 +7414,7 @@
             this.label43.AutoSize = true;
             this.label43.Location = new System.Drawing.Point(184, 80);
             this.label43.Name = "label43";
-            this.label43.Size = new System.Drawing.Size(11, 14);
+            this.label43.Size = new System.Drawing.Size(11, 13);
             this.label43.TabIndex = 88;
             this.label43.Text = "-";
             // 
@@ -7413,7 +7446,7 @@
             this.label39.AutoSize = true;
             this.label39.Location = new System.Drawing.Point(373, 55);
             this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(48, 14);
+            this.label39.Size = new System.Drawing.Size(46, 13);
             this.label39.TabIndex = 86;
             this.label39.Text = "Branch:";
             // 
@@ -7444,7 +7477,7 @@
             this.label40.AutoSize = true;
             this.label40.Location = new System.Drawing.Point(11, 57);
             this.label40.Name = "label40";
-            this.label40.Size = new System.Drawing.Size(37, 14);
+            this.label40.Size = new System.Drawing.Size(34, 13);
             this.label40.TabIndex = 84;
             this.label40.Text = "Date:";
             // 
@@ -7470,7 +7503,7 @@
             this.label41.AutoSize = true;
             this.label41.Location = new System.Drawing.Point(705, 55);
             this.label41.Name = "label41";
-            this.label41.Size = new System.Drawing.Size(46, 14);
+            this.label41.Size = new System.Drawing.Size(42, 13);
             this.label41.TabIndex = 80;
             this.label41.Text = "Status:";
             // 
@@ -7500,6 +7533,7 @@
             // 
             this.radPageViewPage18.Controls.Add(this.gridDeliveryStatus);
             this.radPageViewPage18.Controls.Add(this.radPanel25);
+            this.radPageViewPage18.ItemSize = new System.Drawing.SizeF(126F, 30F);
             this.radPageViewPage18.Location = new System.Drawing.Point(136, 12);
             this.radPageViewPage18.Name = "radPageViewPage18";
             this.radPageViewPage18.Size = new System.Drawing.Size(1083, 547);
@@ -7583,7 +7617,7 @@
             this.label121.AutoSize = true;
             this.label121.Location = new System.Drawing.Point(511, 58);
             this.label121.Name = "label121";
-            this.label121.Size = new System.Drawing.Size(38, 14);
+            this.label121.Size = new System.Drawing.Size(37, 13);
             this.label121.TabIndex = 82;
             this.label121.Text = "Driver";
             // 
@@ -7604,7 +7638,7 @@
             this.label117.AutoSize = true;
             this.label117.Location = new System.Drawing.Point(10, 58);
             this.label117.Name = "label117";
-            this.label117.Size = new System.Drawing.Size(37, 14);
+            this.label117.Size = new System.Drawing.Size(34, 13);
             this.label117.TabIndex = 81;
             this.label117.Text = "Date:";
             // 
@@ -7623,7 +7657,7 @@
             this.label105.AutoSize = true;
             this.label105.Location = new System.Drawing.Point(190, 58);
             this.label105.Name = "label105";
-            this.label105.Size = new System.Drawing.Size(38, 14);
+            this.label105.Size = new System.Drawing.Size(36, 13);
             this.label105.TabIndex = 78;
             this.label105.Text = "BCO :";
             // 
@@ -7644,7 +7678,7 @@
             this.label116.AutoSize = true;
             this.label116.Location = new System.Drawing.Point(352, 58);
             this.label116.Name = "label116";
-            this.label116.Size = new System.Drawing.Size(36, 14);
+            this.label116.Size = new System.Drawing.Size(33, 13);
             this.label116.TabIndex = 76;
             this.label116.Text = "Area:";
             // 
@@ -8143,7 +8177,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dropDownDailyTrip_Driver)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateTimeDailyTrip_Date)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dropDownDailyTrip_Area)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radDropDownList3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dropDownDailyTrip_BCO)).EndInit();
             this.radPageViewPage17.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridHoldCargo.MasterTemplate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridHoldCargo)).EndInit();
@@ -8630,7 +8664,7 @@
         private System.Windows.Forms.Label label109;
         private Telerik.WinControls.UI.RadDropDownList dropDownDailyTrip_Area;
         private System.Windows.Forms.Label label122;
-        private Telerik.WinControls.UI.RadDropDownList radDropDownList3;
+        private Telerik.WinControls.UI.RadDropDownList dropDownDailyTrip_BCO;
         private System.Windows.Forms.Label label123;
         private Telerik.WinControls.UI.RadGridView gridDailyTrip;
         private Telerik.WinControls.UI.RadDropDownButton btnPickupCargo_Export;

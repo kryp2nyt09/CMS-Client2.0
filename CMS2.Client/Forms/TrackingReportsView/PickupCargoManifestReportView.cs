@@ -21,10 +21,8 @@ namespace CMS2.Client.Forms.TrackingReportsView
             InitializeComponent();
 
             var objectDataSource = new Telerik.Reporting.ObjectDataSource();
-            //DataTable dataTable = TrackingReportGlobalModel.table;
-            objectDataSource.DataSource = typeof(PickupCargoManifestReport);
-            objectDataSource.DataMember = "getData";
-            //dataTable;
+            DataTable dataTable = TrackingReportGlobalModel.table;
+            objectDataSource.DataSource = dataTable;
             table1.DataSource = objectDataSource;
 
             txtDate.Value = TrackingReportGlobalModel.Date;

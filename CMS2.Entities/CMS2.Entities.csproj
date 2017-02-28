@@ -132,6 +132,7 @@
     <Compile Include="ReportModel\GatewayOutboundViewModel.cs" />
     <Compile Include="ReportModel\GatewayTransmitalViewModel.cs" />
     <Compile Include="ReportModel\HoldCargoViewModel.cs" />
+    <Compile Include="ReportModel\PickupCargoManifestViewModel.cs" />
     <Compile Include="ReportModel\SegregationViewModel.cs" />
     <Compile Include="ReportModel\UnbundleViewModel.cs" />
     <Compile Include="Segregation.cs" />

@@ -24,11 +24,9 @@ namespace CMS2.Client.Forms.TrackingReportsView
             txtDate.Value = TrackingReportGlobalModel.Date;
             txtOrigin.Value = TrackingReportGlobalModel.Origin;
             txtSackNo.Value = TrackingReportGlobalModel.SackNo;
-
-        }
-        public void setData()
-        {
-            
+            txtScannedBy.Value = TrackingReportGlobalModel.ScannedBy;
+            txtRemarks.Value = TrackingReportGlobalModel.Remarks;
+            txtNotes.Value = TrackingReportGlobalModel.Notes;
         }
     }
 }

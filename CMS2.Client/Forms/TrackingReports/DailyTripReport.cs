@@ -29,10 +29,11 @@ namespace CMS2.Client.Forms.TrackingReports
             dt.Columns.Add(new DataColumn("Service Mode", typeof(string)));
             dt.Columns.Add(new DataColumn("Payment Mode", typeof(string)));
             dt.Columns.Add(new DataColumn("Amount", typeof(string)));
-
             dt.Columns.Add(new DataColumn("Area", typeof(string)));
             dt.Columns.Add(new DataColumn("Driver", typeof(string)));
             dt.Columns.Add(new DataColumn("Checker", typeof(string)));
+            
+            dt.Columns.Add(new DataColumn("BCO", typeof(string)));
 
             dt.BeginLoadData();
             int ctr = 1;
@@ -51,7 +52,7 @@ namespace CMS2.Client.Forms.TrackingReports
                 row[9] = item.Area;
                 row[10] = item.Driver;
                 row[11] = item.Checker;
-
+                row[12] = item.BCO;
                 dt.Rows.Add(row);
             }
             dt.EndLoadData();
@@ -71,6 +72,7 @@ namespace CMS2.Client.Forms.TrackingReports
             width.Add(140);
             width.Add(140);
             width.Add(100);
+            width.Add(0);
             width.Add(0);
             width.Add(0);
             width.Add(0);
@@ -102,7 +104,11 @@ namespace CMS2.Client.Forms.TrackingReports
                     model.ServiceMode = distribution.ServiceMode.ServiceModeName;
                     model.PaymentMode = distribution.PaymentMode.PaymentModeName;
                     model.Amount += distribution.Amount;
-                    
+                    model.Area = distribution.City.CityName;
+                    model.Driver = distribution.Driver;
+                    model.Checker = distribution.Checker;
+                    model.BCO = distribution.City.BranchCorpOffice.BranchCorpOfficeName;
+
                     _results.Add(model);
                 }
 

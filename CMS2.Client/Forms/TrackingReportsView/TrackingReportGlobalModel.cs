@@ -29,11 +29,9 @@ namespace CMS2.Client.Forms.TrackingReportsView
         public static String FlightNo { get; set; }
         public static String CommodityType { get; set; }
         public static String Report { get; set; }
-
         public static DataTable table2 { get; set; }
         public static DataTable table3 { get; set; }
         public static DataTable table4 { get; set; }
-
 
     }
 }

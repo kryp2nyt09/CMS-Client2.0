@@ -22,5 +22,6 @@ namespace CMS2.Entities.ReportModel
         public string Area { get; set; }
         public string Driver { get; set; }
         public string Checker { get; set; }
+        public string BCO { get; set; }
     }
 }
