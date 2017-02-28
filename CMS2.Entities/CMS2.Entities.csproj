@@ -107,12 +107,6 @@
     <Compile Include="Models\PaymentSummaryModel.cs" />
     <Compile Include="Models\PaymentSummary_MainDetailsModel.cs" />
     <Compile Include="Models\ShipmentByDateBcoModel.cs" />
-    <Compile Include="NewFolder1\Department.cs" />
-    <Compile Include="NewFolder1\Employee.cs" />
-    <Compile Include="NewFolder1\Model1.cs" />
-    <Compile Include="NewFolder1\Position.cs" />
-    <Compile Include="NewFolder1\RevenueUnit.cs" />
-    <Compile Include="NewFolder1\User.cs" />
     <Compile Include="PackageNumberAcceptance.cs" />
     <Compile Include="PackageNumberTransfer.cs" />
     <Compile Include="PackageTransfer.cs" />
@@ -142,7 +136,6 @@
     <Compile Include="Terminal.cs" />
     <Compile Include="TerminalRevenueUnitMapping.cs" />
     <Compile Include="TntMaint.cs" />
-    <Compile Include="TrackingEntities\area.cs" />
     <Compile Include="BranchCorpOffice.cs" />
     <Compile Include="BusinessType.cs">
       <SubType>Code</SubType>
@@ -193,44 +186,6 @@
     <Compile Include="StatementOfAccountNumber.cs" />
     <Compile Include="StatementOfAccountPayment.cs" />
     <Compile Include="StatementOfAccountPrint.cs" />
-    <Compile Include="TrackingEntities\acceptance.cs" />
-    <Compile Include="TrackingEntities\airline.cs" />
-    <Compile Include="TrackingEntities\batch.cs" />
-    <Compile Include="TrackingEntities\branch.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="TrackingEntities\branchacceptance.cs" />
-    <Compile Include="TrackingEntities\bundle.cs" />
-    <Compile Include="TrackingEntities\commodity.cs" />
-    <Compile Include="TrackingEntities\destination.cs" />
-    <Compile Include="TrackingEntities\distribution.cs" />
-    <Compile Include="TrackingEntities\distribution2.cs" />
-    <Compile Include="TrackingEntities\flight.cs" />
-    <Compile Include="TrackingEntities\gateway.cs" />
-    <Compile Include="TrackingEntities\gatewayacceptance.cs" />
-    <Compile Include="TrackingEntities\gatewaytransmittal.cs" />
-    <Compile Include="TrackingEntities\holdcargo.cs" />
-    <Compile Include="TrackingEntities\inbound.cs" />
-    <Compile Include="TrackingEntities\Models\DeliveryStatusViewModel.cs" />
-    <Compile Include="TrackingEntities\Models\DistributionViewModel.cs" />
-    <Compile Include="TrackingEntities\Models\InboundQueryViewModel.cs" />
-    <Compile Include="TrackingEntities\Models\InboundAwbViewModel.cs" />
-    <Compile Include="TrackingEntities\Models\InboundViewModel.cs" />
-    <Compile Include="TrackingEntities\Models\RetrievalViewModel.cs" />
-    <Compile Include="TrackingEntities\Models\TransmittalQueryViewModel.cs" />
-    <Compile Include="TrackingEntities\Models\TransmittalViewModel.cs" />
-    <Compile Include="TrackingEntities\Models\AirwayBillViewModel.cs" />
-    <Compile Include="TrackingEntities\Models\BundleQueryViewModel.cs" />
-    <Compile Include="TrackingEntities\Models\BundleViewModel.cs" />
-    <Compile Include="TrackingEntities\Models\CargoViewModel.cs" />
-    <Compile Include="TrackingEntities\Models\OriginBranchViewModel.cs" />
-    <Compile Include="TrackingEntities\origin.cs" />
-    <Compile Include="TrackingEntities\reason.cs" />
-    <Compile Include="TrackingEntities\remarks.cs" />
-    <Compile Include="TrackingEntities\shipmode.cs" />
-    <Compile Include="TrackingEntities\status.cs" />
-    <Compile Include="TrackingEntities\transfer.cs" />
-    <Compile Include="TrackingEntities\users.cs" />
     <Compile Include="TransferAcceptance.cs" />
     <Compile Include="TransmittalStatus.cs" />
     <Compile Include="TransShipmentLeg.cs" />

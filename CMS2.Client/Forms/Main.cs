@@ -6320,7 +6320,7 @@ namespace CMS2.Client
         {
             BindingSource bsRevenueUnitType = new BindingSource();
             RevenueUnitTypeBL revenueUnitTypeService = new RevenueUnitTypeBL();
-            List<RevenueUnitType> _revenueUnitType = revenueUnitTypeService.GetAll().Where(x => x.RecordStatus == 1 && x.RevenueUnitTypeName != "Area" && x.RevenueUnitTypeName != "Gateway Satellite Office" && x.RevenueUnitTypeName != "Gateway Satellite").ToList();
+            List<RevenueUnitType> _revenueUnitType = revenueUnitTypeService.GetAll().Where(x => x.RecordStatus == 1 && x.RevenueUnitTypeName != "Area").ToList();
             bsRevenueUnitType.DataSource = _revenueUnitType;
             return bsRevenueUnitType;
         }
@@ -6791,35 +6791,35 @@ namespace CMS2.Client
         private void dropDownCargoTransfer_Origin_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
         {
 
-            //RevenueUnitBL revenueBL = new RevenueUnitBL();
+            RevenueUnitBL revenueBL = new RevenueUnitBL();
 
 
-            //if (dropDownCargoTransfer_Origin.SelectedItem.ToString().Equals("Branch Corporate Office"))
-            //{
-            //    dropDownCargoTransfer_City.DataSource = getBranchCorpOffice();
-            //    dropDownCargoTransfer_City.DisplayMember = "BranchCorpOfficeName";
-            //    dropDownCargoTransfer_City.ValueMember = "BranchCorpOfficeId";
-            //    dropDownCargoTransfer_City.SelectedIndex = 0;
+            if (dropDownCargoTransfer_Origin.SelectedItem.ToString().Equals("Branch Corporate Office"))
+            {
+                dropDownCargoTransfer_City.DataSource = getBranchCorpOffice();
+                dropDownCargoTransfer_City.DisplayMember = "BranchCorpOfficeName";
+                dropDownCargoTransfer_City.ValueMember = "BranchCorpOfficeId";
+                dropDownCargoTransfer_City.SelectedIndex = 0;
 
-            //    dropDownCargoTransfer_Destination.DataSource = getBranchCorpOffice();
-            //    dropDownCargoTransfer_Destination.DisplayMember = "BranchCorpOfficeName";
-            //    dropDownCargoTransfer_Destination.ValueMember = "BranchCorpOfficeId";
-            //    dropDownCargoTransfer_Destination.SelectedIndex = 0;
-            //}
-            //else
-            //{
-            //    List<RevenueUnit> revenueList = revenueBL.GetAll().OrderBy(x => x.City.CityName).ToList();
-            //    dropDownCargoTransfer_City.DataSource = revenueList;
-            //    dropDownCargoTransfer_City.DisplayMember = "RevenueUnitName";
-            //    dropDownCargoTransfer_City.ValueMember = "RevenueUnitId";
-            //    dropDownCargoTransfer_City.SelectedIndex = 0;
+                dropDownCargoTransfer_Destination.DataSource = getBranchCorpOffice();
+                dropDownCargoTransfer_Destination.DisplayMember = "BranchCorpOfficeName";
+                dropDownCargoTransfer_Destination.ValueMember = "BranchCorpOfficeId";
+                dropDownCargoTransfer_Destination.SelectedIndex = 0;
+            }
+            else
+            {
+                List<RevenueUnit> revenueList = revenueBL.GetAll().OrderBy(x => x.City.CityName).ToList();
+                dropDownCargoTransfer_City.DataSource = revenueList;
+                dropDownCargoTransfer_City.DisplayMember = "RevenueUnitName";
+                dropDownCargoTransfer_City.ValueMember = "RevenueUnitId";
+                dropDownCargoTransfer_City.SelectedIndex = 0;
 
-            //    revenueList = revenueBL.GetAll().OrderBy(x => x.City.CityName).ToList();
-            //    dropDownCargoTransfer_Destination.DataSource = revenueList;
-            //    dropDownCargoTransfer_Destination.DisplayMember = "RevenueUnitName";
-            //    dropDownCargoTransfer_Destination.ValueMember = "RevenueUnitId";
-            //    dropDownCargoTransfer_Destination.SelectedIndex = 0;
-            //}
+                revenueList = revenueBL.GetAll().OrderBy(x => x.City.CityName).ToList();
+                dropDownCargoTransfer_Destination.DataSource = revenueList;
+                dropDownCargoTransfer_Destination.DisplayMember = "RevenueUnitName";
+                dropDownCargoTransfer_Destination.ValueMember = "RevenueUnitId";
+                dropDownCargoTransfer_Destination.SelectedIndex = 0;
+            }
 
         }
         private void btnCargoTransfer_Search_Click(object sender, EventArgs e)
