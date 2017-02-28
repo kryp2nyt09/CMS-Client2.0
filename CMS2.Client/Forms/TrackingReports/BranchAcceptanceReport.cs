@@ -79,7 +79,7 @@ namespace CMS2.Client.Forms.TrackingReports
             width.Add(60); //AWB
             width.Add(95); //Recieved
             width.Add(95); //Dis
-            width.Add(60); //Total
+            width.Add(90); //Total
 
             width.Add(0); //BCO
             width.Add(0); //BSO 

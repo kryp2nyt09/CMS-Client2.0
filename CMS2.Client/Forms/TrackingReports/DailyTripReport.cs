@@ -84,7 +84,7 @@ namespace CMS2.Client.Forms.TrackingReports
         {
             List<DailyTripViewModel> _results = new List<DailyTripViewModel>();
             PackageNumberBL _packageNumberService = new PackageNumberBL();
-
+           // ShipmentBL shipmentService = new ShipmentBL();
             foreach (Distribution distribution in _distribution) {
                 DailyTripViewModel model = new DailyTripViewModel();
                 string _airwaybill = _packageNumberService.GetAll().Find(x => x.ShipmentId == distribution.ShipmentId).Shipment.AirwayBillNo;
@@ -93,6 +93,7 @@ namespace CMS2.Client.Forms.TrackingReports
                 if (isExist != null)
                 {
                     isExist.Qty++;
+                    isExist.Amount += distribution.Amount;
                 }
                 else
                 {
@@ -105,10 +106,11 @@ namespace CMS2.Client.Forms.TrackingReports
                     model.PaymentMode = distribution.PaymentMode.PaymentModeName;
                     model.Amount += distribution.Amount;
                     model.Area = distribution.City.CityName;
+                   
                     model.Driver = distribution.Driver;
                     model.Checker = distribution.Checker;
                     model.BCO = distribution.City.BranchCorpOffice.BranchCorpOfficeName;
-
+                    
                     _results.Add(model);
                 }
 

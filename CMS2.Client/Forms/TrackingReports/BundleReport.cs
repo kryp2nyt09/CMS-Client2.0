@@ -83,8 +83,8 @@ namespace CMS2.Client.Forms.TrackingReports
             width.Add(110);
             width.Add(110);
             width.Add(110);
-            width.Add(110);
-            width.Add(110);
+            width.Add(70);
+            width.Add(80);
             width.Add(110);
             width.Add(110);
 

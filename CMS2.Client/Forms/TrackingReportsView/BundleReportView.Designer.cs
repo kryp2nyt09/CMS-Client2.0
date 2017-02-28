@@ -345,7 +345,7 @@ namespace CMS2.Client.Forms.TrackingReportsView
             this.txtDestination.Style.Font.Underline = false;
             this.txtDestination.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
             this.txtDestination.TextWrap = false;
-            this.txtDestination.Value = " ";
+            this.txtDestination.Value = "";
             // 
             // txtWeight
             // 
@@ -359,7 +359,7 @@ namespace CMS2.Client.Forms.TrackingReportsView
             this.txtWeight.Style.Font.Underline = false;
             this.txtWeight.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
             this.txtWeight.TextWrap = false;
-            this.txtWeight.Value = " ";
+            this.txtWeight.Value = "";
             // 
             // txtDate
             // 
@@ -409,7 +409,7 @@ namespace CMS2.Client.Forms.TrackingReportsView
             this.table1.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Inch(1.0473716259002686D)));
             this.table1.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Inch(1.0473716259002686D)));
             this.table1.Body.Rows.Add(new Telerik.Reporting.TableBodyRow(Telerik.Reporting.Drawing.Unit.Inch(0.25D)));
-            this.table1.Body.Rows.Add(new Telerik.Reporting.TableBodyRow(Telerik.Reporting.Drawing.Unit.Inch(0.39999991655349731D)));
+            this.table1.Body.Rows.Add(new Telerik.Reporting.TableBodyRow(Telerik.Reporting.Drawing.Unit.Inch(0.39999988675117493D)));
             this.table1.Body.SetCellContent(0, 0, this.textBox22);
             this.table1.Body.SetCellContent(0, 1, this.txtAwb);
             this.table1.Body.SetCellContent(0, 2, this.textBox8);

@@ -18,5 +18,9 @@ namespace CMS2.Entities.ReportModel
         public string AWB { get; set; }
         public string QTY { get; set; }
         public DateTime CreatedDate { get; set; }
+
+        public string BCO { get; set; }
+        public string GATEWAY { get; set; }
+        public string SATELLITE { get; set; }
     }
 }

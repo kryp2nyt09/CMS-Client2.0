@@ -12,11 +12,11 @@ namespace CMS2.Client.Forms.TrackingReports
 {
     public class HoldCargoReport
     {
-        public DataTable getData() {
+        public DataTable getData(DateTime fromdate , DateTime todate) {
 
             HoldCargoBL holdcargoBl = new HoldCargoBL();
-            List<HoldCargo> list = holdcargoBl.GetAll().ToList();
 
+            List<HoldCargo> list = holdcargoBl.GetAll().Where(x => x.CreatedDate >= fromdate && x.CreatedDate <= todate ).ToList();
             List<HoldCargoViewModel> modelList = Match(list);
 
             DataTable dt = new DataTable();
@@ -94,7 +94,6 @@ namespace CMS2.Client.Forms.TrackingReports
             UserRoleBL user = new UserRoleBL();
             foreach (HoldCargo holdCargo in _holdcargo)
             {
-
                 ShipmentBL shipmentService = new ShipmentBL();
                 HoldCargoViewModel model = new HoldCargoViewModel();
                 //string _airwaybill = _packageNumberService.GetAll().Find(x => x.PackageNo == holdCargo.Cargo).Shipment.AirwayBillNo;
@@ -119,6 +118,7 @@ namespace CMS2.Client.Forms.TrackingReports
                     model.ScannedBy = user.GetActiveRoles().Find(x => x.RoleId == AppUser.User.UserId).RoleName;
                     //model.PreparedBy = user.GetAllUsers().Find(x => x.UserId == shi)
                     model.Aging = (DateTime.Now - holdCargo.HoldCargoDate).TotalDays;
+                   //model.Branch = 
                     _results.Add(model);
                 }
             }

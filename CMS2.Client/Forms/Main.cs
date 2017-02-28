@@ -5578,6 +5578,7 @@ namespace CMS2.Client
                     dropDownCargoTransfer_Origin.DataSource = getRevenueUnitType();
                     dropDownCargoTransfer_Origin.DisplayMember = "RevenueUnitTypeName";
                     dropDownCargoTransfer_Origin.ValueMember = "RevenueUnitTypeId";
+
                     dropDownCargoTransfer_Origin.Items.Add("Branch Corporate Office");
                     dropDownCargoTransfer_Origin.SelectedValue = "Branch Corporate Office";
                     //CALL METHOD GET DATA - CARGO TRANSFER
@@ -5598,7 +5599,8 @@ namespace CMS2.Client
                     getDailyTripData();
                     break;               
                 case "Hold Cargo":
-
+                    dateTimeHoldCargo_FromDate.Value = DateTime.Now;
+                    dateTimeHoldCargo_ToDate.Value = DateTime.Now.AddDays(30);
                     dropDownHoldCargo_Branch.DataSource = getRevenueUnitType();
                     dropDownHoldCargo_Branch.DisplayMember = "RevenueUnitTypeName";
                     dropDownHoldCargo_Branch.ValueMember = "RevenueUnitTypeId";
@@ -5845,29 +5847,39 @@ namespace CMS2.Client
         {
             DataTable dt = new DataTable();
 
-            foreach (GridViewColumn col in gridDeliveryStatus.Columns)
+            foreach (GridViewColumn col in gridDailyTrip.Columns)
             {
                 dt.Columns.Add(new DataColumn(col.HeaderText, typeof(string)));
             }
 
             dt.BeginLoadData();
-            foreach (GridViewDataRowInfo row in gridDeliveryStatus.Rows)
+            foreach (GridViewDataRowInfo row in gridDailyTrip.Rows)
             {
                 DataRow dRow = dt.NewRow();
                 foreach (GridViewCellInfo cell in row.Cells)
-                {
+                    {
                     dRow[cell.ColumnInfo.Index] = cell.Value.ToString();
                 }
                 dt.Rows.Add(dRow);
             }
             dt.EndLoadData();
+            DataView view = new DataView(dt);
+            view.RowFilter = String.Format("[Payment Mode] LIKE '%{0}%'", _paymentmode);
+            dt = view.ToTable();
+            //DataTable table = dt.Select("[Payment Mode] = '" +  _paymentmode + "'").CopyToDataTable();
             //PP - PrePaid
             //CAS - Coporate Account Shipper
             //FC - Freight Collect
             //CAC - Corporate Account Consignee
-            DataView view = new DataView(dt);
-            view.RowFilter = "[Payment Mode] = '"  + _paymentmode + "'";
-            dt = view.ToTable();
+            //DataView view = new DataView(dt);
+
+            //DataRow[] result = dt.Select("[Payment Mode] = '{0}'", _paymentmode);
+            //foreach (DataRow row in result)
+            //{
+            //    dt.ImportRow(row);
+            //}
+            //Console.WriteLine("COUNT = " + dt.Rows.Count);
+
             return dt;
         }
         #endregion
@@ -6478,7 +6490,7 @@ namespace CMS2.Client
         {
             HoldCargoReport holdCargo = new HoldCargoReport();
 
-            DataTable dataTable = holdCargo.getData();
+            DataTable dataTable = holdCargo.getData(dateTimeHoldCargo_FromDate.Value , dateTimeHoldCargo_ToDate.Value);
 
             //STATUS
             DataView view = new DataView(dataTable);
@@ -7083,20 +7095,36 @@ namespace CMS2.Client
         // **** CARGO TRANSFER **** //
         private void dropDownCargoTransfer_Origin_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
         {
-
+        
             RevenueUnitBL revenueBL = new RevenueUnitBL();
-
-
+           
             if (dropDownCargoTransfer_Origin.SelectedItem.ToString().Equals("Branch Corporate Office"))
             {
-                dropDownCargoTransfer_City.DataSource = getBranchCorpOffice();
-                dropDownCargoTransfer_City.DisplayMember = "BranchCorpOfficeName";
-                dropDownCargoTransfer_City.ValueMember = "BranchCorpOfficeId";
-                dropDownCargoTransfer_City.SelectedIndex = 0;
+                CargoTransferReport cargoTransfer = new CargoTransferReport();
+                DataTable dataTable = cargoTransfer.getData(dateTimeCargoTransfer_Date.Value);
 
-                dropDownCargoTransfer_Destination.DataSource = getBranchCorpOffice();
-                dropDownCargoTransfer_Destination.DisplayMember = "BranchCorpOfficeName";
-                dropDownCargoTransfer_Destination.ValueMember = "BranchCorpOfficeId";
+                DataView view = new DataView(dataTable);
+
+                //ORIGIN
+                DataTable table = view.ToTable(true, "BCO");
+
+                dropDownCargoTransfer_City.Items.Clear();
+                dropDownCargoTransfer_City.Items.Add("All");
+                dropDownCargoTransfer_Destination.Items.Clear();
+                dropDownCargoTransfer_Destination.Items.Add("All");
+
+                foreach (DataRow x in table.Rows)
+                {
+                    if (x["BCO"].ToString().Trim() != "")
+                    {
+                        if (x["BCO"].ToString() != null)
+                        {
+                            dropDownCargoTransfer_City.Items.Add(x["BCO"].ToString());
+                            dropDownCargoTransfer_Destination.Items.Add(x["BCO"].ToString());
+                        }
+                    }
+                }
+                dropDownCargoTransfer_City.SelectedIndex = 0;
                 dropDownCargoTransfer_Destination.SelectedIndex = 0;
             }
             else
@@ -7353,8 +7381,6 @@ namespace CMS2.Client
         // **** DELIVERY STATUS **** //
         private void btnDeliveryStatus_Search_Click(object sender, EventArgs e)
         {
-            List<string> x = new List<string>();
-            gridDeliveryStatus.DataSource = x;
             this.gridDeliveryStatus.FilterDescriptors.Clear();
             gridDeliveryStatus.EnableFiltering = true;
             this.gridDeliveryStatus.ShowFilteringRow = false;
@@ -7369,12 +7395,21 @@ namespace CMS2.Client
                 gridDeliveryStatus.EnableFiltering = false;
                 getDeliveryStatusData();
             }
-
-            compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Area));
-            compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
-
-            compositeFilter.LogicalOperator = FilterLogicalOperator.Or;
-
+            else if (Area != null && Driver == "All")
+            {
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Area));
+            }
+            else if (Area == "All" && Driver != null)
+            {
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
+            }
+            else if (Area != null && Driver != null)
+            {
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Area));
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
+            }
+            
+            compositeFilter.LogicalOperator = FilterLogicalOperator.And;
             this.gridDeliveryStatus.FilterDescriptors.Add(compositeFilter);
         }
 
@@ -7526,7 +7561,7 @@ namespace CMS2.Client
 
             TrackingReportGlobalModel.Date = dateTimeBundle_Date.Value.ToLongDateString();
             TrackingReportGlobalModel.SackNo = get_Column_DataView(dataTable, "SackNo");
-            TrackingReportGlobalModel.Destination = get_Column_DataView(dataTable, "Destination");
+            TrackingReportGlobalModel.Destination = dropDownBundle_Destination.SelectedItem.ToString();
             TrackingReportGlobalModel.Weight = get_Column_DataView(dataTable, "AGW");
             TrackingReportGlobalModel.Report = "Bundle";
 
@@ -7615,12 +7650,13 @@ namespace CMS2.Client
             //FC - Freight Collect
             //CAC - Corporate Account Consignee
             DataTable dataTable = getDeliveryStatusGrid();
-            TrackingReportGlobalModel.table = getDailyTripGrid("PP - PrePaid");
-            TrackingReportGlobalModel.table2 = getDailyTripGrid("CAS - Coporate Account Shipper");
-            TrackingReportGlobalModel.table3 = getDailyTripGrid("FC - Freight Collect");
-            TrackingReportGlobalModel.table4 = getDailyTripGrid("CAC - Corporate Account Consignee");
+            TrackingReportGlobalModel.Date = dateTimeDailyTrip_Date.Value.ToLongDateString();
+            TrackingReportGlobalModel.table  = getDailyTripGrid("PP-PrePaid");
+            TrackingReportGlobalModel.table2 = getDailyTripGrid("CAS-Coporate Account Shipper");
+            TrackingReportGlobalModel.table3 = getDailyTripGrid("FC-Freight Collect");
+            TrackingReportGlobalModel.table4 = getDailyTripGrid("CAC-Corporate Account Consignee");
 
-            TrackingReportGlobalModel.Report = "DeliveryStatus";
+            TrackingReportGlobalModel.Report = "DailyTrip";
             ReportViewer viewer = new ReportViewer();
             viewer.Show();
         }
@@ -7689,6 +7725,34 @@ namespace CMS2.Client
             getSegregationData();
         }
 
-       
+        private void dateTimeHoldCargo_FromDate_ValueChanged(object sender, EventArgs e)
+        {
+            if (dateTimeHoldCargo_ToDate.Value <= dateTimeHoldCargo_FromDate.Value)
+            {
+                dateTimeHoldCargo_ToDate.Value = dateTimeHoldCargo_FromDate.Value.AddDays(1);
+            }
+
+        }
+
+        private void dateTimeHoldCargo_ToDate_ValueChanged(object sender, EventArgs e)
+        {
+            if(dateTimeHoldCargo_ToDate.Value <= dateTimeHoldCargo_FromDate.Value)
+            {
+                dateTimeHoldCargo_FromDate.Value = dateTimeHoldCargo_ToDate.Value.AddDays(-1);
+            }
+            
+        }
+
+        private void dateTimeDailyTrip_Date_ValueChanged(object sender, EventArgs e)
+        {
+            gridDailyTrip.EnableFiltering = false;
+            getDailyTripData();
+        }
+
+        private void dateTimeDeliveryStatus_Date_ValueChanged(object sender, EventArgs e)
+        {
+            gridDeliveryStatus.EnableFiltering = false;
+            getDeliveryStatusData();
+        }
     }
 }
