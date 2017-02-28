@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="TrackingInbound" targetNamespace="http://tempuri.org/TrackingInbound.xsd" xmlns:mstns="http://tempuri.org/TrackingInbound.xsd" xmlns="http://tempuri.org/TrackingInbound.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="TrackingInbound" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="TrackingInbound" msprop:Generator_UserDSName="TrackingInbound">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="InboundAwbs" msprop:Generator_TableClassName="InboundAwbsDataTable" msprop:Generator_TableVarName="tableInboundAwbs" msprop:Generator_RowChangedName="InboundAwbsRowChanged" msprop:Generator_TablePropName="InboundAwbs" msprop:Generator_RowDeletingName="InboundAwbsRowDeleting" msprop:Generator_RowChangingName="InboundAwbsRowChanging" msprop:Generator_RowEvHandlerName="InboundAwbsRowChangeEventHandler" msprop:Generator_RowDeletedName="InboundAwbsRowDeleted" msprop:Generator_RowClassName="InboundAwbsRow" msprop:Generator_UserTableName="InboundAwbs" msprop:Generator_RowEvArgName="InboundAwbsRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="AirwayBill" msprop:Generator_ColumnVarNameInTable="columnAirwayBill" msprop:Generator_ColumnPropNameInRow="AirwayBill" msprop:Generator_ColumnPropNameInTable="AirwayBillColumn" msprop:Generator_UserColumnName="AirwayBill" type="xs:string" minOccurs="0" />
+              <xs:element name="DestinationBranch" msprop:Generator_ColumnVarNameInTable="columnDestinationBranch" msprop:Generator_ColumnPropNameInRow="DestinationBranch" msprop:Generator_ColumnPropNameInTable="DestinationBranchColumn" msprop:Generator_UserColumnName="DestinationBranch" type="xs:string" minOccurs="0" />
+              <xs:element name="Status" msprop:Generator_ColumnVarNameInTable="columnStatus" msprop:Generator_ColumnPropNameInRow="Status" msprop:Generator_ColumnPropNameInTable="StatusColumn" msprop:Generator_UserColumnName="Status" type="xs:string" minOccurs="0" />
+              <xs:element name="CountOutbound" msprop:Generator_ColumnVarNameInTable="columnCountOutbound" msprop:Generator_ColumnPropNameInRow="CountOutbound" msprop:Generator_ColumnPropNameInTable="CountOutboundColumn" msprop:Generator_UserColumnName="CountOutbound" type="xs:int" minOccurs="0" />
+              <xs:element name="CountInbound" msprop:Generator_ColumnVarNameInTable="columnCountInbound" msprop:Generator_ColumnPropNameInRow="CountInbound" msprop:Generator_ColumnPropNameInTable="CountInboundColumn" msprop:Generator_UserColumnName="CountInbound" type="xs:int" minOccurs="0" />
+              <xs:element name="Difference" msprop:Generator_ColumnVarNameInTable="columnDifference" msprop:Generator_ColumnPropNameInRow="Difference" msprop:Generator_ColumnPropNameInTable="DifferenceColumn" msprop:Generator_UserColumnName="Difference" type="xs:int" minOccurs="0" />
+              <xs:element name="ActualWeight" msprop:Generator_ColumnVarNameInTable="columnActualWeight" msprop:Generator_ColumnPropNameInRow="ActualWeight" msprop:Generator_ColumnPropNameInTable="ActualWeightColumn" msprop:Generator_UserColumnName="ActualWeight" type="xs:decimal" minOccurs="0" />
+              <xs:element name="TotalAmount" msprop:Generator_ColumnVarNameInTable="columnTotalAmount" msprop:Generator_ColumnPropNameInRow="TotalAmount" msprop:Generator_ColumnPropNameInTable="TotalAmountColumn" msprop:Generator_UserColumnName="TotalAmount" type="xs:decimal" minOccurs="0" />
+              <xs:element name="ScannedBy" msprop:Generator_ColumnVarNameInTable="columnScannedBy" msprop:Generator_ColumnPropNameInRow="ScannedBy" msprop:Generator_ColumnPropNameInTable="ScannedByColumn" msprop:Generator_UserColumnName="ScannedBy" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Inbound" msprop:Generator_TableClassName="InboundDataTable" msprop:Generator_TableVarName="tableInbound" msprop:Generator_RowChangedName="InboundRowChanged" msprop:Generator_TablePropName="Inbound" msprop:Generator_RowDeletingName="InboundRowDeleting" msprop:Generator_RowChangingName="InboundRowChanging" msprop:Generator_RowEvHandlerName="InboundRowChangeEventHandler" msprop:Generator_RowDeletedName="InboundRowDeleted" msprop:Generator_RowClassName="InboundRow" msprop:Generator_UserTableName="Inbound" msprop:Generator_RowEvArgName="InboundRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="TransactionDate" msprop:Generator_ColumnVarNameInTable="columnTransactionDate" msprop:Generator_ColumnPropNameInRow="TransactionDate" msprop:Generator_ColumnPropNameInTable="TransactionDateColumn" msprop:Generator_UserColumnName="TransactionDate" type="xs:string" minOccurs="0" />
+              <xs:element name="Branch" msprop:Generator_ColumnVarNameInTable="columnBranch" msprop:Generator_ColumnPropNameInRow="Branch" msprop:Generator_ColumnPropNameInTable="BranchColumn" msprop:Generator_UserColumnName="Branch" type="xs:string" minOccurs="0" />
+              <xs:element name="Airline" msprop:Generator_ColumnVarNameInTable="columnAirline" msprop:Generator_ColumnPropNameInRow="Airline" msprop:Generator_ColumnPropNameInTable="AirlineColumn" msprop:Generator_UserColumnName="Airline" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

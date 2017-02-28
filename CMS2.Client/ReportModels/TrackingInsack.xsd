@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="TrackingInsack" targetNamespace="http://tempuri.org/TrackingInsack.xsd" xmlns:mstns="http://tempuri.org/TrackingInsack.xsd" xmlns="http://tempuri.org/TrackingInsack.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="TrackingInsack" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="TrackingInsack" msprop:Generator_UserDSName="TrackingInsack">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Bundle" msprop:Generator_TableClassName="BundleDataTable" msprop:Generator_TableVarName="tableBundle" msprop:Generator_TablePropName="Bundle" msprop:Generator_RowDeletingName="BundleRowDeleting" msprop:Generator_RowChangingName="BundleRowChanging" msprop:Generator_RowEvHandlerName="BundleRowChangeEventHandler" msprop:Generator_RowDeletedName="BundleRowDeleted" msprop:Generator_UserTableName="Bundle" msprop:Generator_RowChangedName="BundleRowChanged" msprop:Generator_RowEvArgName="BundleRowChangeEvent" msprop:Generator_RowClassName="BundleRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="BundleDate" msprop:Generator_ColumnVarNameInTable="columnBundleDate" msprop:Generator_ColumnPropNameInRow="BundleDate" msprop:Generator_ColumnPropNameInTable="BundleDateColumn" msprop:Generator_UserColumnName="BundleDate" type="xs:string" minOccurs="0" />
+              <xs:element name="SackNo" msprop:Generator_ColumnVarNameInTable="columnSackNo" msprop:Generator_ColumnPropNameInRow="SackNo" msprop:Generator_ColumnPropNameInTable="SackNoColumn" msprop:Generator_UserColumnName="SackNo" type="xs:string" minOccurs="0" />
+              <xs:element name="OriginBranch" msprop:Generator_ColumnVarNameInTable="columnOriginBranch" msprop:Generator_ColumnPropNameInRow="OriginBranch" msprop:Generator_ColumnPropNameInTable="OriginBranchColumn" msprop:Generator_UserColumnName="OriginBranch" type="xs:string" minOccurs="0" />
+              <xs:element name="DestinationBranch" msprop:Generator_ColumnVarNameInTable="columnDestinationBranch" msprop:Generator_ColumnPropNameInRow="DestinationBranch" msprop:Generator_ColumnPropNameInTable="DestinationBranchColumn" msprop:Generator_UserColumnName="DestinationBranch" type="xs:string" minOccurs="0" />
+              <xs:element name="User" msprop:Generator_ColumnVarNameInTable="columnUser" msprop:Generator_ColumnPropNameInRow="User" msprop:Generator_ColumnPropNameInTable="UserColumn" msprop:Generator_UserColumnName="User" type="xs:string" minOccurs="0" />
+              <xs:element name="PrintTime" msprop:Generator_ColumnVarNameInTable="columnPrintTime" msprop:Generator_ColumnPropNameInRow="PrintTime" msprop:Generator_ColumnPropNameInTable="PrintTimeColumn" msprop:Generator_UserColumnName="PrintTime" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="BundleItems" msprop:Generator_TableClassName="BundleItemsDataTable" msprop:Generator_TableVarName="tableBundleItems" msprop:Generator_TablePropName="BundleItems" msprop:Generator_RowDeletingName="BundleItemsRowDeleting" msprop:Generator_RowChangingName="BundleItemsRowChanging" msprop:Generator_RowEvHandlerName="BundleItemsRowChangeEventHandler" msprop:Generator_RowDeletedName="BundleItemsRowDeleted" msprop:Generator_UserTableName="BundleItems" msprop:Generator_RowChangedName="BundleItemsRowChanged" msprop:Generator_RowEvArgName="BundleItemsRowChangeEvent" msprop:Generator_RowClassName="BundleItemsRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="AirwayBill" msprop:Generator_ColumnVarNameInTable="columnAirwayBill" msprop:Generator_ColumnPropNameInRow="AirwayBill" msprop:Generator_ColumnPropNameInTable="AirwayBillColumn" msprop:Generator_UserColumnName="AirwayBill" type="xs:string" minOccurs="0" />
+              <xs:element name="Count" msprop:Generator_ColumnVarNameInTable="columnCount" msprop:Generator_ColumnPropNameInRow="Count" msprop:Generator_ColumnPropNameInTable="CountColumn" msprop:Generator_UserColumnName="Count" type="xs:int" minOccurs="0" />
+              <xs:element name="Remarks" msprop:Generator_ColumnVarNameInTable="columnRemarks" msprop:Generator_ColumnPropNameInRow="Remarks" msprop:Generator_ColumnPropNameInTable="RemarksColumn" msprop:Generator_UserColumnName="Remarks" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

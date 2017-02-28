@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="TrackingRetrieval" targetNamespace="http://tempuri.org/TrackingRetrieval.xsd" xmlns:mstns="http://tempuri.org/TrackingRetrieval.xsd" xmlns="http://tempuri.org/TrackingRetrieval.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="TrackingRetrieval" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="TrackingRetrieval" msprop:Generator_UserDSName="TrackingRetrieval">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Retrieval" msprop:Generator_TableClassName="RetrievalDataTable" msprop:Generator_TableVarName="tableRetrieval" msprop:Generator_TablePropName="Retrieval" msprop:Generator_RowDeletingName="RetrievalRowDeleting" msprop:Generator_RowChangingName="RetrievalRowChanging" msprop:Generator_RowEvHandlerName="RetrievalRowChangeEventHandler" msprop:Generator_RowDeletedName="RetrievalRowDeleted" msprop:Generator_UserTableName="Retrieval" msprop:Generator_RowChangedName="RetrievalRowChanged" msprop:Generator_RowEvArgName="RetrievalRowChangeEvent" msprop:Generator_RowClassName="RetrievalRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Date" msprop:Generator_ColumnVarNameInTable="columnDate" msprop:Generator_ColumnPropNameInRow="Date" msprop:Generator_ColumnPropNameInTable="DateColumn" msprop:Generator_UserColumnName="Date" type="xs:string" minOccurs="0" />
+              <xs:element name="Origin" msprop:Generator_ColumnVarNameInTable="columnOrigin" msprop:Generator_ColumnPropNameInRow="Origin" msprop:Generator_ColumnPropNameInTable="OriginColumn" msprop:Generator_UserColumnName="Origin" type="xs:string" minOccurs="0" />
+              <xs:element name="Destination" msprop:Generator_ColumnVarNameInTable="columnDestination" msprop:Generator_ColumnPropNameInRow="Destination" msprop:Generator_ColumnPropNameInTable="DestinationColumn" msprop:Generator_UserColumnName="Destination" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="AirwayBills" msprop:Generator_TableClassName="AirwayBillsDataTable" msprop:Generator_TableVarName="tableAirwayBills" msprop:Generator_TablePropName="AirwayBills" msprop:Generator_RowDeletingName="AirwayBillsRowDeleting" msprop:Generator_RowChangingName="AirwayBillsRowChanging" msprop:Generator_RowEvHandlerName="AirwayBillsRowChangeEventHandler" msprop:Generator_RowDeletedName="AirwayBillsRowDeleted" msprop:Generator_UserTableName="AirwayBills" msprop:Generator_RowChangedName="AirwayBillsRowChanged" msprop:Generator_RowEvArgName="AirwayBillsRowChangeEvent" msprop:Generator_RowClassName="AirwayBillsRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="AirwayBill" msprop:Generator_ColumnVarNameInTable="columnAirwayBill" msprop:Generator_ColumnPropNameInRow="AirwayBill" msprop:Generator_ColumnPropNameInTable="AirwayBillColumn" msprop:Generator_UserColumnName="AirwayBill" type="xs:string" minOccurs="0" />
+              <xs:element name="Count" msprop:Generator_ColumnVarNameInTable="columnCount" msprop:Generator_ColumnPropNameInRow="Count" msprop:Generator_ColumnPropNameInTable="CountColumn" msprop:Generator_UserColumnName="Count" type="xs:int" minOccurs="0" />
+              <xs:element name="Airline" msprop:Generator_ColumnVarNameInTable="columnAirline" msprop:Generator_ColumnPropNameInRow="Airline" msprop:Generator_ColumnPropNameInTable="AirlineColumn" msprop:Generator_UserColumnName="Airline" type="xs:string" minOccurs="0" />
+              <xs:element name="Status" msprop:Generator_ColumnVarNameInTable="columnStatus" msprop:Generator_ColumnPropNameInRow="Status" msprop:Generator_ColumnPropNameInTable="StatusColumn" msprop:Generator_UserColumnName="Status" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

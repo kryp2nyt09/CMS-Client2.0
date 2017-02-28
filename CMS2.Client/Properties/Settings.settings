@@ -1,0 +1,45 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="CMS2.Client.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="DeviceCode" Type="System.String" Scope="User">
+      <Value Profile="(Default)">S005</Value>
+    </Setting>
+    <Setting Name="DeviceRevenueUnitId" Type="System.String" Scope="User">
+      <Value Profile="(Default)">00000000-0000-0000-0000-000000000000</Value>
+    </Setting>
+    <Setting Name="DeviceBcoId" Type="System.String" Scope="User">
+      <Value Profile="(Default)">00000000-0000-0000-0000-000000000000</Value>
+    </Setting>
+    <Setting Name="LocalDbUsername" Type="System.String" Scope="User">
+      <Value Profile="(Default)">cmsuser</Value>
+    </Setting>
+    <Setting Name="LocalDbPassword" Type="System.String" Scope="User">
+      <Value Profile="(Default)">P9ssW0rd</Value>
+    </Setting>
+    <Setting Name="LocalDbServer" Type="System.String" Scope="User">
+      <Value Profile="(Default)">192.168.0.58</Value>
+    </Setting>
+    <Setting Name="CentralDbName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">cms2_Beta1</Value>
+    </Setting>
+    <Setting Name="CentralUsername" Type="System.String" Scope="User">
+      <Value Profile="(Default)">sa</Value>
+    </Setting>
+    <Setting Name="LocalDbName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">cms</Value>
+    </Setting>
+    <Setting Name="CentralServerIp" Type="System.String" Scope="User">
+      <Value Profile="(Default)">192.168.15.108\MHINE</Value>
+    </Setting>
+    <Setting Name="CentralPassword" Type="System.String" Scope="User">
+      <Value Profile="(Default)">admin!@#</Value>
+    </Setting>
+    <Setting Name="IsSynchronizationSetup" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="Filter" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Manila</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

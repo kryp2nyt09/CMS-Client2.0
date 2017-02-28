@@ -1,0 +1,116 @@
+﻿using CMS2.BusinessLogic;
+using CMS2.Entities;
+using CMS2.Entities.ReportModel;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace CMS2.Client.Forms.TrackingReports
+{
+    public class DailyTripReport
+    {
+        public DataTable getData(DateTime date)
+        {
+            DistributionBL shipmentService = new DistributionBL();
+            List<Distribution> list = shipmentService.GetAll().Where(x => x.RecordStatus == 1 && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
+
+            List<DailyTripViewModel> modelList = Match(list);
+
+            DataTable dt = new DataTable();
+            dt.Columns.Add(new DataColumn("No", typeof(string)));
+            dt.Columns.Add(new DataColumn("AWB/SOA", typeof(string)));
+            dt.Columns.Add(new DataColumn("Consignee", typeof(string)));
+            dt.Columns.Add(new DataColumn("Address", typeof(string)));
+            dt.Columns.Add(new DataColumn("QTY", typeof(int)));
+            dt.Columns.Add(new DataColumn("AGW", typeof(string)));
+            dt.Columns.Add(new DataColumn("Service Mode", typeof(string)));
+            dt.Columns.Add(new DataColumn("Payment Mode", typeof(string)));
+            dt.Columns.Add(new DataColumn("Amount", typeof(string)));
+
+            dt.Columns.Add(new DataColumn("Area", typeof(string)));
+            dt.Columns.Add(new DataColumn("Driver", typeof(string)));
+            dt.Columns.Add(new DataColumn("Checker", typeof(string)));
+
+            dt.BeginLoadData();
+            int ctr = 1;
+            foreach (DailyTripViewModel item in modelList)
+            {
+                DataRow row = dt.NewRow();
+                row[0] = (ctr++).ToString();
+                row[1] = item.AirwayBillNo;
+                row[2] = item.Consignee;
+                row[3] = item.Address;
+                row[4] = item.Qty;
+                row[5] = item.AGW;
+                row[6] = item.ServiceMode;
+                row[7] = item.PaymentMode;
+                row[8] = item.Amount;
+                row[9] = item.Area;
+                row[10] = item.Driver;
+                row[11] = item.Checker;
+
+                dt.Rows.Add(row);
+            }
+            dt.EndLoadData();
+
+            return dt;
+        }
+
+        public List<int> setWidth()
+        {
+            List<int> width = new List<int>();
+            width.Add(25);
+            width.Add(100);
+            width.Add(220);
+            width.Add(200);
+            width.Add(80);
+            width.Add(100);
+            width.Add(140);
+            width.Add(140);
+            width.Add(100);
+            width.Add(0);
+            width.Add(0);
+            width.Add(0);
+
+            return width;
+        }
+
+        public List<DailyTripViewModel> Match(List<Distribution> _distribution)
+        {
+            List<DailyTripViewModel> _results = new List<DailyTripViewModel>();
+            PackageNumberBL _packageNumberService = new PackageNumberBL();
+
+            foreach (Distribution distribution in _distribution) {
+                DailyTripViewModel model = new DailyTripViewModel();
+                string _airwaybill = _packageNumberService.GetAll().Find(x => x.ShipmentId == distribution.ShipmentId).Shipment.AirwayBillNo;
+                DailyTripViewModel isExist = _results.Find(x => x.AirwayBillNo == _airwaybill);
+
+                if (isExist != null)
+                {
+                    isExist.Qty++;
+                }
+                else
+                {
+                    model.AirwayBillNo = _airwaybill;
+                    model.Qty++;
+                    model.Consignee = distribution.Consignee.FullName;
+                    model.Address = distribution.Consignee.Address1;
+                    model.AGW += distribution.Shipment.Weight;
+                    model.ServiceMode = distribution.ServiceMode.ServiceModeName;
+                    model.PaymentMode = distribution.PaymentMode.PaymentModeName;
+                    model.Amount += distribution.Amount;
+                    
+                    _results.Add(model);
+                }
+
+            }
+
+            return _results;
+
+        }
+
+    }
+}
