@@ -71,12 +71,12 @@ namespace CMS2.Client.Forms.TrackingReports
             width.Add(110);
             width.Add(110);
 
-            width.Add(150);
+            width.Add(190);
             width.Add(100);            
             width.Add(90);
             
             width.Add(0);
-            width.Add(0);
+            width.Add(100);
             return width;
         }
         public List<UnbundleViewModel> Match(List<Unbundle> _unbundle , List<Bundle> _bundle)
