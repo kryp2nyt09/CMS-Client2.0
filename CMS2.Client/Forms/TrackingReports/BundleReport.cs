@@ -76,26 +76,26 @@ namespace CMS2.Client.Forms.TrackingReports
         public List<int> setBundleWidth()
         {
             List<int> width = new List<int>();
-            width.Add(30);
-            width.Add(110);
-            width.Add(110);
-            width.Add(110);
-            width.Add(110);
-            width.Add(110);
-            width.Add(110);
-            width.Add(70);
-            width.Add(80);
-            width.Add(110);
-            width.Add(110);
-
-            width.Add(0);
-            width.Add(0);
-            width.Add(0);
-            width.Add(0);
-
-            width.Add(0);
-            width.Add(0);
-
+            width.Add(30);  // No
+            width.Add(110); // AWB
+            width.Add(110); // Shipper
+            width.Add(110); // Consignee
+            width.Add(210); // Address
+            width.Add(110); // Com Type
+            width.Add(110); // Com
+            width.Add(60);  // Qty
+            width.Add(80);  // AGW
+            width.Add(110); // Service Mode
+            width.Add(110); // Payment Mode
+                            
+            width.Add(0);   // Area
+            width.Add(0);   // Sack No
+            width.Add(0);   // Create Date
+            width.Add(0);   // Destination
+                            
+            width.Add(0);   // BCO
+            width.Add(0);   // BSO
+                            
             return width;
         }
 

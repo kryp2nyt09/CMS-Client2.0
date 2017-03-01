@@ -916,8 +916,8 @@ namespace CMS2.Client.Forms.TrackingReportsView
             this.table1.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Inch(1.5884562730789185D)));
             this.table1.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Inch(1.3470990657806397D)));
             this.table1.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Inch(1.3470990657806397D)));
-            this.table1.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Inch(0.78580814599990845D)));
-            this.table1.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Inch(0.996296226978302D)));
+            this.table1.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Inch(0.78580808639526367D)));
+            this.table1.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Inch(0.99629616737365723D)));
             this.table1.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Inch(1.3471024036407471D)));
             this.table1.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Inch(1.3471024036407471D)));
             this.table1.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Inch(1.3471024036407471D)));
@@ -1030,7 +1030,7 @@ namespace CMS2.Client.Forms.TrackingReportsView
             this.txtAwb.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Left;
             this.txtAwb.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Bottom;
             this.txtAwb.TextWrap = false;
-            this.txtAwb.Value = "= Fields.AWB";
+            this.txtAwb.Value = "= Fields.[AWB/SOA]";
             // 
             // textBox13
             // 
@@ -1250,11 +1250,11 @@ namespace CMS2.Client.Forms.TrackingReportsView
             this.table2.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Inch(1.5884562730789185D)));
             this.table2.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Inch(1.3470990657806397D)));
             this.table2.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Inch(1.3470990657806397D)));
-            this.table2.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Inch(0.78580832481384277D)));
-            this.table2.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Inch(0.9962964653968811D)));
-            this.table2.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Inch(1.3471024036407471D)));
-            this.table2.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Inch(1.3471024036407471D)));
-            this.table2.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Inch(1.3471024036407471D)));
+            this.table2.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Inch(0.785808265209198D)));
+            this.table2.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Inch(0.99629640579223633D)));
+            this.table2.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Inch(1.3471025228500366D)));
+            this.table2.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Inch(1.3471025228500366D)));
+            this.table2.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Inch(1.3471025228500366D)));
             this.table2.Body.Rows.Add(new Telerik.Reporting.TableBodyRow(Telerik.Reporting.Drawing.Unit.Inch(0.25D)));
             this.table2.Body.Rows.Add(new Telerik.Reporting.TableBodyRow(Telerik.Reporting.Drawing.Unit.Inch(0.40000006556510925D)));
             this.table2.Body.SetCellContent(0, 0, this.textBox2);
@@ -1364,7 +1364,7 @@ namespace CMS2.Client.Forms.TrackingReportsView
             this.textBox7.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Left;
             this.textBox7.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Bottom;
             this.textBox7.TextWrap = false;
-            this.textBox7.Value = "= Fields.AWB";
+            this.textBox7.Value = "= Fields.[AWB/SOA]";
             // 
             // textBox8
             // 
@@ -1584,11 +1584,11 @@ namespace CMS2.Client.Forms.TrackingReportsView
             this.table3.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Inch(1.5884566307067871D)));
             this.table3.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Inch(1.3470990657806397D)));
             this.table3.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Inch(1.3470990657806397D)));
-            this.table3.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Inch(0.78580838441848755D)));
-            this.table3.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Inch(0.99629634618759155D)));
-            this.table3.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Inch(1.3471022844314575D)));
-            this.table3.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Inch(1.3471022844314575D)));
-            this.table3.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Inch(1.3471022844314575D)));
+            this.table3.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Inch(0.78580832481384277D)));
+            this.table3.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Inch(0.996296226978302D)));
+            this.table3.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Inch(1.3471024036407471D)));
+            this.table3.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Inch(1.3471024036407471D)));
+            this.table3.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Inch(1.3471024036407471D)));
             this.table3.Body.Rows.Add(new Telerik.Reporting.TableBodyRow(Telerik.Reporting.Drawing.Unit.Inch(0.25D)));
             this.table3.Body.Rows.Add(new Telerik.Reporting.TableBodyRow(Telerik.Reporting.Drawing.Unit.Inch(0.40000006556510925D)));
             this.table3.Body.SetCellContent(0, 0, this.textBox67);
@@ -1698,7 +1698,7 @@ namespace CMS2.Client.Forms.TrackingReportsView
             this.textBox68.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Left;
             this.textBox68.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Bottom;
             this.textBox68.TextWrap = false;
-            this.textBox68.Value = "= Fields.AWB";
+            this.textBox68.Value = "= Fields.[AWB/SOA]";
             // 
             // textBox69
             // 
@@ -1918,11 +1918,11 @@ namespace CMS2.Client.Forms.TrackingReportsView
             this.table4.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Inch(1.588456392288208D)));
             this.table4.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Inch(1.3470990657806397D)));
             this.table4.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Inch(1.3470990657806397D)));
-            this.table4.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Inch(0.78580832481384277D)));
-            this.table4.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Inch(0.99629634618759155D)));
-            this.table4.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Inch(1.3471024036407471D)));
-            this.table4.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Inch(1.3471024036407471D)));
-            this.table4.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Inch(1.3471024036407471D)));
+            this.table4.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Inch(0.785808265209198D)));
+            this.table4.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Inch(0.996296226978302D)));
+            this.table4.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Inch(1.3471025228500366D)));
+            this.table4.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Inch(1.3471025228500366D)));
+            this.table4.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Inch(1.3471025228500366D)));
             this.table4.Body.Rows.Add(new Telerik.Reporting.TableBodyRow(Telerik.Reporting.Drawing.Unit.Inch(0.25D)));
             this.table4.Body.Rows.Add(new Telerik.Reporting.TableBodyRow(Telerik.Reporting.Drawing.Unit.Inch(0.40000006556510925D)));
             this.table4.Body.SetCellContent(0, 0, this.textBox97);
@@ -2032,7 +2032,7 @@ namespace CMS2.Client.Forms.TrackingReportsView
             this.textBox98.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Left;
             this.textBox98.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Bottom;
             this.textBox98.TextWrap = false;
-            this.textBox98.Value = "= Fields.AWB";
+            this.textBox98.Value = "= Fields.[AWB/SOA]";
             // 
             // textBox99
             // 

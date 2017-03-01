@@ -29,13 +29,10 @@ namespace CMS2.Client.Forms.TrackingReports
             dt.Columns.Add(new DataColumn("Checker", typeof(string)));
             dt.Columns.Add(new DataColumn("Plate #", typeof(string))); 
             dt.Columns.Add(new DataColumn("Batch", typeof(string)));
-
             dt.Columns.Add(new DataColumn("AWB", typeof(string)));
-
             dt.Columns.Add(new DataColumn("Recieved(Qty)", typeof(string)));
             dt.Columns.Add(new DataColumn("Dicrepency(Qty)", typeof(string)));
             dt.Columns.Add(new DataColumn("Total Qty", typeof(string)));
-
             dt.Columns.Add(new DataColumn("BCO", typeof(string)));
             dt.Columns.Add(new DataColumn("BSO", typeof(string)));
 
@@ -73,7 +70,7 @@ namespace CMS2.Client.Forms.TrackingReports
             width.Add(180); //Area/Branch
             width.Add(150); //Driver
             width.Add(150); //Checker
-            width.Add(150); //Plate #
+            width.Add(147); //Plate #
             width.Add(100); //Batch
 
             width.Add(60); //AWB
@@ -106,7 +103,6 @@ namespace CMS2.Client.Forms.TrackingReports
                     {
                         isExist.TotalRecieved++;
                         isExist.Total += model.TotalRecieved;
-                        //_results.Add(isExist);
                     }
                     else
                     {                        

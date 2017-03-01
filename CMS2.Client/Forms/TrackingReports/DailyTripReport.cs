@@ -30,10 +30,13 @@ namespace CMS2.Client.Forms.TrackingReports
             dt.Columns.Add(new DataColumn("Payment Mode", typeof(string)));
             dt.Columns.Add(new DataColumn("Amount", typeof(string)));
             dt.Columns.Add(new DataColumn("Area", typeof(string)));
+
             dt.Columns.Add(new DataColumn("Driver", typeof(string)));
             dt.Columns.Add(new DataColumn("Checker", typeof(string)));
             
             dt.Columns.Add(new DataColumn("BCO", typeof(string)));
+
+            dt.Columns.Add(new DataColumn("PaymentCode", typeof(string)));
 
             dt.BeginLoadData();
             int ctr = 1;
@@ -53,6 +56,7 @@ namespace CMS2.Client.Forms.TrackingReports
                 row[10] = item.Driver;
                 row[11] = item.Checker;
                 row[12] = item.BCO;
+                row[13] = item.PaymentCode;
                 dt.Rows.Add(row);
             }
             dt.EndLoadData();
@@ -76,7 +80,7 @@ namespace CMS2.Client.Forms.TrackingReports
             width.Add(0);
             width.Add(0);
             width.Add(0);
-
+            width.Add(0);
             return width;
         }
 
@@ -100,7 +104,7 @@ namespace CMS2.Client.Forms.TrackingReports
                     model.AirwayBillNo = _airwaybill;
                     model.Qty++;
                     model.Consignee = distribution.Consignee.FullName;
-                    model.Address = distribution.Consignee.Address1;
+                    model.Address = distribution.Consignee.Address1 + " " + distribution.Consignee.Address2;
                     model.AGW += distribution.Shipment.Weight;
                     model.ServiceMode = distribution.ServiceMode.ServiceModeName;
                     model.PaymentMode = distribution.PaymentMode.PaymentModeName;
@@ -110,7 +114,7 @@ namespace CMS2.Client.Forms.TrackingReports
                     model.Driver = distribution.Driver;
                     model.Checker = distribution.Checker;
                     model.BCO = distribution.City.BranchCorpOffice.BranchCorpOfficeName;
-                    
+                    model.PaymentCode = distribution.PaymentMode.PaymentModeCode;
                     _results.Add(model);
                 }
 

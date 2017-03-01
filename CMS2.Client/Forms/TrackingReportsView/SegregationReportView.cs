@@ -21,14 +21,18 @@ namespace CMS2.Client.Forms.TrackingReportsView
             // Required for telerik Reporting designer support
             //
             InitializeComponent();
-            List<string> x = new List<string>();
+            //List<string> x = new List<string>();
+
             var objectDataSource = new Telerik.Reporting.ObjectDataSource();
-            //DataTable dataTable = 
-            //TrackingReportGlobalModel.table;
-            objectDataSource.DataSource = typeof(BranchAcceptanceViewModel);
+            DataTable dataTable = TrackingReportGlobalModel.table;
+            objectDataSource.DataSource = dataTable;
             table1.DataSource = objectDataSource;
 
             txtDate.Value = TrackingReportGlobalModel.Date;
+            txtDriver.Value = TrackingReportGlobalModel.Driver;
+            txtChecker.Value = TrackingReportGlobalModel.Checker;
+            txtPlateNo.Value = TrackingReportGlobalModel.PlateNo;
+
             //
         }
     }

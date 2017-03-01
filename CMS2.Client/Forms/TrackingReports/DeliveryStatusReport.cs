@@ -32,6 +32,7 @@ namespace CMS2.Client.Forms.TrackingReports
             dt.Columns.Add(new DataColumn("Plate No", typeof(string)));
             dt.Columns.Add(new DataColumn("Batch", typeof(string)));
 
+            dt.Columns.Add(new DataColumn("BSO", typeof(string)));
             dt.BeginLoadData();
             int ctr = 1;
             foreach (DeliveryStatusViewModel item in modelList)
@@ -47,7 +48,7 @@ namespace CMS2.Client.Forms.TrackingReports
                 row[7] = item.Checker;
                 row[8] = item.PlateNo;
                 row[9] = item.Batch;
-
+                row[10] = item.BSO;
                 dt.Rows.Add(row);
             }
             dt.EndLoadData();
@@ -95,16 +96,17 @@ namespace CMS2.Client.Forms.TrackingReports
                 }
                 else
                 {
+
                     model.AirwayBillNo = _airwaybill;
                     model.QTY++;
                     model.Status = status.GetAll().Find(x => x.DeliveryStatusId == deliveryStatus.DeliveryStatusId).DeliveryStatusName;
                     model.Remarks = deliveryStatus.DeliveryRemark.DeliveryRemarkName;
-                    //model.Area = distribution.GetAll().Find(x => x.ShipmentId == deliveryStatus.ShipmentId).City.CityName;
-                    //model.Driver = distribution.GetAll().Find(x => x.ShipmentId == deliveryStatus.ShipmentId).Driver;
-                    //model.Checker = distribution.GetAll().Find(x => x.ShipmentId == deliveryStatus.ShipmentId).Checker;
-                    //model.PlateNo = distribution.GetAll().Find(x => x.ShipmentId == deliveryStatus.ShipmentId).PlateNo;
-                    //model.Batch = distribution.GetAll().Find(x => x.ShipmentId == deliveryStatus.ShipmentId).Batch.BatchName;
-
+                    model.Area = distribution.GetAll().Find(x => x.ShipmentId == deliveryStatus.ShipmentId).City.CityName;
+                    model.Driver = distribution.GetAll().Find(x => x.ShipmentId == deliveryStatus.ShipmentId).Driver;
+                    model.Checker = distribution.GetAll().Find(x => x.ShipmentId == deliveryStatus.ShipmentId).Checker;
+                    model.PlateNo = distribution.GetAll().Find(x => x.ShipmentId == deliveryStatus.ShipmentId).PlateNo;
+                    model.Batch = distribution.GetAll().Find(x => x.ShipmentId == deliveryStatus.ShipmentId).Batch.BatchName;
+                    //model.BSO = deliveryStatus.Shipment.
                     _results.Add(model);
                 }
             }

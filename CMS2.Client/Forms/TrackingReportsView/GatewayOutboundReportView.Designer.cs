@@ -255,7 +255,7 @@ namespace CMS2.Client.Forms.TrackingReportsView
             this.txtDriver.Style.Font.Underline = false;
             this.txtDriver.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
             this.txtDriver.TextWrap = false;
-            this.txtDriver.Value = " ";
+            this.txtDriver.Value = "";
             // 
             // txtPlateNo
             // 
@@ -269,7 +269,7 @@ namespace CMS2.Client.Forms.TrackingReportsView
             this.txtPlateNo.Style.Font.Underline = false;
             this.txtPlateNo.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
             this.txtPlateNo.TextWrap = false;
-            this.txtPlateNo.Value = " ";
+            this.txtPlateNo.Value = "";
             // 
             // txtDate
             // 
@@ -578,7 +578,7 @@ namespace CMS2.Client.Forms.TrackingReportsView
             this.txtScannedBy.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(11D);
             this.txtScannedBy.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
             this.txtScannedBy.TextWrap = false;
-            this.txtScannedBy.Value = "   ";
+            this.txtScannedBy.Value = "";
             // 
             // txtRemarks
             // 
@@ -592,7 +592,7 @@ namespace CMS2.Client.Forms.TrackingReportsView
             this.txtRemarks.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(11D);
             this.txtRemarks.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
             this.txtRemarks.TextWrap = false;
-            this.txtRemarks.Value = "   ";
+            this.txtRemarks.Value = "";
             // 
             // txtNotes
             // 
@@ -606,7 +606,7 @@ namespace CMS2.Client.Forms.TrackingReportsView
             this.txtNotes.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(11D);
             this.txtNotes.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
             this.txtNotes.TextWrap = false;
-            this.txtNotes.Value = "   ";
+            this.txtNotes.Value = "";
             // 
             // txtVerified
             // 
@@ -620,7 +620,7 @@ namespace CMS2.Client.Forms.TrackingReportsView
             this.txtVerified.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(11D);
             this.txtVerified.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
             this.txtVerified.TextWrap = false;
-            this.txtVerified.Value = "   ";
+            this.txtVerified.Value = "";
             // 
             // GatewayOutboundReportView
             // 

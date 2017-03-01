@@ -71,8 +71,8 @@ namespace CMS2.Client.Forms.TrackingReports
         {
             List<int> width = new List<int>();
             width.Add(25);
-            width.Add(150);
-            width.Add(150);
+            width.Add(190);
+            width.Add(190);
             width.Add(100);
             width.Add(100);
             width.Add(100);
@@ -80,12 +80,12 @@ namespace CMS2.Client.Forms.TrackingReports
             width.Add(90);
 
             width.Add(80);
-            width.Add(80);
+            width.Add(0);
             width.Add(0);
 
             width.Add(0);
-            width.Add(10);
-            width.Add(10);
+            width.Add(0);
+            width.Add(0);
 
             return width;
         }
@@ -103,8 +103,9 @@ namespace CMS2.Client.Forms.TrackingReports
 
                 if (isExist != null)
                 {
-                    //isExist.TotalRecieved++;
-                    _results.Add(isExist);
+                    isExist.QTY++;
+                    model.Pieces++;
+                    //_results.Add(isExist);
                 }
                 else
                 {
@@ -116,11 +117,11 @@ namespace CMS2.Client.Forms.TrackingReports
                     }
                     model.Driver = cargoTransfer.Driver;
                     model.Checker = cargoTransfer.Checker;
-                    model.Pieces = "";
+                    model.Pieces++;
                     model.PlateNo = cargoTransfer.PlateNo;
                     model.Batch = cargoTransfer.Batch.BatchName;
                     model.AWB = _airwaybill;
-                    model.QTY = _cargoTransfers.Count().ToString();
+                    model.QTY++;
                     model.CreatedDate = cargoTransfer.CreatedDate;
 
                     model.BCO = cargoTransfer.BranchCorpOffice.BranchCorpOfficeName;

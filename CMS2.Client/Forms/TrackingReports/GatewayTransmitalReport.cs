@@ -77,25 +77,26 @@ namespace CMS2.Client.Forms.TrackingReports
         public List<int> setWidth()
         {
             List<int> width = new List<int>();
-            width.Add(25);
-            width.Add(100);
-            width.Add(180);
-            width.Add(180);
-            width.Add(150);
-            width.Add(120);
-            width.Add(100);
-            width.Add(100);
-            width.Add(100);
-            width.Add(100);
-            width.Add(100);
 
-            width.Add(0);
-            width.Add(0);
-            width.Add(0);
-            width.Add(0);
+            width.Add(25); //No
+            width.Add(60);//AWB
+            width.Add(110);//Shipper
+            width.Add(110);//Consignee
+            width.Add(200);//Address
+            width.Add(110);//Com Type
+            width.Add(100);//Com
+            width.Add(40);//Qty
+            width.Add(50);//AGW
+            width.Add(150);//Service Mode
+            width.Add(150);//Payment Mode
 
-            width.Add(0);
-            width.Add(0);
+            width.Add(0);  //Gateway
+            width.Add(0);  //Destination
+            width.Add(0);  //Batch
+            width.Add(0);  //Createdate
+                           
+            width.Add(0);  //Driver
+            width.Add(0);  //PlateNO
 
             return width;
         }

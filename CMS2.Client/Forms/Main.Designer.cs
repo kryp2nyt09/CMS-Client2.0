@@ -29,35 +29,35 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            Telerik.WinControls.Data.FilterDescriptor filterDescriptor31 = new Telerik.WinControls.Data.FilterDescriptor();
-            Telerik.WinControls.Data.SortDescriptor sortDescriptor31 = new Telerik.WinControls.Data.SortDescriptor();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition271 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.Data.FilterDescriptor filterDescriptor32 = new Telerik.WinControls.Data.FilterDescriptor();
-            Telerik.WinControls.Data.SortDescriptor sortDescriptor32 = new Telerik.WinControls.Data.SortDescriptor();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition272 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition273 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition274 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition275 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition276 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition277 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.Data.FilterDescriptor filterDescriptor23 = new Telerik.WinControls.Data.FilterDescriptor();
+            Telerik.WinControls.Data.SortDescriptor sortDescriptor23 = new Telerik.WinControls.Data.SortDescriptor();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition199 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.Data.FilterDescriptor filterDescriptor24 = new Telerik.WinControls.Data.FilterDescriptor();
+            Telerik.WinControls.Data.SortDescriptor sortDescriptor24 = new Telerik.WinControls.Data.SortDescriptor();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition200 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition201 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition202 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition203 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition204 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition205 = new Telerik.WinControls.UI.TableViewDefinition();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition26 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.RadListDataItem radListDataItem7 = new Telerik.WinControls.UI.RadListDataItem();
-            Telerik.WinControls.UI.RadListDataItem radListDataItem8 = new Telerik.WinControls.UI.RadListDataItem();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition27 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition206 = new Telerik.WinControls.UI.TableViewDefinition();
             Telerik.WinControls.UI.RadListDataItem radListDataItem3 = new Telerik.WinControls.UI.RadListDataItem();
             Telerik.WinControls.UI.RadListDataItem radListDataItem4 = new Telerik.WinControls.UI.RadListDataItem();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition28 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition29 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition30 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition31 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition32 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition33 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition34 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition35 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition36 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition207 = new Telerik.WinControls.UI.TableViewDefinition();
             Telerik.WinControls.UI.RadListDataItem radListDataItem5 = new Telerik.WinControls.UI.RadListDataItem();
             Telerik.WinControls.UI.RadListDataItem radListDataItem6 = new Telerik.WinControls.UI.RadListDataItem();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition208 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition209 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition210 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition211 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition212 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition213 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition214 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition215 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.RadListDataItem radListDataItem7 = new Telerik.WinControls.UI.RadListDataItem();
+            Telerik.WinControls.UI.RadListDataItem radListDataItem8 = new Telerik.WinControls.UI.RadListDataItem();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition216 = new Telerik.WinControls.UI.TableViewDefinition();
             this.office2010BlackTheme1 = new Telerik.WinControls.Themes.Office2010BlackTheme();
             this.radPanel1 = new Telerik.WinControls.UI.RadPanel();
             this.panel = new Telerik.WinControls.UI.RadPanel();
@@ -243,7 +243,6 @@
             this.radLabel82 = new Telerik.WinControls.UI.RadLabel();
             this.radLabel83 = new Telerik.WinControls.UI.RadLabel();
             this.radLabel84 = new Telerik.WinControls.UI.RadLabel();
-            this.chkNonVatable = new Telerik.WinControls.UI.RadCheckBox();
             this.radLabel85 = new Telerik.WinControls.UI.RadLabel();
             this.chkPackaging = new Telerik.WinControls.UI.RadCheckBox();
             this.chkDraining = new Telerik.WinControls.UI.RadCheckBox();
@@ -251,6 +250,7 @@
             this.radLabel86 = new Telerik.WinControls.UI.RadLabel();
             this.txtTotalEvm = new Telerik.WinControls.UI.RadMaskedEditBox();
             this.txtTotalWeightCharge = new Telerik.WinControls.UI.RadMaskedEditBox();
+            this.chkNonVatable = new Telerik.WinControls.UI.RadCheckBox();
             this.radGroupBox1 = new Telerik.WinControls.UI.RadGroupBox();
             this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
             this.AcceptancetxtShipperMobile = new Telerik.WinControls.UI.RadMaskedEditBox();
@@ -300,8 +300,8 @@
             this.PaymentPage = new Telerik.WinControls.UI.RadPageViewPage();
             this.radGroupBox2 = new Telerik.WinControls.UI.RadGroupBox();
             this.tableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnAccept = new Telerik.WinControls.UI.RadButton();
             this.btnCancel = new Telerik.WinControls.UI.RadButton();
+            this.btnAccept = new Telerik.WinControls.UI.RadButton();
             this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
             this.radLabel27 = new Telerik.WinControls.UI.RadLabel();
             this.radLabel28 = new Telerik.WinControls.UI.RadLabel();
@@ -330,6 +330,7 @@
             this.txtAmountPaid = new Telerik.WinControls.UI.RadMaskedEditBox();
             this.txtAmountDue = new Telerik.WinControls.UI.RadMaskedEditBox();
             this.radLabel30 = new Telerik.WinControls.UI.RadLabel();
+            this.cmb_PaymentRemarks = new Telerik.WinControls.UI.RadDropDownList();
             this.Manifest = new Telerik.WinControls.UI.RadPageViewPage();
             this.gridManifest = new Telerik.WinControls.UI.RadGridView();
             this.radPageViewPage5 = new Telerik.WinControls.UI.RadPageViewPage();
@@ -374,7 +375,6 @@
             this.dateCollectionDate = new Telerik.WinControls.UI.RadDateTimePicker();
             this.radLabel65 = new Telerik.WinControls.UI.RadLabel();
             this.radLabel70 = new Telerik.WinControls.UI.RadLabel();
-            this.btnReceivedAll = new Telerik.WinControls.UI.RadButton();
             this.radLabel68 = new Telerik.WinControls.UI.RadLabel();
             this.radLabel69 = new Telerik.WinControls.UI.RadLabel();
             this.txtTotalAmntCorpAcctConsignee = new Telerik.WinControls.UI.RadTextBox();
@@ -388,6 +388,8 @@
             this.btnSearch = new Telerik.WinControls.UI.RadButton();
             this.lstRevenueUnitType = new Telerik.WinControls.UI.RadDropDownList();
             this.radLabel66 = new Telerik.WinControls.UI.RadLabel();
+            this.chk_ReceivedAll = new Telerik.WinControls.UI.RadCheckBox();
+            this.btnReceivedAll = new Telerik.WinControls.UI.RadButton();
             this.radPageViewPage6 = new Telerik.WinControls.UI.RadPageViewPage();
             this.pageViewTracking = new Telerik.WinControls.UI.RadPageView();
             this.radPageViewPage7 = new Telerik.WinControls.UI.RadPageViewPage();
@@ -590,8 +592,7 @@
             this.label118 = new System.Windows.Forms.Label();
             this.label119 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.chk_ReceivedAll = new Telerik.WinControls.UI.RadCheckBox();
-            this.cmb_PaymentRemarks = new Telerik.WinControls.UI.RadDropDownList();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.radPanel1)).BeginInit();
             this.radPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panel)).BeginInit();
@@ -756,7 +757,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.radLabel82)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel83)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel84)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chkNonVatable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel85)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkPackaging)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkDraining)).BeginInit();
@@ -765,6 +765,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.radLabel86)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTotalEvm)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTotalWeightCharge)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkNonVatable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radGroupBox1)).BeginInit();
             this.radGroupBox1.SuspendLayout();
             this.tableLayoutPanel10.SuspendLayout();
@@ -817,8 +818,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.radGroupBox2)).BeginInit();
             this.radGroupBox2.SuspendLayout();
             this.tableLayoutPanel11.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btnAccept)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnCancel)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnAccept)).BeginInit();
             this.tableLayoutPanel9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel27)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel28)).BeginInit();
@@ -847,6 +848,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtAmountPaid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtAmountDue)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel30)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cmb_PaymentRemarks)).BeginInit();
             this.Manifest.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridManifest)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridManifest.MasterTemplate)).BeginInit();
@@ -885,7 +887,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dateCollectionDate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel65)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel70)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnReceivedAll)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel68)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel69)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTotalAmntCorpAcctConsignee)).BeginInit();
@@ -900,6 +901,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.btnSearch)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lstRevenueUnitType)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel66)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chk_ReceivedAll)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnReceivedAll)).BeginInit();
             this.radPageViewPage6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pageViewTracking)).BeginInit();
             this.pageViewTracking.SuspendLayout();
@@ -1044,8 +1047,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dateTimeDeliveryStatus_Date)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dropDownDeliveryStatus_Area)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dropDownDeliveryStatus_BCO)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chk_ReceivedAll)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cmb_PaymentRemarks)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
             // 
@@ -1209,12 +1210,12 @@
             this.BookingGridView.MasterTemplate.EnableAlternatingRowColor = true;
             this.BookingGridView.MasterTemplate.EnableFiltering = true;
             this.BookingGridView.MasterTemplate.FilterDescriptors.AddRange(new Telerik.WinControls.Data.FilterDescriptor[] {
-            filterDescriptor31});
+            filterDescriptor23});
             this.BookingGridView.MasterTemplate.MultiSelect = true;
-            sortDescriptor31.PropertyName = "Delete";
+            sortDescriptor23.PropertyName = "Delete";
             this.BookingGridView.MasterTemplate.SortDescriptors.AddRange(new Telerik.WinControls.Data.SortDescriptor[] {
-            sortDescriptor31});
-            this.BookingGridView.MasterTemplate.ViewDefinition = tableViewDefinition271;
+            sortDescriptor23});
+            this.BookingGridView.MasterTemplate.ViewDefinition = tableViewDefinition199;
             this.BookingGridView.Name = "BookingGridView";
             this.BookingGridView.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.BookingGridView.Size = new System.Drawing.Size(1231, 192);
@@ -3521,16 +3522,6 @@
             this.radLabel84.TabIndex = 1;
             this.radLabel84.Text = "Non-Vatable";
             // 
-            // chkNonVatable
-            // 
-            this.chkNonVatable.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.chkNonVatable.Location = new System.Drawing.Point(758, 255);
-            this.chkNonVatable.Name = "chkNonVatable";
-            this.chkNonVatable.Size = new System.Drawing.Size(15, 15);
-            this.chkNonVatable.TabIndex = 50;
-            this.chkNonVatable.TabStop = false;
-            this.chkNonVatable.KeyUp += new System.Windows.Forms.KeyEventHandler(this.chkNonVatable_KeyUp);
-            // 
             // radLabel85
             // 
             this.radLabel85.Anchor = System.Windows.Forms.AnchorStyles.Left;
@@ -3581,14 +3572,14 @@
             this.gridPackage.MasterTemplate.EnableAlternatingRowColor = true;
             this.gridPackage.MasterTemplate.EnableGrouping = false;
             this.gridPackage.MasterTemplate.FilterDescriptors.AddRange(new Telerik.WinControls.Data.FilterDescriptor[] {
-            filterDescriptor32});
+            filterDescriptor24});
             this.gridPackage.MasterTemplate.MultiSelect = true;
             this.gridPackage.MasterTemplate.ShowFilteringRow = false;
             this.gridPackage.MasterTemplate.ShowRowHeaderColumn = false;
-            sortDescriptor32.PropertyName = "Delete";
+            sortDescriptor24.PropertyName = "Delete";
             this.gridPackage.MasterTemplate.SortDescriptors.AddRange(new Telerik.WinControls.Data.SortDescriptor[] {
-            sortDescriptor32});
-            this.gridPackage.MasterTemplate.ViewDefinition = tableViewDefinition272;
+            sortDescriptor24});
+            this.gridPackage.MasterTemplate.ViewDefinition = tableViewDefinition200;
             this.gridPackage.Name = "gridPackage";
             this.gridPackage.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.tableLayoutPanel14.SetRowSpan(this.gridPackage, 5);
@@ -3640,6 +3631,16 @@
             this.txtTotalWeightCharge.Text = "₱0.00";
             this.txtTotalWeightCharge.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtTotalWeightCharge.ThemeName = "Office2010Black";
+            // 
+            // chkNonVatable
+            // 
+            this.chkNonVatable.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.chkNonVatable.Location = new System.Drawing.Point(758, 255);
+            this.chkNonVatable.Name = "chkNonVatable";
+            this.chkNonVatable.Size = new System.Drawing.Size(15, 15);
+            this.chkNonVatable.TabIndex = 50;
+            this.chkNonVatable.TabStop = false;
+            this.chkNonVatable.KeyUp += new System.Windows.Forms.KeyEventHandler(this.chkNonVatable_KeyUp);
             // 
             // radGroupBox1
             // 
@@ -4296,17 +4297,6 @@
             this.tableLayoutPanel11.Size = new System.Drawing.Size(202, 36);
             this.tableLayoutPanel11.TabIndex = 2;
             // 
-            // btnAccept
-            // 
-            this.btnAccept.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.btnAccept.Location = new System.Drawing.Point(3, 3);
-            this.btnAccept.Name = "btnAccept";
-            this.btnAccept.Size = new System.Drawing.Size(95, 30);
-            this.btnAccept.TabIndex = 1;
-            this.btnAccept.Text = "Sa&ve";
-            this.btnAccept.ThemeName = "Office2010Black";
-            this.btnAccept.Click += new System.EventHandler(this.btnAccept_Click);
-            // 
             // btnCancel
             // 
             this.btnCancel.Anchor = System.Windows.Forms.AnchorStyles.Left;
@@ -4318,6 +4308,17 @@
             this.btnCancel.Text = "&Reset/Cancel";
             this.btnCancel.ThemeName = "Office2010Black";
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
+            // btnAccept
+            // 
+            this.btnAccept.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.btnAccept.Location = new System.Drawing.Point(3, 3);
+            this.btnAccept.Name = "btnAccept";
+            this.btnAccept.Size = new System.Drawing.Size(95, 30);
+            this.btnAccept.TabIndex = 1;
+            this.btnAccept.Text = "Sa&ve";
+            this.btnAccept.ThemeName = "Office2010Black";
+            this.btnAccept.Click += new System.EventHandler(this.btnAccept_Click);
             // 
             // tableLayoutPanel9
             // 
@@ -4661,6 +4662,14 @@
             this.radLabel30.TabIndex = 10;
             this.radLabel30.Text = "Remarks";
             // 
+            // cmb_PaymentRemarks
+            // 
+            this.cmb_PaymentRemarks.Location = new System.Drawing.Point(86, 341);
+            this.cmb_PaymentRemarks.Name = "cmb_PaymentRemarks";
+            this.cmb_PaymentRemarks.Size = new System.Drawing.Size(161, 20);
+            this.cmb_PaymentRemarks.TabIndex = 21;
+            this.cmb_PaymentRemarks.ThemeName = "Office2010Black";
+            // 
             // Manifest
             // 
             this.Manifest.Controls.Add(this.gridManifest);
@@ -4690,7 +4699,7 @@
             this.gridManifest.MasterTemplate.EnablePaging = true;
             this.gridManifest.MasterTemplate.PageSize = 10;
             this.gridManifest.MasterTemplate.ShowGroupedColumns = true;
-            this.gridManifest.MasterTemplate.ViewDefinition = tableViewDefinition273;
+            this.gridManifest.MasterTemplate.ViewDefinition = tableViewDefinition201;
             this.gridManifest.Name = "gridManifest";
             this.gridManifest.Size = new System.Drawing.Size(1231, 571);
             this.gridManifest.TabIndex = 0;
@@ -5175,7 +5184,7 @@
             // 
             this.gridCorpAcctConsignee.MasterTemplate.AllowAddNewRow = false;
             this.gridCorpAcctConsignee.MasterTemplate.AllowDeleteRow = false;
-            this.gridCorpAcctConsignee.MasterTemplate.ViewDefinition = tableViewDefinition274;
+            this.gridCorpAcctConsignee.MasterTemplate.ViewDefinition = tableViewDefinition202;
             this.gridCorpAcctConsignee.Name = "gridCorpAcctConsignee";
             this.gridCorpAcctConsignee.Size = new System.Drawing.Size(794, 121);
             this.gridCorpAcctConsignee.TabIndex = 62;
@@ -5193,7 +5202,7 @@
             this.gridPrepaid.MasterTemplate.AllowColumnReorder = false;
             this.gridPrepaid.MasterTemplate.AllowColumnResize = false;
             this.gridPrepaid.MasterTemplate.AllowDeleteRow = false;
-            this.gridPrepaid.MasterTemplate.ViewDefinition = tableViewDefinition275;
+            this.gridPrepaid.MasterTemplate.ViewDefinition = tableViewDefinition203;
             this.gridPrepaid.Name = "gridPrepaid";
             this.gridPrepaid.Size = new System.Drawing.Size(794, 131);
             this.gridPrepaid.TabIndex = 60;
@@ -5256,18 +5265,6 @@
             this.radLabel70.Size = new System.Drawing.Size(84, 69);
             this.radLabel70.TabIndex = 6;
             this.radLabel70.Text = "Corporate Account Consignee";
-            // 
-            // btnReceivedAll
-            // 
-            this.btnReceivedAll.Location = new System.Drawing.Point(640, 35);
-            this.btnReceivedAll.Name = "btnReceivedAll";
-            this.btnReceivedAll.Size = new System.Drawing.Size(75, 17);
-            this.btnReceivedAll.TabIndex = 56;
-            this.btnReceivedAll.TabStop = false;
-            this.btnReceivedAll.Text = "Received All";
-            this.btnReceivedAll.ThemeName = "Office2010Black";
-            this.btnReceivedAll.Visible = false;
-            this.btnReceivedAll.Click += new System.EventHandler(this.btnReceivedAll_Click);
             // 
             // radLabel68
             // 
@@ -5377,7 +5374,7 @@
             this.gridFreightCollect.MasterTemplate.AllowAddNewRow = false;
             this.gridFreightCollect.MasterTemplate.AllowColumnResize = false;
             this.gridFreightCollect.MasterTemplate.AllowDeleteRow = false;
-            this.gridFreightCollect.MasterTemplate.ViewDefinition = tableViewDefinition276;
+            this.gridFreightCollect.MasterTemplate.ViewDefinition = tableViewDefinition204;
             this.gridFreightCollect.Name = "gridFreightCollect";
             this.gridFreightCollect.Size = new System.Drawing.Size(794, 127);
             this.gridFreightCollect.TabIndex = 61;
@@ -5418,6 +5415,27 @@
             this.radLabel66.TabIndex = 53;
             this.radLabel66.Text = "Revenue Type";
             // 
+            // chk_ReceivedAll
+            // 
+            this.chk_ReceivedAll.Location = new System.Drawing.Point(810, 35);
+            this.chk_ReceivedAll.Name = "chk_ReceivedAll";
+            this.chk_ReceivedAll.Size = new System.Drawing.Size(81, 17);
+            this.chk_ReceivedAll.TabIndex = 65;
+            this.chk_ReceivedAll.Text = "Received All";
+            this.chk_ReceivedAll.CheckStateChanged += new System.EventHandler(this.chk_ReceivedAll_CheckStateChanged);
+            // 
+            // btnReceivedAll
+            // 
+            this.btnReceivedAll.Location = new System.Drawing.Point(640, 35);
+            this.btnReceivedAll.Name = "btnReceivedAll";
+            this.btnReceivedAll.Size = new System.Drawing.Size(75, 17);
+            this.btnReceivedAll.TabIndex = 56;
+            this.btnReceivedAll.TabStop = false;
+            this.btnReceivedAll.Text = "Received All";
+            this.btnReceivedAll.ThemeName = "Office2010Black";
+            this.btnReceivedAll.Visible = false;
+            this.btnReceivedAll.Click += new System.EventHandler(this.btnReceivedAll_Click);
+            // 
             // radPageViewPage6
             // 
             this.radPageViewPage6.Controls.Add(this.pageViewTracking);
@@ -5444,7 +5462,7 @@
             this.pageViewTracking.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pageViewTracking.Location = new System.Drawing.Point(0, 0);
             this.pageViewTracking.Name = "pageViewTracking";
-            this.pageViewTracking.SelectedPage = this.radPageViewPage16;
+            this.pageViewTracking.SelectedPage = this.radPageViewPage7;
             this.pageViewTracking.Size = new System.Drawing.Size(1231, 571);
             this.pageViewTracking.TabIndex = 0;
             this.pageViewTracking.Text = " ";
@@ -5458,6 +5476,7 @@
             // 
             this.radPageViewPage7.Controls.Add(this.radPanel14);
             this.radPageViewPage7.Controls.Add(this.radPanel13);
+            this.radPageViewPage7.ItemSize = new System.Drawing.SizeF(126F, 30F);
             this.radPageViewPage7.Location = new System.Drawing.Point(136, 12);
             this.radPageViewPage7.Name = "radPageViewPage7";
             this.radPageViewPage7.Size = new System.Drawing.Size(1083, 547);
@@ -5485,7 +5504,7 @@
             this.gridPickupCargo.MasterTemplate.AllowDragToGroup = false;
             this.gridPickupCargo.MasterTemplate.AllowEditRow = false;
             this.gridPickupCargo.MasterTemplate.ShowRowHeaderColumn = false;
-            this.gridPickupCargo.MasterTemplate.ViewDefinition = tableViewDefinition277;
+            this.gridPickupCargo.MasterTemplate.ViewDefinition = tableViewDefinition205;
             this.gridPickupCargo.Name = "gridPickupCargo";
             this.gridPickupCargo.ShowItemToolTips = false;
             this.gridPickupCargo.Size = new System.Drawing.Size(1083, 439);
@@ -5599,7 +5618,7 @@
             this.label19.AutoSize = true;
             this.label19.Location = new System.Drawing.Point(189, 60);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(38, 14);
+            this.label19.Size = new System.Drawing.Size(36, 13);
             this.label19.TabIndex = 74;
             this.label19.Text = "BCO :";
             // 
@@ -5620,7 +5639,7 @@
             this.label73.AutoSize = true;
             this.label73.Location = new System.Drawing.Point(404, 58);
             this.label73.Name = "label73";
-            this.label73.Size = new System.Drawing.Size(36, 14);
+            this.label73.Size = new System.Drawing.Size(33, 13);
             this.label73.TabIndex = 69;
             this.label73.Text = "Area:";
             // 
@@ -5642,7 +5661,7 @@
             this.label76.AutoSize = true;
             this.label76.Location = new System.Drawing.Point(10, 60);
             this.label76.Name = "label76";
-            this.label76.Size = new System.Drawing.Size(37, 14);
+            this.label76.Size = new System.Drawing.Size(34, 13);
             this.label76.TabIndex = 72;
             this.label76.Text = "Date:";
             // 
@@ -5672,6 +5691,7 @@
             // 
             this.radPageViewPage8.Controls.Add(this.gridBranchAcceptance);
             this.radPageViewPage8.Controls.Add(this.radPanel15);
+            this.radPageViewPage8.ItemSize = new System.Drawing.SizeF(126F, 30F);
             this.radPageViewPage8.Location = new System.Drawing.Point(136, 12);
             this.radPageViewPage8.Name = "radPageViewPage8";
             this.radPageViewPage8.Size = new System.Drawing.Size(1083, 547);
@@ -5688,7 +5708,7 @@
             this.gridBranchAcceptance.MasterTemplate.AllowDeleteRow = false;
             this.gridBranchAcceptance.MasterTemplate.AllowEditRow = false;
             this.gridBranchAcceptance.MasterTemplate.ShowRowHeaderColumn = false;
-//            this.gridBranchAcceptance.MasterTemplate.ViewDefinition = tableViewDefinition278;
+            this.gridBranchAcceptance.MasterTemplate.ViewDefinition = tableViewDefinition206;
             this.gridBranchAcceptance.Name = "gridBranchAcceptance";
             this.gridBranchAcceptance.ShowItemToolTips = false;
             this.gridBranchAcceptance.Size = new System.Drawing.Size(1083, 439);
@@ -5736,7 +5756,7 @@
             this.label100.AutoSize = true;
             this.label100.Location = new System.Drawing.Point(366, 58);
             this.label100.Name = "label100";
-            this.label100.Size = new System.Drawing.Size(62, 14);
+            this.label100.Size = new System.Drawing.Size(59, 13);
             this.label100.TabIndex = 82;
             this.label100.Text = "BCO/BSO:";
             // 
@@ -5754,7 +5774,7 @@
             this.label97.AutoSize = true;
             this.label97.Location = new System.Drawing.Point(542, 58);
             this.label97.Name = "label97";
-            this.label97.Size = new System.Drawing.Size(42, 14);
+            this.label97.Size = new System.Drawing.Size(40, 13);
             this.label97.TabIndex = 80;
             this.label97.Text = "Driver:";
             // 
@@ -5775,17 +5795,17 @@
             this.label45.AutoSize = true;
             this.label45.Location = new System.Drawing.Point(184, 58);
             this.label45.Name = "label45";
-            this.label45.Size = new System.Drawing.Size(48, 14);
+            this.label45.Size = new System.Drawing.Size(46, 13);
             this.label45.TabIndex = 78;
             this.label45.Text = "Branch:";
             // 
             // dropDownBranchAcceptance_Branch
             // 
             this.dropDownBranchAcceptance_Branch.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            radListDataItem5.Text = "Branch Corporate Office";
-            radListDataItem6.Text = "Branch Satellite Office";
-            this.dropDownBranchAcceptance_Branch.Items.Add(radListDataItem5);
-            this.dropDownBranchAcceptance_Branch.Items.Add(radListDataItem6);
+            radListDataItem3.Text = "Branch Corporate Office";
+            radListDataItem4.Text = "Branch Satellite Office";
+            this.dropDownBranchAcceptance_Branch.Items.Add(radListDataItem3);
+            this.dropDownBranchAcceptance_Branch.Items.Add(radListDataItem4);
             this.dropDownBranchAcceptance_Branch.Location = new System.Drawing.Point(187, 79);
             this.dropDownBranchAcceptance_Branch.Name = "dropDownBranchAcceptance_Branch";
             this.dropDownBranchAcceptance_Branch.Size = new System.Drawing.Size(176, 20);
@@ -5811,7 +5831,7 @@
             this.label48.AutoSize = true;
             this.label48.Location = new System.Drawing.Point(10, 58);
             this.label48.Name = "label48";
-            this.label48.Size = new System.Drawing.Size(37, 14);
+            this.label48.Size = new System.Drawing.Size(34, 13);
             this.label48.TabIndex = 76;
             this.label48.Text = "Date:";
             // 
@@ -5838,7 +5858,7 @@
             this.label77.AutoSize = true;
             this.label77.Location = new System.Drawing.Point(683, 56);
             this.label77.Name = "label77";
-            this.label77.Size = new System.Drawing.Size(38, 14);
+            this.label77.Size = new System.Drawing.Size(36, 13);
             this.label77.TabIndex = 69;
             this.label77.Text = "Batch";
             // 
@@ -5868,6 +5888,7 @@
             // 
             this.radPageViewPage9.Controls.Add(this.gridBundle);
             this.radPageViewPage9.Controls.Add(this.radPanel16);
+            this.radPageViewPage9.ItemSize = new System.Drawing.SizeF(126F, 30F);
             this.radPageViewPage9.Location = new System.Drawing.Point(136, 12);
             this.radPageViewPage9.Name = "radPageViewPage9";
             this.radPageViewPage9.Size = new System.Drawing.Size(1083, 547);
@@ -5885,7 +5906,7 @@
             this.gridBundle.MasterTemplate.AllowDragToGroup = false;
             this.gridBundle.MasterTemplate.AllowEditRow = false;
             this.gridBundle.MasterTemplate.ShowRowHeaderColumn = false;
-        //    this.gridBundle.MasterTemplate.ViewDefinition = tableViewDefinition279;
+            this.gridBundle.MasterTemplate.ViewDefinition = tableViewDefinition207;
             this.gridBundle.Name = "gridBundle";
             this.gridBundle.ShowItemToolTips = false;
             this.gridBundle.Size = new System.Drawing.Size(1083, 439);
@@ -5942,7 +5963,7 @@
             this.label125.AutoSize = true;
             this.label125.Location = new System.Drawing.Point(647, 55);
             this.label125.Name = "label125";
-            this.label125.Size = new System.Drawing.Size(72, 14);
+            this.label125.Size = new System.Drawing.Size(70, 13);
             this.label125.TabIndex = 95;
             this.label125.Text = "Destination:";
             // 
@@ -5983,7 +6004,7 @@
             this.label113.AutoSize = true;
             this.label113.Location = new System.Drawing.Point(366, 57);
             this.label113.Name = "label113";
-            this.label113.Size = new System.Drawing.Size(62, 14);
+            this.label113.Size = new System.Drawing.Size(59, 13);
             this.label113.TabIndex = 92;
             this.label113.Text = "BCO/BSO:";
             // 
@@ -5993,7 +6014,7 @@
             this.label101.AutoSize = true;
             this.label101.Location = new System.Drawing.Point(525, 57);
             this.label101.Name = "label101";
-            this.label101.Size = new System.Drawing.Size(55, 14);
+            this.label101.Size = new System.Drawing.Size(51, 13);
             this.label101.TabIndex = 89;
             this.label101.Text = "Sack No:";
             // 
@@ -6014,17 +6035,17 @@
             this.label23.AutoSize = true;
             this.label23.Location = new System.Drawing.Point(185, 57);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(48, 14);
+            this.label23.Size = new System.Drawing.Size(46, 13);
             this.label23.TabIndex = 86;
             this.label23.Text = "Branch:";
             // 
             // dropDownBundle_Branch
             // 
             this.dropDownBundle_Branch.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            radListDataItem3.Text = "Branch Corporate Office";
-            radListDataItem4.Text = "Branch Satellite Office";
-            this.dropDownBundle_Branch.Items.Add(radListDataItem3);
-            this.dropDownBundle_Branch.Items.Add(radListDataItem4);
+            radListDataItem5.Text = "Branch Corporate Office";
+            radListDataItem6.Text = "Branch Satellite Office";
+            this.dropDownBundle_Branch.Items.Add(radListDataItem5);
+            this.dropDownBundle_Branch.Items.Add(radListDataItem6);
             this.dropDownBundle_Branch.Location = new System.Drawing.Point(188, 80);
             this.dropDownBundle_Branch.Name = "dropDownBundle_Branch";
             this.dropDownBundle_Branch.Size = new System.Drawing.Size(175, 20);
@@ -6050,7 +6071,7 @@
             this.label24.AutoSize = true;
             this.label24.Location = new System.Drawing.Point(11, 57);
             this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(37, 14);
+            this.label24.Size = new System.Drawing.Size(34, 13);
             this.label24.TabIndex = 84;
             this.label24.Text = "Date:";
             // 
@@ -6088,6 +6109,7 @@
             // 
             this.radPageViewPage10.Controls.Add(this.gridUnbundle);
             this.radPageViewPage10.Controls.Add(this.radPanel17);
+            this.radPageViewPage10.ItemSize = new System.Drawing.SizeF(126F, 30F);
             this.radPageViewPage10.Location = new System.Drawing.Point(136, 12);
             this.radPageViewPage10.Name = "radPageViewPage10";
             this.radPageViewPage10.Size = new System.Drawing.Size(1083, 547);
@@ -6105,7 +6127,7 @@
             this.gridUnbundle.MasterTemplate.AllowDragToGroup = false;
             this.gridUnbundle.MasterTemplate.AllowEditRow = false;
             this.gridUnbundle.MasterTemplate.ShowRowHeaderColumn = false;
-         //   this.gridUnbundle.MasterTemplate.ViewDefinition = tableViewDefinition280;
+            this.gridUnbundle.MasterTemplate.ViewDefinition = tableViewDefinition208;
             this.gridUnbundle.Name = "gridUnbundle";
             this.gridUnbundle.ShowItemToolTips = false;
             this.gridUnbundle.Size = new System.Drawing.Size(1083, 439);
@@ -6149,7 +6171,7 @@
             this.label112.AutoSize = true;
             this.label112.Location = new System.Drawing.Point(353, 55);
             this.label112.Name = "label112";
-            this.label112.Size = new System.Drawing.Size(59, 14);
+            this.label112.Size = new System.Drawing.Size(54, 13);
             this.label112.TabIndex = 91;
             this.label112.Text = "Sack No.:";
             // 
@@ -6178,7 +6200,7 @@
             this.label34.AutoSize = true;
             this.label34.Location = new System.Drawing.Point(191, 57);
             this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(38, 14);
+            this.label34.Size = new System.Drawing.Size(36, 13);
             this.label34.TabIndex = 86;
             this.label34.Text = "BCO :";
             // 
@@ -6209,7 +6231,7 @@
             this.label51.AutoSize = true;
             this.label51.Location = new System.Drawing.Point(12, 57);
             this.label51.Name = "label51";
-            this.label51.Size = new System.Drawing.Size(37, 14);
+            this.label51.Size = new System.Drawing.Size(34, 13);
             this.label51.TabIndex = 84;
             this.label51.Text = "Date:";
             // 
@@ -6239,6 +6261,7 @@
             // 
             this.radPageViewPage11.Controls.Add(this.gridGatewayTransmital);
             this.radPageViewPage11.Controls.Add(this.radPanel18);
+            this.radPageViewPage11.ItemSize = new System.Drawing.SizeF(126F, 30F);
             this.radPageViewPage11.Location = new System.Drawing.Point(136, 12);
             this.radPageViewPage11.Name = "radPageViewPage11";
             this.radPageViewPage11.Size = new System.Drawing.Size(1083, 547);
@@ -6256,7 +6279,7 @@
             this.gridGatewayTransmital.MasterTemplate.AllowDragToGroup = false;
             this.gridGatewayTransmital.MasterTemplate.AllowEditRow = false;
             this.gridGatewayTransmital.MasterTemplate.ShowRowHeaderColumn = false;
-        //    this.gridGatewayTransmital.MasterTemplate.ViewDefinition = tableViewDefinition281;
+            this.gridGatewayTransmital.MasterTemplate.ViewDefinition = tableViewDefinition209;
             this.gridGatewayTransmital.Name = "gridGatewayTransmital";
             this.gridGatewayTransmital.ShowItemToolTips = false;
             this.gridGatewayTransmital.Size = new System.Drawing.Size(1083, 439);
@@ -6313,7 +6336,7 @@
             this.label59.AutoSize = true;
             this.label59.Location = new System.Drawing.Point(350, 57);
             this.label59.Name = "label59";
-            this.label59.Size = new System.Drawing.Size(99, 14);
+            this.label59.Size = new System.Drawing.Size(96, 13);
             this.label59.TabIndex = 92;
             this.label59.Text = "BCO Destination:";
             // 
@@ -6323,7 +6346,7 @@
             this.label58.AutoSize = true;
             this.label58.Location = new System.Drawing.Point(534, 56);
             this.label58.Name = "label58";
-            this.label58.Size = new System.Drawing.Size(42, 14);
+            this.label58.Size = new System.Drawing.Size(39, 13);
             this.label58.TabIndex = 91;
             this.label58.Text = "Batch:";
             // 
@@ -6349,7 +6372,7 @@
             this.label55.AutoSize = true;
             this.label55.Location = new System.Drawing.Point(648, 54);
             this.label55.Name = "label55";
-            this.label55.Size = new System.Drawing.Size(78, 14);
+            this.label55.Size = new System.Drawing.Size(72, 13);
             this.label55.TabIndex = 84;
             this.label55.Text = "Master AWB:";
             // 
@@ -6370,7 +6393,7 @@
             this.label35.AutoSize = true;
             this.label35.Location = new System.Drawing.Point(188, 58);
             this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(59, 14);
+            this.label35.Size = new System.Drawing.Size(54, 13);
             this.label35.TabIndex = 81;
             this.label35.Text = "Gateway:";
             // 
@@ -6401,7 +6424,7 @@
             this.label54.AutoSize = true;
             this.label54.Location = new System.Drawing.Point(9, 58);
             this.label54.Name = "label54";
-            this.label54.Size = new System.Drawing.Size(37, 14);
+            this.label54.Size = new System.Drawing.Size(34, 13);
             this.label54.TabIndex = 79;
             this.label54.Text = "Date:";
             // 
@@ -6431,6 +6454,7 @@
             // 
             this.radPageViewPage12.Controls.Add(this.gridGatewayOutbound);
             this.radPageViewPage12.Controls.Add(this.radPanel19);
+            this.radPageViewPage12.ItemSize = new System.Drawing.SizeF(126F, 30F);
             this.radPageViewPage12.Location = new System.Drawing.Point(136, 12);
             this.radPageViewPage12.Name = "radPageViewPage12";
             this.radPageViewPage12.Size = new System.Drawing.Size(1083, 547);
@@ -6448,7 +6472,7 @@
             this.gridGatewayOutbound.MasterTemplate.AllowDragToGroup = false;
             this.gridGatewayOutbound.MasterTemplate.AllowEditRow = false;
             this.gridGatewayOutbound.MasterTemplate.ShowRowHeaderColumn = false;
-      //      this.gridGatewayOutbound.MasterTemplate.ViewDefinition = tableViewDefinition282;
+            this.gridGatewayOutbound.MasterTemplate.ViewDefinition = tableViewDefinition210;
             this.gridGatewayOutbound.Name = "gridGatewayOutbound";
             this.gridGatewayOutbound.ShowItemToolTips = false;
             this.gridGatewayOutbound.Size = new System.Drawing.Size(1083, 439);
@@ -6505,7 +6529,7 @@
             this.label78.AutoSize = true;
             this.label78.Location = new System.Drawing.Point(511, 57);
             this.label78.Name = "label78";
-            this.label78.Size = new System.Drawing.Size(42, 14);
+            this.label78.Size = new System.Drawing.Size(39, 13);
             this.label78.TabIndex = 95;
             this.label78.Text = "Batch:";
             // 
@@ -6533,7 +6557,7 @@
             this.label79.AutoSize = true;
             this.label79.Location = new System.Drawing.Point(188, 57);
             this.label79.Name = "label79";
-            this.label79.Size = new System.Drawing.Size(34, 14);
+            this.label79.Size = new System.Drawing.Size(33, 13);
             this.label79.TabIndex = 92;
             this.label79.Text = "BCO:";
             // 
@@ -6543,7 +6567,7 @@
             this.label60.AutoSize = true;
             this.label60.Location = new System.Drawing.Point(349, 57);
             this.label60.Name = "label60";
-            this.label60.Size = new System.Drawing.Size(59, 14);
+            this.label60.Size = new System.Drawing.Size(54, 13);
             this.label60.TabIndex = 85;
             this.label60.Text = "Gateway:";
             // 
@@ -6575,7 +6599,7 @@
             this.label61.AutoSize = true;
             this.label61.Location = new System.Drawing.Point(11, 57);
             this.label61.Name = "label61";
-            this.label61.Size = new System.Drawing.Size(37, 14);
+            this.label61.Size = new System.Drawing.Size(34, 13);
             this.label61.TabIndex = 83;
             this.label61.Text = "Date:";
             // 
@@ -6605,6 +6629,7 @@
             // 
             this.radPageViewPage13.Controls.Add(this.gridGatewayInbound);
             this.radPageViewPage13.Controls.Add(this.radPanel20);
+            this.radPageViewPage13.ItemSize = new System.Drawing.SizeF(126F, 30F);
             this.radPageViewPage13.Location = new System.Drawing.Point(136, 12);
             this.radPageViewPage13.Name = "radPageViewPage13";
             this.radPageViewPage13.Size = new System.Drawing.Size(1083, 547);
@@ -6622,7 +6647,7 @@
             this.gridGatewayInbound.MasterTemplate.AllowDragToGroup = false;
             this.gridGatewayInbound.MasterTemplate.AllowEditRow = false;
             this.gridGatewayInbound.MasterTemplate.ShowRowHeaderColumn = false;
-      //      this.gridGatewayInbound.MasterTemplate.ViewDefinition = tableViewDefinition283;
+            this.gridGatewayInbound.MasterTemplate.ViewDefinition = tableViewDefinition211;
             this.gridGatewayInbound.Name = "gridGatewayInbound";
             this.gridGatewayInbound.ShowItemToolTips = false;
             this.gridGatewayInbound.Size = new System.Drawing.Size(1083, 439);
@@ -6677,7 +6702,7 @@
             this.label93.AutoSize = true;
             this.label93.Location = new System.Drawing.Point(627, 55);
             this.label93.Name = "label93";
-            this.label93.Size = new System.Drawing.Size(78, 14);
+            this.label93.Size = new System.Drawing.Size(72, 13);
             this.label93.TabIndex = 105;
             this.label93.Text = "Master AWB:";
             // 
@@ -6707,7 +6732,7 @@
             this.label92.AutoSize = true;
             this.label92.Location = new System.Drawing.Point(473, 55);
             this.label92.Name = "label92";
-            this.label92.Size = new System.Drawing.Size(104, 14);
+            this.label92.Size = new System.Drawing.Size(93, 13);
             this.label92.TabIndex = 102;
             this.label92.Text = "Commodity Type:";
             // 
@@ -6717,7 +6742,7 @@
             this.label89.AutoSize = true;
             this.label89.Location = new System.Drawing.Point(313, 55);
             this.label89.Name = "label89";
-            this.label89.Size = new System.Drawing.Size(66, 14);
+            this.label89.Size = new System.Drawing.Size(65, 13);
             this.label89.TabIndex = 101;
             this.label89.Text = "Origin City:";
             // 
@@ -6736,7 +6761,7 @@
             this.label85.AutoSize = true;
             this.label85.Location = new System.Drawing.Point(187, 55);
             this.label85.Name = "label85";
-            this.label85.Size = new System.Drawing.Size(59, 14);
+            this.label85.Size = new System.Drawing.Size(54, 13);
             this.label85.TabIndex = 97;
             this.label85.Text = "Gateway:";
             // 
@@ -6767,7 +6792,7 @@
             this.label88.AutoSize = true;
             this.label88.Location = new System.Drawing.Point(8, 55);
             this.label88.Name = "label88";
-            this.label88.Size = new System.Drawing.Size(37, 14);
+            this.label88.Size = new System.Drawing.Size(34, 13);
             this.label88.TabIndex = 95;
             this.label88.Text = "Date:";
             // 
@@ -6797,6 +6822,7 @@
             // 
             this.radPageViewPage14.Controls.Add(this.gridCargoTransfer);
             this.radPageViewPage14.Controls.Add(this.radPanel21);
+            this.radPageViewPage14.ItemSize = new System.Drawing.SizeF(126F, 30F);
             this.radPageViewPage14.Location = new System.Drawing.Point(136, 12);
             this.radPageViewPage14.Name = "radPageViewPage14";
             this.radPageViewPage14.Size = new System.Drawing.Size(1083, 547);
@@ -6814,7 +6840,7 @@
             this.gridCargoTransfer.MasterTemplate.AllowDragToGroup = false;
             this.gridCargoTransfer.MasterTemplate.AllowEditRow = false;
             this.gridCargoTransfer.MasterTemplate.ShowRowHeaderColumn = false;
-      //      this.gridCargoTransfer.MasterTemplate.ViewDefinition = tableViewDefinition284;
+            this.gridCargoTransfer.MasterTemplate.ViewDefinition = tableViewDefinition212;
             this.gridCargoTransfer.Name = "gridCargoTransfer";
             this.gridCargoTransfer.ShowItemToolTips = false;
             this.gridCargoTransfer.Size = new System.Drawing.Size(1083, 439);
@@ -6860,7 +6886,7 @@
             this.label120.AutoSize = true;
             this.label120.Location = new System.Drawing.Point(335, 57);
             this.label120.Name = "label120";
-            this.label120.Size = new System.Drawing.Size(55, 14);
+            this.label120.Size = new System.Drawing.Size(53, 13);
             this.label120.TabIndex = 90;
             this.label120.Text = "BCO/City";
             // 
@@ -6870,7 +6896,7 @@
             this.label84.AutoSize = true;
             this.label84.Location = new System.Drawing.Point(484, 57);
             this.label84.Name = "label84";
-            this.label84.Size = new System.Drawing.Size(72, 14);
+            this.label84.Size = new System.Drawing.Size(70, 13);
             this.label84.TabIndex = 89;
             this.label84.Text = "Destination:";
             // 
@@ -6899,7 +6925,7 @@
             this.label44.AutoSize = true;
             this.label44.Location = new System.Drawing.Point(184, 57);
             this.label44.Name = "label44";
-            this.label44.Size = new System.Drawing.Size(42, 14);
+            this.label44.Size = new System.Drawing.Size(43, 13);
             this.label44.TabIndex = 86;
             this.label44.Text = "Origin:";
             // 
@@ -6931,7 +6957,7 @@
             this.label50.AutoSize = true;
             this.label50.Location = new System.Drawing.Point(10, 57);
             this.label50.Name = "label50";
-            this.label50.Size = new System.Drawing.Size(37, 14);
+            this.label50.Size = new System.Drawing.Size(34, 13);
             this.label50.TabIndex = 84;
             this.label50.Text = "Date:";
             // 
@@ -6969,6 +6995,7 @@
             // 
             this.radPageViewPage15.Controls.Add(this.gridSegregation);
             this.radPageViewPage15.Controls.Add(this.radPanel22);
+            this.radPageViewPage15.ItemSize = new System.Drawing.SizeF(126F, 30F);
             this.radPageViewPage15.Location = new System.Drawing.Point(136, 12);
             this.radPageViewPage15.Name = "radPageViewPage15";
             this.radPageViewPage15.Size = new System.Drawing.Size(1083, 547);
@@ -6986,7 +7013,7 @@
             this.gridSegregation.MasterTemplate.AllowDragToGroup = false;
             this.gridSegregation.MasterTemplate.AllowEditRow = false;
             this.gridSegregation.MasterTemplate.ShowRowHeaderColumn = false;
-       //     this.gridSegregation.MasterTemplate.ViewDefinition = tableViewDefinition285;
+            this.gridSegregation.MasterTemplate.ViewDefinition = tableViewDefinition213;
             this.gridSegregation.Name = "gridSegregation";
             this.gridSegregation.ShowItemToolTips = false;
             this.gridSegregation.Size = new System.Drawing.Size(1083, 439);
@@ -7034,7 +7061,7 @@
             this.label83.AutoSize = true;
             this.label83.Location = new System.Drawing.Point(509, 56);
             this.label83.Name = "label83";
-            this.label83.Size = new System.Drawing.Size(51, 14);
+            this.label83.Size = new System.Drawing.Size(45, 13);
             this.label83.TabIndex = 111;
             this.label83.Text = "Plate #:";
             // 
@@ -7065,7 +7092,7 @@
             this.label36.AutoSize = true;
             this.label36.Location = new System.Drawing.Point(606, 56);
             this.label36.Name = "label36";
-            this.label36.Size = new System.Drawing.Size(42, 14);
+            this.label36.Size = new System.Drawing.Size(39, 13);
             this.label36.TabIndex = 108;
             this.label36.Text = "Batch:";
             // 
@@ -7093,7 +7120,7 @@
             this.label56.AutoSize = true;
             this.label56.Location = new System.Drawing.Point(186, 56);
             this.label56.Name = "label56";
-            this.label56.Size = new System.Drawing.Size(34, 14);
+            this.label56.Size = new System.Drawing.Size(33, 13);
             this.label56.TabIndex = 105;
             this.label56.Text = "BCO:";
             // 
@@ -7103,7 +7130,7 @@
             this.label57.AutoSize = true;
             this.label57.Location = new System.Drawing.Point(347, 56);
             this.label57.Name = "label57";
-            this.label57.Size = new System.Drawing.Size(38, 14);
+            this.label57.Size = new System.Drawing.Size(37, 13);
             this.label57.TabIndex = 104;
             this.label57.Text = "Driver";
             // 
@@ -7135,7 +7162,7 @@
             this.label80.AutoSize = true;
             this.label80.Location = new System.Drawing.Point(9, 56);
             this.label80.Name = "label80";
-            this.label80.Size = new System.Drawing.Size(37, 14);
+            this.label80.Size = new System.Drawing.Size(34, 13);
             this.label80.TabIndex = 102;
             this.label80.Text = "Date:";
             // 
@@ -7165,6 +7192,7 @@
             // 
             this.radPageViewPage16.Controls.Add(this.gridDailyTrip);
             this.radPageViewPage16.Controls.Add(this.radPanel23);
+            this.radPageViewPage16.ItemSize = new System.Drawing.SizeF(126F, 30F);
             this.radPageViewPage16.Location = new System.Drawing.Point(136, 12);
             this.radPageViewPage16.Name = "radPageViewPage16";
             this.radPageViewPage16.Size = new System.Drawing.Size(1083, 547);
@@ -7182,7 +7210,7 @@
             this.gridDailyTrip.MasterTemplate.AllowDragToGroup = false;
             this.gridDailyTrip.MasterTemplate.AllowEditRow = false;
             this.gridDailyTrip.MasterTemplate.ShowRowHeaderColumn = false;
-        //    this.gridDailyTrip.MasterTemplate.ViewDefinition = tableViewDefinition286;
+            this.gridDailyTrip.MasterTemplate.ViewDefinition = tableViewDefinition214;
             this.gridDailyTrip.Name = "gridDailyTrip";
             this.gridDailyTrip.ShowItemToolTips = false;
             this.gridDailyTrip.Size = new System.Drawing.Size(1083, 439);
@@ -7239,7 +7267,7 @@
             this.label124.AutoSize = true;
             this.label124.Location = new System.Drawing.Point(668, 56);
             this.label124.Name = "label124";
-            this.label124.Size = new System.Drawing.Size(93, 14);
+            this.label124.Size = new System.Drawing.Size(86, 13);
             this.label124.TabIndex = 94;
             this.label124.Text = "Payment Mode:";
             // 
@@ -7269,7 +7297,7 @@
             this.label108.AutoSize = true;
             this.label108.Location = new System.Drawing.Point(509, 56);
             this.label108.Name = "label108";
-            this.label108.Size = new System.Drawing.Size(42, 14);
+            this.label108.Size = new System.Drawing.Size(40, 13);
             this.label108.TabIndex = 91;
             this.label108.Text = "Driver:";
             // 
@@ -7291,7 +7319,7 @@
             this.label109.AutoSize = true;
             this.label109.Location = new System.Drawing.Point(8, 56);
             this.label109.Name = "label109";
-            this.label109.Size = new System.Drawing.Size(37, 14);
+            this.label109.Size = new System.Drawing.Size(34, 13);
             this.label109.TabIndex = 90;
             this.label109.Text = "Date:";
             // 
@@ -7310,7 +7338,7 @@
             this.label122.AutoSize = true;
             this.label122.Location = new System.Drawing.Point(188, 56);
             this.label122.Name = "label122";
-            this.label122.Size = new System.Drawing.Size(38, 14);
+            this.label122.Size = new System.Drawing.Size(36, 13);
             this.label122.TabIndex = 87;
             this.label122.Text = "BCO :";
             // 
@@ -7331,7 +7359,7 @@
             this.label123.AutoSize = true;
             this.label123.Location = new System.Drawing.Point(350, 56);
             this.label123.Name = "label123";
-            this.label123.Size = new System.Drawing.Size(36, 14);
+            this.label123.Size = new System.Drawing.Size(33, 13);
             this.label123.TabIndex = 85;
             this.label123.Text = "Area:";
             // 
@@ -7361,6 +7389,7 @@
             // 
             this.radPageViewPage17.Controls.Add(this.gridHoldCargo);
             this.radPageViewPage17.Controls.Add(this.radPanel24);
+            this.radPageViewPage17.ItemSize = new System.Drawing.SizeF(126F, 30F);
             this.radPageViewPage17.Location = new System.Drawing.Point(136, 12);
             this.radPageViewPage17.Name = "radPageViewPage17";
             this.radPageViewPage17.Size = new System.Drawing.Size(1083, 547);
@@ -7378,7 +7407,7 @@
             this.gridHoldCargo.MasterTemplate.AllowDragToGroup = false;
             this.gridHoldCargo.MasterTemplate.AllowEditRow = false;
             this.gridHoldCargo.MasterTemplate.ShowRowHeaderColumn = false;
-          //  this.gridHoldCargo.MasterTemplate.ViewDefinition = tableViewDefinition287;
+            this.gridHoldCargo.MasterTemplate.ViewDefinition = tableViewDefinition215;
             this.gridHoldCargo.Name = "gridHoldCargo";
             this.gridHoldCargo.ShowItemToolTips = false;
             this.gridHoldCargo.Size = new System.Drawing.Size(1083, 439);
@@ -7426,7 +7455,7 @@
             this.label104.AutoSize = true;
             this.label104.Location = new System.Drawing.Point(524, 55);
             this.label104.Name = "label104";
-            this.label104.Size = new System.Drawing.Size(62, 14);
+            this.label104.Size = new System.Drawing.Size(59, 13);
             this.label104.TabIndex = 89;
             this.label104.Text = "BCO/BSO:";
             // 
@@ -7436,7 +7465,7 @@
             this.label43.AutoSize = true;
             this.label43.Location = new System.Drawing.Point(184, 80);
             this.label43.Name = "label43";
-            this.label43.Size = new System.Drawing.Size(11, 14);
+            this.label43.Size = new System.Drawing.Size(11, 13);
             this.label43.TabIndex = 88;
             this.label43.Text = "-";
             // 
@@ -7469,13 +7498,17 @@
             this.label39.AutoSize = true;
             this.label39.Location = new System.Drawing.Point(373, 55);
             this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(48, 14);
+            this.label39.Size = new System.Drawing.Size(46, 13);
             this.label39.TabIndex = 86;
             this.label39.Text = "Branch:";
             // 
             // dropDownHoldCargo_Branch
             // 
             this.dropDownHoldCargo_Branch.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            radListDataItem7.Text = "Branch Corporate Office";
+            radListDataItem8.Text = "Branch Satellite Office";
+            this.dropDownHoldCargo_Branch.Items.Add(radListDataItem7);
+            this.dropDownHoldCargo_Branch.Items.Add(radListDataItem8);
             this.dropDownHoldCargo_Branch.Location = new System.Drawing.Point(376, 76);
             this.dropDownHoldCargo_Branch.Name = "dropDownHoldCargo_Branch";
             this.dropDownHoldCargo_Branch.Size = new System.Drawing.Size(145, 20);
@@ -7501,7 +7534,7 @@
             this.label40.AutoSize = true;
             this.label40.Location = new System.Drawing.Point(11, 57);
             this.label40.Name = "label40";
-            this.label40.Size = new System.Drawing.Size(37, 14);
+            this.label40.Size = new System.Drawing.Size(34, 13);
             this.label40.TabIndex = 84;
             this.label40.Text = "Date:";
             // 
@@ -7527,7 +7560,7 @@
             this.label41.AutoSize = true;
             this.label41.Location = new System.Drawing.Point(705, 55);
             this.label41.Name = "label41";
-            this.label41.Size = new System.Drawing.Size(46, 14);
+            this.label41.Size = new System.Drawing.Size(42, 13);
             this.label41.TabIndex = 80;
             this.label41.Text = "Status:";
             // 
@@ -7557,6 +7590,7 @@
             // 
             this.radPageViewPage18.Controls.Add(this.gridDeliveryStatus);
             this.radPageViewPage18.Controls.Add(this.radPanel25);
+            this.radPageViewPage18.ItemSize = new System.Drawing.SizeF(126F, 30F);
             this.radPageViewPage18.Location = new System.Drawing.Point(136, 12);
             this.radPageViewPage18.Name = "radPageViewPage18";
             this.radPageViewPage18.Size = new System.Drawing.Size(1083, 547);
@@ -7574,7 +7608,7 @@
             this.gridDeliveryStatus.MasterTemplate.AllowDragToGroup = false;
             this.gridDeliveryStatus.MasterTemplate.AllowEditRow = false;
             this.gridDeliveryStatus.MasterTemplate.ShowRowHeaderColumn = false;
-         //   this.gridDeliveryStatus.MasterTemplate.ViewDefinition = tableViewDefinition288;
+            this.gridDeliveryStatus.MasterTemplate.ViewDefinition = tableViewDefinition216;
             this.gridDeliveryStatus.Name = "gridDeliveryStatus";
             this.gridDeliveryStatus.ShowItemToolTips = false;
             this.gridDeliveryStatus.Size = new System.Drawing.Size(1083, 439);
@@ -7640,7 +7674,7 @@
             this.label121.AutoSize = true;
             this.label121.Location = new System.Drawing.Point(511, 58);
             this.label121.Name = "label121";
-            this.label121.Size = new System.Drawing.Size(38, 14);
+            this.label121.Size = new System.Drawing.Size(37, 13);
             this.label121.TabIndex = 82;
             this.label121.Text = "Driver";
             // 
@@ -7662,7 +7696,7 @@
             this.label117.AutoSize = true;
             this.label117.Location = new System.Drawing.Point(10, 58);
             this.label117.Name = "label117";
-            this.label117.Size = new System.Drawing.Size(37, 14);
+            this.label117.Size = new System.Drawing.Size(34, 13);
             this.label117.TabIndex = 81;
             this.label117.Text = "Date:";
             // 
@@ -7681,7 +7715,7 @@
             this.label105.AutoSize = true;
             this.label105.Location = new System.Drawing.Point(190, 58);
             this.label105.Name = "label105";
-            this.label105.Size = new System.Drawing.Size(38, 14);
+            this.label105.Size = new System.Drawing.Size(36, 13);
             this.label105.TabIndex = 78;
             this.label105.Text = "BCO :";
             // 
@@ -7702,7 +7736,7 @@
             this.label116.AutoSize = true;
             this.label116.Location = new System.Drawing.Point(352, 58);
             this.label116.Name = "label116";
-            this.label116.Size = new System.Drawing.Size(36, 14);
+            this.label116.Size = new System.Drawing.Size(33, 13);
             this.label116.TabIndex = 76;
             this.label116.Text = "Area:";
             // 
@@ -7728,26 +7762,9 @@
             this.label119.TabIndex = 62;
             this.label119.Text = "Pickup Cargo Manifest";
             // 
-            // chk_ReceivedAll
+            // saveFileDialog1
             // 
-            this.chk_ReceivedAll.Location = new System.Drawing.Point(810, 35);
-            this.chk_ReceivedAll.Name = "chk_ReceivedAll";
-            this.chk_ReceivedAll.Size = new System.Drawing.Size(81, 18);
-            this.chk_ReceivedAll.TabIndex = 65;
-            this.chk_ReceivedAll.Text = "Received All";
-            this.chk_ReceivedAll.CheckStateChanged += new System.EventHandler(this.chk_ReceivedAll_CheckStateChanged);
-            // 
-            // cmb_PaymentRemarks
-            // 
-            radListDataItem5.Text = "Full";
-            radListDataItem6.Text = "Partial";
-            this.cmb_PaymentRemarks.Items.Add(radListDataItem5);
-            this.cmb_PaymentRemarks.Items.Add(radListDataItem6);
-            this.cmb_PaymentRemarks.Location = new System.Drawing.Point(86, 341);
-            this.cmb_PaymentRemarks.Name = "cmb_PaymentRemarks";
-            this.cmb_PaymentRemarks.Size = new System.Drawing.Size(161, 20);
-            this.cmb_PaymentRemarks.TabIndex = 21;
-            this.cmb_PaymentRemarks.ThemeName = "Office2010Black";
+            this.saveFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.saveFileDialog1_FileOk);
             // 
             // Main
             // 
@@ -7939,7 +7956,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.radLabel82)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel83)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel84)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chkNonVatable)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel85)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkPackaging)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkDraining)).EndInit();
@@ -7948,6 +7964,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.radLabel86)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTotalEvm)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTotalWeightCharge)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkNonVatable)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radGroupBox1)).EndInit();
             this.radGroupBox1.ResumeLayout(false);
             this.tableLayoutPanel10.ResumeLayout(false);
@@ -8004,8 +8021,8 @@
             this.radGroupBox2.ResumeLayout(false);
             this.radGroupBox2.PerformLayout();
             this.tableLayoutPanel11.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.btnAccept)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnCancel)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnAccept)).EndInit();
             this.tableLayoutPanel9.ResumeLayout(false);
             this.tableLayoutPanel9.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel27)).EndInit();
@@ -8035,6 +8052,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtAmountPaid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtAmountDue)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel30)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cmb_PaymentRemarks)).EndInit();
             this.Manifest.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridManifest.MasterTemplate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridManifest)).EndInit();
@@ -8076,7 +8094,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dateCollectionDate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel65)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel70)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnReceivedAll)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel68)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel69)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTotalAmntCorpAcctConsignee)).EndInit();
@@ -8091,6 +8108,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.btnSearch)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lstRevenueUnitType)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel66)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chk_ReceivedAll)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnReceivedAll)).EndInit();
             this.radPageViewPage6.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pageViewTracking)).EndInit();
             this.pageViewTracking.ResumeLayout(false);
@@ -8247,8 +8266,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dateTimeDeliveryStatus_Date)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dropDownDeliveryStatus_Area)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dropDownDeliveryStatus_BCO)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chk_ReceivedAll)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cmb_PaymentRemarks)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
 
@@ -8790,5 +8807,6 @@
         private Telerik.WinControls.UI.RadLabel radLabel66;
         private Telerik.WinControls.UI.RadCheckBox chk_ReceivedAll;
         private Telerik.WinControls.UI.RadDropDownList cmb_PaymentRemarks;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
     }
 }
