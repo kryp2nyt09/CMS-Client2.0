@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using CMS2.BusinessLogic.Interfaces;
-using CMS2.Common;
 using CMS2.DataAccess;
 using CMS2.DataAccess.Interfaces;
 using CMS2.Entities;
@@ -15,8 +14,6 @@ namespace CMS2.BusinessLogic
         private ICmsUoW _unitOfWork = null;
         private ICmsRepository<TEntity> _entityRepository = null;
         public string LogPath = AppDomain.CurrentDomain.BaseDirectory + "Logs\\";
-        public Logs logs = new Logs();
-        
 
         public BaseAPCargoBL()
         {

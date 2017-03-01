@@ -12,7 +12,7 @@ namespace CMS2.Client.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "14.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "12.0.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -61,7 +61,7 @@ namespace CMS2.Client.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("cmsuser")]
+        [global::System.Configuration.DefaultSettingValueAttribute("sa")]
         public string LocalDbUsername {
             get {
                 return ((string)(this["LocalDbUsername"]));
@@ -73,7 +73,7 @@ namespace CMS2.Client.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("P9ssW0rd")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Ap123456#")]
         public string LocalDbPassword {
             get {
                 return ((string)(this["LocalDbPassword"]));
@@ -85,7 +85,7 @@ namespace CMS2.Client.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("192.168.0.58")]
+        [global::System.Configuration.DefaultSettingValueAttribute("192.168.5.3")]
         public string LocalDbServer {
             get {
                 return ((string)(this["LocalDbServer"]));
@@ -97,7 +97,7 @@ namespace CMS2.Client.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("cms2_Beta1")]
+        [global::System.Configuration.DefaultSettingValueAttribute("cms2_Beta3")]
         public string CentralDbName {
             get {
                 return ((string)(this["CentralDbName"]));

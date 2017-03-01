@@ -54,7 +54,7 @@ namespace CMS2.Entities
         #endregion
 
         [NotMapped]
-        public string LastLogInDateString { get { return LastLogInDate?.ToString("MMM dd, yyyy HH:mm"); } }
+        public string LastLogInDateString { get { return LastLogInDate.ToString(); } }
         [NotMapped]
         public string LastPasswordChangeString { get { return LastPasswordChange.ToString("MMM dd, yyyy HH:mm"); } }
         

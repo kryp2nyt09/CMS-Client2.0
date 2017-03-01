@@ -7,6 +7,7 @@ using CMS2.Common.Enums;
 using CMS2.DataAccess.Interfaces;
 using CMS2.Entities;
 using CMS2.Entities.Models;
+using CMS2.Common;
 
 namespace CMS2.BusinessLogic
 {
@@ -334,7 +335,7 @@ namespace CMS2.BusinessLogic
 
         public ShipmentModel ComputeCharges(ShipmentModel model)
         {
-            logs.AppLogs(LogPath, "Shipment BL - ComputeCharges", model.ShipmentId.ToString());
+            Logs.AppLogs(LogPath, "Shipment BL - ComputeCharges", model.ShipmentId.ToString());
 
             #region variables
             decimal freightCollectCharge = 0;
@@ -530,7 +531,7 @@ namespace CMS2.BusinessLogic
             model.ShipmentTotal = (model.ShipmentSubTotal + model.ShipmentVatAmount);
             #endregion
 
-            logs.AppLogs(LogPath, "Shipment BL - ComputeCharges - Done");
+            Logs.AppLogs(LogPath, "Shipment BL - ComputeCharges - Done");
             return model;
         }
 
@@ -777,7 +778,7 @@ namespace CMS2.BusinessLogic
 
         public List<ShipmentModel> ComputeCharges(List<ShipmentModel> models)
         {
-            logs.AppLogs(LogPath, "Shipment BL - ComputeCharges", "Shipment count: " + models.Count.ToString());
+            Logs.AppLogs(LogPath, "Shipment BL - ComputeCharges", "Shipment count: " + models.Count.ToString());
             List<ShipmentModel> _models = new List<ShipmentModel>();
             foreach (var item in models)
             {
@@ -915,13 +916,13 @@ namespace CMS2.BusinessLogic
         // The following methods as SOA specific
         public ShipmentModel ComputeBalances(ShipmentModel model, DateTime? dueDate)
         {
-            logs.AppLogs(LogPath, "Shipment BL - ComputeBalances");
+            Logs.AppLogs(LogPath, "Shipment BL - ComputeBalances");
             model.CurrentBalance = model.ShipmentTotal;
             model.PreviousAmountDue = model.CurrentBalance;
             if (model.StatementOfAccount == null)
             {
                 #region Shipment No SOA
-                logs.AppLogs(LogPath, "Shipment BL - ComputeBalances - SOA is null");
+                Logs.AppLogs(LogPath, "Shipment BL - ComputeBalances - SOA is null");
                 try
                 {
                     if (model.Payments != null && model.Payments.Count > 0)
@@ -936,14 +937,14 @@ namespace CMS2.BusinessLogic
                 }
                 catch (Exception ex)
                 {
-                    logs.ErrorLogs(LogPath, "Shipment BL - ComputeBalances - SOA is null", ex.Message);
+                    Logs.ErrorLogs(LogPath, "Shipment BL - ComputeBalances - SOA is null", ex.Message);
                 }
                 #endregion
             }
             else
             {
                 #region Shipment with SOA
-                logs.AppLogs(LogPath, "Shipment BL - ComputeBalances - SOA is not null");
+                Logs.AppLogs(LogPath, "Shipment BL - ComputeBalances - SOA is not null");
                 try
                 {
                     var soa = model.StatementOfAccount;
@@ -1043,7 +1044,7 @@ namespace CMS2.BusinessLogic
                 }
                 catch (Exception ex)
                 {
-                    logs.ErrorLogs(LogPath, "Shipment BL - ComputeBalances - SOA is not null", ex.Message);
+                    Logs.ErrorLogs(LogPath, "Shipment BL - ComputeBalances - SOA is not null", ex.Message);
                 }
                 #endregion
             }
@@ -1054,7 +1055,7 @@ namespace CMS2.BusinessLogic
 
         public List<ShipmentModel> ComputeBalances(List<ShipmentModel> models, DateTime? dueDate)
         {
-            logs.AppLogs(LogPath, "Shipment BL - ComputeBalances", "Shipment count: " + models.Count.ToString());
+            Logs.AppLogs(LogPath, "Shipment BL - ComputeBalances", "Shipment count: " + models.Count.ToString());
             List<ShipmentModel> computedShipments = new List<ShipmentModel>();
             foreach (var item in models)
             {
@@ -1070,7 +1071,7 @@ namespace CMS2.BusinessLogic
 
         public List<ShipmentModel> GetByCompanyAccountNoByPeriod(string companyAccountNo, DateTime dateFrom, DateTime dateUntil)
         {
-            logs.AppLogs(LogPath, "Shipment BL - GetByCompanyAccountNoByPeriod");
+            Logs.AppLogs(LogPath, "Shipment BL - GetByCompanyAccountNoByPeriod");
             var clients = clientService.FilterActiveBy(x => x.Company.AccountNo.Equals(companyAccountNo) || x.Company.MotherCompany.AccountNo.Equals(companyAccountNo));
             //var shipments = GetByPeriod(dateFrom, dateUntil);
             var entities = (from shp in FilterActiveBy(x => x.DateAccepted > dateFrom && x.DateAccepted < dateUntil)
@@ -1080,11 +1081,11 @@ namespace CMS2.BusinessLogic
 
             if (entities != null)
             {
-                logs.AppLogs(LogPath, "Shipment BL - GetByCompanyAccountNoByPeriod", "return: _shipments- " + entities.Count.ToString());
+                Logs.AppLogs(LogPath, "Shipment BL - GetByCompanyAccountNoByPeriod", "return: _shipments- " + entities.Count.ToString());
                 var models = ComputeCharges(EntitiesToModels(entities));
                 return models;
             }
-            logs.AppLogs(LogPath, "Shipment BL - GetByCompanyAccountNoByPeriod", "return: _shipments- null");
+            Logs.AppLogs(LogPath, "Shipment BL - GetByCompanyAccountNoByPeriod", "return: _shipments- null");
             return null;
         }
 
@@ -1115,7 +1116,7 @@ namespace CMS2.BusinessLogic
 
         public List<ShipmentModel> GetSoaShipmentsByCompanyId(Guid companyId)
         {
-            logs.AppLogs(LogPath, "Shipment BL - GetUnpaidShipmentsByCompanyId", companyId.ToString());
+            Logs.AppLogs(LogPath, "Shipment BL - GetUnpaidShipmentsByCompanyId", companyId.ToString());
             List<ShipmentModel> models = new List<ShipmentModel>();
             var clients = companyService.GetById(companyId).Clients;
             foreach (var item in clients)
@@ -1127,7 +1128,7 @@ namespace CMS2.BusinessLogic
 
         public List<ShipmentModel> GetSoaShipmentsByClientId(Guid clientId)
         {
-            logs.AppLogs(LogPath, "Shipment BL - GetUnpaidShipmentsByClientId", clientId.ToString());
+            Logs.AppLogs(LogPath, "Shipment BL - GetUnpaidShipmentsByClientId", clientId.ToString());
             var unpaidShipments = FilterActiveBy(x => ((x.ConsigneeId == clientId && x.PaymentMode.PaymentModeCode.Equals("CAC")) || (x.ShipperId == clientId && x.PaymentMode.PaymentModeCode.Equals("CAS")))).ToList().Distinct().OrderByDescending(x => x.DateAccepted).ToList();
 
             List<ShipmentModel> models = new List<ShipmentModel>();

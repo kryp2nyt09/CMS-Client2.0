@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using CMS2.BusinessLogic.ReportModels;
 using CMS2.BusinessLogic.Helpers;
+using CMS2.Common;
 using CMS2.Common.Enums;
 using CMS2.DataAccess.Interfaces;
 using CMS2.Entities.Models;
@@ -197,7 +198,7 @@ namespace CMS2.BusinessLogic
         /// 
         public StatementOfAccountModel ComputeSoa(StatementOfAccountModel model)
         {
-            logs.AppLogs(LogPath, "SOA BL - ComputeSoa", model.StatementOfAccountNo);
+            Logs.AppLogs(LogPath, "SOA BL - ComputeSoa", model.StatementOfAccountNo);
             model.CurrentShipments = shipmentService.EntitiesToModels(shipmentService.FilterActiveBy(x => x.StatementOfAccountId == model.StatementOfAccountId)).OrderByDescending(x => x.DateAccepted).ToList();
             model.PreviousShipments = shipmentService.GetSoaShipmentsByCompanyId(model.CompanyId).Where(x => x.DateAccepted < model.StatementOfAccountPeriodFrom && x.StatementOfAccountId != null).OrderByDescending(x => x.DateAccepted).ToList();
 
@@ -213,7 +214,7 @@ namespace CMS2.BusinessLogic
             }
 
             List<ShipmentModel> shipments = new List<ShipmentModel>();
-            logs.AppLogs(LogPath, "SOA BL - ComputeSoa - CurrentShipments");
+            Logs.AppLogs(LogPath, "SOA BL - ComputeSoa - CurrentShipments");
             if (model.CurrentShipments != null && model.CurrentShipments.Count > 0)
             {
                 foreach (var item in model.CurrentShipments)
@@ -233,7 +234,7 @@ namespace CMS2.BusinessLogic
             }
             model.CurrentShipments = shipments;
 
-            logs.AppLogs(LogPath, "SOA BL - ComputeSoa - PreviousShipments");
+            Logs.AppLogs(LogPath, "SOA BL - ComputeSoa - PreviousShipments");
             shipments = new List<ShipmentModel>();
 
             //string soaNo = model.StatementOfAccountNo; // ++++ for debugging
@@ -260,7 +261,7 @@ namespace CMS2.BusinessLogic
             model.TotalBalancesFromPrevious = model.TotalPreviousAmountDue - model.TotalPreviousPayments + model.TotalPreviousAdjustments;
             model.TotalSoaAmount = model.TotalCurrentCharges + model.TotalBalancesFromPrevious;
 
-            logs.AppLogs(LogPath, "SOA BL - ComputeSoa - Done");
+            Logs.AppLogs(LogPath, "SOA BL - ComputeSoa - Done");
             return model;
         }
 
@@ -316,7 +317,7 @@ namespace CMS2.BusinessLogic
         /// <returns></returns>
         public StatementOfAccount CreateNewSoa(string companyAccountNo, DateTime periodStart, DateTime periodEnd, Guid userId)
         {
-            logs.AppLogs(LogPath, "SOA BL - Create SOA", companyAccountNo);
+            Logs.AppLogs(LogPath, "SOA BL - Create SOA", companyAccountNo);
             Company companyModel = companyService.GetByAccountNo(companyAccountNo);
             if (companyModel == null)
             {
@@ -361,11 +362,11 @@ namespace CMS2.BusinessLogic
             try
             {
                 Add(entity);
-                logs.AppLogs(LogPath, "SOA BL - Create SOA", "Successfull");
+                Logs.AppLogs(LogPath, "SOA BL - Create SOA", "Successfull");
             }
             catch (Exception ex)
             {
-                logs.ErrorLogs(LogPath, "SOA BL - Create SOA", ex.Message);
+                Logs.ErrorLogs(LogPath, "SOA BL - Create SOA", ex.Message);
             }
 
 
@@ -390,7 +391,7 @@ namespace CMS2.BusinessLogic
         /// <param name="entity"></param>
         public StatementOfAccountModel Finalize(StatementOfAccountModel model)
         {
-            logs.AppLogs(LogPath, "SOA BL - Finalize");
+            Logs.AppLogs(LogPath, "SOA BL - Finalize");
             StatementOfAccount entity = base.GetById(model.StatementOfAccountId);
             if (entity != null && string.IsNullOrEmpty(entity.StatementOfAccountNo))
             {
@@ -403,11 +404,11 @@ namespace CMS2.BusinessLogic
                     //model.StatementOfAccountNo = entity.StatementOfAccountNo;
                     model.StatementOfAccountNoBarcode = BarcodeGenerator.GetBarcode(model.StatementOfAccountNo);
                     model.ModifiedDate = entity.ModifiedDate;
-                    logs.AppLogs(LogPath, "SOA BL - Finalize", "Successfull");
+                    Logs.AppLogs(LogPath, "SOA BL - Finalize", "Successfull");
                 }
                 catch (Exception ex)
                 {
-                    logs.ErrorLogs(LogPath, "SOA BL - Finalize", ex.Message);
+                    Logs.ErrorLogs(LogPath, "SOA BL - Finalize", ex.Message);
                 }
 
             }
@@ -416,7 +417,7 @@ namespace CMS2.BusinessLogic
 
         public void CreateSavePdfFile(StatementOfAccountModel model)
         {
-            logs.AppLogs(LogPath, "SOA BL - Create and Save Pdf File");
+            Logs.AppLogs(LogPath, "SOA BL - Create and Save Pdf File");
             // create PDF and save to file system
             if (model != null)
             {
@@ -515,16 +516,16 @@ namespace CMS2.BusinessLogic
                     report.Load(reportTemplatePath + soaTemplateFile);
                     report.SetDataSource(soaDs);
                     report.ExportToDisk(ExportFormatType.PortableDocFormat, soaReportPath + soaReportFile);
-                    logs.AppLogs(LogPath, "SOA BL - CreateSavePdfFile", "Successfull");
+                    Logs.AppLogs(LogPath, "SOA BL - CreateSavePdfFile", "Successfull");
                 }
                 catch (Exception ex)
                 {
-                    logs.ErrorLogs(LogPath, "SOA BL - CreateSavePdfFile", ex.Message);
+                    Logs.ErrorLogs(LogPath, "SOA BL - CreateSavePdfFile", ex.Message);
                 }
             }
             else
             {
-                logs.ErrorLogs(LogPath, "SOA BL - CreateSavePdfFile", "Application Settings is null");
+                Logs.ErrorLogs(LogPath, "SOA BL - CreateSavePdfFile", "Application Settings is null");
             }
         }
 
@@ -676,7 +677,7 @@ namespace CMS2.BusinessLogic
 
         public List<StatementOfAccountModel> GetByCompanyAccountNo(string accountNo)
         {
-            logs.AppLogs(LogPath, "SOA BL - GetByCompanyAccountNo");
+            Logs.AppLogs(LogPath, "SOA BL - GetByCompanyAccountNo");
             var soa = FilterBy(x => x.Company.AccountNo.Equals(accountNo)).ToList();
             List<StatementOfAccountModel> models = new List<StatementOfAccountModel>();
             if (soa != null && soa.Count > 0)
@@ -864,7 +865,7 @@ namespace CMS2.BusinessLogic
 
         public void UpdateAdjustments(List<ShipmentAdjustment> shipments)
         {
-            logs.AppLogs(LogPath, "SOA BL - UpdateAdjustments");
+            Logs.AppLogs(LogPath, "SOA BL - UpdateAdjustments");
             UserStore userStore = new UserStore(_unitOfWork);
 
             if (shipments != null)
@@ -883,7 +884,7 @@ namespace CMS2.BusinessLogic
                     }
                     catch (Exception ex)
                     {
-                        logs.ErrorLogs(LogPath, "SOA BL - UpdateAdjustments", ex.Message);
+                        Logs.ErrorLogs(LogPath, "SOA BL - UpdateAdjustments", ex.Message);
                     }
                 }
             }

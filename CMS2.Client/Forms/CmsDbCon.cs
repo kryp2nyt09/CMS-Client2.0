@@ -10,257 +10,204 @@ using CMS2.Client.Properties;
 using CMS2.Entities;
 using System.Data.Sql;
 using System.Data.SqlClient;
+using System.Data.Entity.Infrastructure;
+using CMS2.DataAccess;
+using System.Data.Entity.Core.Objects;
+using System.Data.Entity.Core.Metadata.Edm;
+using CMS2.Client.SyncHelper;
+using System.Drawing;
+using CMS2.Common;
+using System.Threading;
 
 namespace CMS2.Client
 {
     public partial class CmsDbCon : Telerik.WinControls.UI.RadForm
     {
+
+        #region Properties
+
         private XmlNodeList settings;
+
+        private bool isLocalConnected { get; set; }
+        private bool isMainConnected { get; set; }
+        private string _localServer { get; set; }
+        private string _localDbName { get; set; }
+        private string _localUsername { get; set; }
+        private string _localPassword { get; set; }
+
+        private string _mainServer { get; set; }
+        private string _mainDbName { get; set; }
+        private string _mainUsername { get; set; }
+        private string _mainPassword { get; set; }
+
+        private string _localConnectionString { get; set; }
+        private string _mainConnectionString { get; set; }
+
+        private string _filter { get; set; }
+        public string _branchCorpOfficeId { get; set; }
+        private string _deviceCode { get; set; }
+        public string _deviceRevenueUnitId { get; set; }
+
+        public bool IsNeedDBSetup { get; set; }
+        public bool IsFormClose { get; set; }
 
         private BranchCorpOfficeBL bcoService;
         private RevenueUnitTypeBL revenutUnitTypeService;
         private RevenueUnitBL revenueUnitService;
 
-        List<BranchCorpOffice> branchCorpOffices;
+        private Synchronization _synchronization;
+
+        private List<BranchCorpOffice> _branchCorpOffices;
         private List<RevenueUnitType> revenueUnitTypes;
         private List<RevenueUnit> revenueUnits;
+        private List<SyncTables> _entities;
 
+        private bool isProvision = false;
+        private bool isDeprovisionClient = false;
+        private bool IsDeprovisionServer = false;
+
+        #endregion
+
+        #region Constructors
         public CmsDbCon()
         {
             InitializeComponent();
         }
-        public bool IsNeedDBSetup
-        {
-            get; set;
-        }
+        #endregion
 
-        public bool IsFormClose
-        {
-            get; set;
-        }
-
+        #region Events
         private void CmsDbCon_Load(object sender, EventArgs e)
         {
+            WaitingBar.StopWaiting();
+            btnSaveSync.Enabled = false;
+
+            this.isLocalConnected = false;
+            this.isMainConnected = false;
+            testMainConnection.Visible = false;
+            testLocalConnection.Visible = false;
+
             bcoService = new BranchCorpOfficeBL();
             revenutUnitTypeService = new RevenueUnitTypeBL();
             revenueUnitService = new RevenueUnitBL();
 
-            branchCorpOffices = bcoService.FilterActive().OrderBy(x => x.BranchCorpOfficeName).ToList();
+            _branchCorpOffices = bcoService.FilterActive().OrderBy(x => x.BranchCorpOfficeName).ToList();
             revenueUnitTypes = revenutUnitTypeService.FilterActive().OrderBy(x => x.RevenueUnitTypeName).ToList();
             revenueUnits = revenueUnitService.FilterActive().OrderBy(x => x.RevenueUnitName).ToList();
 
+            // Load BranchCorpOffices
+            lstBco.DataSource = _branchCorpOffices;
+            lstBco.DisplayMember = "BranchCorpOfficeName";
+            lstBco.ValueMember = "BranchCorpOfficeId";
+
+            // Load RevenueUnitTypes
             lstRevenueUnitType.DataSource = revenueUnitTypes;
             lstRevenueUnitType.DisplayMember = "RevenueUnitTypeName";
             lstRevenueUnitType.ValueMember = "RevenueUnitTypeId";
 
-            lstBco.DataSource = branchCorpOffices;
-            lstBco.DisplayMember = "BranchCorpOfficeName";
-            lstBco.ValueMember = "BranchCorpOfficeId";
+            // Load RevenueUnits
+            lstRevenueUnit.DataSource = revenueUnits;
+            lstRevenueUnit.DisplayMember = "RevenueUnitName";
+            lstRevenueUnit.ValueMember = "RevenueUnitId";
+                        
+            SetEntities();
+            CheckTableState();
+            gridTables.DataSource = _entities;
 
-            lstBco.SelectedIndex = -1;
-
-            //lstRevenueUnit.DataSource = revenueUnits;
-            //lstRevenueUnit.DisplayMember = "RevenueUnitName";
-            //lstRevenueUnit.ValueMember = "RevenueUnitId";
-            PopulateRevenueUnit(revenueUnits);
         }
-
         private void btnSave_Click(object sender, EventArgs e)
         {
-            //app.config-connectionStrings
-            String connStringCms = string.Format("Data Source={0};Initial Catalog={1};User ID={2};Password={3};Connect Timeout=180;", txtServerName.Text, txtDbName.Text, txtDbUsername.Text, txtDbPassword.Text);
-          // string connectionStringCentral = string.Format("Data Source={0};Initial Catalog={1};User ID={2};Password={3};Connect Timeout=180;", CentralServerIp.Text, CentralDbName.Text, CentralUserName.Text, CentralPassword.Text);
-            //we need to try first if the connection is valid before saving it
-            SqlConnection sqlConnection = new SqlConnection(connStringCms);
-            //SqlConnection sqlConnection2 = new SqlConnection(connectionStringCentral);
-            try
+            if (isLocalConnected && isMainConnected && GatherInputs())
             {
-                sqlConnection.Open();
-            }
-            catch
-            {
-                MessageBox.Show("Can't connect to specified local server. Make sure connection is correct");
-                sqlConnection.Dispose();
-                return;
-            }
+                // AppUSerSettings
+                Settings.Default["LocalDbServer"] = _localServer;
+                Settings.Default["LocalDbName"] = _localDbName;
+                Settings.Default["LocalDbUsername"] = _localUsername;
+                Settings.Default["LocalDbPassword"] = _localPassword;
+                Settings.Default["CentralServerIp"] = _mainServer;
+                Settings.Default["CentralDbName"] = _mainDbName;
+                Settings.Default["CentralUsername"] = _mainUsername;
+                Settings.Default["CentralPassword"] = _mainPassword;
+                Settings.Default["DeviceCode"] = _deviceCode;
+                Settings.Default["DeviceRevenueUnitId"] = _deviceRevenueUnitId;
+                Settings.Default["DeviceBcoId"] = _branchCorpOfficeId;
+                Settings.Default.Save();
 
-            //try
-            //{
-            //    sqlConnection2.Open();
-            //}
-            //catch
-            //{
-            //    MessageBox.Show("Can't connect to specified central server. Make sure connection is correct");
-            //    sqlConnection2.Dispose();
-            //    return;
-            //}
+                //app.config-appSettings
+                var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                config.AppSettings.Settings["DeviceCode"].Value = txtDeviceCode.Text;
+                config.AppSettings.Settings["RUId"].Value = _deviceRevenueUnitId;
+                config.AppSettings.Settings["BcoId"].Value = _branchCorpOfficeId;
+                config.Save(ConfigurationSaveMode.Modified);
 
-
-            Guid bcoId = new Guid();
-            if (lstBco.SelectedValue != null)
-            {
-                bcoId = Guid.Parse(lstBco.SelectedValue.ToString());
-            }
-
-            Guid revenueUnitId = new Guid();
-            if (lstRevenueUnit.SelectedIndex > 0)
-            {
-                var runit = revenueUnits.FirstOrDefault(x => x.RevenueUnitName.Equals(lstRevenueUnit.SelectedItem.ToString()));
-                if (runit != null)
-                    revenueUnitId = runit.RevenueUnitId;
-            }
-
-            // AppUSerSettings
-            Settings.Default["LocalDbServer"] = txtServerName.Text;
-            Settings.Default["LocalDbName"] = txtDbName.Text;
-            Settings.Default["LocalDbUsername"] = txtDbUsername.Text;
-            Settings.Default["LocalDbPassword"] = txtDbPassword.Text;
-            //Settings.Default["CentralServerIp"] = CentralServerIp.Text;
-            //Settings.Default["CentralDbName"] = CentralDbName.Text;
-            //Settings.Default["CentralUsername"] = CentralUserName.Text;
-            //Settings.Default["CentralPassword"] = CentralPassword.Text;
-            Settings.Default["DeviceCode"] = txtDeviceCode.Text;
-            Settings.Default["DeviceRevenueUnitId"] = revenueUnitId.ToString();
-            Settings.Default["DeviceBcoId"] = bcoId.ToString();
-            Settings.Default.Save();
-
-            //app.config-appSettings
-            var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            config.AppSettings.Settings["DeviceCode"].Value = txtDeviceCode.Text;
-            config.AppSettings.Settings["RUId"].Value = revenueUnitId.ToString();
-            config.AppSettings.Settings["BcoId"].Value = bcoId.ToString();
-            config.Save(ConfigurationSaveMode.Modified);
-
-            XmlDocument appConfigDoc = new XmlDocument();
-            appConfigDoc.Load(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
-            foreach (XmlElement xElement in appConfigDoc.DocumentElement)
-            {
-                if (xElement.Name == "connectionStrings")
+                XmlDocument appConfigDoc = new XmlDocument();
+                appConfigDoc.Load(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
+                foreach (XmlElement xElement in appConfigDoc.DocumentElement)
                 {
-                    var nodes = xElement.ChildNodes;
-                    foreach (XmlElement item in nodes)
+                    if (xElement.Name == "connectionStrings")
                     {
-                        if (item.Attributes["name"].Value.Equals("Cms"))
+                        var nodes = xElement.ChildNodes;
+                        foreach (XmlElement item in nodes)
                         {
-                            item.Attributes["connectionString"].Value = connStringCms;
-                        }
-                        else if (item.Attributes["name"].Value.Equals("CmsCentral"))
-                        {
-                            //item.Attributes["connectionString"].Value = connectionStringCentral;
+                            if (item.Attributes["name"].Value.Equals("Cms"))
+                            {
+                                item.Attributes["connectionString"].Value = _localConnectionString;
+                            }
+                            else if (item.Attributes["name"].Value.Equals("CmsCentral"))
+                            {
+                                item.Attributes["connectionString"].Value = _mainConnectionString;
+                            }
                         }
                     }
                 }
-            }
-            appConfigDoc.Save(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
-            
-            Application.Restart();
-        }
+                appConfigDoc.Save(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
 
+                Application.Restart();
+
+            }
+        }
         private void CmsDbCon_Shown(object sender, EventArgs e)
         {
-            txtServerName.Text = Settings.Default.LocalDbServer;
-            txtDbName.Text = Settings.Default.LocalDbName;
-            txtDbUsername.Text = Settings.Default.LocalDbUsername;
-            txtDbPassword.Text = Settings.Default.LocalDbPassword;
-            //CentralServerIp.Text = Settings.Default.CentralServerIp;
-            //CentralDbName.Text = Settings.Default.CentralDbName;
-            //CentralUserName.Text = Settings.Default.CentralUsername;
-            //CentralPassword.Text = Settings.Default.CentralPassword;
+            txtLocalIP.Text = Settings.Default.LocalDbServer;
+            txtLocalDbName.Text = Settings.Default.LocalDbName;
+            txtLocalDbUsername.Text = Settings.Default.LocalDbUsername;
+            txtLocalDbPassword.Text = Settings.Default.LocalDbPassword;
+            txtServerIP.Text = Settings.Default.CentralServerIp;
+            txtServerDbName.Text = Settings.Default.CentralDbName;
+            txtServerUsername.Text = Settings.Default.CentralUsername;
+            txtServerPassword.Text = Settings.Default.CentralPassword;
             txtDeviceCode.Text = Settings.Default.DeviceCode;
 
-            if (!string.IsNullOrEmpty(Settings.Default.DeviceRevenueUnitId))
+            try
             {
-                string idString = Settings.Default.DeviceRevenueUnitId;
-                if (string.IsNullOrEmpty(idString))
-                {
-                }
-                else
-                {
-                    Guid id;
-                    Guid.TryParse(idString, out id);
-                    if (id != Guid.Empty)
-                    {
-                        lstBco.SelectedValue =
-                            revenueUnits.Where(x => x.RevenueUnitId == id)
-                                .Select(x => x.City.BranchCorpOffice.BranchCorpOfficeId).First();
-                        lstRevenueUnitType.SelectedValue =
-                            revenueUnits.Where(x => x.RevenueUnitId == id)
-                                .Select(x => x.RevenueUnitType.RevenueUnitTypeId).First();
-                        var runit = revenueUnits.FirstOrDefault(x => x.RevenueUnitId == id);
-                        if (runit != null)
-                            lstRevenueUnit.Text = runit.RevenueUnitName;
-                    }
-                    else
-                    {
-                        var bcoId = Guid.Parse(Settings.Default.DeviceBcoId);
-
-                        var office = revenueUnits.FirstOrDefault(x => x.City.BranchCorpOffice.BranchCorpOfficeId == bcoId);
-                        if (office != null)
-                        {
-                            lstBco.SelectedValue = office.City.BranchCorpOffice.BranchCorpOfficeId;
-                        }
-                    }
-                }
+                lstBco.SelectedValue = _branchCorpOffices.Find(x => x.BranchCorpOfficeId == Guid.Parse(Settings.Default.DeviceBcoId.ToString())).BranchCorpOfficeId;
+                lstRevenueUnit.SelectedValue = revenueUnits.Find(x => x.RevenueUnitId == Guid.Parse(Settings.Default.DeviceRevenueUnitId.ToString())).RevenueUnitId;
             }
-        }
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs("CMS Settings", "CmsDBConShow", ex.Message);
+            }
 
+        }
         private void lstBco_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //    if (lstBco.SelectedValue != null)
-            //    {
-            //        var temp =
-            //            revenueUnits.Where(x => x.City.BranchCorpOffice.BranchCorpOfficeId == Guid.Parse(lstBco.SelectedValue.ToString()) && x.RevenueUnitType.RevenueUnitTypeId == Guid.Parse(lstRevenueUnitType.SelectedValue.ToString())).ToList();
-            //        lstRevenueUnit.DataSource = temp;
-            //        lstRevenueUnit.DisplayMember = "RevenueUnitName";
-            //        lstRevenueUnit.ValueMember = "RevenueUnitId";
-            //        lstRevenueUnit.Items.Insert(0, new ListItem(String.Empty, new Guid().ToString()));
-            //    }
+            if (lstBco.SelectedIndex > -1 && lstRevenueUnitType.SelectedIndex > - 1)
+            {
+                List<RevenueUnit> list = new List<RevenueUnit>();
+                list = revenueUnits.Where(x => x.City.BranchCorpOffice.BranchCorpOfficeName == lstBco.SelectedItem.ToString() && x.RevenueUnitType.RevenueUnitTypeName == lstRevenueUnitType.SelectedItem.ToString()).ToList();
+                PopulateRevenueUnit(list);
+            }
+            
         }
-
-        private void lstRevenueUnitType_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //if (lstRevenueUnitType.SelectedValue!=null)
-            //{
-            //    var temp =
-            //             revenueUnits.Where(x => x.Cluster.BranchCorpOffice.BranchCorpOfficeId == Guid.Parse(lstBco.SelectedValue.ToString()) && x.RevenueUnitType.RevenueUnitTypeId == Guid.Parse(lstRevenueUnitType.SelectedValue.ToString())).ToList();
-
-            //    lstRevenueUnit.DataSource = temp;
-            //    lstRevenueUnit.DisplayMember = "RevenueUnitName";
-            //    lstRevenueUnit.ValueMember = "RevenueUnitId";
-            //    lstRevenueUnit.Items.Insert(0, new ListItem(String.Empty, new Guid().ToString()));
-            //}
-        }
-
-        private void lstRevenueUnit_Enter(object sender, EventArgs e)
-        {
-            var temp = revenueUnits.Where(x => x.City.BranchCorpOffice.BranchCorpOfficeId == Guid.Parse(lstBco.SelectedValue.ToString()) && x.RevenueUnitType.RevenueUnitTypeId == Guid.Parse(lstRevenueUnitType.SelectedValue.ToString())).ToList();
-            PopulateRevenueUnit(temp);
-        }
-
         private void PopulateRevenueUnit(List<RevenueUnit> list)
         {
             lstRevenueUnit.Items.Clear();
-            lstRevenueUnit.Items.Insert(0, new Telerik.WinControls.UI.RadListDataItem(String.Empty, new Guid().ToString()));
-            int index = 1;
-            foreach (var item in list)
-            {
-                lstRevenueUnit.Items.Insert(index, new Telerik.WinControls.UI.RadListDataItem(item.RevenueUnitName, item.RevenueUnitId.ToString()));
-                index++;
-            }
+            lstRevenueUnit.DisplayMember = "RevenueUnitName";
+            lstRevenueUnit.ValueMember = "ReveneuUnitId";
         }
-
         private void CmsDbCon_FormClosed(object sender, FormClosedEventArgs e)
         {
             this.IsFormClose = true;
         }
-
-        private void lstBco_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
-            
-        {
-            
-            
-        }
-
         private void lstBco_Validated(object sender, EventArgs e)
         {
             if (lstBco.SelectedIndex > -1)
@@ -269,7 +216,6 @@ namespace CMS2.Client
                 PopulateRevenueUnit(temp);
             }
         }
-
         private void lstRevenueUnitType_Validated(object sender, EventArgs e)
         {
             if (lstRevenueUnitType.SelectedIndex > -1)
@@ -278,5 +224,303 @@ namespace CMS2.Client
                 PopulateRevenueUnit(temp);
             }
         }
+        private void btnLocalTest_Click(object sender, EventArgs e)
+        {
+            if (IsDataValid_Local())
+            {
+                GatherInputs();
+                _localConnectionString = String.Format("Server={0};Database={1};User Id={2};Password={3};Connect Timeout=180;Connection Lifetime=0;Pooling=true;", _localServer, "master", _localUsername, _localPassword);
+
+                SqlConnection localConnection = new SqlConnection(_localConnectionString);
+                try
+                {
+                    localConnection.Open();
+                    isLocalConnected = true;
+                    testLocalConnection.Text = "Success";
+                    testLocalConnection.Visible = true;
+                    testLocalConnection.ForeColor = Color.Green;
+
+                }
+                catch (Exception)
+                {
+                    isLocalConnected = false;
+                    testLocalConnection.Text = "Failed";
+                    testLocalConnection.Visible = true;
+                    testLocalConnection.ForeColor = Color.Red;
+                }
+                finally
+                {
+                    localConnection.Dispose();
+                }
+            }
+        }
+        private void btnServerTest_Click(object sender, EventArgs e)
+        {
+            if (IsDataValid_Main())
+            {
+                GatherInputs();
+                _mainConnectionString = String.Format("Server={0};Database={1};User Id={2};Password={3};", _mainServer, _mainDbName, _mainUsername, _mainPassword);
+                SqlConnection mainConnection = new SqlConnection(_mainConnectionString);
+                try
+                {
+                    mainConnection.Open();
+                    isMainConnected = true;
+                    testMainConnection.Text = "Success";
+                    testMainConnection.Visible = true;
+                    testMainConnection.ForeColor = Color.Green;
+                }
+                catch (Exception)
+                {
+                    isMainConnected = false;
+                    testMainConnection.Text = "Failed";
+                    testMainConnection.Visible = true;
+                    testMainConnection.ForeColor = Color.Red;
+                }
+                finally
+                {
+                    mainConnection.Dispose();
+                }
+            }
+        }
+        private void lstRevenueUnitType_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
+        {
+            if (lstRevenueUnitType.SelectedIndex > -1 && lstBco.SelectedIndex > -1)
+            {
+                List<RevenueUnit> list = new List<RevenueUnit>();
+                list = revenueUnits.Where(x => x.City.BranchCorpOffice.BranchCorpOfficeId == Guid.Parse(lstBco.SelectedValue.ToString()) && x.RevenueUnitType.RevenueUnitTypeName == lstRevenueUnitType.SelectedItem.ToString()).ToList();
+                PopulateRevenueUnit(list);
+            }
+            
+        }
+        private void LocalTestConnection_Click(object sender, EventArgs e)
+        {
+            if (IsDataValid_Local())
+            {
+                GatherInputs();
+
+                _localConnectionString = String.Format("Server={0};Database={1};User Id={2};Password={3};Connect Timeout=180;Connection Lifetime=0;Pooling=true;", _localServer, _localDbName, _localUsername, _localPassword);
+
+
+                SqlConnection localConnection = new SqlConnection(_localConnectionString);
+                try
+                {
+                    localConnection.Open();
+                    isLocalConnected = true;
+                    testLocalConnection.Text = "Success";
+                    testLocalConnection.Visible = true;
+                    testLocalConnection.ForeColor = Color.Green;
+
+                }
+                catch (Exception)
+                {
+                    isLocalConnected = false;
+                    testLocalConnection.Text = "Failed";
+                    testLocalConnection.Visible = true;
+                    testLocalConnection.ForeColor = Color.Red;
+                }
+                finally
+                {
+                    localConnection.Dispose();
+                }
+            }
+        }
+        private void MainTestConnection_Click(object sender, EventArgs e)
+        {
+            if (IsDataValid_Main())
+            {
+                GatherInputs();
+                _mainConnectionString = String.Format("Server={0};Database={1};User Id={2};Password={3};", _mainServer, _mainDbName, _mainUsername, _mainPassword);
+                SqlConnection mainConnection = new SqlConnection(_mainConnectionString);
+                try
+                {
+                    mainConnection.Open();
+                    isMainConnected = true;
+                    testMainConnection.Text = "Success";
+                    testMainConnection.Visible = true;
+                    testMainConnection.ForeColor = Color.Green;
+                }
+                catch (Exception)
+                {
+                    isMainConnected = false;
+                    testMainConnection.Text = "Failed";
+                    testMainConnection.Visible = true;
+                    testMainConnection.ForeColor = Color.Red;
+                }
+                finally
+                {
+                    mainConnection.Dispose();
+                }
+            }
+        }
+        private void chkDeprovisionClient_ToggleStateChanged(object sender, Telerik.WinControls.UI.StateChangedEventArgs args)
+        {
+            if (args.ToggleState == Telerik.WinControls.Enumerations.ToggleState.On)
+            {
+                isDeprovisionClient = true;
+            }
+            else
+            {
+                isDeprovisionClient = false;
+            }
+        }
+        private void chkDeprovisionServer_ToggleStateChanged(object sender, Telerik.WinControls.UI.StateChangedEventArgs args)
+        {
+            if (args.ToggleState == Telerik.WinControls.Enumerations.ToggleState.On)
+            {
+                IsDeprovisionServer = true;
+            }
+            else
+            {
+                IsDeprovisionServer = false;
+            }
+        }
+        private void chkProvision_ToggleStateChanged(object sender, Telerik.WinControls.UI.StateChangedEventArgs args)
+        {
+            if (args.ToggleState == Telerik.WinControls.Enumerations.ToggleState.On)
+            {
+                isProvision = true;
+            }
+            else
+            {
+                isProvision = false;
+            }
+        }
+        private void btnStart_Click(object sender, EventArgs e)
+        {
+            WaitingBar.StartWaiting();
+            Synchronization sync = new Synchronization(
+                this._entities,
+                this.isProvision,
+                this.isDeprovisionClient,
+                this.IsDeprovisionServer,
+                this._branchCorpOfficeId,
+                this._filter);
+
+            WaitingBar.StopWaiting();
+            btnSaveSync.Enabled = true;
+
+        }
+        #endregion
+
+        #region Methods
+        private void SetEntities()
+        {
+
+            using (CmsContext context = new CmsContext())
+            {
+                ObjectContext objContext = ((IObjectContextAdapter)context).ObjectContext;
+                MetadataWorkspace workspace = objContext.MetadataWorkspace;
+
+
+                IEnumerable<EntityType> tables = workspace.GetItems<EntityType>(DataSpace.SSpace);
+
+                _entities = new List<SyncTables>();
+
+                foreach (var item in tables)
+                {
+                    SyncTables table = new SyncTables();
+                    table.TableName = item.Name;
+                    _entities.Add(table);
+                }
+
+            }
+        }
+        private bool IsDataValid_Local()
+        {
+            bool isValid = true;
+            if (string.IsNullOrEmpty(txtLocalIP.Text) || string.IsNullOrEmpty(txtLocalDbName.Text) || string.IsNullOrEmpty(txtLocalDbUsername.Text) || string.IsNullOrEmpty(txtLocalDbPassword.Text))
+            {
+                MessageBox.Show("Please fill out all fields.", "Data Error.", MessageBoxButtons.OK);
+                isValid = false;
+            }
+
+            return isValid;
+        }
+        private bool IsDataValid_Main()
+        {
+            bool isValid = true;
+            if (string.IsNullOrEmpty(txtServerIP.Text) || string.IsNullOrEmpty(txtServerDbName.Text) || string.IsNullOrEmpty(txtServerUsername.Text) || string.IsNullOrEmpty(txtServerPassword.Text))
+            {
+                MessageBox.Show("Please fill out all fields.", "Data Error", MessageBoxButtons.OK);
+                isValid = false;
+            }
+            return isValid;
+        }
+        private bool GatherInputs()
+        {
+            _localServer = txtLocalIP.Text;
+            _localDbName = txtLocalDbName.Text;
+            _localUsername = txtLocalDbUsername.Text;
+            _localPassword = txtLocalDbPassword.Text;
+
+            _mainServer = txtServerIP.Text;
+            _mainDbName = txtServerDbName.Text;
+            _mainUsername = txtServerUsername.Text;
+            _mainPassword = txtServerPassword.Text;
+
+            _deviceCode = txtDeviceCode.Text;
+
+            try
+            {
+                if (lstBco.SelectedValue != null)
+                {
+                    _branchCorpOfficeId = lstBco.SelectedValue.ToString();
+                }
+                else
+                {
+                    lstBco.Focus();
+                    return false;
+                }
+
+                if (lstRevenueUnit.SelectedIndex != -1)
+                {
+                    _deviceRevenueUnitId = lstRevenueUnit.SelectedValue.ToString();
+                }
+                else
+                {
+                    lstRevenueUnit.Focus();
+                    return false;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+
+            return true;
+        }
+        private void CheckTableState()
+        {
+            List<SyncHelper.ThreadState> listOfThread = new List<SyncHelper.ThreadState>();
+            List<ManualResetEvent> syncEvents = new List<ManualResetEvent>();
+            foreach (SyncTables table in _entities)
+            {
+                SyncHelper.ThreadState _threadState = new SyncHelper.ThreadState();
+                _threadState.table = table;
+                syncEvents.Add(_threadState._event);
+                listOfThread.Add(_threadState);
+                try
+                {
+                    Synchronize sync = new Synchronize(table.TableName, _filter, _threadState._event, new SqlConnection(_localConnectionString), new SqlConnection(_mainConnectionString));
+                    ThreadPool.QueueUserWorkItem(sync.PerformSync, _threadState);                    
+                }
+                catch (Exception ex)
+                {
+                                      
+                }
+            }
+
+            WaitHandle.WaitAll(syncEvents.ToArray());
+            foreach (SyncHelper.ThreadState thread in listOfThread)
+            {
+                _entities = new List<SyncTables>();
+                _entities.Add(thread.table);
+            }
+        }
+
+        #endregion
+
+
     }
 }

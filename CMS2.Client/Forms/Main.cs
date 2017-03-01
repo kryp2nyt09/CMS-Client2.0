@@ -156,7 +156,6 @@ namespace CMS2.Client
 
 
         public string LogPath;
-        public Logs logs;
 
         public bool isNewShipment { get; set; }
 
@@ -3440,7 +3439,6 @@ namespace CMS2.Client
             paymentTermService = new PaymentTermBL(GlobalVars.UnitOfWork);
 
             LogPath = AppDomain.CurrentDomain.BaseDirectory + "Logs\\";
-            logs = new Logs();
 
         }
 
@@ -4123,9 +4121,9 @@ namespace CMS2.Client
                 catch (Exception ex)
                 {
                     if (ex.InnerException == null)
-                        logs.ErrorLogs(LogPath, "Acceptance-PrintAwb", ex.Message);
+                        Logs.ErrorLogs(LogPath, "Acceptance-PrintAwb", ex.Message);
                     else
-                        logs.ErrorLogs(LogPath, "Acceptance-PrintAwb", ex.InnerException.Message);
+                        Logs.ErrorLogs(LogPath, "Acceptance-PrintAwb", ex.InnerException.Message);
                 }
 
                 btnReset.Enabled = true;

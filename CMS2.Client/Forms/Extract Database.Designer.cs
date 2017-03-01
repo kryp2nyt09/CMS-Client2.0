@@ -55,8 +55,10 @@
             this.ClientApp = new Telerik.WinControls.UI.RadRadioButton();
             this.office2010BlackTheme1 = new Telerik.WinControls.Themes.Office2010BlackTheme();
             this.Extract = new Telerik.WinControls.UI.RadButton();
-            this.ProgressBar1 = new Telerik.WinControls.UI.RadProgressBar();
             this.ProgressLabel = new Telerik.WinControls.UI.RadLabel();
+            this.radWaitingBar1 = new Telerik.WinControls.UI.RadWaitingBar();
+            this.waitingBarIndicatorElement1 = new Telerik.WinControls.UI.WaitingBarIndicatorElement();
+            this.waitingBarIndicatorElement2 = new Telerik.WinControls.UI.WaitingBarIndicatorElement();
             ((System.ComponentModel.ISupportInitialize)(this.radPanel1)).BeginInit();
             this.radPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dboBranchCoprOffice)).BeginInit();
@@ -84,8 +86,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.SubServer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ClientApp)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Extract)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ProgressBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ProgressLabel)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radWaitingBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
             // 
@@ -374,20 +376,6 @@
             this.Extract.ThemeName = "Office2010Black";
             this.Extract.Click += new System.EventHandler(this.Extract_Click);
             // 
-            // ProgressBar1
-            // 
-            this.ProgressBar1.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ProgressBar1.Location = new System.Drawing.Point(29, 440);
-            this.ProgressBar1.Name = "ProgressBar1";
-            this.ProgressBar1.ShowItemToolTips = false;
-            this.ProgressBar1.Size = new System.Drawing.Size(369, 24);
-            this.ProgressBar1.TabIndex = 19;
-            this.ProgressBar1.ThemeName = "Office2010Black";
-            ((Telerik.WinControls.UI.RadProgressBarElement)(this.ProgressBar1.GetChildAt(0))).ShowProgressIndicators = false;
-            ((Telerik.WinControls.UI.RadProgressBarElement)(this.ProgressBar1.GetChildAt(0))).Text = "";
-            ((Telerik.WinControls.UI.UpperProgressIndicatorElement)(this.ProgressBar1.GetChildAt(0).GetChildAt(1))).BackColor = System.Drawing.Color.Green;
-            ((Telerik.WinControls.UI.UpperProgressIndicatorElement)(this.ProgressBar1.GetChildAt(0).GetChildAt(1))).Visibility = Telerik.WinControls.ElementVisibility.Collapsed;
-            // 
             // ProgressLabel
             // 
             this.ProgressLabel.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -397,13 +385,33 @@
             this.ProgressLabel.TabIndex = 20;
             this.ProgressLabel.ThemeName = "Office2010Black";
             // 
+            // radWaitingBar1
+            // 
+            this.radWaitingBar1.Location = new System.Drawing.Point(29, 440);
+            this.radWaitingBar1.Name = "radWaitingBar1";
+            this.radWaitingBar1.Size = new System.Drawing.Size(369, 24);
+            this.radWaitingBar1.TabIndex = 21;
+            this.radWaitingBar1.Text = "radWaitingBar1";
+            this.radWaitingBar1.WaitingIndicators.Add(this.waitingBarIndicatorElement2);
+            this.radWaitingBar1.WaitingIndicators.Add(this.waitingBarIndicatorElement1);
+            // 
+            // waitingBarIndicatorElement1
+            // 
+            this.waitingBarIndicatorElement1.Name = "waitingBarIndicatorElement1";
+            this.waitingBarIndicatorElement1.StretchHorizontally = false;
+            // 
+            // waitingBarIndicatorElement2
+            // 
+            this.waitingBarIndicatorElement2.Name = "waitingBarIndicatorElement2";
+            this.waitingBarIndicatorElement2.StretchHorizontally = false;
+            // 
             // Extract_Database
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(432, 505);
+            this.Controls.Add(this.radWaitingBar1);
             this.Controls.Add(this.ProgressLabel);
-            this.Controls.Add(this.ProgressBar1);
             this.Controls.Add(this.Extract);
             this.Controls.Add(this.ClientApp);
             this.Controls.Add(this.SubServer);
@@ -444,8 +452,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.SubServer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ClientApp)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Extract)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ProgressBar1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ProgressLabel)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radWaitingBar1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -477,11 +485,13 @@
         private Telerik.WinControls.UI.RadRadioButton ClientApp;
         private Telerik.WinControls.Themes.Office2010BlackTheme office2010BlackTheme1;
         private Telerik.WinControls.UI.RadButton Extract;
-        private Telerik.WinControls.UI.RadProgressBar ProgressBar1;
         private Telerik.WinControls.UI.RadLabel ProgressLabel;
         private Telerik.WinControls.UI.RadLabel testMainConnection;
         private Telerik.WinControls.UI.RadLabel testLocalConnection;
         private Telerik.WinControls.UI.RadLabel radLabel9;
         private Telerik.WinControls.UI.RadDropDownList dboBranchCoprOffice;
+        private Telerik.WinControls.UI.RadWaitingBar radWaitingBar1;
+        private Telerik.WinControls.UI.WaitingBarIndicatorElement waitingBarIndicatorElement2;
+        private Telerik.WinControls.UI.WaitingBarIndicatorElement waitingBarIndicatorElement1;
     }
 }

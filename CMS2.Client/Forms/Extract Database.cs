@@ -56,7 +56,6 @@ namespace CMS2_Client
         public Extract_Database()
         {
             InitializeComponent();
-            _bcoService = new BranchCorpOfficeBL();
         }
         #endregion
 
@@ -69,18 +68,12 @@ namespace CMS2_Client
             testMainConnection.Visible = false;
             testLocalConnection.Visible = false;
             dboBranchCoprOffice.Enabled = false;
-
-            //_branchCorpOffices = _bcoService.FilterActive().OrderBy(x => x.BranchCorpOfficeName).ToList();
-
-            //dboBranchCoprOffice.DataSource = _branchCorpOffices;
-            //dboBranchCoprOffice.DisplayMember = "BranchCorpOfficeName";
-            //dboBranchCoprOffice.ValueMember = "BranchCorpOfficeId";
-            //dboBranchCoprOffice.SelectedIndex = -1;
         }
 
         private void LocalTestConnection_Click(object sender, EventArgs e)
         {
-            if (IsDataValid_Local()) {
+            if (IsDataValid_Local())
+            {
                 GatherInputs();
                 if (isSubServer)
                 {
@@ -100,11 +93,6 @@ namespace CMS2_Client
                     testLocalConnection.Text = "Success";
                     testLocalConnection.Visible = true;
                     testLocalConnection.ForeColor = Color.Green;
-                    if (!isSubServer) {
-                        loadbranchCorp(_localConnectionString);
-                        dboBranchCoprOffice.Enabled = true;
-                    }
-
 
                 }
                 catch (Exception)
@@ -123,7 +111,8 @@ namespace CMS2_Client
 
         private void MainTestConnection_Click(object sender, EventArgs e)
         {
-            if (IsDataValid_Main()) {
+            if (IsDataValid_Main())
+            {
                 GatherInputs();
                 _mainConnectionString = String.Format("Server={0};Database={1};User Id={2};Password={3};", _mainServer, _mainDbName, _mainUsername, _mainPassword);
                 SqlConnection mainConnection = new SqlConnection(_mainConnectionString);
@@ -151,7 +140,6 @@ namespace CMS2_Client
             }
         }
 
-        
         private void SubServer_ToggleStateChanged(object sender, Telerik.WinControls.UI.StateChangedEventArgs args)
         {
             ResetAll();
@@ -167,17 +155,16 @@ namespace CMS2_Client
         }
 
         private void Extract_Click(object sender, EventArgs e)
-        {            
+        {
             if (isSubServer && isLocalConnected && isMainConnected)
             {
+
                 Application.DoEvents();
                 ProgressLabel.Text = "Checking database if exist...";
-                ProgressBar1.Value1 = ProgressBar1.Value1 + 20;
                 Application.DoEvents();
-                DropDatabaseIfExist();             
+                DropDatabaseIfExist();
 
                 ProgressLabel.Text = "Creating database...";
-                ProgressBar1.Value1 = ProgressBar1.Value1 + 20;
                 Application.DoEvents();
                 CreateDatabase();
 
@@ -186,21 +173,19 @@ namespace CMS2_Client
                 _filter = dboBranchCoprOffice.SelectedItem.ToString().Substring(0, index);
                 _branchCorpOfficeId = dboBranchCoprOffice.SelectedValue.ToString();
                 Application.DoEvents();
-                GlobalVars.Sync = new Synchronization(new SqlConnection(_localConnectionString.Replace("master",_localDbName)), new SqlConnection(_mainConnectionString), dboBranchCoprOffice.SelectedValue.ToString(), _filter);
+                GlobalVars.Sync = new Synchronization(_localConnectionString.Replace("master", _localDbName), _mainConnectionString, false, false, false, dboBranchCoprOffice.SelectedValue.ToString(), _filter);
                 Application.DoEvents();
 
-                ProgressBar1.Value1 = ProgressBar1.Value1 + 30;
                 Application.DoEvents();
                 ProgressLabel.Text = "Writing settings to configuration settings...";
                 Application.DoEvents();
                 WriteToConfig(_localConnectionString.Replace("master", _localDbName));
                 WriteToConfig(_mainConnectionString);
-                ProgressBar1.Value1 = ProgressBar1.Value1 + 20;
                 Application.DoEvents();
                 System.Threading.Thread.Sleep(3000);
                 this.DialogResult = DialogResult.OK;
                 this.Close();
-                
+
             }
             else if (!isSubServer && isLocalConnected)
             {
@@ -310,22 +295,6 @@ namespace CMS2_Client
             dboBranchCoprOffice.Enabled = false;
         }
 
-        private static IEnumerable<string> SplitSqlStatements(string sqlScript)
-        {
-            // Split by "GO" statements
-            var statements = Regex.Split(
-                    sqlScript,
-                    @"^\s*GO\s*\d*\s*($|\-\-.*$)",
-                    RegexOptions.Multiline |
-                    RegexOptions.IgnorePatternWhitespace |
-                    RegexOptions.IgnoreCase);
-
-            // Remove empties, trim, and return
-            return statements
-                .Where(x => !string.IsNullOrWhiteSpace(x))
-                .Select(x => x.Trim(' ', '\r', '\n'));
-        }
-
         private void DropDatabaseIfExist()
         {
             using (SqlConnection connection = new SqlConnection(_localConnectionString))
@@ -335,14 +304,14 @@ namespace CMS2_Client
                     try
                     {
                         connection.Open();
-                        int count = (Int32) command.ExecuteScalar();
+                        int count = (Int32)command.ExecuteScalar();
 
                         if (count == 1)
                         {
-                            command.CommandText = "Use master alter database[" +_localDbName +"] set single_user with rollback immediate; DROP DATABASE [" + _localDbName + "]";
+                            command.CommandText = "Use master alter database[" + _localDbName + "] set single_user with rollback immediate; DROP DATABASE [" + _localDbName + "]";
                             command.ExecuteNonQuery();
                             ProgressLabel.Text = "Database was deleted.";
-                        }                       
+                        }
                     }
                     catch (Exception ex)
                     {
@@ -357,12 +326,12 @@ namespace CMS2_Client
         {
             using (SqlConnection connection = new SqlConnection(_localConnectionString))
             {
-                using (SqlCommand command = new SqlCommand("Create Database " + _localDbName  , connection))
+                using (SqlCommand command = new SqlCommand("Create Database " + _localDbName, connection))
                 {
                     try
                     {
                         connection.Open();
-                        command.ExecuteNonQuery();                        
+                        command.ExecuteNonQuery();
                         ProgressLabel.Text = "Database was created.";
                     }
                     catch (Exception ex)

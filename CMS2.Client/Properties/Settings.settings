@@ -12,16 +12,16 @@
       <Value Profile="(Default)">00000000-0000-0000-0000-000000000000</Value>
     </Setting>
     <Setting Name="LocalDbUsername" Type="System.String" Scope="User">
-      <Value Profile="(Default)">cmsuser</Value>
+      <Value Profile="(Default)">sa</Value>
     </Setting>
     <Setting Name="LocalDbPassword" Type="System.String" Scope="User">
-      <Value Profile="(Default)">P9ssW0rd</Value>
+      <Value Profile="(Default)">Ap123456#</Value>
     </Setting>
     <Setting Name="LocalDbServer" Type="System.String" Scope="User">
-      <Value Profile="(Default)">192.168.0.58</Value>
+      <Value Profile="(Default)">192.168.5.3</Value>
     </Setting>
     <Setting Name="CentralDbName" Type="System.String" Scope="User">
-      <Value Profile="(Default)">cms2_Beta1</Value>
+      <Value Profile="(Default)">cms2_Beta3</Value>
     </Setting>
     <Setting Name="CentralUsername" Type="System.String" Scope="User">
       <Value Profile="(Default)">sa</Value>
