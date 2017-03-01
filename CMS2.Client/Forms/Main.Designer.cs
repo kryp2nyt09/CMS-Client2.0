@@ -592,7 +592,8 @@
             this.label118 = new System.Windows.Forms.Label();
             this.label119 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.chk_ReceivedAll = new Telerik.WinControls.UI.RadCheckBox();
+            this.cmb_PaymentRemarks = new Telerik.WinControls.UI.RadDropDownList();
             ((System.ComponentModel.ISupportInitialize)(this.radPanel1)).BeginInit();
             this.radPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panel)).BeginInit();
@@ -1210,12 +1211,12 @@
             this.BookingGridView.MasterTemplate.EnableAlternatingRowColor = true;
             this.BookingGridView.MasterTemplate.EnableFiltering = true;
             this.BookingGridView.MasterTemplate.FilterDescriptors.AddRange(new Telerik.WinControls.Data.FilterDescriptor[] {
-            filterDescriptor23});
+            filterDescriptor31});
             this.BookingGridView.MasterTemplate.MultiSelect = true;
-            sortDescriptor23.PropertyName = "Delete";
+            sortDescriptor31.PropertyName = "Delete";
             this.BookingGridView.MasterTemplate.SortDescriptors.AddRange(new Telerik.WinControls.Data.SortDescriptor[] {
-            sortDescriptor23});
-            this.BookingGridView.MasterTemplate.ViewDefinition = tableViewDefinition199;
+            sortDescriptor31});
+            this.BookingGridView.MasterTemplate.ViewDefinition = tableViewDefinition271;
             this.BookingGridView.Name = "BookingGridView";
             this.BookingGridView.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.BookingGridView.Size = new System.Drawing.Size(1231, 192);
@@ -3572,14 +3573,14 @@
             this.gridPackage.MasterTemplate.EnableAlternatingRowColor = true;
             this.gridPackage.MasterTemplate.EnableGrouping = false;
             this.gridPackage.MasterTemplate.FilterDescriptors.AddRange(new Telerik.WinControls.Data.FilterDescriptor[] {
-            filterDescriptor24});
+            filterDescriptor32});
             this.gridPackage.MasterTemplate.MultiSelect = true;
             this.gridPackage.MasterTemplate.ShowFilteringRow = false;
             this.gridPackage.MasterTemplate.ShowRowHeaderColumn = false;
-            sortDescriptor24.PropertyName = "Delete";
+            sortDescriptor32.PropertyName = "Delete";
             this.gridPackage.MasterTemplate.SortDescriptors.AddRange(new Telerik.WinControls.Data.SortDescriptor[] {
-            sortDescriptor24});
-            this.gridPackage.MasterTemplate.ViewDefinition = tableViewDefinition200;
+            sortDescriptor32});
+            this.gridPackage.MasterTemplate.ViewDefinition = tableViewDefinition272;
             this.gridPackage.Name = "gridPackage";
             this.gridPackage.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.tableLayoutPanel14.SetRowSpan(this.gridPackage, 5);
@@ -4699,7 +4700,7 @@
             this.gridManifest.MasterTemplate.EnablePaging = true;
             this.gridManifest.MasterTemplate.PageSize = 10;
             this.gridManifest.MasterTemplate.ShowGroupedColumns = true;
-            this.gridManifest.MasterTemplate.ViewDefinition = tableViewDefinition201;
+            this.gridManifest.MasterTemplate.ViewDefinition = tableViewDefinition273;
             this.gridManifest.Name = "gridManifest";
             this.gridManifest.Size = new System.Drawing.Size(1231, 571);
             this.gridManifest.TabIndex = 0;
@@ -5708,7 +5709,7 @@
             this.gridBranchAcceptance.MasterTemplate.AllowDeleteRow = false;
             this.gridBranchAcceptance.MasterTemplate.AllowEditRow = false;
             this.gridBranchAcceptance.MasterTemplate.ShowRowHeaderColumn = false;
-            this.gridBranchAcceptance.MasterTemplate.ViewDefinition = tableViewDefinition206;
+//            this.gridBranchAcceptance.MasterTemplate.ViewDefinition = tableViewDefinition278;
             this.gridBranchAcceptance.Name = "gridBranchAcceptance";
             this.gridBranchAcceptance.ShowItemToolTips = false;
             this.gridBranchAcceptance.Size = new System.Drawing.Size(1083, 439);
@@ -5802,10 +5803,10 @@
             // dropDownBranchAcceptance_Branch
             // 
             this.dropDownBranchAcceptance_Branch.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            radListDataItem3.Text = "Branch Corporate Office";
-            radListDataItem4.Text = "Branch Satellite Office";
-            this.dropDownBranchAcceptance_Branch.Items.Add(radListDataItem3);
-            this.dropDownBranchAcceptance_Branch.Items.Add(radListDataItem4);
+            radListDataItem5.Text = "Branch Corporate Office";
+            radListDataItem6.Text = "Branch Satellite Office";
+            this.dropDownBranchAcceptance_Branch.Items.Add(radListDataItem5);
+            this.dropDownBranchAcceptance_Branch.Items.Add(radListDataItem6);
             this.dropDownBranchAcceptance_Branch.Location = new System.Drawing.Point(187, 79);
             this.dropDownBranchAcceptance_Branch.Name = "dropDownBranchAcceptance_Branch";
             this.dropDownBranchAcceptance_Branch.Size = new System.Drawing.Size(176, 20);
@@ -5906,7 +5907,7 @@
             this.gridBundle.MasterTemplate.AllowDragToGroup = false;
             this.gridBundle.MasterTemplate.AllowEditRow = false;
             this.gridBundle.MasterTemplate.ShowRowHeaderColumn = false;
-            this.gridBundle.MasterTemplate.ViewDefinition = tableViewDefinition207;
+        //    this.gridBundle.MasterTemplate.ViewDefinition = tableViewDefinition279;
             this.gridBundle.Name = "gridBundle";
             this.gridBundle.ShowItemToolTips = false;
             this.gridBundle.Size = new System.Drawing.Size(1083, 439);
@@ -6042,10 +6043,10 @@
             // dropDownBundle_Branch
             // 
             this.dropDownBundle_Branch.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            radListDataItem5.Text = "Branch Corporate Office";
-            radListDataItem6.Text = "Branch Satellite Office";
-            this.dropDownBundle_Branch.Items.Add(radListDataItem5);
-            this.dropDownBundle_Branch.Items.Add(radListDataItem6);
+            radListDataItem3.Text = "Branch Corporate Office";
+            radListDataItem4.Text = "Branch Satellite Office";
+            this.dropDownBundle_Branch.Items.Add(radListDataItem3);
+            this.dropDownBundle_Branch.Items.Add(radListDataItem4);
             this.dropDownBundle_Branch.Location = new System.Drawing.Point(188, 80);
             this.dropDownBundle_Branch.Name = "dropDownBundle_Branch";
             this.dropDownBundle_Branch.Size = new System.Drawing.Size(175, 20);
@@ -6127,7 +6128,7 @@
             this.gridUnbundle.MasterTemplate.AllowDragToGroup = false;
             this.gridUnbundle.MasterTemplate.AllowEditRow = false;
             this.gridUnbundle.MasterTemplate.ShowRowHeaderColumn = false;
-            this.gridUnbundle.MasterTemplate.ViewDefinition = tableViewDefinition208;
+         //   this.gridUnbundle.MasterTemplate.ViewDefinition = tableViewDefinition280;
             this.gridUnbundle.Name = "gridUnbundle";
             this.gridUnbundle.ShowItemToolTips = false;
             this.gridUnbundle.Size = new System.Drawing.Size(1083, 439);
@@ -7210,7 +7211,7 @@
             this.gridDailyTrip.MasterTemplate.AllowDragToGroup = false;
             this.gridDailyTrip.MasterTemplate.AllowEditRow = false;
             this.gridDailyTrip.MasterTemplate.ShowRowHeaderColumn = false;
-            this.gridDailyTrip.MasterTemplate.ViewDefinition = tableViewDefinition214;
+        //    this.gridDailyTrip.MasterTemplate.ViewDefinition = tableViewDefinition286;
             this.gridDailyTrip.Name = "gridDailyTrip";
             this.gridDailyTrip.ShowItemToolTips = false;
             this.gridDailyTrip.Size = new System.Drawing.Size(1083, 439);
@@ -7407,7 +7408,7 @@
             this.gridHoldCargo.MasterTemplate.AllowDragToGroup = false;
             this.gridHoldCargo.MasterTemplate.AllowEditRow = false;
             this.gridHoldCargo.MasterTemplate.ShowRowHeaderColumn = false;
-            this.gridHoldCargo.MasterTemplate.ViewDefinition = tableViewDefinition215;
+          //  this.gridHoldCargo.MasterTemplate.ViewDefinition = tableViewDefinition287;
             this.gridHoldCargo.Name = "gridHoldCargo";
             this.gridHoldCargo.ShowItemToolTips = false;
             this.gridHoldCargo.Size = new System.Drawing.Size(1083, 439);
@@ -7608,7 +7609,7 @@
             this.gridDeliveryStatus.MasterTemplate.AllowDragToGroup = false;
             this.gridDeliveryStatus.MasterTemplate.AllowEditRow = false;
             this.gridDeliveryStatus.MasterTemplate.ShowRowHeaderColumn = false;
-            this.gridDeliveryStatus.MasterTemplate.ViewDefinition = tableViewDefinition216;
+         //   this.gridDeliveryStatus.MasterTemplate.ViewDefinition = tableViewDefinition288;
             this.gridDeliveryStatus.Name = "gridDeliveryStatus";
             this.gridDeliveryStatus.ShowItemToolTips = false;
             this.gridDeliveryStatus.Size = new System.Drawing.Size(1083, 439);
@@ -7762,9 +7763,26 @@
             this.label119.TabIndex = 62;
             this.label119.Text = "Pickup Cargo Manifest";
             // 
-            // saveFileDialog1
+            // chk_ReceivedAll
             // 
-            this.saveFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.saveFileDialog1_FileOk);
+            this.chk_ReceivedAll.Location = new System.Drawing.Point(810, 35);
+            this.chk_ReceivedAll.Name = "chk_ReceivedAll";
+            this.chk_ReceivedAll.Size = new System.Drawing.Size(81, 18);
+            this.chk_ReceivedAll.TabIndex = 65;
+            this.chk_ReceivedAll.Text = "Received All";
+            this.chk_ReceivedAll.CheckStateChanged += new System.EventHandler(this.chk_ReceivedAll_CheckStateChanged);
+            // 
+            // cmb_PaymentRemarks
+            // 
+            radListDataItem5.Text = "Full";
+            radListDataItem6.Text = "Partial";
+            this.cmb_PaymentRemarks.Items.Add(radListDataItem5);
+            this.cmb_PaymentRemarks.Items.Add(radListDataItem6);
+            this.cmb_PaymentRemarks.Location = new System.Drawing.Point(86, 341);
+            this.cmb_PaymentRemarks.Name = "cmb_PaymentRemarks";
+            this.cmb_PaymentRemarks.Size = new System.Drawing.Size(161, 20);
+            this.cmb_PaymentRemarks.TabIndex = 21;
+            this.cmb_PaymentRemarks.ThemeName = "Office2010Black";
             // 
             // Main
             // 

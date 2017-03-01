@@ -5407,7 +5407,7 @@ namespace CMS2.Client
             paymentStatusId = paymentSummaryStatusService.GetAll().Where(x => x.PaymentSummaryStatusName == "Validated").Select(x => x.PaymentSummaryStatusId).First();
             checkById = userService.GetAllActiveUsers().Where(x => x.UserId == AppUser.User.UserId).Select(x => x.EmployeeId).First();
 
-            Guid remittedById = Guid.Parse(lstUser.SelectedValue.ToString());
+            Guid remittedById = Guid.Parse(lstRemittedBy.SelectedValue.ToString());
 
             PaymentSummaryModel paymentSummarymodel = new PaymentSummaryModel();
             paymentSummarymodel.PaymentSummaryId = paymentSummary.PaymentSummaryId;
