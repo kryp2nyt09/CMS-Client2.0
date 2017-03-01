@@ -29,24 +29,24 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            Telerik.WinControls.Data.FilterDescriptor filterDescriptor31 = new Telerik.WinControls.Data.FilterDescriptor();
-            Telerik.WinControls.Data.SortDescriptor sortDescriptor31 = new Telerik.WinControls.Data.SortDescriptor();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition271 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.Data.FilterDescriptor filterDescriptor32 = new Telerik.WinControls.Data.FilterDescriptor();
-            Telerik.WinControls.Data.SortDescriptor sortDescriptor32 = new Telerik.WinControls.Data.SortDescriptor();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition272 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition273 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition274 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition275 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition276 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition277 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.Data.FilterDescriptor filterDescriptor3 = new Telerik.WinControls.Data.FilterDescriptor();
+            Telerik.WinControls.Data.SortDescriptor sortDescriptor3 = new Telerik.WinControls.Data.SortDescriptor();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition19 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.Data.FilterDescriptor filterDescriptor4 = new Telerik.WinControls.Data.FilterDescriptor();
+            Telerik.WinControls.Data.SortDescriptor sortDescriptor4 = new Telerik.WinControls.Data.SortDescriptor();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition20 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition21 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition22 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition23 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition24 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition25 = new Telerik.WinControls.UI.TableViewDefinition();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             Telerik.WinControls.UI.TableViewDefinition tableViewDefinition26 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.RadListDataItem radListDataItem7 = new Telerik.WinControls.UI.RadListDataItem();
-            Telerik.WinControls.UI.RadListDataItem radListDataItem8 = new Telerik.WinControls.UI.RadListDataItem();
+            Telerik.WinControls.UI.RadListDataItem radListDataItem5 = new Telerik.WinControls.UI.RadListDataItem();
+            Telerik.WinControls.UI.RadListDataItem radListDataItem6 = new Telerik.WinControls.UI.RadListDataItem();
             Telerik.WinControls.UI.TableViewDefinition tableViewDefinition27 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.RadListDataItem radListDataItem3 = new Telerik.WinControls.UI.RadListDataItem();
-            Telerik.WinControls.UI.RadListDataItem radListDataItem4 = new Telerik.WinControls.UI.RadListDataItem();
+            Telerik.WinControls.UI.RadListDataItem radListDataItem1 = new Telerik.WinControls.UI.RadListDataItem();
+            Telerik.WinControls.UI.RadListDataItem radListDataItem2 = new Telerik.WinControls.UI.RadListDataItem();
             Telerik.WinControls.UI.TableViewDefinition tableViewDefinition28 = new Telerik.WinControls.UI.TableViewDefinition();
             Telerik.WinControls.UI.TableViewDefinition tableViewDefinition29 = new Telerik.WinControls.UI.TableViewDefinition();
             Telerik.WinControls.UI.TableViewDefinition tableViewDefinition30 = new Telerik.WinControls.UI.TableViewDefinition();
@@ -56,8 +56,6 @@
             Telerik.WinControls.UI.TableViewDefinition tableViewDefinition34 = new Telerik.WinControls.UI.TableViewDefinition();
             Telerik.WinControls.UI.TableViewDefinition tableViewDefinition35 = new Telerik.WinControls.UI.TableViewDefinition();
             Telerik.WinControls.UI.TableViewDefinition tableViewDefinition36 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.RadListDataItem radListDataItem5 = new Telerik.WinControls.UI.RadListDataItem();
-            Telerik.WinControls.UI.RadListDataItem radListDataItem6 = new Telerik.WinControls.UI.RadListDataItem();
             this.office2010BlackTheme1 = new Telerik.WinControls.Themes.Office2010BlackTheme();
             this.radPanel1 = new Telerik.WinControls.UI.RadPanel();
             this.panel = new Telerik.WinControls.UI.RadPanel();
@@ -243,7 +241,6 @@
             this.radLabel82 = new Telerik.WinControls.UI.RadLabel();
             this.radLabel83 = new Telerik.WinControls.UI.RadLabel();
             this.radLabel84 = new Telerik.WinControls.UI.RadLabel();
-            this.chkNonVatable = new Telerik.WinControls.UI.RadCheckBox();
             this.radLabel85 = new Telerik.WinControls.UI.RadLabel();
             this.chkPackaging = new Telerik.WinControls.UI.RadCheckBox();
             this.chkDraining = new Telerik.WinControls.UI.RadCheckBox();
@@ -251,6 +248,7 @@
             this.radLabel86 = new Telerik.WinControls.UI.RadLabel();
             this.txtTotalEvm = new Telerik.WinControls.UI.RadMaskedEditBox();
             this.txtTotalWeightCharge = new Telerik.WinControls.UI.RadMaskedEditBox();
+            this.chkNonVatable = new Telerik.WinControls.UI.RadCheckBox();
             this.radGroupBox1 = new Telerik.WinControls.UI.RadGroupBox();
             this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
             this.AcceptancetxtShipperMobile = new Telerik.WinControls.UI.RadMaskedEditBox();
@@ -300,8 +298,8 @@
             this.PaymentPage = new Telerik.WinControls.UI.RadPageViewPage();
             this.radGroupBox2 = new Telerik.WinControls.UI.RadGroupBox();
             this.tableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnAccept = new Telerik.WinControls.UI.RadButton();
             this.btnCancel = new Telerik.WinControls.UI.RadButton();
+            this.btnAccept = new Telerik.WinControls.UI.RadButton();
             this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
             this.radLabel27 = new Telerik.WinControls.UI.RadLabel();
             this.radLabel28 = new Telerik.WinControls.UI.RadLabel();
@@ -330,6 +328,7 @@
             this.txtAmountPaid = new Telerik.WinControls.UI.RadMaskedEditBox();
             this.txtAmountDue = new Telerik.WinControls.UI.RadMaskedEditBox();
             this.radLabel30 = new Telerik.WinControls.UI.RadLabel();
+            this.cmb_PaymentRemarks = new Telerik.WinControls.UI.RadDropDownList();
             this.Manifest = new Telerik.WinControls.UI.RadPageViewPage();
             this.gridManifest = new Telerik.WinControls.UI.RadGridView();
             this.radPageViewPage5 = new Telerik.WinControls.UI.RadPageViewPage();
@@ -374,7 +373,6 @@
             this.dateCollectionDate = new Telerik.WinControls.UI.RadDateTimePicker();
             this.radLabel65 = new Telerik.WinControls.UI.RadLabel();
             this.radLabel70 = new Telerik.WinControls.UI.RadLabel();
-            this.btnReceivedAll = new Telerik.WinControls.UI.RadButton();
             this.radLabel68 = new Telerik.WinControls.UI.RadLabel();
             this.radLabel69 = new Telerik.WinControls.UI.RadLabel();
             this.txtTotalAmntCorpAcctConsignee = new Telerik.WinControls.UI.RadTextBox();
@@ -388,6 +386,8 @@
             this.btnSearch = new Telerik.WinControls.UI.RadButton();
             this.lstRevenueUnitType = new Telerik.WinControls.UI.RadDropDownList();
             this.radLabel66 = new Telerik.WinControls.UI.RadLabel();
+            this.chk_ReceivedAll = new Telerik.WinControls.UI.RadCheckBox();
+            this.btnReceivedAll = new Telerik.WinControls.UI.RadButton();
             this.radPageViewPage6 = new Telerik.WinControls.UI.RadPageViewPage();
             this.pageViewTracking = new Telerik.WinControls.UI.RadPageView();
             this.radPageViewPage7 = new Telerik.WinControls.UI.RadPageViewPage();
@@ -590,8 +590,6 @@
             this.label118 = new System.Windows.Forms.Label();
             this.label119 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.chk_ReceivedAll = new Telerik.WinControls.UI.RadCheckBox();
-            this.cmb_PaymentRemarks = new Telerik.WinControls.UI.RadDropDownList();
             ((System.ComponentModel.ISupportInitialize)(this.radPanel1)).BeginInit();
             this.radPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panel)).BeginInit();
@@ -756,7 +754,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.radLabel82)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel83)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel84)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chkNonVatable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel85)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkPackaging)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkDraining)).BeginInit();
@@ -765,6 +762,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.radLabel86)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTotalEvm)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTotalWeightCharge)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkNonVatable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radGroupBox1)).BeginInit();
             this.radGroupBox1.SuspendLayout();
             this.tableLayoutPanel10.SuspendLayout();
@@ -817,8 +815,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.radGroupBox2)).BeginInit();
             this.radGroupBox2.SuspendLayout();
             this.tableLayoutPanel11.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btnAccept)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnCancel)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnAccept)).BeginInit();
             this.tableLayoutPanel9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel27)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel28)).BeginInit();
@@ -847,6 +845,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtAmountPaid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtAmountDue)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel30)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cmb_PaymentRemarks)).BeginInit();
             this.Manifest.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridManifest)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridManifest.MasterTemplate)).BeginInit();
@@ -885,7 +884,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dateCollectionDate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel65)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel70)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnReceivedAll)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel68)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel69)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTotalAmntCorpAcctConsignee)).BeginInit();
@@ -900,6 +898,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.btnSearch)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lstRevenueUnitType)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel66)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chk_ReceivedAll)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnReceivedAll)).BeginInit();
             this.radPageViewPage6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pageViewTracking)).BeginInit();
             this.pageViewTracking.SuspendLayout();
@@ -1044,8 +1044,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dateTimeDeliveryStatus_Date)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dropDownDeliveryStatus_Area)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dropDownDeliveryStatus_BCO)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chk_ReceivedAll)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cmb_PaymentRemarks)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
             // 
@@ -1209,12 +1207,12 @@
             this.BookingGridView.MasterTemplate.EnableAlternatingRowColor = true;
             this.BookingGridView.MasterTemplate.EnableFiltering = true;
             this.BookingGridView.MasterTemplate.FilterDescriptors.AddRange(new Telerik.WinControls.Data.FilterDescriptor[] {
-            filterDescriptor31});
+            filterDescriptor3});
             this.BookingGridView.MasterTemplate.MultiSelect = true;
-            sortDescriptor31.PropertyName = "Delete";
+            sortDescriptor3.PropertyName = "Delete";
             this.BookingGridView.MasterTemplate.SortDescriptors.AddRange(new Telerik.WinControls.Data.SortDescriptor[] {
-            sortDescriptor31});
-            this.BookingGridView.MasterTemplate.ViewDefinition = tableViewDefinition271;
+            sortDescriptor3});
+            this.BookingGridView.MasterTemplate.ViewDefinition = tableViewDefinition19;
             this.BookingGridView.Name = "BookingGridView";
             this.BookingGridView.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.BookingGridView.Size = new System.Drawing.Size(1231, 192);
@@ -3521,16 +3519,6 @@
             this.radLabel84.TabIndex = 1;
             this.radLabel84.Text = "Non-Vatable";
             // 
-            // chkNonVatable
-            // 
-            this.chkNonVatable.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.chkNonVatable.Location = new System.Drawing.Point(758, 255);
-            this.chkNonVatable.Name = "chkNonVatable";
-            this.chkNonVatable.Size = new System.Drawing.Size(15, 15);
-            this.chkNonVatable.TabIndex = 50;
-            this.chkNonVatable.TabStop = false;
-            this.chkNonVatable.KeyUp += new System.Windows.Forms.KeyEventHandler(this.chkNonVatable_KeyUp);
-            // 
             // radLabel85
             // 
             this.radLabel85.Anchor = System.Windows.Forms.AnchorStyles.Left;
@@ -3581,14 +3569,14 @@
             this.gridPackage.MasterTemplate.EnableAlternatingRowColor = true;
             this.gridPackage.MasterTemplate.EnableGrouping = false;
             this.gridPackage.MasterTemplate.FilterDescriptors.AddRange(new Telerik.WinControls.Data.FilterDescriptor[] {
-            filterDescriptor32});
+            filterDescriptor4});
             this.gridPackage.MasterTemplate.MultiSelect = true;
             this.gridPackage.MasterTemplate.ShowFilteringRow = false;
             this.gridPackage.MasterTemplate.ShowRowHeaderColumn = false;
-            sortDescriptor32.PropertyName = "Delete";
+            sortDescriptor4.PropertyName = "Delete";
             this.gridPackage.MasterTemplate.SortDescriptors.AddRange(new Telerik.WinControls.Data.SortDescriptor[] {
-            sortDescriptor32});
-            this.gridPackage.MasterTemplate.ViewDefinition = tableViewDefinition272;
+            sortDescriptor4});
+            this.gridPackage.MasterTemplate.ViewDefinition = tableViewDefinition20;
             this.gridPackage.Name = "gridPackage";
             this.gridPackage.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.tableLayoutPanel14.SetRowSpan(this.gridPackage, 5);
@@ -3640,6 +3628,16 @@
             this.txtTotalWeightCharge.Text = "₱0.00";
             this.txtTotalWeightCharge.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtTotalWeightCharge.ThemeName = "Office2010Black";
+            // 
+            // chkNonVatable
+            // 
+            this.chkNonVatable.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.chkNonVatable.Location = new System.Drawing.Point(758, 255);
+            this.chkNonVatable.Name = "chkNonVatable";
+            this.chkNonVatable.Size = new System.Drawing.Size(15, 15);
+            this.chkNonVatable.TabIndex = 50;
+            this.chkNonVatable.TabStop = false;
+            this.chkNonVatable.KeyUp += new System.Windows.Forms.KeyEventHandler(this.chkNonVatable_KeyUp);
             // 
             // radGroupBox1
             // 
@@ -4296,17 +4294,6 @@
             this.tableLayoutPanel11.Size = new System.Drawing.Size(202, 36);
             this.tableLayoutPanel11.TabIndex = 2;
             // 
-            // btnAccept
-            // 
-            this.btnAccept.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.btnAccept.Location = new System.Drawing.Point(3, 3);
-            this.btnAccept.Name = "btnAccept";
-            this.btnAccept.Size = new System.Drawing.Size(95, 30);
-            this.btnAccept.TabIndex = 1;
-            this.btnAccept.Text = "Sa&ve";
-            this.btnAccept.ThemeName = "Office2010Black";
-            this.btnAccept.Click += new System.EventHandler(this.btnAccept_Click);
-            // 
             // btnCancel
             // 
             this.btnCancel.Anchor = System.Windows.Forms.AnchorStyles.Left;
@@ -4318,6 +4305,17 @@
             this.btnCancel.Text = "&Reset/Cancel";
             this.btnCancel.ThemeName = "Office2010Black";
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
+            // btnAccept
+            // 
+            this.btnAccept.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.btnAccept.Location = new System.Drawing.Point(3, 3);
+            this.btnAccept.Name = "btnAccept";
+            this.btnAccept.Size = new System.Drawing.Size(95, 30);
+            this.btnAccept.TabIndex = 1;
+            this.btnAccept.Text = "Sa&ve";
+            this.btnAccept.ThemeName = "Office2010Black";
+            this.btnAccept.Click += new System.EventHandler(this.btnAccept_Click);
             // 
             // tableLayoutPanel9
             // 
@@ -4661,6 +4659,14 @@
             this.radLabel30.TabIndex = 10;
             this.radLabel30.Text = "Remarks";
             // 
+            // cmb_PaymentRemarks
+            // 
+            this.cmb_PaymentRemarks.Location = new System.Drawing.Point(86, 341);
+            this.cmb_PaymentRemarks.Name = "cmb_PaymentRemarks";
+            this.cmb_PaymentRemarks.Size = new System.Drawing.Size(161, 20);
+            this.cmb_PaymentRemarks.TabIndex = 21;
+            this.cmb_PaymentRemarks.ThemeName = "Office2010Black";
+            // 
             // Manifest
             // 
             this.Manifest.Controls.Add(this.gridManifest);
@@ -4690,7 +4696,7 @@
             this.gridManifest.MasterTemplate.EnablePaging = true;
             this.gridManifest.MasterTemplate.PageSize = 10;
             this.gridManifest.MasterTemplate.ShowGroupedColumns = true;
-            this.gridManifest.MasterTemplate.ViewDefinition = tableViewDefinition273;
+            this.gridManifest.MasterTemplate.ViewDefinition = tableViewDefinition21;
             this.gridManifest.Name = "gridManifest";
             this.gridManifest.Size = new System.Drawing.Size(1231, 571);
             this.gridManifest.TabIndex = 0;
@@ -5175,7 +5181,7 @@
             // 
             this.gridCorpAcctConsignee.MasterTemplate.AllowAddNewRow = false;
             this.gridCorpAcctConsignee.MasterTemplate.AllowDeleteRow = false;
-            this.gridCorpAcctConsignee.MasterTemplate.ViewDefinition = tableViewDefinition274;
+            this.gridCorpAcctConsignee.MasterTemplate.ViewDefinition = tableViewDefinition22;
             this.gridCorpAcctConsignee.Name = "gridCorpAcctConsignee";
             this.gridCorpAcctConsignee.Size = new System.Drawing.Size(794, 121);
             this.gridCorpAcctConsignee.TabIndex = 62;
@@ -5193,7 +5199,7 @@
             this.gridPrepaid.MasterTemplate.AllowColumnReorder = false;
             this.gridPrepaid.MasterTemplate.AllowColumnResize = false;
             this.gridPrepaid.MasterTemplate.AllowDeleteRow = false;
-            this.gridPrepaid.MasterTemplate.ViewDefinition = tableViewDefinition275;
+            this.gridPrepaid.MasterTemplate.ViewDefinition = tableViewDefinition23;
             this.gridPrepaid.Name = "gridPrepaid";
             this.gridPrepaid.Size = new System.Drawing.Size(794, 131);
             this.gridPrepaid.TabIndex = 60;
@@ -5256,18 +5262,6 @@
             this.radLabel70.Size = new System.Drawing.Size(84, 69);
             this.radLabel70.TabIndex = 6;
             this.radLabel70.Text = "Corporate Account Consignee";
-            // 
-            // btnReceivedAll
-            // 
-            this.btnReceivedAll.Location = new System.Drawing.Point(640, 35);
-            this.btnReceivedAll.Name = "btnReceivedAll";
-            this.btnReceivedAll.Size = new System.Drawing.Size(75, 17);
-            this.btnReceivedAll.TabIndex = 56;
-            this.btnReceivedAll.TabStop = false;
-            this.btnReceivedAll.Text = "Received All";
-            this.btnReceivedAll.ThemeName = "Office2010Black";
-            this.btnReceivedAll.Visible = false;
-            this.btnReceivedAll.Click += new System.EventHandler(this.btnReceivedAll_Click);
             // 
             // radLabel68
             // 
@@ -5377,7 +5371,7 @@
             this.gridFreightCollect.MasterTemplate.AllowAddNewRow = false;
             this.gridFreightCollect.MasterTemplate.AllowColumnResize = false;
             this.gridFreightCollect.MasterTemplate.AllowDeleteRow = false;
-            this.gridFreightCollect.MasterTemplate.ViewDefinition = tableViewDefinition276;
+            this.gridFreightCollect.MasterTemplate.ViewDefinition = tableViewDefinition24;
             this.gridFreightCollect.Name = "gridFreightCollect";
             this.gridFreightCollect.Size = new System.Drawing.Size(794, 127);
             this.gridFreightCollect.TabIndex = 61;
@@ -5417,6 +5411,27 @@
             this.radLabel66.Size = new System.Drawing.Size(74, 18);
             this.radLabel66.TabIndex = 53;
             this.radLabel66.Text = "Revenue Type";
+            // 
+            // chk_ReceivedAll
+            // 
+            this.chk_ReceivedAll.Location = new System.Drawing.Point(810, 35);
+            this.chk_ReceivedAll.Name = "chk_ReceivedAll";
+            this.chk_ReceivedAll.Size = new System.Drawing.Size(81, 17);
+            this.chk_ReceivedAll.TabIndex = 65;
+            this.chk_ReceivedAll.Text = "Received All";
+            this.chk_ReceivedAll.CheckStateChanged += new System.EventHandler(this.chk_ReceivedAll_CheckStateChanged);
+            // 
+            // btnReceivedAll
+            // 
+            this.btnReceivedAll.Location = new System.Drawing.Point(640, 35);
+            this.btnReceivedAll.Name = "btnReceivedAll";
+            this.btnReceivedAll.Size = new System.Drawing.Size(75, 17);
+            this.btnReceivedAll.TabIndex = 56;
+            this.btnReceivedAll.TabStop = false;
+            this.btnReceivedAll.Text = "Received All";
+            this.btnReceivedAll.ThemeName = "Office2010Black";
+            this.btnReceivedAll.Visible = false;
+            this.btnReceivedAll.Click += new System.EventHandler(this.btnReceivedAll_Click);
             // 
             // radPageViewPage6
             // 
@@ -5485,7 +5500,7 @@
             this.gridPickupCargo.MasterTemplate.AllowDragToGroup = false;
             this.gridPickupCargo.MasterTemplate.AllowEditRow = false;
             this.gridPickupCargo.MasterTemplate.ShowRowHeaderColumn = false;
-            this.gridPickupCargo.MasterTemplate.ViewDefinition = tableViewDefinition277;
+            this.gridPickupCargo.MasterTemplate.ViewDefinition = tableViewDefinition25;
             this.gridPickupCargo.Name = "gridPickupCargo";
             this.gridPickupCargo.ShowItemToolTips = false;
             this.gridPickupCargo.Size = new System.Drawing.Size(1083, 439);
@@ -5688,7 +5703,7 @@
             this.gridBranchAcceptance.MasterTemplate.AllowDeleteRow = false;
             this.gridBranchAcceptance.MasterTemplate.AllowEditRow = false;
             this.gridBranchAcceptance.MasterTemplate.ShowRowHeaderColumn = false;
-//            this.gridBranchAcceptance.MasterTemplate.ViewDefinition = tableViewDefinition278;
+            this.gridBranchAcceptance.MasterTemplate.ViewDefinition = tableViewDefinition26;
             this.gridBranchAcceptance.Name = "gridBranchAcceptance";
             this.gridBranchAcceptance.ShowItemToolTips = false;
             this.gridBranchAcceptance.Size = new System.Drawing.Size(1083, 439);
@@ -5782,8 +5797,8 @@
             // dropDownBranchAcceptance_Branch
             // 
             this.dropDownBranchAcceptance_Branch.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            radListDataItem5.Text = "Branch Corporate Office";
-            radListDataItem6.Text = "Branch Satellite Office";
+            radListDataItem5.Text = "Full";
+            radListDataItem6.Text = "Partial";
             this.dropDownBranchAcceptance_Branch.Items.Add(radListDataItem5);
             this.dropDownBranchAcceptance_Branch.Items.Add(radListDataItem6);
             this.dropDownBranchAcceptance_Branch.Location = new System.Drawing.Point(187, 79);
@@ -5885,7 +5900,7 @@
             this.gridBundle.MasterTemplate.AllowDragToGroup = false;
             this.gridBundle.MasterTemplate.AllowEditRow = false;
             this.gridBundle.MasterTemplate.ShowRowHeaderColumn = false;
-        //    this.gridBundle.MasterTemplate.ViewDefinition = tableViewDefinition279;
+            this.gridBundle.MasterTemplate.ViewDefinition = tableViewDefinition27;
             this.gridBundle.Name = "gridBundle";
             this.gridBundle.ShowItemToolTips = false;
             this.gridBundle.Size = new System.Drawing.Size(1083, 439);
@@ -6021,10 +6036,10 @@
             // dropDownBundle_Branch
             // 
             this.dropDownBundle_Branch.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            radListDataItem3.Text = "Branch Corporate Office";
-            radListDataItem4.Text = "Branch Satellite Office";
-            this.dropDownBundle_Branch.Items.Add(radListDataItem3);
-            this.dropDownBundle_Branch.Items.Add(radListDataItem4);
+            radListDataItem1.Text = "Branch Corporate Office";
+            radListDataItem2.Text = "Branch Satellite Office";
+            this.dropDownBundle_Branch.Items.Add(radListDataItem1);
+            this.dropDownBundle_Branch.Items.Add(radListDataItem2);
             this.dropDownBundle_Branch.Location = new System.Drawing.Point(188, 80);
             this.dropDownBundle_Branch.Name = "dropDownBundle_Branch";
             this.dropDownBundle_Branch.Size = new System.Drawing.Size(175, 20);
@@ -6105,7 +6120,7 @@
             this.gridUnbundle.MasterTemplate.AllowDragToGroup = false;
             this.gridUnbundle.MasterTemplate.AllowEditRow = false;
             this.gridUnbundle.MasterTemplate.ShowRowHeaderColumn = false;
-         //   this.gridUnbundle.MasterTemplate.ViewDefinition = tableViewDefinition280;
+            this.gridUnbundle.MasterTemplate.ViewDefinition = tableViewDefinition28;
             this.gridUnbundle.Name = "gridUnbundle";
             this.gridUnbundle.ShowItemToolTips = false;
             this.gridUnbundle.Size = new System.Drawing.Size(1083, 439);
@@ -6256,7 +6271,7 @@
             this.gridGatewayTransmital.MasterTemplate.AllowDragToGroup = false;
             this.gridGatewayTransmital.MasterTemplate.AllowEditRow = false;
             this.gridGatewayTransmital.MasterTemplate.ShowRowHeaderColumn = false;
-        //    this.gridGatewayTransmital.MasterTemplate.ViewDefinition = tableViewDefinition281;
+            this.gridGatewayTransmital.MasterTemplate.ViewDefinition = tableViewDefinition29;
             this.gridGatewayTransmital.Name = "gridGatewayTransmital";
             this.gridGatewayTransmital.ShowItemToolTips = false;
             this.gridGatewayTransmital.Size = new System.Drawing.Size(1083, 439);
@@ -6448,7 +6463,7 @@
             this.gridGatewayOutbound.MasterTemplate.AllowDragToGroup = false;
             this.gridGatewayOutbound.MasterTemplate.AllowEditRow = false;
             this.gridGatewayOutbound.MasterTemplate.ShowRowHeaderColumn = false;
-      //      this.gridGatewayOutbound.MasterTemplate.ViewDefinition = tableViewDefinition282;
+            this.gridGatewayOutbound.MasterTemplate.ViewDefinition = tableViewDefinition30;
             this.gridGatewayOutbound.Name = "gridGatewayOutbound";
             this.gridGatewayOutbound.ShowItemToolTips = false;
             this.gridGatewayOutbound.Size = new System.Drawing.Size(1083, 439);
@@ -6622,7 +6637,7 @@
             this.gridGatewayInbound.MasterTemplate.AllowDragToGroup = false;
             this.gridGatewayInbound.MasterTemplate.AllowEditRow = false;
             this.gridGatewayInbound.MasterTemplate.ShowRowHeaderColumn = false;
-      //      this.gridGatewayInbound.MasterTemplate.ViewDefinition = tableViewDefinition283;
+            this.gridGatewayInbound.MasterTemplate.ViewDefinition = tableViewDefinition31;
             this.gridGatewayInbound.Name = "gridGatewayInbound";
             this.gridGatewayInbound.ShowItemToolTips = false;
             this.gridGatewayInbound.Size = new System.Drawing.Size(1083, 439);
@@ -6814,7 +6829,7 @@
             this.gridCargoTransfer.MasterTemplate.AllowDragToGroup = false;
             this.gridCargoTransfer.MasterTemplate.AllowEditRow = false;
             this.gridCargoTransfer.MasterTemplate.ShowRowHeaderColumn = false;
-      //      this.gridCargoTransfer.MasterTemplate.ViewDefinition = tableViewDefinition284;
+            this.gridCargoTransfer.MasterTemplate.ViewDefinition = tableViewDefinition32;
             this.gridCargoTransfer.Name = "gridCargoTransfer";
             this.gridCargoTransfer.ShowItemToolTips = false;
             this.gridCargoTransfer.Size = new System.Drawing.Size(1083, 439);
@@ -6986,7 +7001,7 @@
             this.gridSegregation.MasterTemplate.AllowDragToGroup = false;
             this.gridSegregation.MasterTemplate.AllowEditRow = false;
             this.gridSegregation.MasterTemplate.ShowRowHeaderColumn = false;
-       //     this.gridSegregation.MasterTemplate.ViewDefinition = tableViewDefinition285;
+            this.gridSegregation.MasterTemplate.ViewDefinition = tableViewDefinition33;
             this.gridSegregation.Name = "gridSegregation";
             this.gridSegregation.ShowItemToolTips = false;
             this.gridSegregation.Size = new System.Drawing.Size(1083, 439);
@@ -7182,7 +7197,7 @@
             this.gridDailyTrip.MasterTemplate.AllowDragToGroup = false;
             this.gridDailyTrip.MasterTemplate.AllowEditRow = false;
             this.gridDailyTrip.MasterTemplate.ShowRowHeaderColumn = false;
-        //    this.gridDailyTrip.MasterTemplate.ViewDefinition = tableViewDefinition286;
+            this.gridDailyTrip.MasterTemplate.ViewDefinition = tableViewDefinition34;
             this.gridDailyTrip.Name = "gridDailyTrip";
             this.gridDailyTrip.ShowItemToolTips = false;
             this.gridDailyTrip.Size = new System.Drawing.Size(1083, 439);
@@ -7378,7 +7393,7 @@
             this.gridHoldCargo.MasterTemplate.AllowDragToGroup = false;
             this.gridHoldCargo.MasterTemplate.AllowEditRow = false;
             this.gridHoldCargo.MasterTemplate.ShowRowHeaderColumn = false;
-          //  this.gridHoldCargo.MasterTemplate.ViewDefinition = tableViewDefinition287;
+            this.gridHoldCargo.MasterTemplate.ViewDefinition = tableViewDefinition35;
             this.gridHoldCargo.Name = "gridHoldCargo";
             this.gridHoldCargo.ShowItemToolTips = false;
             this.gridHoldCargo.Size = new System.Drawing.Size(1083, 439);
@@ -7574,7 +7589,7 @@
             this.gridDeliveryStatus.MasterTemplate.AllowDragToGroup = false;
             this.gridDeliveryStatus.MasterTemplate.AllowEditRow = false;
             this.gridDeliveryStatus.MasterTemplate.ShowRowHeaderColumn = false;
-         //   this.gridDeliveryStatus.MasterTemplate.ViewDefinition = tableViewDefinition288;
+            this.gridDeliveryStatus.MasterTemplate.ViewDefinition = tableViewDefinition36;
             this.gridDeliveryStatus.Name = "gridDeliveryStatus";
             this.gridDeliveryStatus.ShowItemToolTips = false;
             this.gridDeliveryStatus.Size = new System.Drawing.Size(1083, 439);
@@ -7727,27 +7742,6 @@
             this.label119.Size = new System.Drawing.Size(223, 23);
             this.label119.TabIndex = 62;
             this.label119.Text = "Pickup Cargo Manifest";
-            // 
-            // chk_ReceivedAll
-            // 
-            this.chk_ReceivedAll.Location = new System.Drawing.Point(810, 35);
-            this.chk_ReceivedAll.Name = "chk_ReceivedAll";
-            this.chk_ReceivedAll.Size = new System.Drawing.Size(81, 18);
-            this.chk_ReceivedAll.TabIndex = 65;
-            this.chk_ReceivedAll.Text = "Received All";
-            this.chk_ReceivedAll.CheckStateChanged += new System.EventHandler(this.chk_ReceivedAll_CheckStateChanged);
-            // 
-            // cmb_PaymentRemarks
-            // 
-            radListDataItem5.Text = "Full";
-            radListDataItem6.Text = "Partial";
-            this.cmb_PaymentRemarks.Items.Add(radListDataItem5);
-            this.cmb_PaymentRemarks.Items.Add(radListDataItem6);
-            this.cmb_PaymentRemarks.Location = new System.Drawing.Point(86, 341);
-            this.cmb_PaymentRemarks.Name = "cmb_PaymentRemarks";
-            this.cmb_PaymentRemarks.Size = new System.Drawing.Size(161, 20);
-            this.cmb_PaymentRemarks.TabIndex = 21;
-            this.cmb_PaymentRemarks.ThemeName = "Office2010Black";
             // 
             // Main
             // 
@@ -7939,7 +7933,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.radLabel82)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel83)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel84)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chkNonVatable)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel85)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkPackaging)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkDraining)).EndInit();
@@ -7948,6 +7941,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.radLabel86)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTotalEvm)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTotalWeightCharge)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkNonVatable)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radGroupBox1)).EndInit();
             this.radGroupBox1.ResumeLayout(false);
             this.tableLayoutPanel10.ResumeLayout(false);
@@ -8004,8 +7998,8 @@
             this.radGroupBox2.ResumeLayout(false);
             this.radGroupBox2.PerformLayout();
             this.tableLayoutPanel11.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.btnAccept)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnCancel)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnAccept)).EndInit();
             this.tableLayoutPanel9.ResumeLayout(false);
             this.tableLayoutPanel9.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel27)).EndInit();
@@ -8035,6 +8029,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtAmountPaid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtAmountDue)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel30)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cmb_PaymentRemarks)).EndInit();
             this.Manifest.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridManifest.MasterTemplate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridManifest)).EndInit();
@@ -8076,7 +8071,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dateCollectionDate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel65)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel70)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnReceivedAll)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel68)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel69)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTotalAmntCorpAcctConsignee)).EndInit();
@@ -8091,6 +8085,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.btnSearch)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lstRevenueUnitType)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel66)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chk_ReceivedAll)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnReceivedAll)).EndInit();
             this.radPageViewPage6.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pageViewTracking)).EndInit();
             this.pageViewTracking.ResumeLayout(false);
@@ -8247,8 +8243,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dateTimeDeliveryStatus_Date)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dropDownDeliveryStatus_Area)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dropDownDeliveryStatus_BCO)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chk_ReceivedAll)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cmb_PaymentRemarks)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
 
