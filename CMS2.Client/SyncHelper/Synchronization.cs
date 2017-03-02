@@ -31,10 +31,13 @@ namespace CMS2.Client.SyncHelper
         private bool isDeprovisionServer;
         private bool isDeprovisionClient;
         private List<SyncTables> Entities = new List<SyncTables>();
-        
+
         List<ManualResetEvent> ProvisionEvents = new List<ManualResetEvent>();
+        List<ManualResetEvent> ProvisionEvents1 = new List<ManualResetEvent>();
         List<ManualResetEvent> DeprovisionEvents = new List<ManualResetEvent>();
+        List<ManualResetEvent> DeprovisionEvents1 = new List<ManualResetEvent>();
         List<ManualResetEvent> SynchronizationEvents = new List<ManualResetEvent>();
+        List<ManualResetEvent> SynchronizationEvents1 = new List<ManualResetEvent>();
 
         public Synchronization()
         {
@@ -44,7 +47,6 @@ namespace CMS2.Client.SyncHelper
 
         public Synchronization(List<SyncTables> tables, bool isProvision, bool isDeprovisionClient, bool isDeprovisionServer, string BranchCorpOfficeId, string Filter)
         {
-
             if (ValidateConnectionStrings(ConfigurationManager.ConnectionStrings["Cms"].ConnectionString, ConfigurationManager.ConnectionStrings["CmsCentral"].ConnectionString))
             {
                 this.ClientConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["Cms"].ConnectionString);
@@ -58,10 +60,11 @@ namespace CMS2.Client.SyncHelper
                 this.DeProvision_Server();
                 this.DeProvision_Client();
                 this.Prepare_Database_For_Synchronization();
+
             }
 
         }
-        
+
         public Synchronization(string clientConnection, string serverConnection, bool isProvision, bool isDeprovisionClient, bool isDeprovisionServer, string BranchCorpOfficeId, string Filter)
         {
             if (ValidateConnectionStrings(clientConnection, serverConnection))
@@ -79,7 +82,7 @@ namespace CMS2.Client.SyncHelper
                 this.Prepare_Database_For_Synchronization();
             }
         }
-        
+
         private bool ValidateConnectionStrings(string _local, string _server)
         {
             if (_local == _server)
@@ -96,28 +99,43 @@ namespace CMS2.Client.SyncHelper
             {
                 return;
             }
-
-            foreach (SyncTables table in Entities)
+            for (int i = 0; i < Entities.Count - 1; i++)
             {
                 ManualResetEvent _newEvent = new ManualResetEvent(false);
-                ProvisionEvents.Add(_newEvent);
-                Provision _provision = new Provision(table.TableName, ClientConnection, ServerConnection, _newEvent, Filter, DeviceBranchCorpOfficeID);
-                ThreadPool.QueueUserWorkItem(_provision.Prepare_Database_For_Synchronization, table);
 
-            }
+                if (i<= 60)
+                {
+                    ProvisionEvents.Add(_newEvent);
+                }
+                else
+                {
+                    ProvisionEvents1.Add(_newEvent);
+                }
+                
+                Provision _provision = new Provision(Entities[i].TableName, ClientConnection, ServerConnection, _newEvent, Filter, DeviceBranchCorpOfficeID);
+                ThreadPool.QueueUserWorkItem(new WaitCallback(_provision.Prepare_Database_For_Synchronization), Entities[i]);
+            }            
         }
 
         public void Synchronize()
         {
             try
             {
-                foreach (SyncTables table in Entities)
+                for (int i = 0; i < Entities.Count - 1; i++)
                 {
                     ManualResetEvent _newEvent = new ManualResetEvent(false);
-                    SynchronizationEvents.Add(_newEvent);
-                    Synchronize sync = new Synchronize(table.TableName, Filter, _newEvent, ClientConnection, ServerConnection);
-                    ThreadPool.QueueUserWorkItem(sync.PerformSync, table);
-                }
+                    if (i<=60)
+                    {
+                        SynchronizationEvents.Add(_newEvent);
+                    }
+                    else
+                    {
+                        SynchronizationEvents1.Add(_newEvent);
+                    }
+                    
+                    Synchronize sync = new Synchronize(Entities[i].TableName, Filter, _newEvent, ClientConnection, ServerConnection);
+                    ThreadPool.QueueUserWorkItem(sync.PerformSync, Entities[i]);
+                }                
             }
             catch (Exception ex)
             {
@@ -125,44 +143,7 @@ namespace CMS2.Client.SyncHelper
             }
 
         }
-
-        public SyncTables CheckTableState(SyncTables table, string Filter)
-        {
-            ThreadState _threadState = new ThreadState();
-            _threadState.table = table;
-            try
-            {                
-                SynchronizationEvents.Add(_threadState._event);
-                Synchronize sync = new Synchronize(table.TableName, Filter, _threadState._event, ClientConnection, ServerConnection);
-                ThreadPool.QueueUserWorkItem(sync.PerformSync, _threadState);
-
-                _threadState._event.WaitOne();
-                _threadState.table.Status = TableStatus.Good;
-                return _threadState.table;
-
-            }
-            catch (Exception)
-            {
-                _threadState.table.Status = TableStatus.Bad;
-                return _threadState.table;
-            }
-        }
-
-        public void Synchronize(SyncTables table)
-        {
-            try
-            {
-                ManualResetEvent _newEvent = new ManualResetEvent(false);
-                SynchronizationEvents.Add(_newEvent);
-                Synchronize sync = new Synchronize(table.TableName, Filter, _newEvent, ClientConnection, ServerConnection);
-                ThreadPool.QueueUserWorkItem(sync.PerformSync, table.TableName);
-            }
-            catch (Exception ex)
-            {
-                Log.WriteErrorLogs(table.TableName,ex);
-            }
-        }
-
+        
         /// <summary>
         /// Remove the "_Filter_template" template from the server database.
         /// This also removes all of the scopes that depend on the template.            
@@ -190,7 +171,7 @@ namespace CMS2.Client.SyncHelper
                 ManualResetEvent _newEvent = new ManualResetEvent(false);
                 DeprovisionEvents.Add(_newEvent);
                 Deprovision _deprovision = new Deprovision(ServerConnection, _newEvent, Filter, tableName);
-                ThreadPool.QueueUserWorkItem(_deprovision.PerformDeprovision, tableName);
+                ThreadPool.QueueUserWorkItem(_deprovision.PerformDeprovisionTable, tableName);
             }
             catch (Exception ex)
             {
@@ -207,13 +188,20 @@ namespace CMS2.Client.SyncHelper
 
             try
             {
-                foreach (SyncTables table in Entities)
+                for (int i = 0; i < Entities.Count -1 ; i++)
                 {
                     ManualResetEvent _newEvent = new ManualResetEvent(false);
-                    DeprovisionEvents.Add(_newEvent);
-                    Deprovision _deprovision = new Deprovision(ServerConnection, _newEvent, Filter, table.TableName);
-                    ThreadPool.QueueUserWorkItem(_deprovision.PerformDeprovision, table);
-                }
+                    if (i<60)
+                    {
+                        DeprovisionEvents.Add(_newEvent);
+                    }
+                    else
+                    {
+                        DeprovisionEvents1.Add(_newEvent);
+                    }                    
+                    Deprovision _deprovision = new Deprovision(ServerConnection, _newEvent, Filter, Entities[i].TableName);
+                    ThreadPool.QueueUserWorkItem(new WaitCallback( _deprovision.PerformDeprovisionTable), Entities[i]);
+                }                
             }
             catch (Exception ex)
             {
@@ -231,13 +219,20 @@ namespace CMS2.Client.SyncHelper
 
             try
             {
-                foreach (SyncTables table in Entities)
+                for (int i = 0; i < Entities.Count - 1; i++)
                 {
                     ManualResetEvent _newEvent = new ManualResetEvent(false);
-                    DeprovisionEvents.Add(_newEvent);
-                    Deprovision _deprovision = new Deprovision(ClientConnection, _newEvent, Filter, table.TableName);
-                    ThreadPool.QueueUserWorkItem(_deprovision.PerformDeprovision, table);
-                }
+                    if (i < 60)
+                    {
+                        DeprovisionEvents.Add(_newEvent);
+                    }
+                    else
+                    {
+                        DeprovisionEvents1.Add(_newEvent);
+                    }
+                    Deprovision _deprovision = new Deprovision(ClientConnection, _newEvent, Filter, Entities[i].TableName);
+                    ThreadPool.QueueUserWorkItem(new WaitCallback(_deprovision.PerformDeprovisionTable), Entities[i]);
+                }  
             }
             catch (Exception ex)
             {
@@ -251,9 +246,8 @@ namespace CMS2.Client.SyncHelper
             try
             {
                 ManualResetEvent _newEvent = new ManualResetEvent(false);
-                DeprovisionEvents.Add(_newEvent);
                 Deprovision _deprovision = new Deprovision(ServerConnection, _newEvent, Filter, tableName);
-                ThreadPool.QueueUserWorkItem(_deprovision.PerformDeprovision, tableName);
+                ThreadPool.QueueUserWorkItem(_deprovision.PerformDeprovisionTable, tableName);
             }
             catch (Exception ex)
             {
@@ -271,7 +265,7 @@ namespace CMS2.Client.SyncHelper
 
 
                 IEnumerable<EntityType> tables = workspace.GetItems<EntityType>(DataSpace.SSpace);
-                
+
                 foreach (var item in tables)
                 {
                     SyncTables table = new SyncTables();
@@ -308,7 +302,7 @@ namespace CMS2.Client.SyncHelper
             syncOrchestrator.LocalProvider = new SqlSyncProvider(_tableName + _filter, _localConnection);
             syncOrchestrator.RemoteProvider = new SqlSyncProvider(_tableName + _filter, _serverConnection);
             SyncOperationStatistics syncStats;
-
+            ThreadState State = (ThreadState)obj;
             switch (_tableName)
             {
 
@@ -332,15 +326,18 @@ namespace CMS2.Client.SyncHelper
 
                         syncStats = syncOrchestrator.Synchronize();
 
-                        Console.Write(_tableName + " Total Changes Uploaded: " + syncStats.UploadChangesTotal + " Total Changes Downloaded: " + syncStats.DownloadChangesTotal + " Total Changes applied: " + syncStats.DownloadChangesApplied + " Total Changes failed: " + syncStats.DownloadChangesFailed);
                         Log.WriteLogs(_tableName + " Total Changes Uploaded: " + syncStats.UploadChangesTotal + " Total Changes Downloaded: " + syncStats.DownloadChangesTotal + " Total Changes applied: " + syncStats.DownloadChangesApplied + " Total Changes failed: " + syncStats.DownloadChangesFailed);
-                        obj = ((ThreadState)obj).table.Status = TableStatus.Good;                        
+
+                        State.table.Status = TableStatus.Good;
+                        State.table.isSelected = false;
+
                         break;
                     }
                     catch (Exception ex)
                     {
                         Log.WriteErrorLogs(ex);
-                        obj = ((ThreadState)obj).table.Status = TableStatus.Bad;
+                        State.table.Status = TableStatus.Bad;
+                        State.table.isSelected = true;
                     }
                     break;
 
@@ -350,26 +347,27 @@ namespace CMS2.Client.SyncHelper
                     {
                         syncStats = syncOrchestrator.Synchronize();
 
-                        Console.Write(_tableName + " Total Changes Uploaded: " + syncStats.UploadChangesTotal + " Total Changes Downloaded: " + syncStats.DownloadChangesTotal + " Total Changes applied: " + syncStats.DownloadChangesApplied + " Total Changes failed: " + syncStats.DownloadChangesFailed);
                         Log.WriteLogs(_tableName + " Total Changes Uploaded: " + syncStats.UploadChangesTotal + " Total Changes Downloaded: " + syncStats.DownloadChangesTotal + " Total Changes applied: " + syncStats.DownloadChangesApplied + " Total Changes failed: " + syncStats.DownloadChangesFailed);
-                        obj = ((ThreadState)obj).table.Status = TableStatus.Good;     
+                        State.table.Status = TableStatus.Good;
+                        State.table.isSelected = false;
                         break;
                     }
                     catch (Exception ex)
                     {
                         Log.WriteErrorLogs(ex);
-                        obj = ((ThreadState)obj).table.Status = TableStatus.Bad;     
+                        State.table.Status = TableStatus.Bad;
+                        State.table.isSelected = true;
                     }
                     break;
             }
 
-            _currentEvent.Set();
+            State._event.Set();
 
         }
 
     }
 
-     class Provision
+    class Provision
     {
 
         SqlConnection _serverConnection;
@@ -399,216 +397,261 @@ namespace CMS2.Client.SyncHelper
         {
 
             SqlParameter param;
-
-            string filterColumn = "";
-            string filterClause = "";
-            switch (_tableName)
+            ThreadState state = (ThreadState)obj;
+            try
             {
-                case "Booking":
 
-                    filterColumn = "AssignedToAreaId";
-                    filterClause = "[side].[AssignedToAreaId] IN (SELECT book.AssignedToAreaId  FROM Booking as book " +
-                                    "left join RevenueUnit as ru on ru.RevenueUnitId = book.AssignedToAreaId " +
-                                    "left join City as city on city.CityId = ru.CityId " +
-                                    "where city.BranchCorpOfficeId = @BranchCorpOfficeId)";
-                    param = new SqlParameter("@BranchCorpOfficeId", SqlDbType.UniqueIdentifier);
+                string filterColumn = "";
+                string filterClause = "";
+                switch (_tableName)
+                {
+                    case "Booking":
 
-                    CreateTemplate(_tableName, filterColumn, filterClause, param);
+                        filterColumn = "AssignedToAreaId";
+                        filterClause = "[side].[AssignedToAreaId] IN (SELECT book.AssignedToAreaId  FROM Booking as book " +
+                                        "left join RevenueUnit as ru on ru.RevenueUnitId = book.AssignedToAreaId " +
+                                        "left join City as city on city.CityId = ru.CityId " +
+                                        "where city.BranchCorpOfficeId = @BranchCorpOfficeId)";
+                        param = new SqlParameter("@BranchCorpOfficeId", SqlDbType.UniqueIdentifier);
 
-                    ProvisionServer(_tableName, param, _branchCorpOfficeId);
+                        CreateTemplate(_tableName, filterColumn, filterClause, param);
 
-                    ProvisionClient(_tableName);
+                        ProvisionServer(_tableName, param, _branchCorpOfficeId);
 
-                    break;
-                case "Shipment":
+                        ProvisionClient(_tableName);
 
-                    filterColumn = "ShipmentId";
-                    filterClause = "[side].[ShipmentId] In (SELECT ship.ShipmentId FROM Shipment as ship " +
-                                    "left join Booking as book on book.BookingId = ship.BookingId " +
-                                    "left join RevenueUnit as ru on ru.RevenueUnitId = book.AssignedToAreaId " +
-                                    "left join City as city on city.CityId = ru.CityId " +
-                                    "where city.BranchCorpOfficeId = @BranchCorpOfficeId)";
-                    param = new SqlParameter("@BranchCorpOfficeId", SqlDbType.UniqueIdentifier);
+                        state._event.Set();
+                        state.table.Status = TableStatus.Provisioned;
 
-                    CreateTemplate(_tableName, filterColumn, filterClause, param);
+                        break;
+                    case "Shipment":
 
-                    ProvisionServer(_tableName, param, _branchCorpOfficeId);
+                        filterColumn = "ShipmentId";
+                        filterClause = "[side].[ShipmentId] In (SELECT ship.ShipmentId FROM Shipment as ship " +
+                                        "left join Booking as book on book.BookingId = ship.BookingId " +
+                                        "left join RevenueUnit as ru on ru.RevenueUnitId = book.AssignedToAreaId " +
+                                        "left join City as city on city.CityId = ru.CityId " +
+                                        "where city.BranchCorpOfficeId = @BranchCorpOfficeId)";
+                        param = new SqlParameter("@BranchCorpOfficeId", SqlDbType.UniqueIdentifier);
 
-                    ProvisionClient(_tableName);
+                        CreateTemplate(_tableName, filterColumn, filterClause, param);
 
-                    break;
+                        ProvisionServer(_tableName, param, _branchCorpOfficeId);
 
-                case "PackageNumber":
+                        ProvisionClient(_tableName);
 
-                    filterColumn = "ShipmentId";
-                    filterClause = "[side].[ShipmentId] In (SELECT pack.ShipmentId FROM PackageNumber as pack " +
-                                    "left join   Shipment as ship on ship.ShipmentId = pack.ShipmentId " +
-                                    "left join Booking as book on book.BookingId = ship.BookingId " +
-                                    "left join RevenueUnit as ru on ru.RevenueUnitId = book.AssignedToAreaId " +
-                                    "left join City as city on city.CityId = ru.CityId " +
-                                    "where city.BranchCorpOfficeId = @BranchCorpOfficeId)";
-                    param = new SqlParameter("@BranchCorpOfficeId", SqlDbType.UniqueIdentifier);
+                        state._event.Set();
+                        state.table.Status = TableStatus.Provisioned;
 
-                    CreateTemplate(_tableName, filterColumn, filterClause, param);
+                        break;
 
-                    ProvisionServer(_tableName, param, _branchCorpOfficeId);
+                    case "PackageNumber":
 
-                    ProvisionClient(_tableName);
+                        filterColumn = "ShipmentId";
+                        filterClause = "[side].[ShipmentId] In (SELECT pack.ShipmentId FROM PackageNumber as pack " +
+                                        "left join   Shipment as ship on ship.ShipmentId = pack.ShipmentId " +
+                                        "left join Booking as book on book.BookingId = ship.BookingId " +
+                                        "left join RevenueUnit as ru on ru.RevenueUnitId = book.AssignedToAreaId " +
+                                        "left join City as city on city.CityId = ru.CityId " +
+                                        "where city.BranchCorpOfficeId = @BranchCorpOfficeId)";
+                        param = new SqlParameter("@BranchCorpOfficeId", SqlDbType.UniqueIdentifier);
 
-                    break;
+                        CreateTemplate(_tableName, filterColumn, filterClause, param);
 
-                case "PackageDimension":
+                        ProvisionServer(_tableName, param, _branchCorpOfficeId);
 
-                    filterColumn = "ShipmentId";
-                    filterClause = "[side].[ShipmentId] In (SELECT pack.ShipmentId FROM PackageDimension as pack " +
-                                    "left join   Shipment as ship on ship.ShipmentId = pack.ShipmentId " +
-                                    "left join Booking as book on book.BookingId = ship.BookingId " +
-                                    "left join RevenueUnit as ru on ru.RevenueUnitId = book.AssignedToAreaId " +
-                                    "left join City as city on city.CityId = ru.CityId " +
-                                    "where city.BranchCorpOfficeId = @BranchCorpOfficeId)";
-                    param = new SqlParameter("@BranchCorpOfficeId", SqlDbType.UniqueIdentifier);
+                        ProvisionClient(_tableName);
 
-                    CreateTemplate(_tableName, filterColumn, filterClause, param);
+                        state._event.Set();
+                        state.table.Status = TableStatus.Provisioned;
 
-                    ProvisionServer(_tableName, param, _branchCorpOfficeId);
+                        break;
 
-                    ProvisionClient(_tableName);
+                    case "PackageDimension":
 
-                    break;
+                        filterColumn = "ShipmentId";
+                        filterClause = "[side].[ShipmentId] In (SELECT pack.ShipmentId FROM PackageDimension as pack " +
+                                        "left join   Shipment as ship on ship.ShipmentId = pack.ShipmentId " +
+                                        "left join Booking as book on book.BookingId = ship.BookingId " +
+                                        "left join RevenueUnit as ru on ru.RevenueUnitId = book.AssignedToAreaId " +
+                                        "left join City as city on city.CityId = ru.CityId " +
+                                        "where city.BranchCorpOfficeId = @BranchCorpOfficeId)";
+                        param = new SqlParameter("@BranchCorpOfficeId", SqlDbType.UniqueIdentifier);
 
-                case "StateOfAccountPayment":
+                        CreateTemplate(_tableName, filterColumn, filterClause, param);
 
-                    filterColumn = "StatementOfAccountId";
-                    filterClause = "[side].[StatementOfAccountId] In (Select soaPayment.StatementOfAccountId from StatementOfAccountPayment as soaPayment " +
-                                    "left join StatementOfAccount as soa on soa.StatementOfAccountId = soaPayment.StatementOfAccountId " +
-                                    "left join Company as company on company.CompanyId = soa.CompanyId " +
-                                    "left join City as city on city.CityId = company.CityId " +
-                                    "left join BranchCorpOffice as bco on bco.BranchCorpOfficeId = city.BranchCorpOfficeId " +
-                                    "where bco.BranchCorpOfficeId = @BranchCorpOfficeId)";
-                    param = new SqlParameter("@BranchCorpOfficeId", SqlDbType.UniqueIdentifier);
+                        ProvisionServer(_tableName, param, _branchCorpOfficeId);
 
-                    CreateTemplate(_tableName, filterColumn, filterClause, param);
+                        ProvisionClient(_tableName);
 
-                    ProvisionServer(_tableName, param, _branchCorpOfficeId);
+                        state._event.Set();
+                        state.table.Status = TableStatus.Provisioned;
 
-                    ProvisionClient(_tableName);
+                        break;
 
-                    break;
-                case "Payment":
+                    case "StateOfAccountPayment":
 
-                    filterColumn = "ShipmentId";
-                    filterClause = "[side].[ShipmentId] In (Select payment.ShipmentId from Payment as payment " +
-                                    "left join Shipment as shipment on shipment.ShipmentId = payment.ShipmentId " +
-                                    "left join Booking as book on book.BookingId = shipment.BookingId " +
-                                    "left join RevenueUnit as ru on ru.RevenueUnitId = book.AssignedToAreaId " +
-                                    "left join City as city on city.CityId = ru.CityId " +
-                                    "where city.BranchCorpOfficeId = @BranchCorpOfficeId)";
-                    param = new SqlParameter("@BranchCorpOfficeId", SqlDbType.UniqueIdentifier);
+                        filterColumn = "StatementOfAccountId";
+                        filterClause = "[side].[StatementOfAccountId] In (Select soaPayment.StatementOfAccountId from StatementOfAccountPayment as soaPayment " +
+                                        "left join StatementOfAccount as soa on soa.StatementOfAccountId = soaPayment.StatementOfAccountId " +
+                                        "left join Company as company on company.CompanyId = soa.CompanyId " +
+                                        "left join City as city on city.CityId = company.CityId " +
+                                        "left join BranchCorpOffice as bco on bco.BranchCorpOfficeId = city.BranchCorpOfficeId " +
+                                        "where bco.BranchCorpOfficeId = @BranchCorpOfficeId)";
+                        param = new SqlParameter("@BranchCorpOfficeId", SqlDbType.UniqueIdentifier);
 
-                    CreateTemplate(_tableName, filterColumn, filterClause, param);
+                        CreateTemplate(_tableName, filterColumn, filterClause, param);
 
-                    ProvisionServer(_tableName, param, _branchCorpOfficeId);
+                        ProvisionServer(_tableName, param, _branchCorpOfficeId);
 
-                    ProvisionClient(_tableName);
+                        ProvisionClient(_tableName);
 
-                    break;
-                case "PaymenTurnOver":
+                        state._event.Set();
+                        state.table.Status = TableStatus.Provisioned;
 
-                    filterColumn = "CollectedById";
-                    filterClause = "[side].[CollectedById] In (Select turnOver.CollectedById From PaymentTurnOver as turnOver " +
-                                    "left join Employee as emp on emp.EmployeeId = turnOver.CollectedById " +
-                                    "left join RevenueUnit as ru on ru.RevenueUnitId = emp.AssignedToAreaId " +
-                                    "left join City as city on city.CityId = ru.CityId " +
-                                    "where city.BranchCorpOfficeId = @BranchCorpOfficeId)";
-                    param = new SqlParameter("@BranchCorpOfficeId", SqlDbType.UniqueIdentifier);
+                        break;
+                    case "Payment":
 
-                    CreateTemplate(_tableName, filterColumn, filterClause, param);
+                        filterColumn = "ShipmentId";
+                        filterClause = "[side].[ShipmentId] In (Select payment.ShipmentId from Payment as payment " +
+                                        "left join Shipment as shipment on shipment.ShipmentId = payment.ShipmentId " +
+                                        "left join Booking as book on book.BookingId = shipment.BookingId " +
+                                        "left join RevenueUnit as ru on ru.RevenueUnitId = book.AssignedToAreaId " +
+                                        "left join City as city on city.CityId = ru.CityId " +
+                                        "where city.BranchCorpOfficeId = @BranchCorpOfficeId)";
+                        param = new SqlParameter("@BranchCorpOfficeId", SqlDbType.UniqueIdentifier);
 
-                    ProvisionServer(_tableName, param, _branchCorpOfficeId);
+                        CreateTemplate(_tableName, filterColumn, filterClause, param);
 
-                    ProvisionClient(_tableName);
+                        ProvisionServer(_tableName, param, _branchCorpOfficeId);
 
-                    break;
-                case "ShipmentAdjustment":
+                        ProvisionClient(_tableName);
 
-                    filterColumn = "ShipmentId";
-                    filterClause = "[side].[ShipmentId] In (Select adjustment.ShipmentId from ShipmentAdjustment as adjustment " +
-                                    "left join Shipment as shipment on shipment.ShipmentId = adjustment.ShipmentId " +
-                                    "left join Booking as book on book.BookingId = shipment.BookingId " +
-                                    "left join RevenueUnit as ru on ru.RevenueUnitId = book.AssignedToAreaId " +
-                                    "left join City as city on city.CityId = ru.CityId " +
-                                    "where city.BranchCorpOfficeId = @BranchCorpOfficeId)";
-                    param = new SqlParameter("@BranchCorpOfficeId", SqlDbType.UniqueIdentifier);
+                        state._event.Set();
+                        state.table.Status = TableStatus.Provisioned;
 
-                    CreateTemplate(_tableName, filterColumn, filterClause, param);
+                        break;
+                    case "PaymenTurnOver":
 
-                    ProvisionServer(_tableName, param, _branchCorpOfficeId);
+                        filterColumn = "CollectedById";
+                        filterClause = "[side].[CollectedById] In (Select turnOver.CollectedById From PaymentTurnOver as turnOver " +
+                                        "left join Employee as emp on emp.EmployeeId = turnOver.CollectedById " +
+                                        "left join RevenueUnit as ru on ru.RevenueUnitId = emp.AssignedToAreaId " +
+                                        "left join City as city on city.CityId = ru.CityId " +
+                                        "where city.BranchCorpOfficeId = @BranchCorpOfficeId)";
+                        param = new SqlParameter("@BranchCorpOfficeId", SqlDbType.UniqueIdentifier);
 
-                    ProvisionClient(_tableName);
-                    break;
-                case "Delivery":
+                        CreateTemplate(_tableName, filterColumn, filterClause, param);
 
-                    filterColumn = "ShipmentId";
-                    filterClause = "[side].[ShipmentId] In (Select delivery.ShipmentId from Delivery as delivery " +
-                                    "left join Shipment as shipment on shipment.ShipmentId = delivery.ShipmentId " +
-                                    "left join Booking as book on book.BookingId = shipment.BookingId " +
-                                    "left join RevenueUnit as ru on ru.RevenueUnitId = book.AssignedToAreaId " +
-                                    "left join City as city on city.CityId = ru.CityId " +
-                                    "where city.BranchCorpOfficeId = @BranchCorpOfficeId)";
-                    param = new SqlParameter("@BranchCorpOfficeId", SqlDbType.UniqueIdentifier);
+                        ProvisionServer(_tableName, param, _branchCorpOfficeId);
 
-                    CreateTemplate(_tableName, filterColumn, filterClause, param);
+                        ProvisionClient(_tableName);
 
-                    ProvisionServer(_tableName, param, _branchCorpOfficeId);
+                        state._event.Set();
+                        state.table.Status = TableStatus.Provisioned;
 
-                    ProvisionClient(_tableName);
+                        break;
+                    case "ShipmentAdjustment":
 
-                    break;
-                case "DeliveryPackage":
+                        filterColumn = "ShipmentId";
+                        filterClause = "[side].[ShipmentId] In (Select adjustment.ShipmentId from ShipmentAdjustment as adjustment " +
+                                        "left join Shipment as shipment on shipment.ShipmentId = adjustment.ShipmentId " +
+                                        "left join Booking as book on book.BookingId = shipment.BookingId " +
+                                        "left join RevenueUnit as ru on ru.RevenueUnitId = book.AssignedToAreaId " +
+                                        "left join City as city on city.CityId = ru.CityId " +
+                                        "where city.BranchCorpOfficeId = @BranchCorpOfficeId)";
+                        param = new SqlParameter("@BranchCorpOfficeId", SqlDbType.UniqueIdentifier);
 
-                    filterColumn = "DeliveryId";
-                    filterClause = "[side].[DeliveryId] In (Select package.DeliveryId from DeliveredPackage as package  " +
-                                    "left join Delivery as delivery on delivery.DeliveryId = package.DeliveryId " +
-                                    "left join Shipment as shipment on shipment.ShipmentId = delivery.ShipmentId " +
-                                    "left join Booking as book on book.BookingId = shipment.BookingId " +
-                                    "left join RevenueUnit as ru on ru.RevenueUnitId = book.AssignedToAreaId " +
-                                    "left join City as city on city.CityId = ru.CityId " +
-                                    "where city.BranchCorpOfficeId = @BranchCorpOfficeId)";
-                    param = new SqlParameter("@BranchCorpOfficeId", SqlDbType.UniqueIdentifier);
+                        CreateTemplate(_tableName, filterColumn, filterClause, param);
 
-                    CreateTemplate(_tableName, filterColumn, filterClause, param);
+                        ProvisionServer(_tableName, param, _branchCorpOfficeId);
 
-                    ProvisionServer(_tableName, param, _branchCorpOfficeId);
+                        ProvisionClient(_tableName);
 
-                    ProvisionClient(_tableName);
+                        state._event.Set();
+                        state.table.Status = TableStatus.Provisioned;
 
-                    break;
-                case "DeliveryReceipt":
+                        break;
+                    case "Delivery":
 
-                    filterColumn = "DeliveryId";
-                    filterClause = "[side].[DeliveryId] In (Select receipt.DeliveryId from DeliveryReceipt as receipt " +
-                                    "left join Delivery as delivery on delivery.DeliveryId = receipt.DeliveryId " +
-                                    "left join Shipment as shipment on shipment.ShipmentId = delivery.ShipmentId " +
-                                    "left join Booking as book on book.BookingId = shipment.BookingId " +
-                                    "left join RevenueUnit as ru on ru.RevenueUnitId = book.AssignedToAreaId " +
-                                    "left join City as city on city.CityId = ru.CityId " +
-                                    "where city.BranchCorpOfficeId = @BranchCorpOfficeId)";
-                    param = new SqlParameter("@BranchCorpOfficeId", SqlDbType.UniqueIdentifier);
+                        filterColumn = "ShipmentId";
+                        filterClause = "[side].[ShipmentId] In (Select delivery.ShipmentId from Delivery as delivery " +
+                                        "left join Shipment as shipment on shipment.ShipmentId = delivery.ShipmentId " +
+                                        "left join Booking as book on book.BookingId = shipment.BookingId " +
+                                        "left join RevenueUnit as ru on ru.RevenueUnitId = book.AssignedToAreaId " +
+                                        "left join City as city on city.CityId = ru.CityId " +
+                                        "where city.BranchCorpOfficeId = @BranchCorpOfficeId)";
+                        param = new SqlParameter("@BranchCorpOfficeId", SqlDbType.UniqueIdentifier);
 
-                    CreateTemplate(_tableName, filterColumn, filterClause, param);
+                        CreateTemplate(_tableName, filterColumn, filterClause, param);
 
-                    ProvisionServer(_tableName, param, _branchCorpOfficeId);
+                        ProvisionServer(_tableName, param, _branchCorpOfficeId);
 
-                    ProvisionClient(_tableName);
+                        ProvisionClient(_tableName);
 
-                    break;
-                default:
-                    ProvisionServer(_tableName);
-                    ProvisionClient(_tableName);
-                    break;
-                   
+                        state._event.Set();
+                        state.table.Status = TableStatus.Provisioned;
+
+                        break;
+                    case "DeliveryPackage":
+
+                        filterColumn = "DeliveryId";
+                        filterClause = "[side].[DeliveryId] In (Select package.DeliveryId from DeliveredPackage as package  " +
+                                        "left join Delivery as delivery on delivery.DeliveryId = package.DeliveryId " +
+                                        "left join Shipment as shipment on shipment.ShipmentId = delivery.ShipmentId " +
+                                        "left join Booking as book on book.BookingId = shipment.BookingId " +
+                                        "left join RevenueUnit as ru on ru.RevenueUnitId = book.AssignedToAreaId " +
+                                        "left join City as city on city.CityId = ru.CityId " +
+                                        "where city.BranchCorpOfficeId = @BranchCorpOfficeId)";
+                        param = new SqlParameter("@BranchCorpOfficeId", SqlDbType.UniqueIdentifier);
+
+                        CreateTemplate(_tableName, filterColumn, filterClause, param);
+
+                        ProvisionServer(_tableName, param, _branchCorpOfficeId);
+
+                        ProvisionClient(_tableName);
+
+                        state._event.Set();
+                        state.table.Status = TableStatus.Provisioned;
+
+                        break;
+                    case "DeliveryReceipt":
+
+                        filterColumn = "DeliveryId";
+                        filterClause = "[side].[DeliveryId] In (Select receipt.DeliveryId from DeliveryReceipt as receipt " +
+                                        "left join Delivery as delivery on delivery.DeliveryId = receipt.DeliveryId " +
+                                        "left join Shipment as shipment on shipment.ShipmentId = delivery.ShipmentId " +
+                                        "left join Booking as book on book.BookingId = shipment.BookingId " +
+                                        "left join RevenueUnit as ru on ru.RevenueUnitId = book.AssignedToAreaId " +
+                                        "left join City as city on city.CityId = ru.CityId " +
+                                        "where city.BranchCorpOfficeId = @BranchCorpOfficeId)";
+                        param = new SqlParameter("@BranchCorpOfficeId", SqlDbType.UniqueIdentifier);
+
+                        CreateTemplate(_tableName, filterColumn, filterClause, param);
+
+                        ProvisionServer(_tableName, param, _branchCorpOfficeId);
+
+                        ProvisionClient(_tableName);
+
+                        state._event.Set();
+                        state.table.Status = TableStatus.Provisioned;
+
+                        break;
+                    default:
+                        ProvisionServer(_tableName);
+                        ProvisionClient(_tableName);
+
+                        state._event.Set();
+                        state.table.Status = TableStatus.Provisioned;
+
+                        break;
+                }
             }
-            _currentEvent.Set();            
+            catch (Exception ex)
+            {
+                state._event.Set();
+                state.table.Status = TableStatus.ErrorProvision;
+            }
         }
 
         private void ProvisionServer(string TableName)
@@ -667,12 +710,10 @@ namespace CMS2.Client.SyncHelper
                 if (!serverProvision.ScopeExists(serverProvision.ScopeName))
                 {
                     serverProvision.Apply();
-                    Console.WriteLine("Server " + TableName + " was provisioned.");
                     Log.WriteLogs("Server " + TableName + " was provisioned.");
                 }
                 else
                 {
-                    Console.WriteLine("Server " + TableName + " was already provisioned.");
                     Log.WriteLogs("Server " + TableName + " was provisioned.");
                 }
             }
@@ -691,12 +732,10 @@ namespace CMS2.Client.SyncHelper
             if (!clientProvision.ScopeExists(scopeDescription.ScopeName))
             {
                 clientProvision.Apply();
-                Console.WriteLine("Client " + TableName + " was provisioned.");
                 Log.WriteLogs("Client " + TableName + " was provisioned.");
             }
             else
             {
-                Console.WriteLine("Client " + TableName + " was already provisioned.");
                 Log.WriteLogs("Client " + TableName + " was already provisioned.");
             }
         }
@@ -764,7 +803,7 @@ namespace CMS2.Client.SyncHelper
 
     }
 
-     class Deprovision
+    class Deprovision
     {
         private SqlConnection _connection;
         private ManualResetEvent _currentEvent;
@@ -779,45 +818,78 @@ namespace CMS2.Client.SyncHelper
             this._tableName = tableName;
         }
 
-        public void PerformDeprovision(Object obj)
+        public void PerformDeprovisionTable(Object obj)
         {
+            ThreadState state = (ThreadState)obj;
             try
             {
-                SqlSyncScopeDeprovisioning storeClientDeprovision = new SqlSyncScopeDeprovisioning(_connection);
+                SqlSyncScopeDeprovisioning storeClientDeprovision = new SqlSyncScopeDeprovisioning(_connection);                
                 storeClientDeprovision.DeprovisionScope(this._tableName + this._filter);
-                Console.WriteLine("Server " + _tableName + " was Deprovision.");
-                Log.WriteLogs("Server " + _tableName + " was Deprovision.");
-                _currentEvent.Set();
+                Log.WriteLogs("Server " + _tableName + " was Deprovision.");                
+                state.table.Status = TableStatus.Deprovisioned;               
             }
             catch (Exception ex)
             {
-                Log.WriteErrorLogs(_tableName,ex);
+                Log.WriteErrorLogs(_tableName, ex);
             }
+            state._event.Set();
 
 
-           
         }
+
+        public void PerformDeprovisionDatabase(object obj)
+        {
+            ManualResetEvent _event = (ManualResetEvent)obj;
+            try
+            {
+                 SqlSyncScopeDeprovisioning storeClientDeprovision = new SqlSyncScopeDeprovisioning(_connection);
+                storeClientDeprovision.DeprovisionStore();
+
+                Log.WriteLogs("Database was Deprovisioned.");               
+            }
+            catch (Exception ex)
+            {
+                Log.WriteErrorLogs(ex);
+            }
+            _event.Set();
+        }
+
+        public void PerformDeprovisionTemplate(object obj)
+        {
+            try
+            {
+                SqlSyncScopeDeprovisioning templateDeprovision = new SqlSyncScopeDeprovisioning(_connection);
+                templateDeprovision.DeprovisionTemplate(_tableName + "Filter");
+
+                Log.WriteLogs("Template was Deprovisioned.");
+            }
+            catch (Exception ex)
+            {
+                Log.WriteErrorLogs(ex);
+            }
+        }
+                
     }
 
     static class Log
     {
         public static async Task WriteLogs(string Logs)
         {
-            string _fileName = "\\Logs" + DateTime.Now.Day.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Year.ToString() + ".txt";
+            string _fileName = "\\Logs\\SyncTransactionLogs" + DateTime.Now.Day.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Year.ToString() + ".txt";
             System.IO.File.AppendAllText(AppDomain.CurrentDomain.BaseDirectory + _fileName, Environment.NewLine + DateTime.Now.ToString() + " :: " + Logs);
 
         }
 
         public static async Task WriteErrorLogs(Exception ex)
         {
-            string _fileName = "\\ErrorLogs" + DateTime.Now.Day.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Year.ToString() + ".txt";
+            string _fileName = "\\Logs\\SyncErrorLogs" + DateTime.Now.Day.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Year.ToString() + ".txt";
             System.IO.File.AppendAllText(AppDomain.CurrentDomain.BaseDirectory + _fileName, Environment.NewLine + DateTime.Now.ToString() + " :: " + ex.Message.ToString());
             System.IO.File.AppendAllText(AppDomain.CurrentDomain.BaseDirectory + _fileName, Environment.NewLine + DateTime.Now.ToString() + " :: " + ex.StackTrace.ToString());
         }
 
         public static async Task WriteErrorLogs(string Location, Exception ex)
         {
-            string _fileName = "\\ErrorLogs" + DateTime.Now.Day.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Year.ToString() + ".txt";
+            string _fileName = "\\Logs\\SyncErrorLogs" + DateTime.Now.Day.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Year.ToString() + ".txt";
             System.IO.File.AppendAllText(AppDomain.CurrentDomain.BaseDirectory + _fileName, Environment.NewLine + DateTime.Now.ToString() + " :: " + Location);
             System.IO.File.AppendAllText(AppDomain.CurrentDomain.BaseDirectory + _fileName, Environment.NewLine + DateTime.Now.ToString() + " :: " + ex.Message.ToString());
             System.IO.File.AppendAllText(AppDomain.CurrentDomain.BaseDirectory + _fileName, Environment.NewLine + DateTime.Now.ToString() + " :: " + ex.StackTrace.ToString());
@@ -829,6 +901,7 @@ namespace CMS2.Client.SyncHelper
         public ManualResetEvent _event = new ManualResetEvent(false);
 
         public SyncTables table;
+
     }
 }
 

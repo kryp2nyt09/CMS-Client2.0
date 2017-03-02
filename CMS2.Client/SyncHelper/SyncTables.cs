@@ -11,8 +11,9 @@ namespace CMS2.Client.SyncHelper
     {
         public SyncTables()
         {
-            Status = TableStatus.Fresh;
-            isSelected = false;
+            Status = TableStatus.Good;
+            isSelected = false;     
+            
         }
         [DisplayName("Tables")]
         public string TableName { get; set; }
@@ -21,12 +22,20 @@ namespace CMS2.Client.SyncHelper
 
         [DisplayName("Select")]
         public bool isSelected { get; set; }
+
+       
+                
     }
 
     public enum TableStatus
     {
         Fresh, // currently provision
-        Good, // working
-        Bad // not working
+        Good, //sync working
+        Bad, //sync not working
+        Provisioned,
+        Deprovisioned,
+        ErrorProvision,
+        ErrorDeprovision
     }
+
 }

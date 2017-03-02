@@ -62,9 +62,9 @@ namespace CMS2.Client
         private List<RevenueUnit> revenueUnits;
         private List<SyncTables> _entities;
 
-        private bool isProvision = false;
-        private bool isDeprovisionClient = false;
-        private bool IsDeprovisionServer = false;
+        private bool isProvision = true;
+        private bool isDeprovisionClient = true;
+        private bool IsDeprovisionServer = true;
 
         #endregion
 
@@ -108,7 +108,13 @@ namespace CMS2.Client
             lstRevenueUnit.DataSource = revenueUnits;
             lstRevenueUnit.DisplayMember = "RevenueUnitName";
             lstRevenueUnit.ValueMember = "RevenueUnitId";
-                        
+
+            _branchCorpOfficeId = ConfigurationManager.AppSettings["BcoId"].ToString();
+            _filter = ConfigurationManager.AppSettings["Filter"].ToString();
+            _localConnectionString = ConfigurationManager.ConnectionStrings["Cms"].ConnectionString;
+            _mainConnectionString = ConfigurationManager.ConnectionStrings["CmsCentral"].ConnectionString;
+
+            SetChekcBoxes();
             SetEntities();
             CheckTableState();
             gridTables.DataSource = _entities;
@@ -190,13 +196,13 @@ namespace CMS2.Client
         }
         private void lstBco_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (lstBco.SelectedIndex > -1 && lstRevenueUnitType.SelectedIndex > - 1)
+            if (lstBco.SelectedIndex > -1 && lstRevenueUnitType.SelectedIndex > -1)
             {
                 List<RevenueUnit> list = new List<RevenueUnit>();
                 list = revenueUnits.Where(x => x.City.BranchCorpOffice.BranchCorpOfficeName == lstBco.SelectedItem.ToString() && x.RevenueUnitType.RevenueUnitTypeName == lstRevenueUnitType.SelectedItem.ToString()).ToList();
                 PopulateRevenueUnit(list);
             }
-            
+
         }
         private void PopulateRevenueUnit(List<RevenueUnit> list)
         {
@@ -290,7 +296,7 @@ namespace CMS2.Client
                 list = revenueUnits.Where(x => x.City.BranchCorpOffice.BranchCorpOfficeId == Guid.Parse(lstBco.SelectedValue.ToString()) && x.RevenueUnitType.RevenueUnitTypeName == lstRevenueUnitType.SelectedItem.ToString()).ToList();
                 PopulateRevenueUnit(list);
             }
-            
+
         }
         private void LocalTestConnection_Click(object sender, EventArgs e)
         {
@@ -373,6 +379,7 @@ namespace CMS2.Client
             {
                 IsDeprovisionServer = false;
             }
+
         }
         private void chkProvision_ToggleStateChanged(object sender, Telerik.WinControls.UI.StateChangedEventArgs args)
         {
@@ -387,18 +394,20 @@ namespace CMS2.Client
         }
         private void btnStart_Click(object sender, EventArgs e)
         {
-            WaitingBar.StartWaiting();
-            Synchronization sync = new Synchronization(
-                this._entities,
-                this.isProvision,
-                this.isDeprovisionClient,
-                this.IsDeprovisionServer,
-                this._branchCorpOfficeId,
-                this._filter);
-
-            WaitingBar.StopWaiting();
-            btnSaveSync.Enabled = true;
-
+            if (isDeprovisionClient)
+            {
+                StartDeprovisionLocal();
+            }
+            if (IsDeprovisionServer)
+            {
+                StartDeprovisionServer();
+            }
+            if (isProvision)
+            {
+                StartProvision();
+            }
+            CheckTableState();
+            gridTables.Refresh();
         }
         #endregion
 
@@ -494,31 +503,163 @@ namespace CMS2.Client
         {
             List<SyncHelper.ThreadState> listOfThread = new List<SyncHelper.ThreadState>();
             List<ManualResetEvent> syncEvents = new List<ManualResetEvent>();
-            foreach (SyncTables table in _entities)
+            List<ManualResetEvent> syncEvents1 = new List<ManualResetEvent>();
+
+            for (int i = 0; i < _entities.Count - 1; i++)
             {
+
                 SyncHelper.ThreadState _threadState = new SyncHelper.ThreadState();
-                _threadState.table = table;
-                syncEvents.Add(_threadState._event);
+                _threadState.table = _entities[i];
                 listOfThread.Add(_threadState);
+
+                if (i <= 50)
+                {
+                    syncEvents.Add(_threadState._event);
+                }
+                else
+                {
+                    syncEvents1.Add(_threadState._event);
+                }
+
                 try
                 {
-                    Synchronize sync = new Synchronize(table.TableName, _filter, _threadState._event, new SqlConnection(_localConnectionString), new SqlConnection(_mainConnectionString));
-                    ThreadPool.QueueUserWorkItem(sync.PerformSync, _threadState);                    
+                    Synchronize sync = new Synchronize(_entities[i].TableName, _filter, _threadState._event, new SqlConnection(_localConnectionString), new SqlConnection(_mainConnectionString));
+                    ThreadPool.QueueUserWorkItem(new WaitCallback(sync.PerformSync), _threadState);
                 }
                 catch (Exception ex)
                 {
-                                      
+
                 }
             }
 
-            WaitHandle.WaitAll(syncEvents.ToArray());
-            foreach (SyncHelper.ThreadState thread in listOfThread)
-            {
-                _entities = new List<SyncTables>();
-                _entities.Add(thread.table);
-            }
-        }
+            WaitHandle.WaitAny(syncEvents.ToArray());
+            WaitHandle.WaitAny(syncEvents1.ToArray());
 
+        }
+        private void StartProvision()
+        {
+            List<SyncHelper.ThreadState> listOfState = new List<SyncHelper.ThreadState>();
+            List<ManualResetEvent> provisionEvents = new List<ManualResetEvent>();
+            List<ManualResetEvent> provisionEvents1 = new List<ManualResetEvent>();
+            SqlConnection localConnection = new SqlConnection(_localConnectionString);
+            SqlConnection mainConnection = new SqlConnection(_mainConnectionString);
+
+            for (int i = 0; i < _entities.Count - 1; i++)
+            {
+                SyncHelper.ThreadState state = new SyncHelper.ThreadState();
+                state.table = _entities[i];
+                listOfState.Add(state);
+                if (i <= 60)
+                {
+                    provisionEvents.Add(state._event);
+                }
+                else
+                {
+                    provisionEvents1.Add(state._event);
+                }
+
+                try
+                {
+                    Provision provision = new Provision(_entities[i].TableName, localConnection, mainConnection, state._event, _filter, _branchCorpOfficeId);
+                    ThreadPool.QueueUserWorkItem(new WaitCallback(provision.Prepare_Database_For_Synchronization), state);
+
+                }
+                catch (Exception ex)
+                {
+
+                }
+            }
+
+            WaitHandle.WaitAny(provisionEvents.ToArray());
+            WaitHandle.WaitAny(provisionEvents1.ToArray());
+        }
+        private void StartDeprovisionClient()
+        {
+            List<SyncHelper.ThreadState> listOfState = new List<SyncHelper.ThreadState>();
+            List<ManualResetEvent> deprovisionEvents = new List<ManualResetEvent>();
+            List<ManualResetEvent> deprovisionEvents1 = new List<ManualResetEvent>();
+            SqlConnection localConnection = new SqlConnection(_localConnectionString);
+
+            for (int i = 0; i < _entities.Count - 1; i++)
+            {
+                SyncHelper.ThreadState state = new SyncHelper.ThreadState();
+                state.table = _entities[i];
+                listOfState.Add(state);
+
+                if (i <= 60)
+                {
+                    deprovisionEvents.Add(state._event);
+                }
+                else
+                {
+                    deprovisionEvents1.Add(state._event);
+                }
+
+                try
+                {
+                    Deprovision deprovision = new Deprovision(localConnection, state._event, _filter, _entities[i].TableName);
+                    ThreadPool.QueueUserWorkItem(new WaitCallback(deprovision.PerformDeprovisionTable), state);
+                }
+                catch (Exception ex)
+                {
+
+                }
+            }
+
+            WaitHandle.WaitAny(deprovisionEvents.ToArray());
+            WaitHandle.WaitAny(deprovisionEvents1.ToArray());
+        }
+        private void StartDeprovisionLocal()
+        {            
+            SqlConnection localConnection = new SqlConnection(_localConnectionString);
+            ManualResetEvent _event = new ManualResetEvent(false);
+            Deprovision deprovision = new Deprovision(localConnection, _event, "", "");
+            ThreadPool.QueueUserWorkItem(new WaitCallback( deprovision.PerformDeprovisionDatabase),_event);
+            _event.WaitOne();
+        }
+        private void StartDeprovisionServer()
+        {
+            List<SyncHelper.ThreadState> listOfState = new List<SyncHelper.ThreadState>();
+            List<ManualResetEvent> deprovisionEvents = new List<ManualResetEvent>();
+            List<ManualResetEvent> deprovisionEvents1 = new List<ManualResetEvent>();
+            SqlConnection localConnection = new SqlConnection(_localConnectionString);
+            SqlConnection mainConnection = new SqlConnection(_mainConnectionString);
+
+            for (int i = 0; i < _entities.Count - 1; i++)
+            {
+                SyncHelper.ThreadState state = new SyncHelper.ThreadState();
+                state.table = _entities[i];
+                listOfState.Add(state);
+
+                if (i <= 60)
+                {
+                    deprovisionEvents.Add(state._event);
+                }
+                else
+                {
+                    deprovisionEvents1.Add(state._event);
+                }
+
+                try
+                {
+                    Deprovision deprovision = new Deprovision(mainConnection, state._event, _filter, _entities[i].TableName);
+                    ThreadPool.QueueUserWorkItem(new WaitCallback(deprovision.PerformDeprovisionTable), state);
+                }
+                catch (Exception ex)
+                {
+
+                }
+            }
+
+            WaitHandle.WaitAny(deprovisionEvents.ToArray());
+            WaitHandle.WaitAny(deprovisionEvents1.ToArray());
+        }
+        private void SetChekcBoxes()
+        {
+            this.chkDeprovisionClient.Checked = isDeprovisionClient;
+            this.chkDeprovisionServer.Checked = IsDeprovisionServer;
+            this.chkProvision.Checked = isProvision;
+        }
         #endregion
 
 
