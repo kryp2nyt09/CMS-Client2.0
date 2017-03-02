@@ -17,11 +17,12 @@ namespace CMS2.Entities.ReportModel
         public decimal AGW { get; set; }
         public string ServiceMode { get; set; }
         public string PaymentMode { get; set; }
-        public decimal? Amount { get; set; }
+        public decimal Amount { get; set; }
 
         public string Area { get; set; }
         public string Driver { get; set; }
         public string Checker { get; set; }
         public string BCO { get; set; }
+        public string PaymentCode { get; set; }
     }
 }

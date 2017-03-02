@@ -27,7 +27,7 @@ namespace CMS2.Entities.ReportModel
         public DateTime CreatedDate { get; set; }
         public string Driver { get; set; }
         public string PlateNo { get; set; }
-
+        public string MAWB { get; set; }
 
     }
 }

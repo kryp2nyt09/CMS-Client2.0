@@ -288,9 +288,7 @@
     <Compile Include="Forms\TrackingReportsView\GatewayTransmitalReportView.Designer.cs">
       <DependentUpon>GatewayTransmitalReportView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\TrackingReportsView\HoldCargoReportView.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="Forms\TrackingReportsView\HoldCargoReportView.cs" />
     <Compile Include="Forms\TrackingReportsView\HoldCargoReportView.Designer.cs">
       <DependentUpon>HoldCargoReportView.cs</DependentUpon>
     </Compile>

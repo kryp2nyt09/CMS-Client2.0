@@ -15,28 +15,34 @@ namespace CMS2.Client.Forms.TrackingReportsView
     {
         public DailyTripReportView()
         {
-            //
-            // Required for telerik Reporting designer support
-            //
             InitializeComponent();
 
             var objectDataSource = new Telerik.Reporting.ObjectDataSource();
+            var objectDataSource2 = new Telerik.Reporting.ObjectDataSource();
+            var objectDataSource3 = new Telerik.Reporting.ObjectDataSource();
+            var objectDataSource4 = new Telerik.Reporting.ObjectDataSource();
+
             DataTable dataTable = TrackingReportGlobalModel.table;
             objectDataSource.DataSource = dataTable;
             table1.DataSource = objectDataSource;
 
-            dataTable = TrackingReportGlobalModel.table2;
-            objectDataSource.DataSource = dataTable;
-            table2.DataSource = objectDataSource;
+            DataTable dataTable2 = TrackingReportGlobalModel.table2;
+            objectDataSource2.DataSource = dataTable2;
+            table2.DataSource = objectDataSource2;
 
-            dataTable = TrackingReportGlobalModel.table3;
-            objectDataSource.DataSource = dataTable;
-            table2.DataSource = objectDataSource;
+            DataTable dataTable3 = TrackingReportGlobalModel.table3;
+            objectDataSource3.DataSource = dataTable3;
+            table3.DataSource = objectDataSource3;
 
-            dataTable = TrackingReportGlobalModel.table4;
-            objectDataSource.DataSource = dataTable;
-            table3.DataSource = objectDataSource;
+            DataTable dataTable4 = TrackingReportGlobalModel.table4;
+            objectDataSource4.DataSource = dataTable4;
+            table4.DataSource = objectDataSource4;
 
+            txtDate.Value = TrackingReportGlobalModel.Date;
+            txtArea.Value = TrackingReportGlobalModel.Area;
+            txtDriver.Value = TrackingReportGlobalModel.Driver;
+            txtChecker.Value = TrackingReportGlobalModel.Checker;
+            txtPlateNo.Value = TrackingReportGlobalModel.PlateNo;
         }
     }
 }

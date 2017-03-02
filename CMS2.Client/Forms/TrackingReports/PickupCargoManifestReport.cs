@@ -19,6 +19,9 @@ namespace CMS2.Client.Forms.TrackingReports
             //GET LIST 
             ShipmentBL _shipmentService = new ShipmentBL();
             List<Shipment> _shipments = _shipmentService.GetAll().Where(x => x.Booking.BookingStatus.BookingStatusName == "Picked-up" && x.RecordStatus == 1 && (x.CreatedDate).ToShortDateString() == date.ToShortDateString()).ToList();
+
+            List<PickupCargoManifestViewModel> modelList = Match(_shipments);
+
             DataTable dt = new DataTable();
 
             dt.Columns.Add(new DataColumn("No", typeof(string)));
@@ -32,29 +35,31 @@ namespace CMS2.Client.Forms.TrackingReports
             dt.Columns.Add(new DataColumn("AGW", typeof(string)));
             dt.Columns.Add(new DataColumn("Service Mode", typeof(string)));
             dt.Columns.Add(new DataColumn("Payment Mode", typeof(string)));
-            dt.Columns.Add(new DataColumn("Amount", typeof(decimal)));
+            dt.Columns.Add(new DataColumn("Amount", typeof(string)));
 
             dt.Columns.Add(new DataColumn("Area", typeof(string)));
-
+            dt.Columns.Add(new DataColumn("Driver", typeof(string)));
+            dt.Columns.Add(new DataColumn("Checker", typeof(string)));
             dt.BeginLoadData();
             int ctr = 1;
-            foreach (Shipment item in _shipments)
+            foreach (PickupCargoManifestViewModel item in modelList)
             {
                 DataRow row = dt.NewRow();
                 row[0] = (ctr++).ToString();
-                row[1] = item.AirwayBillNo.ToString();
-                row[2] = item.Shipper.FullName.ToString();
-                row[3] = item.OriginAddress.ToString();
-                row[4] = item.Consignee.FullName.ToString();
-                row[5] = item.DestinationAddress.ToString();
-                row[6] = item.Commodity.CommodityName.ToString();
-                row[7] = item.Quantity.ToString();
-                row[8] = item.Weight.ToString();
-                row[9] = item.ServiceMode.ServiceModeName.ToString();
-                row[10] = item.PaymentMode.PaymentModeName.ToString();
-                row[11] = item.TotalAmount;
-                row[12] = item.Booking.AssignedToArea.City.CityName;
-
+                row[1] = item.AirwayBillNo;
+                row[2] = item.Shipper;
+                row[3] = item.ShipperAddress;
+                row[4] = item.Consignee;
+                row[5] = item.ConsigneeAddress;
+                row[6] = item.Commodity;
+                row[7] = item.QTY.ToString();
+                row[8] = item.AGW.ToString();
+                row[9] = item.ServiceMode;
+                row[10] = item.PaymentMode;
+                row[11] = item.Amount;
+                row[12] = item.Area;
+                row[13] = item.Driver;
+                row[14] = item.Checker;
                 dt.Rows.Add(row);
             }
             dt.EndLoadData();
@@ -78,7 +83,61 @@ namespace CMS2.Client.Forms.TrackingReports
             width.Add(100); //Paymentmode
             width.Add(95); //Amount
             width.Add(0); //Area
+            width.Add(0); //Driver
+            width.Add(0); //Checker
             return width;
+        }
+
+        public List<PickupCargoManifestViewModel> Match(List<Shipment> _shipment )
+        {
+            BranchAcceptanceBL branchAcceptanceBL = new BranchAcceptanceBL();
+            PackageNumberBL _packageNumberService = new PackageNumberBL();
+            List<PickupCargoManifestViewModel> _results = new List<PickupCargoManifestViewModel>();
+
+            foreach(Shipment shipment  in _shipment)
+            {
+                PickupCargoManifestViewModel model = new PickupCargoManifestViewModel();
+
+                //string _airwaybill = _packageNumberService.GetAll().Find(x => x.ShipmentId == shipment.ShipmentId).Shipment.AirwayBillNo;
+
+                List<PackageNumber> packageList = _packageNumberService.GetAll().Where(x => x.ShipmentId == shipment.ShipmentId).Distinct().ToList();
+                foreach (PackageNumber number in packageList)
+                {
+                    List<BranchAcceptance> branchList = branchAcceptanceBL.GetAll().Where(x => x.Cargo == number.PackageNo).Distinct().ToList();
+                    foreach (BranchAcceptance branch in branchList)
+                    {
+                        model.Driver = branch.Driver;
+                        model.Checker = branch.Checker;                         
+                    }
+                }
+                PickupCargoManifestViewModel isExist = _results.Find(x => x.AirwayBillNo == shipment.AirwayBillNo);
+
+                if (isExist != null)
+                {
+                    isExist.QTY++;
+                }
+                else
+                {
+                    model.AirwayBillNo = shipment.AirwayBillNo;
+                    model.Shipper = shipment.Shipper.FullName;
+                    model.Consignee = shipment.Consignee.FullName;
+
+                    model.ConsigneeAddress = shipment.Consignee.Address1 + " " + shipment.Consignee.Address2;
+                    model.ShipperAddress = shipment.Shipper.Address1 + " " + shipment.Shipper.Address2;
+                    model.Commodity = shipment.Commodity.CommodityName;
+                    model.QTY++;
+                    model.AGW += shipment.Weight;
+                    model.ServiceMode = shipment.ServiceMode.ServiceModeName;
+                    model.PaymentMode = shipment.PaymentMode.PaymentModeName;
+                    model.Amount = shipment.TotalAmount.ToString();
+                    model.Area = shipment.Booking.AssignedToArea.City.CityName;
+
+                    _results.Add(model);
+                }
+            }
+            
+            return _results;
+
         }
     }
 }

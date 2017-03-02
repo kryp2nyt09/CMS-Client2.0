@@ -25,15 +25,12 @@ namespace CMS2.Client.Forms.TrackingReports
             DataTable dt = new DataTable();
             dt.Columns.Add(new DataColumn("No", typeof(string)));
             dt.Columns.Add(new DataColumn("Sack No", typeof(string)));
-
             dt.Columns.Add(new DataColumn("Total Pieces", typeof(string)));
             dt.Columns.Add(new DataColumn("Scanned Pieces", typeof(string)));
             dt.Columns.Add(new DataColumn("Dicrepency Pieces", typeof(string)));
-
             dt.Columns.Add(new DataColumn("Origin", typeof(string)));
             dt.Columns.Add(new DataColumn("Weight", typeof(string)));
             dt.Columns.Add(new DataColumn("AWB", typeof(string)));
-
             dt.Columns.Add(new DataColumn("CreatedDate", typeof(string)));
             dt.Columns.Add(new DataColumn("Branch", typeof(string)));
 
@@ -44,17 +41,15 @@ namespace CMS2.Client.Forms.TrackingReports
                 DataRow row = dt.NewRow();
                 row[0] = "" + ctr++;
                 row[1] = item.SackNo;
-
                 row[2] = item.TotalPcs;
                 row[3] = item.ScannedPcs;
                 row[4] = item.TotalDiscrepency;
-
                 row[5] = item.Origin;
                 row[6] = item.Weight;
                 row[7] = item.AirwayBillNo;
-
                 row[8] = item.CreatedDate;
                 row[9] = item.Branch;
+
                 dt.Rows.Add(row);
             }
             dt.EndLoadData();
@@ -64,19 +59,18 @@ namespace CMS2.Client.Forms.TrackingReports
         public List<int> setBundleWidth()
         {
             List<int> width = new List<int>();
+
             width.Add(25);
             width.Add(115);
-
             width.Add(110);
             width.Add(110);
             width.Add(110);
-
-            width.Add(150);
+            width.Add(190);
             width.Add(100);            
             width.Add(90);
-            
             width.Add(0);
-            width.Add(0);
+            width.Add(260);
+
             return width;
         }
         public List<UnbundleViewModel> Match(List<Unbundle> _unbundle , List<Bundle> _bundle)

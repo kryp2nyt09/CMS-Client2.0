@@ -30,10 +30,13 @@ namespace CMS2.Client.Forms.TrackingReports
             dt.Columns.Add(new DataColumn("Payment Mode", typeof(string)));
             dt.Columns.Add(new DataColumn("Amount", typeof(string)));
             dt.Columns.Add(new DataColumn("Area", typeof(string)));
+
             dt.Columns.Add(new DataColumn("Driver", typeof(string)));
             dt.Columns.Add(new DataColumn("Checker", typeof(string)));
             
             dt.Columns.Add(new DataColumn("BCO", typeof(string)));
+
+            dt.Columns.Add(new DataColumn("PaymentCode", typeof(string)));
 
             dt.BeginLoadData();
             int ctr = 1;
@@ -53,6 +56,7 @@ namespace CMS2.Client.Forms.TrackingReports
                 row[10] = item.Driver;
                 row[11] = item.Checker;
                 row[12] = item.BCO;
+                row[13] = item.PaymentCode;
                 dt.Rows.Add(row);
             }
             dt.EndLoadData();
@@ -76,7 +80,7 @@ namespace CMS2.Client.Forms.TrackingReports
             width.Add(0);
             width.Add(0);
             width.Add(0);
-
+            width.Add(0);
             return width;
         }
 
@@ -84,7 +88,7 @@ namespace CMS2.Client.Forms.TrackingReports
         {
             List<DailyTripViewModel> _results = new List<DailyTripViewModel>();
             PackageNumberBL _packageNumberService = new PackageNumberBL();
-
+           // ShipmentBL shipmentService = new ShipmentBL();
             foreach (Distribution distribution in _distribution) {
                 DailyTripViewModel model = new DailyTripViewModel();
                 string _airwaybill = _packageNumberService.GetAll().Find(x => x.ShipmentId == distribution.ShipmentId).Shipment.AirwayBillNo;
@@ -93,22 +97,24 @@ namespace CMS2.Client.Forms.TrackingReports
                 if (isExist != null)
                 {
                     isExist.Qty++;
+                    isExist.Amount += distribution.Amount;
                 }
                 else
                 {
                     model.AirwayBillNo = _airwaybill;
                     model.Qty++;
                     model.Consignee = distribution.Consignee.FullName;
-                    model.Address = distribution.Consignee.Address1;
+                    model.Address = distribution.Consignee.Address1 + " " + distribution.Consignee.Address2;
                     model.AGW += distribution.Shipment.Weight;
                     model.ServiceMode = distribution.ServiceMode.ServiceModeName;
                     model.PaymentMode = distribution.PaymentMode.PaymentModeName;
                     model.Amount += distribution.Amount;
                     model.Area = distribution.City.CityName;
+                   
                     model.Driver = distribution.Driver;
                     model.Checker = distribution.Checker;
                     model.BCO = distribution.City.BranchCorpOffice.BranchCorpOfficeName;
-
+                    model.PaymentCode = distribution.PaymentMode.PaymentModeCode;
                     _results.Add(model);
                 }
 

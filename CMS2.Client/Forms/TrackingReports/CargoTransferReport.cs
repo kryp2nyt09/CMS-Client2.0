@@ -34,6 +34,11 @@ namespace CMS2.Client.Forms.TrackingReports
             dt.Columns.Add(new DataColumn("QTY", typeof(string)));
 
             dt.Columns.Add(new DataColumn("CreatedDate", typeof(string)));
+
+            dt.Columns.Add(new DataColumn("BCO", typeof(string)));
+            dt.Columns.Add(new DataColumn("GATEWAY", typeof(string)));
+            dt.Columns.Add(new DataColumn("SATELLITE", typeof(string)));
+
             dt.BeginLoadData();
             int ctr = 1;
             foreach (CargoTransferViewModel item in modelList)
@@ -50,6 +55,11 @@ namespace CMS2.Client.Forms.TrackingReports
                 row[8] = item.AWB;
                 row[9] = item.QTY;
                 row[10] = item.CreatedDate.ToShortDateString();
+
+                row[11] = item.BCO;
+                row[12] = item.GATEWAY;
+                row[13] = item.SATELLITE;
+
                 dt.Rows.Add(row);
             }
             dt.EndLoadData();
@@ -61,17 +71,22 @@ namespace CMS2.Client.Forms.TrackingReports
         {
             List<int> width = new List<int>();
             width.Add(25);
-            width.Add(250);
-            width.Add(250);
-            width.Add(150);
-            width.Add(120);
+            width.Add(190);
+            width.Add(190);
             width.Add(100);
             width.Add(100);
             width.Add(100);
+            width.Add(100);
+            width.Add(90);
 
             width.Add(80);
-            width.Add(80);
             width.Add(0);
+            width.Add(0);
+
+            width.Add(0);
+            width.Add(0);
+            width.Add(0);
+
             return width;
         }
 
@@ -88,8 +103,9 @@ namespace CMS2.Client.Forms.TrackingReports
 
                 if (isExist != null)
                 {
-                    //isExist.TotalRecieved++;
-                    _results.Add(isExist);
+                    isExist.QTY++;
+                    model.Pieces++;
+                    //_results.Add(isExist);
                 }
                 else
                 {
@@ -101,12 +117,17 @@ namespace CMS2.Client.Forms.TrackingReports
                     }
                     model.Driver = cargoTransfer.Driver;
                     model.Checker = cargoTransfer.Checker;
-                    model.Pieces = "";
+                    model.Pieces++;
                     model.PlateNo = cargoTransfer.PlateNo;
                     model.Batch = cargoTransfer.Batch.BatchName;
                     model.AWB = _airwaybill;
-                    model.QTY = _cargoTransfers.Count().ToString();
+                    model.QTY++;
                     model.CreatedDate = cargoTransfer.CreatedDate;
+
+                    model.BCO = cargoTransfer.BranchCorpOffice.BranchCorpOfficeName;
+                    model.GATEWAY = cargoTransfer.RevenueUnit.RevenueUnitName;
+                    model.SATELLITE = cargoTransfer.RevenueUnit.RevenueUnitName;
+
                     _results.Add(model);
 
                 }

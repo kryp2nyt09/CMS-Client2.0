@@ -12,6 +12,6 @@ namespace CMS2.Entities
         [Key]
         public Guid PaymentSummaryStatusId { get; set; }
 
-        public string PaymentSummaryName { get; set; }
+        public string PaymentSummaryStatusName { get; set; }
     }
 }

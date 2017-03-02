@@ -178,6 +178,10 @@ namespace CMS2.Client
         #endregion
 
         #region PaymentSummary
+        private AutoCompleteStringCollection autoComprevenueUnitName;
+        private AutoCompleteStringCollection autoComp_empName;
+        private AutoCompleteStringCollection autoComp_revenueUnitType;
+
         Employee employee;
         Entities.PaymentSummary paymentSummary;
         PaymentSummaryStatus paymentSummaryStatus;
@@ -186,7 +190,10 @@ namespace CMS2.Client
         private List<Payment> paymentPrepaid;
         private List<Payment> paymentFreightCollect;
         private List<Payment> paymentCorpAcctConsignee;
-
+        private List<RevenueUnit> paymentSummary_revenueUnits;
+        private List<Employee> paymentSummary_employee;
+        private List<Employee> paymentSummary_remittedBy;
+        private List<RevenueUnitType> paymentSummary_revenueUnitType;
 
         public List<PaymentSummaryModel> listPaymentSummary = new List<PaymentSummaryModel>();
         public List<PaymentSummaryDetails> listpaymentSummaryDetails = new List<PaymentSummaryDetails>();
@@ -323,6 +330,7 @@ namespace CMS2.Client
                     soa = null;
 
                     datePaymentDate.Value = DateTime.Now;
+                    dateCheckDate.Value = DateTime.Now;
 
                     bsPaymentType.DataSource = paymentTypeService.FilterActive().OrderBy(x => x.PaymentTypeName).ToList();
                     lstPaymentType.DataSource = bsPaymentType;
@@ -348,7 +356,14 @@ namespace CMS2.Client
                     break;
                 case "Payment Summary":
                     PaymentSummaryLoadData();
-                    // PopulateGrid_Prepaid();
+                    PopulateGrid_Prepaid();
+                    PopulateGrid_FreightCollect();
+                    PopulateGrid_CorpAcctConsignee();
+                    gridPrepaid.Columns["Validate"].PinPosition = Telerik.WinControls.UI.PinnedColumnPosition.Right;
+                    gridPrepaid.Columns["Client"].PinPosition = Telerik.WinControls.UI.PinnedColumnPosition.Left;
+
+                    gridFreightCollect.Columns["Validate"].PinPosition = Telerik.WinControls.UI.PinnedColumnPosition.Right;
+                    gridFreightCollect.Columns["Client"].PinPosition = Telerik.WinControls.UI.PinnedColumnPosition.Left;
                     break;
                 case "Tracking":
                     PopulateGrid_FreightCollect();
@@ -1583,6 +1598,30 @@ namespace CMS2.Client
             btnReset.Enabled = true;
         }
 
+        private void lstCommodityType_Enter(object sender, EventArgs e)
+        {
+            commodityTypeCollection = new AutoCompleteStringCollection();
+            var ctypes = commodityTypes.OrderBy(x => x.CommodityTypeName).Where(x => x.RecordStatus == 1).Select(x => x.CommodityTypeName).ToList();
+            foreach (var item in ctypes)
+            {
+                commodityTypeCollection.Add(item);
+            }
+            lstCommodityType.AutoCompleteDataSource = commodityTypeCollection;
+        }
+
+        private void lstServiceType_Enter(object sender, EventArgs e)
+        {
+            serviceTypeCollection = new AutoCompleteStringCollection();
+            var servicetype = serviceTypes.OrderBy(x => x.ServiceTypeName).Where(x => x.RecordStatus == 1).Select(x => x.ServiceTypeName).ToList();
+            foreach (var item in servicetype)
+            {
+                serviceTypeCollection.Add(item);
+            }
+            lstServiceType.AutoCompleteDataSource = serviceTypeCollection;
+        }
+
+
+
         #endregion
 
         #region Payment
@@ -1623,7 +1662,7 @@ namespace CMS2.Client
                         soaPayment.CheckNo = txtCheckNo.Text.Trim();
                     }
                     soaPayment.ReceivedById = AppUser.Employee.EmployeeId;
-                    soaPayment.Remarks = txtRemarks.Text;
+                    soaPayment.Remarks = cmb_PaymentRemarks.Text;
                     soaPayment.CreatedBy = AppUser.User.UserId;
                     soaPayment.CreatedDate = DateTime.Now;
                     soaPayment.ModifiedBy = AppUser.User.UserId;
@@ -1669,7 +1708,7 @@ namespace CMS2.Client
                         payment.CheckNo = txtCheckNo.Text.Trim();
                     }
                     payment.ReceivedById = AppUser.Employee.EmployeeId;
-                    payment.Remarks = txtRemarks.Text;
+                    payment.Remarks = cmb_PaymentRemarks.Text;
                     payment.CreatedBy = AppUser.User.UserId;
                     payment.CreatedDate = DateTime.Now;
                     payment.ModifiedBy = AppUser.User.UserId;
@@ -1750,6 +1789,26 @@ namespace CMS2.Client
             }
             txtAwb.AutoCompleteCustomSource = AirwayBill;
         }
+
+        private void txtAwb_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                List<Shipment> _shipment = shipmentService.FilterActiveBy(x => x.AirwayBillNo.Equals(txtAwb.Text.ToString()));
+                if (_shipment != null && _shipment.Count > 0)
+                {
+                    shipment = shipmentService.EntityToModel(_shipment.FirstOrDefault());
+                    LoadPayment();
+                }
+                else
+                {
+                    MessageBox.Show("No record found.", "Airwaybill Search");
+                }
+
+            }
+
+            shipmentModel = shipment;
+        }
         #endregion
 
         #region Payment Summary
@@ -1757,14 +1816,13 @@ namespace CMS2.Client
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-
             PopulateGrid_Prepaid();
             PopulateGrid_FreightCollect();
             PopulateGrid_CorpAcctConsignee();
             TotalPaymentSummary();
             clearPaymentSummaryData();
-
-
+            chk_ReceivedAll.Checked = false;
+            listPaymentSummary = new List<PaymentSummaryModel>();
         }
 
         private void lstRevenueUnitType_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
@@ -1876,11 +1934,11 @@ namespace CMS2.Client
 
                     }
 
-                    var itemToRemove = listPaymentSummary.SingleOrDefault(r => r.ClientId == clientId);
+                    var itemToRemove = listPaymentSummary.Find(r => r.ClientId == clientId);
                     if (itemToRemove != null)
                         listPaymentSummary.Remove(itemToRemove);
 
-                    var removeDetails = listpaymentSummaryDetails.SingleOrDefault(r => r.AwbNo == awbsoa);
+                    var removeDetails = listpaymentSummaryDetails.Find(r => r.AwbNo == awbsoa);
                     if (removeDetails != null)
                         listpaymentSummaryDetails.Remove(removeDetails);
 
@@ -1965,11 +2023,11 @@ namespace CMS2.Client
 
                     }
 
-                    var itemToRemove = listPaymentSummary.SingleOrDefault(r => r.ClientId == clientId);
+                    var itemToRemove = listPaymentSummary.Find(r => r.ClientId == clientId);
                     if (itemToRemove != null)
                         listPaymentSummary.Remove(itemToRemove);
 
-                    var removeDetails = listpaymentSummaryDetails.SingleOrDefault(r => r.AwbNo == awbsoa);
+                    var removeDetails = listpaymentSummaryDetails.Find(r => r.AwbNo == awbsoa);
                     if (removeDetails != null)
                         listpaymentSummaryDetails.Remove(removeDetails);
 
@@ -2082,7 +2140,9 @@ namespace CMS2.Client
             PopulateGrid_Prepaid();
             PopulateGrid_FreightCollect();
             PopulateGrid_CorpAcctConsignee();
+            TotalPaymentSummary();
             btnPrintPaymentSummary.Enabled = true;
+            chk_ReceivedAll.Checked = false;
         }
 
         private void img_Signature_MouseDown(object sender, MouseEventArgs e)
@@ -2129,12 +2189,231 @@ namespace CMS2.Client
             psummaryForm.passListofMainDetails(listMainDetails);
             psummaryForm.Show();
             clearListofPaymentSummary();
+
         }
 
         private void btnReset_CancelPaymentSummary_Click(object sender, EventArgs e)
         {
             clearSummaryData();
         }
+
+        private void chk_ReceivedAll_CheckStateChanged(object sender, EventArgs e)
+        {
+            clearPaymentSummaryData();
+            string awbsoa;
+            string clientName;
+            string paymentType;
+            decimal amountDue;
+            decimal amountPaid;
+            decimal taxWithheld;
+            string OrNo;
+            string PrNo;
+            string ValidatedBy;
+
+            Guid clientId = new Guid();
+            Guid paymentId = new Guid();
+            Guid validatedById = new Guid();
+            string paymentModeCode;
+
+            if (chk_ReceivedAll.Checked)
+            {
+                #region Prepaid Payment
+
+                for (int i = 0; i < gridPrepaid.Rows.Count; i++)
+                {
+                    gridPrepaid.Rows[i].Cells["Validate"].Value = true;
+                    awbsoa = gridPrepaid.Rows[i].Cells["AWB No"].Value.ToString();
+                    clientName = gridPrepaid.Rows[i].Cells["Client"].Value.ToString();
+                    amountDue = Convert.ToDecimal(gridPrepaid.Rows[i].Cells["Amount Due"].Value);
+                    taxWithheld = Convert.ToDecimal(gridPrepaid.Rows[i].Cells["Tax Withheld"].Value);
+                    OrNo = gridPrepaid.Rows[i].Cells["OR No"].Value.ToString();
+                    PrNo = gridPrepaid.Rows[i].Cells["PR No"].Value.ToString();
+                    ValidatedBy = gridPrepaid.Rows[i].Cells["Validated By"].Value.ToString();
+                    paymentModeCode = "PP";
+
+                    amountPaid = Convert.ToDecimal(gridPrepaid.Rows[i].Cells["Amount Paid"].Value);
+                    paymentType = gridPrepaid.Rows[i].Cells["Payment Type"].Value.ToString();
+                    clientId = Guid.Parse(gridPrepaid.Rows[i].Cells["ClientId"].Value.ToString());
+                    paymentId = Guid.Parse(gridPrepaid.Rows[i].Cells["PaymentId"].Value.ToString());
+                    validatedById = Guid.Parse(gridPrepaid.Rows[i].Cells["ValidatedById"].Value.ToString());
+
+                    if (paymentType.Equals("Cash"))
+                    {
+                        totalCashReceived += amountPaid;
+                    }
+                    else
+                    {
+                        totalCheckReceived += amountPaid;
+                    }
+
+                    listofPaymentSummary(clientId, paymentId, validatedById, paymentModeCode);
+                    summaryDetails(awbsoa, clientName, paymentType, amountDue, amountPaid, taxWithheld, OrNo, PrNo, ValidatedBy, paymentModeCode);
+                }
+
+                #endregion
+
+                #region Freight Collect
+                for (int j = 0; j < gridFreightCollect.Rows.Count; j++)
+                {
+                    gridFreightCollect.Rows[j].Cells["Validate"].Value = true;
+
+                    awbsoa = gridFreightCollect.Rows[j].Cells["AWB No"].Value.ToString();
+                    clientName = gridFreightCollect.Rows[j].Cells["Client"].Value.ToString();
+                    amountDue = Convert.ToDecimal(gridFreightCollect.Rows[j].Cells["Amount Due"].Value);
+                    taxWithheld = Convert.ToDecimal(gridFreightCollect.Rows[j].Cells["Tax Withheld"].Value);
+                    OrNo = gridFreightCollect.Rows[j].Cells["OR No"].Value.ToString();
+                    PrNo = gridFreightCollect.Rows[j].Cells["PR No"].Value.ToString();
+                    ValidatedBy = gridFreightCollect.Rows[j].Cells["Validated By"].Value.ToString();
+                    paymentModeCode = "FC";
+
+
+                    amountPaid = Convert.ToDecimal(gridFreightCollect.Rows[j].Cells["Amount Paid"].Value);
+                    paymentType = gridFreightCollect.Rows[j].Cells["Payment Type"].Value.ToString();
+                    clientId = Guid.Parse(gridFreightCollect.Rows[j].Cells["ClientId"].Value.ToString());
+                    paymentId = Guid.Parse(gridFreightCollect.Rows[j].Cells["PaymentId"].Value.ToString());
+                    validatedById = Guid.Parse(gridFreightCollect.Rows[j].Cells["ValidatedById"].Value.ToString());
+
+                    if (paymentType.Equals("Cash"))
+                    {
+                        totalCashReceived += amountPaid;
+                    }
+                    else
+                    {
+                        totalCheckReceived += amountPaid;
+                    }
+
+                    listofPaymentSummary(clientId, paymentId, validatedById, paymentModeCode);
+                    summaryDetails(awbsoa, clientName, paymentType, amountDue, amountPaid, taxWithheld, OrNo, PrNo, ValidatedBy, paymentModeCode);
+                }
+
+                #endregion
+
+            }
+            else
+            {
+                #region Prepaid
+                for (int i = 0; i < gridPrepaid.Rows.Count; i++)
+                {
+                    gridPrepaid.Rows[i].Cells["Validate"].Value = false;
+                    awbsoa = gridPrepaid.Rows[i].Cells["AWB No"].Value.ToString();
+                    clientId = Guid.Parse(gridPrepaid.Rows[i].Cells["ClientId"].Value.ToString());
+                    paymentType = gridPrepaid.Rows[i].Cells["Payment Type"].Value.ToString();
+                    amountPaid = Convert.ToDecimal(gridPrepaid.Rows[i].Cells["Amount Paid"].Value);
+
+                    //if (paymentType.Equals("Cash"))
+                    //{
+                    //    totalCashReceived -= amountPaid;
+                    //}
+                    //else
+                    //{
+                    //    totalCheckReceived -= amountPaid;
+                    //}
+
+
+                    var itemRemovePrepaid = listPaymentSummary.Find(r => r.ClientId == clientId);
+                    if (itemRemovePrepaid != null)
+                        listPaymentSummary.Remove(itemRemovePrepaid);
+
+                    var removePrepaidDetails = listpaymentSummaryDetails.Find(r => r.AwbNo == awbsoa);
+                    if (removePrepaidDetails != null)
+                        listpaymentSummaryDetails.Remove(removePrepaidDetails);
+                }
+
+                #endregion
+
+                #region Freight Collect
+                for (int j = 0; j < gridFreightCollect.Rows.Count; j++)
+                {
+                    gridFreightCollect.Rows[j].Cells["Validate"].Value = false;
+                    clientId = Guid.Parse(gridFreightCollect.Rows[j].Cells["ClientId"].Value.ToString());
+                    awbsoa = gridFreightCollect.Rows[j].Cells["AWB No"].Value.ToString();
+                    paymentType = gridFreightCollect.Rows[j].Cells["Payment Type"].Value.ToString();
+                    amountPaid = Convert.ToDecimal(gridFreightCollect.Rows[j].Cells["Amount Paid"].Value);
+                    //if (paymentType.Equals("Cash"))
+                    //{
+                    //    totalCashReceived -= amountPaid;
+                    //}
+                    //else
+                    //{
+                    //    totalCheckReceived -= amountPaid;
+                    //}
+                    var itemRemoveFreight = listPaymentSummary.Find(r => r.ClientId == clientId);
+                    if (itemRemoveFreight != null)
+                        listPaymentSummary.Remove(itemRemoveFreight);
+
+                    var removeFCDetails = listpaymentSummaryDetails.Find(r => r.AwbNo == awbsoa);
+                    if (removeFCDetails != null)
+                        listpaymentSummaryDetails.Remove(removeFCDetails);
+                }
+                #endregion
+
+                clearPaymentSummaryData();
+            }
+
+            totalAmountReceived = totalCashReceived + totalCheckReceived;
+            txtTotalCashReceived.Text = totalCashReceived.ToString();
+            txtTotalCheckReceived.Text = totalCheckReceived.ToString();
+            txtTotalAmntReceived.Text = totalAmountReceived.ToString();
+        }
+
+        private void lstRevenueUnitType_Enter(object sender, EventArgs e)
+        {
+            autoComp_revenueUnitType = new AutoCompleteStringCollection();
+            var revenueUnittype = paymentSummary_revenueUnitType.OrderBy(x => x.RevenueUnitTypeName).Where(x => x.RecordStatus == 1).Select(x => x.RevenueUnitTypeName).ToList();
+            foreach (var item in revenueUnittype)
+            {
+                autoComp_revenueUnitType.Add(item);
+            }
+            lstOriginBco.AutoCompleteDataSource = autoComp_revenueUnitType;
+        }
+
+        private void lstRevenueUnitName_Enter(object sender, EventArgs e)
+        {
+            if (lstRevenueUnitType.SelectedIndex >= 0)
+            {
+                var rUnitType = Guid.Parse(lstRevenueUnitType.SelectedValue.ToString());
+                List<string> _unitName = paymentSummary_revenueUnits.Where(x => x.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.RevenueUnitType.RevenueUnitTypeId == rUnitType).Select(x => x.RevenueUnitName).ToList();
+                autoComprevenueUnitName = new AutoCompleteStringCollection();
+                foreach (var item in _unitName)
+                {
+                    autoComprevenueUnitName.Add(item);
+                }
+                lstRevenueUnitName.AutoCompleteDataSource = autoComprevenueUnitName;
+            }
+        }
+
+        private void lstUser_Enter(object sender, EventArgs e)
+        {
+            if (lstRevenueUnitType.SelectedIndex >= 0 && lstRevenueUnitName.SelectedIndex >= 0)
+            {
+                var rUnitType = Guid.Parse(lstRevenueUnitType.SelectedValue.ToString());
+                var rUnitname = Guid.Parse(lstRevenueUnitName.SelectedValue.ToString());
+                List<string> _empName = paymentSummary_employee.Where(x => x.AssignedToArea.City.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.AssignedToArea.RevenueUnitId == rUnitname).Select(x => x.FullName).ToList();
+                autoComp_empName = new AutoCompleteStringCollection();
+                foreach (var item in _empName)
+                {
+                    autoComp_empName.Add(item);
+                }
+                lstUser.AutoCompleteDataSource = autoComp_empName;
+            }
+        }
+
+        private void lstRemittedBy_Enter(object sender, EventArgs e)
+        {
+            if (lstRevenueUnitType.SelectedIndex >= 0 && lstRevenueUnitName.SelectedIndex >= 0)
+            {
+                var rUnitType = Guid.Parse(lstRevenueUnitType.SelectedValue.ToString());
+                var rUnitname = Guid.Parse(lstRevenueUnitName.SelectedValue.ToString());
+                List<string> _empName = paymentSummary_employee.Where(x => x.AssignedToArea.City.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.AssignedToArea.RevenueUnitId == rUnitname && x.AssignedToArea.RevenueUnitType.RevenueUnitTypeId == rUnitType).Select(x => x.FullName).ToList();
+                autoComp_empName = new AutoCompleteStringCollection();
+                foreach (var item in _empName)
+                {
+                    autoComp_empName.Add(item);
+                }
+                lstRemittedBy.AutoCompleteDataSource = autoComp_empName;
+            }
+        }
+
         #endregion
 
         #endregion
@@ -3792,8 +4071,11 @@ namespace CMS2.Client
                 txtRfa.Text = (shipment.Discount * 100).ToString();
                 txtNotes.Text = shipment.Notes;
                 chkNonVatable.Checked = false;
-                if ((shipment.EvatId == null || shipment.EvatId == Guid.Empty) || shipment.EVat == null)
-                    chkNonVatable.Checked = true;
+                //if ((shipment.EvatId == null || shipment.EvatId == Guid.Empty) || shipment.EVat == null)
+                //{
+                //    chkNonVatable.Checked = true;
+                //}
+                   
                 shipment.AcceptedAreaId = AppUser.User.Employee.AssignedToAreaId;
                 shipment.AcceptedArea = AppUser.Employee.AssignedToArea;
 
@@ -4391,9 +4673,9 @@ namespace CMS2.Client
             txtCheckBank.Enabled = false;
             txtCheckNo.Text = "";
             txtCheckNo.Enabled = false;
-            datePaymentDate.Value = DateTime.Now;
-            datePaymentDate.Enabled = false;
-            txtRemarks.Text = "";
+            dateCheckDate.Value = DateTime.Now;
+            dateCheckDate.Enabled = false;
+            cmb_PaymentRemarks.Text = "";
         }
 
         private void SavePayment(object sender, DoWorkEventArgs e)
@@ -4432,6 +4714,14 @@ namespace CMS2.Client
             }
         }
 
+        private void LoadPayment()
+        {
+            if (shipment != null)
+            {
+                txtAmountDue.Text = Convert.ToString(shipment.ShipmentTotal);
+            }
+        }
+
 
         #endregion
 
@@ -4449,6 +4739,9 @@ namespace CMS2.Client
             paymentPrepaid = new List<Payment>();
             paymentFreightCollect = new List<Payment>();
             paymentCorpAcctConsignee = new List<Payment>();
+            paymentSummary_revenueUnits = new List<RevenueUnit>();
+            paymentSummary_revenueUnitType = new List<RevenueUnitType>();
+            paymentSummary_employee = new List<Employee>();
 
             employeeService = new EmployeeBL(GlobalVars.UnitOfWork);
             paymentService = new PaymentBL(GlobalVars.UnitOfWork);
@@ -5109,10 +5402,10 @@ namespace CMS2.Client
             paymentSummary = new Entities.PaymentSummary();
             Guid paymentStatusId = new Guid();
             Guid checkById = new Guid();
-            paymentStatusId = paymentSummaryStatusService.GetAll().Where(x => x.PaymentSummaryName == "Validated").Select(x => x.PaymentSummaryStatusId).First();
+            paymentStatusId = paymentSummaryStatusService.GetAll().Where(x => x.PaymentSummaryStatusName == "Validated").Select(x => x.PaymentSummaryStatusId).First();
             checkById = userService.GetAllActiveUsers().Where(x => x.UserId == AppUser.User.UserId).Select(x => x.EmployeeId).First();
 
-            Guid remittedById = Guid.Parse(lstUser.SelectedValue.ToString());
+            Guid remittedById = Guid.Parse(lstRemittedBy.SelectedValue.ToString());
 
             PaymentSummaryModel paymentSummarymodel = new PaymentSummaryModel();
             paymentSummarymodel.PaymentSummaryId = paymentSummary.PaymentSummaryId;
@@ -5212,6 +5505,7 @@ namespace CMS2.Client
         /// <param name="e"></param>
         private void pageViewTracking_SelectedPageChanged(object sender, EventArgs e)
         {
+
             switch (pageViewTracking.SelectedPage.Text) {
                 case "Pickup Cargo":
                     //DATE 
@@ -5231,14 +5525,8 @@ namespace CMS2.Client
                 case "Bundle":
                     //DATE 
                     dateTimeBundle_Date.Value = DateTime.Now;
-
-                    ////SET DROPDOWN BRANCH IF BCO or BSO
-                    //dropDownBundle_Branch.DataSource = getRevenueUnitType();
-                    //dropDownBundle_Branch.DisplayMember = "RevenueUnitTypeName";
-                    //dropDownBundle_Branch.ValueMember = "RevenueUnitTypeId";
-                    //dropDownBundle_Branch.Items.Add("Branch Corporate Office");
+                    //
                     dropDownBundle_Branch.SelectedIndex = 0;
-
                     //CALL METHOD GET DATA - BUNDLE
                     getBundleData();
                     break;
@@ -5283,6 +5571,7 @@ namespace CMS2.Client
                     dropDownCargoTransfer_Origin.DataSource = getRevenueUnitType();
                     dropDownCargoTransfer_Origin.DisplayMember = "RevenueUnitTypeName";
                     dropDownCargoTransfer_Origin.ValueMember = "RevenueUnitTypeId";
+
                     dropDownCargoTransfer_Origin.Items.Add("Branch Corporate Office");
                     dropDownCargoTransfer_Origin.SelectedValue = "Branch Corporate Office";
                     //CALL METHOD GET DATA - CARGO TRANSFER
@@ -5303,6 +5592,8 @@ namespace CMS2.Client
                     getDailyTripData();
                     break;               
                 case "Hold Cargo":
+                    dateTimeHoldCargo_FromDate.Value = DateTime.Now;
+                    dateTimeHoldCargo_ToDate.Value = DateTime.Now.AddDays(30);
 
                     dropDownHoldCargo_Branch.DataSource = getRevenueUnitType();
                     dropDownHoldCargo_Branch.DisplayMember = "RevenueUnitTypeName";
@@ -5313,7 +5604,16 @@ namespace CMS2.Client
                     getHoldCargoData();
                     break;
                 case "Delivery Status":
-
+                    //DATE
+                    dateTimeDeliveryStatus_Date.Value = DateTime.Now;
+                    //
+                    //List<BranchCorpOffice> branchCorpOffices = getBranchCorpOffice().OrderBy(x => x.BranchCorpOfficeName).ToList();
+                    //dropDownDeliveryStatus_BCO.DataSource = branchCorpOffices;
+                    //dropDownDeliveryStatus_BCO.DisplayMember = "BranchCorpOfficeName";
+                    //dropDownDeliveryStatus_BCO.ValueMember = "BranchCorpOfficeId";
+                    //dropDownDeliveryStatus_BCO.SelectedValue = GlobalVars.DeviceBcoId;
+                    //dropDownDeliveryStatus_BCO.Enabled = false;
+                    //
                     getDeliveryStatusData();
                     break;
                 default:
@@ -5332,37 +5632,43 @@ namespace CMS2.Client
             }
 
             dt.BeginLoadData();
-            foreach (GridViewDataRowInfo row in gridPickupCargo.Rows)
+            foreach (GridRowElement row in this.gridPickupCargo.TableElement.VisualRows)
             {
-                DataRow dRow = dt.NewRow();
-                foreach (GridViewCellInfo cell in row.Cells)
+                if (row is GridDataRowElement)
                 {
-                    dRow[cell.ColumnInfo.Index] = cell.Value.ToString();
+
+                    DataRow dRow = dt.NewRow();
+                    foreach (GridViewCellInfo cell in row.RowInfo.Cells)
+                    {
+                        dRow[cell.ColumnInfo.Index] = cell.Value.ToString();
+                    }
+                    dt.Rows.Add(dRow);
                 }
-                dt.Rows.Add(dRow);
             }
             dt.EndLoadData();
             return dt;
         }
-
         public DataTable getBranchAcceptanceGrid()
         {
             DataTable dt = new DataTable();
-
-            foreach (GridViewColumn col in gridBranchAcceptance.Columns)
+            foreach (GridViewColumn col in this.gridBranchAcceptance.Columns)
             {
                 dt.Columns.Add(new DataColumn(col.HeaderText, typeof(string)));
             }
-
+            
             dt.BeginLoadData();
-            foreach (GridViewDataRowInfo row in gridBranchAcceptance.Rows)
+           
+            foreach (GridRowElement row in this.gridBranchAcceptance.TableElement.VisualRows)
             {
-                DataRow dRow = dt.NewRow();
-                foreach (GridViewCellInfo cell in row.Cells)
-                {
-                    dRow[cell.ColumnInfo.Index] = cell.Value.ToString();
+                if (row is GridDataRowElement) { 
+
+                    DataRow dRow = dt.NewRow();
+                    foreach (GridViewCellInfo cell in row.RowInfo.Cells)
+                    {
+                        dRow[cell.ColumnInfo.Index] = cell.Value.ToString();
+                    }
+                    dt.Rows.Add(dRow);
                 }
-                dt.Rows.Add(dRow);
             }
             dt.EndLoadData();
             return dt;
@@ -5377,14 +5683,18 @@ namespace CMS2.Client
             }
 
             dt.BeginLoadData();
-            foreach (GridViewDataRowInfo row in gridBundle.Rows)
+            foreach (GridRowElement row in this.gridBundle.TableElement.VisualRows)
             {
-                DataRow dRow = dt.NewRow();
-                foreach (GridViewCellInfo cell in row.Cells)
+                if (row is GridDataRowElement)
                 {
-                    dRow[cell.ColumnInfo.Index] = cell.Value.ToString();
+
+                    DataRow dRow = dt.NewRow();
+                    foreach (GridViewCellInfo cell in row.RowInfo.Cells)
+                    {
+                        dRow[cell.ColumnInfo.Index] = cell.Value.ToString();
+                    }
+                    dt.Rows.Add(dRow);
                 }
-                dt.Rows.Add(dRow);
             }
             dt.EndLoadData();
             return dt;
@@ -5399,14 +5709,18 @@ namespace CMS2.Client
             }
 
             dt.BeginLoadData();
-            foreach (GridViewDataRowInfo row in gridUnbundle.Rows)
+            foreach (GridRowElement row in this.gridUnbundle.TableElement.VisualRows)
             {
-                DataRow dRow = dt.NewRow();
-                foreach (GridViewCellInfo cell in row.Cells)
+                if (row is GridDataRowElement)
                 {
-                    dRow[cell.ColumnInfo.Index] = cell.Value.ToString();
+
+                    DataRow dRow = dt.NewRow();
+                    foreach (GridViewCellInfo cell in row.RowInfo.Cells)
+                    {
+                        dRow[cell.ColumnInfo.Index] = cell.Value.ToString();
+                    }
+                    dt.Rows.Add(dRow);
                 }
-                dt.Rows.Add(dRow);
             }
             dt.EndLoadData();
             return dt;
@@ -5422,14 +5736,18 @@ namespace CMS2.Client
             }
 
             dt.BeginLoadData();
-            foreach (GridViewDataRowInfo row in gridGatewayTransmital.Rows)
+            foreach (GridRowElement row in this.gridGatewayTransmital.TableElement.VisualRows)
             {
-                DataRow dRow = dt.NewRow();
-                foreach (GridViewCellInfo cell in row.Cells)
+                if (row is GridDataRowElement)
                 {
-                    dRow[cell.ColumnInfo.Index] = cell.Value.ToString();
+
+                    DataRow dRow = dt.NewRow();
+                    foreach (GridViewCellInfo cell in row.RowInfo.Cells)
+                    {
+                        dRow[cell.ColumnInfo.Index] = cell.Value.ToString();
+                    }
+                    dt.Rows.Add(dRow);
                 }
-                dt.Rows.Add(dRow);
             }
             dt.EndLoadData();
             return dt;
@@ -5444,14 +5762,18 @@ namespace CMS2.Client
             }
 
             dt.BeginLoadData();
-            foreach (GridViewDataRowInfo row in gridGatewayOutbound.Rows)
+            foreach (GridRowElement row in this.gridGatewayOutbound.TableElement.VisualRows)
             {
-                DataRow dRow = dt.NewRow();
-                foreach (GridViewCellInfo cell in row.Cells)
+                if (row is GridDataRowElement)
                 {
-                    dRow[cell.ColumnInfo.Index] = cell.Value.ToString();
+
+                    DataRow dRow = dt.NewRow();
+                    foreach (GridViewCellInfo cell in row.RowInfo.Cells)
+                    {
+                        dRow[cell.ColumnInfo.Index] = cell.Value.ToString();
+                    }
+                    dt.Rows.Add(dRow);
                 }
-                dt.Rows.Add(dRow);
             }
             dt.EndLoadData();
             return dt;
@@ -5466,14 +5788,18 @@ namespace CMS2.Client
             }
 
             dt.BeginLoadData();
-            foreach (GridViewDataRowInfo row in gridGatewayInbound.Rows)
+            foreach (GridRowElement row in this.gridGatewayInbound.TableElement.VisualRows)
             {
-                DataRow dRow = dt.NewRow();
-                foreach (GridViewCellInfo cell in row.Cells)
+                if (row is GridDataRowElement)
                 {
-                    dRow[cell.ColumnInfo.Index] = cell.Value.ToString();
+
+                    DataRow dRow = dt.NewRow();
+                    foreach (GridViewCellInfo cell in row.RowInfo.Cells)
+                    {
+                        dRow[cell.ColumnInfo.Index] = cell.Value.ToString();
+                    }
+                    dt.Rows.Add(dRow);
                 }
-                dt.Rows.Add(dRow);
             }
             dt.EndLoadData();
             return dt;
@@ -5488,14 +5814,18 @@ namespace CMS2.Client
             }
 
             dt.BeginLoadData();
-            foreach (GridViewDataRowInfo row in gridCargoTransfer.Rows)
+            foreach (GridRowElement row in this.gridCargoTransfer.TableElement.VisualRows)
             {
-                DataRow dRow = dt.NewRow();
-                foreach (GridViewCellInfo cell in row.Cells)
+                if (row is GridDataRowElement)
                 {
-                    dRow[cell.ColumnInfo.Index] = cell.Value.ToString();
+
+                    DataRow dRow = dt.NewRow();
+                    foreach (GridViewCellInfo cell in row.RowInfo.Cells)
+                    {
+                        dRow[cell.ColumnInfo.Index] = cell.Value.ToString();
+                    }
+                    dt.Rows.Add(dRow);
                 }
-                dt.Rows.Add(dRow);
             }
             dt.EndLoadData();
             return dt;
@@ -5510,19 +5840,22 @@ namespace CMS2.Client
             }
 
             dt.BeginLoadData();
-            foreach (GridViewDataRowInfo row in gridSegregation.Rows)
+            foreach (GridRowElement row in this.gridSegregation.TableElement.VisualRows)
             {
-                DataRow dRow = dt.NewRow();
-                foreach (GridViewCellInfo cell in row.Cells)
+                if (row is GridDataRowElement)
                 {
-                    dRow[cell.ColumnInfo.Index] = cell.Value.ToString();
+
+                    DataRow dRow = dt.NewRow();
+                    foreach (GridViewCellInfo cell in row.RowInfo.Cells)
+                    {
+                        dRow[cell.ColumnInfo.Index] = cell.Value.ToString();
+                    }
+                    dt.Rows.Add(dRow);
                 }
-                dt.Rows.Add(dRow);
             }
             dt.EndLoadData();
             return dt;
         }
-
         public DataTable getDeliveryStatusGrid()
         {
             DataTable dt = new DataTable();
@@ -5533,45 +5866,48 @@ namespace CMS2.Client
             }
 
             dt.BeginLoadData();
-            foreach (GridViewDataRowInfo row in gridDeliveryStatus.Rows)
+            foreach (GridRowElement row in this.gridDeliveryStatus.TableElement.VisualRows)
             {
-                DataRow dRow = dt.NewRow();
-                foreach (GridViewCellInfo cell in row.Cells)
+                if (row is GridDataRowElement)
                 {
-                    dRow[cell.ColumnInfo.Index] = cell.Value.ToString();
+
+                    DataRow dRow = dt.NewRow();
+                    foreach (GridViewCellInfo cell in row.RowInfo.Cells)
+                    {
+                        dRow[cell.ColumnInfo.Index] = cell.Value.ToString();
+                    }
+                    dt.Rows.Add(dRow);
                 }
-                dt.Rows.Add(dRow);
             }
             dt.EndLoadData();
             return dt;
         }
-
         public DataTable getDailyTripGrid(string _paymentmode)
         {
             DataTable dt = new DataTable();
 
-            foreach (GridViewColumn col in gridDeliveryStatus.Columns)
+            foreach (GridViewColumn col in gridDailyTrip.Columns)
             {
                 dt.Columns.Add(new DataColumn(col.HeaderText, typeof(string)));
             }
 
             dt.BeginLoadData();
-            foreach (GridViewDataRowInfo row in gridDeliveryStatus.Rows)
+            foreach (GridRowElement row in this.gridDailyTrip.TableElement.VisualRows)
             {
-                DataRow dRow = dt.NewRow();
-                foreach (GridViewCellInfo cell in row.Cells)
+                if (row is GridDataRowElement)
                 {
-                    dRow[cell.ColumnInfo.Index] = cell.Value.ToString();
+
+                    DataRow dRow = dt.NewRow();
+                    foreach (GridViewCellInfo cell in row.RowInfo.Cells)
+                    {
+                        dRow[cell.ColumnInfo.Index] = cell.Value.ToString();
+                    }
+                    dt.Rows.Add(dRow);
                 }
-                dt.Rows.Add(dRow);
             }
             dt.EndLoadData();
-            //PP - PrePaid
-            //CAS - Coporate Account Shipper
-            //FC - Freight Collect
-            //CAC - Corporate Account Consignee
             DataView view = new DataView(dt);
-            view.RowFilter = "[Payment Mode] = '"  + _paymentmode + "'";
+            view.RowFilter = String.Format("PaymentCode = '{0}'", _paymentmode);
             dt = view.ToTable();
             return dt;
         }
@@ -6116,6 +6452,8 @@ namespace CMS2.Client
         {
             DailyTripReport dailyTrip = new DailyTripReport();
             DataTable dataTable = dailyTrip.getData(dateTimeDailyTrip_Date.Value);
+
+
             ////AREA
             DataView view = new DataView(dataTable);
             DataTable table = view.ToTable(true, "Area");
@@ -6156,6 +6494,19 @@ namespace CMS2.Client
             }
             dropDownDailyTrip_PaymentMode.SelectedIndex = 0;
 
+            //BCO
+            table = view.ToTable(true, "BCO");
+            dropDownDailyTrip_BCO.Items.Clear();
+            dropDownDailyTrip_BCO.Items.Add("All");
+            foreach (DataRow x in table.Rows)
+            {
+                if (x["BCO"].ToString().Trim() != "")
+                {
+                    dropDownDailyTrip_BCO.Items.Add(x["BCO"].ToString());
+                }
+            }
+            dropDownDailyTrip_BCO.SelectedIndex = 0;
+
             gridDailyTrip.DataSource = dataTable;
 
             #region 
@@ -6183,7 +6534,7 @@ namespace CMS2.Client
         {
             HoldCargoReport holdCargo = new HoldCargoReport();
 
-            DataTable dataTable = holdCargo.getData();
+            DataTable dataTable = holdCargo.getData(dateTimeHoldCargo_FromDate.Value , dateTimeHoldCargo_ToDate.Value);
 
             //STATUS
             DataView view = new DataView(dataTable);
@@ -6192,7 +6543,10 @@ namespace CMS2.Client
             dropDownHoldCargo_Status.Items.Add("All");
             foreach (DataRow x in table.Rows)
             {
-                dropDownHoldCargo_Status.Items.Add(x["Status"].ToString());
+                if(x["Status"].ToString() != null)
+                {
+                    dropDownHoldCargo_Status.Items.Add(x["Status"].ToString());
+                }
             }
             dropDownHoldCargo_Status.SelectedIndex = 0;
 
@@ -6222,7 +6576,7 @@ namespace CMS2.Client
         private void getDeliveryStatusData()
         {
             DeliveryStatusReport deliveryStatus = new DeliveryStatusReport();
-            DataTable dataTable = deliveryStatus.getData();
+            DataTable dataTable = deliveryStatus.getData(dateTimeDeliveryStatus_Date.Value);
             ////AREA
             DataView view = new DataView(dataTable);
 
@@ -6251,6 +6605,32 @@ namespace CMS2.Client
             }
             dropDownDeliveryStatus_Driver.SelectedIndex = 0;
 
+            //STATUS
+            table = view.ToTable(true, "Status");
+            dropDownDeliveryStatus_Status.Items.Clear();
+            dropDownDeliveryStatus_Status.Items.Add("All");
+            foreach (DataRow x in table.Rows)
+            {
+                if (x["Status"].ToString().Trim() != "")
+                {
+                    dropDownDeliveryStatus_Status.Items.Add(x["Status"].ToString());
+                }
+            }
+            dropDownDeliveryStatus_Status.SelectedIndex = 0;
+
+            //BCO
+            table = view.ToTable(true, "BCO");
+            dropDownDeliveryStatus_BCO.Items.Clear();
+            dropDownDeliveryStatus_BCO.Items.Add("All");
+            foreach (DataRow x in table.Rows)
+            {
+                if (x["BCO"].ToString().Trim() != "")
+                {
+                    dropDownDeliveryStatus_BCO.Items.Add(x["BCO"].ToString());
+                }
+            }
+            dropDownDeliveryStatus_BCO.SelectedIndex = 0;
+
             gridDeliveryStatus.DataSource = dataTable;
 
             #region 
@@ -6264,7 +6644,7 @@ namespace CMS2.Client
                     gridDeliveryStatus.Columns[ctr].Width = x;
                     ctr++;
                 }
-                for (int x = 0; x < gridHoldCargo.ColumnCount; x++)
+                for (int x = 0; x < gridDeliveryStatus.ColumnCount; x++)
                 {
                     gridDeliveryStatus.Columns[x].TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
                 }
@@ -6274,32 +6654,11 @@ namespace CMS2.Client
         #endregion
 
         #region GET LIST FROM TABLE REGION
-        public List<Batch> getBatchList()
-        {
-
-            BatchBL batch = new BatchBL();
-            List<Batch> list = batch.GetAll().Distinct().OrderBy(x => x.BatchName).ToList();
-            return list;
-
-        }
         public List<RevenueUnit> getRevenueList()
         {
             revenueUnitService = new RevenueUnitBL();
             List<RevenueUnit> _revenueUnit = revenueUnitService.GetAll().Where(x => x.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId).OrderBy(x => x.RevenueUnitName).ToList();
             return _revenueUnit;
-        }
-        public List<CommodityType> getCommodityType()
-        {
-
-            CommodityTypeBL commodityType = new CommodityTypeBL();
-            List<CommodityType> list = commodityType.GetAll().Distinct().ToList();
-            return list;
-        }
-        public List<CargoTransfer> getCargoTransferList()
-        {
-            CargoTransferBL _cargoService = new CargoTransferBL();
-            List<CargoTransfer> cargoService = _cargoService.GetAll().ToList();
-            return cargoService;
         }
         public List<BranchCorpOffice> getBranchCorpOffice()
         {
@@ -6307,12 +6666,6 @@ namespace CMS2.Client
             bcoService = new BranchCorpOfficeBL(GlobalVars.UnitOfWork);
             List<BranchCorpOffice> branchCorpOffices = bcoService.FilterActive().OrderBy(x => x.BranchCorpOfficeName).ToList();
             return branchCorpOffices;
-        }
-        public List<Bundle> getBundleList()
-        {
-            BundleBL bundleBL = new BundleBL();
-            List<Bundle> list = bundleBL.GetAll().Distinct().ToList();
-            return list;
         }
         public BindingSource getRevenueUnitType()
         {
@@ -6324,30 +6677,62 @@ namespace CMS2.Client
         }
         #endregion
 
+        #region GET COLUMN DATA VIEW
+        public String get_Column_DataView(DataTable _table, String _column)
+        {
+            String Column_Name = "";
+            DataView view = new DataView(_table);
+            DataTable table = view.ToTable(true, _column);
+
+            table = view.ToTable(true, _column);
+            foreach (DataRow x in table.Rows)
+            {
+                if (x[_column].ToString() != null)
+                {
+                    Column_Name += x[_column].ToString() + ",";
+                }
+            }
+            Column_Name = Column_Name.TrimEnd(',');
+
+            return Column_Name;
+        }
+        #endregion
+
         #region TRACKING - BUTTON and DROPDOWN EVENT REGION
         // **** PICK UP CARGO **** //
         private void btnExport_PickupCargo_Click(object sender, EventArgs e)
         {
-            TrackingReportGlobalModel.table = getPickupCargoGrid();
+            DataTable dataTable = getPickupCargoGrid();
+            TrackingReportGlobalModel.table = dataTable;
             TrackingReportGlobalModel.Date = dateTimePicker_PickupCargo.Value.ToLongDateString();
             TrackingReportGlobalModel.Area = dropDownPickUpCargo_Area.SelectedItem.ToString();
 
-            TrackingReportGlobalModel.Driver = "";
-            TrackingReportGlobalModel.Checker = "";
+            TrackingReportGlobalModel.Driver = get_Column_DataView(dataTable, "Driver");
+            TrackingReportGlobalModel.Checker = get_Column_DataView(dataTable, "Checker");
 
             TrackingReportGlobalModel.Report = "PickUpCargo";
 
             ReportViewer viewer = new ReportViewer();
             viewer.Show();
-        }
-       
+        }  
         private void btnSearch_PicupCargo_Click(object sender, EventArgs e)
         {
             this.gridPickupCargo.FilterDescriptors.Clear();
             gridPickupCargo.EnableFiltering = true;
             this.gridPickupCargo.ShowFilteringRow = false;
             CompositeFilterDescriptor compositeFilter = new CompositeFilterDescriptor();
-            String Area = dropDownPickUpCargo_Area.SelectedItem.ToString();
+
+            String Area = "";
+            try
+            {
+                Area = dropDownPickUpCargo_Area.SelectedItem.ToString();
+            }
+            catch(Exception)
+            {
+                Area = "All";
+                dropDownPickUpCargo_Area.SelectedText = "All";
+            }
+
             if(Area == "All")
             {
                 gridPickupCargo.EnableFiltering = false;
@@ -6358,8 +6743,13 @@ namespace CMS2.Client
                 compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Area));
             }
             compositeFilter.LogicalOperator = FilterLogicalOperator.And;
-            this.gridPickupCargo.FilterDescriptors.Add(compositeFilter);
-
+            this.gridPickupCargo.FilterDescriptors.Add(compositeFilter);    
+        }
+        private void dateTimePicker_PickupCargo_ValueChanged(object sender, EventArgs e)
+        {
+            dropDownPickUpCargo_Area.SelectedIndex = 0;
+            gridPickupCargo.EnableFiltering = false;
+            getPickupCargoData();
         }
 
         // **** BRANCH ACCEPTANCE **** //
@@ -6394,7 +6784,6 @@ namespace CMS2.Client
                 dropDownBranchAcceptance_BCO_BSO.SelectedIndex = 0;
             }
         }
-
         private void btnBranchAcceptance_Search_Click(object sender, EventArgs e)
         {
             this.gridBranchAcceptance.FilterDescriptors.Clear();
@@ -6403,10 +6792,21 @@ namespace CMS2.Client
 
             CompositeFilterDescriptor compositeFilter = new CompositeFilterDescriptor();
 
-            String Branch_Area = dropDownBranchAcceptance_BCO_BSO.SelectedItem.ToString();
-            String Driver = dropDownBranchAcceptance_Driver.SelectedItem.ToString();
-            String Batch = dropDownBranchAcceptance_Batch.SelectedItem.ToString();
+            String Branch_Area = "";
+            String Driver = "";
+            String Batch = "";
 
+            try {
+                Branch_Area = dropDownBranchAcceptance_BCO_BSO.SelectedItem.ToString();
+                Driver = dropDownBranchAcceptance_Driver.SelectedItem.ToString();
+                Batch = dropDownBranchAcceptance_Batch.SelectedItem.ToString();
+            }
+            catch (Exception)
+            {
+                Branch_Area = "All"; dropDownBranchAcceptance_BCO_BSO.SelectedText = "All";
+                Driver = "All"; dropDownBranchAcceptance_Driver.SelectedText = "All";
+                Batch = "All"; dropDownBranchAcceptance_Batch.SelectedText = "All";
+            }
             if (Branch_Area == "All" && Driver == "All" && Batch == "All")
             {
                 gridBranchAcceptance.EnableFiltering = false;
@@ -6478,8 +6878,35 @@ namespace CMS2.Client
 
             this.gridBranchAcceptance.FilterDescriptors.Add(compositeFilter);
         }
+        private void btnBranchAcceptance_Print_Click(object sender, EventArgs e)
+        {
+            DataTable dataTable = getBranchAcceptanceGrid();
+            TrackingReportGlobalModel.table = dataTable;
+            TrackingReportGlobalModel.Date = dateTimeGatewayTransmital_Date.Value.ToLongDateString();
+            TrackingReportGlobalModel.Branch = get_Column_DataView(dataTable, "BCO");
+            TrackingReportGlobalModel.Driver = dropDownBranchAcceptance_Driver.SelectedItem.ToString();
+            TrackingReportGlobalModel.Checker = get_Column_DataView(dataTable, "Checker");
+            TrackingReportGlobalModel.PlateNo = get_Column_DataView(dataTable, "Plate #");
+            TrackingReportGlobalModel.Batch = dropDownBranchAcceptance_Batch.SelectedItem.ToString();
+            TrackingReportGlobalModel.ScannedBy = UserTxt.Text.Replace("Welcome!", "");
 
+            TrackingReportGlobalModel.Report = "BranchAcceptance";
 
+            ReportViewer viewer = new ReportViewer(); 
+            viewer.Show();
+
+        }
+        private void dateTimePickerBranchAcceptance_Date_ValueChanged(object sender, EventArgs e)
+        {
+            dropDownBranchAcceptance_Branch.SelectedIndex = 0;
+            dropDownBranchAcceptance_BCO_BSO.Items.Clear();
+            dropDownBranchAcceptance_BCO_BSO.Items.Add("All");
+            dropDownBranchAcceptance_Driver.SelectedIndex = 0;
+            dropDownBranchAcceptance_Batch.SelectedIndex = 0;
+            gridBranchAcceptance.EnableFiltering = false;
+            getBrancAcceptanceData();
+        }
+        
         // **** BUNDLE **** //
         private void dropDownBundle_Branch_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
         {
@@ -6513,7 +6940,6 @@ namespace CMS2.Client
                 dropDownBundle_BCO_BSO.SelectedIndex = 0;
             }
         }
-
         private void btnBundle_Search_Click(object sender, EventArgs e)
         {
             this.gridBundle.FilterDescriptors.Clear();
@@ -6521,10 +6947,20 @@ namespace CMS2.Client
             this.gridBundle.ShowFilteringRow = false;
 
             CompositeFilterDescriptor compositeFilter = new CompositeFilterDescriptor();
-
-            String Area = dropDownBundle_BCO_BSO.SelectedItem.ToString();
-            String SackNo = dropDownBundle_SackNo.SelectedItem.ToString();
-            String Destination = dropDownBundle_Destination.SelectedItem.ToString();
+            String Area = "";
+            String SackNo = "";
+            String Destination = "";
+            try {
+                Area = dropDownBundle_BCO_BSO.SelectedItem.ToString();
+                SackNo = dropDownBundle_SackNo.SelectedItem.ToString();
+                Destination = dropDownBundle_Destination.SelectedItem.ToString();
+            }
+            catch
+            {
+                Area = "All"; dropDownBundle_BCO_BSO.SelectedText = "All";
+                SackNo = "All"; dropDownBundle_SackNo.SelectedText = "All";
+                Destination = "All"; dropDownBundle_Destination.SelectedText = "All";
+            }
 
             if(Area == "All" && SackNo == "All" && Destination == "All")
             {
@@ -6576,7 +7012,25 @@ namespace CMS2.Client
 
             this.gridBundle.FilterDescriptors.Add(compositeFilter);
         }
+        private void btnBundle_Print_Click(object sender, EventArgs e)
+        {
+            DataTable dataTable = getBundleGrid();
+            TrackingReportGlobalModel.table = dataTable;
 
+            TrackingReportGlobalModel.Date = dateTimeBundle_Date.Value.ToLongDateString();
+            TrackingReportGlobalModel.SackNo = get_Column_DataView(dataTable, "SackNo");
+            TrackingReportGlobalModel.Destination = dropDownBundle_Destination.SelectedItem.ToString();
+            TrackingReportGlobalModel.Weight = get_Column_DataView(dataTable, "AGW");
+            TrackingReportGlobalModel.Report = "Bundle";
+
+            ReportViewer viewer = new ReportViewer();
+            viewer.Show();
+        }
+        private void dateTimeBundle_Date_ValueChanged(object sender, EventArgs e)
+        {
+            gridBundle.EnableFiltering = false;
+            getBundleData();
+        }
         // **** UNBUNDLE **** //
         private void btnUnbundle_Search_Click(object sender, EventArgs e)
         {
@@ -6586,9 +7040,17 @@ namespace CMS2.Client
             this.gridUnbundle.ShowFilteringRow = false;
 
             CompositeFilterDescriptor compositeFilter = new CompositeFilterDescriptor();
-            String Branch = dropDownUnbundle_BCO.SelectedItem.ToString();
-            String SackNo = dropDownUnbundle_SackNo.SelectedItem.ToString();
-
+            String Branch = "";
+            String SackNo = "";
+            try {
+                Branch = dropDownUnbundle_BCO.SelectedItem.ToString();
+                SackNo = dropDownUnbundle_SackNo.SelectedItem.ToString();
+            }
+            catch (Exception)
+            {
+                Branch = "All"; dropDownUnbundle_BCO.SelectedText = "All";
+                SackNo = "All"; dropDownUnbundle_SackNo.SelectedText = "All";
+            }
             if (Branch == "All" && SackNo == "All")
             {
                 gridUnbundle.EnableFiltering = false;
@@ -6610,7 +7072,24 @@ namespace CMS2.Client
             compositeFilter.LogicalOperator = FilterLogicalOperator.And;
             this.gridUnbundle.FilterDescriptors.Add(compositeFilter);
         }
+        private void btnUnbundle_Print_Click(object sender, EventArgs e)
+        {
+            DataTable dataTable = getUnbundleGrid();
+            TrackingReportGlobalModel.table = dataTable;
+            TrackingReportGlobalModel.Date = dateTimeUnbunde_Date.Value.ToLongDateString();
+            TrackingReportGlobalModel.SackNo = dropDownUnbundle_SackNo.SelectedItem.ToString();
+            TrackingReportGlobalModel.Origin = get_Column_DataView(dataTable, "Origin");
+            TrackingReportGlobalModel.ScannedBy = UserTxt.Text.Replace("Welcome!", "");
+            TrackingReportGlobalModel.Report = "Unbundle";
 
+            ReportViewer viewer = new ReportViewer();
+            viewer.Show();
+        }
+        private void dateTimeUnbunde_Date_ValueChanged(object sender, EventArgs e)
+        {
+            gridUnbundle.EnableFiltering = false;
+            getUnbundle();
+        }
         // **** GATEWAY TRANSMITAL **** //
         private void btnGatewayTransmital_Search_Click(object sender, EventArgs e)
         {
@@ -6619,11 +7098,20 @@ namespace CMS2.Client
             this.gridGatewayTransmital.ShowFilteringRow = false;
 
             CompositeFilterDescriptor compositeFilter = new CompositeFilterDescriptor();
-
-            String Gateway = dropDownGatewayTransmital_Gateway.SelectedItem.ToString();
-            String Destination = dropDownGatewayTransmital_Destination.SelectedItem.ToString();
-            String Batch = dropDownGatewayTransmital_Batch.SelectedItem.ToString();
-
+            String Gateway = "";
+            String Destination = "";
+            String Batch = "";
+            try {
+                Gateway = dropDownGatewayTransmital_Gateway.SelectedItem.ToString();
+                Destination = dropDownGatewayTransmital_Destination.SelectedItem.ToString();
+                Batch = dropDownGatewayTransmital_Batch.SelectedItem.ToString();
+            }
+            catch (Exception)
+            {
+                Gateway = "All"; dropDownGatewayTransmital_Gateway.SelectedText = "All";
+                Destination = "All"; dropDownGatewayTransmital_Destination.SelectedText = "All";
+                Batch = "All"; dropDownGatewayTransmital_Batch.SelectedText = "All";
+            }
             String CreatedDate = dateTimeGatewayTransmital_Date.Value.ToShortDateString();
 
             if (Gateway == "All" && Destination == "All" && Batch == "All")
@@ -6677,6 +7165,27 @@ namespace CMS2.Client
             compositeFilter.LogicalOperator = FilterLogicalOperator.And;
             this.gridGatewayTransmital.FilterDescriptors.Add(compositeFilter);
         }
+        private void btnGatewayTransmital_Print_Click(object sender, EventArgs e)
+        {
+            DataTable dataTable = getGatewayTransmitalGrid();
+            TrackingReportGlobalModel.table = getGatewayTransmitalGrid();
+            TrackingReportGlobalModel.Date = dateTimeGatewayTransmital_Date.Value.ToLongDateString();
+            TrackingReportGlobalModel.Driver = get_Column_DataView(dataTable, "Driver");
+            TrackingReportGlobalModel.PlateNo = get_Column_DataView(dataTable, "PlateNo");
+            TrackingReportGlobalModel.AirwayBillNo = get_Column_DataView(dataTable, "AWB");
+            TrackingReportGlobalModel.Area = dropDownGatewayTransmital_Destination.SelectedItem.ToString();
+            TrackingReportGlobalModel.Gateway = dropDownGatewayTransmital_Gateway.SelectedItem.ToString();
+
+            TrackingReportGlobalModel.Report = "GatewayTransmital";
+
+            ReportViewer viewer = new ReportViewer();
+            viewer.Show();
+        }
+        private void dateTimeGatewayTransmital_Date_ValueChanged(object sender, EventArgs e)
+        {
+            gridGatewayTransmital.EnableFiltering = false;
+            getGatewayTransmitalData();
+        }
         // **** GATEWAT OUTBOUND **** //
         private void btnGatewayOutbound_Search_Click(object sender, EventArgs e)
         {
@@ -6685,10 +7194,17 @@ namespace CMS2.Client
             this.gridGatewayOutbound.ShowFilteringRow = false;
 
             CompositeFilterDescriptor compositeFilter = new CompositeFilterDescriptor();
-            String Gateway = dropDownGatewayOutbound_Gateway.SelectedItem.ToString();
-            String Batch = dropDownGatewayOutbound_Batch.SelectedItem.ToString();           
-            String CreatedDate = dateTimeGatewayOutbound_Date.Value.ToShortDateString();
+            String Gateway = "";
+            String Batch = "";
+            try {
+                Gateway = dropDownGatewayOutbound_Gateway.SelectedItem.ToString();
+                Batch = dropDownGatewayOutbound_Batch.SelectedItem.ToString();
+            }
+            catch(Exception) {
+                Gateway = "All"; dropDownGatewayOutbound_Gateway.SelectedText = "All";
+                Batch = "All"; dropDownGatewayOutbound_Batch.SelectedText = "All";
 
+            }
             if(Gateway == "All" && Batch == "All")
             {
                 gridGatewayOutbound.EnableFiltering = false;
@@ -6708,13 +7224,28 @@ namespace CMS2.Client
                 compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Batch", FilterOperator.IsEqualTo, Batch));
             }
            
-            //compositeFilter.FilterDescriptors.Add(new FilterDescriptor("CreatedDate", FilterOperator.IsEqualTo, CreatedDate));
-
             compositeFilter.LogicalOperator = FilterLogicalOperator.And;
 
             this.gridGatewayOutbound.FilterDescriptors.Add(compositeFilter);
         }
+        private void btnGatewayOutbound_Print_Click(object sender, EventArgs e)
+        {
+            DataTable dataTable = getGatewayOutboundGrid();
+            TrackingReportGlobalModel.table = dataTable;
+            TrackingReportGlobalModel.Date = dateTimeGatewayOutbound_Date.Value.ToLongDateString();
+            TrackingReportGlobalModel.Driver = get_Column_DataView(dataTable, "Driver");
+            TrackingReportGlobalModel.PlateNo = get_Column_DataView(dataTable, "Plate #");
+            TrackingReportGlobalModel.Gateway = dropDownGatewayOutbound_Gateway.SelectedItem.ToString();
+            TrackingReportGlobalModel.Report = "GatewayOutbound";
 
+            ReportViewer viewer = new ReportViewer();
+            viewer.Show();
+        }
+        private void dateTimeGatewayOutbound_Date_ValueChanged(object sender, EventArgs e)
+        {
+            gridGatewayOutbound.EnableFiltering = false;
+            getGatewayOutBoundData();
+        }
         // **** GATEWAY INBOUND **** //
         private void btnGatewayInbound_Search_Click(object sender, EventArgs e)
         {
@@ -6723,18 +7254,26 @@ namespace CMS2.Client
             this.gridGatewayInbound.ShowFilteringRow = false;
 
             CompositeFilterDescriptor compositeFilter = new CompositeFilterDescriptor();
-
-            String Gateway = dropDownGatewayInbound_Gateway.SelectedItem.ToString();
-            String Origin = dropDownGatewayInbound_Origin.SelectedItem.ToString();
-            String CommodityType = dropDownGatewayInbound_Commodity.SelectedItem.ToString();
-
+            String Gateway = "";
+            String Origin = "";
+            String CommodityType = "";
+            try {
+                Gateway = dropDownGatewayInbound_Gateway.SelectedItem.ToString();
+                Origin = dropDownGatewayInbound_Origin.SelectedItem.ToString();
+                CommodityType = dropDownGatewayInbound_Commodity.SelectedItem.ToString();
+            }
+            catch (Exception)
+            {
+                Gateway = "All"; dropDownGatewayInbound_Gateway.SelectedText = "All";
+                Origin = "All"; dropDownGatewayInbound_Origin.SelectedText = "All";
+                CommodityType = "All"; dropDownGatewayInbound_Commodity.SelectedText = "All";
+            }
             if (txtBoxGatewayInbound_MasterAWB.Text != "")
             {
                 dropDownGatewayInbound_Gateway.SelectedIndex = 0;
                 dropDownGatewayInbound_Origin.SelectedIndex = 0;
                 dropDownGatewayInbound_Commodity.SelectedIndex = 0;
                 compositeFilter.FilterDescriptors.Add(new FilterDescriptor("MAWB", FilterOperator.IsEqualTo, txtBoxGatewayInbound_MasterAWB.Text));
-
             }
             else
             {
@@ -6785,23 +7324,57 @@ namespace CMS2.Client
             this.gridGatewayInbound.FilterDescriptors.Add(compositeFilter);
 
         }
+        private void btnGatewayInbound_Print_Click(object sender, EventArgs e)
+        {
+            DataTable dataTable = getGatewayInboundGrid();
+            TrackingReportGlobalModel.table = dataTable;
+            TrackingReportGlobalModel.Date = dateTimePickerGatewayInbound_Date.Value.ToLongDateString();
+            TrackingReportGlobalModel.Gateway = dropDownGatewayInbound_Gateway.SelectedItem.ToString();
+            TrackingReportGlobalModel.AirwayBillNo = get_Column_DataView(dataTable, "MAWB");
+            TrackingReportGlobalModel.FlightNo = get_Column_DataView(dataTable, "Flight #");
+            TrackingReportGlobalModel.CommodityType = dropDownGatewayInbound_Commodity.SelectedItem.ToString();
+            TrackingReportGlobalModel.Report = "GatewayInbound";
+            ReportViewer viewer = new ReportViewer();
+            viewer.Show();
+        }
+        private void dateTimePickerGatewayInbound_Date_ValueChanged(object sender, EventArgs e)
+        {
+            gridGatewayInbound.EnableFiltering = false;
+            getGatewayInBoundData();
+        }
         // **** CARGO TRANSFER **** //
         private void dropDownCargoTransfer_Origin_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
         {
-
+        
             RevenueUnitBL revenueBL = new RevenueUnitBL();
-
-
+           
             if (dropDownCargoTransfer_Origin.SelectedItem.ToString().Equals("Branch Corporate Office"))
             {
-                dropDownCargoTransfer_City.DataSource = getBranchCorpOffice();
-                dropDownCargoTransfer_City.DisplayMember = "BranchCorpOfficeName";
-                dropDownCargoTransfer_City.ValueMember = "BranchCorpOfficeId";
-                dropDownCargoTransfer_City.SelectedIndex = 0;
+                CargoTransferReport cargoTransfer = new CargoTransferReport();
+                DataTable dataTable = cargoTransfer.getData(dateTimeCargoTransfer_Date.Value);
 
-                dropDownCargoTransfer_Destination.DataSource = getBranchCorpOffice();
-                dropDownCargoTransfer_Destination.DisplayMember = "BranchCorpOfficeName";
-                dropDownCargoTransfer_Destination.ValueMember = "BranchCorpOfficeId";
+                DataView view = new DataView(dataTable);
+
+                //ORIGIN
+                DataTable table = view.ToTable(true, "BCO");
+
+                dropDownCargoTransfer_City.Items.Clear();
+                dropDownCargoTransfer_City.Items.Add("All");
+                dropDownCargoTransfer_Destination.Items.Clear();
+                dropDownCargoTransfer_Destination.Items.Add("All");
+
+                foreach (DataRow x in table.Rows)
+                {
+                    if (x["BCO"].ToString().Trim() != "")
+                    {
+                        if (x["BCO"].ToString() != null)
+                        {
+                            dropDownCargoTransfer_City.Items.Add(x["BCO"].ToString());
+                            dropDownCargoTransfer_Destination.Items.Add(x["BCO"].ToString());
+                        }
+                    }
+                }
+                dropDownCargoTransfer_City.SelectedIndex = 0;
                 dropDownCargoTransfer_Destination.SelectedIndex = 0;
             }
             else
@@ -6826,9 +7399,17 @@ namespace CMS2.Client
             this.gridCargoTransfer.ShowFilteringRow = false;
             //getCargoTransferData();
             CompositeFilterDescriptor compositeFilter = new CompositeFilterDescriptor();
-            string origin = dropDownCargoTransfer_City.SelectedItem.ToString();
-            string destination = dropDownCargoTransfer_Destination.SelectedItem.ToString();
-           
+            string origin = "";
+            string destination = "";
+            try {
+                origin = dropDownCargoTransfer_City.SelectedItem.ToString();
+               destination = dropDownCargoTransfer_Destination.SelectedItem.ToString();
+            }
+            catch (Exception)
+            {
+                origin = "All"; dropDownCargoTransfer_City.SelectedText = "All";
+                destination = "All"; dropDownCargoTransfer_Destination.SelectedText = "All";
+            }
             if (origin == "All" && destination == "All")
             {
                 gridCargoTransfer.EnableFiltering = false;
@@ -6851,6 +7432,25 @@ namespace CMS2.Client
             compositeFilter.LogicalOperator = FilterLogicalOperator.And;
             this.gridCargoTransfer.FilterDescriptors.Add(compositeFilter);
         }
+        private void btnCargoTransfer_Print_Click(object sender, EventArgs e)
+        {
+            DataTable dataTable = getCargoTranferGrid();
+            TrackingReportGlobalModel.table = dataTable;
+            TrackingReportGlobalModel.Date = dateTimeCargoTransfer_Date.Value.ToLongDateString();
+            TrackingReportGlobalModel.Origin = dropDownCargoTransfer_City.SelectedItem.ToString();
+            TrackingReportGlobalModel.Destination = dropDownCargoTransfer_Destination.SelectedItem.ToString();
+            TrackingReportGlobalModel.Driver = get_Column_DataView(dataTable, "Driver");
+            TrackingReportGlobalModel.Checker = get_Column_DataView(dataTable, "Checker");
+            TrackingReportGlobalModel.PlateNo = get_Column_DataView(dataTable, "Plate #");
+            TrackingReportGlobalModel.Report = "CargoTransfer";
+            ReportViewer viewer = new ReportViewer();
+            viewer.Show();
+        }
+        private void dateTimeCargoTransfer_Date_ValueChanged(object sender, EventArgs e)
+        {
+            gridCargoTransfer.EnableFiltering = false;
+            getCargoTransferData();
+        }
 
         // **** SEGREGATION **** //
         private void btnSegregation_Search_Click(object sender, EventArgs e)
@@ -6861,12 +7461,23 @@ namespace CMS2.Client
             this.gridSegregation.ShowFilteringRow = false;
 
             CompositeFilterDescriptor compositeFilter = new CompositeFilterDescriptor();
-
-            String BCO = dropDownSegregation_BCO.SelectedItem.ToString();
-            String Driver = dropDownSegregation_Driver.SelectedItem.ToString();
-            String PlateNo = dropDownSegregation_PlateNo.SelectedItem.ToString();
-            String Batch = dropDownSegregation_Batch.SelectedItem.ToString();
-           
+            String BCO = "";
+            String Driver = "";
+            String PlateNo = "";
+            String Batch = "";
+            try {
+                BCO = dropDownSegregation_BCO.SelectedItem.ToString();
+                Driver = dropDownSegregation_Driver.SelectedItem.ToString();
+                PlateNo = dropDownSegregation_PlateNo.SelectedItem.ToString();
+                Batch = dropDownSegregation_Batch.SelectedItem.ToString();
+            }
+            catch (Exception)
+            {
+                BCO = "All"; dropDownSegregation_BCO.SelectedText = "All";
+                Driver = "All"; dropDownSegregation_Driver.SelectedText = "All";
+                PlateNo = "All"; dropDownSegregation_PlateNo.SelectedText = "All";
+                Batch = "All"; dropDownSegregation_Batch.SelectedText = "All";
+            }
             if (BCO == "All" && Driver == "All" && PlateNo == "All" && Batch == "All")
             {
                 gridSegregation.EnableFiltering = false;
@@ -6956,38 +7567,170 @@ namespace CMS2.Client
 
             this.gridSegregation.FilterDescriptors.Add(compositeFilter);
         }
+        private void btnSegregation_Print_Click(object sender, EventArgs e)
+        {
+            DataTable dataTable = getSegregationGrid();
+            TrackingReportGlobalModel.table = dataTable;
+            TrackingReportGlobalModel.Date = dateTimeSegregation_Date.Value.ToLongDateString();
+            TrackingReportGlobalModel.Driver = dropDownSegregation_Driver.SelectedItem.ToString();
+            TrackingReportGlobalModel.Checker = get_Column_DataView(dataTable, "Checker");
+            TrackingReportGlobalModel.PlateNo = dropDownSegregation_PlateNo.SelectedItem.ToString();
+            TrackingReportGlobalModel.Report = "Segregation";
+            ReportViewer viewer = new ReportViewer();
+            viewer.Show();
+        }
+        private void dateTimeSegregation_Date_ValueChanged(object sender, EventArgs e)
+        {
+            gridSegregation.EnableFiltering = false;
+            getSegregationData();
+        }
+
         // **** DAILY TRIP **** //
         private void btnDailyTrip_Search_Click(object sender, EventArgs e)
         {
 
-            //this.gridDailyTrip.FilterDescriptors.Clear();
-            //gridDailyTrip.EnableFiltering = true;
-            //this.gridDailyTrip.ShowFilteringRow = false;
+            this.gridDailyTrip.FilterDescriptors.Clear();
+            gridDailyTrip.EnableFiltering = true;
+            this.gridDailyTrip.ShowFilteringRow = false;
 
-            //CompositeFilterDescriptor compositeFilter = new CompositeFilterDescriptor();
+            CompositeFilterDescriptor compositeFilter = new CompositeFilterDescriptor();
+            String Area = "";
+            String Driver = "";
+            String PaymentMode = "";
+            String BCO = "";
 
-            //String Area = dropDownDailyTrip_Area.SelectedItem.ToString();
-            //String Driver = dropDownDailyTrip_Driver.SelectedItem.ToString();
-            //String PaymentMode = dropDownDailyTrip_PaymentMode.SelectedItem.ToString();
-
-            //if (Area == "All" && Driver == "All" && PaymentMode == "All")
-            //{
+            try {
+                Area = dropDownDailyTrip_Area.SelectedItem.ToString();
+                Driver = dropDownDailyTrip_Driver.SelectedItem.ToString();
+                PaymentMode = dropDownDailyTrip_PaymentMode.SelectedItem.ToString();
+                BCO = dropDownDailyTrip_BCO.SelectedItem.ToString();
+            }
+            catch (Exception)
+            {
+                Area = "All"; dropDownDailyTrip_Area.SelectedText = "All";
+                Driver = "All"; dropDownDailyTrip_Driver.SelectedText = "All";
+                PaymentMode = "All"; dropDownDailyTrip_PaymentMode.SelectedText = "All";
+                BCO = "All"; dropDownDailyTrip_BCO.SelectedText = "All";
+            }
+            if (Area == "All" && Driver == "All" && PaymentMode == "All" && BCO == "All")
+            {
                 gridDailyTrip.EnableFiltering = false;
                 getDailyTripData();
-            //}
+            }
+            else if (Area != null && Driver == "All" && PaymentMode == "All" && BCO == "All")
+            {
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Area));
+            }
+            else if (Area != null && Driver != null && PaymentMode == "All" && BCO == "All")
+            {
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Area));
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
+            }
+            else if (Area != null && Driver == "All" && PaymentMode != null && BCO == "All")
+            {
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Area));
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Payment Mode", FilterOperator.IsEqualTo, PaymentMode));
+            }
+            else if (Area == "All" && Driver != null && PaymentMode == "All" && BCO == "All")
+            {
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
+            }
+            else if (Area == "All" && Driver != null && PaymentMode != null && BCO == "All")
+            {
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Payment Mode", FilterOperator.IsEqualTo, PaymentMode));
+            }
+            else if (Area == "All" && Driver == "All" && PaymentMode != null && BCO == "All")
+            {
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Payment Mode", FilterOperator.IsEqualTo, PaymentMode));
+            }
+            else if (Area != null && Driver != null && PaymentMode != null && BCO == "All")
+            {
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Area));
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Payment Mode", FilterOperator.IsEqualTo, PaymentMode));
+            }
+            else if (Area == "All" && Driver == "All" && PaymentMode == "All" && BCO != null)
+            {
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, BCO));
+            }
+            else if (Area == "All" && Driver == "All" && PaymentMode != null && BCO != null)
+            {
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, BCO));
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Payment Mode", FilterOperator.IsEqualTo, PaymentMode));
+            }
+            else if (Area == "All" && Driver != null  && PaymentMode == "All" && BCO != null)
+            {
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, BCO));
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
+            }
+            else if (Area != null && Driver == "All" && PaymentMode == "All" && BCO != null)
+            {
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, BCO));
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Area));
+            }
 
-            //compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Area));
-            //compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
-            //compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Payment Mode", FilterOperator.IsEqualTo, PaymentMode));
-            ////compositeFilter.FilterDescriptors.Add(new FilterDescriptor("CreatedBy", FilterOperator.IsEqualTo, dateTimeDailyTrip_Date.Value.ToShortDateString()));
+            else if (Area == "All" && Driver != null && PaymentMode != null && BCO != null)
+            {
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, BCO));
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Payment Mode", FilterOperator.IsEqualTo, PaymentMode));
+            }
+            else if (Area != null && Driver != null && PaymentMode == "All" && BCO != null)
+            {
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, BCO));
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Area));
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
+            }
+            else if (Area != null && Driver == "All" && PaymentMode != null && BCO != null)
+            {
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, BCO));
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Area));
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Payment Mode", FilterOperator.IsEqualTo, PaymentMode));
+            }
+            else if (Area != null && Driver != null && PaymentMode != null && BCO != null)
+            {
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, BCO));
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Area));
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Payment Mode", FilterOperator.IsEqualTo, PaymentMode));
+            }
 
-            //compositeFilter.LogicalOperator = FilterLogicalOperator.Or;
 
-            //this.gridDailyTrip.FilterDescriptors.Add(compositeFilter);
+            compositeFilter.LogicalOperator = FilterLogicalOperator.And;
+            this.gridDailyTrip.FilterDescriptors.Add(compositeFilter);
+        }
+        private void btnDailyTrip_Print_Click(object sender, EventArgs e)
+        {
+
+            DataTable dataTable = getDeliveryStatusGrid();
+            TrackingReportGlobalModel.Date = dateTimeDailyTrip_Date.Value.ToLongDateString();
+            TrackingReportGlobalModel.Driver = dropDownDailyTrip_Driver.SelectedItem.ToString();
+            TrackingReportGlobalModel.Checker = get_Column_DataView(dataTable, "Checker");
+            TrackingReportGlobalModel.PlateNo = "";
+            TrackingReportGlobalModel.Area = get_Column_DataView(dataTable, "Area");
+
+            TrackingReportGlobalModel.table = getDailyTripGrid("PP");
+            TrackingReportGlobalModel.table2 = getDailyTripGrid("CAS");
+            TrackingReportGlobalModel.table3 = getDailyTripGrid("FC");
+            TrackingReportGlobalModel.table4 = getDailyTripGrid("CAC");
+
+            TrackingReportGlobalModel.Report = "DailyTrip";
+            ReportViewer viewer = new ReportViewer();
+            viewer.Show();
+        }
+        private void dateTimeDailyTrip_Date_ValueChanged(object sender, EventArgs e)
+        {
+            gridDailyTrip.EnableFiltering = false;
+            getDailyTripData();
         }
         // **** HOLD CARGO **** //
         private void dropDownHoldCargo_Branch_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
         {
+            HoldCargoReport report = new HoldCargoReport();
+            DataTable dataTable = report.getData(dateTimeHoldCargo_FromDate.Value, dateTimeHoldCargo_ToDate.Value);
+            DataView view = new DataView(dataTable);
+
             if (dropDownHoldCargo_Branch.SelectedItem.ToString().Equals("Branch Corporate Office"))
             {
                 label104.Text = "BCO:";
@@ -6996,28 +7739,21 @@ namespace CMS2.Client
                 dropDownHoldCargo_BCO_BSO.DisplayMember = "BranchCorpOfficeName";
                 dropDownHoldCargo_BCO_BSO.ValueMember = "BranchCorpOfficeId";
                 dropDownHoldCargo_BCO_BSO.SelectedValue = GlobalVars.DeviceBcoId;
-                dropDownHoldCargo_BCO_BSO.Enabled = false;
+                dropDownHoldCargo_BCO_BSO.Enabled = false;   
             }
             else
             {
                 label104.Text = "BSO:";
-                dropDownHoldCargo_BCO_BSO.Enabled = true;
-                Guid revenueUnitTypeId = new Guid();
-                try
+                dropDownBranchAcceptance_BCO_BSO.Enabled = true;
+                //BSO
+                DataTable table = view.ToTable(true, "BSO");
+                dropDownHoldCargo_BCO_BSO.Items.Clear();
+                dropDownHoldCargo_BCO_BSO.Items.Add("All");
+                foreach (DataRow x in table.Rows)
                 {
-                    revenueUnitTypeId = Guid.Parse(dropDownHoldCargo_Branch.SelectedValue.ToString());
+                    dropDownHoldCargo_BCO_BSO.Items.Add(x["BSO"].ToString());
                 }
-                catch (Exception)
-                {
-                    return;
-                }
-
-                RevenueUnitBL revenueUnitservice = new RevenueUnitBL();
-                dropDownHoldCargo_BCO_BSO.DataSource = null;
-                List<RevenueUnit> _revenueUnit = revenueUnitservice.GetAll().Where(x => x.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.RevenueUnitTypeId == revenueUnitTypeId).OrderBy(x => x.RevenueUnitName).ToList();
-                dropDownHoldCargo_BCO_BSO.DataSource = _revenueUnit;
-                dropDownHoldCargo_BCO_BSO.DisplayMember = "RevenueUnitName";
-                dropDownHoldCargo_BCO_BSO.ValueMember = "RevenueUnitId";
+                dropDownHoldCargo_BCO_BSO.SelectedIndex = 0;
             }
         }
         private void btnHoldCargo_Search_Click(object sender, EventArgs e)
@@ -7028,10 +7764,18 @@ namespace CMS2.Client
             this.gridHoldCargo.ShowFilteringRow = false;
 
             CompositeFilterDescriptor compositeFilter = new CompositeFilterDescriptor();
+            String Branch = "";
+            String Status = "";
 
-            String Branch = dropDownHoldCargo_BCO_BSO.SelectedItem.ToString();
-            String Status = dropDownHoldCargo_Status.SelectedItem.ToString();
+            try {
+                Branch = dropDownHoldCargo_BCO_BSO.SelectedItem.ToString();
+                Status = dropDownHoldCargo_Status.SelectedItem.ToString();
+            }catch(Exception)
+            {
+                Branch = "All"; dropDownHoldCargo_BCO_BSO.SelectedText = "All";
+                Status = "All"; dropDownHoldCargo_Status.SelectedText = "All";
 
+            }
             if (Branch == "All" && Status == "All")
             {
                 gridHoldCargo.EnableFiltering = false;
@@ -7055,251 +7799,171 @@ namespace CMS2.Client
 
             this.gridHoldCargo.FilterDescriptors.Add(compositeFilter);
         }
+        private void btnHoldCargo_Export_Click(object sender, EventArgs e)
+        {
+            saveFileDialog2.Filter = "Excel File (*.xlsx)|*.xlsx";
+            saveFileDialog2.DefaultExt = "xlsx";
+            saveFileDialog2.AddExtension = true;
+
+            saveFileDialog2.FileName = "HoldCargo_(" + DateTime.Now.ToShortDateString().Replace("/", "_") + ").xlsx";
+            saveFileDialog2.ShowDialog();
+        }
+        private void dateTimeHoldCargo_FromDate_ValueChanged(object sender, EventArgs e)
+        {
+            if (dateTimeHoldCargo_ToDate.Value <= dateTimeHoldCargo_FromDate.Value)
+            {
+                dateTimeHoldCargo_ToDate.Value = dateTimeHoldCargo_FromDate.Value.AddDays(1);
+            }
+
+            gridHoldCargo.EnableFiltering = false;
+            getHoldCargoData();
+        }
+        private void dateTimeHoldCargo_ToDate_ValueChanged(object sender, EventArgs e)
+        {
+            if (dateTimeHoldCargo_ToDate.Value <= dateTimeHoldCargo_FromDate.Value)
+            {
+                dateTimeHoldCargo_FromDate.Value = dateTimeHoldCargo_ToDate.Value.AddDays(-1);
+            }
+            gridHoldCargo.EnableFiltering = false;
+            getHoldCargoData();
+
+        }
+
+
         // **** DELIVERY STATUS **** //
         private void btnDeliveryStatus_Search_Click(object sender, EventArgs e)
         {
-            List<string> x = new List<string>();
-            gridDeliveryStatus.DataSource = x;
             this.gridDeliveryStatus.FilterDescriptors.Clear();
             gridDeliveryStatus.EnableFiltering = true;
             this.gridDeliveryStatus.ShowFilteringRow = false;
 
             CompositeFilterDescriptor compositeFilter = new CompositeFilterDescriptor();
-
-            String Area = dropDownDeliveryStatus_Area.SelectedItem.ToString();
-            String Driver = dropDownDeliveryStatus_Driver.SelectedItem.ToString();
-
-            if (Area == "All" && Driver == "All")
+            String Area = "";
+            String Driver = "";
+            String Status = "";
+            String BCO = "";
+            try {
+                Area = dropDownDeliveryStatus_Area.SelectedItem.ToString();
+                Driver = dropDownDeliveryStatus_Driver.SelectedItem.ToString();
+                Status = dropDownDeliveryStatus_Status.SelectedItem.ToString();
+                BCO = dropDownDeliveryStatus_BCO.SelectedItem.ToString();
+            }
+            catch (Exception)
+            {
+                Area = "All"; dropDownDeliveryStatus_Area.SelectedText = "All";
+                Driver = "All"; dropDownDeliveryStatus_Driver.SelectedText = "All";
+                Status = "All"; dropDownDeliveryStatus_Status.SelectedText = "All";
+                BCO = "All"; dropDownDeliveryStatus_BCO.SelectedText = "All";
+            }
+            if (Area == "All" && Driver == "All" && Status == "All" && BCO == "ALL")
             {
                 gridDeliveryStatus.EnableFiltering = false;
                 getDeliveryStatusData();
             }
+            else if (Area != null && Driver == "All" && Status == "All" && BCO == "ALL")
+            {
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Area));
+            }
+            else if (Area != null && Driver != null && Status == "All" && BCO == "ALL")
+            {
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Area));
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
+            }
+            else if (Area != null && Driver == "All" && Status != null && BCO == "ALL")
+            {
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Area));
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Status", FilterOperator.IsEqualTo, Status));
+            }
+            else if (Area == "All" && Driver != null && Status == "All" && BCO == "ALL")
+            {
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
+            }
+            else if (Area == "All" && Driver != null && Status != null && BCO == "ALL")
+            {
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Status", FilterOperator.IsEqualTo, Status));
+            }
+            else if (Area == "All" && Driver == "All" && Status != null && BCO == "ALL")
+            {
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Status", FilterOperator.IsEqualTo, Status));
+            }
+            else if (Area != null && Driver != null && Status != null && BCO != null)
+            {
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Area));
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Status", FilterOperator.IsEqualTo, Status));
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, BCO));
+            }
+            else if (Area == "All" && Driver == "All" && Status == "All" && BCO != null)
+            {
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, BCO));
+            }
+            else if (Area == "All" && Driver == "All" && Status != null && BCO != null)
+            {
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, BCO));
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Status", FilterOperator.IsEqualTo, Status));
+            }
+            else if (Area == "All" && Driver != null && Status != null && BCO != null)
+            {
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, BCO));
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Status", FilterOperator.IsEqualTo, Status));
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
+            }
+            else if (Area != null && Driver != null && Status != null && BCO == "All")
+            {
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Area));
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Status", FilterOperator.IsEqualTo, Status));
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
+            }
+            else if (Area != null && Driver != null && Status == "All" && BCO != null)
+            {
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Area));
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, BCO));
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
+            }
+            else if (Area != null && Driver == "All" && Status != null && BCO != null)
+            {
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, BCO));
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Status", FilterOperator.IsEqualTo, Status));
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Area));
+            }
+            else if (Area == "All" && Driver != null && Status == "All" && BCO != null)
+            {
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, BCO));
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
+            }
+            else if (Area != null && Driver == "All" && Status == "All" && BCO != null)
+            {
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Area));
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, BCO));
+            }
 
-            compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Area));
-            compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
-
-            compositeFilter.LogicalOperator = FilterLogicalOperator.Or;
-
+            compositeFilter.LogicalOperator = FilterLogicalOperator.And;
             this.gridDeliveryStatus.FilterDescriptors.Add(compositeFilter);
         }
-
-
-
-
-
-        #endregion
-
-        public String get_Column_DataView(DataTable _table, String _column)
-        {
-            String Column_Name = "";
-            DataView view = new DataView(_table);
-            DataTable table = view.ToTable(true, _column);
-
-            table = view.ToTable(true, _column);
-            foreach (DataRow x in table.Rows)
-            {
-                if (x[_column].ToString() != null)
-                {
-                    Column_Name += x[_column].ToString() + ",";
-                }
-            }
-            Column_Name = Column_Name.TrimEnd(',');
-
-            return Column_Name;
-        }
-
-        public void ExportTelerikReport(String reportAssemblyName, String ext)
-        {
-
-            Telerik.Reporting.Processing.ReportProcessor reportProcessor = new Telerik.Reporting.Processing.ReportProcessor();
-
-            // set any deviceInfo settings if necessary
-            System.Collections.Hashtable deviceInfo = new System.Collections.Hashtable();
-
-            Telerik.Reporting.TypeReportSource typeReportSource =
-                         new Telerik.Reporting.TypeReportSource();
-
-            // reportName is the Assembly Qualified Name of the report
-            switch (reportAssemblyName)
-            {
-                case "Pickup Cargo":
-                    typeReportSource.TypeName = typeof(PickupCargoManifestReportView).AssemblyQualifiedName;
-                    break;
-                default:
-                    break;
-            }
-
-            Telerik.Reporting.Processing.RenderingResult result =
-                reportProcessor.RenderReport(ext, typeReportSource, deviceInfo);
-
-            string fileName = result.DocumentName + "." + result.Extension;
-
-            string path = "E:\\Samples\\"; //System.IO.Path.GetTempPath();
-
-            Console.WriteLine(path);
-
-            string filePath = System.IO.Path.Combine(path, fileName);
-
-            using (System.IO.FileStream fs = new System.IO.FileStream(filePath, System.IO.FileMode.Create))
-            {
-                fs.Write(result.DocumentBytes, 0, result.DocumentBytes.Length);
-            }
-
-        }
-
-
-        private void btnUnbundle_Print_Click(object sender, EventArgs e)
-        {
-            DataTable dataTable = getUnbundleGrid();
-            TrackingReportGlobalModel.table = dataTable;
-            TrackingReportGlobalModel.Date = dateTimeUnbunde_Date.Value.ToLongDateString();
-            TrackingReportGlobalModel.SackNo = dropDownUnbundle_SackNo.SelectedItem.ToString();
-            TrackingReportGlobalModel.Origin = get_Column_DataView(dataTable, "Origin");
-            TrackingReportGlobalModel.ScannedBy = UserTxt.Text.Replace("Welcome!" ,"");
-            TrackingReportGlobalModel.Report = "Unbundle";
-
-            ReportViewer viewer = new ReportViewer();
-            viewer.Show();
-        }
-
-        private void btnGatewayTransmital_Print_Click(object sender, EventArgs e)
-        {
-            DataTable dataTable = getGatewayTransmitalGrid();
-
-            DataView view = new DataView(dataTable);
-            String PlateNo = "";
-            String Driver = "";
-            //CHECKER
-            DataTable table = view.ToTable(true, "PlateNo");
-            foreach (DataRow x in table.Rows)
-            {
-                if (x["PlateNo"].ToString() != null)
-                {
-                    PlateNo += x["PlateNo"].ToString() + ",";
-                }
-            }
-            PlateNo = PlateNo.TrimEnd(',');
-
-            table = view.ToTable(true, "Driver");
-            foreach (DataRow x in table.Rows)
-            {
-                if (x["Driver"].ToString() != null)
-                {
-                    Driver += x["Driver"].ToString() + ",";
-                }
-            }
-            Driver = Driver.TrimEnd(',');
-
-            TrackingReportGlobalModel.table = getGatewayTransmitalGrid();
-            TrackingReportGlobalModel.Date = dateTimeGatewayTransmital_Date.Value.ToLongDateString();
-            TrackingReportGlobalModel.Driver = Driver;
-            TrackingReportGlobalModel.PlateNo = PlateNo;
-            TrackingReportGlobalModel.AirwayBillNo = "";
-            TrackingReportGlobalModel.Area = dropDownGatewayTransmital_Destination.SelectedItem.ToString();
-            TrackingReportGlobalModel.Gateway = dropDownGatewayTransmital_Gateway.SelectedItem.ToString();
-
-            TrackingReportGlobalModel.Report = "GatewayTransmital";
-
-            ReportViewer viewer = new ReportViewer();
-            viewer.Show();
-        }
-
-
-        private void btnBranchAcceptance_Print_Click(object sender, EventArgs e)
-        {
-            DataTable dataTable = getBranchAcceptanceGrid();
-            TrackingReportGlobalModel.table = dataTable;
-            TrackingReportGlobalModel.Date = dateTimeGatewayTransmital_Date.Value.ToLongDateString();
-            TrackingReportGlobalModel.Branch = get_Column_DataView(dataTable, "BCO");
-            TrackingReportGlobalModel.Driver = dropDownBranchAcceptance_Driver.SelectedItem.ToString();
-            TrackingReportGlobalModel.Checker = get_Column_DataView(dataTable, "Checker");
-            TrackingReportGlobalModel.PlateNo = get_Column_DataView(dataTable, "Plate #");
-            TrackingReportGlobalModel.Batch = dropDownBranchAcceptance_Batch.SelectedItem.ToString();
-            TrackingReportGlobalModel.ScannedBy = UserTxt.Text.Replace("Welcome!" , "");
-
-            TrackingReportGlobalModel.Report = "BranchAcceptance";
-
-            ReportViewer viewer = new ReportViewer();
-            viewer.Show();
-
-        }
-
-        private void btnBundle_Print_Click(object sender, EventArgs e)
-        {
-            DataTable dataTable = getBundleGrid();
-            TrackingReportGlobalModel.table = dataTable;
-
-            TrackingReportGlobalModel.Date = dateTimeBundle_Date.Value.ToLongDateString();
-            TrackingReportGlobalModel.SackNo = get_Column_DataView(dataTable, "SackNo");
-            TrackingReportGlobalModel.Destination = get_Column_DataView(dataTable, "Destination");
-            TrackingReportGlobalModel.Weight = get_Column_DataView(dataTable, "AGW");
-            TrackingReportGlobalModel.Report = "Bundle";
-
-            ReportViewer viewer = new ReportViewer();
-            viewer.Show();
-        }
-
-        private void btnGatewayOutbound_Print_Click(object sender, EventArgs e)
-        {
-            DataTable dataTable = getGatewayOutboundGrid();
-            TrackingReportGlobalModel.table = dataTable;
-            TrackingReportGlobalModel.Date = dateTimeGatewayOutbound_Date.Value.ToLongDateString();
-            TrackingReportGlobalModel.Driver = get_Column_DataView(dataTable, "Driver");
-            TrackingReportGlobalModel.PlateNo = get_Column_DataView(dataTable, "Plate #");
-            TrackingReportGlobalModel.Gateway = dropDownGatewayOutbound_Gateway.SelectedItem.ToString();
-            TrackingReportGlobalModel.Report = "GatewayOutbound";
-
-            ReportViewer viewer = new ReportViewer();
-            viewer.Show();
-        }
-
-        private void btnGatewayInbound_Print_Click(object sender, EventArgs e)
-        {
-            DataTable dataTable = getGatewayInboundGrid();
-            TrackingReportGlobalModel.table = dataTable;
-            TrackingReportGlobalModel.Date = dateTimePickerGatewayInbound_Date.Value.ToLongDateString();
-            TrackingReportGlobalModel.Gateway = dropDownGatewayInbound_Gateway.SelectedItem.ToString();
-            TrackingReportGlobalModel.AirwayBillNo = get_Column_DataView(dataTable, "MAWB");
-            TrackingReportGlobalModel.FlightNo = get_Column_DataView(dataTable, "Flight #");
-            TrackingReportGlobalModel.CommodityType = dropDownGatewayInbound_Commodity.SelectedItem.ToString();
-            TrackingReportGlobalModel.Report = "GatewayInbound";
-            ReportViewer viewer = new ReportViewer();
-            viewer.Show();
-        }
-
-        private void btnCargoTransfer_Print_Click(object sender, EventArgs e)
-        {
-            DataTable dataTable = getCargoTranferGrid();
-            TrackingReportGlobalModel.table = dataTable;
-            TrackingReportGlobalModel.Date = dateTimeCargoTransfer_Date.Value.ToLongDateString();
-            TrackingReportGlobalModel.Report = "CargoTransfer";
-            ReportViewer viewer = new ReportViewer();
-            viewer.Show();
-        }
-
-        private void btnSegregation_Print_Click(object sender, EventArgs e)
-        {
-            DataTable dataTable = getSegregationGrid();
-            TrackingReportGlobalModel.table = dataTable;
-            TrackingReportGlobalModel.Date = dateTimeSegregation_Date.Value.ToLongDateString();
-            TrackingReportGlobalModel.Report = "Segregation";
-            ReportViewer viewer = new ReportViewer();
-            viewer.Show();
-        }
-
         private void btnDeliveryStatus_Print_Click(object sender, EventArgs e)
         {
             DataTable dataTable = getDeliveryStatusGrid();
             TrackingReportGlobalModel.table = dataTable;
             TrackingReportGlobalModel.Date = dateTimeDeliveryStatus_Date.Value.ToLongDateString();
+            TrackingReportGlobalModel.Driver = dropDownDeliveryStatus_Driver.SelectedItem.ToString();
+            TrackingReportGlobalModel.Checker = get_Column_DataView(dataTable , "Checker");
             TrackingReportGlobalModel.Report = "DeliveryStatus";
             ReportViewer viewer = new ReportViewer();
             viewer.Show();
         }
-
-        private void btnHoldCargo_Export_Click(object sender, EventArgs e)
+        private void dateTimeDeliveryStatus_Date_ValueChanged(object sender, EventArgs e)
         {
-            string exportFile = @"E:\\Samples\\" + "HoldCargo_" + DateTime.Now + ".xlsx";
+            gridDeliveryStatus.EnableFiltering = false;
+            getDeliveryStatusData();
+        }
+
+        // **** OTHERS **** //
+        private void saveFileDialog2_FileOk(object sender, CancelEventArgs e)
+        {
+
+
+            string exportFile = saveFileDialog2.FileName; // @"E:\Samples\" + "HoldCargo_" + DateTime.Now + ".xlsx";
             using (System.IO.MemoryStream ms = new System.IO.MemoryStream())
             {
                 Telerik.WinControls.Export.GridViewSpreadExport exporter = new Telerik.WinControls.Export.GridViewSpreadExport(this.gridHoldCargo);
@@ -7309,89 +7973,351 @@ namespace CMS2.Client
                 using (System.IO.FileStream fileStream = new System.IO.FileStream(exportFile, FileMode.Create, FileAccess.Write))
                 {
                     ms.WriteTo(fileStream);
+                    MessageBox.Show("Successfully exported!" ,"Export" , MessageBoxButtons.OK ,MessageBoxIcon.Information ,MessageBoxDefaultButton.Button1);
                 }
             }
         }
-
-        private void btnDailyTrip_Print_Click(object sender, EventArgs e)
-        {
-            //PP - PrePaid
-            //CAS - Coporate Account Shipper
-            //FC - Freight Collect
-            //CAC - Corporate Account Consignee
-            DataTable dataTable = getDeliveryStatusGrid();
-            TrackingReportGlobalModel.table = getDailyTripGrid("PP - PrePaid");
-            TrackingReportGlobalModel.table2 = getDailyTripGrid("CAS - Coporate Account Shipper");
-            TrackingReportGlobalModel.table3 = getDailyTripGrid("FC - Freight Collect");
-            TrackingReportGlobalModel.table4 = getDailyTripGrid("CAC - Corporate Account Consignee");
-
-            TrackingReportGlobalModel.Report = "DeliveryStatus";
-            ReportViewer viewer = new ReportViewer();
-            viewer.Show();
-        }
-
-
-
         #endregion
 
-        private void dateTimePicker_PickupCargo_ValueChanged(object sender, EventArgs e)
+        #endregion END MARK SANTOS REGION
+
+        private void dropDownPickUpCargo_Area_Enter(object sender, EventArgs e)
         {
-            dropDownPickUpCargo_Area.SelectedIndex = 0;
-            gridPickupCargo.EnableFiltering = false;
-            getPickupCargoData();
+            try
+            {
+                dropDownPickUpCargo_Area.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+            }
+            catch (Exception) { }
         }
 
-        private void dateTimePickerBranchAcceptance_Date_ValueChanged(object sender, EventArgs e)
+        private void dropDownBranchAcceptance_Branch_Enter(object sender, EventArgs e)
         {
-            dropDownBranchAcceptance_Branch.SelectedIndex = 0;
-            dropDownBranchAcceptance_BCO_BSO.Items.Clear();
-            dropDownBranchAcceptance_BCO_BSO.Items.Add("All");
-            dropDownBranchAcceptance_Driver.SelectedIndex = 0;
-            dropDownBranchAcceptance_Batch.SelectedIndex = 0;
-            gridBranchAcceptance.EnableFiltering = false;
-            getBrancAcceptanceData();
+            try{
+                dropDownBranchAcceptance_Branch.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+            }
+            catch (Exception) { }
         }
 
-        private void dateTimeBundle_Date_ValueChanged(object sender, EventArgs e)
+        private void dropDownBranchAcceptance_BCO_BSO_Enter(object sender, EventArgs e)
         {
-            gridBundle.EnableFiltering = false;
-            getBundleData();
+            try {
+                dropDownBranchAcceptance_BCO_BSO.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+            }
+            catch (Exception) { }
         }
 
-        private void dateTimeUnbunde_Date_ValueChanged(object sender, EventArgs e)
+        private void dropDownBranchAcceptance_Driver_Enter(object sender, EventArgs e)
         {
-            gridUnbundle.EnableFiltering = false;
-            getUnbundle();
+            try { 
+            dropDownBranchAcceptance_Driver.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+            }
+            catch (Exception) { }
         }
 
-        private void dateTimeGatewayTransmital_Date_ValueChanged(object sender, EventArgs e)
+        private void dropDownBranchAcceptance_Batch_Enter(object sender, EventArgs e)
         {
-            gridGatewayTransmital.EnableFiltering = false;
-            getGatewayTransmitalData();
+            try{
+                dropDownBranchAcceptance_Batch.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+            }
+            catch (Exception) { }
         }
 
-        private void dateTimeGatewayOutbound_Date_ValueChanged(object sender, EventArgs e)
+        private void dropDownBundle_BCO_BSO_Enter(object sender, EventArgs e)
         {
-            gridGatewayOutbound.EnableFiltering = false;
-            getGatewayOutBoundData();
+            try
+            {
+                dropDownBundle_BCO_BSO.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+            }
+            catch (Exception) { }
         }
 
-        private void dateTimePickerGatewayInbound_Date_ValueChanged(object sender, EventArgs e)
+        private void dropDownBundle_SackNo_Enter(object sender, EventArgs e)
         {
-            gridGatewayInbound.EnableFiltering = false;
-            getGatewayInBoundData();
+            try {
+                dropDownBundle_SackNo.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+            }
+            catch (Exception) { }
         }
 
-        private void dateTimeCargoTransfer_Date_ValueChanged(object sender, EventArgs e)
+        private void dropDownBundle_Destination_Enter(object sender, EventArgs e)
         {
-            gridCargoTransfer.EnableFiltering = false;
-            getCargoTransferData();
+            try {
+                dropDownBundle_Destination.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+            }
+            catch (Exception) { }
         }
 
-        private void dateTimeSegregation_Date_ValueChanged(object sender, EventArgs e)
+        private void dropDownUnbundle_BCO_Enter(object sender, EventArgs e)
         {
-            gridSegregation.EnableFiltering = false;
-            getSegregationData();
+            try {
+                dropDownUnbundle_BCO.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+            }
+            catch (Exception) { }
+        }
+
+        private void dropDownUnbundle_SackNo_Enter(object sender, EventArgs e)
+        {
+            try
+            {
+                dropDownUnbundle_SackNo.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+            }
+            catch (Exception) { }
+        }
+
+        private void dropDownGatewayTransmital_Gateway_Enter(object sender, EventArgs e)
+        {
+            try {
+                dropDownGatewayTransmital_Gateway.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+            }
+            catch (Exception) { }
+        }
+
+        private void dropDownGatewayTransmital_Destination_Enter(object sender, EventArgs e)
+        {
+            try {
+                dropDownGatewayTransmital_Destination.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+            }
+            catch (Exception) { }
+        }
+
+        private void dropDownGatewayTransmital_Batch_Enter(object sender, EventArgs e)
+        {
+            try {
+                dropDownGatewayTransmital_Batch.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+            }
+            catch (Exception) { }
+        }
+
+        private void txtGatewayTransmital_MAWB_Enter(object sender, EventArgs e)
+        {
+            try {
+                AutoCompleteStringCollection namesCollection = new AutoCompleteStringCollection();
+
+                DataView view = new DataView(getGatewayTransmitalGrid());
+                DataTable table = view.ToTable(true, "MAWB");
+
+                table = view.ToTable(true, "MAWB");
+                foreach (DataRow x in table.Rows)
+                {
+                    if (x["MAWB"].ToString() != null)
+                    {
+                        namesCollection.Add(x["MAWB"].ToString());
+                    }
+                }
+
+                txtGatewayTransmital_MAWB.AutoCompleteMode = AutoCompleteMode.Suggest;
+                txtGatewayTransmital_MAWB.AutoCompleteSource = AutoCompleteSource.CustomSource;
+                txtGatewayTransmital_MAWB.AutoCompleteCustomSource = namesCollection;
+            }
+            catch (Exception) { }
+        }
+
+        private void dropDownGatewayOutbound_BCO_Enter(object sender, EventArgs e)
+        {
+            try {
+                dropDownGatewayOutbound_BCO.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+            }
+            catch (Exception) { }
+        }
+
+        private void dropDownGatewayOutbound_Gateway_Enter(object sender, EventArgs e)
+        {
+            try {
+            dropDownGatewayOutbound_Gateway.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+            }
+            catch (Exception) { }
+        }
+
+        private void dropDownGatewayOutbound_Batch_Enter(object sender, EventArgs e)
+        {
+            try { 
+            dropDownGatewayOutbound_Batch.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+            }
+            catch (Exception) { }
+        }
+
+        private void dropDownGatewayInbound_Gateway_Enter(object sender, EventArgs e)
+        {
+            try { 
+            dropDownGatewayInbound_Gateway.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+            }
+            catch (Exception) { }
+        }
+
+        private void dropDownGatewayInbound_Origin_Enter(object sender, EventArgs e)
+        {
+            try { 
+            dropDownGatewayInbound_Origin.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+            }
+            catch (Exception) { }
+        }
+
+        private void dropDownGatewayInbound_Commodity_Enter(object sender, EventArgs e)
+        {
+            try { 
+            dropDownGatewayInbound_Commodity.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+            }
+            catch (Exception) { }
+        }
+
+        private void txtBoxGatewayInbound_MasterAWB_Enter(object sender, EventArgs e)
+        {
+            try { 
+            AutoCompleteStringCollection namesCollection = new AutoCompleteStringCollection();
+
+            DataView view = new DataView(getGatewayInboundGrid());
+            DataTable table = view.ToTable(true, "MAWB");
+
+            table = view.ToTable(true, "MAWB");
+            foreach (DataRow x in table.Rows)
+            {
+                if (x["MAWB"].ToString() != null)
+                {
+                    namesCollection.Add(x["MAWB"].ToString());
+                }
+            }
+
+            txtBoxGatewayInbound_MasterAWB.AutoCompleteMode = AutoCompleteMode.Suggest;
+            txtBoxGatewayInbound_MasterAWB.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            txtBoxGatewayInbound_MasterAWB.AutoCompleteCustomSource = namesCollection;
+            }
+            catch (Exception) { }
+        }
+
+        private void dropDownCargoTransfer_Origin_Enter(object sender, EventArgs e)
+        {
+            try {
+                dropDownCargoTransfer_Origin.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+            }
+            catch (Exception) { }
+        }
+
+        private void dropDownCargoTransfer_City_Enter(object sender, EventArgs e)
+        {
+            try { 
+            dropDownCargoTransfer_City.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+            }
+            catch (Exception) { }
+        }
+
+        private void dropDownCargoTransfer_Destination_Enter(object sender, EventArgs e)
+        {
+            try { 
+            dropDownCargoTransfer_Destination.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+            }
+            catch (Exception) { }
+        }
+
+        private void dropDownSegregation_BCO_Enter(object sender, EventArgs e)
+        {
+            try { 
+            dropDownSegregation_BCO.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+            }
+            catch (Exception) { }
+        }
+
+        private void dropDownSegregation_Driver_Enter(object sender, EventArgs e)
+        {
+            try { 
+            dropDownSegregation_Driver.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+            }
+            catch (Exception) { }
+        }
+
+        private void dropDownSegregation_PlateNo_Enter(object sender, EventArgs e)
+        {
+            try {
+            dropDownSegregation_PlateNo.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+            }
+            catch (Exception) { }
+        }
+
+        private void dropDownSegregation_Batch_Enter(object sender, EventArgs e)
+        {
+            try { 
+            dropDownSegregation_Batch.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+            }
+            catch (Exception) { }
+        }
+
+        private void dropDownDailyTrip_BCO_Enter(object sender, EventArgs e)
+        {
+            try {
+                dropDownDailyTrip_BCO.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+            }
+            catch (Exception) { }
+        }
+
+        private void dropDownDailyTrip_Area_Enter(object sender, EventArgs e)
+        {
+            try { 
+            dropDownDailyTrip_Area.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+            }
+            catch (Exception) { }
+        }
+
+        private void dropDownDailyTrip_Driver_Enter(object sender, EventArgs e)
+        {
+            try { 
+            dropDownDailyTrip_Driver.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+            }
+            catch (Exception) { }
+        }
+
+        private void dropDownDailyTrip_PaymentMode_Enter(object sender, EventArgs e)
+        {
+            try { 
+            dropDownDailyTrip_PaymentMode.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+            }
+            catch (Exception) { }
+        }
+
+        private void dropDownHoldCargo_BCO_BSO_Enter(object sender, EventArgs e)
+        {
+            try { 
+            dropDownHoldCargo_BCO_BSO.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+            }
+            catch (Exception) { }
+        }
+
+        private void dropDownHoldCargo_Status_Enter(object sender, EventArgs e)
+        {
+            try {
+                dropDownHoldCargo_Status.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+            }
+            catch (Exception) { }
+        }
+
+        private void dropDownDeliveryStatus_BCO_Enter(object sender, EventArgs e)
+        {
+            try { 
+            dropDownDeliveryStatus_BCO.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+            }
+            catch (Exception) { }
+        }
+
+        private void dropDownDeliveryStatus_Status_Enter(object sender, EventArgs e)
+        {
+            try { 
+            dropDownDeliveryStatus_Status.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+            }
+            catch (Exception) { }
+        }
+
+        private void dropDownDeliveryStatus_Area_Enter(object sender, EventArgs e)
+        {
+            try { 
+            dropDownDeliveryStatus_Area.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+            }
+            catch (Exception) { }
+        }
+
+        private void dropDownDeliveryStatus_Driver_Enter(object sender, EventArgs e)
+        {
+            try { 
+            dropDownDeliveryStatus_Driver.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+            }
+            catch (Exception) { }
         }
     }
 }

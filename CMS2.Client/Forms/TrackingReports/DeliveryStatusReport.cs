@@ -13,10 +13,10 @@ namespace CMS2.Client.Forms.TrackingReports
     public class DeliveryStatusReport
     {
 
-        public DataTable getData()
+        public DataTable getData(DateTime date)
         {
             DeliveryBL deliveryStatusBL = new DeliveryBL();
-            List<Delivery> list = deliveryStatusBL.GetAll().ToList();
+            List<Delivery> list = deliveryStatusBL.GetAll().Where(x => x.RecordStatus == 1 && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
 
             List<DeliveryStatusViewModel> modelList = Match(list);
 
@@ -32,6 +32,7 @@ namespace CMS2.Client.Forms.TrackingReports
             dt.Columns.Add(new DataColumn("Plate No", typeof(string)));
             dt.Columns.Add(new DataColumn("Batch", typeof(string)));
 
+            dt.Columns.Add(new DataColumn("BCO", typeof(string)));
             dt.BeginLoadData();
             int ctr = 1;
             foreach (DeliveryStatusViewModel item in modelList)
@@ -47,7 +48,7 @@ namespace CMS2.Client.Forms.TrackingReports
                 row[7] = item.Checker;
                 row[8] = item.PlateNo;
                 row[9] = item.Batch;
-
+                row[10] = item.BCO;
                 dt.Rows.Add(row);
             }
             dt.EndLoadData();
@@ -68,7 +69,7 @@ namespace CMS2.Client.Forms.TrackingReports
             width.Add(110);
             width.Add(100);
             width.Add(110);
-           
+            width.Add(0);
             return width;
         }
 
@@ -97,14 +98,19 @@ namespace CMS2.Client.Forms.TrackingReports
                 {
                     model.AirwayBillNo = _airwaybill;
                     model.QTY++;
-                    model.Status = status.GetAll().Find(x => x.DeliveryStatusId == deliveryStatus.DeliveryStatusId).DeliveryStatusName;
+                    model.Status = deliveryStatus.DeliveryStatus.DeliveryStatusName;// status.GetAll().Find(x => x.DeliveryStatusId == deliveryStatus.DeliveryStatusId).DeliveryStatusName;
                     model.Remarks = deliveryStatus.DeliveryRemark.DeliveryRemarkName;
-                    //model.Area = distribution.GetAll().Find(x => x.ShipmentId == deliveryStatus.ShipmentId).City.CityName;
-                    //model.Driver = distribution.GetAll().Find(x => x.ShipmentId == deliveryStatus.ShipmentId).Driver;
-                    //model.Checker = distribution.GetAll().Find(x => x.ShipmentId == deliveryStatus.ShipmentId).Checker;
-                    //model.PlateNo = distribution.GetAll().Find(x => x.ShipmentId == deliveryStatus.ShipmentId).PlateNo;
-                    //model.Batch = distribution.GetAll().Find(x => x.ShipmentId == deliveryStatus.ShipmentId).Batch.BatchName;
-
+                    List<Distribution> list = distribution.GetAll().Where(x => x.ShipmentId == deliveryStatus.ShipmentId).Distinct().ToList();
+                    foreach(Distribution dis in list)
+                    {
+                        model.Area = dis.City.CityName;
+                        model.Driver = dis.Driver;
+                        model.Checker = dis.Checker;
+                        model.Batch = dis.Batch.BatchName;
+                        model.PlateNo = dis.PlateNo;
+                        model.BCO = dis.City.BranchCorpOffice.BranchCorpOfficeName;
+                    }
+                   // model.BSO = deliveryStatus.Shipment
                     _results.Add(model);
                 }
             }

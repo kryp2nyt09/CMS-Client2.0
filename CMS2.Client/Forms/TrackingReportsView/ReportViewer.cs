@@ -49,7 +49,7 @@ namespace CMS2.Client.Forms.TrackingReportsView
                     typeReportSource.TypeName = typeof(SegregationReportView).AssemblyQualifiedName;
                     break;
                 case "DailyTrip":
-                   // typeReportSource.TypeName = typeof(SegregationReportView).AssemblyQualifiedName;
+                    typeReportSource.TypeName = typeof(DailyTripReportView).AssemblyQualifiedName;
                     break;
                 case "DeliveryStatus":
                     typeReportSource.TypeName = typeof(DeliveryStatusReportView).AssemblyQualifiedName;
