@@ -22,5 +22,6 @@ namespace CMS2.Entities.ReportModel
         public string PreparedBy { get; set; }
         public double Aging { get; set; }
         public string Branch { get; set; }
+        public string BSO { get; set; }
     }
 }

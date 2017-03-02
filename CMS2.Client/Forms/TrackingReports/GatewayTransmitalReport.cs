@@ -40,6 +40,7 @@ namespace CMS2.Client.Forms.TrackingReports
 
             dt.Columns.Add(new DataColumn("Driver", typeof(string)));
             dt.Columns.Add(new DataColumn("PlateNo", typeof(string)));
+            dt.Columns.Add(new DataColumn("MAWB", typeof(string)));
 
             dt.BeginLoadData();
             int ctr = 1;
@@ -66,7 +67,7 @@ namespace CMS2.Client.Forms.TrackingReports
 
                 row[15] = item.Driver;
                 row[16] = item.PlateNo;
-
+                row[17] = item.MAWB;
                 dt.Rows.Add(row);
             }
             dt.EndLoadData();
@@ -97,6 +98,8 @@ namespace CMS2.Client.Forms.TrackingReports
                            
             width.Add(0);  //Driver
             width.Add(0);  //PlateNO
+
+            width.Add(0);  //MAWB
 
             return width;
         }
@@ -140,6 +143,7 @@ namespace CMS2.Client.Forms.TrackingReports
                     model.Batch = transmital.Batch.BatchName;
                     model.CreatedDate = transmital.CreatedDate;
                     model.PlateNo = transmital.PlateNo;
+                    model.MAWB = transmital.MasterAirwayBillNo;
                     _results.Add(model);
                 }
 

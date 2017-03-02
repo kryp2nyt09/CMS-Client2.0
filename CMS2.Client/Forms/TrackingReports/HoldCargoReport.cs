@@ -36,6 +36,9 @@ namespace CMS2.Client.Forms.TrackingReports
             dt.Columns.Add(new DataColumn("Aging", typeof(string)));
 
             dt.Columns.Add(new DataColumn("Branch", typeof(string)));
+
+            dt.Columns.Add(new DataColumn("BSO", typeof(string)));
+
             dt.BeginLoadData();
             int ctr = 1;
             foreach (HoldCargoViewModel item in modelList)
@@ -56,7 +59,7 @@ namespace CMS2.Client.Forms.TrackingReports
                 row[12] = item.PreparedBy;
                 row[13] = item.Aging; //Present Date - Transaction Date
                 row[14] = item.Branch;
-
+                row[15] = item.BSO;
                 dt.Rows.Add(row);
             }
             dt.EndLoadData();
@@ -81,6 +84,7 @@ namespace CMS2.Client.Forms.TrackingReports
             width.Add(100);
             width.Add(100);
             width.Add(100);
+            width.Add(0);
             width.Add(0);
             return width;
         }

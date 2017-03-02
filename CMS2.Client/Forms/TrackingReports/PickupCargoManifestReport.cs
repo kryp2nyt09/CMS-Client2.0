@@ -90,39 +90,50 @@ namespace CMS2.Client.Forms.TrackingReports
 
         public List<PickupCargoManifestViewModel> Match(List<Shipment> _shipment )
         {
-           // BranchAcceptanceBL branchAcceptanceBL = new BranchAcceptanceBL();
-            //PackageNumberBL _packageNumberService = new PackageNumberBL();
+            BranchAcceptanceBL branchAcceptanceBL = new BranchAcceptanceBL();
+            PackageNumberBL _packageNumberService = new PackageNumberBL();
             List<PickupCargoManifestViewModel> _results = new List<PickupCargoManifestViewModel>();
 
             foreach(Shipment shipment  in _shipment)
             {
                 PickupCargoManifestViewModel model = new PickupCargoManifestViewModel();
-                //string _cargo = ""; //_packageNumberService.GetAll().Find(x => x.ShipmentId == shipment.ShipmentId).PackageNo;
-                //string _airwaybill = ""; //_packageNumberService.GetAll().Find(x => x.PackageNo == _cargo).Shipment.AirwayBillNo;
 
-                //PickupCargoManifestViewModel isExist = _results.Find(x => x.AirwayBillNo == _airwaybill);
+                //string _airwaybill = _packageNumberService.GetAll().Find(x => x.ShipmentId == shipment.ShipmentId).Shipment.AirwayBillNo;
 
-                //if (isExist != null)
-                //{
-                //    isExist.QTY++;s
-                //}
-                //else
-                //{
+                List<PackageNumber> packageList = _packageNumberService.GetAll().Where(x => x.ShipmentId == shipment.ShipmentId).Distinct().ToList();
+                foreach (PackageNumber number in packageList)
+                {
+                    List<BranchAcceptance> branchList = branchAcceptanceBL.GetAll().Where(x => x.Cargo == number.PackageNo).Distinct().ToList();
+                    foreach (BranchAcceptance branch in branchList)
+                    {
+                        model.Driver = branch.Driver;
+                        model.Checker = branch.Checker;                         
+                    }
+                }
+                PickupCargoManifestViewModel isExist = _results.Find(x => x.AirwayBillNo == shipment.AirwayBillNo);
+
+                if (isExist != null)
+                {
+                    isExist.QTY++;
+                }
+                else
+                {
                     model.AirwayBillNo = shipment.AirwayBillNo;
                     model.Shipper = shipment.Shipper.FullName;
-                    model.Consignee = shipment.Consignee.Address1 + " " + shipment.Consignee.Address2;
-                    model.Commodity = shipment.Commodity.CommodityName;                 
+                    model.Consignee = shipment.Consignee.FullName;
+
+                    model.ConsigneeAddress = shipment.Consignee.Address1 + " " + shipment.Consignee.Address2;
+                    model.ShipperAddress = shipment.Shipper.Address1 + " " + shipment.Shipper.Address2;
+                    model.Commodity = shipment.Commodity.CommodityName;
                     model.QTY++;
                     model.AGW += shipment.Weight;
                     model.ServiceMode = shipment.ServiceMode.ServiceModeName;
                     model.PaymentMode = shipment.PaymentMode.PaymentModeName;
-                model.Amount = shipment.TotalAmount.ToString();
+                    model.Amount = shipment.TotalAmount.ToString();
                     model.Area = shipment.Booking.AssignedToArea.City.CityName;
-                //    model.Driver = branchAcceptanceBL.GetAll().Find(x => x.Cargo == _cargo).Driver;
-                //    model.Checker = branchAcceptanceBL.GetAll().Find(x => x.Cargo == _cargo).Checker;
-                //    _results.Add(model);
-                //}
-                _results.Add(model);
+
+                    _results.Add(model);
+                }
             }
             
             return _results;

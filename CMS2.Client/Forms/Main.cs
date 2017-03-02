@@ -5507,6 +5507,7 @@ namespace CMS2.Client
         /// <param name="e"></param>
         private void pageViewTracking_SelectedPageChanged(object sender, EventArgs e)
         {
+
             switch (pageViewTracking.SelectedPage.Text) {
                 case "Pickup Cargo":
                     //DATE 
@@ -5608,12 +5609,12 @@ namespace CMS2.Client
                     //DATE
                     dateTimeDeliveryStatus_Date.Value = DateTime.Now;
                     //
-                    List<BranchCorpOffice> branchCorpOffices = getBranchCorpOffice().OrderBy(x => x.BranchCorpOfficeName).ToList();
-                    dropDownDeliveryStatus_BCO.DataSource = branchCorpOffices;
-                    dropDownDeliveryStatus_BCO.DisplayMember = "BranchCorpOfficeName";
-                    dropDownDeliveryStatus_BCO.ValueMember = "BranchCorpOfficeId";
-                    dropDownDeliveryStatus_BCO.SelectedValue = GlobalVars.DeviceBcoId;
-                    dropDownDeliveryStatus_BCO.Enabled = false;
+                    //List<BranchCorpOffice> branchCorpOffices = getBranchCorpOffice().OrderBy(x => x.BranchCorpOfficeName).ToList();
+                    //dropDownDeliveryStatus_BCO.DataSource = branchCorpOffices;
+                    //dropDownDeliveryStatus_BCO.DisplayMember = "BranchCorpOfficeName";
+                    //dropDownDeliveryStatus_BCO.ValueMember = "BranchCorpOfficeId";
+                    //dropDownDeliveryStatus_BCO.SelectedValue = GlobalVars.DeviceBcoId;
+                    //dropDownDeliveryStatus_BCO.Enabled = false;
                     //
                     getDeliveryStatusData();
                     break;
@@ -6453,6 +6454,8 @@ namespace CMS2.Client
         {
             DailyTripReport dailyTrip = new DailyTripReport();
             DataTable dataTable = dailyTrip.getData(dateTimeDailyTrip_Date.Value);
+
+
             ////AREA
             DataView view = new DataView(dataTable);
             DataTable table = view.ToTable(true, "Area");
@@ -6493,6 +6496,19 @@ namespace CMS2.Client
             }
             dropDownDailyTrip_PaymentMode.SelectedIndex = 0;
 
+            //BCO
+            table = view.ToTable(true, "BCO");
+            dropDownDailyTrip_BCO.Items.Clear();
+            dropDownDailyTrip_BCO.Items.Add("All");
+            foreach (DataRow x in table.Rows)
+            {
+                if (x["BCO"].ToString().Trim() != "")
+                {
+                    dropDownDailyTrip_BCO.Items.Add(x["BCO"].ToString());
+                }
+            }
+            dropDownDailyTrip_BCO.SelectedIndex = 0;
+
             gridDailyTrip.DataSource = dataTable;
 
             #region 
@@ -6529,7 +6545,10 @@ namespace CMS2.Client
             dropDownHoldCargo_Status.Items.Add("All");
             foreach (DataRow x in table.Rows)
             {
-                dropDownHoldCargo_Status.Items.Add(x["Status"].ToString());
+                if(x["Status"].ToString() != null)
+                {
+                    dropDownHoldCargo_Status.Items.Add(x["Status"].ToString());
+                }
             }
             dropDownHoldCargo_Status.SelectedIndex = 0;
 
@@ -6559,7 +6578,7 @@ namespace CMS2.Client
         private void getDeliveryStatusData()
         {
             DeliveryStatusReport deliveryStatus = new DeliveryStatusReport();
-            DataTable dataTable = deliveryStatus.getData();
+            DataTable dataTable = deliveryStatus.getData(dateTimeDeliveryStatus_Date.Value);
             ////AREA
             DataView view = new DataView(dataTable);
 
@@ -6587,6 +6606,32 @@ namespace CMS2.Client
                 }
             }
             dropDownDeliveryStatus_Driver.SelectedIndex = 0;
+
+            //STATUS
+            table = view.ToTable(true, "Status");
+            dropDownDeliveryStatus_Status.Items.Clear();
+            dropDownDeliveryStatus_Status.Items.Add("All");
+            foreach (DataRow x in table.Rows)
+            {
+                if (x["Status"].ToString().Trim() != "")
+                {
+                    dropDownDeliveryStatus_Status.Items.Add(x["Status"].ToString());
+                }
+            }
+            dropDownDeliveryStatus_Status.SelectedIndex = 0;
+
+            //BCO
+            table = view.ToTable(true, "BCO");
+            dropDownDeliveryStatus_BCO.Items.Clear();
+            dropDownDeliveryStatus_BCO.Items.Add("All");
+            foreach (DataRow x in table.Rows)
+            {
+                if (x["BCO"].ToString().Trim() != "")
+                {
+                    dropDownDeliveryStatus_BCO.Items.Add(x["BCO"].ToString());
+                }
+            }
+            dropDownDeliveryStatus_BCO.SelectedIndex = 0;
 
             gridDeliveryStatus.DataSource = dataTable;
 
@@ -6678,7 +6723,18 @@ namespace CMS2.Client
             gridPickupCargo.EnableFiltering = true;
             this.gridPickupCargo.ShowFilteringRow = false;
             CompositeFilterDescriptor compositeFilter = new CompositeFilterDescriptor();
-            String Area = dropDownPickUpCargo_Area.SelectedItem.ToString();
+
+            String Area = "";
+            try
+            {
+                Area = dropDownPickUpCargo_Area.SelectedItem.ToString();
+            }
+            catch(Exception)
+            {
+                Area = "All";
+                dropDownPickUpCargo_Area.SelectedText = "All";
+            }
+
             if(Area == "All")
             {
                 gridPickupCargo.EnableFiltering = false;
@@ -6689,8 +6745,7 @@ namespace CMS2.Client
                 compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Area));
             }
             compositeFilter.LogicalOperator = FilterLogicalOperator.And;
-            this.gridPickupCargo.FilterDescriptors.Add(compositeFilter);
-
+            this.gridPickupCargo.FilterDescriptors.Add(compositeFilter);    
         }
         private void dateTimePicker_PickupCargo_ValueChanged(object sender, EventArgs e)
         {
@@ -6739,10 +6794,21 @@ namespace CMS2.Client
 
             CompositeFilterDescriptor compositeFilter = new CompositeFilterDescriptor();
 
-            String Branch_Area = dropDownBranchAcceptance_BCO_BSO.SelectedItem.ToString();
-            String Driver = dropDownBranchAcceptance_Driver.SelectedItem.ToString();
-            String Batch = dropDownBranchAcceptance_Batch.SelectedItem.ToString();
+            String Branch_Area = "";
+            String Driver = "";
+            String Batch = "";
 
+            try {
+                Branch_Area = dropDownBranchAcceptance_BCO_BSO.SelectedItem.ToString();
+                Driver = dropDownBranchAcceptance_Driver.SelectedItem.ToString();
+                Batch = dropDownBranchAcceptance_Batch.SelectedItem.ToString();
+            }
+            catch (Exception)
+            {
+                Branch_Area = "All"; dropDownBranchAcceptance_BCO_BSO.SelectedText = "All";
+                Driver = "All"; dropDownBranchAcceptance_Driver.SelectedText = "All";
+                Batch = "All"; dropDownBranchAcceptance_Batch.SelectedText = "All";
+            }
             if (Branch_Area == "All" && Driver == "All" && Batch == "All")
             {
                 gridBranchAcceptance.EnableFiltering = false;
@@ -6883,10 +6949,20 @@ namespace CMS2.Client
             this.gridBundle.ShowFilteringRow = false;
 
             CompositeFilterDescriptor compositeFilter = new CompositeFilterDescriptor();
-
-            String Area = dropDownBundle_BCO_BSO.SelectedItem.ToString();
-            String SackNo = dropDownBundle_SackNo.SelectedItem.ToString();
-            String Destination = dropDownBundle_Destination.SelectedItem.ToString();
+            String Area = "";
+            String SackNo = "";
+            String Destination = "";
+            try {
+                Area = dropDownBundle_BCO_BSO.SelectedItem.ToString();
+                SackNo = dropDownBundle_SackNo.SelectedItem.ToString();
+                Destination = dropDownBundle_Destination.SelectedItem.ToString();
+            }
+            catch
+            {
+                Area = "All"; dropDownBundle_BCO_BSO.SelectedText = "All";
+                SackNo = "All"; dropDownBundle_SackNo.SelectedText = "All";
+                Destination = "All"; dropDownBundle_Destination.SelectedText = "All";
+            }
 
             if(Area == "All" && SackNo == "All" && Destination == "All")
             {
@@ -6966,9 +7042,17 @@ namespace CMS2.Client
             this.gridUnbundle.ShowFilteringRow = false;
 
             CompositeFilterDescriptor compositeFilter = new CompositeFilterDescriptor();
-            String Branch = dropDownUnbundle_BCO.SelectedItem.ToString();
-            String SackNo = dropDownUnbundle_SackNo.SelectedItem.ToString();
-
+            String Branch = "";
+            String SackNo = "";
+            try {
+                Branch = dropDownUnbundle_BCO.SelectedItem.ToString();
+                SackNo = dropDownUnbundle_SackNo.SelectedItem.ToString();
+            }
+            catch (Exception)
+            {
+                Branch = "All"; dropDownUnbundle_BCO.SelectedText = "All";
+                SackNo = "All"; dropDownUnbundle_SackNo.SelectedText = "All";
+            }
             if (Branch == "All" && SackNo == "All")
             {
                 gridUnbundle.EnableFiltering = false;
@@ -7016,11 +7100,20 @@ namespace CMS2.Client
             this.gridGatewayTransmital.ShowFilteringRow = false;
 
             CompositeFilterDescriptor compositeFilter = new CompositeFilterDescriptor();
-
-            String Gateway = dropDownGatewayTransmital_Gateway.SelectedItem.ToString();
-            String Destination = dropDownGatewayTransmital_Destination.SelectedItem.ToString();
-            String Batch = dropDownGatewayTransmital_Batch.SelectedItem.ToString();
-
+            String Gateway = "";
+            String Destination = "";
+            String Batch = "";
+            try {
+                Gateway = dropDownGatewayTransmital_Gateway.SelectedItem.ToString();
+                Destination = dropDownGatewayTransmital_Destination.SelectedItem.ToString();
+                Batch = dropDownGatewayTransmital_Batch.SelectedItem.ToString();
+            }
+            catch (Exception)
+            {
+                Gateway = "All"; dropDownGatewayTransmital_Gateway.SelectedText = "All";
+                Destination = "All"; dropDownGatewayTransmital_Destination.SelectedText = "All";
+                Batch = "All"; dropDownGatewayTransmital_Batch.SelectedText = "All";
+            }
             String CreatedDate = dateTimeGatewayTransmital_Date.Value.ToShortDateString();
 
             if (Gateway == "All" && Destination == "All" && Batch == "All")
@@ -7103,10 +7196,17 @@ namespace CMS2.Client
             this.gridGatewayOutbound.ShowFilteringRow = false;
 
             CompositeFilterDescriptor compositeFilter = new CompositeFilterDescriptor();
-            String Gateway = dropDownGatewayOutbound_Gateway.SelectedItem.ToString();
-            String Batch = dropDownGatewayOutbound_Batch.SelectedItem.ToString();           
-            String CreatedDate = dateTimeGatewayOutbound_Date.Value.ToShortDateString();
+            String Gateway = "";
+            String Batch = "";
+            try {
+                Gateway = dropDownGatewayOutbound_Gateway.SelectedItem.ToString();
+                Batch = dropDownGatewayOutbound_Batch.SelectedItem.ToString();
+            }
+            catch(Exception) {
+                Gateway = "All"; dropDownGatewayOutbound_Gateway.SelectedText = "All";
+                Batch = "All"; dropDownGatewayOutbound_Batch.SelectedText = "All";
 
+            }
             if(Gateway == "All" && Batch == "All")
             {
                 gridGatewayOutbound.EnableFiltering = false;
@@ -7126,8 +7226,6 @@ namespace CMS2.Client
                 compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Batch", FilterOperator.IsEqualTo, Batch));
             }
            
-            //compositeFilter.FilterDescriptors.Add(new FilterDescriptor("CreatedDate", FilterOperator.IsEqualTo, CreatedDate));
-
             compositeFilter.LogicalOperator = FilterLogicalOperator.And;
 
             this.gridGatewayOutbound.FilterDescriptors.Add(compositeFilter);
@@ -7158,18 +7256,26 @@ namespace CMS2.Client
             this.gridGatewayInbound.ShowFilteringRow = false;
 
             CompositeFilterDescriptor compositeFilter = new CompositeFilterDescriptor();
-
-            String Gateway = dropDownGatewayInbound_Gateway.SelectedItem.ToString();
-            String Origin = dropDownGatewayInbound_Origin.SelectedItem.ToString();
-            String CommodityType = dropDownGatewayInbound_Commodity.SelectedItem.ToString();
-
+            String Gateway = "";
+            String Origin = "";
+            String CommodityType = "";
+            try {
+                Gateway = dropDownGatewayInbound_Gateway.SelectedItem.ToString();
+                Origin = dropDownGatewayInbound_Origin.SelectedItem.ToString();
+                CommodityType = dropDownGatewayInbound_Commodity.SelectedItem.ToString();
+            }
+            catch (Exception)
+            {
+                Gateway = "All"; dropDownGatewayInbound_Gateway.SelectedText = "All";
+                Origin = "All"; dropDownGatewayInbound_Origin.SelectedText = "All";
+                CommodityType = "All"; dropDownGatewayInbound_Commodity.SelectedText = "All";
+            }
             if (txtBoxGatewayInbound_MasterAWB.Text != "")
             {
                 dropDownGatewayInbound_Gateway.SelectedIndex = 0;
                 dropDownGatewayInbound_Origin.SelectedIndex = 0;
                 dropDownGatewayInbound_Commodity.SelectedIndex = 0;
                 compositeFilter.FilterDescriptors.Add(new FilterDescriptor("MAWB", FilterOperator.IsEqualTo, txtBoxGatewayInbound_MasterAWB.Text));
-
             }
             else
             {
@@ -7295,9 +7401,17 @@ namespace CMS2.Client
             this.gridCargoTransfer.ShowFilteringRow = false;
             //getCargoTransferData();
             CompositeFilterDescriptor compositeFilter = new CompositeFilterDescriptor();
-            string origin = dropDownCargoTransfer_City.SelectedItem.ToString();
-            string destination = dropDownCargoTransfer_Destination.SelectedItem.ToString();
-           
+            string origin = "";
+            string destination = "";
+            try {
+                origin = dropDownCargoTransfer_City.SelectedItem.ToString();
+               destination = dropDownCargoTransfer_Destination.SelectedItem.ToString();
+            }
+            catch (Exception)
+            {
+                origin = "All"; dropDownCargoTransfer_City.SelectedText = "All";
+                destination = "All"; dropDownCargoTransfer_Destination.SelectedText = "All";
+            }
             if (origin == "All" && destination == "All")
             {
                 gridCargoTransfer.EnableFiltering = false;
@@ -7349,12 +7463,23 @@ namespace CMS2.Client
             this.gridSegregation.ShowFilteringRow = false;
 
             CompositeFilterDescriptor compositeFilter = new CompositeFilterDescriptor();
-
-            String BCO = dropDownSegregation_BCO.SelectedItem.ToString();
-            String Driver = dropDownSegregation_Driver.SelectedItem.ToString();
-            String PlateNo = dropDownSegregation_PlateNo.SelectedItem.ToString();
-            String Batch = dropDownSegregation_Batch.SelectedItem.ToString();
-           
+            String BCO = "";
+            String Driver = "";
+            String PlateNo = "";
+            String Batch = "";
+            try {
+                BCO = dropDownSegregation_BCO.SelectedItem.ToString();
+                Driver = dropDownSegregation_Driver.SelectedItem.ToString();
+                PlateNo = dropDownSegregation_PlateNo.SelectedItem.ToString();
+                Batch = dropDownSegregation_Batch.SelectedItem.ToString();
+            }
+            catch (Exception)
+            {
+                BCO = "All"; dropDownSegregation_BCO.SelectedText = "All";
+                Driver = "All"; dropDownSegregation_Driver.SelectedText = "All";
+                PlateNo = "All"; dropDownSegregation_PlateNo.SelectedText = "All";
+                Batch = "All"; dropDownSegregation_Batch.SelectedText = "All";
+            }
             if (BCO == "All" && Driver == "All" && PlateNo == "All" && Batch == "All")
             {
                 gridSegregation.EnableFiltering = false;
@@ -7471,49 +7596,109 @@ namespace CMS2.Client
             this.gridDailyTrip.ShowFilteringRow = false;
 
             CompositeFilterDescriptor compositeFilter = new CompositeFilterDescriptor();
+            String Area = "";
+            String Driver = "";
+            String PaymentMode = "";
+            String BCO = "";
 
-            String Area = dropDownDailyTrip_Area.SelectedItem.ToString();
-            String Driver = dropDownDailyTrip_Driver.SelectedItem.ToString();
-            String PaymentMode = dropDownDailyTrip_PaymentMode.SelectedItem.ToString();
-
-            if (Area == "All" && Driver == "All" && PaymentMode == "All")
+            try {
+                Area = dropDownDailyTrip_Area.SelectedItem.ToString();
+                Driver = dropDownDailyTrip_Driver.SelectedItem.ToString();
+                PaymentMode = dropDownDailyTrip_PaymentMode.SelectedItem.ToString();
+                BCO = dropDownDailyTrip_BCO.SelectedItem.ToString();
+            }
+            catch (Exception)
+            {
+                Area = "All"; dropDownDailyTrip_Area.SelectedText = "All";
+                Driver = "All"; dropDownDailyTrip_Driver.SelectedText = "All";
+                PaymentMode = "All"; dropDownDailyTrip_PaymentMode.SelectedText = "All";
+                BCO = "All"; dropDownDailyTrip_BCO.SelectedText = "All";
+            }
+            if (Area == "All" && Driver == "All" && PaymentMode == "All" && BCO == "All")
             {
                 gridDailyTrip.EnableFiltering = false;
                 getDailyTripData();
             }
-            else if (Area != null && Driver == "All" && PaymentMode == "All")
+            else if (Area != null && Driver == "All" && PaymentMode == "All" && BCO == "All")
             {
                 compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Area));
             }
-            else if (Area != null && Driver != null && PaymentMode == "All")
+            else if (Area != null && Driver != null && PaymentMode == "All" && BCO == "All")
             {
                 compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Area));
                 compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
             }
-            else if (Area != null && Driver == "All" && PaymentMode != null)
+            else if (Area != null && Driver == "All" && PaymentMode != null && BCO == "All")
             {
                 compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Area));
                 compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Payment Mode", FilterOperator.IsEqualTo, PaymentMode));
             }
-            else if (Area == "All" && Driver != null && PaymentMode == "All")
+            else if (Area == "All" && Driver != null && PaymentMode == "All" && BCO == "All")
             {
                 compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
             }
-            else if (Area == "All" && Driver != null && PaymentMode != null)
+            else if (Area == "All" && Driver != null && PaymentMode != null && BCO == "All")
             {
                 compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
                 compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Payment Mode", FilterOperator.IsEqualTo, PaymentMode));
             }
-            else if (Area == "All" && Driver == "All" && PaymentMode != null)
+            else if (Area == "All" && Driver == "All" && PaymentMode != null && BCO == "All")
             {
                 compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Payment Mode", FilterOperator.IsEqualTo, PaymentMode));
             }
-            else if (Area != null && Driver != null && PaymentMode != null)
+            else if (Area != null && Driver != null && PaymentMode != null && BCO == "All")
             {
                 compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Area));
                 compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
                 compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Payment Mode", FilterOperator.IsEqualTo, PaymentMode));
             }
+            else if (Area == "All" && Driver == "All" && PaymentMode == "All" && BCO != null)
+            {
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, BCO));
+            }
+            else if (Area == "All" && Driver == "All" && PaymentMode != null && BCO != null)
+            {
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, BCO));
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Payment Mode", FilterOperator.IsEqualTo, PaymentMode));
+            }
+            else if (Area == "All" && Driver != null  && PaymentMode == "All" && BCO != null)
+            {
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, BCO));
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
+            }
+            else if (Area != null && Driver == "All" && PaymentMode == "All" && BCO != null)
+            {
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, BCO));
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Area));
+            }
+
+            else if (Area == "All" && Driver != null && PaymentMode != null && BCO != null)
+            {
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, BCO));
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Payment Mode", FilterOperator.IsEqualTo, PaymentMode));
+            }
+            else if (Area != null && Driver != null && PaymentMode == "All" && BCO != null)
+            {
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, BCO));
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Area));
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
+            }
+            else if (Area != null && Driver == "All" && PaymentMode != null && BCO != null)
+            {
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, BCO));
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Area));
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Payment Mode", FilterOperator.IsEqualTo, PaymentMode));
+            }
+            else if (Area != null && Driver != null && PaymentMode != null && BCO != null)
+            {
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, BCO));
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Area));
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Payment Mode", FilterOperator.IsEqualTo, PaymentMode));
+            }
+
+
             compositeFilter.LogicalOperator = FilterLogicalOperator.And;
             this.gridDailyTrip.FilterDescriptors.Add(compositeFilter);
         }
@@ -7581,10 +7766,18 @@ namespace CMS2.Client
             this.gridHoldCargo.ShowFilteringRow = false;
 
             CompositeFilterDescriptor compositeFilter = new CompositeFilterDescriptor();
+            String Branch = "";
+            String Status = "";
 
-            String Branch = dropDownHoldCargo_BCO_BSO.SelectedItem.ToString();
-            String Status = dropDownHoldCargo_Status.SelectedItem.ToString();
+            try {
+                Branch = dropDownHoldCargo_BCO_BSO.SelectedItem.ToString();
+                Status = dropDownHoldCargo_Status.SelectedItem.ToString();
+            }catch(Exception)
+            {
+                Branch = "All"; dropDownHoldCargo_BCO_BSO.SelectedText = "All";
+                Status = "All"; dropDownHoldCargo_Status.SelectedText = "All";
 
+            }
             if (Branch == "All" && Status == "All")
             {
                 gridHoldCargo.EnableFiltering = false;
@@ -7610,12 +7803,12 @@ namespace CMS2.Client
         }
         private void btnHoldCargo_Export_Click(object sender, EventArgs e)
         {
-            saveFileDialog1.Filter = "Excel File (*.xlsx)|*.xlsx";
-            saveFileDialog1.DefaultExt = "xlsx";
-            saveFileDialog1.AddExtension = true;
+            saveFileDialog2.Filter = "Excel File (*.xlsx)|*.xlsx";
+            saveFileDialog2.DefaultExt = "xlsx";
+            saveFileDialog2.AddExtension = true;
 
-            saveFileDialog1.FileName = "HoldCargo_(" + DateTime.Now.ToShortDateString().Replace("/", "_") + ").xlsx";
-            saveFileDialog1.ShowDialog();
+            saveFileDialog2.FileName = "HoldCargo_(" + DateTime.Now.ToShortDateString().Replace("/", "_") + ").xlsx";
+            saveFileDialog2.ShowDialog();
         }
         private void dateTimeHoldCargo_FromDate_ValueChanged(object sender, EventArgs e)
         {
@@ -7623,8 +7816,9 @@ namespace CMS2.Client
             {
                 dateTimeHoldCargo_ToDate.Value = dateTimeHoldCargo_FromDate.Value.AddDays(1);
             }
-            gridDeliveryStatus.EnableFiltering = false;
-            getDeliveryStatusData();
+
+            gridHoldCargo.EnableFiltering = false;
+            getHoldCargoData();
         }
         private void dateTimeHoldCargo_ToDate_ValueChanged(object sender, EventArgs e)
         {
@@ -7632,8 +7826,8 @@ namespace CMS2.Client
             {
                 dateTimeHoldCargo_FromDate.Value = dateTimeHoldCargo_ToDate.Value.AddDays(-1);
             }
-            gridDeliveryStatus.EnableFiltering = false;
-            getDeliveryStatusData();
+            gridHoldCargo.EnableFiltering = false;
+            getHoldCargoData();
 
         }
 
@@ -7646,29 +7840,106 @@ namespace CMS2.Client
             this.gridDeliveryStatus.ShowFilteringRow = false;
 
             CompositeFilterDescriptor compositeFilter = new CompositeFilterDescriptor();
-
-            String Area = dropDownDeliveryStatus_Area.SelectedItem.ToString();
-            String Driver = dropDownDeliveryStatus_Driver.SelectedItem.ToString();
-
-            if (Area == "All" && Driver == "All")
+            String Area = "";
+            String Driver = "";
+            String Status = "";
+            String BCO = "";
+            try {
+                Area = dropDownDeliveryStatus_Area.SelectedItem.ToString();
+                Driver = dropDownDeliveryStatus_Driver.SelectedItem.ToString();
+                Status = dropDownDeliveryStatus_Status.SelectedItem.ToString();
+                BCO = dropDownDeliveryStatus_BCO.SelectedItem.ToString();
+            }
+            catch (Exception)
+            {
+                Area = "All"; dropDownDeliveryStatus_Area.SelectedText = "All";
+                Driver = "All"; dropDownDeliveryStatus_Driver.SelectedText = "All";
+                Status = "All"; dropDownDeliveryStatus_Status.SelectedText = "All";
+                BCO = "All"; dropDownDeliveryStatus_BCO.SelectedText = "All";
+            }
+            if (Area == "All" && Driver == "All" && Status == "All" && BCO == "ALL")
             {
                 gridDeliveryStatus.EnableFiltering = false;
                 getDeliveryStatusData();
             }
-            else if (Area != null && Driver == "All")
+            else if (Area != null && Driver == "All" && Status == "All" && BCO == "ALL")
             {
                 compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Area));
             }
-            else if (Area == "All" && Driver != null)
-            {
-                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
-            }
-            else if (Area != null && Driver != null)
+            else if (Area != null && Driver != null && Status == "All" && BCO == "ALL")
             {
                 compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Area));
                 compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
             }
-            
+            else if (Area != null && Driver == "All" && Status != null && BCO == "ALL")
+            {
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Area));
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Status", FilterOperator.IsEqualTo, Status));
+            }
+            else if (Area == "All" && Driver != null && Status == "All" && BCO == "ALL")
+            {
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
+            }
+            else if (Area == "All" && Driver != null && Status != null && BCO == "ALL")
+            {
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Status", FilterOperator.IsEqualTo, Status));
+            }
+            else if (Area == "All" && Driver == "All" && Status != null && BCO == "ALL")
+            {
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Status", FilterOperator.IsEqualTo, Status));
+            }
+            else if (Area != null && Driver != null && Status != null && BCO != null)
+            {
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Area));
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Status", FilterOperator.IsEqualTo, Status));
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, BCO));
+            }
+            else if (Area == "All" && Driver == "All" && Status == "All" && BCO != null)
+            {
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, BCO));
+            }
+            else if (Area == "All" && Driver == "All" && Status != null && BCO != null)
+            {
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, BCO));
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Status", FilterOperator.IsEqualTo, Status));
+            }
+            else if (Area == "All" && Driver != null && Status != null && BCO != null)
+            {
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, BCO));
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Status", FilterOperator.IsEqualTo, Status));
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
+            }
+            else if (Area != null && Driver != null && Status != null && BCO == "All")
+            {
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Area));
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Status", FilterOperator.IsEqualTo, Status));
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
+            }
+            else if (Area != null && Driver != null && Status == "All" && BCO != null)
+            {
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Area));
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, BCO));
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
+            }
+            else if (Area != null && Driver == "All" && Status != null && BCO != null)
+            {
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, BCO));
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Status", FilterOperator.IsEqualTo, Status));
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Area));
+            }
+            else if (Area == "All" && Driver != null && Status == "All" && BCO != null)
+            {
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, BCO));
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
+            }
+            else if (Area != null && Driver == "All" && Status == "All" && BCO != null)
+            {
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Area));
+                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, BCO));
+            }
+
             compositeFilter.LogicalOperator = FilterLogicalOperator.And;
             this.gridDeliveryStatus.FilterDescriptors.Add(compositeFilter);
         }
@@ -7677,6 +7948,8 @@ namespace CMS2.Client
             DataTable dataTable = getDeliveryStatusGrid();
             TrackingReportGlobalModel.table = dataTable;
             TrackingReportGlobalModel.Date = dateTimeDeliveryStatus_Date.Value.ToLongDateString();
+            TrackingReportGlobalModel.Driver = dropDownDeliveryStatus_Driver.SelectedItem.ToString();
+            TrackingReportGlobalModel.Checker = get_Column_DataView(dataTable , "Checker");
             TrackingReportGlobalModel.Report = "DeliveryStatus";
             ReportViewer viewer = new ReportViewer();
             viewer.Show();
@@ -7688,11 +7961,11 @@ namespace CMS2.Client
         }
 
         // **** OTHERS **** //
-        private void saveFileDialog1_FileOk(object sender, CancelEventArgs e)
+        private void saveFileDialog2_FileOk(object sender, CancelEventArgs e)
         {
 
 
-            string exportFile = saveFileDialog1.FileName; // @"E:\Samples\" + "HoldCargo_" + DateTime.Now + ".xlsx";
+            string exportFile = saveFileDialog2.FileName; // @"E:\Samples\" + "HoldCargo_" + DateTime.Now + ".xlsx";
             using (System.IO.MemoryStream ms = new System.IO.MemoryStream())
             {
                 Telerik.WinControls.Export.GridViewSpreadExport exporter = new Telerik.WinControls.Export.GridViewSpreadExport(this.gridHoldCargo);
@@ -7702,11 +7975,351 @@ namespace CMS2.Client
                 using (System.IO.FileStream fileStream = new System.IO.FileStream(exportFile, FileMode.Create, FileAccess.Write))
                 {
                     ms.WriteTo(fileStream);
+                    MessageBox.Show("Successfully exported!" ,"Export" , MessageBoxButtons.OK ,MessageBoxIcon.Information ,MessageBoxDefaultButton.Button1);
                 }
             }
         }
         #endregion
 
         #endregion END MARK SANTOS REGION
+
+        private void dropDownPickUpCargo_Area_Enter(object sender, EventArgs e)
+        {
+            try
+            {
+                dropDownPickUpCargo_Area.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+            }
+            catch (Exception) { }
+        }
+
+        private void dropDownBranchAcceptance_Branch_Enter(object sender, EventArgs e)
+        {
+            try{
+                dropDownBranchAcceptance_Branch.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+            }
+            catch (Exception) { }
+        }
+
+        private void dropDownBranchAcceptance_BCO_BSO_Enter(object sender, EventArgs e)
+        {
+            try {
+                dropDownBranchAcceptance_BCO_BSO.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+            }
+            catch (Exception) { }
+        }
+
+        private void dropDownBranchAcceptance_Driver_Enter(object sender, EventArgs e)
+        {
+            try { 
+            dropDownBranchAcceptance_Driver.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+            }
+            catch (Exception) { }
+        }
+
+        private void dropDownBranchAcceptance_Batch_Enter(object sender, EventArgs e)
+        {
+            try{
+                dropDownBranchAcceptance_Batch.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+            }
+            catch (Exception) { }
+        }
+
+        private void dropDownBundle_BCO_BSO_Enter(object sender, EventArgs e)
+        {
+            try
+            {
+                dropDownBundle_BCO_BSO.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+            }
+            catch (Exception) { }
+        }
+
+        private void dropDownBundle_SackNo_Enter(object sender, EventArgs e)
+        {
+            try {
+                dropDownBundle_SackNo.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+            }
+            catch (Exception) { }
+        }
+
+        private void dropDownBundle_Destination_Enter(object sender, EventArgs e)
+        {
+            try {
+                dropDownBundle_Destination.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+            }
+            catch (Exception) { }
+        }
+
+        private void dropDownUnbundle_BCO_Enter(object sender, EventArgs e)
+        {
+            try {
+                dropDownUnbundle_BCO.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+            }
+            catch (Exception) { }
+        }
+
+        private void dropDownUnbundle_SackNo_Enter(object sender, EventArgs e)
+        {
+            try
+            {
+                dropDownUnbundle_SackNo.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+            }
+            catch (Exception) { }
+        }
+
+        private void dropDownGatewayTransmital_Gateway_Enter(object sender, EventArgs e)
+        {
+            try {
+                dropDownGatewayTransmital_Gateway.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+            }
+            catch (Exception) { }
+        }
+
+        private void dropDownGatewayTransmital_Destination_Enter(object sender, EventArgs e)
+        {
+            try {
+                dropDownGatewayTransmital_Destination.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+            }
+            catch (Exception) { }
+        }
+
+        private void dropDownGatewayTransmital_Batch_Enter(object sender, EventArgs e)
+        {
+            try {
+                dropDownGatewayTransmital_Batch.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+            }
+            catch (Exception) { }
+        }
+
+        private void txtGatewayTransmital_MAWB_Enter(object sender, EventArgs e)
+        {
+            try {
+                AutoCompleteStringCollection namesCollection = new AutoCompleteStringCollection();
+
+                DataView view = new DataView(getGatewayTransmitalGrid());
+                DataTable table = view.ToTable(true, "MAWB");
+
+                table = view.ToTable(true, "MAWB");
+                foreach (DataRow x in table.Rows)
+                {
+                    if (x["MAWB"].ToString() != null)
+                    {
+                        namesCollection.Add(x["MAWB"].ToString());
+                    }
+                }
+
+                txtGatewayTransmital_MAWB.AutoCompleteMode = AutoCompleteMode.Suggest;
+                txtGatewayTransmital_MAWB.AutoCompleteSource = AutoCompleteSource.CustomSource;
+                txtGatewayTransmital_MAWB.AutoCompleteCustomSource = namesCollection;
+            }
+            catch (Exception) { }
+        }
+
+        private void dropDownGatewayOutbound_BCO_Enter(object sender, EventArgs e)
+        {
+            try {
+                dropDownGatewayOutbound_BCO.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+            }
+            catch (Exception) { }
+        }
+
+        private void dropDownGatewayOutbound_Gateway_Enter(object sender, EventArgs e)
+        {
+            try {
+            dropDownGatewayOutbound_Gateway.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+            }
+            catch (Exception) { }
+        }
+
+        private void dropDownGatewayOutbound_Batch_Enter(object sender, EventArgs e)
+        {
+            try { 
+            dropDownGatewayOutbound_Batch.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+            }
+            catch (Exception) { }
+        }
+
+        private void dropDownGatewayInbound_Gateway_Enter(object sender, EventArgs e)
+        {
+            try { 
+            dropDownGatewayInbound_Gateway.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+            }
+            catch (Exception) { }
+        }
+
+        private void dropDownGatewayInbound_Origin_Enter(object sender, EventArgs e)
+        {
+            try { 
+            dropDownGatewayInbound_Origin.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+            }
+            catch (Exception) { }
+        }
+
+        private void dropDownGatewayInbound_Commodity_Enter(object sender, EventArgs e)
+        {
+            try { 
+            dropDownGatewayInbound_Commodity.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+            }
+            catch (Exception) { }
+        }
+
+        private void txtBoxGatewayInbound_MasterAWB_Enter(object sender, EventArgs e)
+        {
+            try { 
+            AutoCompleteStringCollection namesCollection = new AutoCompleteStringCollection();
+
+            DataView view = new DataView(getGatewayInboundGrid());
+            DataTable table = view.ToTable(true, "MAWB");
+
+            table = view.ToTable(true, "MAWB");
+            foreach (DataRow x in table.Rows)
+            {
+                if (x["MAWB"].ToString() != null)
+                {
+                    namesCollection.Add(x["MAWB"].ToString());
+                }
+            }
+
+            txtBoxGatewayInbound_MasterAWB.AutoCompleteMode = AutoCompleteMode.Suggest;
+            txtBoxGatewayInbound_MasterAWB.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            txtBoxGatewayInbound_MasterAWB.AutoCompleteCustomSource = namesCollection;
+            }
+            catch (Exception) { }
+        }
+
+        private void dropDownCargoTransfer_Origin_Enter(object sender, EventArgs e)
+        {
+            try {
+                dropDownCargoTransfer_Origin.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+            }
+            catch (Exception) { }
+        }
+
+        private void dropDownCargoTransfer_City_Enter(object sender, EventArgs e)
+        {
+            try { 
+            dropDownCargoTransfer_City.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+            }
+            catch (Exception) { }
+        }
+
+        private void dropDownCargoTransfer_Destination_Enter(object sender, EventArgs e)
+        {
+            try { 
+            dropDownCargoTransfer_Destination.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+            }
+            catch (Exception) { }
+        }
+
+        private void dropDownSegregation_BCO_Enter(object sender, EventArgs e)
+        {
+            try { 
+            dropDownSegregation_BCO.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+            }
+            catch (Exception) { }
+        }
+
+        private void dropDownSegregation_Driver_Enter(object sender, EventArgs e)
+        {
+            try { 
+            dropDownSegregation_Driver.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+            }
+            catch (Exception) { }
+        }
+
+        private void dropDownSegregation_PlateNo_Enter(object sender, EventArgs e)
+        {
+            try {
+            dropDownSegregation_PlateNo.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+            }
+            catch (Exception) { }
+        }
+
+        private void dropDownSegregation_Batch_Enter(object sender, EventArgs e)
+        {
+            try { 
+            dropDownSegregation_Batch.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+            }
+            catch (Exception) { }
+        }
+
+        private void dropDownDailyTrip_BCO_Enter(object sender, EventArgs e)
+        {
+            try {
+                dropDownDailyTrip_BCO.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+            }
+            catch (Exception) { }
+        }
+
+        private void dropDownDailyTrip_Area_Enter(object sender, EventArgs e)
+        {
+            try { 
+            dropDownDailyTrip_Area.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+            }
+            catch (Exception) { }
+        }
+
+        private void dropDownDailyTrip_Driver_Enter(object sender, EventArgs e)
+        {
+            try { 
+            dropDownDailyTrip_Driver.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+            }
+            catch (Exception) { }
+        }
+
+        private void dropDownDailyTrip_PaymentMode_Enter(object sender, EventArgs e)
+        {
+            try { 
+            dropDownDailyTrip_PaymentMode.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+            }
+            catch (Exception) { }
+        }
+
+        private void dropDownHoldCargo_BCO_BSO_Enter(object sender, EventArgs e)
+        {
+            try { 
+            dropDownHoldCargo_BCO_BSO.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+            }
+            catch (Exception) { }
+        }
+
+        private void dropDownHoldCargo_Status_Enter(object sender, EventArgs e)
+        {
+            try {
+                dropDownHoldCargo_Status.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+            }
+            catch (Exception) { }
+        }
+
+        private void dropDownDeliveryStatus_BCO_Enter(object sender, EventArgs e)
+        {
+            try { 
+            dropDownDeliveryStatus_BCO.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+            }
+            catch (Exception) { }
+        }
+
+        private void dropDownDeliveryStatus_Status_Enter(object sender, EventArgs e)
+        {
+            try { 
+            dropDownDeliveryStatus_Status.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+            }
+            catch (Exception) { }
+        }
+
+        private void dropDownDeliveryStatus_Area_Enter(object sender, EventArgs e)
+        {
+            try { 
+            dropDownDeliveryStatus_Area.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+            }
+            catch (Exception) { }
+        }
+
+        private void dropDownDeliveryStatus_Driver_Enter(object sender, EventArgs e)
+        {
+            try { 
+            dropDownDeliveryStatus_Driver.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+            }
+            catch (Exception) { }
+        }
     }
 }

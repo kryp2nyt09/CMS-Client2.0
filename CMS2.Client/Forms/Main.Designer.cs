@@ -29,35 +29,31 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            Telerik.WinControls.Data.FilterDescriptor filterDescriptor23 = new Telerik.WinControls.Data.FilterDescriptor();
-            Telerik.WinControls.Data.SortDescriptor sortDescriptor23 = new Telerik.WinControls.Data.SortDescriptor();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition199 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.Data.FilterDescriptor filterDescriptor24 = new Telerik.WinControls.Data.FilterDescriptor();
-            Telerik.WinControls.Data.SortDescriptor sortDescriptor24 = new Telerik.WinControls.Data.SortDescriptor();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition200 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition201 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition202 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition203 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition204 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition205 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition775 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition776 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition777 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition778 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition779 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition780 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition781 = new Telerik.WinControls.UI.TableViewDefinition();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition206 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition782 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.RadListDataItem radListDataItem1 = new Telerik.WinControls.UI.RadListDataItem();
+            Telerik.WinControls.UI.RadListDataItem radListDataItem2 = new Telerik.WinControls.UI.RadListDataItem();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition783 = new Telerik.WinControls.UI.TableViewDefinition();
             Telerik.WinControls.UI.RadListDataItem radListDataItem3 = new Telerik.WinControls.UI.RadListDataItem();
             Telerik.WinControls.UI.RadListDataItem radListDataItem4 = new Telerik.WinControls.UI.RadListDataItem();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition207 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.RadListDataItem radListDataItem5 = new Telerik.WinControls.UI.RadListDataItem();
-            Telerik.WinControls.UI.RadListDataItem radListDataItem6 = new Telerik.WinControls.UI.RadListDataItem();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition208 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition209 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition210 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition211 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition212 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition213 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition214 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition215 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition784 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition785 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition786 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition787 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition788 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition789 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition790 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition791 = new Telerik.WinControls.UI.TableViewDefinition();
             Telerik.WinControls.UI.RadListDataItem radListDataItem7 = new Telerik.WinControls.UI.RadListDataItem();
             Telerik.WinControls.UI.RadListDataItem radListDataItem8 = new Telerik.WinControls.UI.RadListDataItem();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition216 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition792 = new Telerik.WinControls.UI.TableViewDefinition();
             this.office2010BlackTheme1 = new Telerik.WinControls.Themes.Office2010BlackTheme();
             this.radPanel1 = new Telerik.WinControls.UI.RadPanel();
             this.panel = new Telerik.WinControls.UI.RadPanel();
@@ -592,8 +588,9 @@
             this.label118 = new System.Windows.Forms.Label();
             this.label119 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.chk_ReceivedAll = new Telerik.WinControls.UI.RadCheckBox();
-            this.cmb_PaymentRemarks = new Telerik.WinControls.UI.RadDropDownList();
+            this.label37 = new System.Windows.Forms.Label();
+            this.dropDownDeliveryStatus_Status = new Telerik.WinControls.UI.RadDropDownList();
+            this.saveFileDialog2 = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.radPanel1)).BeginInit();
             this.radPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panel)).BeginInit();
@@ -1048,6 +1045,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dateTimeDeliveryStatus_Date)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dropDownDeliveryStatus_Area)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dropDownDeliveryStatus_BCO)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dropDownDeliveryStatus_Status)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
             // 
@@ -1210,13 +1208,7 @@
             this.BookingGridView.MasterTemplate.AllowSearchRow = true;
             this.BookingGridView.MasterTemplate.EnableAlternatingRowColor = true;
             this.BookingGridView.MasterTemplate.EnableFiltering = true;
-            this.BookingGridView.MasterTemplate.FilterDescriptors.AddRange(new Telerik.WinControls.Data.FilterDescriptor[] {
-            filterDescriptor31});
-            this.BookingGridView.MasterTemplate.MultiSelect = true;
-            sortDescriptor31.PropertyName = "Delete";
-            this.BookingGridView.MasterTemplate.SortDescriptors.AddRange(new Telerik.WinControls.Data.SortDescriptor[] {
-            sortDescriptor31});
-            this.BookingGridView.MasterTemplate.ViewDefinition = tableViewDefinition271;
+            this.BookingGridView.MasterTemplate.ViewDefinition = tableViewDefinition775;
             this.BookingGridView.Name = "BookingGridView";
             this.BookingGridView.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.BookingGridView.Size = new System.Drawing.Size(1231, 192);
@@ -3572,15 +3564,9 @@
             this.gridPackage.MasterTemplate.AllowRowResize = false;
             this.gridPackage.MasterTemplate.EnableAlternatingRowColor = true;
             this.gridPackage.MasterTemplate.EnableGrouping = false;
-            this.gridPackage.MasterTemplate.FilterDescriptors.AddRange(new Telerik.WinControls.Data.FilterDescriptor[] {
-            filterDescriptor32});
             this.gridPackage.MasterTemplate.MultiSelect = true;
             this.gridPackage.MasterTemplate.ShowFilteringRow = false;
-            this.gridPackage.MasterTemplate.ShowRowHeaderColumn = false;
-            sortDescriptor32.PropertyName = "Delete";
-            this.gridPackage.MasterTemplate.SortDescriptors.AddRange(new Telerik.WinControls.Data.SortDescriptor[] {
-            sortDescriptor32});
-            this.gridPackage.MasterTemplate.ViewDefinition = tableViewDefinition272;
+            this.gridPackage.MasterTemplate.ViewDefinition = tableViewDefinition776;
             this.gridPackage.Name = "gridPackage";
             this.gridPackage.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.tableLayoutPanel14.SetRowSpan(this.gridPackage, 5);
@@ -4700,7 +4686,7 @@
             this.gridManifest.MasterTemplate.EnablePaging = true;
             this.gridManifest.MasterTemplate.PageSize = 10;
             this.gridManifest.MasterTemplate.ShowGroupedColumns = true;
-            this.gridManifest.MasterTemplate.ViewDefinition = tableViewDefinition273;
+            this.gridManifest.MasterTemplate.ViewDefinition = tableViewDefinition777;
             this.gridManifest.Name = "gridManifest";
             this.gridManifest.Size = new System.Drawing.Size(1231, 571);
             this.gridManifest.TabIndex = 0;
@@ -4812,7 +4798,7 @@
             // txtTotalCash
             // 
             this.txtTotalCash.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtTotalCash.Location = new System.Drawing.Point(132, 3);
+            this.txtTotalCash.Location = new System.Drawing.Point(145, 3);
             this.txtTotalCash.Name = "txtTotalCash";
             this.txtTotalCash.ReadOnly = true;
             this.txtTotalCash.Size = new System.Drawing.Size(145, 20);
@@ -4824,7 +4810,7 @@
             // txtTotalPending
             // 
             this.txtTotalPending.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtTotalPending.Location = new System.Drawing.Point(132, 133);
+            this.txtTotalPending.Location = new System.Drawing.Point(145, 133);
             this.txtTotalPending.Name = "txtTotalPending";
             this.txtTotalPending.ReadOnly = true;
             this.txtTotalPending.Size = new System.Drawing.Size(145, 20);
@@ -4837,7 +4823,7 @@
             // txtTotalPdc
             // 
             this.txtTotalPdc.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtTotalPdc.Location = new System.Drawing.Point(132, 107);
+            this.txtTotalPdc.Location = new System.Drawing.Point(145, 107);
             this.txtTotalPdc.Name = "txtTotalPdc";
             this.txtTotalPdc.ReadOnly = true;
             this.txtTotalPdc.Size = new System.Drawing.Size(145, 20);
@@ -4852,7 +4838,7 @@
             this.label42.AutoSize = true;
             this.label42.Location = new System.Drawing.Point(3, 110);
             this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(55, 13);
+            this.label42.Size = new System.Drawing.Size(61, 14);
             this.label42.TabIndex = 2;
             this.label42.Text = "Total PDC";
             // 
@@ -4862,7 +4848,7 @@
             this.label47.AutoSize = true;
             this.label47.Location = new System.Drawing.Point(3, 84);
             this.label47.Name = "label47";
-            this.label47.Size = new System.Drawing.Size(101, 13);
+            this.label47.Size = new System.Drawing.Size(113, 14);
             this.label47.TabIndex = 1;
             this.label47.Text = "Total Tax WithHeld";
             // 
@@ -4872,14 +4858,14 @@
             this.label62.AutoSize = true;
             this.label62.Location = new System.Drawing.Point(3, 58);
             this.label62.Name = "label62";
-            this.label62.Size = new System.Drawing.Size(86, 13);
+            this.label62.Size = new System.Drawing.Size(91, 14);
             this.label62.TabIndex = 10;
             this.label62.Text = "Total Collection";
             // 
             // txtRemarksPaymentSummary
             // 
             this.txtRemarksPaymentSummary.AutoSize = false;
-            this.txtRemarksPaymentSummary.Location = new System.Drawing.Point(132, 263);
+            this.txtRemarksPaymentSummary.Location = new System.Drawing.Point(145, 263);
             this.txtRemarksPaymentSummary.Multiline = true;
             this.txtRemarksPaymentSummary.Name = "txtRemarksPaymentSummary";
             this.txtRemarksPaymentSummary.Size = new System.Drawing.Size(145, 44);
@@ -4889,7 +4875,7 @@
             // 
             // txtTotalCheckReceived
             // 
-            this.txtTotalCheckReceived.Location = new System.Drawing.Point(132, 185);
+            this.txtTotalCheckReceived.Location = new System.Drawing.Point(145, 185);
             this.txtTotalCheckReceived.Name = "txtTotalCheckReceived";
             this.txtTotalCheckReceived.ReadOnly = true;
             this.txtTotalCheckReceived.Size = new System.Drawing.Size(145, 20);
@@ -4900,7 +4886,7 @@
             // 
             // txtDifference
             // 
-            this.txtDifference.Location = new System.Drawing.Point(132, 237);
+            this.txtDifference.Location = new System.Drawing.Point(145, 237);
             this.txtDifference.Name = "txtDifference";
             this.txtDifference.ReadOnly = true;
             this.txtDifference.Size = new System.Drawing.Size(145, 20);
@@ -4915,13 +4901,13 @@
             this.label63.AutoSize = true;
             this.label63.Location = new System.Drawing.Point(3, 32);
             this.label63.Name = "label63";
-            this.label63.Size = new System.Drawing.Size(65, 13);
+            this.label63.Size = new System.Drawing.Size(72, 14);
             this.label63.TabIndex = 0;
             this.label63.Text = "Total Check";
             // 
             // txtTotalAmntReceived
             // 
-            this.txtTotalAmntReceived.Location = new System.Drawing.Point(132, 211);
+            this.txtTotalAmntReceived.Location = new System.Drawing.Point(145, 211);
             this.txtTotalAmntReceived.Name = "txtTotalAmntReceived";
             this.txtTotalAmntReceived.ReadOnly = true;
             this.txtTotalAmntReceived.Size = new System.Drawing.Size(145, 20);
@@ -4936,7 +4922,7 @@
             this.label64.AutoSize = true;
             this.label64.Location = new System.Drawing.Point(3, 188);
             this.label64.Name = "label64";
-            this.label64.Size = new System.Drawing.Size(113, 13);
+            this.label64.Size = new System.Drawing.Size(125, 14);
             this.label64.TabIndex = 28;
             this.label64.Text = "Total Check Received";
             // 
@@ -4946,7 +4932,7 @@
             this.label65.AutoSize = true;
             this.label65.Location = new System.Drawing.Point(3, 6);
             this.label65.Name = "label65";
-            this.label65.Size = new System.Drawing.Size(59, 13);
+            this.label65.Size = new System.Drawing.Size(64, 14);
             this.label65.TabIndex = 24;
             this.label65.Text = "Total Cash";
             // 
@@ -4956,7 +4942,7 @@
             this.label66.AutoSize = true;
             this.label66.Location = new System.Drawing.Point(3, 136);
             this.label66.Name = "label66";
-            this.label66.Size = new System.Drawing.Size(77, 13);
+            this.label66.Size = new System.Drawing.Size(83, 14);
             this.label66.TabIndex = 27;
             this.label66.Text = "Total Pending";
             this.label66.Visible = false;
@@ -4964,7 +4950,7 @@
             // txtTotalCashReceived
             // 
             this.txtTotalCashReceived.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtTotalCashReceived.Location = new System.Drawing.Point(132, 159);
+            this.txtTotalCashReceived.Location = new System.Drawing.Point(145, 159);
             this.txtTotalCashReceived.Name = "txtTotalCashReceived";
             this.txtTotalCashReceived.ReadOnly = true;
             this.txtTotalCashReceived.Size = new System.Drawing.Size(145, 20);
@@ -4979,7 +4965,7 @@
             this.label69.AutoSize = true;
             this.label69.Location = new System.Drawing.Point(3, 278);
             this.label69.Name = "label69";
-            this.label69.Size = new System.Drawing.Size(50, 13);
+            this.label69.Size = new System.Drawing.Size(52, 14);
             this.label69.TabIndex = 3;
             this.label69.Text = "Remarks";
             // 
@@ -4989,7 +4975,7 @@
             this.label70.AutoSize = true;
             this.label70.Location = new System.Drawing.Point(3, 240);
             this.label70.Name = "label70";
-            this.label70.Size = new System.Drawing.Size(60, 13);
+            this.label70.Size = new System.Drawing.Size(63, 14);
             this.label70.TabIndex = 1;
             this.label70.Text = "Difference";
             // 
@@ -4999,7 +4985,7 @@
             this.label71.AutoSize = true;
             this.label71.Location = new System.Drawing.Point(3, 214);
             this.label71.Name = "label71";
-            this.label71.Size = new System.Drawing.Size(123, 13);
+            this.label71.Size = new System.Drawing.Size(136, 14);
             this.label71.TabIndex = 26;
             this.label71.Text = "Total Amount Received";
             // 
@@ -5009,14 +4995,14 @@
             this.label72.AutoSize = true;
             this.label72.Location = new System.Drawing.Point(3, 162);
             this.label72.Name = "label72";
-            this.label72.Size = new System.Drawing.Size(107, 13);
+            this.label72.Size = new System.Drawing.Size(117, 14);
             this.label72.TabIndex = 30;
             this.label72.Text = "Total Cash Received";
             // 
             // txtTotalTax
             // 
             this.txtTotalTax.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtTotalTax.Location = new System.Drawing.Point(132, 81);
+            this.txtTotalTax.Location = new System.Drawing.Point(145, 81);
             this.txtTotalTax.Name = "txtTotalTax";
             this.txtTotalTax.ReadOnly = true;
             this.txtTotalTax.Size = new System.Drawing.Size(145, 20);
@@ -5028,7 +5014,7 @@
             // txtTotalCheck
             // 
             this.txtTotalCheck.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtTotalCheck.Location = new System.Drawing.Point(132, 29);
+            this.txtTotalCheck.Location = new System.Drawing.Point(145, 29);
             this.txtTotalCheck.Name = "txtTotalCheck";
             this.txtTotalCheck.ReadOnly = true;
             this.txtTotalCheck.Size = new System.Drawing.Size(145, 20);
@@ -5040,7 +5026,7 @@
             // txtTotalCollection
             // 
             this.txtTotalCollection.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtTotalCollection.Location = new System.Drawing.Point(132, 55);
+            this.txtTotalCollection.Location = new System.Drawing.Point(145, 55);
             this.txtTotalCollection.Name = "txtTotalCollection";
             this.txtTotalCollection.ReadOnly = true;
             this.txtTotalCollection.Size = new System.Drawing.Size(145, 20);
@@ -5185,7 +5171,7 @@
             // 
             this.gridCorpAcctConsignee.MasterTemplate.AllowAddNewRow = false;
             this.gridCorpAcctConsignee.MasterTemplate.AllowDeleteRow = false;
-            this.gridCorpAcctConsignee.MasterTemplate.ViewDefinition = tableViewDefinition202;
+            this.gridCorpAcctConsignee.MasterTemplate.ViewDefinition = tableViewDefinition778;
             this.gridCorpAcctConsignee.Name = "gridCorpAcctConsignee";
             this.gridCorpAcctConsignee.Size = new System.Drawing.Size(794, 121);
             this.gridCorpAcctConsignee.TabIndex = 62;
@@ -5203,7 +5189,7 @@
             this.gridPrepaid.MasterTemplate.AllowColumnReorder = false;
             this.gridPrepaid.MasterTemplate.AllowColumnResize = false;
             this.gridPrepaid.MasterTemplate.AllowDeleteRow = false;
-            this.gridPrepaid.MasterTemplate.ViewDefinition = tableViewDefinition203;
+            this.gridPrepaid.MasterTemplate.ViewDefinition = tableViewDefinition779;
             this.gridPrepaid.Name = "gridPrepaid";
             this.gridPrepaid.Size = new System.Drawing.Size(794, 131);
             this.gridPrepaid.TabIndex = 60;
@@ -5375,7 +5361,7 @@
             this.gridFreightCollect.MasterTemplate.AllowAddNewRow = false;
             this.gridFreightCollect.MasterTemplate.AllowColumnResize = false;
             this.gridFreightCollect.MasterTemplate.AllowDeleteRow = false;
-            this.gridFreightCollect.MasterTemplate.ViewDefinition = tableViewDefinition204;
+            this.gridFreightCollect.MasterTemplate.ViewDefinition = tableViewDefinition780;
             this.gridFreightCollect.Name = "gridFreightCollect";
             this.gridFreightCollect.Size = new System.Drawing.Size(794, 127);
             this.gridFreightCollect.TabIndex = 61;
@@ -5463,7 +5449,7 @@
             this.pageViewTracking.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pageViewTracking.Location = new System.Drawing.Point(0, 0);
             this.pageViewTracking.Name = "pageViewTracking";
-            this.pageViewTracking.SelectedPage = this.radPageViewPage7;
+            this.pageViewTracking.SelectedPage = this.radPageViewPage18;
             this.pageViewTracking.Size = new System.Drawing.Size(1231, 571);
             this.pageViewTracking.TabIndex = 0;
             this.pageViewTracking.Text = " ";
@@ -5505,7 +5491,7 @@
             this.gridPickupCargo.MasterTemplate.AllowDragToGroup = false;
             this.gridPickupCargo.MasterTemplate.AllowEditRow = false;
             this.gridPickupCargo.MasterTemplate.ShowRowHeaderColumn = false;
-            this.gridPickupCargo.MasterTemplate.ViewDefinition = tableViewDefinition205;
+            this.gridPickupCargo.MasterTemplate.ViewDefinition = tableViewDefinition781;
             this.gridPickupCargo.Name = "gridPickupCargo";
             this.gridPickupCargo.ShowItemToolTips = false;
             this.gridPickupCargo.Size = new System.Drawing.Size(1083, 439);
@@ -5590,6 +5576,7 @@
             this.dropDownPickUpCargo_Area.Size = new System.Drawing.Size(182, 20);
             this.dropDownPickUpCargo_Area.TabIndex = 75;
             this.dropDownPickUpCargo_Area.ThemeName = "Office2010Black";
+            this.dropDownPickUpCargo_Area.Enter += new System.EventHandler(this.dropDownPickUpCargo_Area_Enter);
             // 
             // btnExport_PickupCargo
             // 
@@ -5709,7 +5696,7 @@
             this.gridBranchAcceptance.MasterTemplate.AllowDeleteRow = false;
             this.gridBranchAcceptance.MasterTemplate.AllowEditRow = false;
             this.gridBranchAcceptance.MasterTemplate.ShowRowHeaderColumn = false;
-//            this.gridBranchAcceptance.MasterTemplate.ViewDefinition = tableViewDefinition278;
+            this.gridBranchAcceptance.MasterTemplate.ViewDefinition = tableViewDefinition782;
             this.gridBranchAcceptance.Name = "gridBranchAcceptance";
             this.gridBranchAcceptance.ShowItemToolTips = false;
             this.gridBranchAcceptance.Size = new System.Drawing.Size(1083, 439);
@@ -5768,6 +5755,7 @@
             this.dropDownBranchAcceptance_Driver.Size = new System.Drawing.Size(135, 20);
             this.dropDownBranchAcceptance_Driver.TabIndex = 81;
             this.dropDownBranchAcceptance_Driver.ThemeName = "Office2010Black";
+            this.dropDownBranchAcceptance_Driver.Enter += new System.EventHandler(this.dropDownBranchAcceptance_Driver_Enter);
             // 
             // label97
             // 
@@ -5803,16 +5791,17 @@
             // dropDownBranchAcceptance_Branch
             // 
             this.dropDownBranchAcceptance_Branch.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            radListDataItem5.Text = "Branch Corporate Office";
-            radListDataItem6.Text = "Branch Satellite Office";
-            this.dropDownBranchAcceptance_Branch.Items.Add(radListDataItem5);
-            this.dropDownBranchAcceptance_Branch.Items.Add(radListDataItem6);
+            radListDataItem1.Text = "Branch Corporate Office";
+            radListDataItem2.Text = "Branch Satellite Office";
+            this.dropDownBranchAcceptance_Branch.Items.Add(radListDataItem1);
+            this.dropDownBranchAcceptance_Branch.Items.Add(radListDataItem2);
             this.dropDownBranchAcceptance_Branch.Location = new System.Drawing.Point(187, 79);
             this.dropDownBranchAcceptance_Branch.Name = "dropDownBranchAcceptance_Branch";
             this.dropDownBranchAcceptance_Branch.Size = new System.Drawing.Size(176, 20);
             this.dropDownBranchAcceptance_Branch.TabIndex = 77;
             this.dropDownBranchAcceptance_Branch.ThemeName = "Office2010Black";
             this.dropDownBranchAcceptance_Branch.SelectedIndexChanged += new Telerik.WinControls.UI.Data.PositionChangedEventHandler(this.dropDownBranchAcceptance_Branch_SelectedIndexChanged);
+            this.dropDownBranchAcceptance_Branch.Enter += new System.EventHandler(this.dropDownBranchAcceptance_Branch_Enter);
             // 
             // dateTimePickerBranchAcceptance_Date
             // 
@@ -5844,6 +5833,7 @@
             this.dropDownBranchAcceptance_BCO_BSO.Size = new System.Drawing.Size(170, 20);
             this.dropDownBranchAcceptance_BCO_BSO.TabIndex = 73;
             this.dropDownBranchAcceptance_BCO_BSO.ThemeName = "Office2010Black";
+            this.dropDownBranchAcceptance_BCO_BSO.Enter += new System.EventHandler(this.dropDownBranchAcceptance_BCO_BSO_Enter);
             // 
             // dropDownBranchAcceptance_Batch
             // 
@@ -5852,6 +5842,7 @@
             this.dropDownBranchAcceptance_Batch.Size = new System.Drawing.Size(116, 20);
             this.dropDownBranchAcceptance_Batch.TabIndex = 70;
             this.dropDownBranchAcceptance_Batch.ThemeName = "Office2010Black";
+            this.dropDownBranchAcceptance_Batch.Enter += new System.EventHandler(this.dropDownBranchAcceptance_Batch_Enter);
             // 
             // label77
             // 
@@ -5907,7 +5898,7 @@
             this.gridBundle.MasterTemplate.AllowDragToGroup = false;
             this.gridBundle.MasterTemplate.AllowEditRow = false;
             this.gridBundle.MasterTemplate.ShowRowHeaderColumn = false;
-        //    this.gridBundle.MasterTemplate.ViewDefinition = tableViewDefinition279;
+            this.gridBundle.MasterTemplate.ViewDefinition = tableViewDefinition783;
             this.gridBundle.Name = "gridBundle";
             this.gridBundle.ShowItemToolTips = false;
             this.gridBundle.Size = new System.Drawing.Size(1083, 439);
@@ -5957,6 +5948,7 @@
             this.dropDownBundle_Destination.Size = new System.Drawing.Size(155, 20);
             this.dropDownBundle_Destination.TabIndex = 96;
             this.dropDownBundle_Destination.ThemeName = "Office2010Black";
+            this.dropDownBundle_Destination.Enter += new System.EventHandler(this.dropDownBundle_Destination_Enter);
             // 
             // label125
             // 
@@ -5998,6 +5990,7 @@
             this.dropDownBundle_SackNo.Size = new System.Drawing.Size(116, 20);
             this.dropDownBundle_SackNo.TabIndex = 93;
             this.dropDownBundle_SackNo.ThemeName = "Office2010Black";
+            this.dropDownBundle_SackNo.Enter += new System.EventHandler(this.dropDownBundle_SackNo_Enter);
             // 
             // label113
             // 
@@ -6083,6 +6076,7 @@
             this.dropDownBundle_BCO_BSO.Size = new System.Drawing.Size(153, 20);
             this.dropDownBundle_BCO_BSO.TabIndex = 82;
             this.dropDownBundle_BCO_BSO.ThemeName = "Office2010Black";
+            this.dropDownBundle_BCO_BSO.Enter += new System.EventHandler(this.dropDownBundle_BCO_BSO_Enter);
             // 
             // label81
             // 
@@ -6128,7 +6122,7 @@
             this.gridUnbundle.MasterTemplate.AllowDragToGroup = false;
             this.gridUnbundle.MasterTemplate.AllowEditRow = false;
             this.gridUnbundle.MasterTemplate.ShowRowHeaderColumn = false;
-         //   this.gridUnbundle.MasterTemplate.ViewDefinition = tableViewDefinition280;
+            this.gridUnbundle.MasterTemplate.ViewDefinition = tableViewDefinition784;
             this.gridUnbundle.Name = "gridUnbundle";
             this.gridUnbundle.ShowItemToolTips = false;
             this.gridUnbundle.Size = new System.Drawing.Size(1083, 439);
@@ -6183,6 +6177,7 @@
             this.dropDownUnbundle_SackNo.Size = new System.Drawing.Size(118, 20);
             this.dropDownUnbundle_SackNo.TabIndex = 90;
             this.dropDownUnbundle_SackNo.ThemeName = "Office2010Black";
+            this.dropDownUnbundle_SackNo.Enter += new System.EventHandler(this.dropDownUnbundle_SackNo_Enter);
             // 
             // btnUnbundle_Search
             // 
@@ -6213,6 +6208,7 @@
             this.dropDownUnbundle_BCO.Size = new System.Drawing.Size(156, 20);
             this.dropDownUnbundle_BCO.TabIndex = 85;
             this.dropDownUnbundle_BCO.ThemeName = "Office2010Black";
+            this.dropDownUnbundle_BCO.Enter += new System.EventHandler(this.dropDownUnbundle_BCO_Enter);
             // 
             // dateTimeUnbunde_Date
             // 
@@ -6280,7 +6276,7 @@
             this.gridGatewayTransmital.MasterTemplate.AllowDragToGroup = false;
             this.gridGatewayTransmital.MasterTemplate.AllowEditRow = false;
             this.gridGatewayTransmital.MasterTemplate.ShowRowHeaderColumn = false;
-            this.gridGatewayTransmital.MasterTemplate.ViewDefinition = tableViewDefinition209;
+            this.gridGatewayTransmital.MasterTemplate.ViewDefinition = tableViewDefinition785;
             this.gridGatewayTransmital.Name = "gridGatewayTransmital";
             this.gridGatewayTransmital.ShowItemToolTips = false;
             this.gridGatewayTransmital.Size = new System.Drawing.Size(1083, 439);
@@ -6330,6 +6326,7 @@
             this.dropDownGatewayTransmital_Destination.Size = new System.Drawing.Size(169, 20);
             this.dropDownGatewayTransmital_Destination.TabIndex = 93;
             this.dropDownGatewayTransmital_Destination.ThemeName = "Office2010Black";
+            this.dropDownGatewayTransmital_Destination.Enter += new System.EventHandler(this.dropDownGatewayTransmital_Destination_Enter);
             // 
             // label59
             // 
@@ -6357,6 +6354,7 @@
             this.txtGatewayTransmital_MAWB.Name = "txtGatewayTransmital_MAWB";
             this.txtGatewayTransmital_MAWB.Size = new System.Drawing.Size(100, 20);
             this.txtGatewayTransmital_MAWB.TabIndex = 90;
+            this.txtGatewayTransmital_MAWB.Enter += new System.EventHandler(this.txtGatewayTransmital_MAWB_Enter);
             // 
             // dropDownGatewayTransmital_Batch
             // 
@@ -6366,6 +6364,7 @@
             this.dropDownGatewayTransmital_Batch.Size = new System.Drawing.Size(117, 20);
             this.dropDownGatewayTransmital_Batch.TabIndex = 85;
             this.dropDownGatewayTransmital_Batch.ThemeName = "Office2010Black";
+            this.dropDownGatewayTransmital_Batch.Enter += new System.EventHandler(this.dropDownGatewayTransmital_Batch_Enter);
             // 
             // label55
             // 
@@ -6406,6 +6405,7 @@
             this.dropDownGatewayTransmital_Gateway.Size = new System.Drawing.Size(156, 20);
             this.dropDownGatewayTransmital_Gateway.TabIndex = 80;
             this.dropDownGatewayTransmital_Gateway.ThemeName = "Office2010Black";
+            this.dropDownGatewayTransmital_Gateway.Enter += new System.EventHandler(this.dropDownGatewayTransmital_Gateway_Enter);
             // 
             // dateTimeGatewayTransmital_Date
             // 
@@ -6473,7 +6473,7 @@
             this.gridGatewayOutbound.MasterTemplate.AllowDragToGroup = false;
             this.gridGatewayOutbound.MasterTemplate.AllowEditRow = false;
             this.gridGatewayOutbound.MasterTemplate.ShowRowHeaderColumn = false;
-            this.gridGatewayOutbound.MasterTemplate.ViewDefinition = tableViewDefinition210;
+            this.gridGatewayOutbound.MasterTemplate.ViewDefinition = tableViewDefinition786;
             this.gridGatewayOutbound.Name = "gridGatewayOutbound";
             this.gridGatewayOutbound.ShowItemToolTips = false;
             this.gridGatewayOutbound.Size = new System.Drawing.Size(1083, 439);
@@ -6542,6 +6542,7 @@
             this.dropDownGatewayOutbound_BCO.Size = new System.Drawing.Size(155, 20);
             this.dropDownGatewayOutbound_BCO.TabIndex = 93;
             this.dropDownGatewayOutbound_BCO.ThemeName = "Office2010Black";
+            this.dropDownGatewayOutbound_BCO.Enter += new System.EventHandler(this.dropDownGatewayOutbound_BCO_Enter);
             // 
             // dropDownGatewayOutbound_Batch
             // 
@@ -6551,6 +6552,7 @@
             this.dropDownGatewayOutbound_Batch.Size = new System.Drawing.Size(117, 20);
             this.dropDownGatewayOutbound_Batch.TabIndex = 94;
             this.dropDownGatewayOutbound_Batch.ThemeName = "Office2010Black";
+            this.dropDownGatewayOutbound_Batch.Enter += new System.EventHandler(this.dropDownGatewayOutbound_Batch_Enter);
             // 
             // label79
             // 
@@ -6581,6 +6583,7 @@
             this.dropDownGatewayOutbound_Gateway.Size = new System.Drawing.Size(156, 20);
             this.dropDownGatewayOutbound_Gateway.TabIndex = 84;
             this.dropDownGatewayOutbound_Gateway.ThemeName = "Office2010Black";
+            this.dropDownGatewayOutbound_Gateway.Enter += new System.EventHandler(this.dropDownGatewayOutbound_Gateway_Enter);
             // 
             // dateTimeGatewayOutbound_Date
             // 
@@ -6648,7 +6651,7 @@
             this.gridGatewayInbound.MasterTemplate.AllowDragToGroup = false;
             this.gridGatewayInbound.MasterTemplate.AllowEditRow = false;
             this.gridGatewayInbound.MasterTemplate.ShowRowHeaderColumn = false;
-            this.gridGatewayInbound.MasterTemplate.ViewDefinition = tableViewDefinition211;
+            this.gridGatewayInbound.MasterTemplate.ViewDefinition = tableViewDefinition787;
             this.gridGatewayInbound.Name = "gridGatewayInbound";
             this.gridGatewayInbound.ShowItemToolTips = false;
             this.gridGatewayInbound.Size = new System.Drawing.Size(1083, 439);
@@ -6682,7 +6685,7 @@
             // btnGatewayInbound_Print
             // 
             this.btnGatewayInbound_Print.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnGatewayInbound_Print.Location = new System.Drawing.Point(1010, 73);
+            this.btnGatewayInbound_Print.Location = new System.Drawing.Point(974, 73);
             this.btnGatewayInbound_Print.Name = "btnGatewayInbound_Print";
             this.btnGatewayInbound_Print.Size = new System.Drawing.Size(70, 22);
             this.btnGatewayInbound_Print.TabIndex = 105;
@@ -6696,6 +6699,7 @@
             this.txtBoxGatewayInbound_MasterAWB.Name = "txtBoxGatewayInbound_MasterAWB";
             this.txtBoxGatewayInbound_MasterAWB.Size = new System.Drawing.Size(100, 20);
             this.txtBoxGatewayInbound_MasterAWB.TabIndex = 106;
+            this.txtBoxGatewayInbound_MasterAWB.Enter += new System.EventHandler(this.txtBoxGatewayInbound_MasterAWB_Enter);
             // 
             // label93
             // 
@@ -6726,6 +6730,7 @@
             this.dropDownGatewayInbound_Commodity.Size = new System.Drawing.Size(148, 20);
             this.dropDownGatewayInbound_Commodity.TabIndex = 103;
             this.dropDownGatewayInbound_Commodity.ThemeName = "Office2010Black";
+            this.dropDownGatewayInbound_Commodity.Enter += new System.EventHandler(this.dropDownGatewayInbound_Commodity_Enter);
             // 
             // label92
             // 
@@ -6755,6 +6760,7 @@
             this.dropDownGatewayInbound_Origin.Size = new System.Drawing.Size(154, 20);
             this.dropDownGatewayInbound_Origin.TabIndex = 100;
             this.dropDownGatewayInbound_Origin.ThemeName = "Office2010Black";
+            this.dropDownGatewayInbound_Origin.Enter += new System.EventHandler(this.dropDownGatewayInbound_Origin_Enter);
             // 
             // label85
             // 
@@ -6774,6 +6780,7 @@
             this.dropDownGatewayInbound_Gateway.Size = new System.Drawing.Size(120, 20);
             this.dropDownGatewayInbound_Gateway.TabIndex = 96;
             this.dropDownGatewayInbound_Gateway.ThemeName = "Office2010Black";
+            this.dropDownGatewayInbound_Gateway.Enter += new System.EventHandler(this.dropDownGatewayInbound_Gateway_Enter);
             // 
             // dateTimePickerGatewayInbound_Date
             // 
@@ -6841,7 +6848,7 @@
             this.gridCargoTransfer.MasterTemplate.AllowDragToGroup = false;
             this.gridCargoTransfer.MasterTemplate.AllowEditRow = false;
             this.gridCargoTransfer.MasterTemplate.ShowRowHeaderColumn = false;
-            this.gridCargoTransfer.MasterTemplate.ViewDefinition = tableViewDefinition212;
+            this.gridCargoTransfer.MasterTemplate.ViewDefinition = tableViewDefinition788;
             this.gridCargoTransfer.Name = "gridCargoTransfer";
             this.gridCargoTransfer.ShowItemToolTips = false;
             this.gridCargoTransfer.Size = new System.Drawing.Size(1083, 439);
@@ -6908,6 +6915,7 @@
             this.dropDownCargoTransfer_Destination.Size = new System.Drawing.Size(143, 20);
             this.dropDownCargoTransfer_Destination.TabIndex = 88;
             this.dropDownCargoTransfer_Destination.ThemeName = "Office2010Black";
+            this.dropDownCargoTransfer_Destination.Enter += new System.EventHandler(this.dropDownCargoTransfer_Destination_Enter);
             // 
             // btnCargoTransfer_Search
             // 
@@ -6939,6 +6947,7 @@
             this.dropDownCargoTransfer_Origin.TabIndex = 85;
             this.dropDownCargoTransfer_Origin.ThemeName = "Office2010Black";
             this.dropDownCargoTransfer_Origin.SelectedIndexChanged += new Telerik.WinControls.UI.Data.PositionChangedEventHandler(this.dropDownCargoTransfer_Origin_SelectedIndexChanged);
+            this.dropDownCargoTransfer_Origin.Enter += new System.EventHandler(this.dropDownCargoTransfer_Origin_Enter);
             // 
             // dateTimeCargoTransfer_Date
             // 
@@ -6969,6 +6978,7 @@
             this.dropDownCargoTransfer_City.Size = new System.Drawing.Size(143, 20);
             this.dropDownCargoTransfer_City.TabIndex = 82;
             this.dropDownCargoTransfer_City.ThemeName = "Office2010Black";
+            this.dropDownCargoTransfer_City.Enter += new System.EventHandler(this.dropDownCargoTransfer_City_Enter);
             // 
             // label102
             // 
@@ -7014,7 +7024,7 @@
             this.gridSegregation.MasterTemplate.AllowDragToGroup = false;
             this.gridSegregation.MasterTemplate.AllowEditRow = false;
             this.gridSegregation.MasterTemplate.ShowRowHeaderColumn = false;
-            this.gridSegregation.MasterTemplate.ViewDefinition = tableViewDefinition213;
+            this.gridSegregation.MasterTemplate.ViewDefinition = tableViewDefinition789;
             this.gridSegregation.Name = "gridSegregation";
             this.gridSegregation.ShowItemToolTips = false;
             this.gridSegregation.Size = new System.Drawing.Size(1083, 439);
@@ -7075,6 +7085,7 @@
             this.dropDownSegregation_PlateNo.Size = new System.Drawing.Size(91, 20);
             this.dropDownSegregation_PlateNo.TabIndex = 110;
             this.dropDownSegregation_PlateNo.ThemeName = "Office2010Black";
+            this.dropDownSegregation_PlateNo.Enter += new System.EventHandler(this.dropDownSegregation_PlateNo_Enter);
             // 
             // btnSegregation_Search
             // 
@@ -7105,6 +7116,7 @@
             this.dropDownSegregation_BCO.Size = new System.Drawing.Size(155, 20);
             this.dropDownSegregation_BCO.TabIndex = 106;
             this.dropDownSegregation_BCO.ThemeName = "Office2010Black";
+            this.dropDownSegregation_BCO.Enter += new System.EventHandler(this.dropDownSegregation_BCO_Enter);
             // 
             // dropDownSegregation_Batch
             // 
@@ -7114,6 +7126,7 @@
             this.dropDownSegregation_Batch.Size = new System.Drawing.Size(117, 20);
             this.dropDownSegregation_Batch.TabIndex = 107;
             this.dropDownSegregation_Batch.ThemeName = "Office2010Black";
+            this.dropDownSegregation_Batch.Enter += new System.EventHandler(this.dropDownSegregation_Batch_Enter);
             // 
             // label56
             // 
@@ -7144,6 +7157,7 @@
             this.dropDownSegregation_Driver.Size = new System.Drawing.Size(156, 20);
             this.dropDownSegregation_Driver.TabIndex = 103;
             this.dropDownSegregation_Driver.ThemeName = "Office2010Black";
+            this.dropDownSegregation_Driver.Enter += new System.EventHandler(this.dropDownSegregation_Driver_Enter);
             // 
             // dateTimeSegregation_Date
             // 
@@ -7211,7 +7225,7 @@
             this.gridDailyTrip.MasterTemplate.AllowDragToGroup = false;
             this.gridDailyTrip.MasterTemplate.AllowEditRow = false;
             this.gridDailyTrip.MasterTemplate.ShowRowHeaderColumn = false;
-        //    this.gridDailyTrip.MasterTemplate.ViewDefinition = tableViewDefinition286;
+            this.gridDailyTrip.MasterTemplate.ViewDefinition = tableViewDefinition790;
             this.gridDailyTrip.Name = "gridDailyTrip";
             this.gridDailyTrip.ShowItemToolTips = false;
             this.gridDailyTrip.Size = new System.Drawing.Size(1083, 439);
@@ -7261,6 +7275,7 @@
             this.dropDownDailyTrip_PaymentMode.Size = new System.Drawing.Size(153, 20);
             this.dropDownDailyTrip_PaymentMode.TabIndex = 95;
             this.dropDownDailyTrip_PaymentMode.ThemeName = "Office2010Black";
+            this.dropDownDailyTrip_PaymentMode.Enter += new System.EventHandler(this.dropDownDailyTrip_PaymentMode_Enter);
             // 
             // label124
             // 
@@ -7291,6 +7306,7 @@
             this.dropDownDailyTrip_Driver.Size = new System.Drawing.Size(153, 20);
             this.dropDownDailyTrip_Driver.TabIndex = 92;
             this.dropDownDailyTrip_Driver.ThemeName = "Office2010Black";
+            this.dropDownDailyTrip_Driver.Enter += new System.EventHandler(this.dropDownDailyTrip_Driver_Enter);
             // 
             // label108
             // 
@@ -7332,6 +7348,7 @@
             this.dropDownDailyTrip_Area.Size = new System.Drawing.Size(153, 20);
             this.dropDownDailyTrip_Area.TabIndex = 88;
             this.dropDownDailyTrip_Area.ThemeName = "Office2010Black";
+            this.dropDownDailyTrip_Area.Enter += new System.EventHandler(this.dropDownDailyTrip_Area_Enter);
             // 
             // label122
             // 
@@ -7349,10 +7366,10 @@
             this.dropDownDailyTrip_BCO.Enabled = false;
             this.dropDownDailyTrip_BCO.Location = new System.Drawing.Point(191, 76);
             this.dropDownDailyTrip_BCO.Name = "dropDownDailyTrip_BCO";
-            this.dropDownDailyTrip_BCO.ReadOnly = true;
             this.dropDownDailyTrip_BCO.Size = new System.Drawing.Size(156, 20);
             this.dropDownDailyTrip_BCO.TabIndex = 86;
             this.dropDownDailyTrip_BCO.ThemeName = "Office2010Black";
+            this.dropDownDailyTrip_BCO.Enter += new System.EventHandler(this.dropDownDailyTrip_BCO_Enter);
             // 
             // label123
             // 
@@ -7408,7 +7425,7 @@
             this.gridHoldCargo.MasterTemplate.AllowDragToGroup = false;
             this.gridHoldCargo.MasterTemplate.AllowEditRow = false;
             this.gridHoldCargo.MasterTemplate.ShowRowHeaderColumn = false;
-          //  this.gridHoldCargo.MasterTemplate.ViewDefinition = tableViewDefinition287;
+            this.gridHoldCargo.MasterTemplate.ViewDefinition = tableViewDefinition791;
             this.gridHoldCargo.Name = "gridHoldCargo";
             this.gridHoldCargo.ShowItemToolTips = false;
             this.gridHoldCargo.Size = new System.Drawing.Size(1083, 439);
@@ -7546,6 +7563,7 @@
             this.dropDownHoldCargo_BCO_BSO.Size = new System.Drawing.Size(170, 20);
             this.dropDownHoldCargo_BCO_BSO.TabIndex = 82;
             this.dropDownHoldCargo_BCO_BSO.ThemeName = "Office2010Black";
+            this.dropDownHoldCargo_BCO_BSO.Enter += new System.EventHandler(this.dropDownHoldCargo_BCO_BSO_Enter);
             // 
             // dropDownHoldCargo_Status
             // 
@@ -7554,6 +7572,7 @@
             this.dropDownHoldCargo_Status.Size = new System.Drawing.Size(116, 20);
             this.dropDownHoldCargo_Status.TabIndex = 81;
             this.dropDownHoldCargo_Status.ThemeName = "Office2010Black";
+            this.dropDownHoldCargo_Status.Enter += new System.EventHandler(this.dropDownHoldCargo_Status_Enter);
             // 
             // label41
             // 
@@ -7609,7 +7628,7 @@
             this.gridDeliveryStatus.MasterTemplate.AllowDragToGroup = false;
             this.gridDeliveryStatus.MasterTemplate.AllowEditRow = false;
             this.gridDeliveryStatus.MasterTemplate.ShowRowHeaderColumn = false;
-         //   this.gridDeliveryStatus.MasterTemplate.ViewDefinition = tableViewDefinition288;
+            this.gridDeliveryStatus.MasterTemplate.ViewDefinition = tableViewDefinition792;
             this.gridDeliveryStatus.Name = "gridDeliveryStatus";
             this.gridDeliveryStatus.ShowItemToolTips = false;
             this.gridDeliveryStatus.Size = new System.Drawing.Size(1083, 439);
@@ -7619,6 +7638,8 @@
             // 
             // radPanel25
             // 
+            this.radPanel25.Controls.Add(this.label37);
+            this.radPanel25.Controls.Add(this.dropDownDeliveryStatus_Status);
             this.radPanel25.Controls.Add(this.btnDeliveryStatus_Print);
             this.radPanel25.Controls.Add(this.btnDeliveryStatus_Search);
             this.radPanel25.Controls.Add(this.dropDownDeliveryStatus_Driver);
@@ -7652,7 +7673,7 @@
             // btnDeliveryStatus_Search
             // 
             this.btnDeliveryStatus_Search.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnDeliveryStatus_Search.Location = new System.Drawing.Point(673, 76);
+            this.btnDeliveryStatus_Search.Location = new System.Drawing.Point(854, 77);
             this.btnDeliveryStatus_Search.Name = "btnDeliveryStatus_Search";
             this.btnDeliveryStatus_Search.Size = new System.Drawing.Size(70, 22);
             this.btnDeliveryStatus_Search.TabIndex = 84;
@@ -7663,17 +7684,18 @@
             // dropDownDeliveryStatus_Driver
             // 
             this.dropDownDeliveryStatus_Driver.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.dropDownDeliveryStatus_Driver.Location = new System.Drawing.Point(514, 78);
+            this.dropDownDeliveryStatus_Driver.Location = new System.Drawing.Point(695, 79);
             this.dropDownDeliveryStatus_Driver.Name = "dropDownDeliveryStatus_Driver";
             this.dropDownDeliveryStatus_Driver.Size = new System.Drawing.Size(153, 20);
             this.dropDownDeliveryStatus_Driver.TabIndex = 83;
             this.dropDownDeliveryStatus_Driver.ThemeName = "Office2010Black";
+            this.dropDownDeliveryStatus_Driver.Enter += new System.EventHandler(this.dropDownDeliveryStatus_Driver_Enter);
             // 
             // label121
             // 
             this.label121.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label121.AutoSize = true;
-            this.label121.Location = new System.Drawing.Point(511, 58);
+            this.label121.Location = new System.Drawing.Point(692, 59);
             this.label121.Name = "label121";
             this.label121.Size = new System.Drawing.Size(37, 13);
             this.label121.TabIndex = 82;
@@ -7704,11 +7726,12 @@
             // dropDownDeliveryStatus_Area
             // 
             this.dropDownDeliveryStatus_Area.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.dropDownDeliveryStatus_Area.Location = new System.Drawing.Point(355, 78);
+            this.dropDownDeliveryStatus_Area.Location = new System.Drawing.Point(536, 79);
             this.dropDownDeliveryStatus_Area.Name = "dropDownDeliveryStatus_Area";
             this.dropDownDeliveryStatus_Area.Size = new System.Drawing.Size(153, 20);
             this.dropDownDeliveryStatus_Area.TabIndex = 79;
             this.dropDownDeliveryStatus_Area.ThemeName = "Office2010Black";
+            this.dropDownDeliveryStatus_Area.Enter += new System.EventHandler(this.dropDownDeliveryStatus_Area_Enter);
             // 
             // label105
             // 
@@ -7723,19 +7746,18 @@
             // dropDownDeliveryStatus_BCO
             // 
             this.dropDownDeliveryStatus_BCO.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.dropDownDeliveryStatus_BCO.Enabled = false;
             this.dropDownDeliveryStatus_BCO.Location = new System.Drawing.Point(193, 78);
             this.dropDownDeliveryStatus_BCO.Name = "dropDownDeliveryStatus_BCO";
-            this.dropDownDeliveryStatus_BCO.ReadOnly = true;
             this.dropDownDeliveryStatus_BCO.Size = new System.Drawing.Size(156, 20);
             this.dropDownDeliveryStatus_BCO.TabIndex = 77;
             this.dropDownDeliveryStatus_BCO.ThemeName = "Office2010Black";
+            this.dropDownDeliveryStatus_BCO.Enter += new System.EventHandler(this.dropDownDeliveryStatus_BCO_Enter);
             // 
             // label116
             // 
             this.label116.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label116.AutoSize = true;
-            this.label116.Location = new System.Drawing.Point(352, 58);
+            this.label116.Location = new System.Drawing.Point(533, 59);
             this.label116.Name = "label116";
             this.label116.Size = new System.Drawing.Size(33, 13);
             this.label116.TabIndex = 76;
@@ -7763,26 +7785,30 @@
             this.label119.TabIndex = 62;
             this.label119.Text = "Pickup Cargo Manifest";
             // 
-            // chk_ReceivedAll
+            // label37
             // 
-            this.chk_ReceivedAll.Location = new System.Drawing.Point(810, 35);
-            this.chk_ReceivedAll.Name = "chk_ReceivedAll";
-            this.chk_ReceivedAll.Size = new System.Drawing.Size(81, 18);
-            this.chk_ReceivedAll.TabIndex = 65;
-            this.chk_ReceivedAll.Text = "Received All";
-            this.chk_ReceivedAll.CheckStateChanged += new System.EventHandler(this.chk_ReceivedAll_CheckStateChanged);
+            this.label37.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label37.AutoSize = true;
+            this.label37.Location = new System.Drawing.Point(350, 58);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(45, 13);
+            this.label37.TabIndex = 87;
+            this.label37.Text = "Status :";
             // 
-            // cmb_PaymentRemarks
+            // dropDownDeliveryStatus_Status
             // 
-            radListDataItem5.Text = "Full";
-            radListDataItem6.Text = "Partial";
-            this.cmb_PaymentRemarks.Items.Add(radListDataItem5);
-            this.cmb_PaymentRemarks.Items.Add(radListDataItem6);
-            this.cmb_PaymentRemarks.Location = new System.Drawing.Point(86, 341);
-            this.cmb_PaymentRemarks.Name = "cmb_PaymentRemarks";
-            this.cmb_PaymentRemarks.Size = new System.Drawing.Size(161, 20);
-            this.cmb_PaymentRemarks.TabIndex = 21;
-            this.cmb_PaymentRemarks.ThemeName = "Office2010Black";
+            this.dropDownDeliveryStatus_Status.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.dropDownDeliveryStatus_Status.Location = new System.Drawing.Point(353, 78);
+            this.dropDownDeliveryStatus_Status.Name = "dropDownDeliveryStatus_Status";
+            this.dropDownDeliveryStatus_Status.ReadOnly = true;
+            this.dropDownDeliveryStatus_Status.Size = new System.Drawing.Size(177, 20);
+            this.dropDownDeliveryStatus_Status.TabIndex = 86;
+            this.dropDownDeliveryStatus_Status.ThemeName = "Office2010Black";
+            this.dropDownDeliveryStatus_Status.Enter += new System.EventHandler(this.dropDownDeliveryStatus_Status_Enter);
+            // 
+            // saveFileDialog2
+            // 
+            this.saveFileDialog2.FileOk += new System.ComponentModel.CancelEventHandler(this.saveFileDialog2_FileOk);
             // 
             // Main
             // 
@@ -8284,6 +8310,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dateTimeDeliveryStatus_Date)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dropDownDeliveryStatus_Area)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dropDownDeliveryStatus_BCO)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dropDownDeliveryStatus_Status)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
 
@@ -8826,5 +8853,8 @@
         private Telerik.WinControls.UI.RadCheckBox chk_ReceivedAll;
         private Telerik.WinControls.UI.RadDropDownList cmb_PaymentRemarks;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.Label label37;
+        private Telerik.WinControls.UI.RadDropDownList dropDownDeliveryStatus_Status;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog2;
     }
 }
