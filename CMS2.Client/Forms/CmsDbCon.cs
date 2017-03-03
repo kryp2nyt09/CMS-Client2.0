@@ -18,6 +18,7 @@ using CMS2.Client.SyncHelper;
 using System.Drawing;
 using CMS2.Common;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace CMS2.Client
 {
@@ -66,6 +67,9 @@ namespace CMS2.Client
         private bool isDeprovisionClient = true;
         private bool IsDeprovisionServer = true;
 
+        // Cancellation Flag
+        bool flag = false;
+
         #endregion
 
         #region Constructors
@@ -79,6 +83,7 @@ namespace CMS2.Client
         private void CmsDbCon_Load(object sender, EventArgs e)
         {
             WaitingBar.StopWaiting();
+            WaitingBar.Visible = false;
             btnSaveSync.Enabled = false;
 
             this.isLocalConnected = false;
@@ -394,20 +399,38 @@ namespace CMS2.Client
         }
         private void btnStart_Click(object sender, EventArgs e)
         {
+            WaitingBar.StartWaiting();
+            WaitingBar.Visible = true;
+            btnStart.Enabled = false;
+
+            CancellationToken cancellationToken = new CancellationToken(flag);
+
             if (isDeprovisionClient)
             {
-                StartDeprovisionLocal();
+                Task task = new Task(new Action(StartDeprovisionLocal), cancellationToken);
+                task.Wait(cancellationToken);
             }
             if (IsDeprovisionServer)
             {
-                StartDeprovisionServer();
+                Task task = new Task(new Action(StartDeprovisionServer), new CancellationToken(flag));
+                task.Wait(cancellationToken);
             }
             if (isProvision)
             {
-                StartProvision();
+                Task task = new Task(new Action(StartProvision), new CancellationToken(flag));
+                task.Wait(cancellationToken);
             }
-            CheckTableState();
+                        
+            Task synctask = new Task(new Action(CheckTableState), cancellationToken);
+            synctask.Wait(cancellationToken);
             gridTables.Refresh();
+
+            WaitingBar.StopWaiting();
+            btnSave.Enabled = true;
+        }
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            flag = true;
         }
         #endregion
 
@@ -661,7 +684,6 @@ namespace CMS2.Client
             this.chkProvision.Checked = isProvision;
         }
         #endregion
-
-
+            
     }
 }

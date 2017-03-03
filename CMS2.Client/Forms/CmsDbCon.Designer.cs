@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn1 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn2 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewCheckBoxColumn gridViewCheckBoxColumn1 = new Telerik.WinControls.UI.GridViewCheckBoxColumn();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition1 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn3 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn4 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewCheckBoxColumn gridViewCheckBoxColumn2 = new Telerik.WinControls.UI.GridViewCheckBoxColumn();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition2 = new Telerik.WinControls.UI.TableViewDefinition();
             this.label1 = new Telerik.WinControls.UI.RadLabel();
             this.txtLocalDbPassword = new Telerik.WinControls.UI.RadTextBox();
             this.txtLocalDbUsername = new Telerik.WinControls.UI.RadTextBox();
@@ -78,6 +78,7 @@
             this.chkDeprovisionClient = new Telerik.WinControls.UI.RadCheckBox();
             this.gridTables = new Telerik.WinControls.UI.RadGridView();
             this.btnStart = new Telerik.WinControls.UI.RadButton();
+            this.btnCancel = new Telerik.WinControls.UI.RadButton();
             ((System.ComponentModel.ISupportInitialize)(this.label1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtLocalDbPassword)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtLocalDbUsername)).BeginInit();
@@ -124,6 +125,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridTables)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridTables.MasterTemplate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnStart)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnCancel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
             // 
@@ -527,6 +529,7 @@
             // 
             // radPageViewPage2
             // 
+            this.radPageViewPage2.Controls.Add(this.btnCancel);
             this.radPageViewPage2.Controls.Add(this.btnSaveSync);
             this.radPageViewPage2.Controls.Add(this.WaitingBar);
             this.radPageViewPage2.Controls.Add(this.chkDeprovisionServer);
@@ -544,9 +547,9 @@
             // 
             this.btnSaveSync.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnSaveSync.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSaveSync.Location = new System.Drawing.Point(278, 473);
+            this.btnSaveSync.Location = new System.Drawing.Point(297, 472);
             this.btnSaveSync.Name = "btnSaveSync";
-            this.btnSaveSync.Size = new System.Drawing.Size(94, 25);
+            this.btnSaveSync.Size = new System.Drawing.Size(75, 25);
             this.btnSaveSync.TabIndex = 20;
             this.btnSaveSync.Text = "&Save";
             this.btnSaveSync.ThemeName = "Office2010Black";
@@ -618,32 +621,32 @@
             this.gridTables.MasterTemplate.AllowSearchRow = true;
             this.gridTables.MasterTemplate.AutoExpandGroups = true;
             this.gridTables.MasterTemplate.AutoGenerateColumns = false;
-            gridViewTextBoxColumn1.FieldName = "TableName";
-            gridViewTextBoxColumn1.HeaderText = "Table";
-            gridViewTextBoxColumn1.Name = "colTable";
-            gridViewTextBoxColumn1.Width = 160;
-            gridViewTextBoxColumn2.FieldName = "Status";
-            gridViewTextBoxColumn2.HeaderText = "Status";
-            gridViewTextBoxColumn2.Name = "colStatus";
-            gridViewTextBoxColumn2.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            gridViewTextBoxColumn2.Width = 120;
-            gridViewCheckBoxColumn1.AllowFiltering = false;
-            gridViewCheckBoxColumn1.AllowGroup = false;
-            gridViewCheckBoxColumn1.AllowSearching = false;
-            gridViewCheckBoxColumn1.EnableHeaderCheckBox = true;
-            gridViewCheckBoxColumn1.FieldName = "isSelected";
-            gridViewCheckBoxColumn1.HeaderText = "Select";
-            gridViewCheckBoxColumn1.IsPinned = true;
-            gridViewCheckBoxColumn1.Name = "column1";
-            gridViewCheckBoxColumn1.PinPosition = Telerik.WinControls.UI.PinnedColumnPosition.Right;
-            gridViewCheckBoxColumn1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            gridViewCheckBoxColumn1.WrapText = true;
+            gridViewTextBoxColumn3.FieldName = "TableName";
+            gridViewTextBoxColumn3.HeaderText = "Table";
+            gridViewTextBoxColumn3.Name = "colTable";
+            gridViewTextBoxColumn3.Width = 160;
+            gridViewTextBoxColumn4.FieldName = "Status";
+            gridViewTextBoxColumn4.HeaderText = "Status";
+            gridViewTextBoxColumn4.Name = "colStatus";
+            gridViewTextBoxColumn4.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            gridViewTextBoxColumn4.Width = 120;
+            gridViewCheckBoxColumn2.AllowFiltering = false;
+            gridViewCheckBoxColumn2.AllowGroup = false;
+            gridViewCheckBoxColumn2.AllowSearching = false;
+            gridViewCheckBoxColumn2.EnableHeaderCheckBox = true;
+            gridViewCheckBoxColumn2.FieldName = "isSelected";
+            gridViewCheckBoxColumn2.HeaderText = "Select";
+            gridViewCheckBoxColumn2.IsPinned = true;
+            gridViewCheckBoxColumn2.Name = "column1";
+            gridViewCheckBoxColumn2.PinPosition = Telerik.WinControls.UI.PinnedColumnPosition.Right;
+            gridViewCheckBoxColumn2.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            gridViewCheckBoxColumn2.WrapText = true;
             this.gridTables.MasterTemplate.Columns.AddRange(new Telerik.WinControls.UI.GridViewDataColumn[] {
-            gridViewTextBoxColumn1,
-            gridViewTextBoxColumn2,
-            gridViewCheckBoxColumn1});
+            gridViewTextBoxColumn3,
+            gridViewTextBoxColumn4,
+            gridViewCheckBoxColumn2});
             this.gridTables.MasterTemplate.EnableSorting = false;
-            this.gridTables.MasterTemplate.ViewDefinition = tableViewDefinition1;
+            this.gridTables.MasterTemplate.ViewDefinition = tableViewDefinition2;
             this.gridTables.Name = "gridTables";
             this.gridTables.Size = new System.Drawing.Size(366, 424);
             this.gridTables.TabIndex = 14;
@@ -654,13 +657,25 @@
             // 
             this.btnStart.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnStart.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnStart.Location = new System.Drawing.Point(163, 473);
+            this.btnStart.Location = new System.Drawing.Point(151, 472);
             this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(109, 25);
+            this.btnStart.Size = new System.Drawing.Size(67, 25);
             this.btnStart.TabIndex = 13;
             this.btnStart.Text = "&Renew";
             this.btnStart.ThemeName = "Office2010Black";
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnCancel.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancel.Location = new System.Drawing.Point(224, 472);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(67, 25);
+            this.btnCancel.TabIndex = 21;
+            this.btnCancel.Text = "&Cancel";
+            this.btnCancel.ThemeName = "Office2010Black";
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // CmsDbCon
             // 
@@ -734,6 +749,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridTables.MasterTemplate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridTables)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnStart)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnCancel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
 
@@ -787,5 +803,6 @@
         private Telerik.WinControls.UI.RadWaitingBar WaitingBar;
         private Telerik.WinControls.UI.WaitingBarIndicatorElement waitingBarIndicatorElement2;
         private Telerik.WinControls.UI.WaitingBarIndicatorElement waitingBarIndicatorElement1;
+        private Telerik.WinControls.UI.RadButton btnCancel;
     }
 }
