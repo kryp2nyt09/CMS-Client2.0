@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace CMS2.Entities
 {
-    public class PaymentSummary: BaseEntity
+    public class PaymentSummary : BaseEntity
     {
         public PaymentSummary()
         {
@@ -21,40 +21,34 @@ namespace CMS2.Entities
         [Key]
 
         public Guid PaymentSummaryId { get; set; }
-        
-        [DisplayName("Client")]
+
         public Guid ClientId { get; set; }
-        [DisplayName("Client")]
 
         [ForeignKey("ClientId")]
         public virtual Client Client { get; set; }
 
-        [DisplayName("Payment")]
+
         public Guid PaymentId { get; set; }
 
         [ForeignKey("PaymentId")]
         public virtual Payment Payment { get; set; }
-        [DisplayName("Checked By")]
+
         public Guid? CheckedBy { get; set; }
 
         [ForeignKey("CheckedBy")]
         public virtual Employee Check { get; set; }
 
-
-
-        [DisplayName("Validated By")]
         public Guid ValidatedBy { get; set; }
 
         [ForeignKey("ValidatedBy")]
         public virtual Employee Validated { get; set; }
-
-        [DisplayName("Remitted By")]
+        
         public Guid RemittedBy { get; set; }
 
         [ForeignKey("RemittedBy")]
         public virtual Employee Remitted { get; set; }
 
-        [DisplayName("PaymentSummaryStatus")]
+
         public Guid PaymentSummaryStatusId { get; set; }
 
         [ForeignKey("PaymentSummaryStatusId")]
@@ -89,11 +83,11 @@ namespace CMS2.Entities
                 paymentSummary.ModifiedDate = item.ModifiedDate;
                 paymentSummary.RecordStatus = item.RecordStatus;
                 paymentSummaries.Add(paymentSummary);
-               
+
             }
             return paymentSummaries;
         }
 
-        
+
     }
 }

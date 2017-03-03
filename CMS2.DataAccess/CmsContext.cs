@@ -23,14 +23,14 @@ namespace CMS2.DataAccess
         public DbSet<ApplicationSetting> ApplicationSettings { get; set; }
         public DbSet<ApprovingAuthority> ApprovingAuthorities { get; set; }
         public DbSet<AwbIssuance> AwbIssuances { get; set; }
-        public DbSet<Batch> Batch { get; set; }
+        public DbSet<Batch> Batches { get; set; }
         public DbSet<BillingPeriod> BillingPeriods { get; set; }
         public DbSet<Booking> Bookings { get; set; }
         public DbSet<BookingRemark> BookingRemarks { get; set; }
         public DbSet<BookingStatus> BookingStatus { get; set; }
-        public DbSet<BranchAcceptance> BranchAcceptance { get; set; }
+        public DbSet<BranchAcceptance> BranchAcceptances { get; set; }
         public DbSet<BranchCorpOffice> BranchCorpOffices { get; set; }
-        public DbSet<Bundle> Bundle { get; set; }
+        public DbSet<Bundle> Bundles { get; set; }
         public DbSet<BusinessType> BusinessTypes { get; set; }
         public DbSet<CargoTransfer> CargoTransfer { get; set; }
         public DbSet<City> Cities { get; set; }
@@ -45,14 +45,14 @@ namespace CMS2.DataAccess
         public DbSet<DeliveryRemark> DeliveryRemarks { get; set; }
         public DbSet<DeliveryStatus> DeliveryStatus { get; set; }
         public DbSet<DeliveryReceipt> DeliveryReceipts { get; set; }
-        public DbSet<Distribution> Distribution { get; set; }
+        public DbSet<Distribution> Distributions { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<ExpressRate> ExpressRates { get; set; }
         public DbSet<FlightInfo> FlightInfos { get; set; }
         public DbSet<FuelSurcharge> FuelSurcharges { get; set; }
-        public DbSet<GatewayInbound> GatewayInbound { get; set; }
-        public DbSet<GatewayOutbound> GatewayOutbound { get; set; }
-        public DbSet<GatewayTransmittal> GatewayTransmittal { get; set; }
+        public DbSet<GatewayInbound> GatewayInbounds { get; set; }
+        public DbSet<GatewayOutbound> GatewayOutbounds { get; set; }
+        public DbSet<GatewayTransmittal> GatewayTransmittals { get; set; }
         public DbSet<HoldCargo> HoldCargo { get; set; }
         public DbSet<GoodsDescription> GoodsDescriptions { get; set; }
         public DbSet<Group> Groups { get; set; }
@@ -67,7 +67,7 @@ namespace CMS2.DataAccess
         public DbSet<Packaging> Packagings { get; set; }
         public DbSet<Payment> Payments { get; set; }
         public DbSet<PaymentMode> PaymentModes { get; set; }
-        public DbSet<PaymentSummary> PaymentSummary { get; set; }
+        public DbSet<PaymentSummary> PaymentSummaries { get; set; }
         public DbSet<PaymentSummaryStatus> PaymentSummaryStatus { get; set; }
         public DbSet<PaymentTerm> PaymentTerms { get; set; }
         public DbSet<PaymentType> PaymentTypes { get; set; }
@@ -75,7 +75,7 @@ namespace CMS2.DataAccess
         public DbSet<Position> Positions { get; set; }
         public DbSet<Province> Provinces { get; set; }
         public DbSet<RateMatrix> RateMatrix { get; set; }
-        public DbSet<Reason> Reason { get; set; }
+        public DbSet<Reason> Reasons { get; set; }
         public DbSet<RecordChange> RecordChanges { get; set; }
         public DbSet<Remarks> Remarks { get; set; }
         public DbSet<Region> Regions { get; set; }
@@ -105,7 +105,7 @@ namespace CMS2.DataAccess
         public DbSet<Truck> Trucks { get; set; }
         public DbSet<TruckAreaMapping> TruckAreaMappings { get; set; }
         public DbSet<WeightBreak> WeigthBreaks { get; set; }
-        public DbSet<Unbundle> Unbundle { get; set; }
+        public DbSet<Unbundle> Unbundles { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<Claim> Claims { get; set; }
@@ -132,6 +132,8 @@ namespace CMS2.DataAccess
             modelBuilder.Entity<Bundle>().HasRequired(x => x.BranchCorpOffice).WithMany().WillCascadeOnDelete(false);
 
             modelBuilder.Entity<CargoTransfer>().HasRequired(x => x.BranchCorpOffice).WithMany().WillCascadeOnDelete(false);
+            modelBuilder.Entity<CargoTransfer>().HasRequired(x => x.RevenueUnitType).WithMany().WillCascadeOnDelete(false);
+            modelBuilder.Entity<CargoTransfer>().HasRequired(x => x.RevenueUnit).WithMany().WillCascadeOnDelete(false);
 
             modelBuilder.Entity<City>().HasMany(e => e.RevenueUnits).WithRequired(e => e.City).WillCascadeOnDelete(false);
 
@@ -149,6 +151,12 @@ namespace CMS2.DataAccess
             modelBuilder.Entity<Crating>().Property(x => x.Multiplier).HasPrecision(10, 10);
 
             modelBuilder.Entity<Delivery>().HasRequired(x => x.DeliveredBy).WithMany().WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Distribution>().HasRequired(x => x.Consignee).WithMany().WillCascadeOnDelete(false);
+            modelBuilder.Entity<Distribution>().HasRequired(x => x.Area).WithMany().WillCascadeOnDelete(false);
+            modelBuilder.Entity<Distribution>().HasRequired(x => x.Shipment).WithMany().WillCascadeOnDelete(false);
+            modelBuilder.Entity<Distribution>().HasRequired(x => x.PaymentMode).WithMany().WillCascadeOnDelete(false);
+            modelBuilder.Entity<Distribution>().HasRequired(x => x.ServiceMode).WithMany().WillCascadeOnDelete(false);
 
             modelBuilder.Entity<ExpressRate>().Property(x => x.C1to5Cost).HasPrecision(9, 2);
             modelBuilder.Entity<ExpressRate>().Property(x => x.C6to49Cost).HasPrecision(9, 2);
@@ -176,6 +184,12 @@ namespace CMS2.DataAccess
             modelBuilder.Entity<Payment>().Property(x => x.Amount).HasPrecision(9, 2);
             modelBuilder.Entity<Payment>().Property(x => x.TaxWithheld).HasPrecision(9, 2);
             modelBuilder.Entity<Payment>().HasRequired(x => x.ReceivedBy).WithMany().WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<PaymentSummary>().HasRequired(x => x.Validated).WithMany().WillCascadeOnDelete(false);
+            modelBuilder.Entity<PaymentSummary>().HasRequired(x => x.Client).WithMany().WillCascadeOnDelete(false);
+            modelBuilder.Entity<PaymentSummary>().HasRequired(x => x.Check).WithMany().WillCascadeOnDelete(false);
+            modelBuilder.Entity<PaymentSummary>().HasRequired(x => x.Payment).WithMany().WillCascadeOnDelete(false);
+            modelBuilder.Entity<PaymentSummary>().HasRequired(x => x.PaymentSummaryStatus).WithMany().WillCascadeOnDelete(false);
 
             modelBuilder.Entity<PaymentTurnover>().Property(x => x.ReceivedCashAmount).HasPrecision(9, 2);
             modelBuilder.Entity<PaymentTurnover>().Property(x => x.ReceivedCheckAmount).HasPrecision(9, 2);
@@ -217,6 +231,8 @@ namespace CMS2.DataAccess
             modelBuilder.Entity<Status>().HasMany(e => e.Reason).WithRequired(e => e.Status).WillCascadeOnDelete(false);
 
             modelBuilder.Entity<StatementOfAccount>().HasRequired(x => x.Company).WithMany().WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<TerminalRevenueUnitMapping>().HasRequired(x => x.AssignedBy).WithMany().WillCascadeOnDelete(false);
 
             modelBuilder.Entity<TransferAcceptance>().HasRequired(x => x.ScannedBy).WithMany().WillCascadeOnDelete(false);
             modelBuilder.Entity<TransferAcceptance>().HasRequired(x => x.Driver).WithMany().WillCascadeOnDelete(false);

@@ -25,7 +25,7 @@ namespace CMS2.Entities
 
         public Guid ClusterId { get; set; }
         [ForeignKey("ClusterId")]
-        public virtual City Cluster { get; set; }
+        public virtual Cluster Cluster { get; set; }
         [MaxLength(300)]
         [DisplayName("Street")]
         public string StreetAddress { get; set; }

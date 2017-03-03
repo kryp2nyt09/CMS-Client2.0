@@ -61,7 +61,7 @@ namespace CMS2.Client
                     Application.Restart();
 
                 //Application.Run(container.Resolve</*CMSMain*/>());
-                Application.Run(cmsMainWindow);
+               Application.Run(cmsMainWindow);
             }
 
         }

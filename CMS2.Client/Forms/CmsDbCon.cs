@@ -68,7 +68,7 @@ namespace CMS2.Client
         private bool IsDeprovisionServer = true;
 
         // Cancellation Flag
-        bool flag = false;
+        private bool flag = false;        
 
         #endregion
 
@@ -120,9 +120,7 @@ namespace CMS2.Client
             _mainConnectionString = ConfigurationManager.ConnectionStrings["CmsCentral"].ConnectionString;
 
             SetChekcBoxes();
-            SetEntities();
-            CheckTableState();
-            gridTables.DataSource = _entities;
+            SetEntities();            
 
         }
         private void btnSave_Click(object sender, EventArgs e)
@@ -187,6 +185,9 @@ namespace CMS2.Client
             txtServerUsername.Text = Settings.Default.CentralUsername;
             txtServerPassword.Text = Settings.Default.CentralPassword;
             txtDeviceCode.Text = Settings.Default.DeviceCode;
+
+            CheckTableState();
+            gridTables.DataSource = _entities;
 
             try
             {
@@ -407,21 +408,19 @@ namespace CMS2.Client
 
             if (isDeprovisionClient)
             {
-                Task task = new Task(new Action(StartDeprovisionLocal), cancellationToken);
-                task.Wait(cancellationToken);
+                StartDeprovisionLocal();
             }
             if (IsDeprovisionServer)
             {
-                Task task = new Task(new Action(StartDeprovisionServer), new CancellationToken(flag));
-                task.Wait(cancellationToken);
+                StartDeprovisionServer1();
             }
             if (isProvision)
             {
-                Task task = new Task(new Action(StartProvision), new CancellationToken(flag));
+                Task task = Task.Run(new Action(StartProvision), cancellationToken);
                 task.Wait(cancellationToken);
             }
                         
-            Task synctask = new Task(new Action(CheckTableState), cancellationToken);
+            Task synctask = Task.Run(new Action(CheckTableState), cancellationToken);
             synctask.Wait(cancellationToken);
             gridTables.Refresh();
 
@@ -640,6 +639,14 @@ namespace CMS2.Client
             ThreadPool.QueueUserWorkItem(new WaitCallback( deprovision.PerformDeprovisionDatabase),_event);
             _event.WaitOne();
         }
+        private void StartDeprovisionServer1()
+        {
+            SqlConnection mainConnection = new SqlConnection(_mainConnectionString);
+            ManualResetEvent _event = new ManualResetEvent(false);
+            Deprovision deprovision = new Deprovision(mainConnection, _event, "", "");
+            ThreadPool.QueueUserWorkItem(new WaitCallback(deprovision.PerformDeprovisionDatabase), _event);
+            _event.WaitOne();
+        }
         private void StartDeprovisionServer()
         {
             List<SyncHelper.ThreadState> listOfState = new List<SyncHelper.ThreadState>();
@@ -683,6 +690,11 @@ namespace CMS2.Client
             this.chkDeprovisionServer.Checked = IsDeprovisionServer;
             this.chkProvision.Checked = isProvision;
         }
+        private void ReportProgress(int progress)
+        {
+
+        }
+
         #endregion
             
     }

@@ -16,7 +16,7 @@ namespace CMS2.Entities
         public Guid AreaID { get; set; }
 
         [ForeignKey("AreaID")]
-        public virtual City City { get; set; }
+        public virtual RevenueUnit Area { get; set; }
             
         public Guid BatchID { get; set; }
 
