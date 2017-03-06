@@ -19,6 +19,7 @@ using System.Drawing;
 using CMS2.Common;
 using System.Threading;
 using System.Threading.Tasks;
+using System.ComponentModel;
 
 namespace CMS2.Client
 {
@@ -55,20 +56,15 @@ namespace CMS2.Client
         private BranchCorpOfficeBL bcoService;
         private RevenueUnitTypeBL revenutUnitTypeService;
         private RevenueUnitBL revenueUnitService;
-
-        private Synchronization _synchronization;
-
+        
         private List<BranchCorpOffice> _branchCorpOffices;
         private List<RevenueUnitType> revenueUnitTypes;
         private List<RevenueUnit> revenueUnits;
-        private List<SyncTables> _entities;
+        private BindingList<SyncTables> _entities;
 
         private bool isProvision = true;
         private bool isDeprovisionClient = true;
         private bool IsDeprovisionServer = true;
-
-        // Cancellation Flag
-        private bool flag = false;        
 
         #endregion
 
@@ -82,8 +78,10 @@ namespace CMS2.Client
         #region Events
         private void CmsDbCon_Load(object sender, EventArgs e)
         {
-            WaitingBar.StopWaiting();
-            WaitingBar.Visible = false;
+            Worker.WorkerReportsProgress = true;
+            Worker.WorkerSupportsCancellation = true;
+            radProgressBar1.Value1 = 0;
+            lblProgressState.Text = "";
             btnSaveSync.Enabled = false;
 
             this.isLocalConnected = false;
@@ -116,11 +114,13 @@ namespace CMS2.Client
 
             _branchCorpOfficeId = ConfigurationManager.AppSettings["BcoId"].ToString();
             _filter = ConfigurationManager.AppSettings["Filter"].ToString();
-            _localConnectionString = ConfigurationManager.ConnectionStrings["Cms"].ConnectionString;
-            _mainConnectionString = ConfigurationManager.ConnectionStrings["CmsCentral"].ConnectionString;
+            _localConnectionString = ConfigurationManager.ConnectionStrings["CmsCentral"].ConnectionString;
+            _mainConnectionString = ConfigurationManager.ConnectionStrings["Cms"].ConnectionString;
 
             SetChekcBoxes();
-            SetEntities();            
+            SetEntities();
+            gridTables.DataSource = _entities;
+            radProgressBar1.Maximum = _entities.Count();
 
         }
         private void btnSave_Click(object sender, EventArgs e)
@@ -186,8 +186,10 @@ namespace CMS2.Client
             txtServerPassword.Text = Settings.Default.CentralPassword;
             txtDeviceCode.Text = Settings.Default.DeviceCode;
 
-            CheckTableState();
-            gridTables.DataSource = _entities;
+            BackgroundWorker worker = new BackgroundWorker();
+            worker.WorkerReportsProgress = true;
+
+            CheckTableState(worker);            
 
             try
             {
@@ -399,37 +401,66 @@ namespace CMS2.Client
             }
         }
         private void btnStart_Click(object sender, EventArgs e)
-        {
-            WaitingBar.StartWaiting();
-            WaitingBar.Visible = true;
+        {      
+                
             btnStart.Enabled = false;
-
-            CancellationToken cancellationToken = new CancellationToken(flag);
-
+            Worker.RunWorkerAsync();                       
+            
+            btnSave.Enabled = true;
+        }
+        private void Renew_Work(object sender, DoWorkEventArgs e)
+        {
             if (isDeprovisionClient)
             {
-                StartDeprovisionLocal();
+                radProgressBar1.Value1 = 0;
+                StartDeprovisionLocal();                
             }
             if (IsDeprovisionServer)
             {
-                StartDeprovisionServer1();
+                radProgressBar1.Value1 = 0;
+                StartDeprovisionServer();
             }
             if (isProvision)
             {
-                Task task = Task.Run(new Action(StartProvision), cancellationToken);
-                task.Wait(cancellationToken);
+                radProgressBar1.Value1 = 0;
+                StartProvision();
             }
-                        
-            Task synctask = Task.Run(new Action(CheckTableState), cancellationToken);
-            synctask.Wait(cancellationToken);
-            gridTables.Refresh();
 
-            WaitingBar.StopWaiting();
-            btnSave.Enabled = true;
+            radProgressBar1.Value1 = 0;
+            CheckTableState(Worker);       
+            
         }
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            flag = true;
+            //Worker.CancelAsync();
+            Provision prov = new Provision();
+            prov.ProvisionClient1("RateMatrix", "Pasay", new SqlConnection(_mainConnectionString), new SqlConnection(_localConnectionString));
+        }
+        private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            radProgressBar1.Value1 += e.ProgressPercentage;
+            lblProgressState.Text = e.UserState.ToString();
+        }
+        private void Worker_RunWorkerCompleted_1(object sender, RunWorkerCompletedEventArgs e)
+        {
+            gridTables.Refresh();
+            lblProgressState.Text = "Completed.";
+            radProgressBar1.Value1 = _entities.Count();
+        }
+        private void gridTables_CellValueChanged(object sender, Telerik.WinControls.UI.GridViewCellEventArgs e)
+        {
+            IEditableObject editableObject = e.Row.DataBoundItem as IEditableObject;
+            if (editableObject != null)
+            {
+                editableObject.EndEdit();
+            }
+
+            SyncTables table = e.Row.DataBoundItem as SyncTables;
+            if (table != null)
+            {
+                _entities.Remove(table);
+                _entities.Add(table);
+            }
         }
         #endregion
 
@@ -445,7 +476,7 @@ namespace CMS2.Client
 
                 IEnumerable<EntityType> tables = workspace.GetItems<EntityType>(DataSpace.SSpace);
 
-                _entities = new List<SyncTables>();
+                _entities = new BindingList<SyncTables>();
 
                 foreach (var item in tables)
                 {
@@ -521,17 +552,17 @@ namespace CMS2.Client
 
             return true;
         }
-        private void CheckTableState()
+        private void CheckTableState(BackgroundWorker worker)
         {
             List<SyncHelper.ThreadState> listOfThread = new List<SyncHelper.ThreadState>();
             List<ManualResetEvent> syncEvents = new List<ManualResetEvent>();
             List<ManualResetEvent> syncEvents1 = new List<ManualResetEvent>();
-
+            
             for (int i = 0; i < _entities.Count - 1; i++)
             {
-
                 SyncHelper.ThreadState _threadState = new SyncHelper.ThreadState();
                 _threadState.table = _entities[i];
+                _threadState.worker = worker;
                 listOfThread.Add(_threadState);
 
                 if (i <= 50)
@@ -550,13 +581,15 @@ namespace CMS2.Client
                 }
                 catch (Exception ex)
                 {
-
+                    Logs.ErrorLogs("CheckTableState","ChecktableState",ex.Message);
                 }
             }
 
-            WaitHandle.WaitAny(syncEvents.ToArray());
-            WaitHandle.WaitAny(syncEvents1.ToArray());
-
+            if (syncEvents != null && syncEvents1 != null)
+            {
+                WaitHandle.WaitAny(syncEvents.ToArray());
+                WaitHandle.WaitAny(syncEvents1.ToArray());
+            }          
         }
         private void StartProvision()
         {
@@ -568,8 +601,11 @@ namespace CMS2.Client
 
             for (int i = 0; i < _entities.Count - 1; i++)
             {
+                //if (_entities[i].isSelected == false) continue;
                 SyncHelper.ThreadState state = new SyncHelper.ThreadState();
                 state.table = _entities[i];
+                state.worker = Worker;
+                state.maximumSize = _entities.Count;
                 listOfState.Add(state);
                 if (i <= 60)
                 {
@@ -592,8 +628,11 @@ namespace CMS2.Client
                 }
             }
 
-            WaitHandle.WaitAny(provisionEvents.ToArray());
-            WaitHandle.WaitAny(provisionEvents1.ToArray());
+            if (provisionEvents != null && provisionEvents1 != null)
+            {
+                WaitHandle.WaitAny(provisionEvents.ToArray());
+                WaitHandle.WaitAny(provisionEvents1.ToArray());
+            }            
         }
         private void StartDeprovisionClient()
         {
@@ -604,8 +643,10 @@ namespace CMS2.Client
 
             for (int i = 0; i < _entities.Count - 1; i++)
             {
+                //if (_entities[i].isSelected == false) continue;
                 SyncHelper.ThreadState state = new SyncHelper.ThreadState();
                 state.table = _entities[i];
+                state.worker = Worker;
                 listOfState.Add(state);
 
                 if (i <= 60)
@@ -628,8 +669,11 @@ namespace CMS2.Client
                 }
             }
 
-            WaitHandle.WaitAny(deprovisionEvents.ToArray());
-            WaitHandle.WaitAny(deprovisionEvents1.ToArray());
+            if (deprovisionEvents != null && deprovisionEvents1 != null)
+            {
+                WaitHandle.WaitAny(deprovisionEvents.ToArray());
+                WaitHandle.WaitAny(deprovisionEvents1.ToArray());
+            }            
         }
         private void StartDeprovisionLocal()
         {            
@@ -652,13 +696,14 @@ namespace CMS2.Client
             List<SyncHelper.ThreadState> listOfState = new List<SyncHelper.ThreadState>();
             List<ManualResetEvent> deprovisionEvents = new List<ManualResetEvent>();
             List<ManualResetEvent> deprovisionEvents1 = new List<ManualResetEvent>();
-            SqlConnection localConnection = new SqlConnection(_localConnectionString);
             SqlConnection mainConnection = new SqlConnection(_mainConnectionString);
 
             for (int i = 0; i < _entities.Count - 1; i++)
             {
+                //if (_entities[i].isSelected == false) continue;
                 SyncHelper.ThreadState state = new SyncHelper.ThreadState();
                 state.table = _entities[i];
+                state.worker = Worker;
                 listOfState.Add(state);
 
                 if (i <= 60)
@@ -680,9 +725,12 @@ namespace CMS2.Client
 
                 }
             }
-
-            WaitHandle.WaitAny(deprovisionEvents.ToArray());
-            WaitHandle.WaitAny(deprovisionEvents1.ToArray());
+            if (deprovisionEvents != null && deprovisionEvents1 != null)
+            {
+                WaitHandle.WaitAny(deprovisionEvents.ToArray());
+                WaitHandle.WaitAny(deprovisionEvents1.ToArray());
+            }
+            
         }
         private void SetChekcBoxes()
         {
@@ -690,12 +738,9 @@ namespace CMS2.Client
             this.chkDeprovisionServer.Checked = IsDeprovisionServer;
             this.chkProvision.Checked = isProvision;
         }
-        private void ReportProgress(int progress)
-        {
-
-        }
-
-        #endregion
-            
+        
+        
+        #endregion       
+                            
     }
 }

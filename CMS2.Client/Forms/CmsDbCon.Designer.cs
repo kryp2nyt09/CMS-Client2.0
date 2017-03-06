@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn3 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn4 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewCheckBoxColumn gridViewCheckBoxColumn2 = new Telerik.WinControls.UI.GridViewCheckBoxColumn();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition2 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn1 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn2 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewCheckBoxColumn gridViewCheckBoxColumn1 = new Telerik.WinControls.UI.GridViewCheckBoxColumn();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition1 = new Telerik.WinControls.UI.TableViewDefinition();
             this.label1 = new Telerik.WinControls.UI.RadLabel();
             this.txtLocalDbPassword = new Telerik.WinControls.UI.RadTextBox();
             this.txtLocalDbUsername = new Telerik.WinControls.UI.RadTextBox();
@@ -69,16 +69,16 @@
             this.radPageView1 = new Telerik.WinControls.UI.RadPageView();
             this.radPageViewPage1 = new Telerik.WinControls.UI.RadPageViewPage();
             this.radPageViewPage2 = new Telerik.WinControls.UI.RadPageViewPage();
+            this.radProgressBar1 = new Telerik.WinControls.UI.RadProgressBar();
+            this.btnCancel = new Telerik.WinControls.UI.RadButton();
             this.btnSaveSync = new Telerik.WinControls.UI.RadButton();
-            this.WaitingBar = new Telerik.WinControls.UI.RadWaitingBar();
-            this.waitingBarIndicatorElement2 = new Telerik.WinControls.UI.WaitingBarIndicatorElement();
-            this.waitingBarIndicatorElement1 = new Telerik.WinControls.UI.WaitingBarIndicatorElement();
             this.chkDeprovisionServer = new Telerik.WinControls.UI.RadCheckBox();
             this.chkProvision = new Telerik.WinControls.UI.RadCheckBox();
             this.chkDeprovisionClient = new Telerik.WinControls.UI.RadCheckBox();
             this.gridTables = new Telerik.WinControls.UI.RadGridView();
             this.btnStart = new Telerik.WinControls.UI.RadButton();
-            this.btnCancel = new Telerik.WinControls.UI.RadButton();
+            this.lblProgressState = new Telerik.WinControls.UI.RadLabel();
+            this.Worker = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.label1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtLocalDbPassword)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtLocalDbUsername)).BeginInit();
@@ -117,15 +117,16 @@
             this.radPageView1.SuspendLayout();
             this.radPageViewPage1.SuspendLayout();
             this.radPageViewPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.radProgressBar1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnCancel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnSaveSync)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.WaitingBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkDeprovisionServer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkProvision)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkDeprovisionClient)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridTables)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridTables.MasterTemplate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnStart)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnCancel)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lblProgressState)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
             // 
@@ -319,7 +320,7 @@
             // 
             this.btnSave.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnSave.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSave.Location = new System.Drawing.Point(138, 483);
+            this.btnSave.Location = new System.Drawing.Point(138, 498);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(96, 25);
             this.btnSave.TabIndex = 12;
@@ -513,7 +514,7 @@
             this.radPageView1.Location = new System.Drawing.Point(12, 12);
             this.radPageView1.Name = "radPageView1";
             this.radPageView1.SelectedPage = this.radPageViewPage2;
-            this.radPageView1.Size = new System.Drawing.Size(399, 560);
+            this.radPageView1.Size = new System.Drawing.Size(399, 590);
             this.radPageView1.TabIndex = 2;
             this.radPageView1.ThemeName = "Office2010Black";
             // 
@@ -524,55 +525,56 @@
             this.radPageViewPage1.ItemSize = new System.Drawing.SizeF(95F, 30F);
             this.radPageViewPage1.Location = new System.Drawing.Point(12, 40);
             this.radPageViewPage1.Name = "radPageViewPage1";
-            this.radPageViewPage1.Size = new System.Drawing.Size(375, 508);
+            this.radPageViewPage1.Size = new System.Drawing.Size(375, 538);
             this.radPageViewPage1.Text = "CMS Settings";
             // 
             // radPageViewPage2
             // 
+            this.radPageViewPage2.Controls.Add(this.radProgressBar1);
             this.radPageViewPage2.Controls.Add(this.btnCancel);
             this.radPageViewPage2.Controls.Add(this.btnSaveSync);
-            this.radPageViewPage2.Controls.Add(this.WaitingBar);
             this.radPageViewPage2.Controls.Add(this.chkDeprovisionServer);
             this.radPageViewPage2.Controls.Add(this.chkProvision);
             this.radPageViewPage2.Controls.Add(this.chkDeprovisionClient);
             this.radPageViewPage2.Controls.Add(this.gridTables);
             this.radPageViewPage2.Controls.Add(this.btnStart);
+            this.radPageViewPage2.Controls.Add(this.lblProgressState);
             this.radPageViewPage2.ItemSize = new System.Drawing.SizeF(95F, 30F);
             this.radPageViewPage2.Location = new System.Drawing.Point(12, 40);
             this.radPageViewPage2.Name = "radPageViewPage2";
-            this.radPageViewPage2.Size = new System.Drawing.Size(375, 508);
+            this.radPageViewPage2.Size = new System.Drawing.Size(375, 538);
             this.radPageViewPage2.Text = "Sync Settings";
+            // 
+            // radProgressBar1
+            // 
+            this.radProgressBar1.Location = new System.Drawing.Point(6, 506);
+            this.radProgressBar1.Name = "radProgressBar1";
+            this.radProgressBar1.Size = new System.Drawing.Size(366, 11);
+            this.radProgressBar1.TabIndex = 22;
+            this.radProgressBar1.ThemeName = "Office2010Black";
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnCancel.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancel.Location = new System.Drawing.Point(224, 469);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(67, 25);
+            this.btnCancel.TabIndex = 21;
+            this.btnCancel.Text = "&Cancel";
+            this.btnCancel.ThemeName = "Office2010Black";
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnSaveSync
             // 
             this.btnSaveSync.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnSaveSync.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSaveSync.Location = new System.Drawing.Point(297, 472);
+            this.btnSaveSync.Location = new System.Drawing.Point(297, 469);
             this.btnSaveSync.Name = "btnSaveSync";
             this.btnSaveSync.Size = new System.Drawing.Size(75, 25);
             this.btnSaveSync.TabIndex = 20;
             this.btnSaveSync.Text = "&Save";
             this.btnSaveSync.ThemeName = "Office2010Black";
-            // 
-            // WaitingBar
-            // 
-            this.WaitingBar.Location = new System.Drawing.Point(6, 500);
-            this.WaitingBar.Name = "WaitingBar";
-            this.WaitingBar.Size = new System.Drawing.Size(366, 10);
-            this.WaitingBar.TabIndex = 0;
-            this.WaitingBar.ThemeName = "Office2010Black";
-            this.WaitingBar.WaitingIndicators.Add(this.waitingBarIndicatorElement2);
-            this.WaitingBar.WaitingIndicators.Add(this.waitingBarIndicatorElement1);
-            // 
-            // waitingBarIndicatorElement2
-            // 
-            this.waitingBarIndicatorElement2.Name = "waitingBarIndicatorElement2";
-            this.waitingBarIndicatorElement2.StretchHorizontally = false;
-            // 
-            // waitingBarIndicatorElement1
-            // 
-            this.waitingBarIndicatorElement1.Name = "waitingBarIndicatorElement1";
-            this.waitingBarIndicatorElement1.StretchHorizontally = false;
             // 
             // chkDeprovisionServer
             // 
@@ -621,43 +623,44 @@
             this.gridTables.MasterTemplate.AllowSearchRow = true;
             this.gridTables.MasterTemplate.AutoExpandGroups = true;
             this.gridTables.MasterTemplate.AutoGenerateColumns = false;
-            gridViewTextBoxColumn3.FieldName = "TableName";
-            gridViewTextBoxColumn3.HeaderText = "Table";
-            gridViewTextBoxColumn3.Name = "colTable";
-            gridViewTextBoxColumn3.Width = 160;
-            gridViewTextBoxColumn4.FieldName = "Status";
-            gridViewTextBoxColumn4.HeaderText = "Status";
-            gridViewTextBoxColumn4.Name = "colStatus";
-            gridViewTextBoxColumn4.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            gridViewTextBoxColumn4.Width = 120;
-            gridViewCheckBoxColumn2.AllowFiltering = false;
-            gridViewCheckBoxColumn2.AllowGroup = false;
-            gridViewCheckBoxColumn2.AllowSearching = false;
-            gridViewCheckBoxColumn2.EnableHeaderCheckBox = true;
-            gridViewCheckBoxColumn2.FieldName = "isSelected";
-            gridViewCheckBoxColumn2.HeaderText = "Select";
-            gridViewCheckBoxColumn2.IsPinned = true;
-            gridViewCheckBoxColumn2.Name = "column1";
-            gridViewCheckBoxColumn2.PinPosition = Telerik.WinControls.UI.PinnedColumnPosition.Right;
-            gridViewCheckBoxColumn2.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            gridViewCheckBoxColumn2.WrapText = true;
+            gridViewTextBoxColumn1.FieldName = "TableName";
+            gridViewTextBoxColumn1.HeaderText = "Table";
+            gridViewTextBoxColumn1.Name = "colTable";
+            gridViewTextBoxColumn1.Width = 160;
+            gridViewTextBoxColumn2.FieldName = "Status";
+            gridViewTextBoxColumn2.HeaderText = "Status";
+            gridViewTextBoxColumn2.Name = "colStatus";
+            gridViewTextBoxColumn2.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            gridViewTextBoxColumn2.Width = 120;
+            gridViewCheckBoxColumn1.AllowFiltering = false;
+            gridViewCheckBoxColumn1.AllowGroup = false;
+            gridViewCheckBoxColumn1.AllowSearching = false;
+            gridViewCheckBoxColumn1.EnableHeaderCheckBox = true;
+            gridViewCheckBoxColumn1.FieldName = "isSelected";
+            gridViewCheckBoxColumn1.HeaderText = "Select";
+            gridViewCheckBoxColumn1.IsPinned = true;
+            gridViewCheckBoxColumn1.Name = "column1";
+            gridViewCheckBoxColumn1.PinPosition = Telerik.WinControls.UI.PinnedColumnPosition.Right;
+            gridViewCheckBoxColumn1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            gridViewCheckBoxColumn1.WrapText = true;
             this.gridTables.MasterTemplate.Columns.AddRange(new Telerik.WinControls.UI.GridViewDataColumn[] {
-            gridViewTextBoxColumn3,
-            gridViewTextBoxColumn4,
-            gridViewCheckBoxColumn2});
+            gridViewTextBoxColumn1,
+            gridViewTextBoxColumn2,
+            gridViewCheckBoxColumn1});
             this.gridTables.MasterTemplate.EnableSorting = false;
-            this.gridTables.MasterTemplate.ViewDefinition = tableViewDefinition2;
+            this.gridTables.MasterTemplate.ViewDefinition = tableViewDefinition1;
             this.gridTables.Name = "gridTables";
             this.gridTables.Size = new System.Drawing.Size(366, 424);
             this.gridTables.TabIndex = 14;
             this.gridTables.Text = "radGridView1";
             this.gridTables.ThemeName = "Office2010Black";
+            this.gridTables.CellValueChanged += new Telerik.WinControls.UI.GridViewCellEventHandler(this.gridTables_CellValueChanged);
             // 
             // btnStart
             // 
             this.btnStart.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnStart.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnStart.Location = new System.Drawing.Point(151, 472);
+            this.btnStart.Location = new System.Drawing.Point(151, 469);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(67, 25);
             this.btnStart.TabIndex = 13;
@@ -665,24 +668,26 @@
             this.btnStart.ThemeName = "Office2010Black";
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
-            // btnCancel
+            // lblProgressState
             // 
-            this.btnCancel.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnCancel.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancel.Location = new System.Drawing.Point(224, 472);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(67, 25);
-            this.btnCancel.TabIndex = 21;
-            this.btnCancel.Text = "&Cancel";
-            this.btnCancel.ThemeName = "Office2010Black";
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            this.lblProgressState.Location = new System.Drawing.Point(6, 520);
+            this.lblProgressState.Name = "lblProgressState";
+            this.lblProgressState.Size = new System.Drawing.Size(52, 18);
+            this.lblProgressState.TabIndex = 23;
+            this.lblProgressState.Text = "Waiting...";
+            // 
+            // Worker
+            // 
+            this.Worker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.Renew_Work);
+            this.Worker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.Worker_ProgressChanged);
+            this.Worker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.Worker_RunWorkerCompleted_1);
             // 
             // CmsDbCon
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkGray;
-            this.ClientSize = new System.Drawing.Size(414, 574);
+            this.ClientSize = new System.Drawing.Size(421, 621);
             this.Controls.Add(this.radPageView1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
@@ -741,15 +746,16 @@
             this.radPageViewPage1.ResumeLayout(false);
             this.radPageViewPage2.ResumeLayout(false);
             this.radPageViewPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.radProgressBar1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnCancel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnSaveSync)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.WaitingBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkDeprovisionServer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkProvision)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkDeprovisionClient)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridTables.MasterTemplate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridTables)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnStart)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnCancel)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lblProgressState)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
 
@@ -800,9 +806,9 @@
         private Telerik.WinControls.UI.RadLabel testLocalConnection;
         private Telerik.WinControls.UI.RadCheckBox chkDeprovisionServer;
         private Telerik.WinControls.UI.RadButton btnSaveSync;
-        private Telerik.WinControls.UI.RadWaitingBar WaitingBar;
-        private Telerik.WinControls.UI.WaitingBarIndicatorElement waitingBarIndicatorElement2;
-        private Telerik.WinControls.UI.WaitingBarIndicatorElement waitingBarIndicatorElement1;
         private Telerik.WinControls.UI.RadButton btnCancel;
+        private Telerik.WinControls.UI.RadProgressBar radProgressBar1;
+        private System.ComponentModel.BackgroundWorker Worker;
+        private Telerik.WinControls.UI.RadLabel lblProgressState;
     }
 }
