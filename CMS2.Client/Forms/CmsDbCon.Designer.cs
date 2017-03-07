@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn1 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn2 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewCheckBoxColumn gridViewCheckBoxColumn1 = new Telerik.WinControls.UI.GridViewCheckBoxColumn();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition1 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn3 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn4 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewCheckBoxColumn gridViewCheckBoxColumn2 = new Telerik.WinControls.UI.GridViewCheckBoxColumn();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition2 = new Telerik.WinControls.UI.TableViewDefinition();
             this.label1 = new Telerik.WinControls.UI.RadLabel();
             this.txtLocalDbPassword = new Telerik.WinControls.UI.RadTextBox();
             this.txtLocalDbUsername = new Telerik.WinControls.UI.RadTextBox();
@@ -79,6 +79,7 @@
             this.btnStart = new Telerik.WinControls.UI.RadButton();
             this.lblProgressState = new Telerik.WinControls.UI.RadLabel();
             this.Worker = new System.ComponentModel.BackgroundWorker();
+            this.OpenFile = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.label1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtLocalDbPassword)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtLocalDbUsername)).BeginInit();
@@ -320,9 +321,9 @@
             // 
             this.btnSave.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnSave.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSave.Location = new System.Drawing.Point(138, 498);
+            this.btnSave.Location = new System.Drawing.Point(275, 498);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(96, 25);
+            this.btnSave.Size = new System.Drawing.Size(96, 37);
             this.btnSave.TabIndex = 12;
             this.btnSave.Text = "&Save";
             this.btnSave.ThemeName = "Office2010Black";
@@ -575,6 +576,7 @@
             this.btnSaveSync.TabIndex = 20;
             this.btnSaveSync.Text = "&Save";
             this.btnSaveSync.ThemeName = "Office2010Black";
+            this.btnSaveSync.Click += new System.EventHandler(this.btnSaveSync_Click);
             // 
             // chkDeprovisionServer
             // 
@@ -623,32 +625,32 @@
             this.gridTables.MasterTemplate.AllowSearchRow = true;
             this.gridTables.MasterTemplate.AutoExpandGroups = true;
             this.gridTables.MasterTemplate.AutoGenerateColumns = false;
-            gridViewTextBoxColumn1.FieldName = "TableName";
-            gridViewTextBoxColumn1.HeaderText = "Table";
-            gridViewTextBoxColumn1.Name = "colTable";
-            gridViewTextBoxColumn1.Width = 160;
-            gridViewTextBoxColumn2.FieldName = "Status";
-            gridViewTextBoxColumn2.HeaderText = "Status";
-            gridViewTextBoxColumn2.Name = "colStatus";
-            gridViewTextBoxColumn2.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            gridViewTextBoxColumn2.Width = 120;
-            gridViewCheckBoxColumn1.AllowFiltering = false;
-            gridViewCheckBoxColumn1.AllowGroup = false;
-            gridViewCheckBoxColumn1.AllowSearching = false;
-            gridViewCheckBoxColumn1.EnableHeaderCheckBox = true;
-            gridViewCheckBoxColumn1.FieldName = "isSelected";
-            gridViewCheckBoxColumn1.HeaderText = "Select";
-            gridViewCheckBoxColumn1.IsPinned = true;
-            gridViewCheckBoxColumn1.Name = "column1";
-            gridViewCheckBoxColumn1.PinPosition = Telerik.WinControls.UI.PinnedColumnPosition.Right;
-            gridViewCheckBoxColumn1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            gridViewCheckBoxColumn1.WrapText = true;
+            gridViewTextBoxColumn3.FieldName = "TableName";
+            gridViewTextBoxColumn3.HeaderText = "Table";
+            gridViewTextBoxColumn3.Name = "colTable";
+            gridViewTextBoxColumn3.Width = 160;
+            gridViewTextBoxColumn4.FieldName = "Status";
+            gridViewTextBoxColumn4.HeaderText = "Status";
+            gridViewTextBoxColumn4.Name = "colStatus";
+            gridViewTextBoxColumn4.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            gridViewTextBoxColumn4.Width = 120;
+            gridViewCheckBoxColumn2.AllowFiltering = false;
+            gridViewCheckBoxColumn2.AllowGroup = false;
+            gridViewCheckBoxColumn2.AllowSearching = false;
+            gridViewCheckBoxColumn2.EnableHeaderCheckBox = true;
+            gridViewCheckBoxColumn2.FieldName = "isSelected";
+            gridViewCheckBoxColumn2.HeaderText = "Select";
+            gridViewCheckBoxColumn2.IsPinned = true;
+            gridViewCheckBoxColumn2.Name = "column1";
+            gridViewCheckBoxColumn2.PinPosition = Telerik.WinControls.UI.PinnedColumnPosition.Right;
+            gridViewCheckBoxColumn2.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            gridViewCheckBoxColumn2.WrapText = true;
             this.gridTables.MasterTemplate.Columns.AddRange(new Telerik.WinControls.UI.GridViewDataColumn[] {
-            gridViewTextBoxColumn1,
-            gridViewTextBoxColumn2,
-            gridViewCheckBoxColumn1});
+            gridViewTextBoxColumn3,
+            gridViewTextBoxColumn4,
+            gridViewCheckBoxColumn2});
             this.gridTables.MasterTemplate.EnableSorting = false;
-            this.gridTables.MasterTemplate.ViewDefinition = tableViewDefinition1;
+            this.gridTables.MasterTemplate.ViewDefinition = tableViewDefinition2;
             this.gridTables.Name = "gridTables";
             this.gridTables.Size = new System.Drawing.Size(366, 424);
             this.gridTables.TabIndex = 14;
@@ -681,6 +683,13 @@
             this.Worker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.Renew_Work);
             this.Worker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.Worker_ProgressChanged);
             this.Worker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.Worker_RunWorkerCompleted_1);
+            // 
+            // OpenFile
+            // 
+            this.OpenFile.FileName = "AP CARGO SERVICE.exe.config";
+            this.OpenFile.Filter = "Config Files|*.config";
+            this.OpenFile.InitialDirectory = "C:\\Program Files (x86)\\admin\\APCargo Setup";
+            this.OpenFile.RestoreDirectory = true;
             // 
             // CmsDbCon
             // 
@@ -810,5 +819,6 @@
         private Telerik.WinControls.UI.RadProgressBar radProgressBar1;
         private System.ComponentModel.BackgroundWorker Worker;
         private Telerik.WinControls.UI.RadLabel lblProgressState;
+        private System.Windows.Forms.OpenFileDialog OpenFile;
     }
 }

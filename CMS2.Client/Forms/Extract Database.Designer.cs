@@ -56,9 +56,10 @@
             this.office2010BlackTheme1 = new Telerik.WinControls.Themes.Office2010BlackTheme();
             this.Extract = new Telerik.WinControls.UI.RadButton();
             this.ProgressLabel = new Telerik.WinControls.UI.RadLabel();
-            this.radWaitingBar1 = new Telerik.WinControls.UI.RadWaitingBar();
-            this.waitingBarIndicatorElement1 = new Telerik.WinControls.UI.WaitingBarIndicatorElement();
-            this.waitingBarIndicatorElement2 = new Telerik.WinControls.UI.WaitingBarIndicatorElement();
+            this.radProgressBar1 = new Telerik.WinControls.UI.RadProgressBar();
+            this.lblProgressState = new Telerik.WinControls.UI.RadLabel();
+            this.Worker = new System.ComponentModel.BackgroundWorker();
+            this.OpenFile = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.radPanel1)).BeginInit();
             this.radPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dboBranchCoprOffice)).BeginInit();
@@ -87,7 +88,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.ClientApp)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Extract)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ProgressLabel)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radWaitingBar1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radProgressBar1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lblProgressState)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
             // 
@@ -385,32 +387,44 @@
             this.ProgressLabel.TabIndex = 20;
             this.ProgressLabel.ThemeName = "Office2010Black";
             // 
-            // radWaitingBar1
+            // radProgressBar1
             // 
-            this.radWaitingBar1.Location = new System.Drawing.Point(29, 440);
-            this.radWaitingBar1.Name = "radWaitingBar1";
-            this.radWaitingBar1.Size = new System.Drawing.Size(369, 24);
-            this.radWaitingBar1.TabIndex = 21;
-            this.radWaitingBar1.Text = "radWaitingBar1";
-            this.radWaitingBar1.WaitingIndicators.Add(this.waitingBarIndicatorElement2);
-            this.radWaitingBar1.WaitingIndicators.Add(this.waitingBarIndicatorElement1);
+            this.radProgressBar1.Location = new System.Drawing.Point(32, 444);
+            this.radProgressBar1.Name = "radProgressBar1";
+            this.radProgressBar1.Size = new System.Drawing.Size(366, 20);
+            this.radProgressBar1.TabIndex = 24;
+            this.radProgressBar1.ThemeName = "Office2010Black";
             // 
-            // waitingBarIndicatorElement1
+            // lblProgressState
             // 
-            this.waitingBarIndicatorElement1.Name = "waitingBarIndicatorElement1";
-            this.waitingBarIndicatorElement1.StretchHorizontally = false;
+            this.lblProgressState.Location = new System.Drawing.Point(32, 420);
+            this.lblProgressState.Name = "lblProgressState";
+            this.lblProgressState.Size = new System.Drawing.Size(52, 18);
+            this.lblProgressState.TabIndex = 25;
+            this.lblProgressState.Text = "Waiting...";
             // 
-            // waitingBarIndicatorElement2
+            // Worker
             // 
-            this.waitingBarIndicatorElement2.Name = "waitingBarIndicatorElement2";
-            this.waitingBarIndicatorElement2.StretchHorizontally = false;
+            this.Worker.WorkerReportsProgress = true;
+            this.Worker.WorkerSupportsCancellation = true;
+            this.Worker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.Extract_Work);
+            this.Worker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.Worker_ProgressChanged);
+            this.Worker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.Worker_RunWorkerCompleted);
+            // 
+            // OpenFile
+            // 
+            this.OpenFile.FileName = "AP CARGO SERVICE.exe.config";
+            this.OpenFile.Filter = "Config Files|*.config";
+            this.OpenFile.InitialDirectory = "C:\\Program Files (x86)\\admin\\APCargo Setup";
+            this.OpenFile.RestoreDirectory = true;
             // 
             // Extract_Database
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(432, 505);
-            this.Controls.Add(this.radWaitingBar1);
+            this.Controls.Add(this.radProgressBar1);
+            this.Controls.Add(this.lblProgressState);
             this.Controls.Add(this.ProgressLabel);
             this.Controls.Add(this.Extract);
             this.Controls.Add(this.ClientApp);
@@ -453,7 +467,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.ClientApp)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Extract)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ProgressLabel)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radWaitingBar1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radProgressBar1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lblProgressState)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -490,8 +505,9 @@
         private Telerik.WinControls.UI.RadLabel testLocalConnection;
         private Telerik.WinControls.UI.RadLabel radLabel9;
         private Telerik.WinControls.UI.RadDropDownList dboBranchCoprOffice;
-        private Telerik.WinControls.UI.RadWaitingBar radWaitingBar1;
-        private Telerik.WinControls.UI.WaitingBarIndicatorElement waitingBarIndicatorElement2;
-        private Telerik.WinControls.UI.WaitingBarIndicatorElement waitingBarIndicatorElement1;
+        private Telerik.WinControls.UI.RadProgressBar radProgressBar1;
+        private Telerik.WinControls.UI.RadLabel lblProgressState;
+        private System.ComponentModel.BackgroundWorker Worker;
+        private System.Windows.Forms.OpenFileDialog OpenFile;
     }
 }

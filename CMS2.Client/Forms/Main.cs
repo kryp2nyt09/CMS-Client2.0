@@ -1168,8 +1168,13 @@ namespace CMS2.Client
         private void btnSettings_Click(object sender, EventArgs e)
         {
 
-            CmsDbCon settings = new CmsDbCon();
-            settings.ShowDialog();
+           using( CmsDbCon settings = new CmsDbCon())
+           {
+               if (settings.ShowDialog() == DialogResult.OK)
+               {
+                   settings.Close();
+               }               
+           }            
 
         }
 
@@ -3941,7 +3946,7 @@ namespace CMS2.Client
             shipment.ServiceModeId = Guid.Parse(lstServiceMode.SelectedValue.ToString());
             shipment.ServiceMode = serviceModes.Find(x => x.ServiceModeId == shipment.ServiceModeId);
             shipment.ShipModeId = Guid.Parse(lstShipMode.SelectedValue.ToString());
-            shipment.ShipMode = shipModes.Find(x => x.ShipModeId == shipment.ShipModeId);
+            shipment.ShipMode = shipModes.Find(x => x.ShipModeId == shipment.ShipModeId);            
             if (shipment.GoodsDescriptionId == null || shipment.GoodsDescription == null)
             {
                 if (lstGoodsDescription.SelectedValue == null)
@@ -3978,13 +3983,21 @@ namespace CMS2.Client
                 shipment.Discount = Decimal.Parse(txtRfa.Value.ToString());
             }
 
-
             if (shipment.Shipper != null)
             {
                 if (shipment.Shipper.Company != null)
                 {
                     shipment.Discount = shipment.Shipper.Company.Discount;
                 }
+            }
+
+            if (chkNonVatable.Checked)
+            {
+                shipment.IsVatable = true;
+            }
+            else
+            {
+                shipment.IsVatable = false;
             }
 
             shipment = shipmentService.ComputeCharges(shipment);

@@ -1175,7 +1175,7 @@
             this.BookingPage.ItemSize = new System.Drawing.SizeF(69F, 30F);
             this.BookingPage.Location = new System.Drawing.Point(12, 40);
             this.BookingPage.Name = "BookingPage";
-            this.BookingPage.Size = new System.Drawing.Size(1231, 571);
+            this.BookingPage.Size = new System.Drawing.Size(1231, 637);
             this.BookingPage.Text = "Booking";
             // 
             // radPanel4
@@ -1184,7 +1184,7 @@
             this.radPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.radPanel4.Location = new System.Drawing.Point(0, 379);
             this.radPanel4.Name = "radPanel4";
-            this.radPanel4.Size = new System.Drawing.Size(1231, 192);
+            this.radPanel4.Size = new System.Drawing.Size(1231, 258);
             this.radPanel4.TabIndex = 1;
             this.radPanel4.Text = "radPanel4";
             // 
@@ -1211,7 +1211,7 @@
             this.BookingGridView.MasterTemplate.ViewDefinition = tableViewDefinition1;
             this.BookingGridView.Name = "BookingGridView";
             this.BookingGridView.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.BookingGridView.Size = new System.Drawing.Size(1231, 192);
+            this.BookingGridView.Size = new System.Drawing.Size(1231, 258);
             this.BookingGridView.TabIndex = 30;
             this.BookingGridView.ThemeName = "Office2010Black";
             this.BookingGridView.CellClick += new Telerik.WinControls.UI.GridViewCellEventHandler(this.BookingGridView_CellClick);

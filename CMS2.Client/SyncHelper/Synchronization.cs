@@ -304,6 +304,9 @@ namespace CMS2.Client.SyncHelper
             syncOrchestrator.RemoteProvider = new SqlSyncProvider(_tableName + _filter, _serverConnection);
             SyncOperationStatistics syncStats;
             ThreadState State = (ThreadState)obj;
+
+            State.worker.ReportProgress(0, _tableName + " was synchronizing.");
+
             switch (_tableName)
             {
 
@@ -417,6 +420,7 @@ namespace CMS2.Client.SyncHelper
 
             SqlParameter param;
             ThreadState state = (ThreadState)obj;
+            List<ManualResetEvent> events = new List<ManualResetEvent>();
             try
             {
 
@@ -663,7 +667,6 @@ namespace CMS2.Client.SyncHelper
                         ProvisionClient(_tableName);
                                                 
                         state._event.Set();
-                        state._event.WaitOne();
                         state.table.Status = TableStatus.Provisioned;
                         state.worker.ReportProgress(1, _tableName + " was provisioned.");
 
@@ -755,23 +758,7 @@ namespace CMS2.Client.SyncHelper
                 Log.WriteErrorLogs(ex);
             }
         }
-        public void ProvisionClient1(string TableName, string _filter, SqlConnection _serverConnection, SqlConnection _localConnection)
-        {
-            DbSyncScopeDescription scopeDescription = SqlSyncDescriptionBuilder.GetDescriptionForScope(TableName + _filter, _serverConnection);
-
-            SqlSyncScopeProvisioning clientProvision = new SqlSyncScopeProvisioning(_localConnection, scopeDescription);
-
-            if (!clientProvision.ScopeExists(scopeDescription.ScopeName))
-            {
-                clientProvision.Apply();
-                Log.WriteLogs("Client " + TableName + " was provisioned.");
-            }
-            else
-            {
-                Log.WriteLogs("Client " + TableName + " was already provisioned.");
-            }
-        }
-
+       
         public void ProvisionClient(string TableName)
         {
             DbSyncScopeDescription scopeDescription = SqlSyncDescriptionBuilder.GetDescriptionForScope(TableName + _filter, _serverConnection);

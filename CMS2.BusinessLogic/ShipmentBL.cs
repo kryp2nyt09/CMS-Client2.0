@@ -522,7 +522,15 @@ namespace CMS2.BusinessLogic
                     {
                         vat = model.EVat.Amount / 100;
                     }
-                    model.ShipmentVatAmount = (model.ShipmentSubTotal * vat);
+                    if (model.IsVatable)
+                    {
+                        model.ShipmentVatAmount = (model.ShipmentSubTotal * vat);
+                    }
+                    else
+                    {
+                        model.ShipmentVatAmount = 0;
+                    }
+                    
                 }
             }
 
