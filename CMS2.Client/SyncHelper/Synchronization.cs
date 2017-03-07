@@ -16,7 +16,6 @@ using CMS2.DataAccess;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Core.Objects;
 using System.Data.Entity.Core.Metadata.Edm;
-using System.ComponentModel;
 
 namespace CMS2.Client.SyncHelper
 {
@@ -331,23 +330,14 @@ namespace CMS2.Client.SyncHelper
 
                         State.table.Status = TableStatus.Good;
                         State.table.isSelected = false;
-                        State.worker.ReportProgress(1, _tableName + " was synchronized.");
 
                         break;
                     }
                     catch (Exception ex)
                     {
-                        try
-                        {
-                            Log.WriteErrorLogs(ex);
-                            State.table.Status = TableStatus.Bad;
-                            State.table.isSelected = true;
-                            State.worker.ReportProgress(1, _tableName + " synchronize error.");
-                        }
-                        catch (Exception )
-                        {                           
-                        }
-                        
+                        Log.WriteErrorLogs(ex);
+                        State.table.Status = TableStatus.Bad;
+                        State.table.isSelected = true;
                     }
                     break;
 
@@ -360,22 +350,13 @@ namespace CMS2.Client.SyncHelper
                         Log.WriteLogs(_tableName + " Total Changes Uploaded: " + syncStats.UploadChangesTotal + " Total Changes Downloaded: " + syncStats.DownloadChangesTotal + " Total Changes applied: " + syncStats.DownloadChangesApplied + " Total Changes failed: " + syncStats.DownloadChangesFailed);
                         State.table.Status = TableStatus.Good;
                         State.table.isSelected = false;
-                        State.worker.ReportProgress(1, _tableName + " was synchronized.");
                         break;
                     }
                     catch (Exception ex)
                     {
-                        try
-                        {
-                            Log.WriteErrorLogs(ex);
-                            State.table.Status = TableStatus.Bad;
-                            State.table.isSelected = true;
-                            State.worker.ReportProgress(1, _tableName + " synchronize error.");
-                        }
-                        catch (Exception )
-                        {                            
-                        }
-                        
+                        Log.WriteErrorLogs(ex);
+                        State.table.Status = TableStatus.Bad;
+                        State.table.isSelected = true;
                     }
                     break;
             }
@@ -386,7 +367,7 @@ namespace CMS2.Client.SyncHelper
 
     }
 
-    public class Provision
+    class Provision
     {
 
         SqlConnection _serverConnection;
@@ -401,7 +382,7 @@ namespace CMS2.Client.SyncHelper
         static DbSyncScopeDescription scopeDesc;
         static DbSyncTableDescription tableDescription;
         static SqlSyncScopeProvisioning serverTemplate;
-        public Provision() { }
+
         public Provision(string tableName, SqlConnection localConnection, SqlConnection serverConnection, ManualResetEvent currentEvent, string filter, string branchCorpOfficeId)
         {
             this._tableName = tableName;
@@ -441,7 +422,6 @@ namespace CMS2.Client.SyncHelper
 
                         state._event.Set();
                         state.table.Status = TableStatus.Provisioned;
-                        state.worker.ReportProgress(1, _tableName + " was provisioned.");
 
                         break;
                     case "Shipment":
@@ -462,7 +442,6 @@ namespace CMS2.Client.SyncHelper
 
                         state._event.Set();
                         state.table.Status = TableStatus.Provisioned;
-                        state.worker.ReportProgress(1, _tableName + " was provisioned.");
 
                         break;
 
@@ -485,7 +464,6 @@ namespace CMS2.Client.SyncHelper
 
                         state._event.Set();
                         state.table.Status = TableStatus.Provisioned;
-                        state.worker.ReportProgress(1, _tableName + " was provisioned.");
 
                         break;
 
@@ -508,7 +486,6 @@ namespace CMS2.Client.SyncHelper
 
                         state._event.Set();
                         state.table.Status = TableStatus.Provisioned;
-                        state.worker.ReportProgress(1  ,_tableName + " was provisioned.");
 
                         break;
 
@@ -531,7 +508,6 @@ namespace CMS2.Client.SyncHelper
 
                         state._event.Set();
                         state.table.Status = TableStatus.Provisioned;
-                        state.worker.ReportProgress(1, _tableName + " was provisioned.");
 
                         break;
                     case "Payment":
@@ -553,7 +529,6 @@ namespace CMS2.Client.SyncHelper
 
                         state._event.Set();
                         state.table.Status = TableStatus.Provisioned;
-                        state.worker.ReportProgress(1, _tableName + " was provisioned.");
 
                         break;
                     case "PaymenTurnOver":
@@ -574,7 +549,6 @@ namespace CMS2.Client.SyncHelper
 
                         state._event.Set();
                         state.table.Status = TableStatus.Provisioned;
-                        state.worker.ReportProgress(1, _tableName + " was provisioned.");
 
                         break;
                     case "ShipmentAdjustment":
@@ -596,7 +570,6 @@ namespace CMS2.Client.SyncHelper
 
                         state._event.Set();
                         state.table.Status = TableStatus.Provisioned;
-                        state.worker.ReportProgress(1, _tableName + " was provisioned.");
 
                         break;
                     case "Delivery":
@@ -618,7 +591,6 @@ namespace CMS2.Client.SyncHelper
 
                         state._event.Set();
                         state.table.Status = TableStatus.Provisioned;
-                        state.worker.ReportProgress(1, _tableName + " was provisioned.");
 
                         break;
                     case "DeliveryPackage":
@@ -641,7 +613,6 @@ namespace CMS2.Client.SyncHelper
 
                         state._event.Set();
                         state.table.Status = TableStatus.Provisioned;
-                        state.worker.ReportProgress(1 , _tableName + " was provisioned.");
 
                         break;
                     case "DeliveryReceipt":
@@ -661,11 +632,9 @@ namespace CMS2.Client.SyncHelper
                         ProvisionServer(_tableName, param, _branchCorpOfficeId);
 
                         ProvisionClient(_tableName);
-                                                
+
                         state._event.Set();
-                        state._event.WaitOne();
                         state.table.Status = TableStatus.Provisioned;
-                        state.worker.ReportProgress(1, _tableName + " was provisioned.");
 
                         break;
                     default:
@@ -674,7 +643,6 @@ namespace CMS2.Client.SyncHelper
 
                         state._event.Set();
                         state.table.Status = TableStatus.Provisioned;
-                        state.worker.ReportProgress(1, _tableName + " was provisioned.");
 
                         break;
                 }
@@ -683,7 +651,6 @@ namespace CMS2.Client.SyncHelper
             {
                 state._event.Set();
                 state.table.Status = TableStatus.ErrorProvision;
-                Log.WriteErrorLogs(ex);
             }
         }
 
@@ -755,24 +722,8 @@ namespace CMS2.Client.SyncHelper
                 Log.WriteErrorLogs(ex);
             }
         }
-        public void ProvisionClient1(string TableName, string _filter, SqlConnection _serverConnection, SqlConnection _localConnection)
-        {
-            DbSyncScopeDescription scopeDescription = SqlSyncDescriptionBuilder.GetDescriptionForScope(TableName + _filter, _serverConnection);
 
-            SqlSyncScopeProvisioning clientProvision = new SqlSyncScopeProvisioning(_localConnection, scopeDescription);
-
-            if (!clientProvision.ScopeExists(scopeDescription.ScopeName))
-            {
-                clientProvision.Apply();
-                Log.WriteLogs("Client " + TableName + " was provisioned.");
-            }
-            else
-            {
-                Log.WriteLogs("Client " + TableName + " was already provisioned.");
-            }
-        }
-
-        public void ProvisionClient(string TableName)
+        private void ProvisionClient(string TableName)
         {
             DbSyncScopeDescription scopeDescription = SqlSyncDescriptionBuilder.GetDescriptionForScope(TableName + _filter, _serverConnection);
 
@@ -882,7 +833,8 @@ namespace CMS2.Client.SyncHelper
                 Log.WriteErrorLogs(_tableName, ex);
             }
             state._event.Set();
-            state.worker.ReportProgress(1, _tableName + " was deprovisioned.");
+
+
         }
 
         public void PerformDeprovisionDatabase(object obj)
@@ -949,10 +901,6 @@ namespace CMS2.Client.SyncHelper
         public ManualResetEvent _event = new ManualResetEvent(false);
 
         public SyncTables table;
-
-        public BackgroundWorker worker;
-
-        public int maximumSize;
 
     }
 }
