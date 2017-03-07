@@ -54,8 +54,8 @@ namespace CMS2.Client.Forms.TrackingReports
                 row[4] = item.Address;
                 row[5] = item.CommodityType;
                 row[6] = item.Commodity;
-                row[7] = item.Qty;
-                row[8] = item.AGW;
+                row[7] = item.Qty.ToString();
+                row[8] = item.AGW.ToString();
                 row[9] = item.ServiceMode;
                 row[10] = item.PaymendMode;
                 row[11] = item.Area;
@@ -102,26 +102,25 @@ namespace CMS2.Client.Forms.TrackingReports
         public List<BundleViewModel> Match(List<Bundle> bundle) {
 
             PackageNumberBL _packageNumberService = new PackageNumberBL();
-            List<BundleViewModel> _results = new List<BundleViewModel>();        
-            ShipmentBL shipment = new ShipmentBL();
+            List<BundleViewModel> _results = new List<BundleViewModel>();       
 
             foreach (Bundle _bundle in bundle) {
 
                 BundleViewModel model = new BundleViewModel();
-
+                ShipmentBL shipment = new ShipmentBL();
                 string _airwaybill = _packageNumberService.GetAll().Find(x => x.PackageNo == _bundle.Cargo).Shipment.AirwayBillNo;
               
                 BundleViewModel isExist = _results.Find(x => x.AirwayBillNo == _airwaybill);
                 
                 if (isExist != null)
-                {                 
-                    _results.Add(isExist);
+                {
+                    isExist.Qty++;
+                    //_results.Add(isExist);
                 }
                 else
                 {
                     model.AirwayBillNo = _airwaybill;
-
-                    List<Shipment> list = shipment.GetAll().Where(x => x.AirwayBillNo.Equals(_airwaybill)).ToList();                    
+                    List<Shipment> list = shipment.GetAll().Where(x => x.AirwayBillNo == _airwaybill).ToList();                    
                     foreach (Shipment ship in list)
                     {
                         model.Shipper = ship.Shipper.FullName;
@@ -129,13 +128,13 @@ namespace CMS2.Client.Forms.TrackingReports
                         model.Address = ship.Consignee.Address1;
                         model.CommodityType = ship.Commodity.CommodityType.CommodityTypeName;
                         model.Commodity = ship.Commodity.CommodityName;
-                        model.Qty = bundle.Count.ToString();
-                        model.AGW = ship.Weight.ToString();
+                        model.Qty++;
+                        model.AGW += ship.Weight;
                         model.ServiceMode = ship.ServiceMode.ServiceModeName;
                         model.PaymendMode = ship.PaymentMode.PaymentModeName;
                         model.Area = ship.OriginCity.CityName;
                         model.CreatedDate = ship.CreatedDate;
-                        model.Destination = ship.DestinationCity.BranchCorpOffice.BranchCorpOfficeName;
+                        model.Destination = ship.DestinationCity.CityName;
                         model.BSO = ship.OriginCity.CityName;
                     }
                     model.SackNo = _bundle.SackNo;

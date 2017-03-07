@@ -7,63 +7,24 @@ using System.Threading.Tasks;
 
 namespace CMS2.Client.SyncHelper
 {
-    public class SyncTables : INotifyPropertyChanged
+    public class SyncTables
     {
-
-        private TableStatus _status;
-        private bool _isSelected;
-        public event PropertyChangedEventHandler PropertyChanged;
         public SyncTables()
         {
             Status = TableStatus.Good;
-            isSelected = false;
-
+            isSelected = false;     
+            
         }
         [DisplayName("Tables")]
         public string TableName { get; set; }
-
         [DisplayName("Status")]
-        public TableStatus Status
-        {
-            get
-            {
-                return _status;
-            }
-            set
-            {
-                if (_status != value)
-                {
-                    _status = value;
-                    OnPropertyChanged("Status");
-                }
-            }
-        }
+        public TableStatus Status { get; set; }
 
         [DisplayName("Select")]
-        public bool isSelected
-        {
-            get
-            {
-                return _isSelected;
-            }
-            set
-            {
-                if (this._isSelected != value)
-                {
-                    this._isSelected = value;
-                    OnPropertyChanged("isSelected");
-                }
-            }
-        }
+        public bool isSelected { get; set; }
 
-        protected virtual void OnPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-
+       
+                
     }
 
     public enum TableStatus

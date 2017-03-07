@@ -70,9 +70,9 @@ namespace CMS2.Entities
         [MaxLength(30)]
         [DisplayName("Department")]
         public string Department { get; set; }
-        [MaxLength(80)]
-        [DisplayName("Company")]
-        public string CompanyName { get; set; }
+        //[MaxLength(80)]
+        //[DisplayName("Company")]
+        //public string CompanyName { get; set; }
         [MaxLength(300)]
         [DisplayName("Remarks")]
         public string Remarks { get; set; }

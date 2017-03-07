@@ -101,7 +101,7 @@ namespace CMS2.Client.Forms.TrackingReports
                         model.ScannedPcs++;
                         model.Weight += bundle.Weight;
                         model.TotalPcs += model.ScannedPcs;
-                        model.Origin = shipment.GetAll().Find(x => x.AirwayBillNo.Equals(_airwaybill)).OriginCity.CityName;
+                        //model.Origin = shipment.GetAll().Find(x => x.AirwayBillNo.Equals(_airwaybill)).OriginCity.CityName;
                         model.CreatedDate = bundle.CreatedDate;
                         model.Branch = bundle.BranchCorpOffice.BranchCorpOfficeName;
                         _results.Add(model);

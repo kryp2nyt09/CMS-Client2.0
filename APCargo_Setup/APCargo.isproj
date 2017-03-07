@@ -29,6 +29,10 @@
 	</ItemGroup>
 	<Import Project="$(MSBuildExtensionsPath32)\InstallShield\2015Limited\InstallShield.targets"/>
 	<ItemGroup>
+		<ProjectReference Include="..\AP CARGO SERVICE\AP CARGO SERVICE.csproj">
+			<Name>AP CARGO SERVICE</Name>
+			<Project>{62270F11-7DC6-43A6-9F5A-3A15A5CC2E54}</Project>
+		</ProjectReference>
 		<ProjectReference Include="..\CMS2.Client\CMS2.Client.csproj">
 			<Name>CMS2.Client</Name>
 			<Project>{B6A11D95-5E39-4249-9F39-F90507C1BAFE}</Project>
