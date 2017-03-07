@@ -14,8 +14,8 @@ namespace CMS2.Entities.ReportModel
         public string Address { get; set; }
         public string CommodityType { get; set; }
         public string Commodity { get; set; }
-        public string Qty { get; set; }
-        public string AGW { get; set; }
+        public int Qty { get; set; }
+        public decimal AGW { get; set; }
         public string ServiceMode { get; set; }
         public string PaymendMode { get; set; }
         public string Area { get; set; }

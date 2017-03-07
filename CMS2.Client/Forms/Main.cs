@@ -807,9 +807,9 @@ namespace CMS2.Client
                     foreach (var item in _clients)
                     {
                         if (item.CompanyId == null)
-                            shipperCompany.Add(item.CompanyName);
+                            shipperCompany.Add(item.Company.CompanyName);
                         else
-                            shipperCompany.Add(item.CompanyName + " - " + item.AccountNo);
+                            shipperCompany.Add(item.Company.CompanyName + " - " + item.AccountNo);
                     }
                 }
                 else
@@ -881,9 +881,9 @@ namespace CMS2.Client
                     foreach (var item in _clients)
                     {
                         if (item.CompanyId == null)
-                            consigneeCompany.Add(item.CompanyName);
+                            consigneeCompany.Add(item.Company.CompanyName);
                         else
-                            consigneeCompany.Add(item.CompanyName + " - " + item.AccountNo);
+                            consigneeCompany.Add(item.Company.CompanyName + " - " + item.AccountNo);
                     }
                 }
                 else
@@ -2876,7 +2876,7 @@ namespace CMS2.Client
                 }
                 else
                 {
-                    txtShipperCompany.Text = booking.Shipper.CompanyName;
+                    txtShipperCompany.Text = booking.Shipper.Company.CompanyName;
                 }
                 txtShipperAddress1.Text = booking.OriginAddress1;
                 txtShipperAddress2.Text = booking.OriginAddress2;
@@ -2899,7 +2899,7 @@ namespace CMS2.Client
                 }
                 else
                 {
-                    txtConsigneeCompany.Text = booking.Consignee.CompanyName;
+                    txtConsigneeCompany.Text = booking.Consignee.Company.CompanyName;
                 }
                 txtConsigneeAddress1.Text = booking.DestinationAddress1;
                 txtConsigneeAddress2.Text = booking.DestinationAddress2;
@@ -3168,7 +3168,7 @@ namespace CMS2.Client
                 { txtShipperCompany.Text = shipper.Company.CompanyName + " - " + shipper.Company.AccountNo; }
                 else
                 {
-                    txtShipperCompany.Text = shipper.CompanyName;
+                    txtShipperCompany.Text = shipper.Company.CompanyName;
                 }
                 txtShipperAddress1.Text = shipper.Address1;
                 txtShipperAddress2.Text = shipper.Address2;
@@ -3205,7 +3205,7 @@ namespace CMS2.Client
                 if (consignee.CompanyId != null)
                 { txtConsigneeCompany.Text = consignee.Company.CompanyName + " - " + consignee.Company.AccountNo; }
                 else
-                { txtConsigneeCompany.Text = consignee.CompanyName; }
+                { txtConsigneeCompany.Text = consignee.Company.CompanyName; }
 
                 txtConsigneeAddress1.Text = consignee.Address1;
                 txtConsigneeAddress2.Text = consignee.Address2;
@@ -3452,7 +3452,7 @@ namespace CMS2.Client
                 shipper.ModifiedBy = AppUser.User.UserId;
                 shipper.ModifiedDate = DateTime.Now;
                 shipper.RecordStatus = (int)RecordStatus.Active;
-                shipper.CompanyName = txtShipperCompany.Text.Trim();
+                shipper.Company.CompanyName = txtShipperCompany.Text.Trim();
                 shipper.Address1 = txtShipperAddress1.Text.Trim();
                 shipper.Address2 = txtShipperAddress2.Text.Trim();
                 shipper.Street = txtShipperStreet.Text.Trim();
@@ -3472,9 +3472,9 @@ namespace CMS2.Client
                 shipper.Email = txtShipperEmail.Text.Trim();
                 if (shipper.CompanyId == null)
                 {
-                    if (shipper.CompanyName.Contains(" - "))
+                    if (shipper.Company.CompanyName.Contains(" - "))
                     {
-                        Guid id = GetCompanyIdByString(shipper.CompanyName);
+                        Guid id = GetCompanyIdByString(shipper.Company.CompanyName);
                         if (id == Guid.Empty)
                             shipper.CompanyId = null;
                         else
@@ -3489,7 +3489,7 @@ namespace CMS2.Client
                 consignee.ModifiedBy = AppUser.User.UserId;
                 consignee.ModifiedDate = DateTime.Now;
                 consignee.RecordStatus = (int)RecordStatus.Active;
-                consignee.CompanyName = txtConsigneeCompany.Text.Trim();
+                consignee.Company.CompanyName = txtConsigneeCompany.Text.Trim();
                 consignee.Address1 = txtConsigneeAddress1.Text.Trim();
                 consignee.Address2 = txtConsigneeAddress2.Text.Trim();
                 consignee.Street = txtConsgineeStreet.Text.Trim();
@@ -3508,9 +3508,9 @@ namespace CMS2.Client
                 consignee.Email = txtConsigneeEmail.Text.Trim();
                 if (consignee.CompanyId == null)
                 {
-                    if (consignee.CompanyName.Contains(" - "))
+                    if (consignee.Company.CompanyName.Contains(" - "))
                     {
-                        Guid id = GetCompanyIdByString(consignee.CompanyName);
+                        Guid id = GetCompanyIdByString(consignee.Company.CompanyName);
                         if (id == Guid.Empty)
                             consignee.CompanyId = null;
                         else
@@ -4016,7 +4016,7 @@ namespace CMS2.Client
                     }
                     else
                     {
-                        AcceptancetxtShipperCompany.Text = shipment.Shipper.CompanyName;
+                        AcceptancetxtShipperCompany.Text = shipment.Shipper.Company.CompanyName;
                     }
                     AcceptancetxtShipperAddress.Text = shipment.Shipper.Address1 + ", " + shipment.Shipper.Address2;
                     AcceptancetxtShipperBarangay.Text = shipment.Shipper.Barangay;
@@ -4036,7 +4036,7 @@ namespace CMS2.Client
                     }
                     else
                     {
-                        AcceptancetxtConsigneeCompany.Text = shipment.Consignee.CompanyName;
+                        AcceptancetxtConsigneeCompany.Text = shipment.Consignee.Company.CompanyName;
                     }
                     AcceptancetxtConsigneeAddress.Text = shipment.Consignee.Address1 + ", " + shipment.Consignee.Address2;
                     AcceptancetxtConsigneeBarangay.Text = shipment.Consignee.Barangay;
@@ -5740,7 +5740,6 @@ namespace CMS2.Client
             {
                 if (row is GridDataRowElement)
                 {
-
                     DataRow dRow = dt.NewRow();
                     foreach (GridViewCellInfo cell in row.RowInfo.Cells)
                     {
@@ -7168,7 +7167,7 @@ namespace CMS2.Client
         private void btnGatewayTransmital_Print_Click(object sender, EventArgs e)
         {
             DataTable dataTable = getGatewayTransmitalGrid();
-            TrackingReportGlobalModel.table = getGatewayTransmitalGrid();
+            TrackingReportGlobalModel.table = dataTable;
             TrackingReportGlobalModel.Date = dateTimeGatewayTransmital_Date.Value.ToLongDateString();
             TrackingReportGlobalModel.Driver = get_Column_DataView(dataTable, "Driver");
             TrackingReportGlobalModel.PlateNo = get_Column_DataView(dataTable, "PlateNo");
@@ -7702,10 +7701,11 @@ namespace CMS2.Client
         }
         private void btnDailyTrip_Print_Click(object sender, EventArgs e)
         {
-
-            DataTable dataTable = getDeliveryStatusGrid();
+           
+            DataTable dataTable = getDailyTripGrid("PP");
             TrackingReportGlobalModel.Date = dateTimeDailyTrip_Date.Value.ToLongDateString();
             TrackingReportGlobalModel.Driver = dropDownDailyTrip_Driver.SelectedItem.ToString();
+
             TrackingReportGlobalModel.Checker = get_Column_DataView(dataTable, "Checker");
             TrackingReportGlobalModel.PlateNo = "";
             TrackingReportGlobalModel.Area = get_Column_DataView(dataTable, "Area");

@@ -109,11 +109,11 @@ namespace CMS2.Client.Forms.TrackingReports
                     model.ServiceMode = distribution.ServiceMode.ServiceModeName;
                     model.PaymentMode = distribution.PaymentMode.PaymentModeName;
                     model.Amount += distribution.Amount;
-                    model.Area = distribution.Area.RevenueUnitName;
+                    //model.Area = distribution.Area.RevenueUnitName;
                    
                     model.Driver = distribution.Driver;
                     model.Checker = distribution.Checker;
-                    model.BCO = distribution.Area.City.BranchCorpOffice.BranchCorpOfficeName;
+                    //model.BCO = distribution.Area.
                     model.PaymentCode = distribution.PaymentMode.PaymentModeCode;
                     _results.Add(model);
                 }

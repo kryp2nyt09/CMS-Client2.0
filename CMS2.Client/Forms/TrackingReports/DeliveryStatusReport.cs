@@ -103,7 +103,7 @@ namespace CMS2.Client.Forms.TrackingReports
                     List<Distribution> list = distribution.GetAll().Where(x => x.ShipmentId == deliveryStatus.ShipmentId).Distinct().ToList();
                     foreach(Distribution dis in list)
                     {
-                        model.Area = dis.Area.RevenueUnitName;
+                        //model.Area = dis.Area.RevenueUnitName;
                         model.Driver = dis.Driver;
                         model.Checker = dis.Checker;
                         model.Batch = dis.Batch.BatchName;
