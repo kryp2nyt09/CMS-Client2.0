@@ -162,26 +162,31 @@ namespace CMS2_Client
             ToggleEnableDisableMainServer(false);
             isSubServer = false;
         }
-        private void Extract_Click(object sender, EventArgs e, int i = 3000)
-        {
+        private void Extract_Click(object sender, EventArgs e)
+        {           
             int index = dboBranchCoprOffice.SelectedItem.ToString().IndexOf(" ");
             _filter = dboBranchCoprOffice.SelectedItem.ToString().Substring(0, index);
             _branchCorpOfficeId = dboBranchCoprOffice.SelectedValue.ToString();
+
             if (isSubServer && isLocalConnected && isMainConnected)
             {
-                SetEntities();
+                Extract.Enabled = false;
                 Worker.RunWorkerAsync();
             }
             else if (!isSubServer && isLocalConnected)
             {
+                Extract.Enabled = false;
                 WriteToConfig(_localConnectionString.Replace("master", _localDbName));
-                this.DialogResult = DialogResult.OK;
-                this.Close();
+                radButton1.Enabled = true;
             }
         }
-
-        private void Extract_Work(object sender, DoWorkEventArgs e)
+        private void radButton1_Click(object sender, EventArgs e)
         {
+            this.DialogResult = DialogResult.OK;
+            this.Close();
+        }
+        private void Extract_Work(object sender, DoWorkEventArgs e)
+        {           
             DropDatabaseIfExist();
             CreateDatabase();
 
@@ -194,8 +199,8 @@ namespace CMS2_Client
             StartSynchronization(Worker);
 
             WriteToConfig(_localConnectionString.Replace("master", _localDbName));
-            WriteToConfig(_mainConnectionString);
-            SaveSyncServiceSettings();
+            WriteToConfig(_mainConnectionString);           
+
         }
         private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
@@ -204,9 +209,16 @@ namespace CMS2_Client
         }
         private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            if (OpenFile.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                SaveSyncServiceSettings();
+                StartService();
+            }
+
             lblProgressState.Text = "Completed.";
             radProgressBar1.Value1 = radProgressBar1.Maximum;
-            System.Threading.Thread.Sleep(3000);
+            System.Threading.Thread.Sleep(5000);
+            radButton1.Enabled = true;
         }
         #endregion
 
@@ -252,7 +264,7 @@ namespace CMS2_Client
             Settings.Default.CentralUsername = _mainUsername;
             Settings.Default.CentralPassword = _mainPassword;
             Settings.Default.Filter = _filter;
-            Settings.Default.DeviceBcoId = _branchCorpOfficeId;            
+            Settings.Default.DeviceBcoId = _branchCorpOfficeId;
             Settings.Default.Save();
 
             Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
@@ -436,7 +448,7 @@ namespace CMS2_Client
 
                 try
                 {
-                    Synchronize sync = new Synchronize(_entities[i].TableName, _filter, _threadState._event, new SqlConnection(_localConnectionString), new SqlConnection(_mainConnectionString));
+                    Synchronize sync = new Synchronize(_entities[i].TableName, _filter, _threadState._event, new SqlConnection(_localConnectionString.Replace("master", _localDbName)), new SqlConnection(_mainConnectionString));
                     ThreadPool.QueueUserWorkItem(new WaitCallback(sync.PerformSync), _threadState);
                     _threadState._event.WaitOne();
                 }
@@ -450,7 +462,7 @@ namespace CMS2_Client
             List<CMS2.Client.SyncHelper.ThreadState> listOfState = new List<CMS2.Client.SyncHelper.ThreadState>();
             List<ManualResetEvent> provisionEvents = new List<ManualResetEvent>();
             List<ManualResetEvent> provisionEvents1 = new List<ManualResetEvent>();
-            SqlConnection localConnection = new SqlConnection(_localConnectionString);
+            SqlConnection localConnection = new SqlConnection(_localConnectionString.Replace("master", _localDbName));
             SqlConnection mainConnection = new SqlConnection(_mainConnectionString);
 
             for (int i = 0; i < _entities.Count - 1; i++)
@@ -499,7 +511,7 @@ namespace CMS2_Client
                         {
                             if (item.Attributes["name"].Value.Equals("AP_CARGO_SERVICE.Properties.Settings.LocalConnectionString"))
                             {
-                                item.Attributes["connectionString"].Value = _localConnectionString;
+                                item.Attributes["connectionString"].Value = _localConnectionString.Replace("master", _localDbName);
                             }
                             else if (item.Attributes["name"].Value.Equals("AP_CARGO_SERVICE.Properties.Settings.ServerConnectionString"))
                             {
@@ -562,7 +574,7 @@ namespace CMS2_Client
             }
             catch (Exception ex)
             {
-                Logs.ErrorLogs("Saving Sync Settings configuration", "SaveSyncSettings", ex.Message);
+                Log.WriteErrorLogs(ex);
             }
 
         }
@@ -570,15 +582,17 @@ namespace CMS2_Client
         {
             try
             {
+                lblProgressState.Text =  "Starting synchronization service.";
+                System.Threading.Thread.Sleep(2000);
                 ServiceController service = new ServiceController("Synchronization Service", Environment.MachineName);
                 TimeSpan timeout = TimeSpan.FromMilliseconds(300000);
 
                 if (service.Status == ServiceControllerStatus.Stopped)
                 {
                     service.Start();
-                    lblProgressState.Text = "Starting Synchronization Service...";
                     service.WaitForStatus(ServiceControllerStatus.Running, timeout);
                     lblProgressState.Text = "Synchronization Service started.";
+                    System.Threading.Thread.Sleep(2000);
                     Log.WriteLogs("Synchronization Service started.");
                 }
             }

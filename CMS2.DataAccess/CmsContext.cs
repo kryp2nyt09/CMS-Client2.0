@@ -128,6 +128,7 @@ namespace CMS2.DataAccess
 
             modelBuilder.Entity<BranchCorpOffice>().HasMany(e => e.Clusters).WithRequired(e => e.BranchCorpOffice).WillCascadeOnDelete(false);
             modelBuilder.Entity<BranchCorpOffice>().HasMany(e => e.Cities).WithRequired(e => e.BranchCorpOffice).WillCascadeOnDelete(false);
+            modelBuilder.Entity<BranchCorpOffice>().Property(e => e.BranchCorpOfficeCode).IsOptional();
 
             modelBuilder.Entity<Bundle>().HasRequired(x => x.BranchCorpOffice).WithMany().WillCascadeOnDelete(false);
 

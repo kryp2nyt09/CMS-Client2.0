@@ -22,6 +22,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.ComponentModel;
 using System.ServiceProcess;
+using System.IO;
 
 namespace CMS2.Client
 {
@@ -58,7 +59,7 @@ namespace CMS2.Client
         private BranchCorpOfficeBL bcoService;
         private RevenueUnitTypeBL revenutUnitTypeService;
         private RevenueUnitBL revenueUnitService;
-        
+
         private List<BranchCorpOffice> _branchCorpOffices;
         private List<RevenueUnitType> revenueUnitTypes;
         private List<RevenueUnit> revenueUnits;
@@ -116,11 +117,11 @@ namespace CMS2.Client
 
             _branchCorpOfficeId = ConfigurationManager.AppSettings["BcoId"].ToString();
             _filter = ConfigurationManager.AppSettings["Filter"].ToString();
-            _localConnectionString = ConfigurationManager.ConnectionStrings["CmsCentral"].ConnectionString;
-            _mainConnectionString = ConfigurationManager.ConnectionStrings["CmsSampleServer"].ConnectionString;
+            _localConnectionString = ConfigurationManager.ConnectionStrings["Cms"].ConnectionString;
+            _mainConnectionString = ConfigurationManager.ConnectionStrings["CmsCentral"].ConnectionString;
 
             SetChekcBoxes();
-            SetEntities();            
+            SetEntities();
             gridTables.DataSource = _entities;
             radProgressBar1.Maximum = _entities.Count() + 5;
         }
@@ -190,7 +191,7 @@ namespace CMS2.Client
             txtServerUsername.Text = Settings.Default.CentralUsername;
             txtServerPassword.Text = Settings.Default.CentralPassword;
             txtDeviceCode.Text = Settings.Default.DeviceCode;
-            
+
             try
             {
                 lstBco.SelectedValue = _branchCorpOffices.Find(x => x.BranchCorpOfficeId == Guid.Parse(Settings.Default.DeviceBcoId.ToString())).BranchCorpOfficeId;
@@ -215,6 +216,7 @@ namespace CMS2.Client
         private void PopulateRevenueUnit(List<RevenueUnit> list)
         {
             lstRevenueUnit.Items.Clear();
+            lstRevenueUnit.DataSource = list;
             lstRevenueUnit.DisplayMember = "RevenueUnitName";
             lstRevenueUnit.ValueMember = "ReveneuUnitId";
         }
@@ -401,17 +403,17 @@ namespace CMS2.Client
             }
         }
         private void btnStart_Click(object sender, EventArgs e)
-        {                      
+        {
             btnStart.Enabled = false;
             btnCancel.Enabled = true;
-            Worker.RunWorkerAsync();     
+            Worker.RunWorkerAsync();
         }
         private void Renew_Work(object sender, DoWorkEventArgs e)
         {
             if (isDeprovisionClient)
             {
                 radProgressBar1.Value1 = 0;
-                StartDeprovisionLocal();                
+                StartDeprovisionLocal();
             }
             if (IsDeprovisionServer)
             {
@@ -425,16 +427,16 @@ namespace CMS2.Client
             }
 
             radProgressBar1.Value1 = 0;
-            CheckTableState(Worker);            
-            
+            CheckTableState(Worker);
+
         }
         private void btnCancel_Click(object sender, EventArgs e)
         {
             if (Worker.IsBusy)
             {
                 Worker.CancelAsync();
-            }            
-         }
+            }
+        }
         private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             radProgressBar1.Value1 += e.ProgressPercentage;
@@ -569,7 +571,7 @@ namespace CMS2.Client
             List<SyncHelper.ThreadState> listOfThread = new List<SyncHelper.ThreadState>();
             List<ManualResetEvent> syncEvents = new List<ManualResetEvent>();
             List<ManualResetEvent> syncEvents1 = new List<ManualResetEvent>();
-            
+
             for (int i = 0; i < _entities.Count - 1; i++)
             {
                 SyncHelper.ThreadState _threadState = new SyncHelper.ThreadState();
@@ -594,9 +596,9 @@ namespace CMS2.Client
                 }
                 catch (Exception ex)
                 {
-                    Logs.ErrorLogs("CheckTableState","ChecktableState",ex.Message);
+                    Logs.ErrorLogs("CheckTableState", "ChecktableState", ex.Message);
                 }
-            }     
+            }
         }
         private void CheckTableInitial()
         {
@@ -637,7 +639,7 @@ namespace CMS2.Client
             {
                 WaitHandle.WaitAny(syncEvents.ToArray());
                 WaitHandle.WaitAny(syncEvents1.ToArray());
-            }   
+            }
         }
         private void StartProvision()
         {
@@ -681,7 +683,7 @@ namespace CMS2.Client
             {
                 WaitHandle.WaitAny(provisionEvents.ToArray());
                 WaitHandle.WaitAny(provisionEvents1.ToArray());
-            }            
+            }
         }
         private void StartDeprovisionClient()
         {
@@ -722,14 +724,14 @@ namespace CMS2.Client
             {
                 WaitHandle.WaitAny(deprovisionEvents.ToArray());
                 WaitHandle.WaitAny(deprovisionEvents1.ToArray());
-            }            
+            }
         }
         private void StartDeprovisionLocal()
-        {            
+        {
             SqlConnection localConnection = new SqlConnection(_localConnectionString);
             ManualResetEvent _event = new ManualResetEvent(false);
             Deprovision deprovision = new Deprovision(localConnection, _event, "", "");
-            ThreadPool.QueueUserWorkItem(new WaitCallback( deprovision.PerformDeprovisionDatabase),_event);
+            ThreadPool.QueueUserWorkItem(new WaitCallback(deprovision.PerformDeprovisionDatabase), _event);
             _event.WaitOne();
         }
         private void StartDeprovisionWholeServer()
@@ -780,7 +782,7 @@ namespace CMS2.Client
                 WaitHandle.WaitAny(deprovisionEvents.ToArray());
                 WaitHandle.WaitAny(deprovisionEvents1.ToArray());
             }
-            
+
         }
         private void SetChekcBoxes()
         {
@@ -798,7 +800,7 @@ namespace CMS2.Client
                 {
                     if (xElement.Name == "connectionStrings")
                     {
-                        var nodes = xElement.ChildNodes;                        
+                        var nodes = xElement.ChildNodes;
                         foreach (XmlElement item in nodes)
                         {
                             if (item.Attributes["name"].Value.Equals("AP_CARGO_SERVICE.Properties.Settings.LocalConnectionString"))
@@ -868,7 +870,7 @@ namespace CMS2.Client
             {
                 Logs.ErrorLogs("Saving Sync Settings configuration", "SaveSyncSettings", ex.Message);
             }
-            
+
         }
         private void StartService()
         {
@@ -884,13 +886,13 @@ namespace CMS2.Client
                     service.WaitForStatus(ServiceControllerStatus.Running, timeout);
                     lblProgressState.Text = "Synchronization Service started.";
                     Log.WriteLogs("Synchronization Service started.");
-                }  
+                }
             }
             catch (Exception ex)
             {
                 Logs.ErrorLogs("Starting Service", "StartService", ex.Message);
             }
-                      
+
         }
         private void StopService()
         {
@@ -904,14 +906,14 @@ namespace CMS2.Client
                     lblProgressState.Text = "Stopping Synchronization Service...";
                     service.WaitForStatus(ServiceControllerStatus.Stopped, timeout);
                     Log.WriteLogs("Synchronization Service was stop.");
-                }  
+                }
             }
             catch (Exception ex)
             {
                 Logs.ErrorLogs("Stopping Service", "StopService", ex.Message);
             }
-                      
-        }        
-        #endregion           
+
+        }
+        #endregion
     }
 }

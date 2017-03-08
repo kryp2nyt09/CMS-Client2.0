@@ -688,7 +688,7 @@
             // 
             this.OpenFile.FileName = "AP CARGO SERVICE.exe.config";
             this.OpenFile.Filter = "Config Files|*.config";
-            this.OpenFile.InitialDirectory = "C:\\Program Files (x86)\\admin\\APCargo Setup";
+            this.OpenFile.InitialDirectory = "C:\\Program Files (x86)\\APCargo\\APCargo";
             this.OpenFile.RestoreDirectory = true;
             // 
             // CmsDbCon

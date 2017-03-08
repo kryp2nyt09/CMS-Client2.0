@@ -60,6 +60,7 @@
             this.lblProgressState = new Telerik.WinControls.UI.RadLabel();
             this.Worker = new System.ComponentModel.BackgroundWorker();
             this.OpenFile = new System.Windows.Forms.OpenFileDialog();
+            this.radButton1 = new Telerik.WinControls.UI.RadButton();
             ((System.ComponentModel.ISupportInitialize)(this.radPanel1)).BeginInit();
             this.radPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dboBranchCoprOffice)).BeginInit();
@@ -90,6 +91,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.ProgressLabel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radProgressBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblProgressState)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radButton1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
             // 
@@ -118,7 +120,7 @@
             this.radPanel1.Controls.Add(this.LocalServer);
             this.radPanel1.Controls.Add(this.radLabel1);
             this.radPanel1.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radPanel1.Location = new System.Drawing.Point(32, 49);
+            this.radPanel1.Location = new System.Drawing.Point(10, 49);
             this.radPanel1.Name = "radPanel1";
             this.radPanel1.Size = new System.Drawing.Size(366, 364);
             this.radPanel1.TabIndex = 0;
@@ -346,7 +348,7 @@
             // 
             this.SubServer.CheckState = System.Windows.Forms.CheckState.Checked;
             this.SubServer.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SubServer.Location = new System.Drawing.Point(98, 12);
+            this.SubServer.Location = new System.Drawing.Point(76, 12);
             this.SubServer.Name = "SubServer";
             this.SubServer.Size = new System.Drawing.Size(86, 19);
             this.SubServer.TabIndex = 2;
@@ -358,7 +360,7 @@
             // ClientApp
             // 
             this.ClientApp.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ClientApp.Location = new System.Drawing.Point(205, 12);
+            this.ClientApp.Location = new System.Drawing.Point(183, 12);
             this.ClientApp.Name = "ClientApp";
             this.ClientApp.Size = new System.Drawing.Size(81, 19);
             this.ClientApp.TabIndex = 3;
@@ -370,9 +372,9 @@
             // Extract
             // 
             this.Extract.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Extract.Location = new System.Drawing.Point(267, 470);
+            this.Extract.Location = new System.Drawing.Point(204, 464);
             this.Extract.Name = "Extract";
-            this.Extract.Size = new System.Drawing.Size(131, 23);
+            this.Extract.Size = new System.Drawing.Size(79, 23);
             this.Extract.TabIndex = 18;
             this.Extract.Text = "Extract";
             this.Extract.ThemeName = "Office2010Black";
@@ -381,7 +383,7 @@
             // ProgressLabel
             // 
             this.ProgressLabel.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ProgressLabel.Location = new System.Drawing.Point(32, 419);
+            this.ProgressLabel.Location = new System.Drawing.Point(16, 419);
             this.ProgressLabel.Name = "ProgressLabel";
             this.ProgressLabel.Size = new System.Drawing.Size(2, 2);
             this.ProgressLabel.TabIndex = 20;
@@ -389,7 +391,7 @@
             // 
             // radProgressBar1
             // 
-            this.radProgressBar1.Location = new System.Drawing.Point(32, 444);
+            this.radProgressBar1.Location = new System.Drawing.Point(10, 438);
             this.radProgressBar1.Name = "radProgressBar1";
             this.radProgressBar1.Size = new System.Drawing.Size(366, 20);
             this.radProgressBar1.TabIndex = 24;
@@ -397,7 +399,7 @@
             // 
             // lblProgressState
             // 
-            this.lblProgressState.Location = new System.Drawing.Point(32, 420);
+            this.lblProgressState.Location = new System.Drawing.Point(10, 420);
             this.lblProgressState.Name = "lblProgressState";
             this.lblProgressState.Size = new System.Drawing.Size(52, 18);
             this.lblProgressState.TabIndex = 25;
@@ -415,14 +417,27 @@
             // 
             this.OpenFile.FileName = "AP CARGO SERVICE.exe.config";
             this.OpenFile.Filter = "Config Files|*.config";
-            this.OpenFile.InitialDirectory = "C:\\Program Files (x86)\\admin\\APCargo Setup";
+            this.OpenFile.InitialDirectory = "C:\\Program Files (x86)\\APCargo\\APCargo";
             this.OpenFile.RestoreDirectory = true;
+            // 
+            // radButton1
+            // 
+            this.radButton1.Enabled = false;
+            this.radButton1.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radButton1.Location = new System.Drawing.Point(289, 464);
+            this.radButton1.Name = "radButton1";
+            this.radButton1.Size = new System.Drawing.Size(85, 23);
+            this.radButton1.TabIndex = 26;
+            this.radButton1.Text = "Finish";
+            this.radButton1.ThemeName = "Office2010Black";
+            this.radButton1.Click += new System.EventHandler(this.radButton1_Click);
             // 
             // Extract_Database
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(432, 505);
+            this.ClientSize = new System.Drawing.Size(386, 492);
+            this.Controls.Add(this.radButton1);
             this.Controls.Add(this.radProgressBar1);
             this.Controls.Add(this.lblProgressState);
             this.Controls.Add(this.ProgressLabel);
@@ -469,6 +484,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.ProgressLabel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radProgressBar1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblProgressState)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radButton1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -509,5 +525,6 @@
         private Telerik.WinControls.UI.RadLabel lblProgressState;
         private System.ComponentModel.BackgroundWorker Worker;
         private System.Windows.Forms.OpenFileDialog OpenFile;
+        private Telerik.WinControls.UI.RadButton radButton1;
     }
 }

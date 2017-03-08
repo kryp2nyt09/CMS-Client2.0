@@ -104,7 +104,7 @@ namespace CMS2.Client.SyncHelper
             {
                 ManualResetEvent _newEvent = new ManualResetEvent(false);
 
-                if (i<= 60)
+                if (i <= 60)
                 {
                     ProvisionEvents.Add(_newEvent);
                 }
@@ -112,10 +112,10 @@ namespace CMS2.Client.SyncHelper
                 {
                     ProvisionEvents1.Add(_newEvent);
                 }
-                
+
                 Provision _provision = new Provision(Entities[i].TableName, ClientConnection, ServerConnection, _newEvent, Filter, DeviceBranchCorpOfficeID);
                 ThreadPool.QueueUserWorkItem(new WaitCallback(_provision.Prepare_Database_For_Synchronization), Entities[i]);
-            }            
+            }
         }
 
         public void Synchronize()
@@ -125,7 +125,7 @@ namespace CMS2.Client.SyncHelper
                 for (int i = 0; i < Entities.Count - 1; i++)
                 {
                     ManualResetEvent _newEvent = new ManualResetEvent(false);
-                    if (i<=60)
+                    if (i <= 60)
                     {
                         SynchronizationEvents.Add(_newEvent);
                     }
@@ -133,10 +133,10 @@ namespace CMS2.Client.SyncHelper
                     {
                         SynchronizationEvents1.Add(_newEvent);
                     }
-                    
+
                     Synchronize sync = new Synchronize(Entities[i].TableName, Filter, _newEvent, ClientConnection, ServerConnection);
                     ThreadPool.QueueUserWorkItem(sync.PerformSync, Entities[i]);
-                }                
+                }
             }
             catch (Exception ex)
             {
@@ -144,7 +144,7 @@ namespace CMS2.Client.SyncHelper
             }
 
         }
-        
+
         /// <summary>
         /// Remove the "_Filter_template" template from the server database.
         /// This also removes all of the scopes that depend on the template.            
@@ -189,20 +189,20 @@ namespace CMS2.Client.SyncHelper
 
             try
             {
-                for (int i = 0; i < Entities.Count -1 ; i++)
+                for (int i = 0; i < Entities.Count - 1; i++)
                 {
                     ManualResetEvent _newEvent = new ManualResetEvent(false);
-                    if (i<60)
+                    if (i < 60)
                     {
                         DeprovisionEvents.Add(_newEvent);
                     }
                     else
                     {
                         DeprovisionEvents1.Add(_newEvent);
-                    }                    
+                    }
                     Deprovision _deprovision = new Deprovision(ServerConnection, _newEvent, Filter, Entities[i].TableName);
-                    ThreadPool.QueueUserWorkItem(new WaitCallback( _deprovision.PerformDeprovisionTable), Entities[i]);
-                }                
+                    ThreadPool.QueueUserWorkItem(new WaitCallback(_deprovision.PerformDeprovisionTable), Entities[i]);
+                }
             }
             catch (Exception ex)
             {
@@ -233,7 +233,7 @@ namespace CMS2.Client.SyncHelper
                     }
                     Deprovision _deprovision = new Deprovision(ClientConnection, _newEvent, Filter, Entities[i].TableName);
                     ThreadPool.QueueUserWorkItem(new WaitCallback(_deprovision.PerformDeprovisionTable), Entities[i]);
-                }  
+                }
             }
             catch (Exception ex)
             {
@@ -347,10 +347,10 @@ namespace CMS2.Client.SyncHelper
                             State.table.isSelected = true;
                             State.worker.ReportProgress(1, _tableName + " synchronize error.");
                         }
-                        catch (Exception )
-                        {                           
+                        catch (Exception)
+                        {
                         }
-                        
+
                     }
                     break;
 
@@ -375,10 +375,10 @@ namespace CMS2.Client.SyncHelper
                             State.table.isSelected = true;
                             State.worker.ReportProgress(1, _tableName + " synchronize error.");
                         }
-                        catch (Exception )
-                        {                            
+                        catch (Exception)
+                        {
                         }
-                        
+
                     }
                     break;
             }
@@ -512,7 +512,7 @@ namespace CMS2.Client.SyncHelper
 
                         state._event.Set();
                         state.table.Status = TableStatus.Provisioned;
-                        state.worker.ReportProgress(1  ,_tableName + " was provisioned.");
+                        state.worker.ReportProgress(1, _tableName + " was provisioned.");
 
                         break;
 
@@ -645,7 +645,7 @@ namespace CMS2.Client.SyncHelper
 
                         state._event.Set();
                         state.table.Status = TableStatus.Provisioned;
-                        state.worker.ReportProgress(1 , _tableName + " was provisioned.");
+                        state.worker.ReportProgress(1, _tableName + " was provisioned.");
 
                         break;
                     case "DeliveryReceipt":
@@ -665,7 +665,7 @@ namespace CMS2.Client.SyncHelper
                         ProvisionServer(_tableName, param, _branchCorpOfficeId);
 
                         ProvisionClient(_tableName);
-                                                
+
                         state._event.Set();
                         state.table.Status = TableStatus.Provisioned;
                         state.worker.ReportProgress(1, _tableName + " was provisioned.");
@@ -758,7 +758,7 @@ namespace CMS2.Client.SyncHelper
                 Log.WriteErrorLogs(ex);
             }
         }
-       
+
         public void ProvisionClient(string TableName)
         {
             DbSyncScopeDescription scopeDescription = SqlSyncDescriptionBuilder.GetDescriptionForScope(TableName + _filter, _serverConnection);
@@ -859,10 +859,10 @@ namespace CMS2.Client.SyncHelper
             ThreadState state = (ThreadState)obj;
             try
             {
-                SqlSyncScopeDeprovisioning storeClientDeprovision = new SqlSyncScopeDeprovisioning(_connection);                
+                SqlSyncScopeDeprovisioning storeClientDeprovision = new SqlSyncScopeDeprovisioning(_connection);
                 storeClientDeprovision.DeprovisionScope(this._tableName + this._filter);
-                Log.WriteLogs("Server " + _tableName + " was Deprovision.");                
-                state.table.Status = TableStatus.Deprovisioned;               
+                Log.WriteLogs("Server " + _tableName + " was Deprovision.");
+                state.table.Status = TableStatus.Deprovisioned;
             }
             catch (Exception ex)
             {
@@ -877,10 +877,10 @@ namespace CMS2.Client.SyncHelper
             ManualResetEvent _event = (ManualResetEvent)obj;
             try
             {
-                 SqlSyncScopeDeprovisioning storeClientDeprovision = new SqlSyncScopeDeprovisioning(_connection);
+                SqlSyncScopeDeprovisioning storeClientDeprovision = new SqlSyncScopeDeprovisioning(_connection);
                 storeClientDeprovision.DeprovisionStore();
 
-                Log.WriteLogs("Database was Deprovisioned.");               
+                Log.WriteLogs("Database was Deprovisioned.");
             }
             catch (Exception ex)
             {
@@ -903,7 +903,7 @@ namespace CMS2.Client.SyncHelper
                 Log.WriteErrorLogs(ex);
             }
         }
-                
+
     }
 
     static class Log

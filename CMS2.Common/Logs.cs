@@ -15,14 +15,14 @@ namespace CMS2.Common
         public static async Task AppLogs(string logPath, string functionName, string message = "")
         {
             LogDate = DateTime.Now;
-            AppLogFile = logPath + "AppLogs_" + LogFileDate(LogDate) + ".txt";
+            AppLogFile = AppDomain.CurrentDomain.BaseDirectory + "\\AppLogs_" + LogFileDate(LogDate) + ".txt";
             File.AppendAllText(@AppLogFile, LogDate.ToString("yyyy/MM/dd HH:mm:ss") + " :: " + functionName + " :: " + message + "\r\n");
         }
 
         public static async Task ErrorLogs(string logPath, string functionName, string errorMessage)
         {
             LogDate = DateTime.Now;
-            ErrorLogFile = logPath + "ErrorLogs_" + LogFileDate(LogDate) + ".txt";
+            ErrorLogFile = AppDomain.CurrentDomain.BaseDirectory + "\\ErrorLogs_" + LogFileDate(LogDate) + ".txt";
             File.AppendAllText(@ErrorLogFile, LogDate.ToString("yyyy/MM/dd HH:mm:ss") + " :: " + functionName + " :: " + errorMessage + "\r\n");
         }
 

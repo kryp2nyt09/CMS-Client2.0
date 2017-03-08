@@ -2,10 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Telerik.WinControls.UI;
 
 namespace CMS2.Client
 {
@@ -32,7 +29,7 @@ namespace CMS2.Client
             {
                 try
                 {
-                    if (!(ctl == null))
+                    if (!(ctl.Parent == null))
                     {
                         int parentHeight = ctl.Parent.Height;
                         int parentWidth = ctl.Parent.Width;
@@ -52,7 +49,6 @@ namespace CMS2.Client
                 }
                 catch (Exception)
                 {
-                    return;
                 }
 
                 if (ctl.Controls.Count > 0)
@@ -62,7 +58,6 @@ namespace CMS2.Client
 
             }
         }
-
         public void ResizeAllControls(Control thisCtrl)
         {
             Single fontRatioW;
@@ -109,7 +104,6 @@ namespace CMS2.Client
                         }
                         catch (Exception)
                         {
-                            return;
                         }
 
                         if (ctl.Controls.Count > 0)
@@ -122,7 +116,6 @@ namespace CMS2.Client
                 catch (Exception)
                 {
 
-                    throw;
                 }
             }
         }

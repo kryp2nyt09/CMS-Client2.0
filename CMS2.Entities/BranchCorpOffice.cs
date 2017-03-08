@@ -14,8 +14,8 @@ namespace CMS2.Entities
         [MaxLength(50)]
         [DisplayName("BCO Name")]
         public string BranchCorpOfficeName { get; set; }
-
-        public string BCOCode { get; set; }
+        [DisplayName("Code")]
+        public string BranchCorpOfficeCode { get; set; }
 
         [DisplayName("Province")]
         public Guid ProvinceId { get; set; }

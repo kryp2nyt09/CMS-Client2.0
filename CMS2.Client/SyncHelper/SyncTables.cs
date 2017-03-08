@@ -23,6 +23,7 @@ namespace CMS2.Client.SyncHelper
         [DisplayName("Select")]
         public bool isSelected { get; set; }
 
+
        
                 
     }
