@@ -73,30 +73,6 @@ namespace CMS2.Client.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Ap123456#")]
-        public string LocalDbPassword {
-            get {
-                return ((string)(this["LocalDbPassword"]));
-            }
-            set {
-                this["LocalDbPassword"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("192.168.5.3")]
-        public string LocalDbServer {
-            get {
-                return ((string)(this["LocalDbServer"]));
-            }
-            set {
-                this["LocalDbServer"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("cms2_Beta3")]
         public string CentralDbName {
             get {
@@ -121,42 +97,6 @@ namespace CMS2.Client.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("cms")]
-        public string LocalDbName {
-            get {
-                return ((string)(this["LocalDbName"]));
-            }
-            set {
-                this["LocalDbName"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("192.168.15.108\\MHINE")]
-        public string CentralServerIp {
-            get {
-                return ((string)(this["CentralServerIp"]));
-            }
-            set {
-                this["CentralServerIp"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("admin!@#")]
-        public string CentralPassword {
-            get {
-                return ((string)(this["CentralPassword"]));
-            }
-            set {
-                this["CentralPassword"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool IsSynchronizationSetup {
             get {
@@ -176,6 +116,66 @@ namespace CMS2.Client.Properties {
             }
             set {
                 this["Filter"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("d0me$tic$QL")]
+        public string LocalDbPassword {
+            get {
+                return ((string)(this["LocalDbPassword"]));
+            }
+            set {
+                this["LocalDbPassword"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("192.168.5.1")]
+        public string LocalDbServer {
+            get {
+                return ((string)(this["LocalDbServer"]));
+            }
+            set {
+                this["LocalDbServer"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("cms2_Beta3")]
+        public string LocalDbName {
+            get {
+                return ((string)(this["LocalDbName"]));
+            }
+            set {
+                this["LocalDbName"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("192.168.5.1")]
+        public string CentralServerIp {
+            get {
+                return ((string)(this["CentralServerIp"]));
+            }
+            set {
+                this["CentralServerIp"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("d0me$tic$QL")]
+        public string CentralPassword {
+            get {
+                return ((string)(this["CentralPassword"]));
+            }
+            set {
+                this["CentralPassword"] = value;
             }
         }
     }

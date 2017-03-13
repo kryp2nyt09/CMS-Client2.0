@@ -256,7 +256,7 @@ namespace CMS2.Client
             }
         }
         private void Main_Load(object sender, EventArgs e)
-        {            
+        {
 
             GlobalVars.UnitOfWork = new CmsUoW();
             areaService = new AreaBL(GlobalVars.UnitOfWork);
@@ -268,7 +268,7 @@ namespace CMS2.Client
             GlobalVars.DeviceRevenueUnitId = Guid.Parse(ConfigurationManager.AppSettings["RUId"]);
             GlobalVars.DeviceBcoId = Guid.Parse(ConfigurationManager.AppSettings["BcoId"]);
             GlobalVars.UnitOfWork = new CmsUoW();
-                      
+
             LoadInit();
 
             BookingResetAll();
@@ -1176,13 +1176,19 @@ namespace CMS2.Client
 
         private void btnSettings_Click(object sender, EventArgs e)
         {
-
-            using (CmsDbCon settings = new CmsDbCon())
+            if (IsAdmin())
             {
-                if (settings.ShowDialog() == DialogResult.OK)
+                using (CmsDbCon settings = new CmsDbCon())
                 {
-                    settings.Close();
+                    if (settings.ShowDialog() == DialogResult.OK)
+                    {
+                        settings.Close();
+                    }
                 }
+            }
+            else
+            {
+                MessageBox.Show("You have insuficient privilege. Please Run as Administrator.","Adminstrator", MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
             }
 
         }
@@ -1595,7 +1601,19 @@ namespace CMS2.Client
         {
             e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
         }
+        private void lstPaymentMode_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
+        {
+            if (shipment == null) return;
 
+            if (lstPaymentMode.SelectedIndex > -1)
+            {
+                shipment.PaymentMode = paymentModes.Find(x => x.PaymentModeName == lstPaymentMode.SelectedItem.ToString());
+                if (shipment.PaymentMode != null)
+                {
+                    shipment.PaymentModeId = shipment.PaymentMode.PaymentModeId;
+                }
+            }
+        }
         #endregion
 
         #region Payment
@@ -2463,6 +2481,19 @@ namespace CMS2.Client
             {
                 this.Close();
             }
+        }
+        private bool IsAdmin()
+        {
+            WindowsIdentity identity = WindowsIdentity.GetCurrent();
+            if (identity != null)
+            {
+                WindowsPrincipal principal = new WindowsPrincipal(identity);
+                List<System.Security.Claims.Claim> list = new List<System.Security.Claims.Claim>(principal.UserClaims);
+                System.Security.Claims.Claim c = list.Find(p => p.Value.Equals("S-1-5-32-544"));
+                if (c != null)
+                    return true;
+            }
+            return false;
         }
 
         private NewPasswordViewModel GetNewPassword()
@@ -3426,7 +3457,12 @@ namespace CMS2.Client
                 shipper.ModifiedBy = AppUser.User.UserId;
                 shipper.ModifiedDate = DateTime.Now;
                 shipper.RecordStatus = (int)RecordStatus.Active;
-                shipper.Company.CompanyName = txtShipperCompany.Text.Trim();
+                Company company = companies.Find(x => x.CompanyName == txtShipperCompany.Text.Trim());
+                if (company != null)
+                {
+                    shipper.Company = company;
+                    shipper.CompanyId = company.CompanyId;
+                }
                 shipper.Address1 = txtShipperAddress1.Text.Trim();
                 shipper.Address2 = txtShipperAddress2.Text.Trim();
                 shipper.Street = txtShipperStreet.Text.Trim();
@@ -3444,17 +3480,7 @@ namespace CMS2.Client
                 shipper.ContactNo = txtShipperContactNo.Text.Trim();
                 shipper.Mobile = txtShipperMobile.Text.Trim();
                 shipper.Email = txtShipperEmail.Text.Trim();
-                if (shipper.CompanyId == null)
-                {
-                    if (shipper.Company.CompanyName.Contains(" - "))
-                    {
-                        Guid id = GetCompanyIdByString(shipper.Company.CompanyName);
-                        if (id == Guid.Empty)
-                            shipper.CompanyId = null;
-                        else
-                            shipper.CompanyId = id;
-                    }
-                }
+
                 #endregion
 
                 #region ConsingnessInfo
@@ -3463,7 +3489,12 @@ namespace CMS2.Client
                 consignee.ModifiedBy = AppUser.User.UserId;
                 consignee.ModifiedDate = DateTime.Now;
                 consignee.RecordStatus = (int)RecordStatus.Active;
-                consignee.Company.CompanyName = txtConsigneeCompany.Text.Trim();
+                Company consigneeCompany = companies.Find(x => x.CompanyName == txtConsigneeCompany.Text.Trim());
+                if (consigneeCompany != null)
+                {
+                    consignee.Company = consigneeCompany;
+                    consignee.CompanyId = consigneeCompany.CompanyId;
+                }
                 consignee.Address1 = txtConsigneeAddress1.Text.Trim();
                 consignee.Address2 = txtConsigneeAddress2.Text.Trim();
                 consignee.Street = txtConsgineeStreet.Text.Trim();
@@ -3481,20 +3512,11 @@ namespace CMS2.Client
                 consignee.Mobile = txtConsigneeMobile.Text.Trim();
                 consignee.Email = txtConsigneeEmail.Text.Trim();
                 if (consignee.CompanyId == null)
-                {
-                    if (consignee.Company.CompanyName.Contains(" - "))
-                    {
-                        Guid id = GetCompanyIdByString(consignee.Company.CompanyName);
-                        if (id == Guid.Empty)
-                            consignee.CompanyId = null;
-                        else
-                            consignee.CompanyId = id;
-                    }
-                }
+
                 #endregion
 
-                #region CaptureBookingInput
-                booking.OriginAddress1 = txtShipperAddress1.Text.Trim();
+                    #region CaptureBookingInput
+                    booking.OriginAddress1 = txtShipperAddress1.Text.Trim();
                 booking.OriginAddress2 = txtShipperAddress2.Text.Trim();
                 booking.OriginStreet = txtShipperStreet.Text.Trim();
                 booking.OriginBarangay = txtShipperBarangay.Text.Trim();
@@ -3524,7 +3546,7 @@ namespace CMS2.Client
                     booking.CreatedBy = AppUser.User.UserId;
                     booking.CreatedDate = DateTime.Now;
                 }
-                #endregion
+                    #endregion
 
                 ProgressIndicator saving = new ProgressIndicator("Booking", "Saving ...", Saving);
                 saving.ShowDialog();
@@ -3973,7 +3995,7 @@ namespace CMS2.Client
 
             if (chkNonVatable.Checked)
             {
-                shipment.IsVatable = false ;
+                shipment.IsVatable = false;
             }
             else
             {
@@ -4052,11 +4074,11 @@ namespace CMS2.Client
                 txtQuarantineFee.Text = shipment.QuanrantineFeeString;
                 txtRfa.Text = (shipment.Discount * 100).ToString();
                 txtNotes.Text = shipment.Notes;
-                chkNonVatable.Checked = true;
-                if (shipment.IsVatable)
+                chkNonVatable.Checked = false;
+                if (!shipment.IsVatable)
                 {
-                    chkNonVatable.Checked = false;
-                }                
+                    chkNonVatable.Checked = true;
+                }
                 shipment.AcceptedAreaId = AppUser.User.Employee.AssignedToAreaId;
                 shipment.AcceptedArea = AppUser.Employee.AssignedToArea;
 
@@ -4498,7 +4520,6 @@ namespace CMS2.Client
                 }
                 else
                 {
-                    //MessageBox.Show("No Commodity Type Selected", "Data Error", MessageBoxButtons.OK);
                     lstCommodityType.Focus();
                 }
 
@@ -8336,9 +8357,9 @@ namespace CMS2.Client
                     break;
             }
         }
-        #endregion        
+        #endregion
 
         #endregion END MARK SANTOS REGION
-            
+
     }
 }

@@ -50,6 +50,6 @@ namespace CMS2.Entities
         public virtual BranchCorpOffice BranchCorpOffice { get; set; }
 
         [ForeignKey("CommodityID")]
-        public virtual Commodity Commodity { get; set; }
+        public virtual CommodityType CommodityType { get; set; }
     }
 }

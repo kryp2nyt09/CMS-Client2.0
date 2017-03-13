@@ -24,6 +24,11 @@ using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Core.Metadata.Edm;
 using System.ServiceProcess;
 using CMS2.Common;
+using System.Security.Principal;
+using System.Security.Claims;
+using System.Diagnostics;
+using System.Windows;
+using System.Security.Permissions;
 
 namespace CMS2_Client
 {
@@ -46,19 +51,13 @@ namespace CMS2_Client
 
         private string _localConnectionString { get; set; }
         private string _mainConnectionString { get; set; }
-
         private string _filter { get; set; }
-
         public string _branchCorpOfficeId { get; set; }
-
-        private BranchCorpOfficeBL _bcoService;
-
         private Synchronization _synchronization;
-
         private List<BranchCorpOffice> _branchCorpOffices;
-
         private List<SyncTables> _entities;
 
+        private string fileName = @"C:\Program Files (x86)\APCargo\APCargo\AP CARGO SERVICE.exe.config";
         #endregion
 
         #region Constructor
@@ -105,6 +104,11 @@ namespace CMS2_Client
                     testLocalConnection.Text = "Success";
                     testLocalConnection.Visible = true;
                     testLocalConnection.ForeColor = Color.Green;
+                    if (!isSubServer)
+                    {
+                        loadbranchCorp(_localConnectionString.Replace("master", ""));
+                        dboBranchCoprOffice.Enabled = true;
+                    }
 
                 }
                 catch (Exception)
@@ -163,7 +167,7 @@ namespace CMS2_Client
             isSubServer = false;
         }
         private void Extract_Click(object sender, EventArgs e)
-        {           
+        {
             int index = dboBranchCoprOffice.SelectedItem.ToString().IndexOf(" ");
             _filter = dboBranchCoprOffice.SelectedItem.ToString().Substring(0, index);
             _branchCorpOfficeId = dboBranchCoprOffice.SelectedValue.ToString();
@@ -176,7 +180,8 @@ namespace CMS2_Client
             else if (!isSubServer && isLocalConnected)
             {
                 Extract.Enabled = false;
-                WriteToConfig(_localConnectionString.Replace("master", _localDbName));
+                WriteToConfig();
+                radProgressBar1.Value1 = radProgressBar1.Maximum;
                 radButton1.Enabled = true;
             }
         }
@@ -186,10 +191,17 @@ namespace CMS2_Client
             this.Close();
         }
         private void Extract_Work(object sender, DoWorkEventArgs e)
-        {           
+        {
             DropDatabaseIfExist();
             CreateDatabase();
 
+            //radProgressBar1.Value1 = 0;
+            //ProvisionForReplication();
+            //radProgressBar1.Value1 = 0;
+            //ReplicateDatabase();
+
+            //Deprovision Server if theres an update on table
+            StartDeprovisionServer();
             //Provisioning Server and Local for synchronization
             radProgressBar1.Value1 = 0;
             StartProvision();
@@ -198,8 +210,14 @@ namespace CMS2_Client
             radProgressBar1.Value1 = 0;
             StartSynchronization(Worker);
 
-            WriteToConfig(_localConnectionString.Replace("master", _localDbName));
-            WriteToConfig(_mainConnectionString);           
+            WriteToConfig();
+
+            if (File.Exists(fileName))
+            {
+                SaveSyncServiceSettings(Worker);
+                StartService(Worker);
+            }
+
 
         }
         private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -209,10 +227,16 @@ namespace CMS2_Client
         }
         private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            if (OpenFile.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if (!File.Exists(fileName))
             {
-                SaveSyncServiceSettings();
-                StartService();
+                if (OpenFile.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    fileName = OpenFile.FileName;
+                    BackgroundWorker worker = new BackgroundWorker();
+                    worker.WorkerReportsProgress = true;
+                    SaveSyncServiceSettings(worker);
+                    StartService(worker);
+                }
             }
 
             lblProgressState.Text = "Completed.";
@@ -231,7 +255,7 @@ namespace CMS2_Client
             MainPassword.Enabled = Flag;
             MainTestConnection.Enabled = Flag;
         }
-        private void WriteToConfig(string connString)
+        private void WriteToConfig()
         {
             Worker.ReportProgress(0, "Saving application settings.");
             var appConfigDoc = new XmlDocument();
@@ -245,11 +269,16 @@ namespace CMS2_Client
                     {
                         if (item.Attributes["name"].Value.Equals("Cms"))
                         {
-                            item.Attributes["connectionString"].Value = connString;
-                            break;
+                            item.Attributes["connectionString"].Value = _localConnectionString.Replace("master", _localDbName);
+                        }
+                        else if (item.Attributes["name"].Value.Equals("CmsCentral"))
+                        {
+                            if (isSubServer)
+                            {
+                                item.Attributes["connectionString"].Value = _mainConnectionString;
+                            }
                         }
                     }
-                    break;
                 }
             }
             appConfigDoc.Save(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
@@ -406,49 +435,90 @@ namespace CMS2_Client
         }
         private void SetEntities()
         {
+            List<string> list = new List<string>(){"AccountStatus", "AccountType", "AdjustmentReason", "ApplicableRate", "ApplicationSetting",
+                "ApprovingAuthority", "Company", "Employee", "RevenueUnit", "City", "BranchCorpOffice", "Cluster", "Province", "Region",
+                "Group", "RevenueUnitType", "Department", "Position", "BillingPeriod", "BusinessType", "Client", "Industry", 
+                "OrganizationType", "PaymentMode", "PaymentTerm", "AwbIssuance", "Batch", "BookingRemark", "Booking", "BookingStatus",
+                "BranchAcceptance", "Remarks", "Bundle", "CargoTransfer", "Reason", "Status", "User", "Claim", "Role", "Commodity",
+                "CommodityType", "WeightBreak", "DeliveredPackage", "Delivery", "DeliveryReceipt", "DeliveryRemark", "DeliveryStatus",
+                "Shipment", "ShipmentAdjustment", "StatementOfAccount", "ShipmentBasicFee", "FuelSurcharge", "GoodsDescription",
+                "PackageDimension", "Crating", "Packaging", "PackageNumber", "Payment", "PaymentType", "StatementOfAccountPayment",
+                "ServiceMode", "ServiceType", "ShipMode", "Distribution", "ExpressRate", "RateMatrix", "FlightInfo", "GatewayInbound",
+                "GatewayOutbound", "GatewayTransmittal", "HoldCargo", "Menu", "PackageNumberAcceptance", "TransferAcceptance",
+                "PackageNumberTransfer", "PackageTransfer", "PaymentSummary", "PaymentSummaryStatus", "PaymentTurnover", "RecordChange",
+                "Segregation", "ShipmentStatus", "ShipmentTracking", "StatementOfAccountNumber", "StatementOfAccountPrint",
+                "TntMaint", "TransmittalStatus", "TransShipmentLeg", "TransShipmentRoute",
+                "TruckAreaMapping", "Truck", "Unbundle", "RoleUser"};
 
-            using (CmsContext context = new CmsContext())
+            _entities = new List<SyncTables>();
+            foreach (string item in list)
             {
-                ObjectContext objContext = ((IObjectContextAdapter)context).ObjectContext;
-                MetadataWorkspace workspace = objContext.MetadataWorkspace;
+                SyncTables table = new SyncTables();
+                table.TableName = item;
+                _entities.Add(table);
+            }
 
+        }
+        private void ReplicateDatabase()
+        {
+            List<CMS2.Client.SyncHelper.ThreadState> listOfThread = new List<CMS2.Client.SyncHelper.ThreadState>();
+            foreach (SyncTables table in _entities)
+            {
+                CMS2.Client.SyncHelper.ThreadState _threadState = new CMS2.Client.SyncHelper.ThreadState();
+                _threadState.table = table;
+                _threadState.worker = Worker;
+                listOfThread.Add(_threadState);
 
-                IEnumerable<EntityType> tables = workspace.GetItems<EntityType>(DataSpace.SSpace);
-
-                _entities = new List<SyncTables>();
-                foreach (var item in tables)
+                try
                 {
-                    SyncTables table = new SyncTables();
-                    table.TableName = item.Name;
-                    _entities.Add(table);
+                    Synchronize sync = new Synchronize(table.TableName, _filter, _threadState._event, new SqlConnection(_localConnectionString.Replace("master", _localDbName)), new SqlConnection(_mainConnectionString));
+                    ThreadPool.QueueUserWorkItem(new WaitCallback(sync.RepicateDatabase), _threadState);
+                    _threadState._event.WaitOne();
+                }
+                catch (Exception ex)
+                {
+                }
+            }
+        }
+        private void ProvisionForReplication()
+        {
+            List<CMS2.Client.SyncHelper.ThreadState> listOfState = new List<CMS2.Client.SyncHelper.ThreadState>();
+            SqlConnection localConnection = new SqlConnection(_localConnectionString.Replace("master", _localDbName));
+            SqlConnection mainConnection = new SqlConnection(_mainConnectionString);
+
+            foreach (SyncTables table in _entities)
+            {
+                CMS2.Client.SyncHelper.ThreadState state = new CMS2.Client.SyncHelper.ThreadState();
+                state.table = table;
+                state.worker = Worker;
+                listOfState.Add(state);
+
+                try
+                {
+                    Provision provision = new Provision(table.TableName, localConnection, mainConnection, state._event, _filter, _branchCorpOfficeId);
+                    ThreadPool.QueueUserWorkItem(new WaitCallback(provision.PrepareDatabaseForReplication), state);
+                    state._event.WaitOne();
+
+                }
+                catch (Exception ex)
+                {
+
                 }
             }
         }
         private void StartSynchronization(BackgroundWorker worker)
         {
             List<CMS2.Client.SyncHelper.ThreadState> listOfThread = new List<CMS2.Client.SyncHelper.ThreadState>();
-            List<ManualResetEvent> syncEvents = new List<ManualResetEvent>();
-            List<ManualResetEvent> syncEvents1 = new List<ManualResetEvent>();
-
-            for (int i = 0; i < _entities.Count - 1; i++)
+            foreach (SyncTables table in _entities)
             {
                 CMS2.Client.SyncHelper.ThreadState _threadState = new CMS2.Client.SyncHelper.ThreadState();
-                _threadState.table = _entities[i];
+                _threadState.table = table;
                 _threadState.worker = worker;
                 listOfThread.Add(_threadState);
 
-                if (i <= 50)
-                {
-                    syncEvents.Add(_threadState._event);
-                }
-                else
-                {
-                    syncEvents1.Add(_threadState._event);
-                }
-
                 try
                 {
-                    Synchronize sync = new Synchronize(_entities[i].TableName, _filter, _threadState._event, new SqlConnection(_localConnectionString.Replace("master", _localDbName)), new SqlConnection(_mainConnectionString));
+                    Synchronize sync = new Synchronize(table.TableName, _filter, _threadState._event, new SqlConnection(_localConnectionString.Replace("master", _localDbName)), new SqlConnection(_mainConnectionString));
                     ThreadPool.QueueUserWorkItem(new WaitCallback(sync.PerformSync), _threadState);
                     _threadState._event.WaitOne();
                 }
@@ -460,32 +530,20 @@ namespace CMS2_Client
         private void StartProvision()
         {
             List<CMS2.Client.SyncHelper.ThreadState> listOfState = new List<CMS2.Client.SyncHelper.ThreadState>();
-            List<ManualResetEvent> provisionEvents = new List<ManualResetEvent>();
-            List<ManualResetEvent> provisionEvents1 = new List<ManualResetEvent>();
             SqlConnection localConnection = new SqlConnection(_localConnectionString.Replace("master", _localDbName));
             SqlConnection mainConnection = new SqlConnection(_mainConnectionString);
 
-            for (int i = 0; i < _entities.Count - 1; i++)
+            foreach (SyncTables table in _entities)
             {
-                //if (_entities[i].isSelected == false) continue;
                 CMS2.Client.SyncHelper.ThreadState state = new CMS2.Client.SyncHelper.ThreadState();
-                state.table = _entities[i];
+                state.table = table;
                 state.worker = Worker;
-                state.maximumSize = _entities.Count;
                 listOfState.Add(state);
-                if (i <= 60)
-                {
-                    provisionEvents.Add(state._event);
-                }
-                else
-                {
-                    provisionEvents1.Add(state._event);
-                }
 
                 try
                 {
-                    Provision provision = new Provision(_entities[i].TableName, localConnection, mainConnection, state._event, _filter, _branchCorpOfficeId);
-                    ThreadPool.QueueUserWorkItem(new WaitCallback(provision.Prepare_Database_For_Synchronization), state);
+                    Provision provision = new Provision(table.TableName, localConnection, mainConnection, state._event, _filter, _branchCorpOfficeId);
+                    ThreadPool.QueueUserWorkItem(new WaitCallback(provision.PrepareDatabaseForSynchronization), state);
                     state._event.WaitOne();
 
                 }
@@ -494,14 +552,45 @@ namespace CMS2_Client
 
                 }
             }
-
         }
-        private void SaveSyncServiceSettings()
+        private void StartDeprovisionServer()
+        {
+            List<CMS2.Client.SyncHelper.ThreadState> listOfState = new List<CMS2.Client.SyncHelper.ThreadState>();
+            SqlConnection mainConnection = new SqlConnection(_mainConnectionString);
+
+            foreach (SyncTables table in _entities)
+            {
+                CMS2.Client.SyncHelper.ThreadState state = new CMS2.Client.SyncHelper.ThreadState();
+                state.table = table;
+                state.worker = Worker;
+                listOfState.Add(state);
+
+                try
+                {
+                    Deprovision deprovision = new Deprovision(mainConnection, state._event, _filter, table.TableName);
+                    ThreadPool.QueueUserWorkItem(new WaitCallback(deprovision.PerformDeprovisionTable), state);
+                    state._event.WaitOne();
+                }
+                catch (Exception ex)
+                {
+                }
+            }
+        }
+        private void StartDeprovisionWholeServer()
+        {
+            SqlConnection mainConnection = new SqlConnection(_mainConnectionString);
+            ManualResetEvent _event = new ManualResetEvent(false);
+            Deprovision deprovision = new Deprovision(mainConnection, _event, "", "");
+            ThreadPool.QueueUserWorkItem(new WaitCallback(deprovision.PerformDeprovisionDatabase), _event);
+            _event.WaitOne();
+        }
+        private void SaveSyncServiceSettings(BackgroundWorker worker)
         {
             try
             {
+                worker.ReportProgress(1, "Saving synchronization service settings.");
                 XmlDocument appConfigDoc = new XmlDocument();
-                appConfigDoc.Load(OpenFile.FileName);
+                appConfigDoc.Load(fileName);
                 foreach (XmlElement xElement in appConfigDoc.DocumentElement)
                 {
                     if (xElement.Name == "connectionStrings")
@@ -570,7 +659,8 @@ namespace CMS2_Client
                         }
                     }
                 }
-                appConfigDoc.Save(OpenFile.FileName);
+                appConfigDoc.Save(fileName);
+                worker.ReportProgress(2, "Synchronization service settings was saved.");
             }
             catch (Exception ex)
             {
@@ -578,11 +668,11 @@ namespace CMS2_Client
             }
 
         }
-        private void StartService()
+        private void StartService(BackgroundWorker worker)
         {
             try
             {
-                lblProgressState.Text =  "Starting synchronization service.";
+                worker.ReportProgress(0, "Starting synchronization service.");
                 System.Threading.Thread.Sleep(2000);
                 ServiceController service = new ServiceController("Synchronization Service", Environment.MachineName);
                 TimeSpan timeout = TimeSpan.FromMilliseconds(300000);
@@ -593,6 +683,7 @@ namespace CMS2_Client
                     service.WaitForStatus(ServiceControllerStatus.Running, timeout);
                     lblProgressState.Text = "Synchronization Service started.";
                     System.Threading.Thread.Sleep(2000);
+                    worker.ReportProgress(1, "Synchronization Service started.");
                     Log.WriteLogs("Synchronization Service started.");
                 }
             }

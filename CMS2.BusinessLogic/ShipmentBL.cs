@@ -455,20 +455,20 @@ namespace CMS2.BusinessLogic
                     decimal defaultFee = 0;
                     model.DeliveryFeeId = null;
                     model.DeliveryFee = null;
-                    var _deliveryfee = basicFees.FirstOrDefault(x => x.ShipmentFeeName.Equals("Delivery Fee"));
+                    ShipmentBasicFee _deliveryfee = basicFees.FirstOrDefault(x => x.ShipmentFeeName.Equals("Delivery Fee"));
                     if (_deliveryfee != null)
                     {
                         model.DeliveryFeeId = _deliveryfee.ShipmentBasicFeeId;
                         model.DeliveryFee = _deliveryfee;
                         defaultFee = model.DeliveryFee.Amount;
                     }
-                    if (model.Weight > 5)
+                    if (model.ChargeableWeight <= 5)
                     {
-                        deliveryFee = model.Weight * 5;
+                        deliveryFee = defaultFee * 5;
                     }
-                    if (defaultFee > deliveryFee)
+                    else
                     {
-                        deliveryFee = defaultFee;
+                        deliveryFee = model.ChargeableWeight * defaultFee;
                     }
                 }
                 if (matrix.HasPerishableFee)

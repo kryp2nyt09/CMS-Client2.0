@@ -114,33 +114,31 @@ namespace CMS2.Client.SyncHelper
                 }
 
                 Provision _provision = new Provision(Entities[i].TableName, ClientConnection, ServerConnection, _newEvent, Filter, DeviceBranchCorpOfficeID);
-                ThreadPool.QueueUserWorkItem(new WaitCallback(_provision.Prepare_Database_For_Synchronization), Entities[i]);
+                ThreadPool.QueueUserWorkItem(new WaitCallback(_provision.PrepareDatabaseForSynchronization), Entities[i]);
             }
         }
 
         public void Synchronize()
         {
-            try
+            List<ThreadState> listOfThread = new List<ThreadState>();
+            BackgroundWorker worker = new BackgroundWorker();
+            worker.WorkerReportsProgress = true;
+            foreach (SyncTables table in Entities)
             {
-                for (int i = 0; i < Entities.Count - 1; i++)
-                {
-                    ManualResetEvent _newEvent = new ManualResetEvent(false);
-                    if (i <= 60)
-                    {
-                        SynchronizationEvents.Add(_newEvent);
-                    }
-                    else
-                    {
-                        SynchronizationEvents1.Add(_newEvent);
-                    }
+                ThreadState _threadState = new ThreadState();
+                _threadState.table = table;
+                _threadState.worker = worker;
+                listOfThread.Add(_threadState);
 
-                    Synchronize sync = new Synchronize(Entities[i].TableName, Filter, _newEvent, ClientConnection, ServerConnection);
-                    ThreadPool.QueueUserWorkItem(sync.PerformSync, Entities[i]);
+                try
+                {
+                    Synchronize sync = new Synchronize(table.TableName, Filter, _threadState._event, ClientConnection, ServerConnection);
+                    ThreadPool.QueueUserWorkItem(new WaitCallback(sync.PerformSync), _threadState);
+                    _threadState._event.WaitOne();
                 }
-            }
-            catch (Exception ex)
-            {
-                Log.WriteErrorLogs(ex);
+                catch (Exception ex)
+                {
+                }
             }
 
         }
@@ -287,6 +285,7 @@ namespace CMS2.Client.SyncHelper
         private SqlConnection _localConnection;
         private SqlConnection _serverConnection;
         private string _filter;
+        ThreadState State;
 
         public Synchronize(string tableName, string filter, ManualResetEvent currentEvent, SqlConnection localConnection, SqlConnection serverConnection)
         {
@@ -296,14 +295,13 @@ namespace CMS2.Client.SyncHelper
             this._localConnection = localConnection;
             this._serverConnection = serverConnection;
         }
-
         public void PerformSync(Object obj)
         {
+            State = (ThreadState)obj;
             SyncOrchestrator syncOrchestrator = new SyncOrchestrator();
             syncOrchestrator.LocalProvider = new SqlSyncProvider(_tableName + _filter, _localConnection);
             syncOrchestrator.RemoteProvider = new SqlSyncProvider(_tableName + _filter, _serverConnection);
             SyncOperationStatistics syncStats;
-            ThreadState State = (ThreadState)obj;
 
             State.worker.ReportProgress(0, _tableName + " was synchronizing.");
 
@@ -322,6 +320,15 @@ namespace CMS2.Client.SyncHelper
                 case "DeliveryReceipt":
                 case "Booking":
                 case "Client":
+                case "BranchAcceptance":
+                case "GatewayTransmittal":
+                case "GatewayInbound":
+                case "GatewayOutbound":
+                case "Bundling":
+                case "HoldCargo":
+                case "Distribution":
+                case "Segregation":
+                case "CargoTransfer":
 
                     syncOrchestrator.Direction = SyncDirectionOrder.UploadAndDownload;
 
@@ -330,12 +337,12 @@ namespace CMS2.Client.SyncHelper
 
                         syncStats = syncOrchestrator.Synchronize();
 
+
                         Log.WriteLogs(_tableName + " Total Changes Uploaded: " + syncStats.UploadChangesTotal + " Total Changes Downloaded: " + syncStats.DownloadChangesTotal + " Total Changes applied: " + syncStats.DownloadChangesApplied + " Total Changes failed: " + syncStats.DownloadChangesFailed);
 
                         State.table.Status = TableStatus.Good;
                         State.table.isSelected = false;
                         State.worker.ReportProgress(1, _tableName + " was synchronized.");
-
                         break;
                     }
                     catch (Exception ex)
@@ -386,7 +393,41 @@ namespace CMS2.Client.SyncHelper
             State._event.Set();
 
         }
+        public void RepicateDatabase(Object obj)
+        {
+            State = (ThreadState)obj;
+            SyncOrchestrator syncOrchestrator = new SyncOrchestrator();
+            syncOrchestrator.LocalProvider = new SqlSyncProvider(_tableName + _filter, _localConnection);
+            syncOrchestrator.RemoteProvider = new SqlSyncProvider(_tableName + _filter, _serverConnection);
+            SyncOperationStatistics syncStats;
 
+            State.worker.ReportProgress(0, _tableName + " was synchronizing.");
+            syncOrchestrator.Direction = SyncDirectionOrder.Download;
+            try
+            {
+                syncStats = syncOrchestrator.Synchronize();
+
+                Log.WriteLogs(_tableName + " Total Changes Uploaded: " + syncStats.UploadChangesTotal + " Total Changes Downloaded: " + syncStats.DownloadChangesTotal + " Total Changes applied: " + syncStats.DownloadChangesApplied + " Total Changes failed: " + syncStats.DownloadChangesFailed);
+                State.table.Status = TableStatus.Good;
+                State.table.isSelected = false;
+                State.worker.ReportProgress(1, _tableName + " was synchronized.");
+            }
+            catch (Exception ex)
+            {
+                try
+                {
+                    Log.WriteErrorLogs(ex);
+                    State.table.Status = TableStatus.Bad;
+                    State.table.isSelected = true;
+                    State.worker.ReportProgress(1, _tableName + " synchronize error.");
+                }
+                catch (Exception)
+                {
+                }
+
+            }
+            State._event.Set();
+        }
     }
 
     public class Provision
@@ -415,12 +456,11 @@ namespace CMS2.Client.SyncHelper
             this._branchCorpOfficeId = branchCorpOfficeId;
         }
 
-        public void Prepare_Database_For_Synchronization(Object obj)
+        public void PrepareDatabaseForSynchronization(Object obj)
         {
 
             SqlParameter param;
             ThreadState state = (ThreadState)obj;
-            List<ManualResetEvent> events = new List<ManualResetEvent>();
             try
             {
 
@@ -446,7 +486,7 @@ namespace CMS2.Client.SyncHelper
                         state._event.Set();
                         state.table.Status = TableStatus.Provisioned;
                         state.worker.ReportProgress(1, _tableName + " was provisioned.");
-
+                        Log.WriteLogs(_tableName + " was provisioned.");
                         break;
                     case "Shipment":
 
@@ -467,7 +507,7 @@ namespace CMS2.Client.SyncHelper
                         state._event.Set();
                         state.table.Status = TableStatus.Provisioned;
                         state.worker.ReportProgress(1, _tableName + " was provisioned.");
-
+                        Log.WriteLogs(_tableName + " was provisioned.");
                         break;
 
                     case "PackageNumber":
@@ -490,7 +530,7 @@ namespace CMS2.Client.SyncHelper
                         state._event.Set();
                         state.table.Status = TableStatus.Provisioned;
                         state.worker.ReportProgress(1, _tableName + " was provisioned.");
-
+                        Log.WriteLogs(_tableName + " was provisioned.");
                         break;
 
                     case "PackageDimension":
@@ -513,7 +553,7 @@ namespace CMS2.Client.SyncHelper
                         state._event.Set();
                         state.table.Status = TableStatus.Provisioned;
                         state.worker.ReportProgress(1, _tableName + " was provisioned.");
-
+                        Log.WriteLogs(_tableName + " was provisioned.");
                         break;
 
                     case "StateOfAccountPayment":
@@ -536,7 +576,7 @@ namespace CMS2.Client.SyncHelper
                         state._event.Set();
                         state.table.Status = TableStatus.Provisioned;
                         state.worker.ReportProgress(1, _tableName + " was provisioned.");
-
+                        Log.WriteLogs(_tableName + " was provisioned.");
                         break;
                     case "Payment":
 
@@ -558,7 +598,7 @@ namespace CMS2.Client.SyncHelper
                         state._event.Set();
                         state.table.Status = TableStatus.Provisioned;
                         state.worker.ReportProgress(1, _tableName + " was provisioned.");
-
+                        Log.WriteLogs(_tableName + " was provisioned.");
                         break;
                     case "PaymenTurnOver":
 
@@ -579,7 +619,7 @@ namespace CMS2.Client.SyncHelper
                         state._event.Set();
                         state.table.Status = TableStatus.Provisioned;
                         state.worker.ReportProgress(1, _tableName + " was provisioned.");
-
+                        Log.WriteLogs(_tableName + " was provisioned.");
                         break;
                     case "ShipmentAdjustment":
 
@@ -601,7 +641,7 @@ namespace CMS2.Client.SyncHelper
                         state._event.Set();
                         state.table.Status = TableStatus.Provisioned;
                         state.worker.ReportProgress(1, _tableName + " was provisioned.");
-
+                        Log.WriteLogs(_tableName + " was provisioned.");
                         break;
                     case "Delivery":
 
@@ -623,7 +663,7 @@ namespace CMS2.Client.SyncHelper
                         state._event.Set();
                         state.table.Status = TableStatus.Provisioned;
                         state.worker.ReportProgress(1, _tableName + " was provisioned.");
-
+                        Log.WriteLogs(_tableName + " was provisioned.");
                         break;
                     case "DeliveryPackage":
 
@@ -646,7 +686,7 @@ namespace CMS2.Client.SyncHelper
                         state._event.Set();
                         state.table.Status = TableStatus.Provisioned;
                         state.worker.ReportProgress(1, _tableName + " was provisioned.");
-
+                        Log.WriteLogs(_tableName + " was provisioned.");
                         break;
                     case "DeliveryReceipt":
 
@@ -669,7 +709,7 @@ namespace CMS2.Client.SyncHelper
                         state._event.Set();
                         state.table.Status = TableStatus.Provisioned;
                         state.worker.ReportProgress(1, _tableName + " was provisioned.");
-
+                        Log.WriteLogs(_tableName + " was provisioned.");
                         break;
                     default:
                         ProvisionServer(_tableName);
@@ -678,7 +718,7 @@ namespace CMS2.Client.SyncHelper
                         state._event.Set();
                         state.table.Status = TableStatus.Provisioned;
                         state.worker.ReportProgress(1, _tableName + " was provisioned.");
-
+                        Log.WriteLogs(_tableName + " was provisioned.");
                         break;
                 }
             }
@@ -686,7 +726,31 @@ namespace CMS2.Client.SyncHelper
             {
                 state._event.Set();
                 state.table.Status = TableStatus.ErrorProvision;
-                Log.WriteErrorLogs(ex);
+                state.worker.ReportProgress(1, _tableName + " has provision error.");
+                Log.WriteLogs(_tableName + " has provision error.");
+            }
+        }
+
+        public void PrepareDatabaseForReplication(Object obj)
+        {
+            SqlParameter param;
+            ThreadState state = (ThreadState)obj;
+            try
+            {
+                ProvisionServer(_tableName);
+                ProvisionClient(_tableName);
+
+                state._event.Set();
+                state.table.Status = TableStatus.Provisioned;
+                state.worker.ReportProgress(1, _tableName + " was provisioned.");
+                Log.WriteLogs(_tableName + " was provisioned.");
+            }
+            catch (Exception ex)
+            {
+                state._event.Set();
+                state.table.Status = TableStatus.ErrorProvision;
+                state.worker.ReportProgress(1, _tableName + " has provision error.");
+                Log.WriteLogs(_tableName + " has provision error.");
             }
         }
 
@@ -861,14 +925,17 @@ namespace CMS2.Client.SyncHelper
             {
                 SqlSyncScopeDeprovisioning storeClientDeprovision = new SqlSyncScopeDeprovisioning(_connection);
                 storeClientDeprovision.DeprovisionScope(this._tableName + this._filter);
-                Log.WriteLogs("Server " + _tableName + " was Deprovision.");
+                state._event.Set();
                 state.table.Status = TableStatus.Deprovisioned;
+                Log.WriteLogs(_tableName + " was deprovisioned.");
             }
             catch (Exception ex)
             {
+                state._event.Set();
                 Log.WriteErrorLogs(_tableName, ex);
+                state.table.Status = TableStatus.ErrorDeprovision;
+                Log.WriteLogs(_tableName + " has deprovision error.");
             }
-            state._event.Set();
             state.worker.ReportProgress(1, _tableName + " was deprovisioned.");
         }
 
@@ -908,26 +975,29 @@ namespace CMS2.Client.SyncHelper
 
     static class Log
     {
+        private static string _fileName = "\\" + DateTime.Now.Day.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Year.ToString() + ".txt";
         public static async Task WriteLogs(string Logs)
         {
-            string _fileName = "\\Logs\\SyncTransactionLogs" + DateTime.Now.Day.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Year.ToString() + ".txt";
-            System.IO.File.AppendAllText(AppDomain.CurrentDomain.BaseDirectory + _fileName, Environment.NewLine + DateTime.Now.ToString() + " :: " + Logs);
-
+            string _filepath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\APCARGO\\Logs\\SyncTransactionLogs";
+            System.IO.Directory.CreateDirectory(_filepath);
+            System.IO.File.AppendAllText(_filepath + _fileName, Environment.NewLine + DateTime.Now.ToString() + " :: " + Logs);
         }
 
         public static async Task WriteErrorLogs(Exception ex)
         {
-            string _fileName = "\\Logs\\SyncErrorLogs" + DateTime.Now.Day.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Year.ToString() + ".txt";
-            System.IO.File.AppendAllText(AppDomain.CurrentDomain.BaseDirectory + _fileName, Environment.NewLine + DateTime.Now.ToString() + " :: " + ex.Message.ToString());
-            System.IO.File.AppendAllText(AppDomain.CurrentDomain.BaseDirectory + _fileName, Environment.NewLine + DateTime.Now.ToString() + " :: " + ex.StackTrace.ToString());
+            string _filepath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\APCARGO\\Logs\\SyncErrorLogs";
+            System.IO.Directory.CreateDirectory(_filepath);
+            System.IO.File.AppendAllText(_filepath + _fileName, Environment.NewLine + DateTime.Now.ToString() + " :: " + ex.Message.ToString());
+            System.IO.File.AppendAllText(_filepath + _fileName, Environment.NewLine + DateTime.Now.ToString() + " :: " + ex.StackTrace.ToString());
         }
 
         public static async Task WriteErrorLogs(string Location, Exception ex)
         {
-            string _fileName = "\\Logs\\SyncErrorLogs" + DateTime.Now.Day.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Year.ToString() + ".txt";
-            System.IO.File.AppendAllText(AppDomain.CurrentDomain.BaseDirectory + _fileName, Environment.NewLine + DateTime.Now.ToString() + " :: " + Location);
-            System.IO.File.AppendAllText(AppDomain.CurrentDomain.BaseDirectory + _fileName, Environment.NewLine + DateTime.Now.ToString() + " :: " + ex.Message.ToString());
-            System.IO.File.AppendAllText(AppDomain.CurrentDomain.BaseDirectory + _fileName, Environment.NewLine + DateTime.Now.ToString() + " :: " + ex.StackTrace.ToString());
+            string _filepath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\APCARGO\\Logs\\SyncErrorLogs";
+            System.IO.Directory.CreateDirectory(_filepath);
+            System.IO.File.AppendAllText(_filepath + _fileName, Environment.NewLine + DateTime.Now.ToString() + " :: " + Location);
+            System.IO.File.AppendAllText(_filepath + _fileName, Environment.NewLine + DateTime.Now.ToString() + " :: " + ex.Message.ToString());
+            System.IO.File.AppendAllText(_filepath + _fileName, Environment.NewLine + DateTime.Now.ToString() + " :: " + ex.StackTrace.ToString());
         }
     }
 
@@ -939,7 +1009,6 @@ namespace CMS2.Client.SyncHelper
 
         public BackgroundWorker worker;
 
-        public int maximumSize;
 
     }
 }

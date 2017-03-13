@@ -104,6 +104,7 @@ namespace CMS2.Client.Forms.TrackingReports
                     else
                     {
                         model.AirwayBillNo = _airwaybill;
+                        model.Gateway = outbound.Gateway;
                         model.Driver = outbound.Driver;
                         model.PlateNo = outbound.PlateNo;
                         model.Batch = outbound.Batch.BatchName;
@@ -125,6 +126,7 @@ namespace CMS2.Client.Forms.TrackingReports
                     else
                     {
                         model.AirwayBillNo = _airwaybill;
+                        model.Gateway = outbound.Gateway;
                         model.Driver = outbound.Driver;
                         model.PlateNo = outbound.PlateNo;
                         model.Batch = outbound.Batch.BatchName;

@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
 using System.Linq;
 using System.ServiceProcess;
-using System.Text;
-using System.Threading.Tasks;
 using System.Timers;
 
 namespace AP_CARGO_SERVICE
@@ -25,7 +19,7 @@ namespace AP_CARGO_SERVICE
         protected override void OnStart(string[] args)
         {            
             sync = new Synchronization();
-            _timer = new Timer(5000);
+            _timer = new Timer(10000);
             _timer.Elapsed += new System.Timers.ElapsedEventHandler(timer_Elapsed);
             _timer.Start();
         }
@@ -38,7 +32,7 @@ namespace AP_CARGO_SERVICE
 
         private void timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-            sync.Synchronized();
+            sync.Synchronize();
         }
     }
 }

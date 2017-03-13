@@ -90,7 +90,7 @@ namespace CMS2.Client.Forms.TrackingReports
                     model.Pieces++;
                     model.MAWB = inbound.MasterAirwayBill;
                     model.FlightNo = inbound.FlightNumber;
-                    model.CommodityType = inbound.Commodity.CommodityType.CommodityTypeName;
+                    model.CommodityType = inbound.CommodityType.CommodityTypeName;
                     model.CreatedDate = inbound.CreatedDate;
                     _results.Add(model);
                   

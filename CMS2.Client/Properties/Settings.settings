@@ -14,32 +14,32 @@
     <Setting Name="LocalDbUsername" Type="System.String" Scope="User">
       <Value Profile="(Default)">sa</Value>
     </Setting>
-    <Setting Name="LocalDbPassword" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Ap123456#</Value>
-    </Setting>
-    <Setting Name="LocalDbServer" Type="System.String" Scope="User">
-      <Value Profile="(Default)">192.168.5.3</Value>
-    </Setting>
     <Setting Name="CentralDbName" Type="System.String" Scope="User">
       <Value Profile="(Default)">cms2_Beta3</Value>
     </Setting>
     <Setting Name="CentralUsername" Type="System.String" Scope="User">
       <Value Profile="(Default)">sa</Value>
     </Setting>
-    <Setting Name="LocalDbName" Type="System.String" Scope="User">
-      <Value Profile="(Default)">cms</Value>
-    </Setting>
-    <Setting Name="CentralServerIp" Type="System.String" Scope="User">
-      <Value Profile="(Default)">192.168.15.108\MHINE</Value>
-    </Setting>
-    <Setting Name="CentralPassword" Type="System.String" Scope="User">
-      <Value Profile="(Default)">admin!@#</Value>
-    </Setting>
     <Setting Name="IsSynchronizationSetup" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="Filter" Type="System.String" Scope="User">
       <Value Profile="(Default)">Manila</Value>
+    </Setting>
+    <Setting Name="LocalDbPassword" Type="System.String" Scope="User">
+      <Value Profile="(Default)">d0me$tic$QL</Value>
+    </Setting>
+    <Setting Name="LocalDbServer" Type="System.String" Scope="User">
+      <Value Profile="(Default)">192.168.5.1</Value>
+    </Setting>
+    <Setting Name="LocalDbName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">cms2_Beta3</Value>
+    </Setting>
+    <Setting Name="CentralServerIp" Type="System.String" Scope="User">
+      <Value Profile="(Default)">192.168.5.1</Value>
+    </Setting>
+    <Setting Name="CentralPassword" Type="System.String" Scope="User">
+      <Value Profile="(Default)">d0me$tic$QL</Value>
     </Setting>
   </Settings>
 </SettingsFile>

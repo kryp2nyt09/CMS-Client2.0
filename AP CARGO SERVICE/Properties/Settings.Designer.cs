@@ -12,7 +12,7 @@ namespace AP_CARGO_SERVICE.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "14.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "12.0.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -43,28 +43,10 @@ namespace AP_CARGO_SERVICE.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool Provision {
-            get {
-                return ((bool)(this["Provision"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool DeprovisionServer {
             get {
                 return ((bool)(this["DeprovisionServer"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool DeprovisionClient {
-            get {
-                return ((bool)(this["DeprovisionClient"]));
             }
         }
         
@@ -82,11 +64,29 @@ namespace AP_CARGO_SERVICE.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=192.168.5.3;Initial Catalog=cms2_Beta3;User ID=sa;Password=Ap123456#;" +
-            "Connect Timeout=180;Connection Lifetime=0;Pooling=true;")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=121.96.38.24;Initial Catalog=cms2_Beta3;User ID=sa;Password=Ap123456#" +
+            ";Connect Timeout=180;Connection Lifetime=0;Pooling=true;")]
         public string ServerConnectionString {
             get {
                 return ((string)(this["ServerConnectionString"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool Provision {
+            get {
+                return ((bool)(this["Provision"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool DeprovisionClient {
+            get {
+                return ((bool)(this["DeprovisionClient"]));
             }
         }
     }

@@ -5,6 +5,8 @@ using System.Xml;
 using CMS2.Client.Properties;
 using Microsoft.Practices.Unity;
 using CMS2_Client;
+using System.Security.Principal;
+using System.Collections.Generic;
 
 namespace CMS2.Client
 {
@@ -18,13 +20,21 @@ namespace CMS2.Client
         [STAThread]
         private static void Main()
         {
-
             bool xBool = Convert.ToBoolean(ConfigurationManager.AppSettings["isSync"]);
             if (!xBool)
             {
-                Extract_Database extract = new Extract_Database();
-                Application.Run(extract);
-                Application.Exit();
+                if (IsAdmin())
+                {
+                    Extract_Database extract = new Extract_Database();
+                    Application.Run(extract);
+                    Application.Exit();
+                }
+                else
+                {
+                    MessageBox.Show("You have insuficient privilege. Please Run as Administrator.", "Adminstrator", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    Application.Exit();
+                }
+                
             }
 
             //var container = BuildUnityContainer();
@@ -61,11 +71,10 @@ namespace CMS2.Client
                     Application.Restart();
 
                 //Application.Run(container.Resolve</*CMSMain*/>());
-               Application.Run(cmsMainWindow);
+                Application.Run(cmsMainWindow);
             }
 
         }
-
         private static void SetAppSetting()
         {
             string deviceCode = ConfigurationSettings.AppSettings["DeviceCode"];
@@ -101,7 +110,6 @@ namespace CMS2.Client
             config.Save(ConfigurationSaveMode.Modified);
 
         }
-
         private static bool SetLocalDbConnection()
         {
             XmlDocument appConfigDoc = new XmlDocument();
@@ -122,7 +130,7 @@ namespace CMS2.Client
                         {
                             connStringCms = item.Attributes["connectionString"].Value;
                             isNeedDBSetup = string.IsNullOrWhiteSpace(connStringCms) ? true : false;
-                        }                        
+                        }
                     }
                 }
             }
@@ -174,7 +182,6 @@ namespace CMS2.Client
 
             return isNeedDBSetup;
         }
-
         private static void SetCentralDbConnection()
         {
             if (GlobalVars.IsSubserver)
@@ -195,7 +202,7 @@ namespace CMS2.Client
                             if (item.Attributes["name"].Value.Equals("CmsCentral"))
                             {
                                 connStringCmsCentral = item.Attributes["connectionString"].Value;
-                            }                           
+                            }
                         }
                     }
                 }
@@ -224,6 +231,19 @@ namespace CMS2.Client
                     }
                 }
             }
+        }
+        private static bool IsAdmin()
+        {
+            WindowsIdentity identity = WindowsIdentity.GetCurrent();
+            if (identity != null)
+            {
+                WindowsPrincipal principal = new WindowsPrincipal(identity);
+                List<System.Security.Claims.Claim> list = new List<System.Security.Claims.Claim>(principal.UserClaims);
+                System.Security.Claims.Claim c = list.Find(p => p.Value.Equals("S-1-5-32-544"));
+                if (c != null)
+                    return true;
+            }
+            return false;
         }
     }
 }
