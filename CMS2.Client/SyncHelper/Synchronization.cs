@@ -17,6 +17,7 @@ using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Core.Objects;
 using System.Data.Entity.Core.Metadata.Edm;
 using System.ComponentModel;
+using CMS2.Entities;
 
 namespace CMS2.Client.SyncHelper
 {
@@ -1009,7 +1010,7 @@ namespace CMS2.Client.SyncHelper
 
         public BackgroundWorker worker;
 
-
+        public BindingList<Booking> bindingList;
     }
 }
 

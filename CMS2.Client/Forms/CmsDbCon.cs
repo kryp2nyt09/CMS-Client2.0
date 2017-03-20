@@ -56,6 +56,7 @@ namespace CMS2.Client
 
         public bool IsNeedDBSetup { get; set; }
         public bool IsFormClose { get; set; }
+        public string _isSubserver { get; set; }
 
         private BranchCorpOfficeBL bcoService;
         private RevenueUnitTypeBL revenutUnitTypeService;
@@ -122,6 +123,7 @@ namespace CMS2.Client
             _filter = ConfigurationManager.AppSettings["Filter"].ToString();
             _localConnectionString = ConfigurationManager.ConnectionStrings["Cms"].ConnectionString;
             _mainConnectionString = ConfigurationManager.ConnectionStrings["CmsCentral"].ConnectionString;
+            _isSubserver = ConfigurationManager.AppSettings["isSubserver"].ToString();
 
             SetChekcBoxes();
             SetEntities();
@@ -193,6 +195,15 @@ namespace CMS2.Client
             txtServerUsername.Text = Settings.Default.CentralUsername;
             txtServerPassword.Text = Settings.Default.CentralPassword;
             txtDeviceCode.Text = Settings.Default.DeviceCode;
+
+            if (_isSubserver =="false")
+            {
+                txtServerIP.Enabled = false;
+                txtServerDbName.Enabled = false;
+                txtServerUsername.Enabled = false;
+                txtServerPassword.Enabled = false;
+                isMainConnected = true;
+            }
 
             try
             {
@@ -468,7 +479,7 @@ namespace CMS2.Client
         }
         private void btnSaveSync_Click(object sender, EventArgs e)
         {
-            
+
             if (File.Exists(fileName))
             {
                 SaveSyncServiceSettings();
@@ -487,7 +498,7 @@ namespace CMS2.Client
                     StartService();
                 }
             }
-             
+
         }
         #endregion
 
@@ -559,7 +570,7 @@ namespace CMS2.Client
                     return false;
                 }
 
-                if (lstRevenueUnit.SelectedIndex != -1)
+                if (lstRevenueUnit.SelectedValue != null)
                 {
                     _deviceRevenueUnitId = lstRevenueUnit.SelectedValue.ToString();
                 }
@@ -818,5 +829,26 @@ namespace CMS2.Client
 
         }
         #endregion
+
+        private void lstRevenueUnit_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
+        {
+            if (lstRevenueUnit.SelectedValue != null) ;
+            {
+                _deviceRevenueUnitId = lstRevenueUnit.SelectedValue.ToString();
+            }
+        }
+
+        private void lstBco_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
+        {
+
+        }
+
+        private void lstRevenueUnit_Validated(object sender, EventArgs e)
+        {
+            if (lstRevenueUnit.SelectedIndex > -1)
+            {
+                _deviceRevenueUnitId = lstRevenueUnit.SelectedValue.ToString();
+            }
+        }
     }
 }

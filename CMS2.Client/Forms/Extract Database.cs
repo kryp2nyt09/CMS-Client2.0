@@ -283,7 +283,6 @@ namespace CMS2_Client
             }
             appConfigDoc.Save(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
 
-            Settings.Default.IsSynchronizationSetup = true;
             Settings.Default.LocalDbServer = _localServer;
             Settings.Default.LocalDbName = _localDbName;
             Settings.Default.LocalDbUsername = _localUsername;
@@ -300,6 +299,7 @@ namespace CMS2_Client
             config.AppSettings.Settings["isSync"].Value = "true";
             config.AppSettings.Settings["Filter"].Value = _filter;
             config.AppSettings.Settings["BcoId"].Value = _branchCorpOfficeId;
+            config.AppSettings.Settings["isSubserver"].Value = isSubServer.ToString();
             config.Save(ConfigurationSaveMode.Modified);
             Worker.ReportProgress(0, "Application settings was saved.");
         }
