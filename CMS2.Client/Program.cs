@@ -20,22 +20,22 @@ namespace CMS2.Client
         [STAThread]
         private static void Main()
         {
-            bool xBool = Convert.ToBoolean(ConfigurationManager.AppSettings["isSync"]);
-            if (!xBool)
-            {
-                if (IsAdmin())
-                {
-                    Extract_Database extract = new Extract_Database();
-                    Application.Run(extract);
-                    Application.Exit();
-                }
-                else
-                {
-                    MessageBox.Show("You have insuficient privilege. Please Run as Administrator.", "Adminstrator", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    Application.Exit();
-                }
+            // bool xBool = Convert.ToBoolean(ConfigurationManager.AppSettings["isSync"]);
+            // if (!xBool)
+            // {
+                // if (IsAdmin())
+                // {
+                   // Extract_Database extract = new Extract_Database();
+                    // Application.Run(extract);
+                    // Application.Exit();
+                // }
+                // else
+                // {
+                    // MessageBox.Show("You have insuficient privilege. Please Run as Administrator.", "Adminstrator", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    // Application.Exit();
+                // }
                 
-            }
+            // }
 
             //var container = BuildUnityContainer();
             Application.EnableVisualStyles();
@@ -234,16 +234,8 @@ namespace CMS2.Client
         }
         private static bool IsAdmin()
         {
-            WindowsIdentity identity = WindowsIdentity.GetCurrent();
-            if (identity != null)
-            {
-                WindowsPrincipal principal = new WindowsPrincipal(identity);
-                List<System.Security.Claims.Claim> list = new List<System.Security.Claims.Claim>(principal.UserClaims);
-                System.Security.Claims.Claim c = list.Find(p => p.Value.Equals("S-1-5-32-544"));
-                if (c != null)
-                    return true;
-            }
-            return false;
+            return (new WindowsPrincipal(WindowsIdentity.GetCurrent()))
+               .IsInRole(WindowsBuiltInRole.Administrator);
         }
     }
 }

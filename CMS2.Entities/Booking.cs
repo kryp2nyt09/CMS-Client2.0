@@ -18,12 +18,18 @@ namespace CMS2.Entities
         public Guid BookedById { get; set; }
         [ForeignKey("BookedById")]
         public virtual Employee BookedBy { get; set; }
+        [NotMapped()]
+        public string BookedByFullname { get { return BookedBy.FullName; } }
         public Guid ConsigneeId { get; set; }
         [ForeignKey("ConsigneeId")]
         public virtual Client Consignee { get; set; }
+        [NotMapped()]
+        public string ConsigneeFullname { get { return Consignee.LastName + ", " + Consignee.FirstName; } }
         public Guid ShipperId { get; set; }
         [ForeignKey("ShipperId")]
         public virtual Client Shipper { get; set; }
+        [NotMapped()]
+        public string shipperFullname { get { return Consignee.LastName + ", " + Consignee.FirstName; } }
         [Required]
         [MaxLength(250)]
         public string OriginAddress1 { get; set; }

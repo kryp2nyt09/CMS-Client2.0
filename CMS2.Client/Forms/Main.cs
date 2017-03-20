@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
@@ -81,8 +82,7 @@ namespace CMS2.Client
         private BindingSource bsBookingRemark;
         private BindingSource bsAreas;
         private BindingSource bsOriginBco;
-        private BindingSource bsDestinationBco;
-
+        private BindingSource bsDestinationBco;   
 
         private BookingStatusBL bookingStatusService;
         private BookingRemarkBL bookingRemarkService;
@@ -99,6 +99,9 @@ namespace CMS2.Client
         private List<RevenueUnit> revenueUnits;
         private List<City> cities;
         private List<Company> companies;
+
+        private BindingList<Booking> _bookingBindingList;
+        private BindingList<Booking> _manifestBindingList;
 
         #endregion
 
@@ -272,6 +275,8 @@ namespace CMS2.Client
             LoadInit();
 
             BookingResetAll();
+            List<Booking> _bookings = bookingService.GetAll().Where(x => x.RecordStatus == 1).OrderBy(x => x.DateBooked).OrderByDescending(x => x.CreatedDate).ToList();
+            _bookingBindingList = new BindingList<Booking>(_bookings);
             PopulateGrid();
             AddDailyBooking();
 
@@ -297,7 +302,6 @@ namespace CMS2.Client
                     lstAssignedTo.ValueMember = "RevenueUnitId";
 
                     BookingResetAll();
-                    PopulateGrid();
 
                     break;
                 case "Acceptance":
@@ -1188,7 +1192,7 @@ namespace CMS2.Client
             }
             else
             {
-                MessageBox.Show("You have insuficient privilege. Please Run as Administrator.","Adminstrator", MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
+                MessageBox.Show("You have insuficient privilege. Please Run as Administrator.", "Administrator", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
 
         }
@@ -2470,7 +2474,6 @@ namespace CMS2.Client
             }
 
         }
-
         private void InvalidLogin()
         {
             if (MessageBox.Show("Invalid username and/or password. Try again?", "APCargo", MessageBoxButtons.OKCancel) == DialogResult.OK)
@@ -2484,18 +2487,9 @@ namespace CMS2.Client
         }
         private bool IsAdmin()
         {
-            WindowsIdentity identity = WindowsIdentity.GetCurrent();
-            if (identity != null)
-            {
-                WindowsPrincipal principal = new WindowsPrincipal(identity);
-                List<System.Security.Claims.Claim> list = new List<System.Security.Claims.Claim>(principal.UserClaims);
-                System.Security.Claims.Claim c = list.Find(p => p.Value.Equals("S-1-5-32-544"));
-                if (c != null)
-                    return true;
-            }
-            return false;
+            return (new WindowsPrincipal(WindowsIdentity.GetCurrent()))
+               .IsInRole(WindowsBuiltInRole.Administrator);
         }
-
         private NewPasswordViewModel GetNewPassword()
         {
             ChangePassword changePasswordForm = new ChangePassword();
@@ -2673,33 +2667,13 @@ namespace CMS2.Client
             }
         }
 
-        private void PopulateGrid(List<Booking> bookings = null)
-        {
-            List<Booking> _bookings;
-
-            if (bookings == null)
-            {
-                _bookings = bookingService.GetAll().Where(x => x.RecordStatus == 1).OrderBy(x => x.DateBooked).OrderByDescending(x => x.CreatedDate)
-                        .ToList();
-            }
-            else
-            {
-                _bookings = bookings;
-            }
-
-            BookingGridView.DataSource = ConvertToDataTable(_bookings);
-
-            BookingGridView.Columns["BookingId"].IsVisible = false;
-            BookingGridView.Columns["Booking Date"].Width = 100;
-            BookingGridView.Columns["Booking Number"].Width = 150;
-            BookingGridView.Columns["Booking Time"].Width = 100;
-            BookingGridView.Columns["Shipper Name"].Width = 150;
-            BookingGridView.Columns["Origin City"].Width = 150;
-            BookingGridView.Columns["Consignee Name"].Width = 150;
-            BookingGridView.Columns["Destination City"].Width = 150;
-            BookingGridView.Columns["Booked By"].Width = 150;
-            BookingGridView.Columns["Booking Status"].Width = 100;
-
+        private void PopulateGrid()
+        {           
+		    List<Booking> bookings = new List<Booking>();
+			bookings = bookingService.GetAll().Where(x => x.RecordStatus == 1).OrderBy(x => x.DateBooked).OrderByDescending(x => x.CreatedDate).ToList();
+			_bookingBindingList = new BindingList<Booking>(bookings);
+            BookingGridView.DataSource = _bookingBindingList;
+            BookingGridView.BestFitColumns(BestFitColumnMode.AllCells);
         }
 
         private DataTable ConvertToDataTable(List<Booking> list)
@@ -3719,18 +3693,50 @@ namespace CMS2.Client
 
         private void AcceptanceLoadData()
         {
-
-            commodityTypes = commodityTypeService.FilterActive().OrderBy(x => x.CommodityTypeName).ToList();
-            commodities = commodityService.FilterActive().OrderBy(x => x.CommodityName).ToList();
-            serviceTypes = serviceTypeService.FilterActive().OrderBy(x => x.ServiceTypeName).ToList();
-            serviceModes = serviceModeService.FilterActive().OrderBy(x => x.ServiceModeName).ToList();
-            paymentModes = paymentModeService.FilterActive().OrderBy(x => x.PaymentModeName).ToList();
-            shipmentBasicFees = shipmentBasicFeeService.FilterActive();
-            cratings = cratingService.FilterActive().OrderBy(x => x.CratingName).ToList();
-            packagings = packagingService.FilterActive().OrderBy(x => x.PackagingName).ToList();
-            goodsDescriptions = goodsDescriptionService.FilterActive().OrderBy(x => x.GoodsDescriptionName).ToList();
-            shipModes = shipModeService.FilterActive().OrderBy(x => x.ShipModeName).ToList();
-            paymentTerms = paymentTermService.FilterActive().OrderBy(x => x.PaymentTermName).ToList();
+            if (commodityTypes == null)
+            {
+                commodityTypes = commodityTypeService.FilterActive().OrderBy(x => x.CommodityTypeName).ToList();
+            }
+            if (commodities == null)
+            {
+                commodities = commodityService.FilterActive().OrderBy(x => x.CommodityName).ToList();
+            }
+            if (serviceTypes == null)
+            {
+                serviceTypes = serviceTypeService.FilterActive().OrderBy(x => x.ServiceTypeName).ToList();
+            }
+            if (serviceModes == null)
+            {
+                serviceModes = serviceModeService.FilterActive().OrderBy(x => x.ServiceModeName).ToList();
+            }
+            if (paymentModes == null)
+            {
+                paymentModes = paymentModeService.FilterActive().OrderBy(x => x.PaymentModeName).ToList();
+            }
+            if (shipmentBasicFees == null)
+            {
+                shipmentBasicFees = shipmentBasicFeeService.FilterActive();
+            }
+            if (cratings == null)
+            {
+                cratings = cratingService.FilterActive().OrderBy(x => x.CratingName).ToList();
+            }
+            if (packagings == null)
+            {
+                packagings = packagingService.FilterActive().OrderBy(x => x.PackagingName).ToList();
+            }
+            if (goodsDescriptions == null)
+            {
+                goodsDescriptions = goodsDescriptionService.FilterActive().OrderBy(x => x.GoodsDescriptionName).ToList();
+            }
+            if (shipModes == null)
+            {
+                shipModes = shipModeService.FilterActive().OrderBy(x => x.ShipModeName).ToList();
+            }
+            if (paymentTerms == null)
+            {
+                paymentTerms = paymentTermService.FilterActive().OrderBy(x => x.PaymentTermName).ToList();
+            }
 
             bsCommodityType.DataSource = commodityTypes;
             bsCommodity.DataSource = commodities;
@@ -3795,6 +3801,7 @@ namespace CMS2.Client
             lstCrating.SelectedIndex = -1;
             lstShipMode.SelectedIndex = -1;
             lstGoodsDescription.SelectedIndex = -1;
+            chkNonVatable.Checked = false;
 
             DisableForm();
             ShowNewShipment();
@@ -4020,7 +4027,7 @@ namespace CMS2.Client
                     }
                     else
                     {
-                        AcceptancetxtConsigneeCompany.Text = "N/A";
+                        AcceptancetxtShipperCompany.Text = "N/A";
                     }
                     AcceptancetxtShipperAddress.Text = shipment.Shipper.Address1 + ", " + shipment.Shipper.Address2;
                     AcceptancetxtShipperBarangay.Text = shipment.Shipper.Barangay;
@@ -4599,6 +4606,7 @@ namespace CMS2.Client
             txtQuarantineFee.Enabled = false;
             txtRfa.Enabled = false;
             chkNonVatable.Enabled = false;
+            chkNonVatable.Checked = false;
             txtNotes.Enabled = false;
 
             btnCompute.Enabled = false;
@@ -8359,7 +8367,37 @@ namespace CMS2.Client
         }
         #endregion
 
+       
+
         #endregion END MARK SANTOS REGION
 
+      
+        private void RefreshGrid(Object obj)
+        {
+            //try
+            //{
+            //    SyncHelper.ThreadState state = (SyncHelper.ThreadState)(obj);
+            //    List<Booking> bookings = new List<Booking>();
+            //    bookings = bookingService.GetAll().Where(x => x.RecordStatus == 1).OrderBy(x => x.DateBooked).OrderByDescending(x => x.CreatedDate).ToList();
+            //    state.bindingList = new BindingList<Booking>(bookings);
+            //    state._event.Set();
+            //}
+            //catch (Exception)
+            //{
+                
+            //}
+           
+        }
+        private void BookingGridView_Click(object sender, EventArgs e)
+        {
+            
+                //ManualResetEvent reset = new ManualResetEvent(false);
+                //CMS2.Client.SyncHelper.ThreadState state = new SyncHelper.ThreadState();
+                //state._event = reset;
+                //state.bindingList = _bookingBindingList;
+                //ThreadPool.QueueUserWorkItem(new WaitCallback(RefreshGrid), state);
+            
+            
+        }
     }
 }

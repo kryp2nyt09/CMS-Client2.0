@@ -97,18 +97,6 @@ namespace CMS2.Client.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool IsSynchronizationSetup {
-            get {
-                return ((bool)(this["IsSynchronizationSetup"]));
-            }
-            set {
-                this["IsSynchronizationSetup"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Manila")]
         public string Filter {
             get {

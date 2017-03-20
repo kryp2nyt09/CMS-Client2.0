@@ -35,7 +35,7 @@
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>true</Optimize>
@@ -400,7 +400,6 @@
     </Compile>
     <Compile Include="ReportModels\PaymentSummary.cs">
       <DependentUpon>PaymentSummary.xsd</DependentUpon>
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="ReportModels\PaymentSummary.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -419,7 +418,6 @@
     </Compile>
     <Compile Include="ReportModels\TrackingDailyTrip.cs">
       <DependentUpon>TrackingDailyTrip.xsd</DependentUpon>
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="ReportModels\TrackingDailyTrip.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -434,7 +432,6 @@
     </Compile>
     <Compile Include="ReportModels\TrackingInsack.cs">
       <DependentUpon>TrackingInsack.xsd</DependentUpon>
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="ReportModels\TrackingInsack.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -542,6 +539,7 @@
     <Compile Include="Utilities\Resizer.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="SyncHelper\Synchronization.cs" />
+    <Compile Include="ViewModels\BookingViewModel.cs" />
     <Compile Include="ViewModels\NewPasswordViewModel.cs" />
     <Compile Include="ViewModels\PaymentDetailsViewModel.cs" />
     <Compile Include="ViewModels\PaymentTurnoverViewModel.cs" />
@@ -556,6 +554,7 @@
     <EmbeddedResource Include="Reports\rpt_PaymentSummary.resx">
       <DependentUpon>rpt_PaymentSummary.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="CMS2.Client_TemporaryKey.pfx" />
     <None Include="Reports\report_PaymentSummary.rpt" />
     <None Include="Reports\rpt_FreightCollectPaymentSummary.rpt" />
     <None Include="Resources\csv.png" />
@@ -694,7 +693,6 @@
       <LastGenOutput>TrackingDailyTripPp.cs</LastGenOutput>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="CMS2.Client_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
