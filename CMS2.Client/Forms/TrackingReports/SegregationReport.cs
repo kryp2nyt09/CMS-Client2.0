@@ -79,7 +79,11 @@ namespace CMS2.Client.Forms.TrackingReports
             {
                 ShipmentBL shipmentService = new ShipmentBL();
                 SegregationViewModel model = new SegregationViewModel();
-                string _airwaybill = _packageNumberService.GetAll().Find(x => x.PackageNo == segregation.Cargo).Shipment.AirwayBillNo;
+                string _airwaybill = "";
+                try {
+                    _airwaybill = _packageNumberService.GetAll().Find(x => x.PackageNo == segregation.Cargo).Shipment.AirwayBillNo;
+                }
+                catch (Exception) { continue; }
                 SegregationViewModel isExist = _results.Find(x => x.AirwayBillNo == _airwaybill);
 
                 if (isExist != null)

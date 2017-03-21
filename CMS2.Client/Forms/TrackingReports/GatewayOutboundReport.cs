@@ -91,7 +91,11 @@ namespace CMS2.Client.Forms.TrackingReports
             {
 
                 GatewayOutboundViewModel model = new GatewayOutboundViewModel();
-                string _airwaybill = _packageNumberService.GetAll().Find(x => x.PackageNo == outbound.Cargo).Shipment.AirwayBillNo;
+                string _airwaybill = "";
+                try {
+                    _airwaybill = _packageNumberService.GetAll().Find(x => x.PackageNo == outbound.Cargo).Shipment.AirwayBillNo;
+                }
+                catch (Exception) { continue;  }
                 GatewayOutboundViewModel isExist = _results.Find(x => x.AirwayBillNo == _airwaybill);
                 if (_inbound.Exists(x => x.Cargo == outbound.Cargo))
                 {

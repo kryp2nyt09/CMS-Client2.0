@@ -98,7 +98,11 @@ namespace CMS2.Client.Forms.TrackingReports
             foreach (CargoTransfer cargoTransfer in _cargoTransfers)
             {
                 CargoTransferViewModel model = new CargoTransferViewModel();
-                string _airwaybill = _packageNumberService.GetAll().Find(x => x.PackageNo == cargoTransfer.Cargo).Shipment.AirwayBillNo;
+                string _airwaybill = "";
+                try {
+                    _airwaybill = _packageNumberService.GetAll().Find(x => x.PackageNo == cargoTransfer.Cargo).Shipment.AirwayBillNo;
+                }
+                catch (Exception) { continue; }
                 CargoTransferViewModel isExist = _results.Find(x => x.AWB == _airwaybill);
 
                 if (isExist != null)

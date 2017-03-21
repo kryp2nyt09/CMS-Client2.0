@@ -70,6 +70,9 @@ namespace CMS2_Client
         #region Events
         private void Extract_Database_Load(object sender, EventArgs e)
         {
+            LocalServer.Text = "localhost";
+            LocalServer.Enabled = false;
+
             this.isSubServer = true;
             this.isLocalConnected = false;
             this.isMainConnected = false;
@@ -156,15 +159,25 @@ namespace CMS2_Client
         }
         private void SubServer_ToggleStateChanged(object sender, Telerik.WinControls.UI.StateChangedEventArgs args)
         {
+            
             ResetAll();
             ToggleEnableDisableMainServer(true);
             isSubServer = true;
+
+            LocalServer.Text = "localhost";
+            LocalServer.Enabled = false;
+
         }
         private void ClientApp_ToggleStateChanged(object sender, Telerik.WinControls.UI.StateChangedEventArgs args)
         {
+           
             ResetAll();
             ToggleEnableDisableMainServer(false);
             isSubServer = false;
+
+            LocalServer.Clear();
+            LocalServer.Enabled = true;
+
         }
         private void Extract_Click(object sender, EventArgs e)
         {
@@ -417,6 +430,12 @@ namespace CMS2_Client
             if (string.IsNullOrEmpty(LocalServer.Text) || string.IsNullOrEmpty(LocalDbName.Text) || string.IsNullOrEmpty(LocalUsername.Text) || string.IsNullOrEmpty(LocalPassword.Text))
             {
                 MessageBox.Show("Please fill out all fields.", "Data Error", MessageBoxButtons.OK);
+                isValid = false;
+            }
+            else if (LocalServer.Text == "localhost")
+            {
+                MessageBox.Show("Please enter another ip address.", "Data Error", MessageBoxButtons.OK);
+                LocalServer.Focus();
                 isValid = false;
             }
 

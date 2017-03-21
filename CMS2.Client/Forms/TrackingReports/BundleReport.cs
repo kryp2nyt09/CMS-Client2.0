@@ -108,8 +108,10 @@ namespace CMS2.Client.Forms.TrackingReports
 
                 BundleViewModel model = new BundleViewModel();
                 ShipmentBL shipment = new ShipmentBL();
-                string _airwaybill = _packageNumberService.GetAll().Find(x => x.PackageNo == _bundle.Cargo).Shipment.AirwayBillNo;
-              
+                string _airwaybill = "";
+                try {
+                    _airwaybill = _packageNumberService.GetAll().Find(x => x.PackageNo == _bundle.Cargo).Shipment.AirwayBillNo;
+                }catch(Exception) { continue; }
                 BundleViewModel isExist = _results.Find(x => x.AirwayBillNo == _airwaybill);
                 
                 if (isExist != null)

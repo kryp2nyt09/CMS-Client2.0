@@ -117,8 +117,11 @@ namespace CMS2.Client.Forms.TrackingReports
 
                 GatewayTransmitalViewModel model = new GatewayTransmitalViewModel();
                 //List<Shipment> ship = shipmentService.GetAll().Where(x => x.AirwayBillNo == transmital.AirwayBillNo).ToList();
-
-                string _airwaybill = transmitalService.GetAll().Find(x => x.Cargo == transmital.Cargo).AirwayBillNo;
+                string _airwaybill = "";
+                try {
+                    _airwaybill = transmitalService.GetAll().Find(x => x.Cargo == transmital.Cargo).AirwayBillNo;
+                }
+                catch (Exception) { continue; }
                 GatewayTransmitalViewModel isExist = _results.Find(x => x.AirwayBillNo == _airwaybill);
 
                 if (isExist != null) {
