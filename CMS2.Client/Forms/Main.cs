@@ -302,6 +302,7 @@ namespace CMS2.Client
                     lstAssignedTo.ValueMember = "RevenueUnitId";
 
                     BookingResetAll();
+                    PopulateGrid();
 
                     break;
                 case "Acceptance":
@@ -803,14 +804,12 @@ namespace CMS2.Client
             shipperCompany = new AutoCompleteStringCollection();
             if (shipper != null)
             {
-                var _clients = clients.Where(x => x.LastName.Equals(shipper.LastName) && x.FirstName.Equals(shipper.FirstName)).OrderBy(x => x.LastName).ThenBy(x => x.FirstName).ToList();
+                List<Entities.Client> _clients = clients.Where(x => x.LastName.Equals(shipper.LastName) && x.FirstName.Equals(shipper.FirstName)).OrderBy(x => x.LastName).ThenBy(x => x.FirstName).ToList();
                 if (_clients.Count > 0)
                 {
-                    foreach (var item in _clients)
+                    foreach (Entities.Client item in _clients)
                     {
-                        if (item.CompanyId == null)
-                            shipperCompany.Add(item.Company.CompanyName);
-                        else
+                        if (item.CompanyId != null)
                             shipperCompany.Add(item.Company.CompanyName + " - " + item.AccountNo);
                     }
                 }
@@ -877,14 +876,12 @@ namespace CMS2.Client
             consigneeCompany = new AutoCompleteStringCollection();
             if (consignee != null)
             {
-                var _clients = clients.Where(x => x.LastName.Equals(consignee.LastName) && x.FirstName.Equals(consignee.FirstName)).OrderBy(x => x.LastName).ThenBy(x => x.FirstName).ToList();
+                List<Entities.Client> _clients = clients.Where(x => x.LastName.Equals(consignee.LastName) && x.FirstName.Equals(consignee.FirstName)).OrderBy(x => x.LastName).ThenBy(x => x.FirstName).ToList();
                 if (_clients.Count > 0)
                 {
-                    foreach (var item in _clients)
+                    foreach (Entities.Client item in _clients)
                     {
-                        if (item.CompanyId == null)
-                            consigneeCompany.Add(item.Company.CompanyName);
-                        else
+                        if (item.CompanyId != null)
                             consigneeCompany.Add(item.Company.CompanyName + " - " + item.AccountNo);
                     }
                 }
@@ -3147,7 +3144,7 @@ namespace CMS2.Client
                 { txtShipperCompany.Text = shipper.Company.CompanyName + " - " + shipper.Company.AccountNo; }
                 else
                 {
-                    txtShipperCompany.Text = shipper.Company.CompanyName;
+                    txtShipperCompany.Text = "NA";
                 }
                 txtShipperAddress1.Text = shipper.Address1;
                 txtShipperAddress2.Text = shipper.Address2;
@@ -3184,7 +3181,7 @@ namespace CMS2.Client
                 if (consignee.CompanyId != null)
                 { txtConsigneeCompany.Text = consignee.Company.CompanyName + " - " + consignee.Company.AccountNo; }
                 else
-                { txtConsigneeCompany.Text = consignee.Company.CompanyName; }
+                { txtConsigneeCompany.Text = "NA"; }
 
                 txtConsigneeAddress1.Text = consignee.Address1;
                 txtConsigneeAddress2.Text = consignee.Address2;
@@ -3693,47 +3690,47 @@ namespace CMS2.Client
 
         private void AcceptanceLoadData()
         {
-            if (commodityTypes == null)
+            if (commodityTypes.Count == 0)
             {
                 commodityTypes = commodityTypeService.FilterActive().OrderBy(x => x.CommodityTypeName).ToList();
             }
-            if (commodities == null)
+            if (commodities.Count == 0)
             {
                 commodities = commodityService.FilterActive().OrderBy(x => x.CommodityName).ToList();
             }
-            if (serviceTypes == null)
+            if (serviceTypes.Count == 0)
             {
                 serviceTypes = serviceTypeService.FilterActive().OrderBy(x => x.ServiceTypeName).ToList();
             }
-            if (serviceModes == null)
+            if (serviceModes.Count == 0)
             {
                 serviceModes = serviceModeService.FilterActive().OrderBy(x => x.ServiceModeName).ToList();
             }
-            if (paymentModes == null)
+            if (paymentModes.Count == 0)
             {
                 paymentModes = paymentModeService.FilterActive().OrderBy(x => x.PaymentModeName).ToList();
             }
-            if (shipmentBasicFees == null)
+            if (shipmentBasicFees.Count == 0)
             {
                 shipmentBasicFees = shipmentBasicFeeService.FilterActive();
             }
-            if (cratings == null)
+            if (cratings.Count == 0)
             {
                 cratings = cratingService.FilterActive().OrderBy(x => x.CratingName).ToList();
             }
-            if (packagings == null)
+            if (packagings.Count == 0)
             {
                 packagings = packagingService.FilterActive().OrderBy(x => x.PackagingName).ToList();
             }
-            if (goodsDescriptions == null)
+            if (goodsDescriptions.Count == 0)
             {
                 goodsDescriptions = goodsDescriptionService.FilterActive().OrderBy(x => x.GoodsDescriptionName).ToList();
             }
-            if (shipModes == null)
+            if (shipModes.Count == 0)
             {
                 shipModes = shipModeService.FilterActive().OrderBy(x => x.ShipModeName).ToList();
             }
-            if (paymentTerms == null)
+            if (paymentTerms.Count == 0)
             {
                 paymentTerms = paymentTermService.FilterActive().OrderBy(x => x.PaymentTermName).ToList();
             }
