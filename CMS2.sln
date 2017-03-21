@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMS2.Entities", "CMS2.Entities\CMS2.Entities.csproj", "{B446C38F-EA3B-4311-93C1-0A3C813229B5}"
 EndProject
@@ -16,7 +16,6 @@ EndProject
 Project("{6141683F-8A12-4E36-9623-2EB02B2C2303}") = "APCargo", "APCargo_Setup\APCargo.isproj", "{7CAAB9CB-D1A3-4DF1-B821-F1125D5355B6}"
 	ProjectSection(ProjectDependencies) = postProject
 		{62270F11-7DC6-43A6-9F5A-3A15A5CC2E54} = {62270F11-7DC6-43A6-9F5A-3A15A5CC2E54}
-		{B6A11D95-5E39-4249-9F39-F90507C1BAFE} = {B6A11D95-5E39-4249-9F39-F90507C1BAFE}
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AP CARGO SERVICE", "AP CARGO SERVICE\AP CARGO SERVICE.csproj", "{62270F11-7DC6-43A6-9F5A-3A15A5CC2E54}"

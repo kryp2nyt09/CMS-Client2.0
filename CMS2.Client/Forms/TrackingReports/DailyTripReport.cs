@@ -91,7 +91,11 @@ namespace CMS2.Client.Forms.TrackingReports
            // ShipmentBL shipmentService = new ShipmentBL();
             foreach (Distribution distribution in _distribution) {
                 DailyTripViewModel model = new DailyTripViewModel();
-                string _airwaybill = _packageNumberService.GetAll().Find(x => x.ShipmentId == distribution.ShipmentId).Shipment.AirwayBillNo;
+                string _airwaybill = "";
+                try {
+                    _airwaybill = _packageNumberService.GetAll().Find(x => x.ShipmentId == distribution.ShipmentId).Shipment.AirwayBillNo;
+                }
+                catch (Exception) { continue; }
                 DailyTripViewModel isExist = _results.Find(x => x.AirwayBillNo == _airwaybill);
 
                 if (isExist != null)

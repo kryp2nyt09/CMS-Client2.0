@@ -97,10 +97,12 @@ namespace CMS2.Client.Forms.TrackingReports
             foreach(Shipment shipment  in _shipment)
             {
                 PickupCargoManifestViewModel model = new PickupCargoManifestViewModel();
-
+                List<PackageNumber> packageList = new List<PackageNumber>();
                 //string _airwaybill = _packageNumberService.GetAll().Find(x => x.ShipmentId == shipment.ShipmentId).Shipment.AirwayBillNo;
-
-                List<PackageNumber> packageList = _packageNumberService.GetAll().Where(x => x.ShipmentId == shipment.ShipmentId).Distinct().ToList();
+                try {
+                    packageList = _packageNumberService.GetAll().Where(x => x.ShipmentId == shipment.ShipmentId).Distinct().ToList();
+                }
+                catch (Exception) { continue; }
                 foreach (PackageNumber number in packageList)
                 {
                     List<BranchAcceptance> branchList = branchAcceptanceBL.GetAll().Where(x => x.Cargo == number.PackageNo).Distinct().ToList();

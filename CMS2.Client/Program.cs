@@ -20,59 +20,67 @@ namespace CMS2.Client
         [STAThread]
         private static void Main()
         {
-            // bool xBool = Convert.ToBoolean(ConfigurationManager.AppSettings["isSync"]);
-            // if (!xBool)
-            // {
-                // if (IsAdmin())
-                // {
-                   // Extract_Database extract = new Extract_Database();
-                    // Application.Run(extract);
-                    // Application.Exit();
-                // }
-                // else
-                // {
-                    // MessageBox.Show("You have insuficient privilege. Please Run as Administrator.", "Adminstrator", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    // Application.Exit();
-                // }
-                
-            // }
-
-            //var container = BuildUnityContainer();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             var cmsMainWindow = new Main();
 
-            GlobalVars.IsSubserver = false;
-            SetAppSetting();
-            bool isNeedDBSetup = SetLocalDbConnection();
-            bool isAborted = false;
-
-            while (isNeedDBSetup && !isAborted)
+            bool xBool = Convert.ToBoolean(ConfigurationManager.AppSettings["isSync"]);
+            if (!xBool)
             {
-                if (isNeedDBSetup)
+                if (IsAdmin())
                 {
-                    var frmDBCon = new CmsDbCon();
-                    frmDBCon.IsNeedDBSetup = isNeedDBSetup;
-                    frmDBCon.ShowDialog();
-                    isNeedDBSetup = frmDBCon.IsNeedDBSetup;
-                    isAborted = frmDBCon.IsFormClose;
+                    Extract_Database extract = new Extract_Database();
+                    Application.Run(extract);
+                    Application.Exit();
                 }
-            }
+                else
+                {
+                    MessageBox.Show("You have insuficient privilege. Please Run as Administrator.", "Adminstrator", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    Application.Exit();
+                }
 
-            if (isAborted)
-            {
-                MessageBox.Show("Exit.");
-                Application.Exit();
             }
             else
             {
-                SetCentralDbConnection();
-                if (RestartApp)
-                    Application.Restart();
-
-                //Application.Run(container.Resolve</*CMSMain*/>());
                 Application.Run(cmsMainWindow);
             }
+
+            ////var container = BuildUnityContainer();
+            //Application.EnableVisualStyles();
+            //Application.SetCompatibleTextRenderingDefault(false);
+            //var cmsMainWindow = new Main();
+
+            //GlobalVars.IsSubserver = false;
+            //SetAppSetting();
+            //bool isNeedDBSetup = SetLocalDbConnection();
+            //bool isAborted = false;
+
+            //while (isNeedDBSetup && !isAborted)
+            //{
+            //    if (isNeedDBSetup)
+            //    {
+            //        var frmDBCon = new CmsDbCon();
+            //        frmDBCon.IsNeedDBSetup = isNeedDBSetup;
+            //        frmDBCon.ShowDialog();
+            //        isNeedDBSetup = frmDBCon.IsNeedDBSetup;
+            //        isAborted = frmDBCon.IsFormClose;
+            //    }
+            //}
+
+            //if (isAborted)
+            //{
+            //    MessageBox.Show("Exit.");
+            //    Application.Exit();
+            //}
+            //else
+            //{
+            //    SetCentralDbConnection();
+            //    if (RestartApp)
+            //        Application.Restart();
+
+            //    //Application.Run(container.Resolve</*CMSMain*/>());
+            //    Application.Run(cmsMainWindow);
+            //}
 
         }
         private static void SetAppSetting()

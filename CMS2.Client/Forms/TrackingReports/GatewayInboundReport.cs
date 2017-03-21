@@ -76,7 +76,11 @@ namespace CMS2.Client.Forms.TrackingReports
             foreach (GatewayInbound inbound in _inbound)
             {
                 GatewayInboundViewModel model = new GatewayInboundViewModel();
-                string _airwaybill = _packageNumberService.GetAll().Find(x => x.PackageNo == inbound.Cargo).Shipment.AirwayBillNo;
+                string _airwaybill = "";
+                try {
+                    _airwaybill = _packageNumberService.GetAll().Find(x => x.PackageNo == inbound.Cargo).Shipment.AirwayBillNo;
+                }
+                catch (Exception) { continue; }
                 GatewayInboundViewModel isExist = _results.Find(x => x.AirwayBillNo == _airwaybill);
                   if (isExist != null)
                   {

@@ -86,8 +86,13 @@ namespace CMS2.Client.Forms.TrackingReports
                 ShipmentBL shipmentService = new ShipmentBL();
 
                 DeliveryStatusViewModel model = new DeliveryStatusViewModel();
-
-                string _airwaybill = _packageNumberService.GetAll().Find(x => x.ShipmentId == deliveryStatus.ShipmentId).Shipment.AirwayBillNo;
+                string _airwaybill = "";
+                try {
+                    _airwaybill = _packageNumberService.GetAll().Find(x => x.ShipmentId == deliveryStatus.ShipmentId).Shipment.AirwayBillNo;
+                }catch(Exception)
+                {
+                    continue;
+                }
                 DeliveryStatusViewModel isExist = _results.Find(x => x.AirwayBillNo == _airwaybill);
 
                 if (isExist != null)

@@ -241,3 +241,5 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+*.fakes
+/APCargo_Setup/APCargo/_isconfig.xml
