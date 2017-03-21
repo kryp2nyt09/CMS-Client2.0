@@ -132,7 +132,15 @@ namespace CMS2.Client.Forms.TrackingReports
                     model.ServiceMode = shipment.ServiceMode.ServiceModeName;
                     model.PaymentMode = shipment.PaymentMode.PaymentModeName;
                     model.Amount = shipment.TotalAmount.ToString();
-                    model.Area = shipment.Booking.AssignedToArea.City.CityName;
+                    if (shipment.Booking.AssignedToArea != null)
+                    {
+                        model.Area = shipment.Booking.AssignedToArea.City.CityName;
+                    }
+                    else
+                    {
+                        model.Area = "NA";
+                    }
+                   
 
                     _results.Add(model);
                 }
