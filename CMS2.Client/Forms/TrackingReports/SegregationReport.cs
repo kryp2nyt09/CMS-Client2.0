@@ -46,6 +46,7 @@ namespace CMS2.Client.Forms.TrackingReports
                 row[7] = item.Qty.ToString();
                 row[8] = item.Area;
                 row[9] = item.CreatedDate.ToShortDateString();
+                dt.Rows.Add(row);
             }
             dt.EndLoadData();
 

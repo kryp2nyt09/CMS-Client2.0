@@ -386,7 +386,7 @@ namespace CMS2.Client.Forms.TrackingReportsView
             this.textBox24.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Bottom;
             this.textBox24.StyleName = "";
             this.textBox24.TextWrap = false;
-            this.textBox24.Value = "= Fields.[Dicrepency Pieces]";
+            this.textBox24.Value = "= Fields.[Discrepancy Pieces]";
             // 
             // textBox31
             // 
@@ -439,7 +439,7 @@ namespace CMS2.Client.Forms.TrackingReportsView
             this.textBox44.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Left;
             this.textBox44.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
             this.textBox44.StyleName = "";
-            this.textBox44.Value = "= SUM(CDbl(Fields.[Dicrepency Pieces]))";
+            this.textBox44.Value = "= SUM(CDbl(Fields.[Discrepancy Pieces]))";
             // 
             // textBox2
             // 

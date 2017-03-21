@@ -35,7 +35,7 @@ namespace CMS2.Client.Forms.TrackingReports
             dt.Columns.Add(new DataColumn("AWB", typeof(string)));
 
             dt.Columns.Add(new DataColumn("Recieved(Qty)", typeof(string)));
-            dt.Columns.Add(new DataColumn("Dicrepency(Qty)", typeof(string)));
+            dt.Columns.Add(new DataColumn("Discrepancy(Qty)", typeof(string)));
             dt.Columns.Add(new DataColumn("Total Qty", typeof(string)));
 
             dt.Columns.Add(new DataColumn("CreatedDate", typeof(string)));
