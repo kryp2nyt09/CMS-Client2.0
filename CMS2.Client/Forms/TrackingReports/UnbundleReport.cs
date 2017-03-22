@@ -78,11 +78,11 @@ namespace CMS2.Client.Forms.TrackingReports
         {
             PackageNumberBL _packageNumberService = new PackageNumberBL();
             List<UnbundleViewModel> _results = new List<UnbundleViewModel>();
-
             ShipmentBL shipment = new ShipmentBL();
+            
+            Shipment _shipment = new Shipment();
 
             foreach (Bundle bundle in _bundle){
-                Shipment _shipment = new Shipment();
                 UnbundleViewModel model = new UnbundleViewModel();
                 try
                 {

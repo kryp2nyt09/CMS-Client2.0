@@ -91,11 +91,11 @@ namespace CMS2.Client.Forms.TrackingReports
             PackageNumberBL _packageNumberService = new PackageNumberBL();
             BranchAcceptanceBL _branchAcceptanceService = new BranchAcceptanceBL();
             List<BranchAcceptanceViewModel> _results = new List<BranchAcceptanceViewModel>();
+           
 
             foreach (Shipment shipment in _shipments)
             {
                 BranchAcceptanceViewModel model = new BranchAcceptanceViewModel();
-
                 BranchAcceptanceViewModel isAirawayBillExist = _results.Find(x => x.AirwayBillNo == shipment.AirwayBillNo);
                 List<PackageNumber> _packageNumbers = _packageNumberService.GetAll().Where(x => x.ShipmentId == shipment.ShipmentId).ToList();
 

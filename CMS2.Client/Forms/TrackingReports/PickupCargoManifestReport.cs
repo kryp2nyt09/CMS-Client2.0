@@ -94,10 +94,12 @@ namespace CMS2.Client.Forms.TrackingReports
             PackageNumberBL _packageNumberService = new PackageNumberBL();
             List<PickupCargoManifestViewModel> _results = new List<PickupCargoManifestViewModel>();
 
-            foreach(Shipment shipment  in _shipment)
+           
+            List<PackageNumber> packageList = new List<PackageNumber>();
+
+            foreach (Shipment shipment  in _shipment)
             {
                 PickupCargoManifestViewModel model = new PickupCargoManifestViewModel();
-                List<PackageNumber> packageList = new List<PackageNumber>();
                 //string _airwaybill = _packageNumberService.GetAll().Find(x => x.ShipmentId == shipment.ShipmentId).Shipment.AirwayBillNo;
                 try {
                     packageList = _packageNumberService.GetAll().Where(x => x.ShipmentId == shipment.ShipmentId).Distinct().ToList();

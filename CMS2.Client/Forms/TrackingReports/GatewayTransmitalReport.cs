@@ -112,10 +112,11 @@ namespace CMS2.Client.Forms.TrackingReports
 
             CommodityBL commodityService = new CommodityBL();
             GatewayTransmittalBL transmitalService = new GatewayTransmittalBL();
+            ShipmentBL shipmentService = new ShipmentBL();
+           
 
             foreach (GatewayTransmittal transmital in _transmital)
             {
-                ShipmentBL shipmentService = new ShipmentBL();
                 GatewayTransmitalViewModel model = new GatewayTransmitalViewModel();
                 Shipment _shipment = new Shipment();
                 string _airwaybill = "";

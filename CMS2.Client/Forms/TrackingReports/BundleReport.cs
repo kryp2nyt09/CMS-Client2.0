@@ -102,16 +102,16 @@ namespace CMS2.Client.Forms.TrackingReports
         public List<BundleViewModel> Match(List<Bundle> bundle) {
 
             PackageNumberBL _packageNumberService = new PackageNumberBL();
-            List<BundleViewModel> _results = new List<BundleViewModel>();       
+            List<BundleViewModel> _results = new List<BundleViewModel>();
+            ShipmentBL shipment = new ShipmentBL();
 
             foreach (Bundle _bundle in bundle) {
-
                 BundleViewModel model = new BundleViewModel();
-                ShipmentBL shipment = new ShipmentBL();
                 string _airwaybill = "";
                 try {
                     _airwaybill = _packageNumberService.GetAll().Find(x => x.PackageNo == _bundle.Cargo).Shipment.AirwayBillNo;
                 }catch(Exception) { continue; }
+
                 BundleViewModel isExist = _results.Find(x => x.AirwayBillNo == _airwaybill);
                 
                 if (isExist != null)

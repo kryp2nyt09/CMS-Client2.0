@@ -82,7 +82,7 @@ namespace CMS2.Client.Forms.TrackingReports
             PackageNumberBL _packageNumberService = new PackageNumberBL();
 
             List<DeliveryStatusViewModel> _results = new List<DeliveryStatusViewModel>();
-            List<Distribution> distributions = distributionService.GetAll();
+            List<Distribution> distributions = distributionService.GetAll().ToList();
 
             foreach (Delivery delivery in _deliveries)
             {               

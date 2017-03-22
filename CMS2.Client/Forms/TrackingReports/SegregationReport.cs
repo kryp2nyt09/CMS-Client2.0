@@ -76,9 +76,10 @@ namespace CMS2.Client.Forms.TrackingReports
             
             PackageNumberBL _packageNumberService = new PackageNumberBL();
 
+            ShipmentBL shipmentService = new ShipmentBL();
+           
             foreach (Segregation segregation in _segregation)
             {
-                ShipmentBL shipmentService = new ShipmentBL();
                 SegregationViewModel model = new SegregationViewModel();
                 string _airwaybill = "";
                 try {

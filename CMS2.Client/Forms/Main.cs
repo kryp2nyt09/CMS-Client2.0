@@ -5792,86 +5792,96 @@ namespace CMS2.Client
         /// </summary>
         public void getPickupCargoData()
         {
-            PickupCargoManifestReport pickup = new PickupCargoManifestReport();
+            try {
+                PickupCargoManifestReport pickup = new PickupCargoManifestReport();
+                DataTable dataTable = pickup.getPickUpCargoData(dateTimePicker_PickupCargo.Value);
+                DataView view = new DataView(dataTable);
+                gridPickupCargo.DataSource = dataTable;
 
-            DataTable dataTable = pickup.getPickUpCargoData(dateTimePicker_PickupCargo.Value);
-            DataView view = new DataView(dataTable);
-            gridPickupCargo.DataSource = dataTable;
-
-            //AREA
-            DataTable table = view.ToTable(true, "Area");
-            dropDownPickUpCargo_Area.Items.Clear();
-            dropDownPickUpCargo_Area.Items.Add("All");
-            foreach (DataRow x in table.Rows)
-            {
-                dropDownPickUpCargo_Area.Items.Add(x["Area"].ToString());
-            }
-            dropDownPickUpCargo_Area.SelectedIndex = 0;
-
-            #region PickupCargo Grid Design
-            if (gridPickupCargo.DataSource != null)
-            {
-                List<int> width = pickup.setPickUpCargoWidth();
-                int ctr = 0;
-                foreach (int x in width)
+                //AREA
+                DataTable table = view.ToTable(true, "Area");
+                dropDownPickUpCargo_Area.Items.Clear();
+                dropDownPickUpCargo_Area.Items.Add("All");
+                foreach (DataRow x in table.Rows)
                 {
-                    if (x == 0) { gridPickupCargo.Columns[ctr].IsVisible = false; }
-                    gridPickupCargo.Columns[ctr].Width = x;
-                    ctr++;
+                    dropDownPickUpCargo_Area.Items.Add(x["Area"].ToString());
                 }
+                dropDownPickUpCargo_Area.SelectedIndex = 0;
 
+                #region PickupCargo Grid Design
+                if (gridPickupCargo.DataSource != null)
+                {
+                    List<int> width = pickup.setPickUpCargoWidth();
+                    int ctr = 0;
+                    foreach (int x in width)
+                    {
+                        if (x == 0) { gridPickupCargo.Columns[ctr].IsVisible = false; }
+                        gridPickupCargo.Columns[ctr].Width = x;
+                        ctr++;
+                    }
+
+                }
+                #endregion PickupCargo Grid Design
             }
-            #endregion PickupCargo Grid Design
-
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs(LogPath, "Pickup Cargo", ex.Message);
+            }
         }
         /// <summary>
         /// BRANCH ACCEPTANCE
         /// </summary>
         public void getBrancAcceptanceData()
         {
-            BranchAcceptanceReport branchAccept = new BranchAcceptanceReport();
-            DataTable dataTable = branchAccept.getBranchAcceptanceData(dateTimePickerBranchAcceptance_Date.Value);
-            DataView view = new DataView(dataTable);
+            try {
+                BranchAcceptanceReport branchAccept = new BranchAcceptanceReport();
+                DataTable dataTable = branchAccept.getBranchAcceptanceData(dateTimePickerBranchAcceptance_Date.Value);
+                DataView view = new DataView(dataTable);
 
-            //DRIVER
-            DataTable table = view.ToTable(true, "Driver");
-            dropDownBranchAcceptance_Driver.Items.Clear();
-            dropDownBranchAcceptance_Driver.Items.Add("All");
-            foreach (DataRow x in table.Rows)
-            {
-                dropDownBranchAcceptance_Driver.Items.Add(x["Driver"].ToString());
-            }
-            dropDownBranchAcceptance_Driver.SelectedIndex = 0;
-
-            //BATCH
-            table = view.ToTable(true, "Batch");
-            dropDownBranchAcceptance_Batch.Items.Clear();
-            dropDownBranchAcceptance_Batch.Items.Add("All");
-            foreach (DataRow x in table.Rows)
-            {
-                dropDownBranchAcceptance_Batch.Items.Add(x["Batch"].ToString());
-            }
-            dropDownBranchAcceptance_Batch.SelectedIndex = 0;
-
-            dropDownBranchAcceptance_BCO_BSO.Items.Clear();
-            dropDownBranchAcceptance_BCO_BSO.Items.Add("All");
-
-            gridBranchAcceptance.DataSource = dataTable;
-
-            #region Branch Acceptance Grid Design
-            if (gridBranchAcceptance.DataSource != null)
-            {
-                List<int> width = branchAccept.setBranchAcceptanceWidth();
-                int ctr = 0;
-                foreach (int x in width)
+                //DRIVER
+                DataTable table = view.ToTable(true, "Driver");
+                dropDownBranchAcceptance_Driver.Items.Clear();
+                dropDownBranchAcceptance_Driver.Items.Add("All");
+                foreach (DataRow x in table.Rows)
                 {
-                    if (x == 0) { gridBranchAcceptance.Columns[ctr].IsVisible = false; }
-                    gridBranchAcceptance.Columns[ctr].Width = x;
-                    ctr++;
+                    dropDownBranchAcceptance_Driver.Items.Add(x["Driver"].ToString());
                 }
+                dropDownBranchAcceptance_Driver.SelectedIndex = 0;
 
+                //BATCH
+                table = view.ToTable(true, "Batch");
+                dropDownBranchAcceptance_Batch.Items.Clear();
+                dropDownBranchAcceptance_Batch.Items.Add("All");
+                foreach (DataRow x in table.Rows)
+                {
+                    dropDownBranchAcceptance_Batch.Items.Add(x["Batch"].ToString());
+                }
+                dropDownBranchAcceptance_Batch.SelectedIndex = 0;
+
+                dropDownBranchAcceptance_BCO_BSO.Items.Clear();
+                dropDownBranchAcceptance_BCO_BSO.Items.Add("All");
+
+                gridBranchAcceptance.DataSource = dataTable;
+
+                #region Branch Acceptance Grid Design
+                if (gridBranchAcceptance.DataSource != null)
+                {
+                    List<int> width = branchAccept.setBranchAcceptanceWidth();
+                    int ctr = 0;
+                    foreach (int x in width)
+                    {
+                        if (x == 0) { gridBranchAcceptance.Columns[ctr].IsVisible = false; }
+                        gridBranchAcceptance.Columns[ctr].Width = x;
+                        ctr++;
+                    }
+
+                }
+                #endregion Branch Acceptance Grid Design
             }
-            #endregion Branch Acceptance Grid Design
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs(LogPath, "Branch Acceptance", ex.Message);
+            }
 
         }
         /// <summary>
@@ -5934,7 +5944,7 @@ namespace CMS2.Client
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error in Bundle ! \n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Logs.ErrorLogs(LogPath, "Bundle", ex.Message);
             }
         }
         /// <summary>
@@ -5942,53 +5952,59 @@ namespace CMS2.Client
         /// </summary>
         private void getUnbundle()
         {
-            UnbundleReport bundle = new UnbundleReport();
+            try {
+                UnbundleReport bundle = new UnbundleReport();
 
-            DataTable dataTable = bundle.getBundleData(dateTimeUnbunde_Date.Value);
-            DataView view = new DataView(dataTable);
+                DataTable dataTable = bundle.getBundleData(dateTimeUnbunde_Date.Value);
+                DataView view = new DataView(dataTable);
 
-            //BRANCH
-            DataTable table = view.ToTable(true, "Branch");
-            dropDownUnbundle_BCO.Items.Clear();
-            dropDownUnbundle_BCO.Items.Add("All");
-            foreach (DataRow x in table.Rows)
-            {
-                if (x["Branch"].ToString().Trim() != "")
+                //BRANCH
+                DataTable table = view.ToTable(true, "Branch");
+                dropDownUnbundle_BCO.Items.Clear();
+                dropDownUnbundle_BCO.Items.Add("All");
+                foreach (DataRow x in table.Rows)
                 {
-                    dropDownUnbundle_BCO.Items.Add(x["Branch"].ToString());
+                    if (x["Branch"].ToString().Trim() != "")
+                    {
+                        dropDownUnbundle_BCO.Items.Add(x["Branch"].ToString());
+                    }
                 }
-            }
-            dropDownUnbundle_BCO.SelectedIndex = 0;
+                dropDownUnbundle_BCO.SelectedIndex = 0;
 
-            //SACK NO
-            table = view.ToTable(true, "Sack No");
-            dropDownUnbundle_SackNo.Items.Clear();
-            dropDownUnbundle_SackNo.Items.Add("All");
-            foreach (DataRow x in table.Rows)
-            {
-                if (x["Sack No"].ToString().Trim() != "")
+                //SACK NO
+                table = view.ToTable(true, "Sack No");
+                dropDownUnbundle_SackNo.Items.Clear();
+                dropDownUnbundle_SackNo.Items.Add("All");
+                foreach (DataRow x in table.Rows)
                 {
-                    dropDownUnbundle_SackNo.Items.Add(x["Sack No"].ToString());
+                    if (x["Sack No"].ToString().Trim() != "")
+                    {
+                        dropDownUnbundle_SackNo.Items.Add(x["Sack No"].ToString());
+                    }
                 }
-            }
-            dropDownUnbundle_SackNo.SelectedIndex = 0;
+                dropDownUnbundle_SackNo.SelectedIndex = 0;
 
-            gridUnbundle.DataSource = dataTable;
+                gridUnbundle.DataSource = dataTable;
 
-            #region Bundle Grid Design
-            if (gridUnbundle.DataSource != null)
-            {
-                List<int> width = bundle.setBundleWidth();
-                int ctr = 0;
-                foreach (int x in width)
+                #region Bundle Grid Design
+                if (gridUnbundle.DataSource != null)
                 {
-                    if (x == 0) { gridUnbundle.Columns[ctr].IsVisible = false; }
-                    gridUnbundle.Columns[ctr].Width = x;
-                    ctr++;
-                }
+                    List<int> width = bundle.setBundleWidth();
+                    int ctr = 0;
+                    foreach (int x in width)
+                    {
+                        if (x == 0) { gridUnbundle.Columns[ctr].IsVisible = false; }
+                        gridUnbundle.Columns[ctr].Width = x;
+                        ctr++;
+                    }
 
+                }
+                #endregion Bundle Grid Design
             }
-            #endregion Bundle Grid Design
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs(LogPath, "Unbundle", ex.Message);
+            }
 
         }
         /// <summary>
@@ -5996,65 +6012,71 @@ namespace CMS2.Client
         /// </summary>
         private void getGatewayTransmitalData()
         {
-            GatewayTransmitalReport gatewayTransmitalre = new GatewayTransmitalReport();
+            try {
+                GatewayTransmitalReport gatewayTransmitalre = new GatewayTransmitalReport();
 
-            DataTable dataTable = gatewayTransmitalre.getData(dateTimeGatewayTransmital_Date.Value);
-            gridGatewayTransmital.DataSource = dataTable;
+                DataTable dataTable = gatewayTransmitalre.getData(dateTimeGatewayTransmital_Date.Value);
+                gridGatewayTransmital.DataSource = dataTable;
 
-            DataView view = new DataView(dataTable);
+                DataView view = new DataView(dataTable);
 
-            //GATEWAY
-            DataTable table = view.ToTable(true, "Gateway");
-            dropDownGatewayTransmital_Gateway.Items.Clear();
-            dropDownGatewayTransmital_Gateway.Items.Add("All");
-            foreach (DataRow x in table.Rows)
-            {
-                if (x["Gateway"].ToString() != null)
+                //GATEWAY
+                DataTable table = view.ToTable(true, "Gateway");
+                dropDownGatewayTransmital_Gateway.Items.Clear();
+                dropDownGatewayTransmital_Gateway.Items.Add("All");
+                foreach (DataRow x in table.Rows)
                 {
-                    dropDownGatewayTransmital_Gateway.Items.Add(x["Gateway"].ToString());
+                    if (x["Gateway"].ToString() != null)
+                    {
+                        dropDownGatewayTransmital_Gateway.Items.Add(x["Gateway"].ToString());
+                    }
+                }
+                dropDownGatewayTransmital_Gateway.SelectedIndex = 0;
+
+                //DESTINATION
+                table = view.ToTable(true, "Destination");
+                dropDownGatewayTransmital_Destination.Items.Clear();
+                dropDownGatewayTransmital_Destination.Items.Add("All");
+                foreach (DataRow x in table.Rows)
+                {
+                    if (x["Destination"].ToString() != null)
+                    {
+                        dropDownGatewayTransmital_Destination.Items.Add(x["Destination"].ToString());
+                    }
+                }
+                dropDownGatewayTransmital_Destination.SelectedIndex = 0;
+
+                //BATCH
+                table = view.ToTable(true, "Batch");
+                dropDownGatewayTransmital_Batch.Items.Clear();
+                dropDownGatewayTransmital_Batch.Items.Add("All");
+                foreach (DataRow x in table.Rows)
+                {
+                    if (x["Batch"].ToString() != null)
+                    {
+                        dropDownGatewayTransmital_Batch.Items.Add(x["Batch"].ToString());
+                    }
+                }
+                dropDownGatewayTransmital_Batch.SelectedIndex = 0;
+
+
+                if (gridGatewayTransmital.DataSource != null)
+                {
+                    List<int> width = gatewayTransmitalre.setWidth();
+                    int ctr = 0;
+                    foreach (int x in width)
+                    {
+                        gridGatewayTransmital.Columns[ctr].Width = x;
+                        if (x == 0) { gridGatewayTransmital.Columns[ctr].IsVisible = false; }
+                        ctr++;
+                    }
+
+
                 }
             }
-            dropDownGatewayTransmital_Gateway.SelectedIndex = 0;
-
-            //DESTINATION
-            table = view.ToTable(true, "Destination");
-            dropDownGatewayTransmital_Destination.Items.Clear();
-            dropDownGatewayTransmital_Destination.Items.Add("All");
-            foreach (DataRow x in table.Rows)
+            catch (Exception ex)
             {
-                if (x["Destination"].ToString() != null)
-                {
-                    dropDownGatewayTransmital_Destination.Items.Add(x["Destination"].ToString());
-                }
-            }
-            dropDownGatewayTransmital_Destination.SelectedIndex = 0;
-
-            //BATCH
-            table = view.ToTable(true, "Batch");
-            dropDownGatewayTransmital_Batch.Items.Clear();
-            dropDownGatewayTransmital_Batch.Items.Add("All");
-            foreach (DataRow x in table.Rows)
-            {
-                if (x["Batch"].ToString() != null)
-                {
-                    dropDownGatewayTransmital_Batch.Items.Add(x["Batch"].ToString());
-                }
-            }
-            dropDownGatewayTransmital_Batch.SelectedIndex = 0;
-
-
-            if (gridGatewayTransmital.DataSource != null)
-            {
-                List<int> width = gatewayTransmitalre.setWidth();
-                int ctr = 0;
-                foreach (int x in width)
-                {
-                    gridGatewayTransmital.Columns[ctr].Width = x;
-                    if (x == 0) { gridGatewayTransmital.Columns[ctr].IsVisible = false; }
-                    ctr++;
-                }
-
-
+                Logs.ErrorLogs(LogPath, "Gateway Transmital", ex.Message);
             }
 
         }
@@ -6115,7 +6137,7 @@ namespace CMS2.Client
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error in Gateway Outbound ! \n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Logs.ErrorLogs(LogPath, "Gateway Outbound", ex.Message);
             }
         }
         /// <summary>
@@ -6175,7 +6197,7 @@ namespace CMS2.Client
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error in Gateway Inbound ! \n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Logs.ErrorLogs(LogPath, "Gateway Inbound", ex.Message);
             }
         }
         /// <summary>
@@ -6237,7 +6259,7 @@ namespace CMS2.Client
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error in Cargo Transfer ! \n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Logs.ErrorLogs(LogPath, "Cargo Transfer", ex.Message);
             }
         }
         /// <summary>
@@ -6323,7 +6345,7 @@ namespace CMS2.Client
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error in Segregation ! \n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Logs.ErrorLogs(LogPath, "Segregation", ex.Message);
             }
         }
         /// <summary>
@@ -6409,7 +6431,7 @@ namespace CMS2.Client
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error in Daily Trip ! \n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Logs.ErrorLogs(LogPath, "Daily Trip", ex.Message);
             }
         }
         /// <summary>
@@ -6417,40 +6439,48 @@ namespace CMS2.Client
         /// </summary>
         private void getHoldCargoData()
         {
-            HoldCargoReport holdCargo = new HoldCargoReport();
+            try {
+                HoldCargoReport holdCargo = new HoldCargoReport();
 
-            DataTable dataTable = holdCargo.getData(dateTimeHoldCargo_FromDate.Value, dateTimeHoldCargo_ToDate.Value);
+                DataTable dataTable = holdCargo.getData(dateTimeHoldCargo_FromDate.Value, dateTimeHoldCargo_ToDate.Value);
 
-            //STATUS
-            DataView view = new DataView(dataTable);
-            DataTable table = view.ToTable(true, "Status");
-            dropDownHoldCargo_Status.Items.Clear();
-            dropDownHoldCargo_Status.Items.Add("All");
-            foreach (DataRow x in table.Rows)
-            {
-                if (x["Status"].ToString() != null)
+                //STATUS
+                DataView view = new DataView(dataTable);
+                DataTable table = view.ToTable(true, "Status");
+                dropDownHoldCargo_Status.Items.Clear();
+                dropDownHoldCargo_Status.Items.Add("All");
+                foreach (DataRow x in table.Rows)
                 {
-                    dropDownHoldCargo_Status.Items.Add(x["Status"].ToString());
+                    if (x["Status"].ToString() != null)
+                    {
+                        dropDownHoldCargo_Status.Items.Add(x["Status"].ToString());
+                    }
                 }
-            }
-            dropDownHoldCargo_Status.SelectedIndex = 0;
+                dropDownHoldCargo_Status.SelectedIndex = 0;
 
-            gridHoldCargo.DataSource = dataTable;
+                gridHoldCargo.DataSource = dataTable;
 
-            #region Hold Cargo Grid Design
-            if (gridHoldCargo.DataSource != null)
-            {
-                List<int> width = holdCargo.setWidth();
-                int ctr = 0;
-                foreach (int x in width)
+                #region Hold Cargo Grid Design
+                if (gridHoldCargo.DataSource != null)
                 {
-                    if (x == 0) { gridHoldCargo.Columns[ctr].IsVisible = false; }
-                    gridHoldCargo.Columns[ctr].Width = x;
-                    ctr++;
+                    List<int> width = holdCargo.setWidth();
+                    int ctr = 0;
+                    foreach (int x in width)
+                    {
+                        if (x == 0) { gridHoldCargo.Columns[ctr].IsVisible = false; }
+                        gridHoldCargo.Columns[ctr].Width = x;
+                        ctr++;
+                    }
+
                 }
+                #endregion Hold Cargo Grid Design
+
 
             }
-            #endregion Hold Cargo Grid Design
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs(LogPath, "Hold Cargo", ex.Message);
+            }
         }
 
         /// <summary>
@@ -6535,7 +6565,7 @@ namespace CMS2.Client
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error in Delivery Status ! \n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Logs.ErrorLogs(LogPath, "Delivery Status", ex.Message);
             }
         }
         #endregion
