@@ -31,7 +31,7 @@ namespace CMS2.Client.Forms.TrackingReports
             dt.Columns.Add(new DataColumn("Batch", typeof(string)));
             dt.Columns.Add(new DataColumn("AWB", typeof(string)));
             dt.Columns.Add(new DataColumn("Recieved(Qty)", typeof(string)));
-            dt.Columns.Add(new DataColumn("Dicrepency(Qty)", typeof(string)));
+            dt.Columns.Add(new DataColumn("Discrepancy(Qty)", typeof(string)));
             dt.Columns.Add(new DataColumn("Total Qty", typeof(string)));
             dt.Columns.Add(new DataColumn("BCO", typeof(string)));
             dt.Columns.Add(new DataColumn("BSO", typeof(string)));
@@ -89,30 +89,36 @@ namespace CMS2.Client.Forms.TrackingReports
         {
 
             PackageNumberBL _packageNumberService = new PackageNumberBL();
+            BranchAcceptanceBL _branchAcceptanceService = new BranchAcceptanceBL();
             List<BranchAcceptanceViewModel> _results = new List<BranchAcceptanceViewModel>();
 
             foreach (Shipment shipment in _shipments)
             {
                 BranchAcceptanceViewModel model = new BranchAcceptanceViewModel();
 
-                BranchAcceptanceViewModel isExist = _results.Find(x => x.AirwayBillNo == shipment.AirwayBillNo);
+                BranchAcceptanceViewModel isAirawayBillExist = _results.Find(x => x.AirwayBillNo == shipment.AirwayBillNo);
                 List<PackageNumber> _packageNumbers = _packageNumberService.GetAll().Where(x => x.ShipmentId == shipment.ShipmentId).ToList();
 
                 foreach (PackageNumber packagenumber in _packageNumbers)
                 {
-                    BranchAcceptance _brachAcceptance = _branchAcceptances.Find(x => x.Cargo == packagenumber.PackageNo);
+                    BranchAcceptance _brachAcceptance = _branchAcceptanceService.GetAll().Where(x => x.Cargo == packagenumber.PackageNo).FirstOrDefault();
+
 
                     if (_brachAcceptance != null)
                     {
-                        if (isExist != null)
+                        if (isAirawayBillExist != null)
                         {
-                            isExist.TotalRecieved++;
-                            isExist.Total += model.TotalRecieved;
+                            isAirawayBillExist.TotalRecieved++;
+                            isAirawayBillExist.Total += model.TotalRecieved;
                         }
                         else
                         {
                             model.AirwayBillNo = shipment.AirwayBillNo;
-                            model.Area = shipment.Booking.AssignedToArea.RevenueUnitName;
+                            model.Area = "NA";
+                            if (shipment.Booking.AssignedToArea != null)
+                            {
+                                model.Area = shipment.Booking.AssignedToArea.RevenueUnitName;
+                            }
                             model.Driver = _brachAcceptance.Driver;
                             model.Checker = _brachAcceptance.Checker;
                             model.PlateNo = "N/A";
@@ -130,24 +136,27 @@ namespace CMS2.Client.Forms.TrackingReports
                     }
                     else
                     {
-                        if (isExist != null)
+                        if (isAirawayBillExist != null)
                         {
-                            isExist.TotalDiscrepency++;
+                            isAirawayBillExist.TotalDiscrepency++;
                             model.Total += model.TotalDiscrepency;
                         }
                         else
                         {
-                            model.AirwayBillNo = shipment.AirwayBillNo; ;
-                            model.Area = shipment.Booking.AssignedToArea.RevenueUnitName;
-                            model.Driver = _brachAcceptance.Driver;
-                            model.Checker = _brachAcceptance.Checker;
+                            model.AirwayBillNo = shipment.AirwayBillNo;
+                            model.Area = "NA";
+                            if (shipment.Booking.AssignedToArea != null)
+                            {
+                                model.Area = shipment.Booking.AssignedToArea.RevenueUnitName;
+                            }                           
+                            model.Driver = "N/A";
+                            model.Checker = "N/A";
                             model.PlateNo = "N/A";
-                            model.Batch = _brachAcceptance.Batch.BatchName;
+                            model.Batch = "N/A";
                             model.TotalDiscrepency++;
                             model.Total += model.TotalDiscrepency;
-                            model.CreatedBy = _brachAcceptance.CreatedDate;
 
-                            model.BCO = _brachAcceptance.BranchCorpOffice.BranchCorpOfficeName;
+                            model.BCO = "N/A";
                             model.BSO = shipment.Booking.AssignedToArea.RevenueUnitName;
 
                             _results.Add(model);

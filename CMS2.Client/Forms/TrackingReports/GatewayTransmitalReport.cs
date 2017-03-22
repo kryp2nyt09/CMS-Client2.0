@@ -1,4 +1,5 @@
 ﻿using CMS2.BusinessLogic;
+using CMS2.Common;
 using CMS2.Entities;
 using CMS2.Entities.ReportModel;
 using System;
@@ -63,7 +64,7 @@ namespace CMS2.Client.Forms.TrackingReports
                 row[12] = item.Destination;
                 row[13] = item.Batch;
 
-                row[14] = item.CreatedDate.ToShortDateString() ;
+                row[14] = item.CreatedDate.ToShortDateString();
 
                 row[15] = item.Driver;
                 row[16] = item.PlateNo;
@@ -95,7 +96,7 @@ namespace CMS2.Client.Forms.TrackingReports
             width.Add(0);  //Destination
             width.Add(0);  //Batch
             width.Add(0);  //Createdate
-                           
+
             width.Add(0);  //Driver
             width.Add(0);  //PlateNO
 
@@ -104,42 +105,46 @@ namespace CMS2.Client.Forms.TrackingReports
             return width;
         }
 
-        public List<GatewayTransmitalViewModel> Match(List<GatewayTransmittal> _transmital) {
+        public List<GatewayTransmitalViewModel> Match(List<GatewayTransmittal> _transmital)
+        {
 
             List<GatewayTransmitalViewModel> _results = new List<GatewayTransmitalViewModel>();
-           
+
             CommodityBL commodityService = new CommodityBL();
             GatewayTransmittalBL transmitalService = new GatewayTransmittalBL();
 
-            foreach(GatewayTransmittal transmital in _transmital)
+            foreach (GatewayTransmittal transmital in _transmital)
             {
                 ShipmentBL shipmentService = new ShipmentBL();
-
                 GatewayTransmitalViewModel model = new GatewayTransmitalViewModel();
-                //List<Shipment> ship = shipmentService.GetAll().Where(x => x.AirwayBillNo == transmital.AirwayBillNo).ToList();
+                Shipment _shipment = new Shipment();
                 string _airwaybill = "";
-                try {
-                    _airwaybill = transmitalService.GetAll().Find(x => x.Cargo == transmital.Cargo).AirwayBillNo;
+
+                _shipment = shipmentService.FilterActive().Where(x => x.AirwayBillNo == transmital.AirwayBillNo).FirstOrDefault();
+                if (_shipment == null)
+                {
+                    continue;
                 }
-                catch (Exception) { continue; }
+
                 GatewayTransmitalViewModel isExist = _results.Find(x => x.AirwayBillNo == _airwaybill);
 
-                if (isExist != null) {
+                if (isExist != null)
+                {
                     isExist.QTY++;
                     isExist.AGW += Convert.ToDecimal(shipmentService.GetAll().Find(x => x.AirwayBillNo == transmital.AirwayBillNo).Weight);
                 }
                 else
                 {
                     model.AirwayBillNo = transmital.AirwayBillNo;
-                    model.Shipper = shipmentService.GetAll().Find(x => x.AirwayBillNo == transmital.AirwayBillNo).Shipper.FullName;
-                    model.Consignee = shipmentService.GetAll().Find(x => x.AirwayBillNo == transmital.AirwayBillNo).Consignee.FullName;
-                    model.Address = shipmentService.GetAll().Find(x => x.AirwayBillNo == transmital.AirwayBillNo).Consignee.Address1;
+                    model.Shipper = _shipment.Shipper.FullName;
+                    model.Consignee = _shipment.Consignee.FullName;
+                    model.Address = _shipment.Consignee.Address1;
                     model.CommodityType = transmital.CommodityType.CommodityTypeName;
-                    model.Commodity = shipmentService.GetAll().Find(x => x.AirwayBillNo == transmital.AirwayBillNo).Commodity.CommodityName;
+                    model.Commodity = _shipment.Commodity.CommodityName;
                     model.QTY++;
-                    model.AGW = shipmentService.GetAll().Find(x => x.AirwayBillNo == transmital.AirwayBillNo).Weight;
-                    model.ServiceMode = shipmentService.GetAll().Find(x => x.AirwayBillNo == transmital.AirwayBillNo).ServiceMode.ServiceModeName;
-                    model.PaymentMode = shipmentService.GetAll().Find(x => x.AirwayBillNo == transmital.AirwayBillNo).PaymentMode.PaymentModeName;
+                    model.AGW = _shipment.Weight;
+                    model.ServiceMode = _shipment.ServiceMode.ServiceModeName;
+                    model.PaymentMode = _shipment.PaymentMode.PaymentModeName;
 
                     model.Gateway = transmital.Gateway;
                     model.Destination = transmital.BranchCorpOffice.BranchCorpOfficeName;
@@ -150,7 +155,7 @@ namespace CMS2.Client.Forms.TrackingReports
                     _results.Add(model);
                 }
 
-                
+
 
             }
             return _results;

@@ -111,13 +111,18 @@ namespace CMS2.Client.Forms.TrackingReports
                 {
                     model.Date = holdCargo.HoldCargoDate;
                     model.AirwayBillNo = holdCargo.AirwayBillNo;
-                    model.Shipper = shipmentService.GetAll().Find(x => x.AirwayBillNo == holdCargo.AirwayBillNo).Shipper.FullName;
-                    model.Consignee = shipmentService.GetAll().Find(x => x.AirwayBillNo == holdCargo.AirwayBillNo).Consignee.FullName;
-                    model.Address = shipmentService.GetAll().Find(x => x.AirwayBillNo == holdCargo.AirwayBillNo).Consignee.Address1;
-                    model.PaymentMode = shipmentService.GetAll().Find(x => x.AirwayBillNo == holdCargo.AirwayBillNo).PaymentMode.PaymentModeName;
-                    model.ServiceMode = shipmentService.GetAll().Find(x => x.AirwayBillNo == holdCargo.AirwayBillNo).ServiceMode.ServiceModeName;
-                    model.Status = status.GetAll().Find(x => x.StatusID == holdCargo.StatusID).StatusName;
-                    model.Reason = reason.GetAll().Find(x => x.ReasonID == holdCargo.ReasonID).ReasonName;
+
+                    List<Shipment> shipList = shipmentService.GetAll().Where(x => x.AirwayBillNo == holdCargo.AirwayBillNo).ToList();
+                    foreach (Shipment x in shipList)
+                    {
+                        model.Shipper = x.Shipper.FullName;
+                        model.Consignee = x.Consignee.FullName;
+                        model.Address = x.Consignee.Address1;
+                        model.PaymentMode = x.PaymentMode.PaymentModeName;
+                        model.ServiceMode = x.ServiceMode.ServiceModeName;
+                    }
+                    model.Status = status.GetById(holdCargo.StatusID).StatusName; // status.GetAll().Find(x => x.StatusID == holdCargo.StatusID).StatusName;
+                    model.Reason = reason.GetById(holdCargo.ReasonID).ReasonName; // .Find(x => x.ReasonID == holdCargo.ReasonID).ReasonName;
                     model.EndorseBy = holdCargo.Endorsedby;
                     model.ScannedBy = user.GetActiveRoles().Find(x => x.RoleId == AppUser.User.UserId).RoleName;
                     //model.PreparedBy = user.GetAllUsers().Find(x => x.UserId == shi)

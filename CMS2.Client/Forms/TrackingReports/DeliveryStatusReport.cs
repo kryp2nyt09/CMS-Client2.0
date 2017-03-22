@@ -73,27 +73,23 @@ namespace CMS2.Client.Forms.TrackingReports
             return width;
         }
 
-        public List<DeliveryStatusViewModel> Match(List<Delivery> _deliveryStatus)
+        public List<DeliveryStatusViewModel> Match(List<Delivery> _deliveries)
         {
-            List<DeliveryStatusViewModel> _results = new List<DeliveryStatusViewModel>();
+            DeliveryStatusBL status = new DeliveryStatusBL();
+            DeliveryRemarkBL remark = new DeliveryRemarkBL();
+            DistributionBL distributionService = new DistributionBL();
+            ShipmentBL shipmentService = new ShipmentBL();            
             PackageNumberBL _packageNumberService = new PackageNumberBL();
-            
-            foreach (Delivery deliveryStatus in _deliveryStatus)
-            {
-                DeliveryStatusBL status = new DeliveryStatusBL();
-                DeliveryRemarkBL remark = new DeliveryRemarkBL();
-                DistributionBL distribution = new DistributionBL();
-                ShipmentBL shipmentService = new ShipmentBL();
+
+            List<DeliveryStatusViewModel> _results = new List<DeliveryStatusViewModel>();
+            List<Distribution> distributions = distributionService.GetAll();
+
+            foreach (Delivery delivery in _deliveries)
+            {               
 
                 DeliveryStatusViewModel model = new DeliveryStatusViewModel();
-                string _airwaybill = "";
-                try {
-                    _airwaybill = _packageNumberService.GetAll().Find(x => x.ShipmentId == deliveryStatus.ShipmentId).Shipment.AirwayBillNo;
-                }catch(Exception)
-                {
-                    continue;
-                }
-                DeliveryStatusViewModel isExist = _results.Find(x => x.AirwayBillNo == _airwaybill);
+
+                DeliveryStatusViewModel isExist = _results.Find(x => x.AirwayBillNo == delivery.Shipment.AirwayBillNo);
 
                 if (isExist != null)
                 {
@@ -101,21 +97,32 @@ namespace CMS2.Client.Forms.TrackingReports
                 }
                 else
                 {
-                    model.AirwayBillNo = _airwaybill;
+                    model.AirwayBillNo = delivery.Shipment.AirwayBillNo;
                     model.QTY++;
-                    model.Status = deliveryStatus.DeliveryStatus.DeliveryStatusName;// status.GetAll().Find(x => x.DeliveryStatusId == deliveryStatus.DeliveryStatusId).DeliveryStatusName;
-                    model.Remarks = deliveryStatus.DeliveryRemark.DeliveryRemarkName;
-                    List<Distribution> list = distribution.GetAll().Where(x => x.ShipmentId == deliveryStatus.ShipmentId).Distinct().ToList();
-                    foreach(Distribution dis in list)
+                    model.Status = delivery.DeliveryStatus.DeliveryStatusName;
+                    model.Remarks = "NA";
+                    if (delivery.DeliveryRemark != null)
                     {
-                        //model.Area = dis.Area.RevenueUnitName;
-                        model.Driver = dis.Driver;
-                        model.Checker = dis.Checker;
-                        model.Batch = dis.Batch.BatchName;
-                        model.PlateNo = dis.PlateNo;
-                        model.BCO = dis.Area.City.BranchCorpOffice.BranchCorpOfficeName;
+                        model.Remarks = delivery.DeliveryRemark.DeliveryRemarkName;
                     }
-                   // model.BSO = deliveryStatus.Shipment
+                    Distribution dis = distributions.Find(x => x.ShipmentId == delivery.ShipmentId);
+                    //List<Distribution> list = distributions.Where( x => x.ShipmentId == delivery.ShipmentId).Distinct().ToList();
+                    //foreach(Distribution dis in list)
+                    //{
+                    //    //model.Area = dis.Area.RevenueUnitName;
+                    //    model.Driver = dis.Driver;
+                    //    model.Checker = dis.Checker;
+                    //    model.Batch = dis.Batch.BatchName;
+                    //    model.PlateNo = dis.PlateNo;
+                    //    model.BCO = dis.Area.City.BranchCorpOffice.BranchCorpOfficeName;
+                    //}
+                    model.Area = dis.Area.RevenueUnitName;
+                    model.Driver = dis.Driver;
+                    model.Checker = dis.Checker;
+                    model.Batch = dis.Batch.BatchName;
+                    model.PlateNo = dis.PlateNo;
+                    model.BCO = dis.Area.City.BranchCorpOffice.BranchCorpOfficeName;
+                  
                     _results.Add(model);
                 }
             }
