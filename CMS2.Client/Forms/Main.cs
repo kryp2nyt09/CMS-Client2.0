@@ -2124,18 +2124,27 @@ namespace CMS2.Client
 
         private void btnSavePaymentSummary_Click(object sender, EventArgs e)
         {
-            SavepaymentSummary(listPaymentSummary);
-            amountPaymentSummary();
-            ProgressIndicator saving = new ProgressIndicator("Payment Summary", "Saving ...", SavingofPaymentSummary);
-            saving.ShowDialog();
-            clearSummaryData();
-            clearPaymentSummaryData();
-            PopulateGrid_Prepaid();
-            PopulateGrid_FreightCollect();
-            PopulateGrid_CorpAcctConsignee();
-            TotalPaymentSummary();
-            btnPrintPaymentSummary.Enabled = true;
-            chk_ReceivedAll.Checked = false;
+            try
+            {
+                SavepaymentSummary(listPaymentSummary);
+                amountPaymentSummary();
+                ProgressIndicator saving = new ProgressIndicator("Payment Summary", "Saving ...", SavingofPaymentSummary);
+                saving.ShowDialog();
+                clearSummaryData();
+                clearPaymentSummaryData();
+                PopulateGrid_Prepaid();
+                PopulateGrid_FreightCollect();
+                PopulateGrid_CorpAcctConsignee();
+                TotalPaymentSummary();
+                btnPrintPaymentSummary.Enabled = true;
+                chk_ReceivedAll.Checked = false;
+                btnSavePaymentSummary.Enabled = false;
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+           
         }
 
         private void img_Signature_MouseDown(object sender, MouseEventArgs e)
@@ -2182,6 +2191,7 @@ namespace CMS2.Client
             psummaryForm.passListofMainDetails(listMainDetails);
             psummaryForm.Show();
             clearListofPaymentSummary();
+            btnSavePaymentSummary.Enabled = true;
 
         }
 
