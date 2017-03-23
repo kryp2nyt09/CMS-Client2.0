@@ -38,7 +38,7 @@ namespace CMS2.Client.Forms.TrackingReports
             dt.Columns.Add(new DataColumn("BCO", typeof(string)));
             dt.Columns.Add(new DataColumn("GATEWAY", typeof(string)));
             dt.Columns.Add(new DataColumn("SATELLITE", typeof(string)));
-
+            dt.Columns.Add(new DataColumn("ScannedBy", typeof(string)));
             dt.BeginLoadData();
             int ctr = 1;
             foreach (CargoTransferViewModel item in modelList)
@@ -59,6 +59,8 @@ namespace CMS2.Client.Forms.TrackingReports
                 row[11] = item.BCO;
                 row[12] = item.GATEWAY;
                 row[13] = item.SATELLITE;
+
+                row[14] = item.ScannedBy;
 
                 dt.Rows.Add(row);
             }
@@ -131,7 +133,7 @@ namespace CMS2.Client.Forms.TrackingReports
                     model.BCO = cargoTransfer.BranchCorpOffice.BranchCorpOfficeName;
                     model.GATEWAY = cargoTransfer.RevenueUnit.RevenueUnitName;
                     model.SATELLITE = cargoTransfer.RevenueUnit.RevenueUnitName;
-
+                    model.ScannedBy = AppUser.User.Employee.FullName;
                     _results.Add(model);
 
                 }

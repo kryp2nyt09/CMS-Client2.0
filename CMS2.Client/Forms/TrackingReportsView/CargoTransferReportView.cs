@@ -26,7 +26,16 @@ namespace CMS2.Client.Forms.TrackingReportsView
             table1.DataSource = objectDataSource;
 
             txtDate.Value = TrackingReportGlobalModel.Date;
+            txtOrigin.Value = TrackingReportGlobalModel.Origin;
+            txtDestination.Value = TrackingReportGlobalModel.Destination;
 
+            txtDriver.Value = TrackingReportGlobalModel.Driver;
+            txtChecker.Value = TrackingReportGlobalModel.Checker;
+            txtPlateNo.Value = TrackingReportGlobalModel.PlateNo;
+
+            txtScannedBy.Value = TrackingReportGlobalModel.ScannedBy;
+            // txtRemarks.Value = TrackingReportGlobalModel.Remarks;
+            // txtNotes.Value = TrackingReportGlobalModel.Notes;
         }
     }
 }

@@ -36,7 +36,9 @@ namespace CMS2.Client.Forms.TrackingReports
             dt.Columns.Add(new DataColumn("BCO", typeof(string)));
             dt.Columns.Add(new DataColumn("BSO", typeof(string)));
 
-
+            dt.Columns.Add(new DataColumn("ScannedBy", typeof(string)));
+            dt.Columns.Add(new DataColumn("Remarks", typeof(string)));
+            dt.Columns.Add(new DataColumn("Notes", typeof(string)));
             dt.BeginLoadData();
             int ctr = 1;
             foreach (BranchAcceptanceViewModel item in list)
@@ -55,7 +57,9 @@ namespace CMS2.Client.Forms.TrackingReports
 
                 row[10] = item.BCO;
                 row[11] = item.BSO;
-
+                row[12] = item.ScannedBy;
+                row[13] = item.Remarks;
+                row[14] = item.Notes;
                 dt.Rows.Add(row);
             }
             dt.EndLoadData();
@@ -81,7 +85,9 @@ namespace CMS2.Client.Forms.TrackingReports
             width.Add(0); //BCO
             width.Add(0); //BSO 
 
-
+            width.Add(110); //Scanned by
+            width.Add(0); //Remarks
+            width.Add(0); //Notes
             return width;
         }
 
@@ -114,7 +120,9 @@ namespace CMS2.Client.Forms.TrackingReports
                         else
                         {
                             model.AirwayBillNo = shipment.AirwayBillNo;
-                            model.Area = "NA";
+
+                            model.Area = "N/A";
+
                             if (shipment.Booking.AssignedToArea != null)
                             {
                                 model.Area = shipment.Booking.AssignedToArea.RevenueUnitName;
@@ -125,11 +133,13 @@ namespace CMS2.Client.Forms.TrackingReports
                             model.Batch = _brachAcceptance.Batch.BatchName;
                             model.TotalRecieved++;
                             model.Total += model.TotalRecieved;
-                            model.CreatedBy = _brachAcceptance.CreatedDate;
+                             model.CreatedBy = _brachAcceptance.CreatedDate;
 
                             model.BCO = _brachAcceptance.BranchCorpOffice.BranchCorpOfficeName;
                             model.BSO = shipment.Booking.AssignedToArea.RevenueUnitName;
-
+                            model.ScannedBy = AppUser.User.Employee.FullName;
+                            model.Remarks = shipment.Remarks;
+                            model.Notes = _brachAcceptance.Notes;
                             _results.Add(model);
 
                         }
@@ -139,26 +149,28 @@ namespace CMS2.Client.Forms.TrackingReports
                         if (isAirawayBillExist != null)
                         {
                             isAirawayBillExist.TotalDiscrepency++;
-                            model.Total += model.TotalDiscrepency;
+                            isAirawayBillExist.Total += model.TotalDiscrepency;
                         }
                         else
                         {
                             model.AirwayBillNo = shipment.AirwayBillNo;
-                            model.Area = "NA";
+                            model.Area = "N/A";
                             if (shipment.Booking.AssignedToArea != null)
                             {
                                 model.Area = shipment.Booking.AssignedToArea.RevenueUnitName;
-                            }                           
-                            model.Driver = "N/A";
-                            model.Checker = "N/A";
+                            }
+                            model.Driver = "N/A"; //_brachAcceptance.Driver;
+                            model.Checker = "N/A"; //_brachAcceptance.Checker;
                             model.PlateNo = "N/A";
-                            model.Batch = "N/A";
+                            model.Batch = "N/A"; //_brachAcceptance.Batch.BatchName;
                             model.TotalDiscrepency++;
                             model.Total += model.TotalDiscrepency;
 
-                            model.BCO = "N/A";
-                            model.BSO = shipment.Booking.AssignedToArea.RevenueUnitName;
-
+                            model.BCO = "N/A"; //_brachAcceptance.BranchCorpOffice.BranchCorpOfficeName;
+                            model.BSO = "N/A"; //shipment.Booking.AssignedToArea.RevenueUnitName;
+                            model.ScannedBy = AppUser.User.Employee.FullName;
+                            //model.Remarks = shipment.Remarks;
+                            //model.Notes = _brachAcceptance.Notes;
                             _results.Add(model);
 
                         }

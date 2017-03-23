@@ -27,6 +27,9 @@ namespace CMS2.Client.Forms.TrackingReportsView
             txtDestination.Value = TrackingReportGlobalModel.Destination;
             txtWeight.Value = TrackingReportGlobalModel.Weight;
 
+            //txtRemarks.Value = TrackingReportGlobalModel.Remarks;
+            txtScannedBy.Value = TrackingReportGlobalModel.ScannedBy;
+           // txtNotes.Value = TrackingReportGlobalModel.Notes;
         }
     }
 }

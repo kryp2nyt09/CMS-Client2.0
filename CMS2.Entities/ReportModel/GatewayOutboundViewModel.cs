@@ -20,5 +20,7 @@ namespace CMS2.Entities.ReportModel
         public DateTime CreatedDate { get; set; }
         public string Branch { get; set; }
 
+        public string ScannedBy { get; set; }
+
     }
 }

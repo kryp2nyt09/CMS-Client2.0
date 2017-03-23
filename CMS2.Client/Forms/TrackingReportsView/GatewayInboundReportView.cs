@@ -30,6 +30,10 @@ namespace CMS2.Client.Forms.TrackingReportsView
             txtMAWB.Value = TrackingReportGlobalModel.AirwayBillNo;
             txtFlightNo.Value = TrackingReportGlobalModel.FlightNo;
             txtCommodityType.Value = TrackingReportGlobalModel.CommodityType;
+
+            txtScannedBy.Value = TrackingReportGlobalModel.ScannedBy;
+            // txtRemarks.Value = TrackingReportGlobalModel.Remarks;
+            // txtNotes.Value = TrackingReportGlobalModel.Notes;
         }
     }
 }

@@ -6618,10 +6618,12 @@ namespace CMS2.Client
             }
             catch (Exception ex)
             {
-
-                MessageBox.Show("Error: " + ex.Message, "Column Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //MessageBox.Show("Error: " + ex.Message, "Column Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Column_Name = "N/A";
             }
+
+            Column_Name = (Column_Name != null || Column_Name != "") ? Column_Name : "N/A";
+
             return Column_Name;
 
         }
@@ -6635,11 +6637,12 @@ namespace CMS2.Client
             {
                 DataTable dataTable = getPickupCargoGrid();
                 TrackingReportGlobalModel.table = dataTable;
+
                 TrackingReportGlobalModel.Date = dateTimePicker_PickupCargo.Value.ToLongDateString();
                 TrackingReportGlobalModel.Area = dropDownPickUpCargo_Area.SelectedItem.ToString();
-
                 TrackingReportGlobalModel.Driver = get_Column_DataView(dataTable, "Driver");
                 TrackingReportGlobalModel.Checker = get_Column_DataView(dataTable, "Checker");
+                TrackingReportGlobalModel.ScannedBy = get_Column_DataView(dataTable, "ScannedBy");
 
                 TrackingReportGlobalModel.Report = "PickUpCargo";
 
@@ -6648,7 +6651,7 @@ namespace CMS2.Client
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error in Pickup Cargo ! \n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Logs.ErrorLogs(LogPath, "Pickup Cargo", ex.Message);
             }
         }
         private void btnSearch_PicupCargo_Click(object sender, EventArgs e)
@@ -6685,7 +6688,7 @@ namespace CMS2.Client
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error in Pickup Cargo ! \n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Logs.ErrorLogs(LogPath, "Pickup Cargo", ex.Message);
             }
         }
         private void dateTimePicker_PickupCargo_ValueChanged(object sender, EventArgs e)
@@ -6698,7 +6701,7 @@ namespace CMS2.Client
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error in Pickup Cargo ! \n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Logs.ErrorLogs(LogPath, "Pickup Cargo", ex.Message);
             }
         }
 
@@ -6738,7 +6741,7 @@ namespace CMS2.Client
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error in Branch Acceptance ! \n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Logs.ErrorLogs(LogPath, "Branch Acceptance", ex.Message);
             }
         }
         private void btnBranchAcceptance_Search_Click(object sender, EventArgs e)
@@ -6840,7 +6843,7 @@ namespace CMS2.Client
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error in Branch Acceptance ! \n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Logs.ErrorLogs(LogPath, "Branch Acceptance", ex.Message);
             }
         }
         private void btnBranchAcceptance_Print_Click(object sender, EventArgs e)
@@ -6855,8 +6858,9 @@ namespace CMS2.Client
                 TrackingReportGlobalModel.Checker = get_Column_DataView(dataTable, "Checker");
                 TrackingReportGlobalModel.PlateNo = get_Column_DataView(dataTable, "Plate #");
                 TrackingReportGlobalModel.Batch = dropDownBranchAcceptance_Batch.SelectedItem.ToString();
-                TrackingReportGlobalModel.ScannedBy = UserTxt.Text.Replace("Welcome!", "");
-
+                TrackingReportGlobalModel.ScannedBy = get_Column_DataView(dataTable, "ScannedBy");
+                TrackingReportGlobalModel.Remarks = get_Column_DataView(dataTable, "Remarks");
+                TrackingReportGlobalModel.Notes = get_Column_DataView(dataTable, "Notes");
                 TrackingReportGlobalModel.Report = "BranchAcceptance";
 
                 ReportViewer viewer = new ReportViewer();
@@ -6864,7 +6868,7 @@ namespace CMS2.Client
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error in Branch Acceptance ! \n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Logs.ErrorLogs(LogPath, "Branch Acceptance", ex.Message);
             }
 
         }
@@ -6882,7 +6886,7 @@ namespace CMS2.Client
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error in Branch Acceptance ! \n" + ex.GetBaseException().ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Logs.ErrorLogs(LogPath, "Branch Acceptance", ex.Message);
             }
         }
 
@@ -6922,7 +6926,7 @@ namespace CMS2.Client
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error in Bundle ! \n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Logs.ErrorLogs(LogPath, "Bundle", ex.Message);
             }
         }
         private void btnBundle_Search_Click(object sender, EventArgs e)
@@ -7002,7 +7006,7 @@ namespace CMS2.Client
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error in Bundle ! \n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Logs.ErrorLogs(LogPath, "Bundle", ex.Message);
             }
         }
         private void btnBundle_Print_Click(object sender, EventArgs e)
@@ -7016,6 +7020,8 @@ namespace CMS2.Client
                 TrackingReportGlobalModel.SackNo = get_Column_DataView(dataTable, "SackNo");
                 TrackingReportGlobalModel.Destination = dropDownBundle_Destination.SelectedItem.ToString();
                 TrackingReportGlobalModel.Weight = get_Column_DataView(dataTable, "AGW");
+                TrackingReportGlobalModel.ScannedBy = UserTxt.Text.Replace("Welcome!", "");
+
                 TrackingReportGlobalModel.Report = "Bundle";
 
                 ReportViewer viewer = new ReportViewer();
@@ -7023,7 +7029,7 @@ namespace CMS2.Client
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error in Bundle ! \n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Logs.ErrorLogs(LogPath, "Bundle", ex.Message);
             }
         }
         private void dateTimeBundle_Date_ValueChanged(object sender, EventArgs e)
@@ -7035,50 +7041,55 @@ namespace CMS2.Client
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error in Bundle ! \n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Logs.ErrorLogs(LogPath, "Bundle", ex.Message);
             }
         }
         // **** UNBUNDLE **** //
         private void btnUnbundle_Search_Click(object sender, EventArgs e)
         {
-            this.gridUnbundle.FilterDescriptors.Clear();
-            gridUnbundle.EnableFiltering = true;
-            this.gridUnbundle.ShowFilteringRow = false;
+            try {
+                this.gridUnbundle.FilterDescriptors.Clear();
+                gridUnbundle.EnableFiltering = true;
+                this.gridUnbundle.ShowFilteringRow = false;
 
-            CompositeFilterDescriptor compositeFilter = new CompositeFilterDescriptor();
-            String Branch = "";
-            String SackNo = "";
-            try
-            {
-                Branch = dropDownUnbundle_BCO.SelectedItem.ToString();
-                SackNo = dropDownUnbundle_SackNo.SelectedItem.ToString();
+                CompositeFilterDescriptor compositeFilter = new CompositeFilterDescriptor();
+                String Branch = "";
+                String SackNo = "";
+                try
+                {
+                    Branch = dropDownUnbundle_BCO.SelectedItem.ToString();
+                    SackNo = dropDownUnbundle_SackNo.SelectedItem.ToString();
+                }
+                catch (Exception)
+                {
+                    Branch = "All"; dropDownUnbundle_BCO.SelectedText = "All";
+                    SackNo = "All"; dropDownUnbundle_SackNo.SelectedText = "All";
+                }
+                if (Branch == "All" && SackNo == "All")
+                {
+                    gridUnbundle.EnableFiltering = false;
+                    getUnbundle();
+                }
+                if (Branch != null && SackNo == "All")
+                {
+                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Branch", FilterOperator.IsEqualTo, Branch));
+                }
+                else if (Branch == "All" && SackNo != null)
+                {
+                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Sack No", FilterOperator.IsEqualTo, SackNo));
+                }
+                else if (Branch != null && SackNo != null)
+                {
+                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Branch", FilterOperator.IsEqualTo, Branch));
+                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Sack No", FilterOperator.IsEqualTo, SackNo));
+                }
+                compositeFilter.LogicalOperator = FilterLogicalOperator.And;
+                this.gridUnbundle.FilterDescriptors.Add(compositeFilter);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                Branch = "All"; dropDownUnbundle_BCO.SelectedText = "All";
-                SackNo = "All"; dropDownUnbundle_SackNo.SelectedText = "All";
+                Logs.ErrorLogs(LogPath, "Unbundle", ex.Message);
             }
-            if (Branch == "All" && SackNo == "All")
-            {
-                gridUnbundle.EnableFiltering = false;
-                getUnbundle();
-            }
-            if (Branch != null && SackNo == "All")
-            {
-                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Branch", FilterOperator.IsEqualTo, Branch));
-            }
-            else if (Branch == "All" && SackNo != null)
-            {
-                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Sack No", FilterOperator.IsEqualTo, SackNo));
-            }
-            else if (Branch != null && SackNo != null)
-            {
-                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Branch", FilterOperator.IsEqualTo, Branch));
-                compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Sack No", FilterOperator.IsEqualTo, SackNo));
-            }
-            compositeFilter.LogicalOperator = FilterLogicalOperator.And;
-            this.gridUnbundle.FilterDescriptors.Add(compositeFilter);
-
         }
         private void btnUnbundle_Print_Click(object sender, EventArgs e)
         {
@@ -7097,7 +7108,7 @@ namespace CMS2.Client
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error in Unbundle ! \n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Logs.ErrorLogs(LogPath, "Unbundle", ex.Message);
             }
         }
         private void dateTimeUnbunde_Date_ValueChanged(object sender, EventArgs e)
@@ -7186,7 +7197,7 @@ namespace CMS2.Client
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error in Gateway Transmital ! \n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Logs.ErrorLogs(LogPath, "Gateway Transmital", ex.Message);
             }
         }
         private void btnGatewayTransmital_Print_Click(object sender, EventArgs e)
@@ -7201,6 +7212,7 @@ namespace CMS2.Client
                 TrackingReportGlobalModel.AirwayBillNo = get_Column_DataView(dataTable, "AWB");
                 TrackingReportGlobalModel.Area = dropDownGatewayTransmital_Destination.SelectedItem.ToString();
                 TrackingReportGlobalModel.Gateway = dropDownGatewayTransmital_Gateway.SelectedItem.ToString();
+                TrackingReportGlobalModel.ScannedBy = UserTxt.Text.Replace("Welcome!", "");
 
                 TrackingReportGlobalModel.Report = "GatewayTransmital";
 
@@ -7209,7 +7221,7 @@ namespace CMS2.Client
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error in Gateway Transmital ! \n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Logs.ErrorLogs(LogPath, "Gateway Transmital", ex.Message);
             }
         }
         private void dateTimeGatewayTransmital_Date_ValueChanged(object sender, EventArgs e)
@@ -7266,7 +7278,7 @@ namespace CMS2.Client
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error in Gateway Outbound ! \n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Logs.ErrorLogs(LogPath, "Gateway Outbound", ex.Message);
             }
         }
         private void btnGatewayOutbound_Print_Click(object sender, EventArgs e)
@@ -7280,13 +7292,14 @@ namespace CMS2.Client
                 TrackingReportGlobalModel.PlateNo = get_Column_DataView(dataTable, "Plate #");
                 TrackingReportGlobalModel.Gateway = dropDownGatewayOutbound_Gateway.SelectedItem.ToString();
                 TrackingReportGlobalModel.Report = "GatewayOutbound";
+                TrackingReportGlobalModel.ScannedBy = UserTxt.Text.Replace("Welcome!", "");
 
                 ReportViewer viewer = new ReportViewer();
                 viewer.Show();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error in Gateway Outbound ! \n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Logs.ErrorLogs(LogPath, "Gateway Outbound", ex.Message);
             }
         }
         private void dateTimeGatewayOutbound_Date_ValueChanged(object sender, EventArgs e)
@@ -7298,7 +7311,7 @@ namespace CMS2.Client
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error in Gateway Outbound ! \n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Logs.ErrorLogs(LogPath, "Gateway Outbound", ex.Message);
             }
         }
         // **** GATEWAY INBOUND **** //
@@ -7383,7 +7396,7 @@ namespace CMS2.Client
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error in Gateway Inbound ! \n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Logs.ErrorLogs(LogPath, "Gateway Inbound", ex.Message);
             }
         }
         private void btnGatewayInbound_Print_Click(object sender, EventArgs e)
@@ -7397,13 +7410,15 @@ namespace CMS2.Client
                 TrackingReportGlobalModel.AirwayBillNo = get_Column_DataView(dataTable, "MAWB");
                 TrackingReportGlobalModel.FlightNo = get_Column_DataView(dataTable, "Flight #");
                 TrackingReportGlobalModel.CommodityType = dropDownGatewayInbound_Commodity.SelectedItem.ToString();
+                TrackingReportGlobalModel.ScannedBy = UserTxt.Text.Replace("Welcome!", "");
                 TrackingReportGlobalModel.Report = "GatewayInbound";
+
                 ReportViewer viewer = new ReportViewer();
                 viewer.Show();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error in Gateway Inbound ! \n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Logs.ErrorLogs(LogPath, "Gateway Inbound", ex.Message);
             }
         }
         private void dateTimePickerGatewayInbound_Date_ValueChanged(object sender, EventArgs e)
@@ -7415,7 +7430,7 @@ namespace CMS2.Client
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error in Gateway Inbound ! \n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Logs.ErrorLogs(LogPath, "Gateway Inbound", ex.Message);
             }
         }
         // **** CARGO TRANSFER **** //
@@ -7471,7 +7486,7 @@ namespace CMS2.Client
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error in Cargo Transfer ! \n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Logs.ErrorLogs(LogPath, "Cargo Transfer", ex.Message);
             }
         }
         private void btnCargoTransfer_Search_Click(object sender, EventArgs e)
@@ -7518,7 +7533,7 @@ namespace CMS2.Client
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error in Cargo Transfer ! \n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Logs.ErrorLogs(LogPath, "Cargo Transfer", ex.Message);
             }
         }
         private void btnCargoTransfer_Print_Click(object sender, EventArgs e)
@@ -7533,13 +7548,14 @@ namespace CMS2.Client
                 TrackingReportGlobalModel.Driver = get_Column_DataView(dataTable, "Driver");
                 TrackingReportGlobalModel.Checker = get_Column_DataView(dataTable, "Checker");
                 TrackingReportGlobalModel.PlateNo = get_Column_DataView(dataTable, "Plate #");
+                TrackingReportGlobalModel.ScannedBy = UserTxt.Text.Replace("Welcome!", "");
                 TrackingReportGlobalModel.Report = "CargoTransfer";
                 ReportViewer viewer = new ReportViewer();
                 viewer.Show();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error in Cargo Transfer ! \n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Logs.ErrorLogs(LogPath, "Cargo Transfer", ex.Message);
             }
         }
         private void dateTimeCargoTransfer_Date_ValueChanged(object sender, EventArgs e)
@@ -7551,7 +7567,7 @@ namespace CMS2.Client
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error in Cargo Transfer ! \n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Logs.ErrorLogs(LogPath, "Cargo Transfer", ex.Message);
             }
         }
 
@@ -7674,7 +7690,7 @@ namespace CMS2.Client
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error in Segregation ! \n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Logs.ErrorLogs(LogPath, "Segregation", ex.Message);
             }
         }
         private void btnSegregation_Print_Click(object sender, EventArgs e)
@@ -7687,13 +7703,14 @@ namespace CMS2.Client
                 TrackingReportGlobalModel.Driver = dropDownSegregation_Driver.SelectedItem.ToString();
                 TrackingReportGlobalModel.Checker = get_Column_DataView(dataTable, "Checker");
                 TrackingReportGlobalModel.PlateNo = dropDownSegregation_PlateNo.SelectedItem.ToString();
+                TrackingReportGlobalModel.ScannedBy = UserTxt.Text.Replace("Welcome!", "");
                 TrackingReportGlobalModel.Report = "Segregation";
                 ReportViewer viewer = new ReportViewer();
                 viewer.Show();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error in Segregation ! \n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Logs.ErrorLogs(LogPath, "Segregation", ex.Message);
             }
         }
         private void dateTimeSegregation_Date_ValueChanged(object sender, EventArgs e)
@@ -7705,7 +7722,7 @@ namespace CMS2.Client
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error in Segregation ! \n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Logs.ErrorLogs(LogPath, "Segregation", ex.Message);
             }
         }
 
@@ -7828,7 +7845,7 @@ namespace CMS2.Client
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error in Daily Trip ! \n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Logs.ErrorLogs(LogPath, "Daily Trip", ex.Message);
             }
         }
         private void btnDailyTrip_Print_Click(object sender, EventArgs e)
@@ -7842,7 +7859,7 @@ namespace CMS2.Client
                 TrackingReportGlobalModel.Checker = get_Column_DataView(dataTable, "Checker");
                 TrackingReportGlobalModel.PlateNo = "";
                 TrackingReportGlobalModel.Area = get_Column_DataView(dataTable, "Area");
-
+                TrackingReportGlobalModel.ScannedBy = UserTxt.Text.Replace("Welcome!", "");
                 TrackingReportGlobalModel.table = getDailyTripGrid("PP");
                 TrackingReportGlobalModel.table2 = getDailyTripGrid("CAS");
                 TrackingReportGlobalModel.table3 = getDailyTripGrid("FC");
@@ -7854,7 +7871,7 @@ namespace CMS2.Client
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error in Daily Trip ! \n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Logs.ErrorLogs(LogPath, "Daily Trip", ex.Message);
             }
         }
         private void dateTimeDailyTrip_Date_ValueChanged(object sender, EventArgs e)
@@ -7866,7 +7883,7 @@ namespace CMS2.Client
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error in Daily Trip ! \n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Logs.ErrorLogs(LogPath, "Daily Trip", ex.Message);
             }
         }
         // **** HOLD CARGO **** //
@@ -7905,7 +7922,7 @@ namespace CMS2.Client
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error in Hold Cargo ! \n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Logs.ErrorLogs(LogPath, "Hold Cargo", ex.Message);
             }
         }
         private void btnHoldCargo_Search_Click(object sender, EventArgs e)
@@ -7956,7 +7973,7 @@ namespace CMS2.Client
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error in Hold Cargo ! \n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Logs.ErrorLogs(LogPath, "Hold Cargo", ex.Message);
             }
         }
         private void btnHoldCargo_Export_Click(object sender, EventArgs e)
@@ -7972,7 +7989,7 @@ namespace CMS2.Client
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error in Hold Cargo ! \n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Logs.ErrorLogs(LogPath, "Hold Cargo", ex.Message);
             }
         }
         private void dateTimeHoldCargo_FromDate_ValueChanged(object sender, EventArgs e)
@@ -8114,7 +8131,7 @@ namespace CMS2.Client
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error in Delivery Status ! \n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Logs.ErrorLogs(LogPath, "Delivery Status", ex.Message);
             }
         }
         private void btnDeliveryStatus_Print_Click(object sender, EventArgs e)
@@ -8126,13 +8143,14 @@ namespace CMS2.Client
                 TrackingReportGlobalModel.Date = dateTimeDeliveryStatus_Date.Value.ToLongDateString();
                 TrackingReportGlobalModel.Driver = dropDownDeliveryStatus_Driver.SelectedItem.ToString();
                 TrackingReportGlobalModel.Checker = get_Column_DataView(dataTable, "Checker");
+                TrackingReportGlobalModel.ScannedBy = UserTxt.Text.Replace("Welcome!", "");
                 TrackingReportGlobalModel.Report = "DeliveryStatus";
                 ReportViewer viewer = new ReportViewer();
                 viewer.Show();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error in Delivery Status ! \n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Logs.ErrorLogs(LogPath, "Delivery Status", ex.Message);
             }
         }
         private void dateTimeDeliveryStatus_Date_ValueChanged(object sender, EventArgs e)
@@ -8144,7 +8162,7 @@ namespace CMS2.Client
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error in Delivery Status ! \n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Logs.ErrorLogs(LogPath, "Delivery Status", ex.Message);
             }
         }
 
@@ -8169,7 +8187,7 @@ namespace CMS2.Client
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error in Hold Cargo Export ! \n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Logs.ErrorLogs(LogPath, "Hold Cargo", ex.Message);
             }
         }
         #endregion

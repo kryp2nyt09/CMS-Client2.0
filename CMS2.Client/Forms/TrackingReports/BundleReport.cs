@@ -42,6 +42,8 @@ namespace CMS2.Client.Forms.TrackingReports
             dt.Columns.Add(new DataColumn("BCO", typeof(string)));
             dt.Columns.Add(new DataColumn("BSO", typeof(string)));
 
+            dt.Columns.Add(new DataColumn("ScannedBy", typeof(string)));
+
             dt.BeginLoadData();
             int ctr = 1;
             foreach (BundleViewModel item in bundleList)
@@ -66,6 +68,7 @@ namespace CMS2.Client.Forms.TrackingReports
                 row[15] = item.BCO;
                 row[16] = item.BSO;
 
+                row[17] = item.Scannedby;
                 dt.Rows.Add(row);
             }
             dt.EndLoadData();
@@ -95,7 +98,9 @@ namespace CMS2.Client.Forms.TrackingReports
                             
             width.Add(0);   // BCO
             width.Add(0);   // BSO
-                            
+
+            width.Add(110); // Scanned By
+
             return width;
         }
 
@@ -138,9 +143,11 @@ namespace CMS2.Client.Forms.TrackingReports
                         model.CreatedDate = ship.CreatedDate;
                         model.Destination = ship.DestinationCity.CityName;
                         model.BSO = ship.OriginCity.CityName;
+              
                     }
                     model.SackNo = _bundle.SackNo;
                     model.BCO = _bundle.BranchCorpOffice.BranchCorpOfficeName;
+                    model.Scannedby = AppUser.User.Employee.FullName;
                     _results.Add(model);
                 }
            }

@@ -28,8 +28,9 @@ namespace CMS2.Client.Forms.TrackingReportsView
             txtChecker.Value = TrackingReportGlobalModel.Checker;
             txtBatch.Value = TrackingReportGlobalModel.Batch;
             txtPlateNo.Value = TrackingReportGlobalModel.PlateNo;
-
+            txtRemarks.Value = TrackingReportGlobalModel.Remarks;
             txtScannedBy.Value = TrackingReportGlobalModel.ScannedBy;
+            txtNotes.Value = TrackingReportGlobalModel.Notes;
         }
     }
 }

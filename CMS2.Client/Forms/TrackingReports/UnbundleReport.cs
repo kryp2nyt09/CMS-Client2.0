@@ -34,7 +34,7 @@ namespace CMS2.Client.Forms.TrackingReports
             dt.Columns.Add(new DataColumn("AWB", typeof(string)));
             dt.Columns.Add(new DataColumn("CreatedDate", typeof(string)));
             dt.Columns.Add(new DataColumn("Branch", typeof(string)));
-
+            dt.Columns.Add(new DataColumn("ScannedBy", typeof(string)));
             dt.BeginLoadData();
             int ctr = 1;
             foreach (UnbundleViewModel item in modelList)
@@ -50,7 +50,7 @@ namespace CMS2.Client.Forms.TrackingReports
                 row[7] = item.AirwayBillNo;
                 row[8] = item.CreatedDate;
                 row[9] = item.Branch;
-
+                row[10] = item.ScannedBy;
                 dt.Rows.Add(row);
             }
             dt.EndLoadData();
@@ -113,6 +113,7 @@ namespace CMS2.Client.Forms.TrackingReports
                         model.Origin = _shipment.OriginCity.CityName;
                         model.CreatedDate = bundle.CreatedDate;
                         model.Branch = bundle.BranchCorpOffice.BranchCorpOfficeName;
+                        model.ScannedBy = AppUser.User.Employee.FullName;
                         _results.Add(model);
 
                     }
@@ -137,6 +138,7 @@ namespace CMS2.Client.Forms.TrackingReports
                         model.Origin = _shipment.OriginCity.CityName;
                         model.CreatedDate = bundle.CreatedDate;
                         model.Branch = bundle.BranchCorpOffice.BranchCorpOfficeName;
+                        model.ScannedBy = AppUser.User.Employee.FullName;
                         _results.Add(model);
                     }
                 }
