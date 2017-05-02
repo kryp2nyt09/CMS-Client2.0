@@ -1,4 +1,4 @@
-﻿using CMS2.BusinessLogic;
+﻿
 using CMS2.Client.SyncHelper;
 using CMS2.Entities;
 using System;
@@ -9,26 +9,13 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml;
-using Telerik.WinControls;
 using CMS2.Client.Properties;
 using System.Configuration;
-using CMS2.Client;
-using CMS2.DataAccess;
 using System.Threading;
-using System.Data.Entity.Core.Objects;
-using System.Data.Entity.Infrastructure;
-using System.Data.Entity.Core.Metadata.Edm;
 using System.ServiceProcess;
 using CMS2.Common;
-using System.Security.Principal;
-using System.Security.Claims;
-using System.Diagnostics;
-using System.Windows;
-using System.Security.Permissions;
 
 namespace CMS2_Client
 {
@@ -181,6 +168,9 @@ namespace CMS2_Client
         }
         private void Extract_Click(object sender, EventArgs e)
         {
+
+            StartDeprovisionWholeServer();
+
             int index = dboBranchCoprOffice.SelectedItem.ToString().IndexOf(" ");
             _filter = dboBranchCoprOffice.SelectedItem.ToString().Substring(0, index);
             _branchCorpOfficeId = dboBranchCoprOffice.SelectedValue.ToString();
@@ -424,14 +414,18 @@ namespace CMS2_Client
             bool isValid = true;
             if (string.IsNullOrEmpty(LocalServer.Text) || string.IsNullOrEmpty(LocalDbName.Text) || string.IsNullOrEmpty(LocalUsername.Text) || string.IsNullOrEmpty(LocalPassword.Text))
             {
-                MessageBox.Show("Please fill out all fields.", "Data Error", MessageBoxButtons.OK);
+                MessageBox.Show("Please fill out all fields.", "Extraction Error", MessageBoxButtons.OK);
                 isValid = false;
             }
-            else if (LocalServer.Text == "localhost")
+            else if (LocalServer.Text != "localhost")
             {
-                MessageBox.Show("Please enter another ip address.", "Data Error", MessageBoxButtons.OK);
-                LocalServer.Focus();
-                isValid = false;
+                if (isSubServer)
+                {
+                    MessageBox.Show("Please enter another ip address.", "Extraction Error", MessageBoxButtons.OK);
+                    LocalServer.Focus();
+                    isValid = false;
+                }
+               
             }
 
             return isValid;
