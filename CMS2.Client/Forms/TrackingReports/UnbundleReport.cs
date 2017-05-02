@@ -1,4 +1,5 @@
 ﻿using CMS2.BusinessLogic;
+using CMS2.Common;
 using CMS2.Entities;
 using CMS2.Entities.ReportModel;
 using System;
@@ -27,13 +28,13 @@ namespace CMS2.Client.Forms.TrackingReports
             dt.Columns.Add(new DataColumn("Sack No", typeof(string)));
             dt.Columns.Add(new DataColumn("Total Pieces", typeof(string)));
             dt.Columns.Add(new DataColumn("Scanned Pieces", typeof(string)));
-            dt.Columns.Add(new DataColumn("Dicrepency Pieces", typeof(string)));
+            dt.Columns.Add(new DataColumn("Discrepancy Pieces", typeof(string)));
             dt.Columns.Add(new DataColumn("Origin", typeof(string)));
             dt.Columns.Add(new DataColumn("Weight", typeof(string)));
             dt.Columns.Add(new DataColumn("AWB", typeof(string)));
             dt.Columns.Add(new DataColumn("CreatedDate", typeof(string)));
             dt.Columns.Add(new DataColumn("Branch", typeof(string)));
-
+            dt.Columns.Add(new DataColumn("ScannedBy", typeof(string)));
             dt.BeginLoadData();
             int ctr = 1;
             foreach (UnbundleViewModel item in modelList)
@@ -49,7 +50,7 @@ namespace CMS2.Client.Forms.TrackingReports
                 row[7] = item.AirwayBillNo;
                 row[8] = item.CreatedDate;
                 row[9] = item.Branch;
-
+                row[10] = item.ScannedBy;
                 dt.Rows.Add(row);
             }
             dt.EndLoadData();
@@ -77,14 +78,22 @@ namespace CMS2.Client.Forms.TrackingReports
         {
             PackageNumberBL _packageNumberService = new PackageNumberBL();
             List<UnbundleViewModel> _results = new List<UnbundleViewModel>();
-
             ShipmentBL shipment = new ShipmentBL();
+            
+            Shipment _shipment = new Shipment();
 
             foreach (Bundle bundle in _bundle){
-
                 UnbundleViewModel model = new UnbundleViewModel();
-                string _airwaybill = _packageNumberService.GetAll().Find(x => x.PackageNo == bundle.Cargo).Shipment.AirwayBillNo;
-                UnbundleViewModel isExist = _results.Find(x => x.AirwayBillNo == _airwaybill);
+                try
+                {
+                    _shipment = _packageNumberService.GetAll().Find(x => x.PackageNo == bundle.Cargo).Shipment;
+                }
+                catch (Exception ex)
+                {
+                    Logs.ErrorLogs("", "Unbundle Match", ex.Message);
+                    continue;
+                }
+                UnbundleViewModel isExist = _results.Find(x => x.AirwayBillNo == _shipment.AirwayBillNo);
 
                 if (_unbundle.Exists(x => x.Cargo == bundle.Cargo))
                 {
@@ -96,14 +105,15 @@ namespace CMS2.Client.Forms.TrackingReports
 
                     else
                     {
-                        model.AirwayBillNo = _airwaybill;
+                        model.AirwayBillNo = _shipment.AirwayBillNo;
                         model.SackNo = bundle.SackNo;
                         model.ScannedPcs++;
                         model.Weight += bundle.Weight;
                         model.TotalPcs += model.ScannedPcs;
-                        //model.Origin = shipment.GetAll().Find(x => x.AirwayBillNo.Equals(_airwaybill)).OriginCity.CityName;
+                        model.Origin = _shipment.OriginCity.CityName;
                         model.CreatedDate = bundle.CreatedDate;
                         model.Branch = bundle.BranchCorpOffice.BranchCorpOfficeName;
+                        model.ScannedBy = AppUser.User.Employee.FullName;
                         _results.Add(model);
 
                     }
@@ -119,14 +129,16 @@ namespace CMS2.Client.Forms.TrackingReports
 
                     else
                     {
-                        model.AirwayBillNo = _airwaybill;
+                        model.AirwayBillNo = _shipment.AirwayBillNo;
                         model.SackNo = bundle.SackNo;
                         model.TotalDiscrepency++;
                         model.TotalPcs += model.TotalDiscrepency;
                         model.Weight += bundle.Weight;
-                        model.Origin = shipment.GetAll().Find(x => x.AirwayBillNo.Equals(_airwaybill)).OriginCity.CityName;
+
+                        model.Origin = _shipment.OriginCity.CityName;
                         model.CreatedDate = bundle.CreatedDate;
                         model.Branch = bundle.BranchCorpOffice.BranchCorpOfficeName;
+                        model.ScannedBy = AppUser.User.Employee.FullName;
                         _results.Add(model);
                     }
                 }

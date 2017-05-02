@@ -75,7 +75,7 @@ namespace CMS2.Client
         private BindingSource bsBookingRemark;
         private BindingSource bsAreas;
         private BindingSource bsOriginBco;
-        private BindingSource bsDestinationBco;
+        private BindingSource bsDestinationBco;   
 
         private BookingStatusBL bookingStatusService;
         private BookingRemarkBL bookingRemarkService;
@@ -374,13 +374,13 @@ namespace CMS2.Client
                     dropDownPickUpCargo_BCO.SelectedIndex = -1;
                     dropDownPickUpCargo_BCO.SelectedValue = GlobalVars.DeviceBcoId;
 
-                    List<RevenueUnit> _revenueUnit = getRevenueList();
-                    dropDownPickUpCargo_Area.DataSource = _revenueUnit;
-                    dropDownPickUpCargo_Area.DisplayMember = "RevenueUnitName";
-                    dropDownPickUpCargo_Area.ValueMember = "RevenueUnitId";
+                    //List<RevenueUnit> _revenueUnit = getRevenueList();
+                    //dropDownPickUpCargo_Area.DataSource = _revenueUnit;
+                    //dropDownPickUpCargo_Area.DisplayMember = "RevenueUnitName";
+                    //dropDownPickUpCargo_Area.ValueMember = "RevenueUnitId";
 
-                    dropDownPickUpCargo_Area.Items.Add("All");
-                    dropDownPickUpCargo_Area.SelectedValue = "All";
+                    //dropDownPickUpCargo_Area.Items.Add("All");
+                    //dropDownPickUpCargo_Area.SelectedValue = "All";
 
                     getPickupCargoData();
 
@@ -802,14 +802,12 @@ namespace CMS2.Client
             shipperCompany = new AutoCompleteStringCollection();
             if (shipper != null)
             {
-                var _clients = clients.Where(x => x.LastName.Equals(shipper.LastName) && x.FirstName.Equals(shipper.FirstName)).OrderBy(x => x.LastName).ThenBy(x => x.FirstName).ToList();
+                List<Entities.Client> _clients = clients.Where(x => x.LastName.Equals(shipper.LastName) && x.FirstName.Equals(shipper.FirstName)).OrderBy(x => x.LastName).ThenBy(x => x.FirstName).ToList();
                 if (_clients.Count > 0)
                 {
-                    foreach (var item in _clients)
+                    foreach (Entities.Client item in _clients)
                     {
-                        if (item.CompanyId == null)
-                            shipperCompany.Add(item.Company.CompanyName);
-                        else
+                        if (item.CompanyId != null)
                             shipperCompany.Add(item.Company.CompanyName + " - " + item.AccountNo);
                     }
                 }
@@ -876,14 +874,12 @@ namespace CMS2.Client
             consigneeCompany = new AutoCompleteStringCollection();
             if (consignee != null)
             {
-                var _clients = clients.Where(x => x.LastName.Equals(consignee.LastName) && x.FirstName.Equals(consignee.FirstName)).OrderBy(x => x.LastName).ThenBy(x => x.FirstName).ToList();
+                List<Entities.Client> _clients = clients.Where(x => x.LastName.Equals(consignee.LastName) && x.FirstName.Equals(consignee.FirstName)).OrderBy(x => x.LastName).ThenBy(x => x.FirstName).ToList();
                 if (_clients.Count > 0)
                 {
-                    foreach (var item in _clients)
+                    foreach (Entities.Client item in _clients)
                     {
-                        if (item.CompanyId == null)
-                            consigneeCompany.Add(item.Company.CompanyName);
-                        else
+                        if (item.CompanyId != null)
                             consigneeCompany.Add(item.Company.CompanyName + " - " + item.AccountNo);
                     }
                 }
@@ -2126,6 +2122,8 @@ namespace CMS2.Client
 
         private void btnSavePaymentSummary_Click(object sender, EventArgs e)
         {
+            try
+            {
             SavepaymentSummary(listPaymentSummary);
             amountPaymentSummary();
             ProgressIndicator saving = new ProgressIndicator("Payment Summary", "Saving ...", SavingofPaymentSummary);
@@ -2138,6 +2136,13 @@ namespace CMS2.Client
             TotalPaymentSummary();
             btnPrintPaymentSummary.Enabled = true;
             chk_ReceivedAll.Checked = false;
+                btnSavePaymentSummary.Enabled = false;
+        }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+
         }
 
         private void img_Signature_MouseDown(object sender, MouseEventArgs e)
@@ -2184,6 +2189,7 @@ namespace CMS2.Client
             psummaryForm.passListofMainDetails(listMainDetails);
             psummaryForm.Show();
             clearListofPaymentSummary();
+            btnSavePaymentSummary.Enabled = true;
 
         }
 
@@ -2667,10 +2673,10 @@ namespace CMS2.Client
         }
 
         private void PopulateGrid()
-        {
-            List<Booking> bookings = new List<Booking>();
-            bookings = bookingService.GetAll().Where(x => x.RecordStatus == 1).OrderBy(x => x.DateBooked).OrderByDescending(x => x.CreatedDate).ToList();
-            _bookingBindingList = new BindingList<Booking>(bookings);
+        {           
+		    List<Booking> bookings = new List<Booking>();
+			bookings = bookingService.GetAll().Where(x => x.RecordStatus == 1).OrderBy(x => x.DateBooked).OrderByDescending(x => x.CreatedDate).ToList();
+			_bookingBindingList = new BindingList<Booking>(bookings);
             BookingGridView.DataSource = _bookingBindingList;
             BookingGridView.BestFitColumns(BestFitColumnMode.AllCells);
         }
@@ -2771,8 +2777,8 @@ namespace CMS2.Client
                 User preparedBy = GetPreparedBy(item.Booking.CreatedBy);
                 if (preparedBy != null)
                 {
-                    row["User Assignment"] = preparedBy.Employee.AssignedToArea.RevenueUnitName;
-                    row["Prepared By"] = preparedBy.UserName;
+                row["User Assignment"] = preparedBy.Employee.AssignedToArea.RevenueUnitName;
+                row["Prepared By"] = preparedBy.UserName;
                 }
 
                 index++;
@@ -3150,7 +3156,7 @@ namespace CMS2.Client
                 { txtShipperCompany.Text = shipper.Company.CompanyName + " - " + shipper.Company.AccountNo; }
                 else
                 {
-                    txtShipperCompany.Text = shipper.Company.CompanyName;
+                    txtShipperCompany.Text = "NA";
                 }
                 txtShipperAddress1.Text = shipper.Address1;
                 txtShipperAddress2.Text = shipper.Address2;
@@ -3187,7 +3193,7 @@ namespace CMS2.Client
                 if (consignee.CompanyId != null)
                 { txtConsigneeCompany.Text = consignee.Company.CompanyName + " - " + consignee.Company.AccountNo; }
                 else
-                { txtConsigneeCompany.Text = consignee.Company.CompanyName; }
+                { txtConsigneeCompany.Text = "NA"; }
 
                 txtConsigneeAddress1.Text = consignee.Address1;
                 txtConsigneeAddress2.Text = consignee.Address2;
@@ -3696,47 +3702,47 @@ namespace CMS2.Client
 
         private void AcceptanceLoadData()
         {
-            if (commodityTypes == null)
+            if (commodityTypes.Count == 0)
             {
                 commodityTypes = commodityTypeService.FilterActive().OrderBy(x => x.CommodityTypeName).ToList();
             }
-            if (commodities == null)
+            if (commodities.Count == 0)
             {
                 commodities = commodityService.FilterActive().OrderBy(x => x.CommodityName).ToList();
             }
-            if (serviceTypes == null)
+            if (serviceTypes.Count == 0)
             {
                 serviceTypes = serviceTypeService.FilterActive().OrderBy(x => x.ServiceTypeName).ToList();
             }
-            if (serviceModes == null)
+            if (serviceModes.Count == 0)
             {
                 serviceModes = serviceModeService.FilterActive().OrderBy(x => x.ServiceModeName).ToList();
             }
-            if (paymentModes == null)
+            if (paymentModes.Count == 0)
             {
                 paymentModes = paymentModeService.FilterActive().OrderBy(x => x.PaymentModeName).ToList();
             }
-            if (shipmentBasicFees == null)
+            if (shipmentBasicFees.Count == 0)
             {
                 shipmentBasicFees = shipmentBasicFeeService.FilterActive();
             }
-            if (cratings == null)
+            if (cratings.Count == 0)
             {
                 cratings = cratingService.FilterActive().OrderBy(x => x.CratingName).ToList();
             }
-            if (packagings == null)
+            if (packagings.Count == 0)
             {
                 packagings = packagingService.FilterActive().OrderBy(x => x.PackagingName).ToList();
             }
-            if (goodsDescriptions == null)
+            if (goodsDescriptions.Count == 0)
             {
                 goodsDescriptions = goodsDescriptionService.FilterActive().OrderBy(x => x.GoodsDescriptionName).ToList();
             }
-            if (shipModes == null)
+            if (shipModes.Count == 0)
             {
                 shipModes = shipModeService.FilterActive().OrderBy(x => x.ShipModeName).ToList();
             }
-            if (paymentTerms == null)
+            if (paymentTerms.Count == 0)
             {
                 paymentTerms = paymentTermService.FilterActive().OrderBy(x => x.PaymentTermName).ToList();
             }
@@ -5797,10 +5803,8 @@ namespace CMS2.Client
         /// </summary>
         public void getPickupCargoData()
         {
-
+            try {
             PickupCargoManifestReport pickup = new PickupCargoManifestReport();
-            List<RevenueUnit> _revenueUnit = getRevenueList();
-
             DataTable dataTable = pickup.getPickUpCargoData(dateTimePicker_PickupCargo.Value);
             DataView view = new DataView(dataTable);
             gridPickupCargo.DataSource = dataTable;
@@ -5826,18 +5830,21 @@ namespace CMS2.Client
                     gridPickupCargo.Columns[ctr].Width = x;
                     ctr++;
                 }
-                for (int x = 0; x < gridPickupCargo.ColumnCount; x++)
-                {
-                    gridPickupCargo.Columns[x].TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
+
                 }
-            }
             #endregion PickupCargo Grid Design
+        }
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs(LogPath, "Pickup Cargo", ex.Message);
+            }
         }
         /// <summary>
         /// BRANCH ACCEPTANCE
         /// </summary>
         public void getBrancAcceptanceData()
         {
+            try {
             BranchAcceptanceReport branchAccept = new BranchAcceptanceReport();
             DataTable dataTable = branchAccept.getBranchAcceptanceData(dateTimePickerBranchAcceptance_Date.Value);
             DataView view = new DataView(dataTable);
@@ -5878,18 +5885,23 @@ namespace CMS2.Client
                     gridBranchAcceptance.Columns[ctr].Width = x;
                     ctr++;
                 }
-                for (int x = 0; x < gridBranchAcceptance.ColumnCount; x++)
-                {
-                    gridBranchAcceptance.Columns[x].TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
+
                 }
-            }
             #endregion Branch Acceptance Grid Design
+        }
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs(LogPath, "Branch Acceptance", ex.Message);
+            }
+
         }
         /// <summary>
         /// BUNDLE
         /// </summary>
         private void getBundleData()
         {
+            try
+            {
             BundleReport bundle = new BundleReport();
             DataTable dataTable = bundle.getBundleData(dateTimeBundle_Date.Value);
 
@@ -5937,18 +5949,21 @@ namespace CMS2.Client
                     gridBundle.Columns[ctr].Width = x;
                     ctr++;
                 }
-                for (int x = 0; x < gridBundle.ColumnCount; x++)
-                {
-                    gridBundle.Columns[x].TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
+
                 }
-            }
             #endregion Bundle Grid Design
+        }
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs(LogPath, "Bundle", ex.Message);
+            }
         }
         /// <summary>
         /// UNBUNDLE
         /// </summary>
         private void getUnbundle()
         {
+            try {
             UnbundleReport bundle = new UnbundleReport();
 
             DataTable dataTable = bundle.getBundleData(dateTimeUnbunde_Date.Value);
@@ -5993,19 +6008,22 @@ namespace CMS2.Client
                     gridUnbundle.Columns[ctr].Width = x;
                     ctr++;
                 }
-                for (int x = 0; x < gridUnbundle.ColumnCount; x++)
-                {
-                    gridUnbundle.Columns[x].TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
+
                 }
-            }
             #endregion Bundle Grid Design
+        }
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs(LogPath, "Unbundle", ex.Message);
+            }
+
         }
         /// <summary>
         /// GATEWAY TRANSMITAL
         /// </summary>
         private void getGatewayTransmitalData()
         {
-
+            try {
             GatewayTransmitalReport gatewayTransmitalre = new GatewayTransmitalReport();
 
             DataTable dataTable = gatewayTransmitalre.getData(dateTimeGatewayTransmital_Date.Value);
@@ -6063,18 +6081,23 @@ namespace CMS2.Client
                     if (x == 0) { gridGatewayTransmital.Columns[ctr].IsVisible = false; }
                     ctr++;
                 }
-                for (int x = 0; x < gridGatewayTransmital.ColumnCount; x++)
+
+
+                }
+            }
+            catch (Exception ex)
                 {
-                    gridGatewayTransmital.Columns[x].TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
+                Logs.ErrorLogs(LogPath, "Gateway Transmital", ex.Message);
                 }
 
             }
-        }
         /// <summary>
         /// GATEWAY OUTBOUND
         /// </summary>
         private void getGatewayOutBoundData()
         {
+            try
+            {
             GatewayOutboundReport gatewayOutbound = new GatewayOutboundReport();
 
             DataTable dataTable = gatewayOutbound.getData(dateTimeGatewayOutbound_Date.Value);
@@ -6120,10 +6143,12 @@ namespace CMS2.Client
                     gridGatewayOutbound.Columns[ctr].Width = x;
                     ctr++;
                 }
-                for (int x = 0; x < gridGatewayOutbound.ColumnCount; x++)
-                {
-                    gridGatewayOutbound.Columns[x].TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
+
                 }
+            }
+            catch (Exception ex)
+                {
+                Logs.ErrorLogs(LogPath, "Gateway Outbound", ex.Message);
             }
         }
         /// <summary>
@@ -6131,6 +6156,8 @@ namespace CMS2.Client
         /// </summary>
         private void getGatewayInBoundData()
         {
+            try
+            {
             GatewayInboundReport gatewayInbound = new GatewayInboundReport();
 
             DataTable dataTable = gatewayInbound.getData(dateTimePickerGatewayInbound_Date.Value);
@@ -6176,10 +6203,12 @@ namespace CMS2.Client
                     gridGatewayInbound.Columns[ctr].Width = x;
                     ctr++;
                 }
-                for (int x = 0; x < gridGatewayInbound.ColumnCount; x++)
-                {
-                    gridGatewayInbound.Columns[x].TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
+
                 }
+            }
+            catch (Exception ex)
+                {
+                Logs.ErrorLogs(LogPath, "Gateway Inbound", ex.Message);
             }
         }
         /// <summary>
@@ -6188,6 +6217,8 @@ namespace CMS2.Client
         /// 
         private void getCargoTransferData()
         {
+            try
+            {
             CargoTransferReport cargoTransfer = new CargoTransferReport();
 
             DataTable dataTable = cargoTransfer.getData(dateTimeCargoTransfer_Date.Value);
@@ -6233,19 +6264,22 @@ namespace CMS2.Client
                     gridCargoTransfer.Columns[ctr].Width = x;
                     ctr++;
                 }
-                for (int x = 0; x < gridCargoTransfer.ColumnCount; x++)
-                {
-                    gridCargoTransfer.Columns[x].TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
+
                 }
+                #endregion Cargo Transfer Grid Design
             }
-            #endregion Cargo Transfer Grid Design
+            catch (Exception ex)
+                {
+                Logs.ErrorLogs(LogPath, "Cargo Transfer", ex.Message);
+            }
         }
         /// <summary>
         /// SEGREGATION
         /// </summary>
         private void getSegregationData()
         {
-
+            try
+            {
             SegregationReport segregation = new SegregationReport();
             DataTable dataTable = segregation.getData(dateTimeSegregation_Date.Value);
 
@@ -6316,18 +6350,22 @@ namespace CMS2.Client
                     gridSegregation.Columns[ctr].Width = x;
                     ctr++;
                 }
-                for (int x = 0; x < gridSegregation.ColumnCount; x++)
-                {
-                    gridSegregation.Columns[x].TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
+
                 }
+                #endregion
             }
-            #endregion
+            catch (Exception ex)
+                {
+                Logs.ErrorLogs(LogPath, "Segregation", ex.Message);
+            }
         }
         /// <summary>
         /// DAILY TRIP
         /// </summary>
         private void getDailyTripData()
         {
+            try
+            {
             DailyTripReport dailyTrip = new DailyTripReport();
             DataTable dataTable = dailyTrip.getData(dateTimeDailyTrip_Date.Value);
 
@@ -6398,18 +6436,21 @@ namespace CMS2.Client
                     gridDailyTrip.Columns[ctr].Width = x;
                     ctr++;
                 }
-                for (int x = 0; x < gridDailyTrip.ColumnCount; x++)
-                {
-                    gridDailyTrip.Columns[x].TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
+
                 }
+                #endregion
             }
-            #endregion
+            catch (Exception ex)
+                {
+                Logs.ErrorLogs(LogPath, "Daily Trip", ex.Message);
+            }
         }
         /// <summary>
         /// HOLD CARGO
         /// </summary>
         private void getHoldCargoData()
         {
+            try {
             HoldCargoReport holdCargo = new HoldCargoReport();
 
             DataTable dataTable = holdCargo.getData(dateTimeHoldCargo_FromDate.Value, dateTimeHoldCargo_ToDate.Value);
@@ -6441,18 +6482,25 @@ namespace CMS2.Client
                     gridHoldCargo.Columns[ctr].Width = x;
                     ctr++;
                 }
-                for (int x = 0; x < gridHoldCargo.ColumnCount; x++)
-                {
-                    gridHoldCargo.Columns[x].TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
+
                 }
+                #endregion Hold Cargo Grid Design
+
+
             }
-            #endregion Hold Cargo Grid Design
+            catch (Exception ex)
+                {
+                Logs.ErrorLogs(LogPath, "Hold Cargo", ex.Message);
+            }
         }
+
         /// <summary>
         /// DELIVERY STATUS
         /// </summary>
         private void getDeliveryStatusData()
         {
+            try
+            {
             DeliveryStatusReport deliveryStatus = new DeliveryStatusReport();
             DataTable dataTable = deliveryStatus.getData(dateTimeDeliveryStatus_Date.Value);
             ////AREA
@@ -6522,22 +6570,18 @@ namespace CMS2.Client
                     gridDeliveryStatus.Columns[ctr].Width = x;
                     ctr++;
                 }
-                for (int x = 0; x < gridDeliveryStatus.ColumnCount; x++)
-                {
-                    gridDeliveryStatus.Columns[x].TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
+
                 }
+                #endregion
             }
-            #endregion
+            catch (Exception ex)
+                {
+                Logs.ErrorLogs(LogPath, "Delivery Status", ex.Message);
+            }
         }
         #endregion
 
         #region GET LIST FROM TABLE REGION
-        public List<RevenueUnit> getRevenueList()
-        {
-            revenueUnitService = new RevenueUnitBL();
-            List<RevenueUnit> _revenueUnit = revenueUnitService.GetAll().Where(x => x.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId).OrderBy(x => x.RevenueUnitName).ToList();
-            return _revenueUnit;
-        }
         public List<BranchCorpOffice> getBranchCorpOffice()
         {
 
@@ -6559,6 +6603,8 @@ namespace CMS2.Client
         public String get_Column_DataView(DataTable _table, String _column)
         {
             String Column_Name = "";
+            try
+            {
             DataView view = new DataView(_table);
             DataTable table = view.ToTable(true, _column);
 
@@ -6571,8 +6617,17 @@ namespace CMS2.Client
                 }
             }
             Column_Name = Column_Name.TrimEnd(',');
+            }
+            catch (Exception ex)
+            {
+                //MessageBox.Show("Error: " + ex.Message, "Column Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Column_Name = "N/A";
+            }
+
+            Column_Name = (Column_Name != null || Column_Name != "") ? Column_Name : "N/A";
 
             return Column_Name;
+
         }
         #endregion
 
@@ -6580,21 +6635,31 @@ namespace CMS2.Client
         // **** PICK UP CARGO **** //
         private void btnExport_PickupCargo_Click(object sender, EventArgs e)
         {
+            try
+            {
             DataTable dataTable = getPickupCargoGrid();
             TrackingReportGlobalModel.table = dataTable;
+
             TrackingReportGlobalModel.Date = dateTimePicker_PickupCargo.Value.ToLongDateString();
             TrackingReportGlobalModel.Area = dropDownPickUpCargo_Area.SelectedItem.ToString();
-
             TrackingReportGlobalModel.Driver = get_Column_DataView(dataTable, "Driver");
             TrackingReportGlobalModel.Checker = get_Column_DataView(dataTable, "Checker");
+                TrackingReportGlobalModel.ScannedBy = get_Column_DataView(dataTable, "ScannedBy");
 
             TrackingReportGlobalModel.Report = "PickUpCargo";
 
             ReportViewer viewer = new ReportViewer();
             viewer.Show();
         }
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs(LogPath, "Pickup Cargo", ex.Message);
+            }
+        }
         private void btnSearch_PicupCargo_Click(object sender, EventArgs e)
         {
+            try
+            {
             this.gridPickupCargo.FilterDescriptors.Clear();
             gridPickupCargo.EnableFiltering = true;
             this.gridPickupCargo.ShowFilteringRow = false;
@@ -6623,16 +6688,30 @@ namespace CMS2.Client
             compositeFilter.LogicalOperator = FilterLogicalOperator.And;
             this.gridPickupCargo.FilterDescriptors.Add(compositeFilter);
         }
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs(LogPath, "Pickup Cargo", ex.Message);
+            }
+        }
         private void dateTimePicker_PickupCargo_ValueChanged(object sender, EventArgs e)
         {
+            try
+            {
             dropDownPickUpCargo_Area.SelectedIndex = 0;
             gridPickupCargo.EnableFiltering = false;
             getPickupCargoData();
+        }
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs(LogPath, "Pickup Cargo", ex.Message);
+            }
         }
 
         // **** BRANCH ACCEPTANCE **** //
         private void dropDownBranchAcceptance_Branch_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
         {
+            try
+            {
             BranchAcceptanceReport branchAccept = new BranchAcceptanceReport();
             DataTable dataTable = branchAccept.getBranchAcceptanceData(dateTimePickerBranchAcceptance_Date.Value);
             DataView view = new DataView(dataTable);
@@ -6662,8 +6741,15 @@ namespace CMS2.Client
                 dropDownBranchAcceptance_BCO_BSO.SelectedIndex = 0;
             }
         }
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs(LogPath, "Branch Acceptance", ex.Message);
+            }
+        }
         private void btnBranchAcceptance_Search_Click(object sender, EventArgs e)
         {
+            try
+            {
             this.gridBranchAcceptance.FilterDescriptors.Clear();
             gridBranchAcceptance.EnableFiltering = true;
             this.gridBranchAcceptance.ShowFilteringRow = false;
@@ -6757,8 +6843,15 @@ namespace CMS2.Client
 
             this.gridBranchAcceptance.FilterDescriptors.Add(compositeFilter);
         }
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs(LogPath, "Branch Acceptance", ex.Message);
+            }
+        }
         private void btnBranchAcceptance_Print_Click(object sender, EventArgs e)
         {
+            try
+            {
             DataTable dataTable = getBranchAcceptanceGrid();
             TrackingReportGlobalModel.table = dataTable;
             TrackingReportGlobalModel.Date = dateTimeGatewayTransmital_Date.Value.ToLongDateString();
@@ -6767,16 +6860,24 @@ namespace CMS2.Client
             TrackingReportGlobalModel.Checker = get_Column_DataView(dataTable, "Checker");
             TrackingReportGlobalModel.PlateNo = get_Column_DataView(dataTable, "Plate #");
             TrackingReportGlobalModel.Batch = dropDownBranchAcceptance_Batch.SelectedItem.ToString();
-            TrackingReportGlobalModel.ScannedBy = UserTxt.Text.Replace("Welcome!", "");
-
+                TrackingReportGlobalModel.ScannedBy = get_Column_DataView(dataTable, "ScannedBy");
+                TrackingReportGlobalModel.Remarks = get_Column_DataView(dataTable, "Remarks");
+                TrackingReportGlobalModel.Notes = get_Column_DataView(dataTable, "Notes");
             TrackingReportGlobalModel.Report = "BranchAcceptance";
 
             ReportViewer viewer = new ReportViewer();
             viewer.Show();
+            }
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs(LogPath, "Branch Acceptance", ex.Message);
+            }
 
         }
         private void dateTimePickerBranchAcceptance_Date_ValueChanged(object sender, EventArgs e)
         {
+            try
+            {
             dropDownBranchAcceptance_Branch.SelectedIndex = 0;
             dropDownBranchAcceptance_BCO_BSO.Items.Clear();
             dropDownBranchAcceptance_BCO_BSO.Items.Add("All");
@@ -6785,11 +6886,17 @@ namespace CMS2.Client
             gridBranchAcceptance.EnableFiltering = false;
             getBrancAcceptanceData();
         }
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs(LogPath, "Branch Acceptance", ex.Message);
+            }
+        }
 
         // **** BUNDLE **** //
         private void dropDownBundle_Branch_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
         {
-
+            try
+            {
             BundleReport bundle = new BundleReport();
             DataTable dataTable = bundle.getBundleData(dateTimeBundle_Date.Value);
             DataView view = new DataView(dataTable);
@@ -6819,8 +6926,15 @@ namespace CMS2.Client
                 dropDownBundle_BCO_BSO.SelectedIndex = 0;
             }
         }
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs(LogPath, "Bundle", ex.Message);
+            }
+        }
         private void btnBundle_Search_Click(object sender, EventArgs e)
         {
+            try
+            {
             this.gridBundle.FilterDescriptors.Clear();
             gridBundle.EnableFiltering = true;
             this.gridBundle.ShowFilteringRow = false;
@@ -6892,8 +7006,15 @@ namespace CMS2.Client
 
             this.gridBundle.FilterDescriptors.Add(compositeFilter);
         }
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs(LogPath, "Bundle", ex.Message);
+            }
+        }
         private void btnBundle_Print_Click(object sender, EventArgs e)
         {
+            try
+            {
             DataTable dataTable = getBundleGrid();
             TrackingReportGlobalModel.table = dataTable;
 
@@ -6901,20 +7022,34 @@ namespace CMS2.Client
             TrackingReportGlobalModel.SackNo = get_Column_DataView(dataTable, "SackNo");
             TrackingReportGlobalModel.Destination = dropDownBundle_Destination.SelectedItem.ToString();
             TrackingReportGlobalModel.Weight = get_Column_DataView(dataTable, "AGW");
+                TrackingReportGlobalModel.ScannedBy = UserTxt.Text.Replace("Welcome!", "");
+
             TrackingReportGlobalModel.Report = "Bundle";
 
             ReportViewer viewer = new ReportViewer();
             viewer.Show();
         }
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs(LogPath, "Bundle", ex.Message);
+            }
+        }
         private void dateTimeBundle_Date_ValueChanged(object sender, EventArgs e)
         {
+            try
+            {
             gridBundle.EnableFiltering = false;
             getBundleData();
+        }
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs(LogPath, "Bundle", ex.Message);
+            }
         }
         // **** UNBUNDLE **** //
         private void btnUnbundle_Search_Click(object sender, EventArgs e)
         {
-
+            try {
             this.gridUnbundle.FilterDescriptors.Clear();
             gridUnbundle.EnableFiltering = true;
             this.gridUnbundle.ShowFilteringRow = false;
@@ -6953,8 +7088,15 @@ namespace CMS2.Client
             compositeFilter.LogicalOperator = FilterLogicalOperator.And;
             this.gridUnbundle.FilterDescriptors.Add(compositeFilter);
         }
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs(LogPath, "Unbundle", ex.Message);
+            }
+        }
         private void btnUnbundle_Print_Click(object sender, EventArgs e)
         {
+            try
+            {
             DataTable dataTable = getUnbundleGrid();
             TrackingReportGlobalModel.table = dataTable;
             TrackingReportGlobalModel.Date = dateTimeUnbunde_Date.Value.ToLongDateString();
@@ -6966,14 +7108,22 @@ namespace CMS2.Client
             ReportViewer viewer = new ReportViewer();
             viewer.Show();
         }
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs(LogPath, "Unbundle", ex.Message);
+            }
+        }
         private void dateTimeUnbunde_Date_ValueChanged(object sender, EventArgs e)
         {
             gridUnbundle.EnableFiltering = false;
             getUnbundle();
+
         }
         // **** GATEWAY TRANSMITAL **** //
         private void btnGatewayTransmital_Search_Click(object sender, EventArgs e)
         {
+            try
+            {
             this.gridGatewayTransmital.FilterDescriptors.Clear();
             gridGatewayTransmital.EnableFiltering = true;
             this.gridGatewayTransmital.ShowFilteringRow = false;
@@ -7047,8 +7197,15 @@ namespace CMS2.Client
             compositeFilter.LogicalOperator = FilterLogicalOperator.And;
             this.gridGatewayTransmital.FilterDescriptors.Add(compositeFilter);
         }
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs(LogPath, "Gateway Transmital", ex.Message);
+            }
+        }
         private void btnGatewayTransmital_Print_Click(object sender, EventArgs e)
         {
+            try
+            {
             DataTable dataTable = getGatewayTransmitalGrid();
             TrackingReportGlobalModel.table = dataTable;
             TrackingReportGlobalModel.Date = dateTimeGatewayTransmital_Date.Value.ToLongDateString();
@@ -7057,20 +7214,29 @@ namespace CMS2.Client
             TrackingReportGlobalModel.AirwayBillNo = get_Column_DataView(dataTable, "AWB");
             TrackingReportGlobalModel.Area = dropDownGatewayTransmital_Destination.SelectedItem.ToString();
             TrackingReportGlobalModel.Gateway = dropDownGatewayTransmital_Gateway.SelectedItem.ToString();
+                TrackingReportGlobalModel.ScannedBy = UserTxt.Text.Replace("Welcome!", "");
 
             TrackingReportGlobalModel.Report = "GatewayTransmital";
 
             ReportViewer viewer = new ReportViewer();
             viewer.Show();
         }
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs(LogPath, "Gateway Transmital", ex.Message);
+            }
+        }
         private void dateTimeGatewayTransmital_Date_ValueChanged(object sender, EventArgs e)
         {
             gridGatewayTransmital.EnableFiltering = false;
             getGatewayTransmitalData();
+
         }
         // **** GATEWAT OUTBOUND **** //
         private void btnGatewayOutbound_Search_Click(object sender, EventArgs e)
         {
+            try
+            {
             this.gridGatewayOutbound.FilterDescriptors.Clear();
             gridGatewayOutbound.EnableFiltering = true;
             this.gridGatewayOutbound.ShowFilteringRow = false;
@@ -7112,8 +7278,15 @@ namespace CMS2.Client
 
             this.gridGatewayOutbound.FilterDescriptors.Add(compositeFilter);
         }
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs(LogPath, "Gateway Outbound", ex.Message);
+            }
+        }
         private void btnGatewayOutbound_Print_Click(object sender, EventArgs e)
         {
+            try
+            {
             DataTable dataTable = getGatewayOutboundGrid();
             TrackingReportGlobalModel.table = dataTable;
             TrackingReportGlobalModel.Date = dateTimeGatewayOutbound_Date.Value.ToLongDateString();
@@ -7121,18 +7294,33 @@ namespace CMS2.Client
             TrackingReportGlobalModel.PlateNo = get_Column_DataView(dataTable, "Plate #");
             TrackingReportGlobalModel.Gateway = dropDownGatewayOutbound_Gateway.SelectedItem.ToString();
             TrackingReportGlobalModel.Report = "GatewayOutbound";
+                TrackingReportGlobalModel.ScannedBy = UserTxt.Text.Replace("Welcome!", "");
 
             ReportViewer viewer = new ReportViewer();
             viewer.Show();
         }
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs(LogPath, "Gateway Outbound", ex.Message);
+            }
+        }
         private void dateTimeGatewayOutbound_Date_ValueChanged(object sender, EventArgs e)
         {
+            try
+            {
             gridGatewayOutbound.EnableFiltering = false;
             getGatewayOutBoundData();
+        }
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs(LogPath, "Gateway Outbound", ex.Message);
+            }
         }
         // **** GATEWAY INBOUND **** //
         private void btnGatewayInbound_Search_Click(object sender, EventArgs e)
         {
+            try
+            {
             this.gridGatewayInbound.FilterDescriptors.Clear();
             gridGatewayInbound.EnableFiltering = true;
             this.gridGatewayInbound.ShowFilteringRow = false;
@@ -7207,10 +7395,16 @@ namespace CMS2.Client
             compositeFilter.LogicalOperator = FilterLogicalOperator.And;
 
             this.gridGatewayInbound.FilterDescriptors.Add(compositeFilter);
-
+        }
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs(LogPath, "Gateway Inbound", ex.Message);
+            }
         }
         private void btnGatewayInbound_Print_Click(object sender, EventArgs e)
         {
+            try
+            {
             DataTable dataTable = getGatewayInboundGrid();
             TrackingReportGlobalModel.table = dataTable;
             TrackingReportGlobalModel.Date = dateTimePickerGatewayInbound_Date.Value.ToLongDateString();
@@ -7218,19 +7412,34 @@ namespace CMS2.Client
             TrackingReportGlobalModel.AirwayBillNo = get_Column_DataView(dataTable, "MAWB");
             TrackingReportGlobalModel.FlightNo = get_Column_DataView(dataTable, "Flight #");
             TrackingReportGlobalModel.CommodityType = dropDownGatewayInbound_Commodity.SelectedItem.ToString();
+                TrackingReportGlobalModel.ScannedBy = UserTxt.Text.Replace("Welcome!", "");
             TrackingReportGlobalModel.Report = "GatewayInbound";
+
             ReportViewer viewer = new ReportViewer();
             viewer.Show();
         }
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs(LogPath, "Gateway Inbound", ex.Message);
+            }
+        }
         private void dateTimePickerGatewayInbound_Date_ValueChanged(object sender, EventArgs e)
         {
+            try
+            {
             gridGatewayInbound.EnableFiltering = false;
             getGatewayInBoundData();
+        }
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs(LogPath, "Gateway Inbound", ex.Message);
+            }
         }
         // **** CARGO TRANSFER **** //
         private void dropDownCargoTransfer_Origin_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
         {
-
+            try
+            {
             RevenueUnitBL revenueBL = new RevenueUnitBL();
 
             if (dropDownCargoTransfer_Origin.SelectedItem.ToString().Equals("Branch Corporate Office"))
@@ -7276,10 +7485,16 @@ namespace CMS2.Client
                 dropDownCargoTransfer_Destination.ValueMember = "RevenueUnitId";
                 dropDownCargoTransfer_Destination.SelectedIndex = 0;
             }
-
+            }
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs(LogPath, "Cargo Transfer", ex.Message);
+            }
         }
         private void btnCargoTransfer_Search_Click(object sender, EventArgs e)
         {
+            try
+            {
             gridCargoTransfer.EnableFiltering = true;
             this.gridCargoTransfer.ShowFilteringRow = false;
             //getCargoTransferData();
@@ -7318,8 +7533,15 @@ namespace CMS2.Client
             compositeFilter.LogicalOperator = FilterLogicalOperator.And;
             this.gridCargoTransfer.FilterDescriptors.Add(compositeFilter);
         }
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs(LogPath, "Cargo Transfer", ex.Message);
+            }
+        }
         private void btnCargoTransfer_Print_Click(object sender, EventArgs e)
         {
+            try
+            {
             DataTable dataTable = getCargoTranferGrid();
             TrackingReportGlobalModel.table = dataTable;
             TrackingReportGlobalModel.Date = dateTimeCargoTransfer_Date.Value.ToLongDateString();
@@ -7328,20 +7550,34 @@ namespace CMS2.Client
             TrackingReportGlobalModel.Driver = get_Column_DataView(dataTable, "Driver");
             TrackingReportGlobalModel.Checker = get_Column_DataView(dataTable, "Checker");
             TrackingReportGlobalModel.PlateNo = get_Column_DataView(dataTable, "Plate #");
+                TrackingReportGlobalModel.ScannedBy = UserTxt.Text.Replace("Welcome!", "");
             TrackingReportGlobalModel.Report = "CargoTransfer";
             ReportViewer viewer = new ReportViewer();
             viewer.Show();
         }
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs(LogPath, "Cargo Transfer", ex.Message);
+            }
+        }
         private void dateTimeCargoTransfer_Date_ValueChanged(object sender, EventArgs e)
         {
+            try
+            {
             gridCargoTransfer.EnableFiltering = false;
             getCargoTransferData();
+        }
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs(LogPath, "Cargo Transfer", ex.Message);
+            }
         }
 
         // **** SEGREGATION **** //
         private void btnSegregation_Search_Click(object sender, EventArgs e)
         {
-
+            try
+            {
             this.gridSegregation.FilterDescriptors.Clear();
             gridSegregation.EnableFiltering = true;
             this.gridSegregation.ShowFilteringRow = false;
@@ -7454,28 +7690,49 @@ namespace CMS2.Client
 
             this.gridSegregation.FilterDescriptors.Add(compositeFilter);
         }
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs(LogPath, "Segregation", ex.Message);
+            }
+        }
         private void btnSegregation_Print_Click(object sender, EventArgs e)
         {
+            try
+            {
             DataTable dataTable = getSegregationGrid();
             TrackingReportGlobalModel.table = dataTable;
             TrackingReportGlobalModel.Date = dateTimeSegregation_Date.Value.ToLongDateString();
             TrackingReportGlobalModel.Driver = dropDownSegregation_Driver.SelectedItem.ToString();
             TrackingReportGlobalModel.Checker = get_Column_DataView(dataTable, "Checker");
             TrackingReportGlobalModel.PlateNo = dropDownSegregation_PlateNo.SelectedItem.ToString();
+                TrackingReportGlobalModel.ScannedBy = UserTxt.Text.Replace("Welcome!", "");
             TrackingReportGlobalModel.Report = "Segregation";
             ReportViewer viewer = new ReportViewer();
             viewer.Show();
         }
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs(LogPath, "Segregation", ex.Message);
+            }
+        }
         private void dateTimeSegregation_Date_ValueChanged(object sender, EventArgs e)
         {
+            try
+            {
             gridSegregation.EnableFiltering = false;
             getSegregationData();
+        }
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs(LogPath, "Segregation", ex.Message);
+            }
         }
 
         // **** DAILY TRIP **** //
         private void btnDailyTrip_Search_Click(object sender, EventArgs e)
         {
-
+            try
+            {
             this.gridDailyTrip.FilterDescriptors.Clear();
             gridDailyTrip.EnableFiltering = true;
             this.gridDailyTrip.ShowFilteringRow = false;
@@ -7588,9 +7845,15 @@ namespace CMS2.Client
             compositeFilter.LogicalOperator = FilterLogicalOperator.And;
             this.gridDailyTrip.FilterDescriptors.Add(compositeFilter);
         }
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs(LogPath, "Daily Trip", ex.Message);
+            }
+        }
         private void btnDailyTrip_Print_Click(object sender, EventArgs e)
         {
-
+            try
+            {
             DataTable dataTable = getDailyTripGrid("PP");
             TrackingReportGlobalModel.Date = dateTimeDailyTrip_Date.Value.ToLongDateString();
             TrackingReportGlobalModel.Driver = dropDownDailyTrip_Driver.SelectedItem.ToString();
@@ -7598,7 +7861,7 @@ namespace CMS2.Client
             TrackingReportGlobalModel.Checker = get_Column_DataView(dataTable, "Checker");
             TrackingReportGlobalModel.PlateNo = "";
             TrackingReportGlobalModel.Area = get_Column_DataView(dataTable, "Area");
-
+                TrackingReportGlobalModel.ScannedBy = UserTxt.Text.Replace("Welcome!", "");
             TrackingReportGlobalModel.table = getDailyTripGrid("PP");
             TrackingReportGlobalModel.table2 = getDailyTripGrid("CAS");
             TrackingReportGlobalModel.table3 = getDailyTripGrid("FC");
@@ -7608,14 +7871,28 @@ namespace CMS2.Client
             ReportViewer viewer = new ReportViewer();
             viewer.Show();
         }
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs(LogPath, "Daily Trip", ex.Message);
+            }
+        }
         private void dateTimeDailyTrip_Date_ValueChanged(object sender, EventArgs e)
         {
+            try
+            {
             gridDailyTrip.EnableFiltering = false;
             getDailyTripData();
+        }
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs(LogPath, "Daily Trip", ex.Message);
+            }
         }
         // **** HOLD CARGO **** //
         private void dropDownHoldCargo_Branch_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
         {
+            try
+            {
             HoldCargoReport report = new HoldCargoReport();
             DataTable dataTable = report.getData(dateTimeHoldCargo_FromDate.Value, dateTimeHoldCargo_ToDate.Value);
             DataView view = new DataView(dataTable);
@@ -7645,9 +7922,15 @@ namespace CMS2.Client
                 dropDownHoldCargo_BCO_BSO.SelectedIndex = 0;
             }
         }
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs(LogPath, "Hold Cargo", ex.Message);
+            }
+        }
         private void btnHoldCargo_Search_Click(object sender, EventArgs e)
         {
-
+            try
+            {
             this.gridHoldCargo.FilterDescriptors.Clear();
             gridHoldCargo.EnableFiltering = true;
             this.gridHoldCargo.ShowFilteringRow = false;
@@ -7690,14 +7973,26 @@ namespace CMS2.Client
 
             this.gridHoldCargo.FilterDescriptors.Add(compositeFilter);
         }
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs(LogPath, "Hold Cargo", ex.Message);
+            }
+        }
         private void btnHoldCargo_Export_Click(object sender, EventArgs e)
         {
+            try
+            {
             saveFileDialog2.Filter = "Excel File (*.xlsx)|*.xlsx";
             saveFileDialog2.DefaultExt = "xlsx";
             saveFileDialog2.AddExtension = true;
 
             saveFileDialog2.FileName = "HoldCargo_(" + DateTime.Now.ToShortDateString().Replace("/", "_") + ").xlsx";
             saveFileDialog2.ShowDialog();
+        }
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs(LogPath, "Hold Cargo", ex.Message);
+            }
         }
         private void dateTimeHoldCargo_FromDate_ValueChanged(object sender, EventArgs e)
         {
@@ -7708,6 +8003,7 @@ namespace CMS2.Client
 
             gridHoldCargo.EnableFiltering = false;
             getHoldCargoData();
+
         }
         private void dateTimeHoldCargo_ToDate_ValueChanged(object sender, EventArgs e)
         {
@@ -7724,6 +8020,8 @@ namespace CMS2.Client
         // **** DELIVERY STATUS **** //
         private void btnDeliveryStatus_Search_Click(object sender, EventArgs e)
         {
+            try
+            {
             this.gridDeliveryStatus.FilterDescriptors.Clear();
             gridDeliveryStatus.EnableFiltering = true;
             this.gridDeliveryStatus.ShowFilteringRow = false;
@@ -7833,28 +8131,48 @@ namespace CMS2.Client
             compositeFilter.LogicalOperator = FilterLogicalOperator.And;
             this.gridDeliveryStatus.FilterDescriptors.Add(compositeFilter);
         }
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs(LogPath, "Delivery Status", ex.Message);
+            }
+        }
         private void btnDeliveryStatus_Print_Click(object sender, EventArgs e)
         {
+            try
+            {
             DataTable dataTable = getDeliveryStatusGrid();
             TrackingReportGlobalModel.table = dataTable;
             TrackingReportGlobalModel.Date = dateTimeDeliveryStatus_Date.Value.ToLongDateString();
             TrackingReportGlobalModel.Driver = dropDownDeliveryStatus_Driver.SelectedItem.ToString();
             TrackingReportGlobalModel.Checker = get_Column_DataView(dataTable, "Checker");
+                TrackingReportGlobalModel.ScannedBy = UserTxt.Text.Replace("Welcome!", "");
             TrackingReportGlobalModel.Report = "DeliveryStatus";
             ReportViewer viewer = new ReportViewer();
             viewer.Show();
         }
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs(LogPath, "Delivery Status", ex.Message);
+            }
+        }
         private void dateTimeDeliveryStatus_Date_ValueChanged(object sender, EventArgs e)
         {
+            try
+            {
             gridDeliveryStatus.EnableFiltering = false;
             getDeliveryStatusData();
+        }
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs(LogPath, "Delivery Status", ex.Message);
+            }
         }
 
         // **** OTHERS **** //
         private void saveFileDialog2_FileOk(object sender, CancelEventArgs e)
         {
-
-
+            try
+            {
             string exportFile = saveFileDialog2.FileName; // @"E:\Samples\" + "HoldCargo_" + DateTime.Now + ".xlsx";
             using (System.IO.MemoryStream ms = new System.IO.MemoryStream())
             {
@@ -7867,6 +8185,11 @@ namespace CMS2.Client
                     ms.WriteTo(fileStream);
                     MessageBox.Show("Successfully exported!", "Export", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
                 }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs(LogPath, "Hold Cargo", ex.Message);
             }
         }
         #endregion
@@ -8370,11 +8693,11 @@ namespace CMS2.Client
         }
         #endregion
 
-
+       
 
         #endregion END MARK SANTOS REGION
 
-
+      
         private void RefreshGrid(Object obj)
         {
             try
@@ -8389,9 +8712,9 @@ namespace CMS2.Client
             {
 
             }
-
+                
         }
-
+           
         private void AsynchronousLoadBooking()
         {
             while (isBookingPage)
@@ -8409,12 +8732,12 @@ namespace CMS2.Client
 
         private void BookingGridView_Click(object sender, EventArgs e)
         {
+            
 
 
-
-
+            
         }
-
+            
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
             AsynchronousLoadBooking();

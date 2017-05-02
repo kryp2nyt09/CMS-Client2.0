@@ -6,6 +6,7 @@ using CMS2.BusinessLogic.Interfaces;
 using CMS2.DataAccess;
 using CMS2.DataAccess.Interfaces;
 using CMS2.Entities;
+using System.Windows.Forms;
 
 namespace CMS2.BusinessLogic
 {
@@ -192,7 +193,8 @@ namespace CMS2.BusinessLogic
             }
             catch (Exception ex)
             {
-                
+                Console.WriteLine(ex);
+                //MessageBox.Show(ex.InnerException.ToString());
             }
 
         }

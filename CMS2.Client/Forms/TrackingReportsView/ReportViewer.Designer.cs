@@ -54,7 +54,7 @@
             // 
             this.RootElement.ApplyShapeToControl = true;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "ReportViewer";
+            this.Text = "Report";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.ReportViewer_Load);
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();

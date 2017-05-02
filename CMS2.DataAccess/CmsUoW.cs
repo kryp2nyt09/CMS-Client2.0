@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using CMS2.DataAccess.Interfaces;
+using System.Windows.Forms;
 
 namespace CMS2.DataAccess
 {
@@ -75,7 +76,11 @@ namespace CMS2.DataAccess
                 _context.SaveChanges();
             }
             catch (Exception ex)
-            {}
+            {
+                Console.WriteLine(ex);
+               // MessageBox.Show(ex.InnerException.ToString());
+            }
+           
         }
 
         protected virtual void Dispose(bool disposing)

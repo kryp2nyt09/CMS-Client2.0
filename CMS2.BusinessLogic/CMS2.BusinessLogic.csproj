@@ -151,7 +151,6 @@
     <Compile Include="RemarkBL.cs" />
     <Compile Include="ReportModels\StatementOfAccountDataSet.cs">
       <DependentUpon>StatementOfAccountDataSet.xsd</DependentUpon>
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="ReportModels\StatementOfAccountDataSet.Designer.cs">
       <DependentUpon>StatementOfAccountDataSet.xsd</DependentUpon>

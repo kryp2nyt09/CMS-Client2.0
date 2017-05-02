@@ -30,7 +30,7 @@ namespace CMS2.Client.Forms.TrackingReports
             dt.Columns.Add(new DataColumn("AWB", typeof(string)));
             dt.Columns.Add(new DataColumn("CreatedDate", typeof(string)));
 
-
+            dt.Columns.Add(new DataColumn("ScannedBy", typeof(string)));
             dt.BeginLoadData();
             int ctr = 1;
             foreach (GatewayInboundViewModel item in modelList)
@@ -45,6 +45,7 @@ namespace CMS2.Client.Forms.TrackingReports
                 row[6] = item.CommodityType;
                 row[7] = item.AirwayBillNo;
                 row[8] = item.CreatedDate.ToShortDateString();
+                row[9] = item.ScannedBy;
                 dt.Rows.Add(row);
             }
             dt.EndLoadData();
@@ -64,6 +65,7 @@ namespace CMS2.Client.Forms.TrackingReports
             width.Add(200);
             width.Add(100);
             width.Add(0);
+            width.Add(100);
             return width;
         }
 
@@ -76,7 +78,11 @@ namespace CMS2.Client.Forms.TrackingReports
             foreach (GatewayInbound inbound in _inbound)
             {
                 GatewayInboundViewModel model = new GatewayInboundViewModel();
-                string _airwaybill = _packageNumberService.GetAll().Find(x => x.PackageNo == inbound.Cargo).Shipment.AirwayBillNo;
+                string _airwaybill = "";
+                try {
+                    _airwaybill = _packageNumberService.GetAll().Find(x => x.PackageNo == inbound.Cargo).Shipment.AirwayBillNo;
+                }
+                catch (Exception) { continue; }
                 GatewayInboundViewModel isExist = _results.Find(x => x.AirwayBillNo == _airwaybill);
                   if (isExist != null)
                   {
@@ -92,6 +98,7 @@ namespace CMS2.Client.Forms.TrackingReports
                     model.FlightNo = inbound.FlightNumber;
                     model.CommodityType = inbound.CommodityType.CommodityTypeName;
                     model.CreatedDate = inbound.CreatedDate;
+                    model.ScannedBy = AppUser.User.Employee.FullName;
                     _results.Add(model);
                   
                   }

@@ -12,31 +12,33 @@ namespace CMS2.Client.Forms.TrackingReports
 {
     public class BranchAcceptanceReport
     {
-       
+
         public DataTable getBranchAcceptanceData(DateTime date)
         {
-            BranchAcceptanceBL branchAcceptanceBl = new BranchAcceptanceBL();               
-            CargoTransferBL cargoTransferBl = new CargoTransferBL();
-            List<CargoTransfer> cargoTransferList = cargoTransferBl.GetAll().Where(x => x.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.RecordStatus == 1 && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
-            List<BranchAcceptance> branchAcceptance = branchAcceptanceBl.GetAll().Where(x => x.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId ).ToList();
+            BranchAcceptanceBL branchAcceptanceBl = new BranchAcceptanceBL();
+            ShipmentBL shipmentService = new ShipmentBL();
+            List<Shipment> shipments = shipmentService.FilterActive().Where(x => x.AcceptedBy.AssignedToArea.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.RecordStatus == 1 && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
+            List<BranchAcceptance> branchAcceptance = branchAcceptanceBl.GetAll().Where(x => x.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId).ToList();
 
-            List <BranchAcceptanceViewModel> list = Match(branchAcceptance, cargoTransferList);
+            List<BranchAcceptanceViewModel> list = Match(branchAcceptance, shipments);
 
             DataTable dt = new DataTable();
             dt.Columns.Add(new DataColumn("No", typeof(string)));
             dt.Columns.Add(new DataColumn("Area/Branch", typeof(string)));
             dt.Columns.Add(new DataColumn("Driver", typeof(string)));
             dt.Columns.Add(new DataColumn("Checker", typeof(string)));
-            dt.Columns.Add(new DataColumn("Plate #", typeof(string))); 
+            dt.Columns.Add(new DataColumn("Plate #", typeof(string)));
             dt.Columns.Add(new DataColumn("Batch", typeof(string)));
             dt.Columns.Add(new DataColumn("AWB", typeof(string)));
             dt.Columns.Add(new DataColumn("Recieved(Qty)", typeof(string)));
-            dt.Columns.Add(new DataColumn("Dicrepency(Qty)", typeof(string)));
+            dt.Columns.Add(new DataColumn("Discrepancy(Qty)", typeof(string)));
             dt.Columns.Add(new DataColumn("Total Qty", typeof(string)));
             dt.Columns.Add(new DataColumn("BCO", typeof(string)));
             dt.Columns.Add(new DataColumn("BSO", typeof(string)));
 
-
+            dt.Columns.Add(new DataColumn("ScannedBy", typeof(string)));
+            dt.Columns.Add(new DataColumn("Remarks", typeof(string)));
+            dt.Columns.Add(new DataColumn("Notes", typeof(string)));
             dt.BeginLoadData();
             int ctr = 1;
             foreach (BranchAcceptanceViewModel item in list)
@@ -55,7 +57,9 @@ namespace CMS2.Client.Forms.TrackingReports
 
                 row[10] = item.BCO;
                 row[11] = item.BSO;
-
+                row[12] = item.ScannedBy;
+                row[13] = item.Remarks;
+                row[14] = item.Notes;
                 dt.Rows.Add(row);
             }
             dt.EndLoadData();
@@ -81,73 +85,95 @@ namespace CMS2.Client.Forms.TrackingReports
             width.Add(0); //BCO
             width.Add(0); //BSO 
 
-
+            width.Add(110); //Scanned by
+            width.Add(0); //Remarks
+            width.Add(0); //Notes
             return width;
         }
 
-        public List<BranchAcceptanceViewModel> Match(List<BranchAcceptance> _branchAcceptances, List<CargoTransfer> _cargoTransfers)
+        public List<BranchAcceptanceViewModel> Match(List<BranchAcceptance> _branchAcceptances, List<Shipment> _shipments)
         {
 
             PackageNumberBL _packageNumberService = new PackageNumberBL();
+            BranchAcceptanceBL _branchAcceptanceService = new BranchAcceptanceBL();
             List<BranchAcceptanceViewModel> _results = new List<BranchAcceptanceViewModel>();
+           
 
-            foreach (CargoTransfer cargoTransfer in _cargoTransfers)
+            foreach (Shipment shipment in _shipments)
             {
                 BranchAcceptanceViewModel model = new BranchAcceptanceViewModel();
-                string _airwaybill = _packageNumberService.GetAll().Find(x => x.PackageNo == cargoTransfer.Cargo).Shipment.AirwayBillNo;
-                BranchAcceptanceViewModel isExist = _results.Find(x => x.AirwayBillNo == _airwaybill);
+                BranchAcceptanceViewModel isAirawayBillExist = _results.Find(x => x.AirwayBillNo == shipment.AirwayBillNo);
+                List<PackageNumber> _packageNumbers = _packageNumberService.GetAll().Where(x => x.ShipmentId == shipment.ShipmentId).ToList();
 
-                if (_branchAcceptances.Exists(x => x.Cargo == cargoTransfer.Cargo))
+                foreach (PackageNumber packagenumber in _packageNumbers)
                 {
-                    if (isExist != null)
+                    BranchAcceptance _brachAcceptance = _branchAcceptanceService.GetAll().Where(x => x.Cargo == packagenumber.PackageNo).FirstOrDefault();
+
+
+                    if (_brachAcceptance != null)
                     {
-                        isExist.TotalRecieved++;
-                        isExist.Total += model.TotalRecieved;
+                        if (isAirawayBillExist != null)
+                        {
+                            isAirawayBillExist.TotalRecieved++;
+                            isAirawayBillExist.Total += model.TotalRecieved;
+                        }
+                        else
+                        {
+                            model.AirwayBillNo = shipment.AirwayBillNo;
+
+                            model.Area = "N/A";
+
+                            if (shipment.Booking.AssignedToArea != null)
+                            {
+                                model.Area = shipment.Booking.AssignedToArea.RevenueUnitName;
+                            }
+                            model.Driver = _brachAcceptance.Driver;
+                            model.Checker = _brachAcceptance.Checker;
+                            model.PlateNo = "N/A";
+                            model.Batch = _brachAcceptance.Batch.BatchName;
+                            model.TotalRecieved++;
+                            model.Total += model.TotalRecieved;
+                             model.CreatedBy = _brachAcceptance.CreatedDate;
+
+                            model.BCO = _brachAcceptance.BranchCorpOffice.BranchCorpOfficeName;
+                            model.BSO = shipment.Booking.AssignedToArea.RevenueUnitName;
+                            model.ScannedBy = AppUser.User.Employee.FullName;
+                            model.Remarks = shipment.Remarks;
+                            model.Notes = _brachAcceptance.Notes;
+                            _results.Add(model);
+
+                        }
                     }
                     else
-                    {                        
-                        model.AirwayBillNo = _airwaybill;
-                        model.Area = cargoTransfer.RevenueUnit.RevenueUnitName;
-                        model.Driver = cargoTransfer.Driver;
-                        model.Checker = cargoTransfer.Checker;
-                        model.PlateNo = cargoTransfer.PlateNo;
-                        model.Batch = cargoTransfer.Batch.BatchName;
-                        model.TotalRecieved++;
-                        model.Total += model.TotalRecieved;
-                        model.CreatedBy = cargoTransfer.CreatedDate;
-
-                        model.BCO = cargoTransfer.BranchCorpOffice.BranchCorpOfficeName;
-                        model.BSO = cargoTransfer.RevenueUnit.RevenueUnitName;
-
-                        _results.Add(model);
-
-                    }
-                    
-                }
-                else
-                {
-                    if (isExist != null)
                     {
-                        isExist.TotalDiscrepency++;
-                        model.Total += model.TotalDiscrepency;
-                    }
-                    else
-                    {
-                        model.AirwayBillNo = _airwaybill;
-                        model.Area = cargoTransfer.RevenueUnit.RevenueUnitName;
-                        model.Driver = cargoTransfer.Driver;
-                        model.Checker = cargoTransfer.Checker;
-                        model.PlateNo = cargoTransfer.PlateNo;
-                        model.Batch = cargoTransfer.Batch.BatchName;
-                        model.TotalDiscrepency++;
-                        model.Total += model.TotalDiscrepency;
-                        model.CreatedBy = cargoTransfer.CreatedDate;
+                        if (isAirawayBillExist != null)
+                        {
+                            isAirawayBillExist.TotalDiscrepency++;
+                            isAirawayBillExist.Total += model.TotalDiscrepency;
+                        }
+                        else
+                        {
+                            model.AirwayBillNo = shipment.AirwayBillNo;
+                            model.Area = "N/A";
+                            if (shipment.Booking.AssignedToArea != null)
+                            {
+                                model.Area = shipment.Booking.AssignedToArea.RevenueUnitName;
+                            }
+                            model.Driver = "N/A"; //_brachAcceptance.Driver;
+                            model.Checker = "N/A"; //_brachAcceptance.Checker;
+                            model.PlateNo = "N/A";
+                            model.Batch = "N/A"; //_brachAcceptance.Batch.BatchName;
+                            model.TotalDiscrepency++;
+                            model.Total += model.TotalDiscrepency;
 
-                        model.BCO = cargoTransfer.BranchCorpOffice.BranchCorpOfficeName;
-                        model.BSO = cargoTransfer.RevenueUnit.RevenueUnitName;
+                            model.BCO = "N/A"; //_brachAcceptance.BranchCorpOffice.BranchCorpOfficeName;
+                            model.BSO = "N/A"; //shipment.Booking.AssignedToArea.RevenueUnitName;
+                            model.ScannedBy = AppUser.User.Employee.FullName;
+                            //model.Remarks = shipment.Remarks;
+                            //model.Notes = _brachAcceptance.Notes;
+                            _results.Add(model);
 
-                        _results.Add(model);
-
+                        }
                     }
                 }
             }

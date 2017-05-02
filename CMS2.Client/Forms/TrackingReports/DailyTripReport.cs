@@ -37,6 +37,7 @@ namespace CMS2.Client.Forms.TrackingReports
             dt.Columns.Add(new DataColumn("BCO", typeof(string)));
 
             dt.Columns.Add(new DataColumn("PaymentCode", typeof(string)));
+            dt.Columns.Add(new DataColumn("ScannedBy", typeof(string)));
 
             dt.BeginLoadData();
             int ctr = 1;
@@ -57,6 +58,7 @@ namespace CMS2.Client.Forms.TrackingReports
                 row[11] = item.Checker;
                 row[12] = item.BCO;
                 row[13] = item.PaymentCode;
+                row[14] = item.Scannedby;
                 dt.Rows.Add(row);
             }
             dt.EndLoadData();
@@ -91,7 +93,11 @@ namespace CMS2.Client.Forms.TrackingReports
            // ShipmentBL shipmentService = new ShipmentBL();
             foreach (Distribution distribution in _distribution) {
                 DailyTripViewModel model = new DailyTripViewModel();
-                string _airwaybill = _packageNumberService.GetAll().Find(x => x.ShipmentId == distribution.ShipmentId).Shipment.AirwayBillNo;
+                string _airwaybill = "";
+                try {
+                    _airwaybill = _packageNumberService.GetAll().Find(x => x.ShipmentId == distribution.ShipmentId).Shipment.AirwayBillNo;
+                }
+                catch (Exception) { continue; }
                 DailyTripViewModel isExist = _results.Find(x => x.AirwayBillNo == _airwaybill);
 
                 if (isExist != null)
@@ -115,6 +121,7 @@ namespace CMS2.Client.Forms.TrackingReports
                     model.Checker = distribution.Checker;
                     //model.BCO = distribution.Area.
                     model.PaymentCode = distribution.PaymentMode.PaymentModeCode;
+                    model.Scannedby = AppUser.User.Employee.FullName;
                     _results.Add(model);
                 }
 

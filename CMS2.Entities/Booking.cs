@@ -29,7 +29,7 @@ namespace CMS2.Entities
         [ForeignKey("ShipperId")]
         public virtual Client Shipper { get; set; }
         [NotMapped()]
-        public string shipperFullname { get { return Consignee.LastName + ", " + Consignee.FirstName; } }
+        public string shipperFullname { get { return Shipper.LastName + ", " + Shipper.FirstName; } }
         [Required]
         [MaxLength(250)]
         public string OriginAddress1 { get; set; }

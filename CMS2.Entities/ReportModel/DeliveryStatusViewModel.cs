@@ -18,5 +18,6 @@ namespace CMS2.Entities.ReportModel
         public string PlateNo { get; set; }
         public string Batch { get; set; }
         public string BCO { get; set; }
+        public string ScannedBy { get; set; }
     }
 }

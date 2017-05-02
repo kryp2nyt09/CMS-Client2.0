@@ -96,9 +96,11 @@ namespace CMS2.Client.Forms.TrackingReports
             StatusBL status = new StatusBL();
             ReasonBL reason = new ReasonBL();
             UserRoleBL user = new UserRoleBL();
+            ShipmentBL shipmentService = new ShipmentBL();
+            List<Shipment> shipList = shipmentService.GetAll();
+
             foreach (HoldCargo holdCargo in _holdcargo)
             {
-                ShipmentBL shipmentService = new ShipmentBL();
                 HoldCargoViewModel model = new HoldCargoViewModel();
                 //string _airwaybill = _packageNumberService.GetAll().Find(x => x.PackageNo == holdCargo.Cargo).Shipment.AirwayBillNo;
                 HoldCargoViewModel isExist = _results.Find(x => x.AirwayBillNo == holdCargo.AirwayBillNo);
@@ -111,13 +113,19 @@ namespace CMS2.Client.Forms.TrackingReports
                 {
                     model.Date = holdCargo.HoldCargoDate;
                     model.AirwayBillNo = holdCargo.AirwayBillNo;
-                    model.Shipper = shipmentService.GetAll().Find(x => x.AirwayBillNo == holdCargo.AirwayBillNo).Shipper.FullName;
-                    model.Consignee = shipmentService.GetAll().Find(x => x.AirwayBillNo == holdCargo.AirwayBillNo).Consignee.FullName;
-                    model.Address = shipmentService.GetAll().Find(x => x.AirwayBillNo == holdCargo.AirwayBillNo).Consignee.Address1;
-                    model.PaymentMode = shipmentService.GetAll().Find(x => x.AirwayBillNo == holdCargo.AirwayBillNo).PaymentMode.PaymentModeName;
-                    model.ServiceMode = shipmentService.GetAll().Find(x => x.AirwayBillNo == holdCargo.AirwayBillNo).ServiceMode.ServiceModeName;
-                    model.Status = status.GetAll().Find(x => x.StatusID == holdCargo.StatusID).StatusName;
-                    model.Reason = reason.GetAll().Find(x => x.ReasonID == holdCargo.ReasonID).ReasonName;
+
+                    Shipment ship = shipList.Find(x => x.AirwayBillNo == holdCargo.AirwayBillNo);
+
+                    //foreach (Shipment x in shipList)
+                    //{
+                        model.Shipper = ship.Shipper.FullName;
+                        model.Consignee = ship.Consignee.FullName;
+                        model.Address = ship.Consignee.Address1;
+                        model.PaymentMode = ship.PaymentMode.PaymentModeName;
+                        model.ServiceMode = ship.ServiceMode.ServiceModeName;
+                    //}
+                    model.Status = status.GetById(holdCargo.StatusID).StatusName; // status.GetAll().Find(x => x.StatusID == holdCargo.StatusID).StatusName;
+                    model.Reason = reason.GetById(holdCargo.ReasonID).ReasonName; // .Find(x => x.ReasonID == holdCargo.ReasonID).ReasonName;
                     model.EndorseBy = holdCargo.Endorsedby;
                     model.ScannedBy = user.GetActiveRoles().Find(x => x.RoleId == AppUser.User.UserId).RoleName;
                     //model.PreparedBy = user.GetAllUsers().Find(x => x.UserId == shi)

@@ -29,7 +29,7 @@ namespace CMS2.Client.Forms.TrackingReportsView
             txtArea.Value = TrackingReportGlobalModel.Area;
             txtDriver.Value = TrackingReportGlobalModel.Driver;
             txtChecker.Value = TrackingReportGlobalModel.Checker;
-
+            txtScannedBy.Value = TrackingReportGlobalModel.ScannedBy;
         }
     }
 }

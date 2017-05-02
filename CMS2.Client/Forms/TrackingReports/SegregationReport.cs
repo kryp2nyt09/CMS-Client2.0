@@ -31,6 +31,9 @@ namespace CMS2.Client.Forms.TrackingReports
             dt.Columns.Add(new DataColumn("Qty", typeof(string)));
             dt.Columns.Add(new DataColumn("Area", typeof(string)));
             dt.Columns.Add(new DataColumn("CreatedDate", typeof(string)));
+
+            dt.Columns.Add(new DataColumn("ScannedBy", typeof(string)));
+
             dt.BeginLoadData();
             int ctr = 1;
             foreach (SegregationViewModel item in modelList)
@@ -46,6 +49,9 @@ namespace CMS2.Client.Forms.TrackingReports
                 row[7] = item.Qty.ToString();
                 row[8] = item.Area;
                 row[9] = item.CreatedDate.ToShortDateString();
+                row[10] = item.ScannedBy;
+
+                dt.Rows.Add(row);
             }
             dt.EndLoadData();
 
@@ -66,6 +72,7 @@ namespace CMS2.Client.Forms.TrackingReports
             width.Add(100);
             width.Add(200);
             width.Add(0);
+            width.Add(100);
             return width;
         }
 
@@ -75,11 +82,16 @@ namespace CMS2.Client.Forms.TrackingReports
             
             PackageNumberBL _packageNumberService = new PackageNumberBL();
 
+            ShipmentBL shipmentService = new ShipmentBL();
+           
             foreach (Segregation segregation in _segregation)
             {
-                ShipmentBL shipmentService = new ShipmentBL();
                 SegregationViewModel model = new SegregationViewModel();
-                string _airwaybill = _packageNumberService.GetAll().Find(x => x.PackageNo == segregation.Cargo).Shipment.AirwayBillNo;
+                string _airwaybill = "";
+                try {
+                    _airwaybill = _packageNumberService.GetAll().Find(x => x.PackageNo == segregation.Cargo).Shipment.AirwayBillNo;
+                }
+                catch (Exception) { continue; }
                 SegregationViewModel isExist = _results.Find(x => x.AirwayBillNo == _airwaybill);
 
                 if (isExist != null)
@@ -97,6 +109,7 @@ namespace CMS2.Client.Forms.TrackingReports
                     model.Qty++;
                     model.Area = shipmentService.GetAll().Find(x => x.AirwayBillNo == _airwaybill).DestinationCity.CityName;
                     model.CreatedDate = segregation.CreatedDate;
+                    model.ScannedBy = AppUser.User.Employee.FullName;
                     _results.Add(model);
                 }
             }
