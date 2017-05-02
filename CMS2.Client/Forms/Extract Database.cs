@@ -194,12 +194,7 @@ namespace CMS2_Client
         {
             DropDatabaseIfExist();
             CreateDatabase();
-
-            //radProgressBar1.Value1 = 0;
-            //ProvisionForReplication();
-            //radProgressBar1.Value1 = 0;
-            //ReplicateDatabase();
-
+            
             //Deprovision Server if theres an update on table
             StartDeprovisionServer();
             //Provisioning Server and Local for synchronization

@@ -20,22 +20,14 @@ namespace CMS2.Client
         [STAThread]
         private static void Main()
         {
-            // bool xBool = Convert.ToBoolean(ConfigurationManager.AppSettings["isSync"]);
-            // if (!xBool)
-            // {
-                // if (IsAdmin())
-                // {
-                   // Extract_Database extract = new Extract_Database();
-                    // Application.Run(extract);
-                    // Application.Exit();
-                // }
-                // else
-                // {
-                    // MessageBox.Show("You have insuficient privilege. Please Run as Administrator.", "Adminstrator", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    // Application.Exit();
-                // }
-                
-            // }
+            bool xBool = Convert.ToBoolean(ConfigurationManager.AppSettings["isSync"]);
+            if (!xBool)
+            {
+                Extract_Database extract = new Extract_Database();
+                Application.Run(extract);
+                Application.Exit();
+
+            }
 
             //var container = BuildUnityContainer();
             Application.EnableVisualStyles();

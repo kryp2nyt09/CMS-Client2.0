@@ -1,8 +1,8 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
-using System.Data.Entity.Migrations.Sql;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -27,18 +27,12 @@ using System.Drawing.Printing;
 using CMS2.Client.SyncHelper;
 using System.Threading.Tasks;
 using System.Threading;
-using System.Data.SqlClient;
-using CMS2.Client.Properties;
 using Tools = CMS2.Common.Utilities;
 using CMS2.Client.Forms;
 using CMS2.Client.Forms.TrackingReports;
 using System.IO;
 using Telerik.WinControls.Data;
-using Telerik.WinControls.Export;
-using Telerik.Windows.Documents.Spreadsheet.Model;
-using Telerik.Windows.Pdf.Documents.Media;
 using CMS2.Client.Forms.TrackingReportsView;
-using Telerik.Reporting.Processing;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 
@@ -81,7 +75,7 @@ namespace CMS2.Client
         private BindingSource bsBookingRemark;
         private BindingSource bsAreas;
         private BindingSource bsOriginBco;
-        private BindingSource bsDestinationBco;   
+        private BindingSource bsDestinationBco;
 
         private BookingStatusBL bookingStatusService;
         private BookingRemarkBL bookingRemarkService;
@@ -101,6 +95,8 @@ namespace CMS2.Client
 
         private BindingList<Booking> _bookingBindingList;
         private BindingList<Booking> _manifestBindingList;
+
+        private bool isBookingPage = false;
 
         #endregion
 
@@ -284,10 +280,11 @@ namespace CMS2.Client
         }
         private void radPageView1_SelectedPageChanged(object sender, EventArgs e)
         {
+
             switch (pageViewMain.SelectedPage.Text)
             {
                 case "Booking":
-
+                    isBookingPage = true;
                     bsBookingStatus.ResetBindings(false);
                     bsBookingStatus.ResetBindings(false);
                     bsBookingRemark.ResetBindings(false);
@@ -295,12 +292,15 @@ namespace CMS2.Client
                     bsOriginBco.ResetBindings(false);
                     bsDestinationBco.ResetBindings(false);
 
-                    var _areas = areas.Where(x => x.City.BranchCorpOfficeId == GlobalVars.DeviceBcoId).ToList();
+                    List<RevenueUnit> _areas = areas.Where(x => x.City.BranchCorpOfficeId == GlobalVars.DeviceBcoId).ToList();
                     lstAssignedTo.DataSource = _areas;
                     lstAssignedTo.DisplayMember = "RevenueUnitName";
                     lstAssignedTo.ValueMember = "RevenueUnitId";
 
                     BookingResetAll();
+                    PopulateGrid();
+
+                    //backgroundWorker1.RunWorkerAsync();
 
                     break;
                 case "Acceptance":
@@ -2667,9 +2667,10 @@ namespace CMS2.Client
         }
 
         private void PopulateGrid()
-        {           		    List<Booking> bookings = new List<Booking>();
-			bookings = bookingService.GetAll().Where(x => x.RecordStatus == 1).OrderBy(x => x.DateBooked).OrderByDescending(x => x.CreatedDate).ToList();
-			_bookingBindingList = new BindingList<Booking>(bookings);
+        {
+            List<Booking> bookings = new List<Booking>();
+            bookings = bookingService.GetAll().Where(x => x.RecordStatus == 1).OrderBy(x => x.DateBooked).OrderByDescending(x => x.CreatedDate).ToList();
+            _bookingBindingList = new BindingList<Booking>(bookings);
             BookingGridView.DataSource = _bookingBindingList;
             BookingGridView.BestFitColumns(BestFitColumnMode.AllCells);
         }
@@ -2768,8 +2769,12 @@ namespace CMS2.Client
                 row["Accepted By"] = item.AcceptedBy.FullName;
                 row["Booking Assignment"] = item.Booking.AssignedToArea != null ? item.Booking.AssignedToArea.RevenueUnitName : "N/A";
                 User preparedBy = GetPreparedBy(item.Booking.CreatedBy);
-                row["User Assignment"] = preparedBy.Employee.AssignedToArea.RevenueUnitName;
-                row["Prepared By"] = preparedBy.UserName;
+                if (preparedBy != null)
+                {
+                    row["User Assignment"] = preparedBy.Employee.AssignedToArea.RevenueUnitName;
+                    row["Prepared By"] = preparedBy.UserName;
+                }
+
                 index++;
                 dt.Rows.Add(row);
             }
@@ -8365,37 +8370,54 @@ namespace CMS2.Client
         }
         #endregion
 
-       
+
 
         #endregion END MARK SANTOS REGION
 
-      
+
         private void RefreshGrid(Object obj)
         {
-            //try
-            //{
-            //    SyncHelper.ThreadState state = (SyncHelper.ThreadState)(obj);
-            //    List<Booking> bookings = new List<Booking>();
-            //    bookings = bookingService.GetAll().Where(x => x.RecordStatus == 1).OrderBy(x => x.DateBooked).OrderByDescending(x => x.CreatedDate).ToList();
-            //    state.bindingList = new BindingList<Booking>(bookings);
-            //    state._event.Set();
-            //}
-            //catch (Exception)
-            //{
-                
-            //}
-           
+            try
+            {
+                SyncHelper.ThreadState state = (SyncHelper.ThreadState)(obj);
+                List<Booking> bookings = new List<Booking>();
+                bookings = bookingService.GetAll().Where(x => x.RecordStatus == 1).OrderBy(x => x.DateBooked).OrderByDescending(x => x.CreatedDate).ToList();
+                state.bindingList = new BindingList<Booking>(bookings);
+                state._event.Set();
+            }
+            catch (Exception)
+            {
+
+            }
+
         }
+
+        private void AsynchronousLoadBooking()
+        {
+            while (isBookingPage)
+            {
+                System.Threading.Thread.Sleep(5000);
+                ManualResetEvent reset = new ManualResetEvent(false);
+                CMS2.Client.SyncHelper.ThreadState state = new SyncHelper.ThreadState();
+                state._event = reset;
+                state.worker = this.backgroundWorker1;
+                state.bindingList = _bookingBindingList;
+                ThreadPool.QueueUserWorkItem(new WaitCallback(RefreshGrid), state);
+                state._event.WaitOne();
+            }
+        }
+
         private void BookingGridView_Click(object sender, EventArgs e)
         {
-            
-                //ManualResetEvent reset = new ManualResetEvent(false);
-                //CMS2.Client.SyncHelper.ThreadState state = new SyncHelper.ThreadState();
-                //state._event = reset;
-                //state.bindingList = _bookingBindingList;
-                //ThreadPool.QueueUserWorkItem(new WaitCallback(RefreshGrid), state);
-            
-            
+
+
+
+
+        }
+
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            AsynchronousLoadBooking();
         }
     }
 }
