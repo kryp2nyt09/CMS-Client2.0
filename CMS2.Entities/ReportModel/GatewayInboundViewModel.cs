@@ -17,5 +17,7 @@ namespace CMS2.Entities.ReportModel
         public String CommodityType { get; set; }
         public String AirwayBillNo { get; set; }
         public DateTime CreatedDate { get; set; }
+        public string ScannedBy { get; set; }
+
     }
 }

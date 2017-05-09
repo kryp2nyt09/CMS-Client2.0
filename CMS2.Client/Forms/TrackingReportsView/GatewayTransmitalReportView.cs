@@ -29,8 +29,8 @@ namespace CMS2.Client.Forms.TrackingReportsView
             txtArea.Value = TrackingReportGlobalModel.Area;
             txtGateway.Value = TrackingReportGlobalModel.Gateway;
             txtScannedBy.Value = TrackingReportGlobalModel.ScannedBy;
-            txtRemarks.Value = TrackingReportGlobalModel.Remarks;
-            txtNotes.Value = TrackingReportGlobalModel.Notes;
+           // txtRemarks.Value = TrackingReportGlobalModel.Remarks;
+           // txtNotes.Value = TrackingReportGlobalModel.Notes;
         }
     }
 }

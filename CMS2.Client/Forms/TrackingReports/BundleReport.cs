@@ -42,6 +42,8 @@ namespace CMS2.Client.Forms.TrackingReports
             dt.Columns.Add(new DataColumn("BCO", typeof(string)));
             dt.Columns.Add(new DataColumn("BSO", typeof(string)));
 
+            dt.Columns.Add(new DataColumn("ScannedBy", typeof(string)));
+
             dt.BeginLoadData();
             int ctr = 1;
             foreach (BundleViewModel item in bundleList)
@@ -66,6 +68,7 @@ namespace CMS2.Client.Forms.TrackingReports
                 row[15] = item.BCO;
                 row[16] = item.BSO;
 
+                row[17] = item.Scannedby;
                 dt.Rows.Add(row);
             }
             dt.EndLoadData();
@@ -95,23 +98,25 @@ namespace CMS2.Client.Forms.TrackingReports
                             
             width.Add(0);   // BCO
             width.Add(0);   // BSO
-                            
+
+            width.Add(110); // Scanned By
+
             return width;
         }
 
         public List<BundleViewModel> Match(List<Bundle> bundle) {
 
             PackageNumberBL _packageNumberService = new PackageNumberBL();
-            List<BundleViewModel> _results = new List<BundleViewModel>();       
+            List<BundleViewModel> _results = new List<BundleViewModel>();
+            ShipmentBL shipment = new ShipmentBL();
 
             foreach (Bundle _bundle in bundle) {
-
                 BundleViewModel model = new BundleViewModel();
-                ShipmentBL shipment = new ShipmentBL();
                 string _airwaybill = "";
                 try {
                     _airwaybill = _packageNumberService.GetAll().Find(x => x.PackageNo == _bundle.Cargo).Shipment.AirwayBillNo;
                 }catch(Exception) { continue; }
+
                 BundleViewModel isExist = _results.Find(x => x.AirwayBillNo == _airwaybill);
                 
                 if (isExist != null)
@@ -138,9 +143,11 @@ namespace CMS2.Client.Forms.TrackingReports
                         model.CreatedDate = ship.CreatedDate;
                         model.Destination = ship.DestinationCity.CityName;
                         model.BSO = ship.OriginCity.CityName;
+              
                     }
                     model.SackNo = _bundle.SackNo;
                     model.BCO = _bundle.BranchCorpOffice.BranchCorpOfficeName;
+                    model.Scannedby = AppUser.User.Employee.FullName;
                     _results.Add(model);
                 }
            }

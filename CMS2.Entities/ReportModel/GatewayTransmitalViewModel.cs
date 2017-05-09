@@ -28,6 +28,7 @@ namespace CMS2.Entities.ReportModel
         public string Driver { get; set; }
         public string PlateNo { get; set; }
         public string MAWB { get; set; }
+        public string ScannedBy { get; set; }
 
     }
 }

@@ -42,6 +42,7 @@ namespace CMS2.Client.Forms.TrackingReports
             dt.Columns.Add(new DataColumn("Driver", typeof(string)));
             dt.Columns.Add(new DataColumn("PlateNo", typeof(string)));
             dt.Columns.Add(new DataColumn("MAWB", typeof(string)));
+            dt.Columns.Add(new DataColumn("ScannedBy", typeof(string)));
 
             dt.BeginLoadData();
             int ctr = 1;
@@ -69,6 +70,7 @@ namespace CMS2.Client.Forms.TrackingReports
                 row[15] = item.Driver;
                 row[16] = item.PlateNo;
                 row[17] = item.MAWB;
+                row[18] = item.ScannedBy;
                 dt.Rows.Add(row);
             }
             dt.EndLoadData();
@@ -101,7 +103,7 @@ namespace CMS2.Client.Forms.TrackingReports
             width.Add(0);  //PlateNO
 
             width.Add(0);  //MAWB
-
+            width.Add(110);//ScannedBy
             return width;
         }
 
@@ -112,10 +114,11 @@ namespace CMS2.Client.Forms.TrackingReports
 
             CommodityBL commodityService = new CommodityBL();
             GatewayTransmittalBL transmitalService = new GatewayTransmittalBL();
+            ShipmentBL shipmentService = new ShipmentBL();
+           
 
             foreach (GatewayTransmittal transmital in _transmital)
             {
-                ShipmentBL shipmentService = new ShipmentBL();
                 GatewayTransmitalViewModel model = new GatewayTransmitalViewModel();
                 Shipment _shipment = new Shipment();
                 string _airwaybill = "";
@@ -152,6 +155,7 @@ namespace CMS2.Client.Forms.TrackingReports
                     model.CreatedDate = transmital.CreatedDate;
                     model.PlateNo = transmital.PlateNo;
                     model.MAWB = transmital.MasterAirwayBillNo;
+                    model.ScannedBy = AppUser.User.Employee.FullName;
                     _results.Add(model);
                 }
 

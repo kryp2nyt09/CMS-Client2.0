@@ -18,5 +18,7 @@ namespace CMS2.Entities.ReportModel
         public int Qty { get; set; }
         public string Area { get; set; }
         public DateTime CreatedDate { get; set; }
+        public string ScannedBy { get; set; }
+
     }
 }

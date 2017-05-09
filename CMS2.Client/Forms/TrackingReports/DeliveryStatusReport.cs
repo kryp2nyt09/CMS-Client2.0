@@ -33,6 +33,7 @@ namespace CMS2.Client.Forms.TrackingReports
             dt.Columns.Add(new DataColumn("Batch", typeof(string)));
 
             dt.Columns.Add(new DataColumn("BCO", typeof(string)));
+            dt.Columns.Add(new DataColumn("ScannedBy", typeof(string)));
             dt.BeginLoadData();
             int ctr = 1;
             foreach (DeliveryStatusViewModel item in modelList)
@@ -49,6 +50,7 @@ namespace CMS2.Client.Forms.TrackingReports
                 row[8] = item.PlateNo;
                 row[9] = item.Batch;
                 row[10] = item.BCO;
+                row[11] = item.ScannedBy;
                 dt.Rows.Add(row);
             }
             dt.EndLoadData();
@@ -70,6 +72,7 @@ namespace CMS2.Client.Forms.TrackingReports
             width.Add(100);
             width.Add(110);
             width.Add(0);
+            width.Add(110);
             return width;
         }
 
@@ -82,7 +85,7 @@ namespace CMS2.Client.Forms.TrackingReports
             PackageNumberBL _packageNumberService = new PackageNumberBL();
 
             List<DeliveryStatusViewModel> _results = new List<DeliveryStatusViewModel>();
-            List<Distribution> distributions = distributionService.GetAll();
+            List<Distribution> distributions = distributionService.GetAll().ToList();
 
             foreach (Delivery delivery in _deliveries)
             {               
@@ -122,7 +125,7 @@ namespace CMS2.Client.Forms.TrackingReports
                     model.Batch = dis.Batch.BatchName;
                     model.PlateNo = dis.PlateNo;
                     model.BCO = dis.Area.City.BranchCorpOffice.BranchCorpOfficeName;
-                  
+                    model.ScannedBy = AppUser.User.Employee.FullName;
                     _results.Add(model);
                 }
             }

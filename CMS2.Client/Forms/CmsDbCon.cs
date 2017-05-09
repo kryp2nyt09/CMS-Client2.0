@@ -183,7 +183,7 @@ namespace CMS2.Client
             }
         }
         private void CmsDbCon_Shown(object sender, EventArgs e)
-        {           
+        {
             txtLocalIP.Text = Settings.Default.LocalDbServer;
             txtLocalDbName.Text = Settings.Default.LocalDbName;
             txtLocalDbUsername.Text = Settings.Default.LocalDbUsername;
@@ -309,12 +309,14 @@ namespace CMS2.Client
         }
         private void lstRevenueUnitType_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
         {
+            
             if (lstRevenueUnitType.SelectedIndex > -1 && lstBco.SelectedIndex > -1)
             {
                 List<RevenueUnit> list = revenueUnitService.FilterActive().OrderBy(x => x.RevenueUnitName).ToList();
                 list = list.Where(x => x.City.BranchCorpOffice.BranchCorpOfficeId == Guid.Parse(lstBco.SelectedValue.ToString()) && x.RevenueUnitType.RevenueUnitTypeName == lstRevenueUnitType.SelectedItem.ToString()).ToList();
                 PopulateRevenueUnit(list);
             }
+
 
         }
         private void LocalTestConnection_Click(object sender, EventArgs e)
@@ -829,14 +831,8 @@ namespace CMS2.Client
 
         private void lstRevenueUnit_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
         {
-            if (lstRevenueUnit.SelectedValue != null) 
+            if (lstRevenueUnit.SelectedValue != null) ;
             {
-                _deviceRevenueUnitId = lstRevenueUnit.SelectedValue.ToString();
-            }
-        }
-        
-        private void lstRevenueUnit_Validated(object sender, EventArgs e)
-        {
             if (lstRevenueUnit.SelectedIndex > -1)
             {
                 _deviceRevenueUnitId = lstRevenueUnit.SelectedValue.ToString();

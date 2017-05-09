@@ -40,6 +40,9 @@ namespace CMS2.Client.Forms.TrackingReports
 
             dt.Columns.Add(new DataColumn("CreatedDate", typeof(string)));
             dt.Columns.Add(new DataColumn("Branch", typeof(string)));
+
+            dt.Columns.Add(new DataColumn("ScannedBy", typeof(string)));
+
             dt.BeginLoadData();
 
             int ctr = 1;
@@ -57,6 +60,7 @@ namespace CMS2.Client.Forms.TrackingReports
                 row[8] = item.Total.ToString();
                 row[9] = item.CreatedDate.ToShortDateString();
                 row[10] = item.Branch;
+                row[11] = item.ScannedBy;
                 dt.Rows.Add(row);
             }
             dt.EndLoadData();
@@ -79,6 +83,7 @@ namespace CMS2.Client.Forms.TrackingReports
             width.Add(120);
             width.Add(0);
             width.Add(0);
+            width.Add(120);
             return width;
         }
 
@@ -115,6 +120,7 @@ namespace CMS2.Client.Forms.TrackingReports
                         model.TotalRecieved++;
                         model.Total += model.TotalRecieved;
                         model.Branch = outbound.BranchCorpOffice.BranchCorpOfficeName;
+                        model.ScannedBy = AppUser.User.Employee.FullName;
                         _results.Add(model);
 
                     }
@@ -137,6 +143,7 @@ namespace CMS2.Client.Forms.TrackingReports
                         model.TotalDiscrepency++;
                         model.Total += model.TotalDiscrepency;
                         model.Branch = outbound.BranchCorpOffice.BranchCorpOfficeName;
+                        model.ScannedBy = AppUser.User.Employee.FullName;
                         _results.Add(model);
 
                     }

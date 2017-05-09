@@ -25,5 +25,7 @@ namespace CMS2.Entities.ReportModel
         public string Destination { get; set; }
         public string BCO { get; set; }
         public string BSO { get; set; }
+
+        public string Scannedby { get; set; }
     }
 }
