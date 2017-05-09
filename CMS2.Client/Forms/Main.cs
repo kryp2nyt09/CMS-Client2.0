@@ -1196,7 +1196,8 @@ namespace CMS2.Client
 
         private void btnLogOut_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            Login();
+            //Application.Exit();
         }
 
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
@@ -1790,6 +1791,7 @@ namespace CMS2.Client
                 List<Shipment> _shipment = shipmentService.FilterActiveBy(x => x.AirwayBillNo.Equals(txtAwb.Text.ToString()));
                 if (_shipment != null && _shipment.Count > 0)
                 {
+                    shipment = null;
                     shipment = shipmentService.EntityToModel(_shipment.FirstOrDefault());
                     LoadPayment();
                 }
@@ -3125,7 +3127,7 @@ namespace CMS2.Client
         {
             int startindex = companyname.IndexOf("-") + 2;
             string acctNo = companyname.Substring(startindex, companyname.Length - startindex);
-            var company = companies.First(x => x.AccountNo.Equals(acctNo));
+            Company company = companies.Where(x => x.AccountNo == acctNo).FirstOrDefault();
             if (company != null)
                 return company.CompanyId;
             else
@@ -3160,7 +3162,7 @@ namespace CMS2.Client
                 }
                 txtShipperContactNo.Text = shipper.ContactNo;
                 txtShipperMobile.Text = shipper.Mobile;
-                txtShipperEmail.Text = shipper.Email;
+                txtShipperEmail.Text = shipper.Email ?? "NA";
             }
             else
             {
@@ -3197,7 +3199,7 @@ namespace CMS2.Client
                 }
                 txtConsigneeContactNo.Text = consignee.ContactNo;
                 txtConsigneeMobile.Text = consignee.Mobile;
-                txtConsigneeEmail.Text = consignee.Email;
+                txtConsigneeEmail.Text = consignee.Email ?? "NA";
             }
             else
             {
@@ -3429,7 +3431,7 @@ namespace CMS2.Client
                 shipper.ModifiedBy = AppUser.User.UserId;
                 shipper.ModifiedDate = DateTime.Now;
                 shipper.RecordStatus = (int)RecordStatus.Active;
-                Company company = companies.Find(x => x.CompanyName == txtShipperCompany.Text.Trim());
+                Company company = companies.Find(x => x.CompanyId == GetCompanyIdByString(txtShipperCompany.Text.Trim()));
                 if (company != null)
                 {
                     shipper.Company = company;
@@ -3461,7 +3463,7 @@ namespace CMS2.Client
                 consignee.ModifiedBy = AppUser.User.UserId;
                 consignee.ModifiedDate = DateTime.Now;
                 consignee.RecordStatus = (int)RecordStatus.Active;
-                Company consigneeCompany = companies.Find(x => x.CompanyName == txtConsigneeCompany.Text.Trim());
+                Company consigneeCompany = companies.Find(x => x.CompanyId == GetCompanyIdByString(txtConsigneeCompany.Text.Trim()));
                 if (consigneeCompany != null)
                 {
                     consignee.Company = consigneeCompany;
@@ -6810,7 +6812,7 @@ namespace CMS2.Client
             {
                 DataTable dataTable = getBranchAcceptanceGrid();
                 TrackingReportGlobalModel.table = dataTable;
-                TrackingReportGlobalModel.Date = dateTimeGatewayTransmital_Date.Value.ToLongDateString();
+                TrackingReportGlobalModel.Date = dateTimePickerBranchAcceptance_Date.Value.ToLongDateString();
                 TrackingReportGlobalModel.Branch = get_Column_DataView(dataTable, "BCO");
                 TrackingReportGlobalModel.Driver = dropDownBranchAcceptance_Driver.SelectedItem.ToString();
                 TrackingReportGlobalModel.Checker = get_Column_DataView(dataTable, "Checker");

@@ -120,6 +120,7 @@ namespace CMS2.Client
             lstRevenueUnit.ValueMember = "RevenueUnitId";
 
             _branchCorpOfficeId = ConfigurationManager.AppSettings["BcoId"].ToString();
+            _deviceRevenueUnitId = ConfigurationManager.AppSettings["RUId"].ToString();
             _filter = ConfigurationManager.AppSettings["Filter"].ToString();
             _localConnectionString = ConfigurationManager.ConnectionStrings["Cms"].ConnectionString;
             _mainConnectionString = ConfigurationManager.ConnectionStrings["CmsCentral"].ConnectionString;
@@ -182,10 +183,7 @@ namespace CMS2.Client
             }
         }
         private void CmsDbCon_Shown(object sender, EventArgs e)
-        {
-            BackgroundWorker worker = new BackgroundWorker();
-            worker.WorkerReportsProgress = true;
-
+        {           
             txtLocalIP.Text = Settings.Default.LocalDbServer;
             txtLocalDbName.Text = Settings.Default.LocalDbName;
             txtLocalDbUsername.Text = Settings.Default.LocalDbUsername;
@@ -196,7 +194,7 @@ namespace CMS2.Client
             txtServerPassword.Text = Settings.Default.CentralPassword;
             txtDeviceCode.Text = Settings.Default.DeviceCode;
 
-            if (_isSubserver =="false")
+            if (_isSubserver.ToLower() == "false")
             {
                 txtServerIP.Enabled = false;
                 txtServerDbName.Enabled = false;
@@ -207,15 +205,14 @@ namespace CMS2.Client
 
             try
             {
-                lstBco.SelectedValue = _branchCorpOffices.Find(x => x.BranchCorpOfficeId == Guid.Parse(Settings.Default.DeviceBcoId.ToString())).BranchCorpOfficeId;
-                lstRevenueUnit.SelectedValue = revenueUnits.Find(x => x.RevenueUnitId == Guid.Parse(Settings.Default.DeviceRevenueUnitId.ToString())).RevenueUnitId;
+                lstBco.SelectedValue = _branchCorpOffices.Find(x => x.BranchCorpOfficeId == Guid.Parse(_branchCorpOfficeId)).BranchCorpOfficeId;
+                lstRevenueUnit.SelectedValue = revenueUnits.Find(x => x.RevenueUnitId == Guid.Parse(_deviceRevenueUnitId)).RevenueUnitId;
             }
             catch (Exception ex)
             {
                 Logs.ErrorLogs("CMS Settings", "CmsDBConShow", ex.Message);
             }
 
-            CheckTableState(worker);
         }
         private void lstBco_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -832,7 +829,15 @@ namespace CMS2.Client
 
         private void lstRevenueUnit_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
         {
-            if (lstRevenueUnit.SelectedValue != null) ;
+            if (lstRevenueUnit.SelectedValue != null) 
+            {
+                _deviceRevenueUnitId = lstRevenueUnit.SelectedValue.ToString();
+            }
+        }
+        
+        private void lstRevenueUnit_Validated(object sender, EventArgs e)
+        {
+            if (lstRevenueUnit.SelectedIndex > -1)
             {
                 _deviceRevenueUnitId = lstRevenueUnit.SelectedValue.ToString();
             }
@@ -843,11 +848,13 @@ namespace CMS2.Client
 
         }
 
-        private void lstRevenueUnit_Validated(object sender, EventArgs e)
+        private void radPageView1_SelectedPageChanged(object sender, EventArgs e)
         {
-            if (lstRevenueUnit.SelectedIndex > -1)
+            if (radPageView1.SelectedPage.Text == "Sync Settings")
             {
-                _deviceRevenueUnitId = lstRevenueUnit.SelectedValue.ToString();
+                BackgroundWorker worker = new BackgroundWorker();
+                worker.WorkerReportsProgress = true;
+                CheckTableState(worker);
             }
         }
     }

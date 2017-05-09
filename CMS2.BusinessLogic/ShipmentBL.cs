@@ -146,11 +146,11 @@ namespace CMS2.BusinessLogic
                 Discount = model.Discount,
                 CommodityId = model.CommodityId,
                 DeliveryFeeId = model.DeliveryFeeId,
-                DangerousFeeId = model.DangerousFeeId, 
+                DangerousFeeId = model.DangerousFeeId,
                 TotalAmount = model.ShipmentTotal,
                 OriginBarangay = model.OriginBarangay,
                 DestinationBarangay = model.DestinationBarangay
-                
+
             };
 
             entity.PackageDimensions = packageDimensionService.ModelsToEntities(model.PackageDimensions);
@@ -347,12 +347,16 @@ namespace CMS2.BusinessLogic
             decimal peracFee = 0;
             decimal awbFee = 0;
             decimal dangerousFee = 0;
+            decimal defaultFee = 0;
+            model.DeliveryFeeId = null;
+            model.DeliveryFee = null;
             #endregion
 
             model = ComputePackageWeightCharge(ComputePackageEvmCrating(model));
 
             dynamic matrix = null;
-            var basicFees = shipmentBasicFeeService.FilterActive();
+            //shipmentBasicFeeService = new ShipmentBasicFeeBL();
+            List<ShipmentBasicFee> basicFees = shipmentBasicFeeService.FilterActive();
 
             model.FreightCollectChargeId = null;
             model.FreightCollectCharge = null;
@@ -429,7 +433,7 @@ namespace CMS2.BusinessLogic
                     if (model.Weight > 5)
                     {
                         var fuelSurcharge =
-                            fuelSurchargeService.FilterActiveBy(x=> x.OriginGroupId == model.OriginCity.BranchCorpOffice.Province.Region.Group.GroupId && x.DestinationGroupId == model.DestinationCity.BranchCorpOffice.Province.Region.Group.GroupId);
+                            fuelSurchargeService.FilterActiveBy(x => x.OriginGroupId == model.OriginCity.BranchCorpOffice.Province.Region.Group.GroupId && x.DestinationGroupId == model.DestinationCity.BranchCorpOffice.Province.Region.Group.GroupId);
                         if (fuelSurcharge != null && fuelSurcharge.Count > 0)
                         {
                             fuelCharge = model.Weight * fuelSurcharge.FirstOrDefault().Amount;
@@ -452,24 +456,27 @@ namespace CMS2.BusinessLogic
                 }
                 if (matrix.HasDeliveryFee)
                 {
-                    decimal defaultFee = 0;
-                    model.DeliveryFeeId = null;
-                    model.DeliveryFee = null;
-                    ShipmentBasicFee _deliveryfee = basicFees.FirstOrDefault(x => x.ShipmentFeeName.Equals("Delivery Fee"));
+                    ShipmentBasicFee _deliveryfee = basicFees.Where(x => x.ShipmentFeeName.Equals("Delivery Fee")).FirstOrDefault();
+
                     if (_deliveryfee != null)
                     {
-                        model.DeliveryFeeId = _deliveryfee.ShipmentBasicFeeId;
-                        model.DeliveryFee = _deliveryfee;
-                        defaultFee = model.DeliveryFee.Amount;
+                        ShipmentBasicFee Fee = new ShipmentBasicFee();
+                        model.DeliveryFee = Fee;
+                        model.DeliveryFeeId = _deliveryfee.ShipmentBasicFeeId;                                        
+                        defaultFee = _deliveryfee.Amount;
+                       
+
+                        if (model.ChargeableWeight <= 5)
+                        {
+                            deliveryFee = defaultFee * 5;
+                        }
+                        else
+                        {
+                            deliveryFee = model.ChargeableWeight * defaultFee;
+                        }
+                        model.DeliveryFee.Amount = deliveryFee;                        
                     }
-                    if (model.ChargeableWeight <= 5)
-                    {
-                        deliveryFee = defaultFee * 5;
-                    }
-                    else
-                    {
-                        deliveryFee = model.ChargeableWeight * defaultFee;
-                    }
+
                 }
                 if (matrix.HasPerishableFee)
                 {
@@ -530,7 +537,7 @@ namespace CMS2.BusinessLogic
                     {
                         model.ShipmentVatAmount = 0;
                     }
-                    
+
                 }
             }
 
@@ -649,7 +656,7 @@ namespace CMS2.BusinessLogic
                 }
                 else
                 {
-                   
+
                     if (model.ShipMode.ShipModeName.Equals("Transhipment"))
                     {
                         #region Transhipment
@@ -754,7 +761,7 @@ namespace CMS2.BusinessLogic
                         model.WeightCharge = expressRateAmount;
                         break;
                     }
-                    else if (model.ChargeableWeight >=6 && model.ChargeableWeight < 49)
+                    else if (model.ChargeableWeight >= 6 && model.ChargeableWeight < 49)
                     {
                         expressRateAmount = expressRate.C6to49Cost;
                         model.WeightCharge = model.ChargeableWeight * expressRateAmount;
@@ -864,7 +871,7 @@ namespace CMS2.BusinessLogic
                         packageDimensionService.Add(newDim);
                     }
                 }
-                
+
                 Edit(this.ModelToEntity(model));
             }
         }
@@ -887,7 +894,7 @@ namespace CMS2.BusinessLogic
                 {
                     ShipmentByDateBcoModel model = new ShipmentByDateBcoModel();
                     model.Shipment = item;
-                    var revenueunit =revenueUnitService.GetById(item.AcceptedBy.AssignedToAreaId);
+                    var revenueunit = revenueUnitService.GetById(item.AcceptedBy.AssignedToAreaId);
                     if (revenueunit == null)
                     {
                         var bco = bcoService.GetById(item.AcceptedBy.AssignedToAreaId);
@@ -901,7 +908,7 @@ namespace CMS2.BusinessLogic
                         model.BranchCorpOfficeId = revenueunit.City.BranchCorpOffice.BranchCorpOfficeId;
                         model.BranchCorpOffice = revenueunit.City.BranchCorpOffice.BranchCorpOfficeName;
                     }
-                   
+
                     if (truckarea != null)
                     {
                         model.TruckId = truckarea.TruckId;
