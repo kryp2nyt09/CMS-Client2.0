@@ -3231,7 +3231,7 @@
             // lstPaymentMode
             // 
             this.lstPaymentMode.AutoCompleteDataSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.lstPaymentMode.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.lstPaymentMode.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.lstPaymentMode.Location = new System.Drawing.Point(108, 200);
             this.lstPaymentMode.Name = "lstPaymentMode";
             this.lstPaymentMode.Size = new System.Drawing.Size(208, 20);
@@ -3383,7 +3383,7 @@
             // lstServiceType
             // 
             this.lstServiceType.AutoCompleteDataSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.lstServiceType.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.lstServiceType.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.lstServiceType.Location = new System.Drawing.Point(108, 121);
             this.lstServiceType.Name = "lstServiceType";
             this.lstServiceType.Size = new System.Drawing.Size(207, 20);
@@ -3394,7 +3394,7 @@
             // lstServiceMode
             // 
             this.lstServiceMode.AutoCompleteDataSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.lstServiceMode.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.lstServiceMode.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.lstServiceMode.Location = new System.Drawing.Point(108, 148);
             this.lstServiceMode.Name = "lstServiceMode";
             this.lstServiceMode.Size = new System.Drawing.Size(207, 20);
@@ -3407,7 +3407,7 @@
             // 
             this.lstShipMode.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lstShipMode.AutoCompleteDataSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.lstShipMode.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.lstShipMode.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.lstShipMode.Location = new System.Drawing.Point(108, 174);
             this.lstShipMode.Name = "lstShipMode";
             this.lstShipMode.Size = new System.Drawing.Size(207, 20);
@@ -3430,7 +3430,7 @@
             // 
             this.lstGoodsDescription.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lstGoodsDescription.AutoCompleteDataSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.lstGoodsDescription.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.lstGoodsDescription.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.lstGoodsDescription.Location = new System.Drawing.Point(108, 55);
             this.lstGoodsDescription.Name = "lstGoodsDescription";
             this.lstGoodsDescription.Size = new System.Drawing.Size(252, 20);
