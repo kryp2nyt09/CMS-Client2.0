@@ -120,7 +120,6 @@ namespace CMS2.Client
             lstRevenueUnit.ValueMember = "RevenueUnitId";
 
             _branchCorpOfficeId = ConfigurationManager.AppSettings["BcoId"].ToString();
-            _deviceRevenueUnitId = ConfigurationManager.AppSettings["RUId"].ToString();
             _filter = ConfigurationManager.AppSettings["Filter"].ToString();
             _localConnectionString = ConfigurationManager.ConnectionStrings["Cms"].ConnectionString;
             _mainConnectionString = ConfigurationManager.ConnectionStrings["CmsCentral"].ConnectionString;
@@ -184,6 +183,9 @@ namespace CMS2.Client
         }
         private void CmsDbCon_Shown(object sender, EventArgs e)
         {
+            BackgroundWorker worker = new BackgroundWorker();
+            worker.WorkerReportsProgress = true;
+
             txtLocalIP.Text = Settings.Default.LocalDbServer;
             txtLocalDbName.Text = Settings.Default.LocalDbName;
             txtLocalDbUsername.Text = Settings.Default.LocalDbUsername;
@@ -194,25 +196,27 @@ namespace CMS2.Client
             txtServerPassword.Text = Settings.Default.CentralPassword;
             txtDeviceCode.Text = Settings.Default.DeviceCode;
 
-            if (_isSubserver.ToLower() == "false")
+            if (_isSubserver == "false")
             {
                 txtServerIP.Enabled = false;
                 txtServerDbName.Enabled = false;
                 txtServerUsername.Enabled = false;
                 txtServerPassword.Enabled = false;
                 isMainConnected = true;
+                radPageViewPage2.Enabled = false;
             }
 
             try
             {
-                lstBco.SelectedValue = _branchCorpOffices.Find(x => x.BranchCorpOfficeId == Guid.Parse(_branchCorpOfficeId)).BranchCorpOfficeId;
-                lstRevenueUnit.SelectedValue = revenueUnits.Find(x => x.RevenueUnitId == Guid.Parse(_deviceRevenueUnitId)).RevenueUnitId;
+                lstBco.SelectedValue = _branchCorpOffices.Find(x => x.BranchCorpOfficeId == Guid.Parse(Settings.Default.DeviceBcoId.ToString())).BranchCorpOfficeId;
+                lstRevenueUnit.SelectedValue = revenueUnits.Find(x => x.RevenueUnitId == Guid.Parse(Settings.Default.DeviceRevenueUnitId.ToString())).RevenueUnitId;
             }
             catch (Exception ex)
             {
                 Logs.ErrorLogs("CMS Settings", "CmsDBConShow", ex.Message);
             }
 
+            CheckTableState(worker);
         }
         private void lstBco_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -284,7 +288,7 @@ namespace CMS2.Client
             if (IsDataValid_Main())
             {
                 GatherInputs();
-                _mainConnectionString = String.Format("Server={0};Database={1};User Id={2};Password={3};", _mainServer, _mainDbName, _mainUsername, _mainPassword);
+                _mainConnectionString = String.Format("Server={0};Database={1};User Id={2};Password={3};;Connect Timeout=180;Pooling=true;", _mainServer, _mainDbName, _mainUsername, _mainPassword);
                 SqlConnection mainConnection = new SqlConnection(_mainConnectionString);
                 try
                 {
@@ -309,7 +313,7 @@ namespace CMS2.Client
         }
         private void lstRevenueUnitType_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
         {
-            
+
             if (lstRevenueUnitType.SelectedIndex > -1 && lstBco.SelectedIndex > -1)
             {
                 List<RevenueUnit> list = revenueUnitService.FilterActive().OrderBy(x => x.RevenueUnitName).ToList();
@@ -507,17 +511,33 @@ namespace CMS2.Client
 
             using (CmsContext context = new CmsContext())
             {
-                ObjectContext objContext = ((IObjectContextAdapter)context).ObjectContext;
-                MetadataWorkspace workspace = objContext.MetadataWorkspace;
+                //ObjectContext objContext = ((IObjectContextAdapter)context).ObjectContext;
+                //MetadataWorkspace workspace = objContext.MetadataWorkspace;
 
+                //IEnumerable<EntityType> tables = workspace.GetItems<EntityType>(DataSpace.SSpace);
 
-                IEnumerable<EntityType> tables = workspace.GetItems<EntityType>(DataSpace.SSpace);
-
+                List<string> list = new List<string>(){"AccountStatus", "AccountType", "AdjustmentReason", "ApplicableRate", "ApplicationSetting",
+                "ApprovingAuthority", "Company", "Employee", "RevenueUnit", "City", "BranchCorpOffice", "Cluster", "Province", "Region",
+                "Group", "RevenueUnitType", "Department", "Position", "BillingPeriod", "BusinessType", "Client", "Industry", 
+                "OrganizationType", "PaymentMode", "PaymentTerm", "AwbIssuance", "Batch", "BookingRemark", "Booking", "BookingStatus",
+                "BranchAcceptance", "Remarks", "Bundle", "CargoTransfer", "Reason", "Status", "User", "Claim", "Role", "Commodity",
+                "CommodityType", "WeightBreak", "DeliveredPackage", "Delivery", "DeliveryReceipt", "DeliveryRemark", "DeliveryStatus",
+                "Shipment", "ShipmentAdjustment", "StatementOfAccount", "ShipmentBasicFee", "FuelSurcharge", "GoodsDescription",
+                "PackageDimension", "Crating", "Packaging", "PackageNumber", "Payment", "PaymentType", "StatementOfAccountPayment",
+                "ServiceMode", "ServiceType", "ShipMode", "Distribution", "ExpressRate", "RateMatrix", "FlightInfo", "GatewayInbound",
+                "GatewayOutbound", "GatewayTransmittal", "HoldCargo", "Menu", "PackageNumberAcceptance", "TransferAcceptance",
+                "PackageNumberTransfer", "PackageTransfer", "PaymentSummary", "PaymentSummaryStatus", "PaymentTurnover", "RecordChange",
+                "Segregation", "ShipmentStatus", "ShipmentTracking", "StatementOfAccountNumber", "StatementOfAccountPrint",
+                "TntMaint", "TransmittalStatus", "TransShipmentLeg", "TransShipmentRoute",
+                "TruckAreaMapping", "Truck", "Unbundle", "RoleUser"};
+                
                 _entities = new BindingList<SyncTables>();
-                foreach (var item in tables)
+
+                
+                foreach (var item in list)
                 {
                     SyncTables table = new SyncTables();
-                    table.TableName = item.Name;
+                    table.TableName = item;
                     _entities.Add(table);
                 }
             }
@@ -831,9 +851,7 @@ namespace CMS2.Client
 
         private void lstRevenueUnit_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
         {
-            if (lstRevenueUnit.SelectedValue != null) ;
-            {
-            if (lstRevenueUnit.SelectedIndex > -1)
+            if (lstRevenueUnit.SelectedValue != null)
             {
                 _deviceRevenueUnitId = lstRevenueUnit.SelectedValue.ToString();
             }
@@ -844,13 +862,11 @@ namespace CMS2.Client
 
         }
 
-        private void radPageView1_SelectedPageChanged(object sender, EventArgs e)
+        private void lstRevenueUnit_Validated(object sender, EventArgs e)
         {
-            if (radPageView1.SelectedPage.Text == "Sync Settings")
+            if (lstRevenueUnit.SelectedIndex > -1)
             {
-                BackgroundWorker worker = new BackgroundWorker();
-                worker.WorkerReportsProgress = true;
-                CheckTableState(worker);
+                _deviceRevenueUnitId = lstRevenueUnit.SelectedValue.ToString();
             }
         }
     }

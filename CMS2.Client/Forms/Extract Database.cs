@@ -146,7 +146,7 @@ namespace CMS2_Client
         }
         private void SubServer_ToggleStateChanged(object sender, Telerik.WinControls.UI.StateChangedEventArgs args)
         {
-            
+
             ResetAll();
             ToggleEnableDisableMainServer(true);
             isSubServer = true;
@@ -157,7 +157,7 @@ namespace CMS2_Client
         }
         private void ClientApp_ToggleStateChanged(object sender, Telerik.WinControls.UI.StateChangedEventArgs args)
         {
-           
+
             ResetAll();
             ToggleEnableDisableMainServer(false);
             isSubServer = false;
@@ -197,7 +197,7 @@ namespace CMS2_Client
         {
             DropDatabaseIfExist();
             CreateDatabase();
-            
+
             //Deprovision Server if theres an update on table
             StartDeprovisionServer();
             //Provisioning Server and Local for synchronization
@@ -418,14 +418,11 @@ namespace CMS2_Client
                 isValid = false;
             }
             else if (LocalServer.Text == "localhost")
-                {
+            {
                 MessageBox.Show("Please enter another ip address.", "Data Error", MessageBoxButtons.OK);
-                    LocalServer.Focus();
-                    isValid = false;
-                }
-               
+                LocalServer.Focus();
+                isValid = false;
             }
-
             return isValid;
         }
         private bool IsDataValid_Main()

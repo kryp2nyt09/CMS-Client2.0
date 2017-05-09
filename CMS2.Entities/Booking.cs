@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CMS2.Entities
 {
-    public class Booking : BaseEntity
+    public class Booking : BaseEntity, INotifyPropertyChanged
     {
         [Key]
         public Guid BookingId { get; set; }
@@ -54,8 +54,26 @@ namespace CMS2.Entities
         [ForeignKey("BookingRemarkId")]
         public virtual BookingRemark BookingRemark { get; set; }
         public Guid BookingStatusId { get; set; }
+
+
+        private BookingStatus _status;
         [ForeignKey("BookingStatusId")]
-        public virtual BookingStatus BookingStatus { get; set; }
+        public virtual BookingStatus BookingStatus
+        {
+            get
+            {
+                return _status;
+            }
+            set
+            {
+                if (_status != value)
+                {
+                    _status = value;
+                    OnPropertyChanged(new PropertyChangedEventArgs("BookingStatus")); 
+                }
+            }
+        }
+
         [DefaultValue(0)]
         public bool HasDailyBooking { get; set; }
 
@@ -75,5 +93,15 @@ namespace CMS2.Entities
         public Guid? AssignedToAreaId { get; set; }
         [ForeignKey("AssignedToAreaId")]
         public virtual RevenueUnit AssignedToArea { get; set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void OnPropertyChanged(PropertyChangedEventArgs e)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, e);
+            }
+        }
     }
 }
