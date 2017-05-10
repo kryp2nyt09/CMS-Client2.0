@@ -1194,10 +1194,7 @@ namespace CMS2.Client
 
         private void btnLogOut_Click(object sender, EventArgs e)
         {
-            using (Login frm = new Login())
-            {
-                frm.Show();
-            }
+            Login();
             //Application.Exit();
         }
 

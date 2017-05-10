@@ -119,7 +119,7 @@ namespace CMS2_Client
             if (IsDataValid_Main())
             {
                 GatherInputs();
-                _mainConnectionString = String.Format("Server={0};Database={1};User Id={2};Password={3};Connect Timeout=180;Pooling=true;", _mainServer, _mainDbName, _mainUsername, _mainPassword);
+                _mainConnectionString = String.Format("Server={0};Database={1};User Id={2};Password={3};Connect Timeout=180;Connection Lifetime=0;Pooling=true;", _mainServer, _mainDbName, _mainUsername, _mainPassword);
                 SqlConnection mainConnection = new SqlConnection(_mainConnectionString);
                 try
                 {
@@ -169,7 +169,7 @@ namespace CMS2_Client
         private void Extract_Click(object sender, EventArgs e)
         {
 
-            //StartDeprovisionWholeServer();
+            StartDeprovisionWholeServer();
 
             int index = dboBranchCoprOffice.SelectedItem.ToString().IndexOf(" ");
             _filter = dboBranchCoprOffice.SelectedItem.ToString().Substring(0, index);
@@ -417,7 +417,7 @@ namespace CMS2_Client
                 MessageBox.Show("Please fill out all fields.", "Extraction Error", MessageBoxButtons.OK);
                 isValid = false;
             }
-            else if (LocalServer.Text == "localhost")
+            else if (LocalServer.Text != "localhost")
             {
                 MessageBox.Show("Please enter another ip address.", "Data Error", MessageBoxButtons.OK);
                 LocalServer.Focus();
