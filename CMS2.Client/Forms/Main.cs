@@ -2865,7 +2865,7 @@ namespace CMS2.Client
                 }
                 else
                 {
-                    txtShipperCompany.Text = "N/A";
+                    txtShipperCompany.Text = booking.Shipper.CompanyName;
                 }
                 txtShipperAddress1.Text = booking.OriginAddress1;
                 txtShipperAddress2.Text = booking.OriginAddress2;
@@ -2888,7 +2888,7 @@ namespace CMS2.Client
                 }
                 else
                 {
-                    txtConsigneeCompany.Text = "N/A";
+                    txtConsigneeCompany.Text = booking.Consignee.CompanyName;
                 }
                 txtConsigneeAddress1.Text = booking.DestinationAddress1;
                 txtConsigneeAddress2.Text = booking.DestinationAddress2;
@@ -3157,7 +3157,7 @@ namespace CMS2.Client
                 { txtShipperCompany.Text = shipper.Company.CompanyName + " - " + shipper.Company.AccountNo; }
                 else
                 {
-                    txtShipperCompany.Text = "NA";
+                    txtShipperCompany.Text = shipper.CompanyName;
                 }
                 txtShipperAddress1.Text = shipper.Address1;
                 txtShipperAddress2.Text = shipper.Address2;
@@ -3194,7 +3194,7 @@ namespace CMS2.Client
                 if (consignee.CompanyId != null)
                 { txtConsigneeCompany.Text = consignee.Company.CompanyName + " - " + consignee.Company.AccountNo; }
                 else
-                { txtConsigneeCompany.Text = "NA"; }
+                { txtConsigneeCompany.Text = consignee.CompanyName; }
 
                 txtConsigneeAddress1.Text = consignee.Address1;
                 txtConsigneeAddress2.Text = consignee.Address2;
@@ -3447,6 +3447,10 @@ namespace CMS2.Client
                     shipper.Company = company;
                     shipper.CompanyId = company.CompanyId;
                 }
+                else
+                {
+                    shipper.CompanyName = txtShipperCompany.Text.Trim();
+                }
                 shipper.Address1 = txtShipperAddress1.Text.Trim();
                 shipper.Address2 = txtShipperAddress2.Text.Trim();
                 shipper.Street = txtShipperStreet.Text.Trim();
@@ -3478,6 +3482,10 @@ namespace CMS2.Client
                 {
                     consignee.Company = consigneeCompany;
                     consignee.CompanyId = consigneeCompany.CompanyId;
+                }
+                else
+                {
+                    consignee.CompanyName = txtConsigneeCompany.Text.Trim();
                 }
                 consignee.Address1 = txtConsigneeAddress1.Text.Trim();
                 consignee.Address2 = txtConsigneeAddress2.Text.Trim();
@@ -3535,7 +3543,8 @@ namespace CMS2.Client
                 ProgressIndicator saving = new ProgressIndicator("Booking", "Saving ...", Saving);
                 saving.ShowDialog();
 
-                if (booking.AssignedToAreaId == null || booking.AssignedToAreaId == Guid.Empty)
+                //if (booking.AssignedToAreaId == null || booking.AssignedToAreaId == Guid.Empty)
+                if (booking.AssignedToArea.RevenueUnitName.Contains("Walk"))
                 {
                     BookingSelected(booking.BookingId);
                     NewShipment();
@@ -4037,7 +4046,7 @@ namespace CMS2.Client
                     }
                     else
                     {
-                        AcceptancetxtShipperCompany.Text = "N/A";
+                        AcceptancetxtShipperCompany.Text = shipment.Shipper.CompanyName;
                     }
                     AcceptancetxtShipperAddress.Text = shipment.Shipper.Address1 + ", " + shipment.Shipper.Address2;
                     AcceptancetxtShipperBarangay.Text = shipment.Shipper.Barangay;
@@ -4057,7 +4066,7 @@ namespace CMS2.Client
                     }
                     else
                     {
-                        AcceptancetxtConsigneeCompany.Text = "N/A";
+                        AcceptancetxtConsigneeCompany.Text = shipment.Consignee.CompanyName;
                     }
                     AcceptancetxtConsigneeAddress.Text = shipment.Consignee.Address1 + ", " + shipment.Consignee.Address2;
                     AcceptancetxtConsigneeBarangay.Text = shipment.Consignee.Barangay;
