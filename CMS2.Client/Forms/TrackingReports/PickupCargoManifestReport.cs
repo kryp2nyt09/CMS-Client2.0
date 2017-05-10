@@ -114,6 +114,7 @@ namespace CMS2.Client.Forms.TrackingReports
                         model.Driver = (branch.Driver != null || branch.Driver != "") ? branch.Driver : "N/A";
                         model.Checker = (branch.Checker != null || branch.Checker != "") ? branch.Checker : "N/A";                                           
                     }
+                   
                 }
                 PickupCargoManifestViewModel isExist = _results.Find(x => x.AirwayBillNo == shipment.AirwayBillNo);
 
@@ -135,8 +136,14 @@ namespace CMS2.Client.Forms.TrackingReports
                     model.ServiceMode = shipment.ServiceMode.ServiceModeName;
                     model.PaymentMode = shipment.PaymentMode.PaymentModeName;
                     model.Amount = shipment.TotalAmount.ToString();
-                    model.Area = shipment.Booking.AssignedToArea.City.CityName;
-
+                    try
+                    {
+                        model.Area = (shipment.Booking.AssignedToArea != null) ? shipment.Booking.AssignedToArea.City.CityName : "N/A";
+                    }
+                    catch (Exception)
+                    {
+                        model.Area = "N/A";
+                    }
                     _results.Add(model);
                 }
             }

@@ -1450,7 +1450,7 @@
             this.dateDateBooked.Size = new System.Drawing.Size(145, 20);
             this.dateDateBooked.TabIndex = 30;
             this.dateDateBooked.TabStop = false;
-            this.dateDateBooked.Text = "Friday, 2 December 2016";
+            this.dateDateBooked.Text = "Friday, December 2, 2016";
             this.dateDateBooked.ThemeName = "Office2010Black";
             this.dateDateBooked.Value = new System.DateTime(2016, 12, 2, 15, 47, 16, 261);
             // 
@@ -2473,10 +2473,10 @@
             this.txtSumTotal.Size = new System.Drawing.Size(173, 20);
             this.txtSumTotal.TabIndex = 70;
             this.txtSumTotal.TabStop = false;
-            this.txtSumTotal.Text = "₱0.00";
+            this.txtSumTotal.Text = "$0.00";
             this.txtSumTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtSumTotal.ThemeName = "VisualStudio2012Dark";
-            ((Telerik.WinControls.UI.RadMaskedEditBoxElement)(this.txtSumTotal.GetChildAt(0))).Text = "₱0.00";
+            ((Telerik.WinControls.UI.RadMaskedEditBoxElement)(this.txtSumTotal.GetChildAt(0))).Text = "$0.00";
             ((Telerik.WinControls.UI.RadTextBoxItem)(this.txtSumTotal.GetChildAt(0).GetChildAt(0))).ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             // 
             // txtSumDiscount
@@ -2490,10 +2490,10 @@
             this.txtSumDiscount.Size = new System.Drawing.Size(173, 20);
             this.txtSumDiscount.TabIndex = 67;
             this.txtSumDiscount.TabStop = false;
-            this.txtSumDiscount.Text = "₱0.00";
+            this.txtSumDiscount.Text = "$0.00";
             this.txtSumDiscount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtSumDiscount.ThemeName = "Office2010Black";
-            ((Telerik.WinControls.UI.RadMaskedEditBoxElement)(this.txtSumDiscount.GetChildAt(0))).Text = "₱0.00";
+            ((Telerik.WinControls.UI.RadMaskedEditBoxElement)(this.txtSumDiscount.GetChildAt(0))).Text = "$0.00";
             ((Telerik.WinControls.UI.RadTextBoxItem)(this.txtSumDiscount.GetChildAt(0).GetChildAt(0))).ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(8)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             // 
             // txtSumVatAmount
@@ -2507,10 +2507,10 @@
             this.txtSumVatAmount.Size = new System.Drawing.Size(173, 20);
             this.txtSumVatAmount.TabIndex = 69;
             this.txtSumVatAmount.TabStop = false;
-            this.txtSumVatAmount.Text = "₱0.00";
+            this.txtSumVatAmount.Text = "$0.00";
             this.txtSumVatAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtSumVatAmount.ThemeName = "VisualStudio2012Dark";
-            ((Telerik.WinControls.UI.RadMaskedEditBoxElement)(this.txtSumVatAmount.GetChildAt(0))).Text = "₱0.00";
+            ((Telerik.WinControls.UI.RadMaskedEditBoxElement)(this.txtSumVatAmount.GetChildAt(0))).Text = "$0.00";
             ((Telerik.WinControls.UI.RadTextBoxItem)(this.txtSumVatAmount.GetChildAt(0).GetChildAt(0))).ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             // 
             // txtSumInsurance
@@ -2524,10 +2524,10 @@
             this.txtSumInsurance.Size = new System.Drawing.Size(173, 20);
             this.txtSumInsurance.TabIndex = 66;
             this.txtSumInsurance.TabStop = false;
-            this.txtSumInsurance.Text = "₱0.00";
+            this.txtSumInsurance.Text = "$0.00";
             this.txtSumInsurance.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtSumInsurance.ThemeName = "Office2010Black";
-            ((Telerik.WinControls.UI.RadMaskedEditBoxElement)(this.txtSumInsurance.GetChildAt(0))).Text = "₱0.00";
+            ((Telerik.WinControls.UI.RadMaskedEditBoxElement)(this.txtSumInsurance.GetChildAt(0))).Text = "$0.00";
             ((Telerik.WinControls.UI.RadTextBoxItem)(this.txtSumInsurance.GetChildAt(0).GetChildAt(0))).ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             // 
             // txtSumQuarantineFee
@@ -2541,10 +2541,10 @@
             this.txtSumQuarantineFee.Size = new System.Drawing.Size(173, 20);
             this.txtSumQuarantineFee.TabIndex = 65;
             this.txtSumQuarantineFee.TabStop = false;
-            this.txtSumQuarantineFee.Text = "₱0.00";
+            this.txtSumQuarantineFee.Text = "$0.00";
             this.txtSumQuarantineFee.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtSumQuarantineFee.ThemeName = "Office2010Black";
-            ((Telerik.WinControls.UI.RadMaskedEditBoxElement)(this.txtSumQuarantineFee.GetChildAt(0))).Text = "₱0.00";
+            ((Telerik.WinControls.UI.RadMaskedEditBoxElement)(this.txtSumQuarantineFee.GetChildAt(0))).Text = "$0.00";
             ((Telerik.WinControls.UI.RadTextBoxItem)(this.txtSumQuarantineFee.GetChildAt(0).GetChildAt(0))).ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             // 
             // txtSumHandlingFee
@@ -2558,10 +2558,10 @@
             this.txtSumHandlingFee.Size = new System.Drawing.Size(173, 20);
             this.txtSumHandlingFee.TabIndex = 64;
             this.txtSumHandlingFee.TabStop = false;
-            this.txtSumHandlingFee.Text = "₱0.00";
+            this.txtSumHandlingFee.Text = "$0.00";
             this.txtSumHandlingFee.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtSumHandlingFee.ThemeName = "Office2010Black";
-            ((Telerik.WinControls.UI.RadMaskedEditBoxElement)(this.txtSumHandlingFee.GetChildAt(0))).Text = "₱0.00";
+            ((Telerik.WinControls.UI.RadMaskedEditBoxElement)(this.txtSumHandlingFee.GetChildAt(0))).Text = "$0.00";
             ((Telerik.WinControls.UI.RadTextBoxItem)(this.txtSumHandlingFee.GetChildAt(0).GetChildAt(0))).ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(6)))), ((int)(((byte)(6)))));
             // 
             // txtSumPackagingFee
@@ -2575,10 +2575,10 @@
             this.txtSumPackagingFee.Size = new System.Drawing.Size(173, 20);
             this.txtSumPackagingFee.TabIndex = 63;
             this.txtSumPackagingFee.TabStop = false;
-            this.txtSumPackagingFee.Text = "₱0.00";
+            this.txtSumPackagingFee.Text = "$0.00";
             this.txtSumPackagingFee.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtSumPackagingFee.ThemeName = "Office2010Black";
-            ((Telerik.WinControls.UI.RadMaskedEditBoxElement)(this.txtSumPackagingFee.GetChildAt(0))).Text = "₱0.00";
+            ((Telerik.WinControls.UI.RadMaskedEditBoxElement)(this.txtSumPackagingFee.GetChildAt(0))).Text = "$0.00";
             ((Telerik.WinControls.UI.RadTextBoxItem)(this.txtSumPackagingFee.GetChildAt(0).GetChildAt(0))).ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             // 
             // txtSumDrainingFee
@@ -2592,10 +2592,10 @@
             this.txtSumDrainingFee.Size = new System.Drawing.Size(173, 20);
             this.txtSumDrainingFee.TabIndex = 62;
             this.txtSumDrainingFee.TabStop = false;
-            this.txtSumDrainingFee.Text = "₱0.00";
+            this.txtSumDrainingFee.Text = "$0.00";
             this.txtSumDrainingFee.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtSumDrainingFee.ThemeName = "Office2010Black";
-            ((Telerik.WinControls.UI.RadMaskedEditBoxElement)(this.txtSumDrainingFee.GetChildAt(0))).Text = "₱0.00";
+            ((Telerik.WinControls.UI.RadMaskedEditBoxElement)(this.txtSumDrainingFee.GetChildAt(0))).Text = "$0.00";
             ((Telerik.WinControls.UI.RadTextBoxItem)(this.txtSumDrainingFee.GetChildAt(0).GetChildAt(0))).ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             // 
             // txtSumCratingFee
@@ -2609,10 +2609,10 @@
             this.txtSumCratingFee.Size = new System.Drawing.Size(173, 20);
             this.txtSumCratingFee.TabIndex = 61;
             this.txtSumCratingFee.TabStop = false;
-            this.txtSumCratingFee.Text = "₱0.00";
+            this.txtSumCratingFee.Text = "$0.00";
             this.txtSumCratingFee.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtSumCratingFee.ThemeName = "Office2010Black";
-            ((Telerik.WinControls.UI.RadMaskedEditBoxElement)(this.txtSumCratingFee.GetChildAt(0))).Text = "₱0.00";
+            ((Telerik.WinControls.UI.RadMaskedEditBoxElement)(this.txtSumCratingFee.GetChildAt(0))).Text = "$0.00";
             ((Telerik.WinControls.UI.RadTextBoxItem)(this.txtSumCratingFee.GetChildAt(0).GetChildAt(0))).ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             // 
             // txtSumDangerousFee
@@ -2626,10 +2626,10 @@
             this.txtSumDangerousFee.Size = new System.Drawing.Size(173, 20);
             this.txtSumDangerousFee.TabIndex = 60;
             this.txtSumDangerousFee.TabStop = false;
-            this.txtSumDangerousFee.Text = "₱0.00";
+            this.txtSumDangerousFee.Text = "$0.00";
             this.txtSumDangerousFee.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtSumDangerousFee.ThemeName = "Office2010Black";
-            ((Telerik.WinControls.UI.RadMaskedEditBoxElement)(this.txtSumDangerousFee.GetChildAt(0))).Text = "₱0.00";
+            ((Telerik.WinControls.UI.RadMaskedEditBoxElement)(this.txtSumDangerousFee.GetChildAt(0))).Text = "$0.00";
             ((Telerik.WinControls.UI.RadTextBoxItem)(this.txtSumDangerousFee.GetChildAt(0).GetChildAt(0))).ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             // 
             // txtSumFuelSurcharge
@@ -2643,10 +2643,10 @@
             this.txtSumFuelSurcharge.Size = new System.Drawing.Size(173, 20);
             this.txtSumFuelSurcharge.TabIndex = 59;
             this.txtSumFuelSurcharge.TabStop = false;
-            this.txtSumFuelSurcharge.Text = "₱0.00";
+            this.txtSumFuelSurcharge.Text = "$0.00";
             this.txtSumFuelSurcharge.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtSumFuelSurcharge.ThemeName = "Office2010Black";
-            ((Telerik.WinControls.UI.RadMaskedEditBoxElement)(this.txtSumFuelSurcharge.GetChildAt(0))).Text = "₱0.00";
+            ((Telerik.WinControls.UI.RadMaskedEditBoxElement)(this.txtSumFuelSurcharge.GetChildAt(0))).Text = "$0.00";
             ((Telerik.WinControls.UI.RadTextBoxItem)(this.txtSumFuelSurcharge.GetChildAt(0).GetChildAt(0))).ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             // 
             // txtSumPeracFee
@@ -2660,10 +2660,10 @@
             this.txtSumPeracFee.Size = new System.Drawing.Size(173, 20);
             this.txtSumPeracFee.TabIndex = 58;
             this.txtSumPeracFee.TabStop = false;
-            this.txtSumPeracFee.Text = "₱0.00";
+            this.txtSumPeracFee.Text = "$0.00";
             this.txtSumPeracFee.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtSumPeracFee.ThemeName = "Office2010Black";
-            ((Telerik.WinControls.UI.RadMaskedEditBoxElement)(this.txtSumPeracFee.GetChildAt(0))).Text = "₱0.00";
+            ((Telerik.WinControls.UI.RadMaskedEditBoxElement)(this.txtSumPeracFee.GetChildAt(0))).Text = "$0.00";
             ((Telerik.WinControls.UI.RadTextBoxItem)(this.txtSumPeracFee.GetChildAt(0).GetChildAt(0))).ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             // 
             // txtSumFreightCollect
@@ -2677,10 +2677,10 @@
             this.txtSumFreightCollect.Size = new System.Drawing.Size(173, 20);
             this.txtSumFreightCollect.TabIndex = 57;
             this.txtSumFreightCollect.TabStop = false;
-            this.txtSumFreightCollect.Text = "₱0.00";
+            this.txtSumFreightCollect.Text = "$0.00";
             this.txtSumFreightCollect.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtSumFreightCollect.ThemeName = "Office2010Black";
-            ((Telerik.WinControls.UI.RadMaskedEditBoxElement)(this.txtSumFreightCollect.GetChildAt(0))).Text = "₱0.00";
+            ((Telerik.WinControls.UI.RadMaskedEditBoxElement)(this.txtSumFreightCollect.GetChildAt(0))).Text = "$0.00";
             ((Telerik.WinControls.UI.RadTextBoxItem)(this.txtSumFreightCollect.GetChildAt(0).GetChildAt(0))).ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             // 
             // txtSumDeliveryFee
@@ -2694,10 +2694,10 @@
             this.txtSumDeliveryFee.Size = new System.Drawing.Size(173, 20);
             this.txtSumDeliveryFee.TabIndex = 56;
             this.txtSumDeliveryFee.TabStop = false;
-            this.txtSumDeliveryFee.Text = "₱0.00";
+            this.txtSumDeliveryFee.Text = "$0.00";
             this.txtSumDeliveryFee.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtSumDeliveryFee.ThemeName = "Office2010Black";
-            ((Telerik.WinControls.UI.RadMaskedEditBoxElement)(this.txtSumDeliveryFee.GetChildAt(0))).Text = "₱0.00";
+            ((Telerik.WinControls.UI.RadMaskedEditBoxElement)(this.txtSumDeliveryFee.GetChildAt(0))).Text = "$0.00";
             ((Telerik.WinControls.UI.RadTextBoxItem)(this.txtSumDeliveryFee.GetChildAt(0).GetChildAt(0))).ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(3)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             // 
             // txtSumValuation
@@ -2711,10 +2711,10 @@
             this.txtSumValuation.Size = new System.Drawing.Size(173, 20);
             this.txtSumValuation.TabIndex = 55;
             this.txtSumValuation.TabStop = false;
-            this.txtSumValuation.Text = "₱0.00";
+            this.txtSumValuation.Text = "$0.00";
             this.txtSumValuation.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtSumValuation.ThemeName = "Office2010Black";
-            ((Telerik.WinControls.UI.RadMaskedEditBoxElement)(this.txtSumValuation.GetChildAt(0))).Text = "₱0.00";
+            ((Telerik.WinControls.UI.RadMaskedEditBoxElement)(this.txtSumValuation.GetChildAt(0))).Text = "$0.00";
             ((Telerik.WinControls.UI.RadTextBoxItem)(this.txtSumValuation.GetChildAt(0).GetChildAt(0))).ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             // 
             // txtSumAwbFee
@@ -2728,10 +2728,10 @@
             this.txtSumAwbFee.Size = new System.Drawing.Size(173, 20);
             this.txtSumAwbFee.TabIndex = 54;
             this.txtSumAwbFee.TabStop = false;
-            this.txtSumAwbFee.Text = "₱0.00";
+            this.txtSumAwbFee.Text = "$0.00";
             this.txtSumAwbFee.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtSumAwbFee.ThemeName = "Office2010Black";
-            ((Telerik.WinControls.UI.RadMaskedEditBoxElement)(this.txtSumAwbFee.GetChildAt(0))).Text = "₱0.00";
+            ((Telerik.WinControls.UI.RadMaskedEditBoxElement)(this.txtSumAwbFee.GetChildAt(0))).Text = "$0.00";
             ((Telerik.WinControls.UI.RadTextBoxItem)(this.txtSumAwbFee.GetChildAt(0).GetChildAt(0))).ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             // 
             // txtSumWeightCharge
@@ -2745,10 +2745,10 @@
             this.txtSumWeightCharge.Size = new System.Drawing.Size(173, 20);
             this.txtSumWeightCharge.TabIndex = 53;
             this.txtSumWeightCharge.TabStop = false;
-            this.txtSumWeightCharge.Text = "₱0.00";
+            this.txtSumWeightCharge.Text = "$0.00";
             this.txtSumWeightCharge.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtSumWeightCharge.ThemeName = "Office2010Black";
-            ((Telerik.WinControls.UI.RadMaskedEditBoxElement)(this.txtSumWeightCharge.GetChildAt(0))).Text = "₱0.00";
+            ((Telerik.WinControls.UI.RadMaskedEditBoxElement)(this.txtSumWeightCharge.GetChildAt(0))).Text = "$0.00";
             ((Telerik.WinControls.UI.RadTextBoxItem)(this.txtSumWeightCharge.GetChildAt(0).GetChildAt(0))).ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             // 
             // radLabel16
@@ -2950,10 +2950,10 @@
             this.txtSumSubTotal.Size = new System.Drawing.Size(173, 20);
             this.txtSumSubTotal.TabIndex = 68;
             this.txtSumSubTotal.TabStop = false;
-            this.txtSumSubTotal.Text = "₱0.00";
+            this.txtSumSubTotal.Text = "$0.00";
             this.txtSumSubTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtSumSubTotal.ThemeName = "Office2010Black";
-            ((Telerik.WinControls.UI.RadMaskedEditBoxElement)(this.txtSumSubTotal.GetChildAt(0))).Text = "₱0.00";
+            ((Telerik.WinControls.UI.RadMaskedEditBoxElement)(this.txtSumSubTotal.GetChildAt(0))).Text = "$0.00";
             ((Telerik.WinControls.UI.RadTextBoxItem)(this.txtSumSubTotal.GetChildAt(0).GetChildAt(0))).ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             // 
             // radLabel100
@@ -3084,7 +3084,7 @@
             this.txtRfa.Size = new System.Drawing.Size(94, 20);
             this.txtRfa.TabIndex = 49;
             this.txtRfa.TabStop = false;
-            this.txtRfa.Text = "0.00%";
+            this.txtRfa.Text = "0.00 %";
             this.txtRfa.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtRfa.ThemeName = "Office2010Black";
             // 
@@ -3098,7 +3098,7 @@
             this.txtQuarantineFee.Size = new System.Drawing.Size(94, 20);
             this.txtQuarantineFee.TabIndex = 47;
             this.txtQuarantineFee.TabStop = false;
-            this.txtQuarantineFee.Text = "₱0.00";
+            this.txtQuarantineFee.Text = "$0.00";
             this.txtQuarantineFee.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtQuarantineFee.ThemeName = "Office2010Black";
             // 
@@ -3112,7 +3112,7 @@
             this.txtHandlingFee.Size = new System.Drawing.Size(94, 20);
             this.txtHandlingFee.TabIndex = 45;
             this.txtHandlingFee.TabStop = false;
-            this.txtHandlingFee.Text = "₱0.00";
+            this.txtHandlingFee.Text = "$0.00";
             this.txtHandlingFee.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtHandlingFee.ThemeName = "Office2010Black";
             // 
@@ -3127,7 +3127,7 @@
             this.txtDeclaredValue.Size = new System.Drawing.Size(107, 20);
             this.txtDeclaredValue.TabIndex = 48;
             this.txtDeclaredValue.TabStop = false;
-            this.txtDeclaredValue.Text = "₱0.00";
+            this.txtDeclaredValue.Text = "$0.00";
             this.txtDeclaredValue.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtDeclaredValue.ThemeName = "Office2010Black";
             this.txtDeclaredValue.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtDeclaredValue_KeyUp);
@@ -3628,7 +3628,7 @@
             this.txtTotalEvm.Size = new System.Drawing.Size(107, 20);
             this.txtTotalEvm.TabIndex = 44;
             this.txtTotalEvm.TabStop = false;
-            this.txtTotalEvm.Text = "₱0.00";
+            this.txtTotalEvm.Text = "$0.00";
             this.txtTotalEvm.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtTotalEvm.ThemeName = "Office2010Black";
             // 
@@ -3644,7 +3644,7 @@
             this.txtTotalWeightCharge.Size = new System.Drawing.Size(107, 20);
             this.txtTotalWeightCharge.TabIndex = 46;
             this.txtTotalWeightCharge.TabStop = false;
-            this.txtTotalWeightCharge.Text = "₱0.00";
+            this.txtTotalWeightCharge.Text = "$0.00";
             this.txtTotalWeightCharge.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtTotalWeightCharge.ThemeName = "Office2010Black";
             // 
@@ -4256,7 +4256,7 @@
             this.dateAcceptedDate.Size = new System.Drawing.Size(202, 20);
             this.dateAcceptedDate.TabIndex = 4;
             this.dateAcceptedDate.TabStop = false;
-            this.dateAcceptedDate.Text = "26/11/2015";
+            this.dateAcceptedDate.Text = "11/26/2015";
             this.dateAcceptedDate.ThemeName = "Office2010Black";
             this.dateAcceptedDate.Value = new System.DateTime(2015, 11, 26, 0, 0, 0, 0);
             this.dateAcceptedDate.KeyUp += new System.Windows.Forms.KeyEventHandler(this.dateAcceptedDate_KeyUp);
@@ -4479,7 +4479,7 @@
             this.datePaymentDate.Size = new System.Drawing.Size(161, 20);
             this.datePaymentDate.TabIndex = 4;
             this.datePaymentDate.TabStop = false;
-            this.datePaymentDate.Text = "10/12/2016";
+            this.datePaymentDate.Text = "12/10/2016";
             this.datePaymentDate.ThemeName = "Office2010Black";
             this.datePaymentDate.Value = new System.DateTime(2016, 12, 10, 10, 55, 47, 86);
             // 
@@ -4573,7 +4573,7 @@
             this.dateCheckDate.Size = new System.Drawing.Size(161, 20);
             this.dateCheckDate.TabIndex = 12;
             this.dateCheckDate.TabStop = false;
-            this.dateCheckDate.Text = "10/12/2016";
+            this.dateCheckDate.Text = "12/10/2016";
             this.dateCheckDate.ThemeName = "Office2010Black";
             this.dateCheckDate.Value = new System.DateTime(2016, 12, 10, 10, 55, 47, 14);
             // 
@@ -4617,7 +4617,7 @@
             this.txtNetCollection.Size = new System.Drawing.Size(161, 20);
             this.txtNetCollection.TabIndex = 8;
             this.txtNetCollection.TabStop = false;
-            this.txtNetCollection.Text = "₱0.00";
+            this.txtNetCollection.Text = "$0.00";
             this.txtNetCollection.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtNetCollection.ThemeName = "Office2010Black";
             // 
@@ -4630,7 +4630,7 @@
             this.txtTaxWithheld.Size = new System.Drawing.Size(161, 20);
             this.txtTaxWithheld.TabIndex = 7;
             this.txtTaxWithheld.TabStop = false;
-            this.txtTaxWithheld.Text = "₱0.00";
+            this.txtTaxWithheld.Text = "$0.00";
             this.txtTaxWithheld.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtTaxWithheld.ThemeName = "Office2010Black";
             this.txtTaxWithheld.Leave += new System.EventHandler(this.txtTaxWithheld_Leave);
@@ -4644,7 +4644,7 @@
             this.txtAmountPaid.Size = new System.Drawing.Size(161, 20);
             this.txtAmountPaid.TabIndex = 6;
             this.txtAmountPaid.TabStop = false;
-            this.txtAmountPaid.Text = "₱0.00";
+            this.txtAmountPaid.Text = "$0.00";
             this.txtAmountPaid.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtAmountPaid.ThemeName = "Office2010Black";
             this.txtAmountPaid.TextChanged += new System.EventHandler(this.txtAmountPaid_Leave);
@@ -4659,7 +4659,7 @@
             this.txtAmountDue.Size = new System.Drawing.Size(161, 20);
             this.txtAmountDue.TabIndex = 5;
             this.txtAmountDue.TabStop = false;
-            this.txtAmountDue.Text = "₱0.00";
+            this.txtAmountDue.Text = "$0.00";
             this.txtAmountDue.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtAmountDue.ThemeName = "Office2010Black";
             // 
@@ -5250,7 +5250,7 @@
             this.dateCollectionDate.Size = new System.Drawing.Size(87, 20);
             this.dateCollectionDate.TabIndex = 3;
             this.dateCollectionDate.TabStop = false;
-            this.dateCollectionDate.Text = "29/12/2016";
+            this.dateCollectionDate.Text = "12/29/2016";
             this.dateCollectionDate.ThemeName = "Office2010Black";
             this.dateCollectionDate.Value = new System.DateTime(2016, 12, 29, 13, 24, 31, 594);
             // 
@@ -5471,7 +5471,7 @@
             this.pageViewTracking.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pageViewTracking.Location = new System.Drawing.Point(0, 0);
             this.pageViewTracking.Name = "pageViewTracking";
-            this.pageViewTracking.SelectedPage = this.radPageViewPage9;
+            this.pageViewTracking.SelectedPage = this.radPageViewPage8;
             this.pageViewTracking.Size = new System.Drawing.Size(1231, 571);
             this.pageViewTracking.TabIndex = 0;
             this.pageViewTracking.Text = " ";
@@ -5659,7 +5659,7 @@
             this.dateTimePicker_PickupCargo.Size = new System.Drawing.Size(171, 20);
             this.dateTimePicker_PickupCargo.TabIndex = 70;
             this.dateTimePicker_PickupCargo.TabStop = false;
-            this.dateTimePicker_PickupCargo.Text = "Thursday, 29 December 2016";
+            this.dateTimePicker_PickupCargo.Text = "Thursday, December 29, 2016";
             this.dateTimePicker_PickupCargo.ThemeName = "Office2010Black";
             this.dateTimePicker_PickupCargo.Value = new System.DateTime(2016, 12, 29, 16, 31, 36, 782);
             this.dateTimePicker_PickupCargo.ValueChanged += new System.EventHandler(this.dateTimePicker_PickupCargo_ValueChanged);
@@ -5830,7 +5830,7 @@
             this.dateTimePickerBranchAcceptance_Date.Size = new System.Drawing.Size(168, 20);
             this.dateTimePickerBranchAcceptance_Date.TabIndex = 75;
             this.dateTimePickerBranchAcceptance_Date.TabStop = false;
-            this.dateTimePickerBranchAcceptance_Date.Text = "Thursday, 29 December 2016";
+            this.dateTimePickerBranchAcceptance_Date.Text = "Thursday, December 29, 2016";
             this.dateTimePickerBranchAcceptance_Date.ThemeName = "Office2010Black";
             this.dateTimePickerBranchAcceptance_Date.Value = new System.DateTime(2016, 12, 29, 16, 31, 36, 782);
             this.dateTimePickerBranchAcceptance_Date.ValueChanged += new System.EventHandler(this.dateTimePickerBranchAcceptance_Date_ValueChanged);
@@ -6073,7 +6073,7 @@
             this.dateTimeBundle_Date.Size = new System.Drawing.Size(168, 20);
             this.dateTimeBundle_Date.TabIndex = 83;
             this.dateTimeBundle_Date.TabStop = false;
-            this.dateTimeBundle_Date.Text = "Thursday, 29 December 2016";
+            this.dateTimeBundle_Date.Text = "Thursday, December 29, 2016";
             this.dateTimeBundle_Date.ThemeName = "Office2010Black";
             this.dateTimeBundle_Date.Value = new System.DateTime(2016, 12, 29, 16, 31, 36, 782);
             this.dateTimeBundle_Date.ValueChanged += new System.EventHandler(this.dateTimeBundle_Date_ValueChanged);
@@ -6235,7 +6235,7 @@
             this.dateTimeUnbunde_Date.Size = new System.Drawing.Size(171, 20);
             this.dateTimeUnbunde_Date.TabIndex = 83;
             this.dateTimeUnbunde_Date.TabStop = false;
-            this.dateTimeUnbunde_Date.Text = "Thursday, 29 December 2016";
+            this.dateTimeUnbunde_Date.Text = "Thursday, December 29, 2016";
             this.dateTimeUnbunde_Date.ThemeName = "Office2010Black";
             this.dateTimeUnbunde_Date.Value = new System.DateTime(2016, 12, 29, 16, 31, 36, 782);
             this.dateTimeUnbunde_Date.ValueChanged += new System.EventHandler(this.dateTimeUnbunde_Date_ValueChanged);
@@ -6431,7 +6431,7 @@
             this.dateTimeGatewayTransmital_Date.Size = new System.Drawing.Size(171, 20);
             this.dateTimeGatewayTransmital_Date.TabIndex = 78;
             this.dateTimeGatewayTransmital_Date.TabStop = false;
-            this.dateTimeGatewayTransmital_Date.Text = "Thursday, 29 December 2016";
+            this.dateTimeGatewayTransmital_Date.Text = "Thursday, December 29, 2016";
             this.dateTimeGatewayTransmital_Date.ThemeName = "Office2010Black";
             this.dateTimeGatewayTransmital_Date.Value = new System.DateTime(2016, 12, 29, 16, 31, 36, 782);
             this.dateTimeGatewayTransmital_Date.ValueChanged += new System.EventHandler(this.dateTimeGatewayTransmital_Date_ValueChanged);
@@ -6608,7 +6608,7 @@
             this.dateTimeGatewayOutbound_Date.Size = new System.Drawing.Size(171, 20);
             this.dateTimeGatewayOutbound_Date.TabIndex = 82;
             this.dateTimeGatewayOutbound_Date.TabStop = false;
-            this.dateTimeGatewayOutbound_Date.Text = "Thursday, 29 December 2016";
+            this.dateTimeGatewayOutbound_Date.Text = "Thursday, December 29, 2016";
             this.dateTimeGatewayOutbound_Date.ThemeName = "Office2010Black";
             this.dateTimeGatewayOutbound_Date.Value = new System.DateTime(2016, 12, 29, 16, 31, 36, 782);
             this.dateTimeGatewayOutbound_Date.ValueChanged += new System.EventHandler(this.dateTimeGatewayOutbound_Date_ValueChanged);
@@ -6804,7 +6804,7 @@
             this.dateTimePickerGatewayInbound_Date.Size = new System.Drawing.Size(171, 20);
             this.dateTimePickerGatewayInbound_Date.TabIndex = 94;
             this.dateTimePickerGatewayInbound_Date.TabStop = false;
-            this.dateTimePickerGatewayInbound_Date.Text = "Thursday, 29 December 2016";
+            this.dateTimePickerGatewayInbound_Date.Text = "Thursday, December 29, 2016";
             this.dateTimePickerGatewayInbound_Date.ThemeName = "Office2010Black";
             this.dateTimePickerGatewayInbound_Date.Value = new System.DateTime(2016, 12, 29, 16, 31, 36, 782);
             this.dateTimePickerGatewayInbound_Date.ValueChanged += new System.EventHandler(this.dateTimePickerGatewayInbound_Date_ValueChanged);
@@ -6970,7 +6970,7 @@
             this.dateTimeCargoTransfer_Date.Size = new System.Drawing.Size(168, 20);
             this.dateTimeCargoTransfer_Date.TabIndex = 83;
             this.dateTimeCargoTransfer_Date.TabStop = false;
-            this.dateTimeCargoTransfer_Date.Text = "Thursday, 29 December 2016";
+            this.dateTimeCargoTransfer_Date.Text = "Thursday, December 29, 2016";
             this.dateTimeCargoTransfer_Date.ThemeName = "Office2010Black";
             this.dateTimeCargoTransfer_Date.Value = new System.DateTime(2016, 12, 29, 16, 31, 36, 782);
             this.dateTimeCargoTransfer_Date.ValueChanged += new System.EventHandler(this.dateTimeCargoTransfer_Date_ValueChanged);
@@ -7179,7 +7179,7 @@
             this.dateTimeSegregation_Date.Size = new System.Drawing.Size(171, 20);
             this.dateTimeSegregation_Date.TabIndex = 101;
             this.dateTimeSegregation_Date.TabStop = false;
-            this.dateTimeSegregation_Date.Text = "Thursday, 29 December 2016";
+            this.dateTimeSegregation_Date.Text = "Thursday, December 29, 2016";
             this.dateTimeSegregation_Date.ThemeName = "Office2010Black";
             this.dateTimeSegregation_Date.Value = new System.DateTime(2016, 12, 29, 16, 31, 36, 782);
             this.dateTimeSegregation_Date.ValueChanged += new System.EventHandler(this.dateTimeSegregation_Date_ValueChanged);
@@ -7337,7 +7337,7 @@
             this.dateTimeDailyTrip_Date.Size = new System.Drawing.Size(171, 20);
             this.dateTimeDailyTrip_Date.TabIndex = 89;
             this.dateTimeDailyTrip_Date.TabStop = false;
-            this.dateTimeDailyTrip_Date.Text = "Thursday, 29 December 2016";
+            this.dateTimeDailyTrip_Date.Text = "Thursday, December 29, 2016";
             this.dateTimeDailyTrip_Date.ThemeName = "Office2010Black";
             this.dateTimeDailyTrip_Date.Value = new System.DateTime(2016, 12, 29, 16, 31, 36, 782);
             this.dateTimeDailyTrip_Date.ValueChanged += new System.EventHandler(this.dateTimeDailyTrip_Date_ValueChanged);
@@ -7505,7 +7505,7 @@
             this.dateTimeHoldCargo_ToDate.Size = new System.Drawing.Size(169, 20);
             this.dateTimeHoldCargo_ToDate.TabIndex = 84;
             this.dateTimeHoldCargo_ToDate.TabStop = false;
-            this.dateTimeHoldCargo_ToDate.Text = "Thursday, 29 December 2016";
+            this.dateTimeHoldCargo_ToDate.Text = "Thursday, December 29, 2016";
             this.dateTimeHoldCargo_ToDate.ThemeName = "Office2010Black";
             this.dateTimeHoldCargo_ToDate.Value = new System.DateTime(2016, 12, 29, 16, 31, 36, 782);
             this.dateTimeHoldCargo_ToDate.ValueChanged += new System.EventHandler(this.dateTimeHoldCargo_ToDate_ValueChanged);
@@ -7552,7 +7552,7 @@
             this.dateTimeHoldCargo_FromDate.Size = new System.Drawing.Size(169, 20);
             this.dateTimeHoldCargo_FromDate.TabIndex = 83;
             this.dateTimeHoldCargo_FromDate.TabStop = false;
-            this.dateTimeHoldCargo_FromDate.Text = "Thursday, 29 December 2016";
+            this.dateTimeHoldCargo_FromDate.Text = "Thursday, December 29, 2016";
             this.dateTimeHoldCargo_FromDate.ThemeName = "Office2010Black";
             this.dateTimeHoldCargo_FromDate.Value = new System.DateTime(2016, 12, 29, 16, 31, 36, 782);
             this.dateTimeHoldCargo_FromDate.ValueChanged += new System.EventHandler(this.dateTimeHoldCargo_FromDate_ValueChanged);
@@ -7739,7 +7739,7 @@
             this.dateTimeDeliveryStatus_Date.Size = new System.Drawing.Size(171, 20);
             this.dateTimeDeliveryStatus_Date.TabIndex = 80;
             this.dateTimeDeliveryStatus_Date.TabStop = false;
-            this.dateTimeDeliveryStatus_Date.Text = "Thursday, 29 December 2016";
+            this.dateTimeDeliveryStatus_Date.Text = "Thursday, December 29, 2016";
             this.dateTimeDeliveryStatus_Date.ThemeName = "Office2010Black";
             this.dateTimeDeliveryStatus_Date.Value = new System.DateTime(2016, 12, 29, 16, 31, 36, 782);
             this.dateTimeDeliveryStatus_Date.ValueChanged += new System.EventHandler(this.dateTimeDeliveryStatus_Date_ValueChanged);
