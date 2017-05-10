@@ -216,7 +216,8 @@ namespace CMS2.Client
                 Logs.ErrorLogs("CMS Settings", "CmsDBConShow", ex.Message);
             }
 
-            CheckTableState(worker);
+            //CheckTableState(worker);
+            Worker.RunWorkerAsync();
         }
         private void lstBco_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -425,24 +426,34 @@ namespace CMS2.Client
         }
         private void Renew_Work(object sender, DoWorkEventArgs e)
         {
-            if (isDeprovisionClient)
+            if (radPageView1.SelectedPage ==  radPageViewPage2)
             {
+                if (isDeprovisionClient)
+                {
+                    radProgressBar1.Value1 = 0;
+                    StartDeprovisionLocal();
+                }
+                if (IsDeprovisionServer)
+                {
+                    radProgressBar1.Value1 = 0;
+                    StartDeprovisionServer();
+                }
+                if (isProvision)
+                {
+                    radProgressBar1.Value1 = 0;
+                    StartProvision();
+                }
                 radProgressBar1.Value1 = 0;
-                StartDeprovisionLocal();
+                CheckTableState(Worker);
             }
-            if (IsDeprovisionServer)
+            else
             {
-                radProgressBar1.Value1 = 0;
-                StartDeprovisionServer();
-            }
-            if (isProvision)
-            {
-                radProgressBar1.Value1 = 0;
-                StartProvision();
+                CheckTableState(Worker);
             }
 
-            radProgressBar1.Value1 = 0;
-            CheckTableState(Worker);
+            
+
+           
 
         }
         private void btnCancel_Click(object sender, EventArgs e)
