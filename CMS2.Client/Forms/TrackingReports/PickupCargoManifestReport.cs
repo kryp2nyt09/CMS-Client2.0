@@ -18,7 +18,7 @@ namespace CMS2.Client.Forms.TrackingReports
         {
             //GET LIST 
             ShipmentBL _shipmentService = new ShipmentBL();
-            List<Shipment> _shipments = _shipmentService.GetAll().Where(x => x.Booking.BookingStatus.BookingStatusName == "Picked-up" && x.RecordStatus == 1 && (x.CreatedDate).ToShortDateString() == date.ToShortDateString()).ToList();
+            List<Shipment> _shipments = _shipmentService.GetAll().Where(x => x.Booking.BookingStatus.BookingStatusName == "Picked-up" && x.AcceptedBy.AssignedToArea.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.RecordStatus == 1 && (x.CreatedDate).ToShortDateString() == date.ToShortDateString()).ToList();
 
             List<PickupCargoManifestViewModel> modelList = Match(_shipments);
 
@@ -114,6 +114,7 @@ namespace CMS2.Client.Forms.TrackingReports
                         model.Driver = (branch.Driver != null || branch.Driver != "") ? branch.Driver : "N/A";
                         model.Checker = (branch.Checker != null || branch.Checker != "") ? branch.Checker : "N/A";                                           
                     }
+                   
                 }
                 PickupCargoManifestViewModel isExist = _results.Find(x => x.AirwayBillNo == shipment.AirwayBillNo);
 
@@ -135,8 +136,14 @@ namespace CMS2.Client.Forms.TrackingReports
                     model.ServiceMode = shipment.ServiceMode.ServiceModeName;
                     model.PaymentMode = shipment.PaymentMode.PaymentModeName;
                     model.Amount = shipment.TotalAmount.ToString();
-                    model.Area = shipment.Booking.AssignedToArea.City.CityName;
-
+                    try
+                    {
+                        model.Area = (shipment.Booking.AssignedToArea != null) ? shipment.Booking.AssignedToArea.City.CityName : "N/A";
+                    }
+                    catch (Exception)
+                    {
+                        model.Area = "N/A";
+                    }
                     _results.Add(model);
                 }
             }

@@ -17,7 +17,7 @@ namespace CMS2.Client.Forms.TrackingReports
         {
             GatewayTransmittalBL gatewayBl = new GatewayTransmittalBL();
 
-            List<GatewayTransmittal> list = gatewayBl.GetAll().Where(x => x.RecordStatus == 1 && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
+            List<GatewayTransmittal> list = gatewayBl.GetAll().Where(x => x.RecordStatus == 1 && x.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
             List<GatewayTransmitalViewModel> modelList = Match(list);
 
             DataTable dt = new DataTable();
