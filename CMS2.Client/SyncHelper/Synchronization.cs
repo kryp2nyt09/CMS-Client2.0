@@ -260,19 +260,32 @@ namespace CMS2.Client.SyncHelper
         {
             using (CmsContext context = new CmsContext())
             {
-                ObjectContext objContext = ((IObjectContextAdapter)context).ObjectContext;
-                MetadataWorkspace workspace = objContext.MetadataWorkspace;
+                //ObjectContext objContext = ((IObjectContextAdapter)context).ObjectContext;
+                //MetadataWorkspace workspace = objContext.MetadataWorkspace;
+                
+                //IEnumerable<EntityType> tables = workspace.GetItems<EntityType>(DataSpace.SSpace);
 
+                List<string> list = new List<string>(){"AccountStatus", "AccountType", "AdjustmentReason", "ApplicableRate", "ApplicationSetting",
+                "ApprovingAuthority", "Company", "Employee", "RevenueUnit", "City", "BranchCorpOffice", "Cluster", "Province", "Region",
+                "Group", "RevenueUnitType", "Department", "Position", "BillingPeriod", "BusinessType", "Client", "Industry", 
+                "OrganizationType", "PaymentMode", "PaymentTerm", "AwbIssuance", "Batch", "BookingRemark", "Booking", "BookingStatus",
+                "BranchAcceptance", "Remarks", "Bundle", "CargoTransfer", "Reason", "Status", "User", "Claim", "Role", "Commodity",
+                "CommodityType", "WeightBreak", "DeliveredPackage", "Delivery", "DeliveryReceipt", "DeliveryRemark", "DeliveryStatus",
+                "Shipment", "ShipmentAdjustment", "StatementOfAccount", "ShipmentBasicFee", "FuelSurcharge", "GoodsDescription",
+                "PackageDimension", "Crating", "Packaging", "PackageNumber", "Payment", "PaymentType", "StatementOfAccountPayment",
+                "ServiceMode", "ServiceType", "ShipMode", "Distribution", "ExpressRate", "RateMatrix", "FlightInfo", "GatewayInbound",
+                "GatewayOutbound", "GatewayTransmittal", "HoldCargo", "Menu", "PackageNumberAcceptance", "TransferAcceptance",
+                "PackageNumberTransfer", "PackageTransfer", "PaymentSummary", "PaymentSummaryStatus", "PaymentTurnover", "RecordChange",
+                "Segregation", "ShipmentStatus", "ShipmentTracking", "StatementOfAccountNumber", "StatementOfAccountPrint",
+                "TntMaint", "TransmittalStatus", "TransShipmentLeg", "TransShipmentRoute",
+                "TruckAreaMapping", "Truck", "Unbundle", "RoleUser", "MenuAccess",  "SubMenu"};
 
-                IEnumerable<EntityType> tables = workspace.GetItems<EntityType>(DataSpace.SSpace);
-
-                foreach (var item in tables)
+                foreach (var item in list)
                 {
                     SyncTables table = new SyncTables();
-                    table.TableName = item.Name;
+                    table.TableName = item;
                     Entities.Add(table);
                 }
-
             }
         }
 
@@ -372,6 +385,7 @@ namespace CMS2.Client.SyncHelper
                         State.table.Status = TableStatus.Good;
                         State.table.isSelected = false;
                         State.worker.ReportProgress(1, _tableName + " was synchronized.");
+                        //AddCount();
                         break;
                     }
                     catch (Exception ex)
@@ -382,6 +396,7 @@ namespace CMS2.Client.SyncHelper
                             State.table.Status = TableStatus.Bad;
                             State.table.isSelected = true;
                             State.worker.ReportProgress(1, _tableName + " synchronize error.");
+                            //AddCount();
                         }
                         catch (Exception)
                         {
@@ -428,6 +443,11 @@ namespace CMS2.Client.SyncHelper
 
             }
             State._event.Set();
+        }
+
+        private async Task AddCount()
+        {
+            State.count++;
         }
     }
 
@@ -484,7 +504,6 @@ namespace CMS2.Client.SyncHelper
 
                         ProvisionClient(_tableName);
 
-                        state._event.Set();
                         state.table.Status = TableStatus.Provisioned;
                         state.worker.ReportProgress(1, _tableName + " was provisioned.");
                         Log.WriteLogs(_tableName + " was provisioned.");
@@ -505,7 +524,6 @@ namespace CMS2.Client.SyncHelper
 
                         ProvisionClient(_tableName);
 
-                        state._event.Set();
                         state.table.Status = TableStatus.Provisioned;
                         state.worker.ReportProgress(1, _tableName + " was provisioned.");
                         Log.WriteLogs(_tableName + " was provisioned.");
@@ -528,7 +546,6 @@ namespace CMS2.Client.SyncHelper
 
                         ProvisionClient(_tableName);
 
-                        state._event.Set();
                         state.table.Status = TableStatus.Provisioned;
                         state.worker.ReportProgress(1, _tableName + " was provisioned.");
                         Log.WriteLogs(_tableName + " was provisioned.");
@@ -551,7 +568,6 @@ namespace CMS2.Client.SyncHelper
 
                         ProvisionClient(_tableName);
 
-                        state._event.Set();
                         state.table.Status = TableStatus.Provisioned;
                         state.worker.ReportProgress(1, _tableName + " was provisioned.");
                         Log.WriteLogs(_tableName + " was provisioned.");
@@ -574,7 +590,6 @@ namespace CMS2.Client.SyncHelper
 
                         ProvisionClient(_tableName);
 
-                        state._event.Set();
                         state.table.Status = TableStatus.Provisioned;
                         state.worker.ReportProgress(1, _tableName + " was provisioned.");
                         Log.WriteLogs(_tableName + " was provisioned.");
@@ -596,7 +611,6 @@ namespace CMS2.Client.SyncHelper
 
                         ProvisionClient(_tableName);
 
-                        state._event.Set();
                         state.table.Status = TableStatus.Provisioned;
                         state.worker.ReportProgress(1, _tableName + " was provisioned.");
                         Log.WriteLogs(_tableName + " was provisioned.");
@@ -617,7 +631,6 @@ namespace CMS2.Client.SyncHelper
 
                         ProvisionClient(_tableName);
 
-                        state._event.Set();
                         state.table.Status = TableStatus.Provisioned;
                         state.worker.ReportProgress(1, _tableName + " was provisioned.");
                         Log.WriteLogs(_tableName + " was provisioned.");
@@ -639,7 +652,6 @@ namespace CMS2.Client.SyncHelper
 
                         ProvisionClient(_tableName);
 
-                        state._event.Set();
                         state.table.Status = TableStatus.Provisioned;
                         state.worker.ReportProgress(1, _tableName + " was provisioned.");
                         Log.WriteLogs(_tableName + " was provisioned.");
@@ -661,7 +673,6 @@ namespace CMS2.Client.SyncHelper
 
                         ProvisionClient(_tableName);
 
-                        state._event.Set();
                         state.table.Status = TableStatus.Provisioned;
                         state.worker.ReportProgress(1, _tableName + " was provisioned.");
                         Log.WriteLogs(_tableName + " was provisioned.");
@@ -684,7 +695,6 @@ namespace CMS2.Client.SyncHelper
 
                         ProvisionClient(_tableName);
 
-                        state._event.Set();
                         state.table.Status = TableStatus.Provisioned;
                         state.worker.ReportProgress(1, _tableName + " was provisioned.");
                         Log.WriteLogs(_tableName + " was provisioned.");
@@ -707,7 +717,6 @@ namespace CMS2.Client.SyncHelper
 
                         ProvisionClient(_tableName);
 
-                        state._event.Set();
                         state.table.Status = TableStatus.Provisioned;
                         state.worker.ReportProgress(1, _tableName + " was provisioned.");
                         Log.WriteLogs(_tableName + " was provisioned.");
@@ -716,7 +725,6 @@ namespace CMS2.Client.SyncHelper
                         ProvisionServer(_tableName);
                         ProvisionClient(_tableName);
 
-                        state._event.Set();
                         state.table.Status = TableStatus.Provisioned;
                         state.worker.ReportProgress(1, _tableName + " was provisioned.");
                         Log.WriteLogs(_tableName + " was provisioned.");
@@ -725,11 +733,11 @@ namespace CMS2.Client.SyncHelper
             }
             catch (Exception ex)
             {
-                state._event.Set();
                 state.table.Status = TableStatus.ErrorProvision;
                 state.worker.ReportProgress(1, _tableName + " has provision error.");
                 Log.WriteLogs(_tableName + " has provision error.");
             }
+            state._event.Set();
         }
 
         public void PrepareDatabaseForReplication(Object obj)
@@ -925,19 +933,18 @@ namespace CMS2.Client.SyncHelper
             try
             {
                 SqlSyncScopeDeprovisioning storeClientDeprovision = new SqlSyncScopeDeprovisioning(_connection);
-                storeClientDeprovision.DeprovisionScope(this._tableName + this._filter);
-                state._event.Set();
+                storeClientDeprovision.DeprovisionScope(this._tableName + this._filter);                
                 state.table.Status = TableStatus.Deprovisioned;
                 Log.WriteLogs(_tableName + " was deprovisioned.");
             }
             catch (Exception ex)
             {
-                state._event.Set();
                 Log.WriteErrorLogs(_tableName, ex);
                 state.table.Status = TableStatus.ErrorDeprovision;
                 Log.WriteLogs(_tableName + " has deprovision error.");
             }
             state.worker.ReportProgress(1, _tableName + " was deprovisioned.");
+            state._event.Set();
         }
 
         public void PerformDeprovisionDatabase(object obj)
@@ -1011,6 +1018,8 @@ namespace CMS2.Client.SyncHelper
         public BackgroundWorker worker;
 
         public BindingList<Booking> bindingList;
+
+        public int count;
     }
 }
 

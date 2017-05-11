@@ -63,6 +63,7 @@ namespace CMS2.Entities.Models
         public string Remarks { get; set; }
         [DisplayName("Declared Value")]
         public decimal DeclaredValue { get; set; }
+        public decimal FreightCharge { get; set; }
         public Guid? StatementOfAccountId { get; set; }
         public StatementOfAccountModel StatementOfAccount { get; set; }
         [DisplayName("AWB Fee")]

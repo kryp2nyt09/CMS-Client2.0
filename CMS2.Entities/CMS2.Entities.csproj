@@ -102,6 +102,7 @@
     <Compile Include="GatewayTransmittal.cs" />
     <Compile Include="GoodsDescription.cs" />
     <Compile Include="HoldCargo.cs" />
+    <Compile Include="MenuAccess.cs" />
     <Compile Include="Models\PackageDimensionModel.cs" />
     <Compile Include="Models\PaymentSummaryDetails.cs" />
     <Compile Include="Models\PaymentSummaryModel.cs" />

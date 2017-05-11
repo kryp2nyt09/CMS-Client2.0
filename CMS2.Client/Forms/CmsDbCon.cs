@@ -71,6 +71,8 @@ namespace CMS2.Client
         private bool isDeprovisionClient = true;
         private bool IsDeprovisionServer = true;
 
+        private int DoneCount = 0;
+
         private string fileName = @"C:\Program Files (x86)\APCargo\APCargo\AP CARGO SERVICE.exe.config";
 
         #endregion
@@ -448,6 +450,7 @@ namespace CMS2.Client
             }
             else
             {
+                radProgressBar1.Value1 = 0;
                 CheckTableState(Worker);
             }
 
@@ -540,13 +543,11 @@ namespace CMS2.Client
                 "PackageNumberTransfer", "PackageTransfer", "PaymentSummary", "PaymentSummaryStatus", "PaymentTurnover", "RecordChange",
                 "Segregation", "ShipmentStatus", "ShipmentTracking", "StatementOfAccountNumber", "StatementOfAccountPrint",
                 "TntMaint", "TransmittalStatus", "TransShipmentLeg", "TransShipmentRoute",
-                "TruckAreaMapping", "Truck", "Unbundle", "RoleUser"};
+                "TruckAreaMapping", "Truck", "Unbundle", "RoleUser", "MenuAccess",  "SubMenu"};
                 
                 _entities = new BindingList<SyncTables>();
-
-                
                 foreach (var item in list)
-                {
+                {                    
                     SyncTables table = new SyncTables();
                     table.TableName = item;
                     _entities.Add(table);
@@ -626,7 +627,6 @@ namespace CMS2.Client
                 SyncHelper.ThreadState _threadState = new SyncHelper.ThreadState();
                 _threadState.table = table;
                 _threadState.worker = worker;
-                listOfThread.Add(_threadState);
 
                 try
                 {
@@ -639,6 +639,10 @@ namespace CMS2.Client
                     Logs.ErrorLogs("CheckTableState", "ChecktableState", ex.Message);
                 }
             }
+            //while (DoneCount != _entities.Count - 5)
+            //{
+                
+            //}
         }
         private void StartProvision()
         {

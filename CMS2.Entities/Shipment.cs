@@ -114,6 +114,8 @@ namespace CMS2.Entities
        [DefaultValue(0)]
         public decimal Discount { get; set; } //Discount or RFA
 
+       public decimal? FreightCharge { get; set; }
+
         public decimal? TotalAmount { get; set; }
         [MaxLength(300)]
         public string Notes { get; set; }
