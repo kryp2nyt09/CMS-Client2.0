@@ -169,7 +169,7 @@ namespace CMS2_Client
         private void Extract_Click(object sender, EventArgs e)
         {
 
-            StartDeprovisionWholeServer();
+            //StartDeprovisionWholeServer();
 
             int index = dboBranchCoprOffice.SelectedItem.ToString().IndexOf(" ");
             _filter = dboBranchCoprOffice.SelectedItem.ToString().Substring(0, index);
@@ -419,9 +419,13 @@ namespace CMS2_Client
             }
             else if (LocalServer.Text != "localhost")
             {
-                MessageBox.Show("Please enter another ip address.", "Data Error", MessageBoxButtons.OK);
-                LocalServer.Focus();
-                isValid = false;
+                if (isSubServer)
+                {
+                    MessageBox.Show("Please enter another ip address.", "Data Error", MessageBoxButtons.OK);
+                    LocalServer.Focus();
+                    isValid = false;
+                }
+              
             }
             return isValid;
         }
@@ -451,7 +455,7 @@ namespace CMS2_Client
                 "PackageNumberTransfer", "PackageTransfer", "PaymentSummary", "PaymentSummaryStatus", "PaymentTurnover", "RecordChange",
                 "Segregation", "ShipmentStatus", "ShipmentTracking", "StatementOfAccountNumber", "StatementOfAccountPrint",
                 "TntMaint", "TransmittalStatus", "TransShipmentLeg", "TransShipmentRoute",
-                "TruckAreaMapping", "Truck", "Unbundle", "RoleUser"};
+                "TruckAreaMapping", "Truck", "Unbundle", "RoleUser", "MenuAccess", "SubMenu"};
 
             _entities = new List<SyncTables>();
             foreach (string item in list)

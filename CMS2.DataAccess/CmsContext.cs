@@ -58,6 +58,7 @@ namespace CMS2.DataAccess
         public DbSet<Group> Groups { get; set; }
         public DbSet<Industry> Industries { get; set; }
         public DbSet<Menu> Menus { get; set; }
+        public DbSet<MenuAccess> MenuAccess { get; set; }
         public DbSet<OrganizationType> OrganizationTypes { get; set; }
         public DbSet<PackageDimension> PackageDimensions { get; set; }
         public DbSet<PackageNumber> PackageNumbers { get; set; }
@@ -178,7 +179,7 @@ namespace CMS2.DataAccess
             modelBuilder.Entity<GatewayInbound>().HasRequired(x => x.BranchCorpOffice).WithMany().WillCascadeOnDelete(false);
 
             modelBuilder.Entity<GatewayTransmittal>().HasRequired(x => x.BranchCorpOffice).WithMany().WillCascadeOnDelete(false);
-
+            
             modelBuilder.Entity<PackageTransfer>().HasRequired(x => x.ScannedBy).WithMany().WillCascadeOnDelete(false);
             modelBuilder.Entity<PackageTransfer>().HasRequired(x => x.Driver).WithMany().WillCascadeOnDelete(false);
 

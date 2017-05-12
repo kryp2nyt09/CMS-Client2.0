@@ -122,6 +122,7 @@
     <Compile Include="Helpers\BarcodeGenerator.cs" />
     <Compile Include="HoldCargoBL.cs" />
     <Compile Include="IndustryBL.cs" />
+    <Compile Include="MenuAccessBL.cs" />
     <Compile Include="PackageDimensionBL.cs" />
     <Compile Include="PackageNumberAcceptanceBL.cs" />
     <Compile Include="PackageNumberBL.cs" />
@@ -151,6 +152,7 @@
     <Compile Include="RemarkBL.cs" />
     <Compile Include="ReportModels\StatementOfAccountDataSet.cs">
       <DependentUpon>StatementOfAccountDataSet.xsd</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="ReportModels\StatementOfAccountDataSet.Designer.cs">
       <DependentUpon>StatementOfAccountDataSet.xsd</DependentUpon>

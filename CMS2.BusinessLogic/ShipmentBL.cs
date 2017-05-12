@@ -147,6 +147,7 @@ namespace CMS2.BusinessLogic
                 CommodityId = model.CommodityId,
                 DeliveryFeeId = model.DeliveryFeeId,
                 DangerousFeeId = model.DangerousFeeId,
+                FreightCharge = model.FreightCharge,
                 TotalAmount = model.ShipmentTotal,
                 OriginBarangay = model.OriginBarangay,
                 DestinationBarangay = model.DestinationBarangay
@@ -267,6 +268,7 @@ namespace CMS2.BusinessLogic
                 CommodityId = entity.CommodityId,
                 DeliveryFeeId = entity.DeliveryFeeId,
                 DangerousFeeId = entity.DangerousFeeId
+                
             };
 
             model.ShipperCompanyAccountNo = "na";
@@ -543,6 +545,7 @@ namespace CMS2.BusinessLogic
 
             model.InsuranceAmount = insuranceCharge;
             model.ValuationAmount = valuation;
+            model.FreightCharge = model.ShipmentSubTotal;
             model.ShipmentTotal = (model.ShipmentSubTotal + model.ShipmentVatAmount);
             #endregion
 
