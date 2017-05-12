@@ -23,6 +23,7 @@ namespace CMS2.Client
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             var cmsMainWindow = new Main();
+            //Application.Run(cmsMainWindow);
 
             bool xBool = Convert.ToBoolean(ConfigurationManager.AppSettings["isSync"]);
             if (!xBool)
