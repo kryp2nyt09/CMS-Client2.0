@@ -18,7 +18,7 @@ namespace CMS2.Client.Forms.TrackingReports
             BranchAcceptanceBL branchAcceptanceBl = new BranchAcceptanceBL();
             ShipmentBL shipmentService = new ShipmentBL();
             List<Shipment> shipments = shipmentService.FilterActive().Where(x => x.AcceptedBy.AssignedToArea.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.RecordStatus == 1 && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
-            List<BranchAcceptance> branchAcceptance = branchAcceptanceBl.GetAll().Where(x => x.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId).ToList();
+            List<BranchAcceptance> branchAcceptance = branchAcceptanceBl.GetAll().Where(x => x.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.RecordStatus == 1).ToList();
 
             List<BranchAcceptanceViewModel> list = Match(branchAcceptance, shipments);
 
