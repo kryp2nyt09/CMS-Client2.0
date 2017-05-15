@@ -35,7 +35,7 @@
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>x64</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>true</Optimize>
@@ -90,6 +90,9 @@
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>CMS2.Client.Program</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
@@ -558,6 +561,7 @@
     <EmbeddedResource Include="Reports\rpt_PaymentSummary.resx">
       <DependentUpon>rpt_PaymentSummary.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="app.manifest" />
     <None Include="CMS2.Client_TemporaryKey.pfx" />
     <None Include="Reports\report_PaymentSummary.rpt" />
     <None Include="Reports\rpt_FreightCollectPaymentSummary.rpt" />
