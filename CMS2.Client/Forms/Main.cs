@@ -272,9 +272,8 @@ namespace CMS2.Client
 
             BookingResetAll();
             //PopulateGrid();
-            BookingGridView.DataSource = bookingService.FilterActiveBy(x => x.AssignedToArea.City.BranchCorpOfficeId == GlobalVars.DeviceBcoId).ToList().OrderByDescending(x => x.CreatedDate);
+            BookingGridView.DataSource = bookingService.FilterActiveBy(x => x.AssignedToArea.City.BranchCorpOfficeId == GlobalVars.DeviceBcoId).OrderBy(x => x.DateBooked).OrderByDescending(x => x.CreatedDate).ToList();//bookingService.FilterActiveBy(x => x.AssignedToArea.City.BranchCorpOfficeId == GlobalVars.DeviceBcoId).ToList().OrderByDescending(x => x.CreatedDate);
             BookingGridView.MasterTemplate.AutoSizeColumnsMode = GridViewAutoSizeColumnsMode.Fill;
-            BookingGridView.BestFitColumns(BestFitColumnMode.AllCells);
 
             AddDailyBooking();
 
@@ -2753,9 +2752,9 @@ namespace CMS2.Client
         private void PopulateGrid()
         {
             BookingGridView.DataSource = null;
-            BookingGridView.DataSource = bookingService.FilterActiveBy(x => x.AssignedToArea.City.BranchCorpOfficeId == GlobalVars.DeviceBcoId).ToList().OrderByDescending(x => x.CreatedDate);// bookingService.GetAll().Where(x => x.RecordStatus == 1).OrderBy(x => x.DateBooked).OrderByDescending(x => x.CreatedDate).ToList();
+            BookingGridView.DataSource = bookingService.FilterActiveBy(x => x.AssignedToArea.City.BranchCorpOfficeId == GlobalVars.DeviceBcoId).OrderBy(x => x.DateBooked).OrderByDescending(x => x.CreatedDate).ToList(); //bookingService.FilterActiveBy(x => x.AssignedToArea.City.BranchCorpOfficeId == GlobalVars.DeviceBcoId).ToList().OrderByDescending(x => x.CreatedDate);
             BookingGridView.MasterTemplate.AutoSizeColumnsMode = GridViewAutoSizeColumnsMode.Fill;
-            BookingGridView.BestFitColumns();
+
         }
 
         private DataTable ConvertToDataTable(List<Booking> list)
@@ -3300,6 +3299,14 @@ namespace CMS2.Client
         {
             bool isValid = true;
 
+            if (lstAssignedTo.SelectedIndex < 0)
+            {
+                MessageBox.Show("Invalid Assgined Area", "Booking", MessageBoxButtons.OK);
+                lstAssignedTo.Focus();
+                isValid = false;
+                return isValid;
+            }
+
             if (string.IsNullOrEmpty(txtShipperLastName.Text))
             {
                 MessageBox.Show("Invalid Shipper Lastname", "Data Error", MessageBoxButtons.OK);
@@ -3512,56 +3519,54 @@ namespace CMS2.Client
             if (IsDataValid())
             {
                 #region ShipperInfo
-                if (shipper.ClientId == null || shipper.ClientId == Guid.Empty)
+                shipper.CreatedBy = AppUser.User.UserId;
+                shipper.CreatedDate = DateTime.Now;
+                shipper.ModifiedBy = AppUser.User.UserId;
+                shipper.ModifiedDate = DateTime.Now;
+                shipper.RecordStatus = (int)RecordStatus.Active;
+                if (shipper.CompanyId == null)
                 {
-                    shipper.CreatedBy = AppUser.User.UserId;
-                    shipper.CreatedDate = DateTime.Now;
-                    shipper.ModifiedBy = AppUser.User.UserId;
-                    shipper.ModifiedDate = DateTime.Now;
-
-                    if (shipper.CompanyId == null)
+                    Company company = companies.Find(x => x.CompanyName == txtShipperCompany.Text.Trim());
+                    if (company != null)
                     {
-                        Company company = companies.Find(x => x.CompanyName == txtShipperCompany.Text.Trim());
-                        if (company != null)
-                        {
-                            shipper.Company = company;
-                            shipper.CompanyId = company.CompanyId;
-                        }
-                        else
-                        {
-                            shipper.CompanyName = txtShipperCompany.Text.Trim();
-                        }
-                    }
-                    shipper.RecordStatus = (int)RecordStatus.Active;
-                    shipper.Address1 = txtShipperAddress1.Text.Trim();
-                    shipper.Address2 = txtShipperAddress2.Text.Trim();
-                    shipper.Street = txtShipperStreet.Text.Trim();
-                    shipper.Barangay = txtShipperBarangay.Text.Trim();
-                    if (lstOriginCity.SelectedIndex >= 0)
-                    {
-                        shipper.CityId = Guid.Parse(lstOriginCity.SelectedValue.ToString());
+                        shipper.Company = company;
+                        shipper.CompanyId = company.CompanyId;
                     }
                     else
                     {
-                        MessageBox.Show("Invalid Shipper City.", "Data Error", MessageBoxButtons.OK);
-                        return;
+                        shipper.CompanyName = txtShipperCompany.Text.Trim();
                     }
-                    shipper.ContactNo = txtShipperContactNo.Text.Trim();
-                    shipper.Mobile = txtShipperMobile.Text.Trim();
-                    shipper.Email = txtShipperEmail.Text.Trim();
                 }
 
+                shipper.Address1 = txtShipperAddress1.Text.Trim();
+                shipper.Address2 = txtShipperAddress2.Text.Trim();
+                shipper.Street = txtShipperStreet.Text.Trim();
+                shipper.Barangay = txtShipperBarangay.Text.Trim();
+                if (lstOriginCity.SelectedIndex >= 0)
+                {
+                    shipper.CityId = Guid.Parse(lstOriginCity.SelectedValue.ToString());
+                }
+                else
+                {
+                    MessageBox.Show("Invalid Shipper City.", "Data Error", MessageBoxButtons.OK);
+                    return;
+                }
+
+                shipper.ContactNo = txtShipperContactNo.Text.Trim();
+                shipper.Mobile = txtShipperMobile.Text.Trim();
+                shipper.Email = txtShipperEmail.Text.Trim();
 
                 #endregion
 
                 #region ConsingnessInfo
-                if (consignee.ClientId == null || consignee.ClientId == Guid.Empty)
+                consignee.CreatedBy = AppUser.User.UserId;
+                consignee.CreatedDate = DateTime.Now;
+                consignee.ModifiedBy = AppUser.User.UserId;
+                consignee.ModifiedDate = DateTime.Now;
+                consignee.RecordStatus = (int)RecordStatus.Active;
+
+                if (consignee.CompanyId == null)
                 {
-                    consignee.CreatedBy = AppUser.User.UserId;
-                    consignee.CreatedDate = DateTime.Now;
-                    consignee.ModifiedBy = AppUser.User.UserId;
-                    consignee.ModifiedDate = DateTime.Now;
-                    consignee.RecordStatus = (int)RecordStatus.Active;
                     Company consigneeCompany = companies.Find(x => x.CompanyName == txtConsigneeCompany.Text.Trim());
                     if (consigneeCompany != null)
                     {
@@ -3572,23 +3577,25 @@ namespace CMS2.Client
                     {
                         consignee.CompanyName = txtConsigneeCompany.Text.Trim();
                     }
-                    consignee.Address1 = txtConsigneeAddress1.Text.Trim();
-                    consignee.Address2 = txtConsigneeAddress2.Text.Trim();
-                    consignee.Street = txtConsgineeStreet.Text.Trim();
-                    consignee.Barangay = txtConsigneeBarangay.Text.Trim();
-                    if (lstDestinationCity.SelectedIndex >= 0)
-                    {
-                        consignee.CityId = Guid.Parse(lstDestinationCity.SelectedValue.ToString());
-                    }
-                    else
-                    {
-                        MessageBox.Show("Invalid Consignee City.", "Data Error", MessageBoxButtons.OK);
-                        return;
-                    }
-                    consignee.ContactNo = txtConsigneeContactNo.Text.Trim();
-                    consignee.Mobile = txtConsigneeMobile.Text.Trim();
-                    consignee.Email = txtConsigneeEmail.Text.Trim();
                 }
+
+                consignee.Address1 = txtConsigneeAddress1.Text.Trim();
+                consignee.Address2 = txtConsigneeAddress2.Text.Trim();
+                consignee.Street = txtConsgineeStreet.Text.Trim();
+                consignee.Barangay = txtConsigneeBarangay.Text.Trim();
+                if (lstDestinationCity.SelectedIndex >= 0)
+                {
+                    consignee.CityId = Guid.Parse(lstDestinationCity.SelectedValue.ToString());
+                }
+                else
+                {
+                    MessageBox.Show("Invalid Consignee City.", "Data Error", MessageBoxButtons.OK);
+                    return;
+                }
+                consignee.ContactNo = txtConsigneeContactNo.Text.Trim();
+                consignee.Mobile = txtConsigneeMobile.Text.Trim();
+                consignee.Email = txtConsigneeEmail.Text.Trim();
+                //if (consignee.CompanyId == null)
 
                 #endregion
 
@@ -3687,8 +3694,10 @@ namespace CMS2.Client
                     consignee.AccountNo = "2" + clientService.GetNewAccountNo(consignee.City.CityCode, false);
                 }
                 consignee.AccountNo = clientService.GetNewAccountNo(consignee.City.CityCode, false);
+
                 clientService.Add(consignee);
                 booking.ConsigneeId = consignee.ClientId;
+
             }
             percent = index * 100 / max;
             _worker.ReportProgress(percent);

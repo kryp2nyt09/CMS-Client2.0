@@ -11,7 +11,7 @@ using CMS2.Client.Properties;
 using CMS2.Entities;
 using System.Data.Sql;
 using System.Data.SqlClient;
-using System.Data.Entity.Infrastructure;
+using System.Data.Entity       .Infrastructure;
 using CMS2.DataAccess;
 using System.Data.Entity.Core.Objects;
 using System.Data.Entity.Core.Metadata.Edm;

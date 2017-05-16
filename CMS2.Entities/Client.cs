@@ -16,7 +16,7 @@ namespace CMS2.Entities
         [DisplayName("Client")]
         public Guid ClientId { get; set; }
         [Required]
-        [MaxLength(15)]
+        [MaxLength(20)]
         [DisplayName("Account No")]
         public string AccountNo { get; set; }
         [Required]
@@ -37,7 +37,7 @@ namespace CMS2.Entities
         [MaxLength(15)]
         [DisplayName("Mobile No")]
         public string Mobile { get; set; }
-        [MaxLength(15)]
+        [MaxLength(50)]
         [DisplayName("Fax")]
         public string Fax { get; set; }
         [MaxLength(50)]
@@ -67,7 +67,7 @@ namespace CMS2.Entities
         [MaxLength(30)]
         [DisplayName("Zip Code")]
         public string Title { get; set; }
-        [MaxLength(30)]
+        [MaxLength(50)]
         [DisplayName("Department")]
         public string Department { get; set; }
 

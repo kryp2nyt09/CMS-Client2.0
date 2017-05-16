@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CMS2.DataAccess.Interfaces;
 using System.Windows.Forms;
+using System.Data.Entity.Validation;
 
 namespace CMS2.DataAccess
 {
@@ -75,10 +76,10 @@ namespace CMS2.DataAccess
             {
                 _context.SaveChanges();
             }
-            catch (Exception ex)
+            catch (DbEntityValidationException ex)
             {
                 Console.WriteLine(ex);
-               // MessageBox.Show(ex.InnerException.ToString());
+                MessageBox.Show(ex.InnerException.ToString());
             }
            
         }
