@@ -54,6 +54,7 @@ namespace CMS2.Client
         private BranchCorpOfficeBL bcoService;
         private RevenueUnitBL revenueUnitService;
         private UserStore userService;
+        //private Resizer rs = new Resizer();
         #endregion
 
         #region Booking
@@ -114,6 +115,7 @@ namespace CMS2.Client
         private BindingSource bsPackaging;
         private BindingSource bsGoodsDescription;
         private BindingSource bsShipMode;
+        private BindingSource bsTranshipmentLeg;
         private BindingSource bsCollectedBy;
         private BindingSource bsRevenueUnitType;
         private AutoCompleteStringCollection commodityTypeCollection;
@@ -121,6 +123,7 @@ namespace CMS2.Client
         private AutoCompleteStringCollection serviceTypeCollection;
         private AutoCompleteStringCollection serviceModeCollection;
         private AutoCompleteStringCollection shipModeCollection;
+        private AutoCompleteStringCollection TransShipmentLegCollection;
         private AutoCompleteStringCollection goodsDescCollection;
         private AutoCompleteStringCollection paymentModeCollection;
         private AutoCompleteStringCollection AirwayBill;
@@ -138,6 +141,7 @@ namespace CMS2.Client
         private ShipModeBL shipModeService;
         private RateMatrixBL rateMatrixService;
         private PaymentTermBL paymentTermService;
+        private TransShipmentLegBL transShipmentLegService;
 
 
         private CommodityType commodityType;
@@ -151,6 +155,7 @@ namespace CMS2.Client
         private List<Packaging> packagings;
         private List<GoodsDescription> goodsDescriptions;
         private List<ShipMode> shipModes;
+        private List<TransShipmentLeg> transShipmentLegs;
         private List<PaymentTerm> paymentTerms;
 
 
@@ -256,6 +261,7 @@ namespace CMS2.Client
         }
         private void Main_Load(object sender, EventArgs e)
         {
+            //rs.FindAllControls(this);
 
             GlobalVars.UnitOfWork = new CmsUoW();
             areaService = new AreaBL(GlobalVars.UnitOfWork);
@@ -399,6 +405,7 @@ namespace CMS2.Client
         }
         private void Main_Resize(object sender, EventArgs e)
         {
+            //rs.ResizeAllControls(this);
         }
         #endregion
 
@@ -3087,7 +3094,7 @@ namespace CMS2.Client
 
                 //txtRemarks.Enabled = true;
                 //dateDateBooked.Enabled = true;
-                //chkHasDailyBooking.Enabled = true;
+                chkHasDailyBooking.Enabled = true;
                 //txtBookedBy.Enabled = true;
                 //txtBookingNo.Enabled = true;
                 //lstAssignedTo.Enabled = true;
@@ -3157,7 +3164,7 @@ namespace CMS2.Client
 
             txtRemarks.Text = "";
 
-            //chkHasDailyBooking.Checked = false;
+            chkHasDailyBooking.Checked = false;
             txtBookedBy.Text = "";
             txtBookingNo.Text = "";
             if (lstAssignedTo.Items.Count > 0)
@@ -3175,7 +3182,7 @@ namespace CMS2.Client
 
             //txtRemarks.Enabled = false;
             //dateDateBooked.Enabled = false;
-            //chkHasDailyBooking.Enabled = false;
+            chkHasDailyBooking.Enabled = false;
             //txtBookedBy.Enabled = false;
             //txtBookingNo.Enabled = false;
             //lstAssignedTo.Enabled = false;
@@ -3479,7 +3486,31 @@ namespace CMS2.Client
             //    isValid = false;
             //    return isValid;
             //}
+            if (txtConsigneeEmail.Text == "" )
+            {
+                txtConsigneeEmail.Focus();
+                isValid = false;
+                return isValid;
+            }
+            if ( txtShipperEmail.Text == "")
+            {
+                txtShipperEmail.Focus();
+                isValid = false;
+                return isValid;
+            }
 
+            if (txtConsigneeCompany.Text == "")
+            {
+                txtConsigneeCompany.Focus();
+                isValid = false;
+                return isValid;
+            }
+            if (txtShipperCompany.Text == "")
+            {
+                txtShipperCompany.Focus();
+                isValid = false;
+                return isValid;
+            }
             return isValid;
         }
 
@@ -3669,11 +3700,11 @@ namespace CMS2.Client
                 if (shipper.CompanyId == null)
                 {
                     // non-rep client account #
-                    shipper.AccountNo = "1" + clientService.GetNewAccountNo(shipper.City.CityCode, false);
+                    shipper.AccountNo = clientService.GetNewAccountNo(shipper.City.BranchCorpOffice.BranchCorpOfficeCode, false);
                 }
                 else
                 {
-                    shipper.AccountNo = "2" + clientService.GetNewAccountNo(shipper.City.CityCode, false);
+                    shipper.AccountNo = clientService.GetNewAccountNo(shipper.City.BranchCorpOffice.BranchCorpOfficeCode, false);
                 }
                 clientService.Add(shipper);
                 booking.ShipperId = shipper.ClientId;
@@ -3687,13 +3718,13 @@ namespace CMS2.Client
                 if (consignee.CompanyId == null)
                 {
                     // non-rep client account #
-                    consignee.AccountNo = "1" + clientService.GetNewAccountNo(consignee.City.CityCode, false);
+                    consignee.AccountNo = clientService.GetNewAccountNo(consignee.City.BranchCorpOffice.BranchCorpOfficeCode, false); //"1" 
                 }
                 else
                 {
-                    consignee.AccountNo = "2" + clientService.GetNewAccountNo(consignee.City.CityCode, false);
+                    consignee.AccountNo = clientService.GetNewAccountNo(consignee.City.BranchCorpOffice.BranchCorpOfficeCode, false);//"1" +
                 }
-                consignee.AccountNo = clientService.GetNewAccountNo(consignee.City.CityCode, false);
+                //consignee.AccountNo = clientService.GetNewAccountNo(consignee.City.BranchCorpOffice.BranchCorpOfficeCode, false);
 
                 clientService.Add(consignee);
                 booking.ConsigneeId = consignee.ClientId;
@@ -3739,6 +3770,16 @@ namespace CMS2.Client
             {
                 return false;
             }
+
+            if (lstShipMode.SelectedIndex >= 0)
+            {
+                if (lstHub.SelectedIndex <= -1)
+                {
+                    return false;
+                }
+
+            }
+
             if (shipment.PackageDimensions == null)
             {
                 return false;
@@ -3804,6 +3845,7 @@ namespace CMS2.Client
             bsPackaging = new BindingSource();
             bsGoodsDescription = new BindingSource();
             bsShipMode = new BindingSource();
+            bsTranshipmentLeg = new BindingSource();
 
             commodityTypes = new List<CommodityType>();
             commodities = new List<Commodity>();
@@ -3815,6 +3857,7 @@ namespace CMS2.Client
             packagings = new List<Packaging>();
             goodsDescriptions = new List<GoodsDescription>();
             shipModes = new List<ShipMode>();
+            transShipmentLegs = new List<TransShipmentLeg>();
             paymentTerms = new List<PaymentTerm>();
 
             commodityTypeService = new CommodityTypeBL(GlobalVars.UnitOfWork);
@@ -3830,6 +3873,7 @@ namespace CMS2.Client
             packagingService = new PackagingBL(GlobalVars.UnitOfWork);
             goodsDescriptionService = new GoodsDescriptionBL(GlobalVars.UnitOfWork);
             shipModeService = new ShipModeBL(GlobalVars.UnitOfWork);
+            transShipmentLegService = new TransShipmentLegBL(GlobalVars.UnitOfWork);
             rateMatrixService = new RateMatrixBL(GlobalVars.UnitOfWork);
             paymentTermService = new PaymentTermBL(GlobalVars.UnitOfWork);
 
@@ -3879,6 +3923,10 @@ namespace CMS2.Client
             {
                 shipModes = shipModeService.FilterActive().OrderBy(x => x.ShipModeName).ToList();
             }
+            if (transShipmentLegs.Count == 0)
+            {
+                transShipmentLegs = transShipmentLegService.FilterActive().OrderBy(x => x.LegOrder).ToList();
+            }
             if (paymentTerms.Count == 0)
             {
                 paymentTerms = paymentTermService.FilterActive().OrderBy(x => x.PaymentTermName).ToList();
@@ -3893,6 +3941,7 @@ namespace CMS2.Client
             bsPackaging.DataSource = packagings;
             bsGoodsDescription.DataSource = goodsDescriptions;
             bsShipMode.DataSource = shipModes;
+            bsTranshipmentLeg.DataSource = transShipmentLegs;
 
             dateAcceptedDate.Value = DateTime.Now;
 
@@ -3932,6 +3981,10 @@ namespace CMS2.Client
             lstShipMode.DisplayMember = "ShipModeName";
             lstShipMode.ValueMember = "ShipModeId";
 
+            lstHub.DataSource = bsTranshipmentLeg;
+            lstHub.DisplayMember = "LegName";
+            lstHub.ValueMember = "TransShipmentLegId";
+
             bsCommodityType.ResetBindings(false);
             bsCommodity.ResetBindings(false);
             bsServiceType.ResetBindings(false);
@@ -3941,6 +3994,7 @@ namespace CMS2.Client
             bsPackaging.ResetBindings(false);
             bsGoodsDescription.ResetBindings(false);
             bsShipMode.ResetBindings(false);
+            bsTranshipmentLeg.ResetBindings(false);
 
             lstCommodityType.SelectedIndex = -1;
             lstCommodity.SelectedIndex = -1;
@@ -3948,6 +4002,7 @@ namespace CMS2.Client
             lstShipMode.SelectedIndex = -1;
             lstGoodsDescription.SelectedIndex = -1;
             chkNonVatable.Checked = false;
+            lstHub.SelectedIndex = -1;
 
             DisableForm();
             ShowNewShipment();
@@ -4075,6 +4130,8 @@ namespace CMS2.Client
                 lstServiceType.SelectedIndex = -1;
             if (lstShipMode.Items.Count > 0)
                 lstShipMode.SelectedIndex = -1;
+            if (lstHub.Items.Count > 0)
+                lstHub.SelectedIndex = -1;
             if (lstGoodsDescription.Items.Count > 0)
                 lstGoodsDescription.SelectedIndex = -1;
 
@@ -4102,6 +4159,11 @@ namespace CMS2.Client
             shipment.ServiceMode = serviceModes.Find(x => x.ServiceModeId == shipment.ServiceModeId);
             shipment.ShipModeId = Guid.Parse(lstShipMode.SelectedValue.ToString());
             shipment.ShipMode = shipModes.Find(x => x.ShipModeId == shipment.ShipModeId);
+            if (shipment.ShipMode.ShipModeName == "Transhipment")
+            {
+                shipment.TransShipmentLegId = Guid.Parse(lstHub.SelectedValue.ToString());
+                shipment.TransShipmentLeg = transShipmentLegs.Find(x => x.TransShipmentLegId == shipment.TransShipmentLegId);
+            }
             if (shipment.GoodsDescriptionId == null || shipment.GoodsDescription == null)
             {
                 if (lstGoodsDescription.SelectedValue == null)
@@ -4217,7 +4279,13 @@ namespace CMS2.Client
                 if (shipment.ServiceTypeId != null && shipment.ServiceTypeId != Guid.Empty)
                     lstServiceType.SelectedValue = shipment.ServiceTypeId;
                 if (shipment.ShipModeId != null && shipment.ShipModeId != Guid.Empty)
+                {
                     lstShipMode.SelectedValue = shipment.ShipModeId;
+                }
+                if (shipment.TransShipmentLeg != null && shipment.TransShipmentLegId != Guid.Empty)
+                {
+                    lstHub.SelectedValue =transShipmentLegService.GetById(shipment.TransShipmentLegId).TransShipmentLegId;
+                }
                 if (shipment.GoodsDescriptionId != null && shipment.GoodsDescriptionId != Guid.Empty)
                     lstGoodsDescription.SelectedValue = shipment.GoodsDescriptionId;
                 txtQuantity.Text = shipment.Quantity.ToString();
@@ -4348,6 +4416,12 @@ namespace CMS2.Client
                 }
                 shipment.ShipModeId = Guid.Parse(lstShipMode.SelectedValue.ToString());
                 shipment.ShipMode = shipModes.Find(x => x.ShipModeId == shipment.ShipModeId);
+            }
+
+            if (shipment.ShipMode.ShipModeName == "Transhipment")
+            {
+                shipment.TransShipmentLegId = Guid.Parse(lstHub.SelectedValue.ToString());
+                shipment.TransShipmentLeg = transShipmentLegs.Find(x => x.TransShipmentLegId == shipment.TransShipmentLegId);
             }
 
             if (shipment.PaymentModeId == null || shipment.PaymentMode == null)
@@ -4699,6 +4773,7 @@ namespace CMS2.Client
             lstServiceType.Enabled = true;
             lstServiceMode.Enabled = true;
             lstShipMode.Enabled = true;
+            lstHub.Enabled = true;
             txtQuantity.Enabled = true;
             txtWeight.Enabled = true;
             txtLength.Enabled = true;
@@ -4733,6 +4808,7 @@ namespace CMS2.Client
             lstServiceType.Enabled = false;
             lstServiceMode.Enabled = false;
             lstShipMode.Enabled = false;
+            lstHub.Enabled = false;
             txtQuantity.Enabled = false;
             txtWeight.Enabled = false;
             txtLength.Enabled = false;
@@ -8836,9 +8912,35 @@ namespace CMS2.Client
         }
         #endregion
 
+        private void radDropDownList1_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
+        {
+
+        }
+
 
 
         #endregion END MARK SANTOS REGION
+
+        private void lstShipMode_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
+        {
+            if (lstShipMode.SelectedIndex >= 0)
+            {
+                if (lstShipMode.SelectedItem.Text == "Transhipment")
+                {
+                    lstHub.Enabled = true;
+                }
+                else
+                {
+                    lstHub.Enabled = false;
+                }
+            }
+
+        }
+
+        private void panel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
 
     }
 }

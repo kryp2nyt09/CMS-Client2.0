@@ -9,14 +9,17 @@ namespace CMS2.Entities
     {
         [Key]
         public Guid TransShipmentLegId { get; set; }
+
         [DisplayName("Leg")]
-        public Guid LegId { get; set; }
-        [ForeignKey("LegId")]
-        public City Leg { get; set; }
+        public string LegName { get; set; }
+        
         [Required]
         [DefaultValue(1)]
         public int LegOrder { get; set; }
-        public Guid TransShipmentRouteId { get; set; }
-        public virtual TransShipmentRoute TransShipmentRoute { get; set; }
+        public Guid CityId { get; set; }
+
+        [ForeignKey("CityId")]
+        public virtual City City{get;set;}
+        
     }
 }

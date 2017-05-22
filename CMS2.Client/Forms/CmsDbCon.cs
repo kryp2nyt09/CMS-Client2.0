@@ -98,9 +98,9 @@ namespace CMS2.Client
             testMainConnection.Visible = false;
             testLocalConnection.Visible = false;
 
-            bcoService = new BranchCorpOfficeBL();
-            revenutUnitTypeService = new RevenueUnitTypeBL();
-            revenueUnitService = new RevenueUnitBL();
+            bcoService = new BranchCorpOfficeBL(GlobalVars.UnitOfWork);
+            revenutUnitTypeService = new RevenueUnitTypeBL(GlobalVars.UnitOfWork);
+            revenueUnitService = new RevenueUnitBL(GlobalVars.UnitOfWork);
 
             _branchCorpOffices = bcoService.FilterActive().OrderBy(x => x.BranchCorpOfficeName).ToList();
             revenueUnitTypes = revenutUnitTypeService.FilterActive().OrderBy(x => x.RevenueUnitTypeName).ToList();
@@ -121,7 +121,7 @@ namespace CMS2.Client
             lstRevenueUnit.DisplayMember = "RevenueUnitName";
             lstRevenueUnit.ValueMember = "RevenueUnitId";
 
-            _branchCorpOfficeId = ConfigurationManager.AppSettings["BcoId"].ToString();
+            _branchCorpOfficeId = GlobalVars.DeviceBcoId.ToString();
             _filter = ConfigurationManager.AppSettings["Filter"].ToString();
             _localConnectionString = ConfigurationManager.ConnectionStrings["Cms"].ConnectionString;
             _mainConnectionString = ConfigurationManager.ConnectionStrings["CmsCentral"].ConnectionString;
@@ -131,6 +131,17 @@ namespace CMS2.Client
             SetEntities();
             gridTables.DataSource = _entities;
             radProgressBar1.Maximum = _entities.Count() + 5;
+
+            if (_isSubserver.ToLower() == "false")
+            {
+                txtServerIP.Enabled = false;
+                txtServerDbName.Enabled = false;
+                txtServerUsername.Enabled = false;
+                txtServerPassword.Enabled = false;
+                isMainConnected = true;
+                radPageViewPage2.Enabled = false;
+            }
+
         }
         private void btnSave_Click(object sender, EventArgs e)
         {
@@ -198,19 +209,10 @@ namespace CMS2.Client
             txtServerPassword.Text = Settings.Default.CentralPassword;
             txtDeviceCode.Text = Settings.Default.DeviceCode;
 
-            if (_isSubserver == "false")
-            {
-                txtServerIP.Enabled = false;
-                txtServerDbName.Enabled = false;
-                txtServerUsername.Enabled = false;
-                txtServerPassword.Enabled = false;
-                isMainConnected = true;
-                radPageViewPage2.Enabled = false;
-            }
-
+           
             try
             {
-                lstBco.SelectedValue = _branchCorpOffices.Find(x => x.BranchCorpOfficeId == Guid.Parse(Settings.Default.DeviceBcoId.ToString())).BranchCorpOfficeId;
+                lstBco.SelectedValue = _branchCorpOffices.Find(x => x.BranchCorpOfficeId == Guid.Parse(_branchCorpOfficeId)).BranchCorpOfficeId;
                 lstRevenueUnit.SelectedValue = revenueUnits.Find(x => x.RevenueUnitId == Guid.Parse(Settings.Default.DeviceRevenueUnitId.ToString())).RevenueUnitId;
             }
             catch (Exception ex)

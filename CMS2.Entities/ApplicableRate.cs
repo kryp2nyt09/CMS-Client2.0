@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CMS2.Entities
 {
@@ -12,7 +13,17 @@ namespace CMS2.Entities
         [MaxLength(100)]
         [DisplayName("Applicable Rate")]
         public string ApplicableRateName { get; set; }
-        [MaxLength(500)]
-        public string Description { get; set; }
+        public Guid CommodityTypeId { get; set; }
+        public Guid ServiceModeId { get; set; }
+        public Guid ServiceTypeId{get; set; }
+
+        [ForeignKey("CommodityTypeId")]
+        public virtual CommodityType CommodityType { get; set; }
+
+        [ForeignKey("ServiceModeId")]
+        public virtual ServiceMode ServiceMode { get; set; }
+
+        [ForeignKey("ServiceTypeId")]
+        public virtual ServiceType ServiceType { get; set; }
     }
 }

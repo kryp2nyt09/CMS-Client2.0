@@ -22,6 +22,6 @@ namespace CMS2.Entities
         public Guid DestinationCityId { get; set; }
         [ForeignKey("DestinationCityId")]
         public City DestinationCity { get; set; }
-        public List<TransShipmentLeg> Legs { get; set; } 
+        //public List<TransShipmentLeg> Legs { get; set; } 
     }
 }

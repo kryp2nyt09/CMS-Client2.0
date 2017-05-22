@@ -66,6 +66,7 @@ namespace CMS2.Entities.Models
         public decimal FreightCharge { get; set; }
         public Guid? StatementOfAccountId { get; set; }
         public StatementOfAccountModel StatementOfAccount { get; set; }
+
         [DisplayName("AWB Fee")]
         public Guid? AwbFeeId { get; set; }
         public ShipmentBasicFee AwbFee { get; set; }
@@ -108,6 +109,8 @@ namespace CMS2.Entities.Models
         public ServiceType ServiceType { get; set; }
         public Guid ShipModeId { get; set; }
         public ShipMode ShipMode { get; set; }
+        public Guid TransShipmentLegId { get; set; }
+        public TransShipmentLeg TransShipmentLeg { get; set; }
         public Guid GoodsDescriptionId { get; set; }
         public GoodsDescription GoodsDescription { get; set; }
         public decimal HandlingFee { get; set; }
@@ -121,7 +124,7 @@ namespace CMS2.Entities.Models
         public Guid? DangerousFeeId { get; set; }
         public ShipmentBasicFee DangerousFee { get; set; }
         public bool IsVatable { get; set; }
-
+        
         // members below are not db fields or part of of the entity
         [DisplayName("Date Accepted")]
         public string DateAcceptedString

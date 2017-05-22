@@ -31,6 +31,7 @@ namespace CMS2.BusinessLogic
         private TransShipmentLegBL transShipmentLegService;
         private RevenueUnitBL revenueUnitService;
         private BranchCorpOfficeBL bcoService;
+        private ApplicableRateBL applicableRateService;
 
         public ShipmentBL()
         {
@@ -53,6 +54,7 @@ namespace CMS2.BusinessLogic
             transShipmentLegService = new TransShipmentLegBL(_unitOfWork);
             revenueUnitService = new RevenueUnitBL(_unitOfWork);
             bcoService = new BranchCorpOfficeBL(_unitOfWork);
+            applicableRateService = new ApplicableRateBL(_unitOfWork);
         }
 
         public ShipmentBL(ICmsUoW unitOfWork)
@@ -75,6 +77,7 @@ namespace CMS2.BusinessLogic
             transShipmentLegService = new TransShipmentLegBL(unitOfWork);
             revenueUnitService = new RevenueUnitBL(unitOfWork);
             bcoService = new BranchCorpOfficeBL(unitOfWork);
+            applicableRateService = new ApplicableRateBL(unitOfWork);
         }
 
         public override Expression<Func<Shipment, object>>[] Includes()
@@ -139,7 +142,7 @@ namespace CMS2.BusinessLogic
                 Weight = model.Weight,
                 PackageNumbers = model.PackageNumbers,
                 ServiceTypeId = model.ServiceTypeId,
-                ShipModeId = model.ShipModeId,
+                ShipModeId = model.ShipModeId,                
                 GoodsDescriptionId = model.GoodsDescriptionId,
                 HandlingFee = model.HandlingFee,
                 QuarantineFee = model.QuarantineFee,
@@ -150,8 +153,8 @@ namespace CMS2.BusinessLogic
                 FreightCharge = model.FreightCharge,
                 TotalAmount = model.ShipmentTotal,
                 OriginBarangay = model.OriginBarangay,
-                DestinationBarangay = model.DestinationBarangay
-
+                DestinationBarangay = model.DestinationBarangay,
+                TransShipmentLegId = model.TransShipmentLegId    
             };
 
             entity.PackageDimensions = packageDimensionService.ModelsToEntities(model.PackageDimensions);
@@ -186,7 +189,10 @@ namespace CMS2.BusinessLogic
                 entity.ShipMode = model.ShipMode;
             if (model.GoodsDescriptionId != null)
                 entity.GoodsDescription = model.GoodsDescription;
-
+            if (model.TransShipmentLegId != null)
+            {
+                entity.TransShipmentLeg = model.TransShipmentLeg;
+            }
             return entity;
         }
 
@@ -260,7 +266,7 @@ namespace CMS2.BusinessLogic
                 Weight = entity.Weight,
                 PackageNumbers = entity.PackageNumbers,
                 ServiceTypeId = entity.ServiceTypeId,
-                ShipModeId = entity.ShipModeId,
+                ShipModeId = entity.ShipModeId,                      
                 GoodsDescriptionId = entity.GoodsDescriptionId,
                 HandlingFee = entity.HandlingFee,
                 QuarantineFee = entity.QuarantineFee,
@@ -284,6 +290,11 @@ namespace CMS2.BusinessLogic
 
             if (entity.StatementOfAccountId != null)
                 model.StatementOfAccount = soaService.EntityToModel(entity.StatementOfAccount);
+
+            if (entity.TransShipmentLegId != null)
+            {
+                model.TransShipmentLeg = entity.TransShipmentLeg;
+            }
 
             if (entity.CommodityType == null)
                 model.CommodityType = commodityTypeService.GetById(entity.CommodityTypeId);
@@ -648,9 +659,22 @@ namespace CMS2.BusinessLogic
         {
             //List<List<ExpressRate>> expressRates = new List<List<ExpressRate>>();
             List<ExpressRate> expressRates = new List<ExpressRate>();
-            RateMatrix matrix = rateMatrixService.GetMatrix(model.CommodityTypeId, model.ServiceTypeId,
+            RateMatrix matrix = new RateMatrix();
+
+            ApplicableRate _applicableRate = applicableRateService.GetApplicableRate(model.CommodityTypeId, model.ServiceModeId, model.ServiceTypeId);
+
+            if (_applicableRate != null)
+            {
+                matrix = rateMatrixService.GetMatrix(_applicableRate.ApplicableRateId);
+            }
+            else
+            {
+                matrix = rateMatrixService.GetMatrix(model.CommodityTypeId, model.ServiceTypeId,
                 model.ServiceModeId);
-            List<ExpressRate> rates = null;
+            }
+
+            
+            ExpressRate rates = null;
 
             if (matrix != null)
             {
@@ -663,33 +687,46 @@ namespace CMS2.BusinessLogic
                     if (model.ShipMode.ShipModeName.Equals("Transhipment"))
                     {
                         #region Transhipment
-                        TransShipmentRoute route = null;
-                        if (transShipmentRouteService.IsExist(x => x.OriginCityId == model.OriginCityId && x.DestinationCityId == model.DestinationCityId && x.RecordStatus == (int)RecordStatus.Active))
-                        {
-                            route = transShipmentRouteService.FilterActiveBy(x => x.OriginCityId == model.OriginCityId && x.DestinationCityId == model.DestinationCityId).FirstOrDefault();
-                        }
-                        else if (transShipmentRouteService.IsExist(x => x.OriginCityId == model.DestinationCityId && x.DestinationCityId == model.OriginCityId && x.RecordStatus == (int)RecordStatus.Active))
-                        {
-                            route = transShipmentRouteService.FilterActiveBy(x => x.OriginCityId == model.DestinationCityId && x.DestinationCityId == model.OriginCityId).FirstOrDefault();
-                        }
-                        if (route != null)
-                        {
-                            if (route.Legs == null)
-                            {
-                                route.Legs = transShipmentLegService.FilterActiveBy(x => x.TransShipmentRouteId == route.TransShipmentRouteId).OrderBy(x => x.LegOrder).ToList();
-                            }
 
-                            rates = expressRateService.GetExpressRatesByMatrix(matrix.RateMatrixId, route.OriginCityId, route.Legs[0].LegId);
-                            if (rates != null)
-                            {
-                                expressRates.AddRange(rates);
-                            }
-                            rates = expressRateService.GetExpressRatesByMatrix(matrix.RateMatrixId, route.Legs[0].LegId, route.DestinationCityId);
-                            if (rates != null)
-                            {
-                                expressRates.AddRange(rates);
-                            }
+                        //'get the Hub/leg - temporarily Manila is the leg
+                        //'get the first rate
+                        //'get the second rate
+                        //'add the two combination
+                        ///'multiply to chargeable weight
+                        //'it will be the weight charge
+
+                        ExpressRate rate1 = new ExpressRate();
+                        ExpressRate rate2 = new ExpressRate();
+
+                        if (model.TransShipmentLeg == null)
+                        {
+                            model.TransShipmentLeg = transShipmentLegService.GetAll().FirstOrDefault();
+                            model.TransShipmentLegId = model.TransShipmentLeg.CityId;
                         }
+                        
+                        rate1 = expressRateService.GetExpressRatesByMatrix(matrix.RateMatrixId, model.DestinationCityId, model.TransShipmentLeg.CityId);
+                        rate2 = expressRateService.GetExpressRatesByMatrix(matrix.RateMatrixId, model.OriginCityId, model.TransShipmentLeg.CityId);
+
+                        if( rate1 == null)
+                        {
+                            rate1 = expressRateService.GetExpressRatesByMatrix(matrix.RateMatrixId,model.TransShipmentLeg.CityId,model.DestinationCityId);
+                        }
+
+                        if (rate2 == null)
+                        {
+                            rate2 = expressRateService.GetExpressRatesByMatrix(matrix.RateMatrixId, model.TransShipmentLeg.CityId, model.OriginCityId );
+                        }
+
+                        if (rate1 != null)
+                        {
+                            expressRates.Add(rate1);
+                        }
+                        if (rate2 != null)
+                        {
+                            expressRates.Add(rate2);
+                        }
+
+                        
                         #endregion
                     }
                     else
@@ -697,38 +734,32 @@ namespace CMS2.BusinessLogic
                         rates = expressRateService.GetExpressRatesByMatrix(matrix.RateMatrixId, model.OriginCityId, model.DestinationCityId);
                         if (rates != null)
                         {
-                            expressRates.AddRange(rates);
+                            expressRates.Add(rates);
                         }
                         else
                         {
-                            TransShipmentRoute route = null;
-                            if (transShipmentRouteService.IsExist(x => x.OriginCityId == model.OriginCityId && x.DestinationCityId == model.DestinationCityId && x.RecordStatus == (int)RecordStatus.Active))
+                            
+                            ExpressRate rate1 = new ExpressRate();
+                            ExpressRate rate2 = new ExpressRate();
+
+                            if (model.TransShipmentLeg == null)
                             {
-                                route = transShipmentRouteService.FilterActiveBy(x => x.OriginCityId == model.OriginCityId && x.DestinationCityId == model.DestinationCityId).FirstOrDefault();
+                                model.TransShipmentLeg = transShipmentLegService.GetAll().FirstOrDefault();
+                                model.TransShipmentLegId = model.TransShipmentLeg.CityId;
                             }
-                            else if (transShipmentRouteService.IsExist(x => x.OriginCityId == model.DestinationCityId && x.DestinationCityId == model.OriginCityId && x.RecordStatus == (int)RecordStatus.Active))
+
+                            rate1 = expressRateService.GetExpressRatesByMatrix(matrix.RateMatrixId, model.DestinationCityId, model.TransShipmentLeg.CityId);
+                            rate2 = expressRateService.GetExpressRatesByMatrix(matrix.RateMatrixId, model.OriginCityId, model.TransShipmentLeg.CityId);
+                            
+                            if (rate1 != null)
                             {
-                                route = transShipmentRouteService.FilterActiveBy(x => x.OriginCityId == model.DestinationCityId && x.DestinationCityId == model.OriginCityId).FirstOrDefault();
+                                expressRates.Add(rate1);
                             }
-                            if (route != null)
+                            if (rate2 != null)
                             {
-                                if (route.Legs == null)
-                                {
-                                    route.Legs = transShipmentLegService.FilterActiveBy(x => x.TransShipmentRouteId == route.TransShipmentRouteId).OrderBy(x => x.LegOrder).ToList();
-                                }
-                                rates = expressRateService.GetExpressRatesByMatrix(matrix.RateMatrixId,
-                                        route.OriginCityId, route.Legs[0].LegId);
-                                if (rates != null)
-                                {
-                                    expressRates.AddRange(rates);
-                                }
-                                rates = expressRateService.GetExpressRatesByMatrix(matrix.RateMatrixId,
-                                    route.Legs[0].LegId, route.DestinationCityId);
-                                if (rates != null)
-                                {
-                                    expressRates.AddRange(rates);
-                                }
+                                expressRates.Add(rate2);
                             }
+                            
                         }
                     }
                 }
@@ -753,6 +784,7 @@ namespace CMS2.BusinessLogic
             #endregion
 
             decimal expressRateAmount = 1;
+            model.WeightCharge = 0;
             if (expressRates.Count > 0)
             {
                 foreach (var expressRate in expressRates)
@@ -761,31 +793,31 @@ namespace CMS2.BusinessLogic
                     {
                         expressRateAmount = expressRate.C1to5Cost;
                         //model.WeightCharge = model.WeightCharge + (model.ChargeableWeight * expressRateAmount);
-                        model.WeightCharge = expressRateAmount;
+                        model.WeightCharge += expressRateAmount;
                         break;
                     }
                     else if (model.ChargeableWeight >= 6 && model.ChargeableWeight < 49)
                     {
                         expressRateAmount = expressRate.C6to49Cost;
-                        model.WeightCharge = model.ChargeableWeight * expressRateAmount;
+                        model.WeightCharge += model.ChargeableWeight * expressRateAmount;
                         break;
                     }
                     else if (model.ChargeableWeight >= 50 && model.ChargeableWeight < 249)
                     {
                         expressRateAmount = expressRate.C50to249Cost;
-                        model.WeightCharge = model.ChargeableWeight * expressRateAmount;
+                        model.WeightCharge += model.ChargeableWeight * expressRateAmount;
                         break;
                     }
                     else if (model.ChargeableWeight >= 250 && model.ChargeableWeight < 999)
                     {
                         expressRateAmount = expressRate.C250to999Cost;
-                        model.WeightCharge = model.ChargeableWeight * expressRateAmount;
+                        model.WeightCharge += model.ChargeableWeight * expressRateAmount;
                         break;
                     }
                     else if (model.ChargeableWeight >= 1000 && model.ChargeableWeight < 10000)
                     {
                         expressRateAmount = expressRate.C1000_10000Cost;
-                        model.WeightCharge = model.ChargeableWeight * expressRateAmount;
+                        model.WeightCharge += model.ChargeableWeight * expressRateAmount;
                         break;
                     }
                 }

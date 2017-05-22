@@ -113,5 +113,13 @@ namespace CMS2.BusinessLogic
 
             return result;
         }
+
+        public RateMatrix GetMatrix(Guid ApplicableRateId)
+        {
+            RateMatrix result = null;
+            result = FilterActiveBy(x => x.ApplicableRateId == ApplicableRateId).FirstOrDefault();
+
+            return result;
+        }
     }
 }

@@ -46,20 +46,16 @@ namespace CMS2.BusinessLogic
             return commodityService.FilterActive();
         }
         
-        public List<ExpressRate> GetExpressRatesByMatrix(Guid MatrixId, Guid OriginCityId, Guid DestinationCityId)
+        public ExpressRate GetExpressRatesByMatrix(Guid MatrixId, Guid OriginCityId, Guid DestinationCityId)
         {
-            List<ExpressRate> result = null;
-            result = FilterActiveBy(
-                    x =>
-                        x.OriginCityId == OriginCityId && x.DestinationCityId == DestinationCityId && x.RateMatrixId == MatrixId);
-            if (result == null || result.Count<=0)
+            ExpressRate result = null;
+            result = FilterActiveBy( x => x.OriginCityId == OriginCityId && x.DestinationCityId == DestinationCityId && x.RateMatrixId == MatrixId).FirstOrDefault();
+            if (result == null)
             {
-                result = FilterActiveBy(
-                   x =>
-                       x.OriginCityId == DestinationCityId && x.DestinationCityId == OriginCityId && x.RateMatrixId == MatrixId);
+                result = FilterActiveBy(x => x.OriginCityId == DestinationCityId && x.DestinationCityId == OriginCityId && x.RateMatrixId == MatrixId).FirstOrDefault();
             }
 
-            if (result.Count <= 0)
+            if (result==null)
                 result = null;
 
             return result;

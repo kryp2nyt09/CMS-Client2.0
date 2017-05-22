@@ -69,6 +69,10 @@ namespace CMS2.Client
             {
                 try
                 {
+                    if (ctl is ComboBox)
+                    {
+                        continue;
+                    }
                     if (!(ctl.Parent == null))
                     {
                         int parentHeight = ctl.Parent.Height;
