@@ -189,10 +189,14 @@ namespace CMS2.BusinessLogic
                 entity.ShipMode = model.ShipMode;
             if (model.GoodsDescriptionId != null)
                 entity.GoodsDescription = model.GoodsDescription;
-            if (model.TransShipmentLegId != null)
+            if (model.TransShipmentLegId != null  && model.TransShipmentLegId != Guid.Empty)
             {
                 entity.TransShipmentLeg = model.TransShipmentLeg;
+            }else
+            {
+                entity.TransShipmentLegId = null;
             }
+
             return entity;
         }
 
@@ -701,21 +705,21 @@ namespace CMS2.BusinessLogic
                         if (model.TransShipmentLeg == null)
                         {
                             model.TransShipmentLeg = transShipmentLegService.GetAll().FirstOrDefault();
-                            model.TransShipmentLegId = model.TransShipmentLeg.CityId;
+                            model.TransShipmentLegId = model.TransShipmentLeg.TransShipmentLegId;
                         }
                         
                         rate1 = expressRateService.GetExpressRatesByMatrix(matrix.RateMatrixId, model.DestinationCityId, model.TransShipmentLeg.CityId);
                         rate2 = expressRateService.GetExpressRatesByMatrix(matrix.RateMatrixId, model.OriginCityId, model.TransShipmentLeg.CityId);
 
-                        if( rate1 == null)
-                        {
-                            rate1 = expressRateService.GetExpressRatesByMatrix(matrix.RateMatrixId,model.TransShipmentLeg.CityId,model.DestinationCityId);
-                        }
+                        //if( rate1 == null)
+                        //{
+                        //    rate1 = expressRateService.GetExpressRatesByMatrix(matrix.RateMatrixId,model.TransShipmentLeg.CityId,model.DestinationCityId);
+                        //}
 
-                        if (rate2 == null)
-                        {
-                            rate2 = expressRateService.GetExpressRatesByMatrix(matrix.RateMatrixId, model.TransShipmentLeg.CityId, model.OriginCityId );
-                        }
+                        //if (rate2 == null)
+                        //{
+                        //    rate2 = expressRateService.GetExpressRatesByMatrix(matrix.RateMatrixId, model.TransShipmentLeg.CityId, model.OriginCityId );
+                        //}
 
                         if (rate1 != null)
                         {
@@ -745,7 +749,7 @@ namespace CMS2.BusinessLogic
                             if (model.TransShipmentLeg == null)
                             {
                                 model.TransShipmentLeg = transShipmentLegService.GetAll().FirstOrDefault();
-                                model.TransShipmentLegId = model.TransShipmentLeg.CityId;
+                                model.TransShipmentLegId = model.TransShipmentLeg.TransShipmentLegId;
                             }
 
                             rate1 = expressRateService.GetExpressRatesByMatrix(matrix.RateMatrixId, model.DestinationCityId, model.TransShipmentLeg.CityId);
@@ -793,32 +797,27 @@ namespace CMS2.BusinessLogic
                     {
                         expressRateAmount = expressRate.C1to5Cost;
                         //model.WeightCharge = model.WeightCharge + (model.ChargeableWeight * expressRateAmount);
-                        model.WeightCharge += expressRateAmount;
-                        break;
+                        model.WeightCharge += expressRateAmount;                        
                     }
                     else if (model.ChargeableWeight >= 6 && model.ChargeableWeight < 49)
                     {
                         expressRateAmount = expressRate.C6to49Cost;
-                        model.WeightCharge += model.ChargeableWeight * expressRateAmount;
-                        break;
+                        model.WeightCharge += model.ChargeableWeight * expressRateAmount;                        
                     }
                     else if (model.ChargeableWeight >= 50 && model.ChargeableWeight < 249)
                     {
                         expressRateAmount = expressRate.C50to249Cost;
-                        model.WeightCharge += model.ChargeableWeight * expressRateAmount;
-                        break;
+                        model.WeightCharge += model.ChargeableWeight * expressRateAmount;                        
                     }
                     else if (model.ChargeableWeight >= 250 && model.ChargeableWeight < 999)
                     {
                         expressRateAmount = expressRate.C250to999Cost;
-                        model.WeightCharge += model.ChargeableWeight * expressRateAmount;
-                        break;
+                        model.WeightCharge += model.ChargeableWeight * expressRateAmount;                       
                     }
                     else if (model.ChargeableWeight >= 1000 && model.ChargeableWeight < 10000)
                     {
                         expressRateAmount = expressRate.C1000_10000Cost;
-                        model.WeightCharge += model.ChargeableWeight * expressRateAmount;
-                        break;
+                        model.WeightCharge += model.ChargeableWeight * expressRateAmount;                        
                     }
                 }
             }

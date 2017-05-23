@@ -3771,7 +3771,7 @@ namespace CMS2.Client
                 return false;
             }
 
-            if (lstShipMode.SelectedIndex >= 0)
+            if (lstShipMode.SelectedText == "Transhipment")
             {
                 if (lstHub.SelectedIndex <= -1)
                 {
@@ -4284,7 +4284,7 @@ namespace CMS2.Client
                 }
                 if (shipment.TransShipmentLeg != null && shipment.TransShipmentLegId != Guid.Empty)
                 {
-                    lstHub.SelectedValue =transShipmentLegService.GetById(shipment.TransShipmentLegId).TransShipmentLegId;
+                    lstHub.SelectedValue = transShipmentLegService.GetById(shipment.TransShipmentLegId).TransShipmentLegId;
                 }
                 if (shipment.GoodsDescriptionId != null && shipment.GoodsDescriptionId != Guid.Empty)
                     lstGoodsDescription.SelectedValue = shipment.GoodsDescriptionId;

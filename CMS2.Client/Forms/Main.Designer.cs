@@ -70,8 +70,6 @@
             this.UserTxt = new System.Windows.Forms.Label();
             this.pictureLogo = new System.Windows.Forms.PictureBox();
             this.panelUser = new System.Windows.Forms.TableLayoutPanel();
-            this.btnLogOut = new Telerik.WinControls.UI.RadButton();
-            this.btnSettings = new Telerik.WinControls.UI.RadButton();
             this.radPanel2 = new Telerik.WinControls.UI.RadPanel();
             this.pageViewMain = new Telerik.WinControls.UI.RadPageView();
             this.BookingPage = new Telerik.WinControls.UI.RadPageViewPage();
@@ -604,6 +602,8 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.saveFileDialog2 = new System.Windows.Forms.SaveFileDialog();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.btnSettings = new Telerik.WinControls.UI.RadButton();
+            this.btnLogOut = new Telerik.WinControls.UI.RadButton();
             ((System.ComponentModel.ISupportInitialize)(this.radPanel1)).BeginInit();
             this.radPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panel)).BeginInit();
@@ -611,8 +611,6 @@
             this.tableLayoutPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureLogo)).BeginInit();
             this.panelUser.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btnLogOut)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnSettings)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radPanel2)).BeginInit();
             this.radPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pageViewMain)).BeginInit();
@@ -1062,6 +1060,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dateTimeDeliveryStatus_Date)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dropDownDeliveryStatus_Area)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dropDownDeliveryStatus_BCO)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnSettings)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnLogOut)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
             // 
@@ -1071,7 +1071,7 @@
             this.radPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.radPanel1.Location = new System.Drawing.Point(0, 0);
             this.radPanel1.Name = "radPanel1";
-            this.radPanel1.Size = new System.Drawing.Size(1261, 55);
+            this.radPanel1.Size = new System.Drawing.Size(1258, 55);
             this.radPanel1.TabIndex = 0;
             // 
             // panel
@@ -1082,7 +1082,7 @@
             this.panel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel.Location = new System.Drawing.Point(0, 0);
             this.panel.Name = "panel";
-            this.panel.Size = new System.Drawing.Size(1261, 55);
+            this.panel.Size = new System.Drawing.Size(1258, 55);
             this.panel.TabIndex = 12;
             this.panel.ThemeName = "Office2010Black";
             this.panel.Paint += new System.Windows.Forms.PaintEventHandler(this.panel_Paint);
@@ -1098,7 +1098,7 @@
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel3.Controls.Add(this.UserTxt, 2, 1);
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(956, 3);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(985, 3);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 2;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -1134,45 +1134,21 @@
             this.panelUser.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.panelUser.AutoSize = true;
             this.panelUser.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.panelUser.ColumnCount = 4;
+            this.panelUser.ColumnCount = 3;
             this.panelUser.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.panelUser.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 76F));
             this.panelUser.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.panelUser.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.panelUser.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.panelUser.Controls.Add(this.btnLogOut, 2, 1);
             this.panelUser.Controls.Add(this.btnSettings, 1, 1);
-            this.panelUser.Location = new System.Drawing.Point(1057, 25);
+            this.panelUser.Location = new System.Drawing.Point(1107, 25);
             this.panelUser.Name = "panelUser";
             this.panelUser.RowCount = 2;
             this.panelUser.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.panelUser.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.panelUser.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.panelUser.Size = new System.Drawing.Size(164, 28);
+            this.panelUser.Size = new System.Drawing.Size(144, 28);
             this.panelUser.TabIndex = 0;
-            // 
-            // btnLogOut
-            // 
-            this.btnLogOut.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnLogOut.Enabled = false;
-            this.btnLogOut.Location = new System.Drawing.Point(79, 3);
-            this.btnLogOut.Name = "btnLogOut";
-            this.btnLogOut.Size = new System.Drawing.Size(62, 22);
-            this.btnLogOut.TabIndex = 34;
-            this.btnLogOut.Text = "&Logout";
-            this.btnLogOut.ThemeName = "Office2010Black";
-            this.btnLogOut.Click += new System.EventHandler(this.btnLogOut_Click);
-            // 
-            // btnSettings
-            // 
-            this.btnSettings.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnSettings.Location = new System.Drawing.Point(3, 3);
-            this.btnSettings.Name = "btnSettings";
-            this.btnSettings.Size = new System.Drawing.Size(70, 22);
-            this.btnSettings.TabIndex = 36;
-            this.btnSettings.Text = "&Settings";
-            this.btnSettings.ThemeName = "Office2010Black";
-            this.btnSettings.Click += new System.EventHandler(this.btnSettings_Click);
             // 
             // radPanel2
             // 
@@ -1180,7 +1156,7 @@
             this.radPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.radPanel2.Location = new System.Drawing.Point(0, 55);
             this.radPanel2.Name = "radPanel2";
-            this.radPanel2.Size = new System.Drawing.Size(1261, 689);
+            this.radPanel2.Size = new System.Drawing.Size(1258, 666);
             this.radPanel2.TabIndex = 1;
             this.radPanel2.Text = "radPanel2";
             // 
@@ -1198,7 +1174,7 @@
             this.pageViewMain.Location = new System.Drawing.Point(0, 0);
             this.pageViewMain.Name = "pageViewMain";
             this.pageViewMain.SelectedPage = this.BookingPage;
-            this.pageViewMain.Size = new System.Drawing.Size(1261, 689);
+            this.pageViewMain.Size = new System.Drawing.Size(1258, 666);
             this.pageViewMain.TabIndex = 0;
             this.pageViewMain.Text = "Manifest";
             this.pageViewMain.ThemeName = "Office2010Black";
@@ -1213,7 +1189,7 @@
             this.BookingPage.ItemSize = new System.Drawing.SizeF(69F, 30F);
             this.BookingPage.Location = new System.Drawing.Point(12, 40);
             this.BookingPage.Name = "BookingPage";
-            this.BookingPage.Size = new System.Drawing.Size(1237, 637);
+            this.BookingPage.Size = new System.Drawing.Size(1234, 614);
             this.BookingPage.Text = "Booking";
             // 
             // radPanel4
@@ -1222,7 +1198,7 @@
             this.radPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.radPanel4.Location = new System.Drawing.Point(0, 379);
             this.radPanel4.Name = "radPanel4";
-            this.radPanel4.Size = new System.Drawing.Size(1237, 258);
+            this.radPanel4.Size = new System.Drawing.Size(1234, 235);
             this.radPanel4.TabIndex = 1;
             this.radPanel4.Text = "radPanel4";
             // 
@@ -1290,7 +1266,7 @@
             this.BookingGridView.MasterTemplate.ViewDefinition = tableViewDefinition1;
             this.BookingGridView.Name = "BookingGridView";
             this.BookingGridView.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.BookingGridView.Size = new System.Drawing.Size(1237, 258);
+            this.BookingGridView.Size = new System.Drawing.Size(1234, 235);
             this.BookingGridView.TabIndex = 30;
             this.BookingGridView.ThemeName = "Office2010Black";
             this.BookingGridView.CellClick += new Telerik.WinControls.UI.GridViewCellEventHandler(this.BookingGridView_CellClick);
@@ -1305,7 +1281,7 @@
             this.radPanel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.radPanel3.Location = new System.Drawing.Point(0, 0);
             this.radPanel3.Name = "radPanel3";
-            this.radPanel3.Size = new System.Drawing.Size(1237, 379);
+            this.radPanel3.Size = new System.Drawing.Size(1234, 379);
             this.radPanel3.TabIndex = 0;
             this.radPanel3.Text = "radPanel3";
             this.radPanel3.ThemeName = "Office2010Black";
@@ -1323,7 +1299,7 @@
             this.radGroupBox7.Controls.Add(this.btnNew);
             this.radGroupBox7.GroupBoxStyle = Telerik.WinControls.UI.RadGroupBoxStyle.Office;
             this.radGroupBox7.HeaderText = "";
-            this.radGroupBox7.Location = new System.Drawing.Point(845, 7);
+            this.radGroupBox7.Location = new System.Drawing.Point(843, 7);
             this.radGroupBox7.Name = "radGroupBox7";
             this.radGroupBox7.Size = new System.Drawing.Size(388, 366);
             this.radGroupBox7.TabIndex = 28;
@@ -1611,7 +1587,7 @@
             this.GroupConsignee.HeaderText = "";
             this.GroupConsignee.Location = new System.Drawing.Point(424, 7);
             this.GroupConsignee.Name = "GroupConsignee";
-            this.GroupConsignee.Size = new System.Drawing.Size(443, 366);
+            this.GroupConsignee.Size = new System.Drawing.Size(413, 366);
             this.GroupConsignee.TabIndex = 14;
             this.GroupConsignee.TabStop = false;
             this.GroupConsignee.ThemeName = "Office2010Black";
@@ -1663,7 +1639,7 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(407, 344);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(403, 344);
             this.tableLayoutPanel2.TabIndex = 2;
             // 
             // txtConsigneeEmail
@@ -2018,7 +1994,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 33F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(405, 344);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(397, 344);
             this.tableLayoutPanel1.TabIndex = 2;
             // 
             // txtShipperMobile
@@ -2320,7 +2296,7 @@
             this.AcceptancePage.ItemSize = new System.Drawing.SizeF(86F, 30F);
             this.AcceptancePage.Location = new System.Drawing.Point(12, 40);
             this.AcceptancePage.Name = "AcceptancePage";
-            this.AcceptancePage.Size = new System.Drawing.Size(1237, 637);
+            this.AcceptancePage.Size = new System.Drawing.Size(1202, 614);
             this.AcceptancePage.Text = "Acceptance";
             // 
             // panelContent
@@ -2334,7 +2310,7 @@
             this.panelContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelContent.Location = new System.Drawing.Point(0, 0);
             this.panelContent.Name = "panelContent";
-            this.panelContent.Size = new System.Drawing.Size(1237, 637);
+            this.panelContent.Size = new System.Drawing.Size(1202, 614);
             this.panelContent.TabIndex = 21;
             this.panelContent.ThemeName = "Office2010Black";
             // 
@@ -2347,7 +2323,7 @@
             this.radGroupBox4.HeaderText = "Total";
             this.radGroupBox4.Location = new System.Drawing.Point(873, 5);
             this.radGroupBox4.Name = "radGroupBox4";
-            this.radGroupBox4.Size = new System.Drawing.Size(326, 620);
+            this.radGroupBox4.Size = new System.Drawing.Size(326, 610);
             this.radGroupBox4.TabIndex = 51;
             this.radGroupBox4.TabStop = false;
             this.radGroupBox4.Text = "Total";
@@ -2365,7 +2341,7 @@
             this.tableLayoutPanel7.Controls.Add(this.btnPayment, 2, 1);
             this.tableLayoutPanel7.Controls.Add(this.btnPrint, 1, 1);
             this.tableLayoutPanel7.Controls.Add(this.btnAcceptanceReset, 0, 1);
-            this.tableLayoutPanel7.Location = new System.Drawing.Point(8, 533);
+            this.tableLayoutPanel7.Location = new System.Drawing.Point(8, 528);
             this.tableLayoutPanel7.Name = "tableLayoutPanel7";
             this.tableLayoutPanel7.RowCount = 2;
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -3068,7 +3044,7 @@
             this.GroupAcceptance.Controls.Add(this.tableLayoutPanel14);
             this.GroupAcceptance.GroupBoxStyle = Telerik.WinControls.UI.RadGroupBoxStyle.Office;
             this.GroupAcceptance.HeaderText = "";
-            this.GroupAcceptance.Location = new System.Drawing.Point(7, 305);
+            this.GroupAcceptance.Location = new System.Drawing.Point(7, 295);
             this.GroupAcceptance.Name = "GroupAcceptance";
             this.GroupAcceptance.Size = new System.Drawing.Size(860, 320);
             this.GroupAcceptance.TabIndex = 25;
@@ -3813,7 +3789,7 @@
             this.radGroupBox1.HeaderText = "Shipper";
             this.radGroupBox1.Location = new System.Drawing.Point(7, 44);
             this.radGroupBox1.Name = "radGroupBox1";
-            this.radGroupBox1.Size = new System.Drawing.Size(426, 260);
+            this.radGroupBox1.Size = new System.Drawing.Size(426, 250);
             this.radGroupBox1.TabIndex = 5;
             this.radGroupBox1.TabStop = false;
             this.radGroupBox1.Text = "Shipper";
@@ -4086,7 +4062,7 @@
             this.groupBox1.HeaderText = "Consignee";
             this.groupBox1.Location = new System.Drawing.Point(441, 44);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(426, 260);
+            this.groupBox1.Size = new System.Drawing.Size(426, 250);
             this.groupBox1.TabIndex = 15;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Consignee";
@@ -7990,11 +7966,34 @@
             // 
             this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
             // 
+            // btnSettings
+            // 
+            this.btnSettings.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnSettings.Location = new System.Drawing.Point(3, 3);
+            this.btnSettings.Name = "btnSettings";
+            this.btnSettings.Size = new System.Drawing.Size(70, 22);
+            this.btnSettings.TabIndex = 36;
+            this.btnSettings.Text = "&Settings";
+            this.btnSettings.ThemeName = "Office2010Black";
+            this.btnSettings.Click += new System.EventHandler(this.btnSettings_Click);
+            // 
+            // btnLogOut
+            // 
+            this.btnLogOut.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnLogOut.Enabled = false;
+            this.btnLogOut.Location = new System.Drawing.Point(79, 3);
+            this.btnLogOut.Name = "btnLogOut";
+            this.btnLogOut.Size = new System.Drawing.Size(62, 22);
+            this.btnLogOut.TabIndex = 34;
+            this.btnLogOut.Text = "&Logout";
+            this.btnLogOut.ThemeName = "Office2010Black";
+            this.btnLogOut.Click += new System.EventHandler(this.btnLogOut_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1261, 744);
+            this.ClientSize = new System.Drawing.Size(1258, 721);
             this.Controls.Add(this.radPanel2);
             this.Controls.Add(this.radPanel1);
             this.Name = "Main";
@@ -8005,7 +8004,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Main";
             this.ThemeName = "Office2010Black";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_FormClosing);
             this.Load += new System.EventHandler(this.Main_Load);
             this.Shown += new System.EventHandler(this.Main_Shown);
@@ -8018,8 +8016,6 @@
             this.tableLayoutPanel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureLogo)).EndInit();
             this.panelUser.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.btnLogOut)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnSettings)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radPanel2)).EndInit();
             this.radPanel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pageViewMain)).EndInit();
@@ -8496,6 +8492,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dateTimeDeliveryStatus_Date)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dropDownDeliveryStatus_Area)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dropDownDeliveryStatus_BCO)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnSettings)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnLogOut)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
 
@@ -8817,14 +8815,12 @@
         private Telerik.WinControls.UI.RadLabel radLabel1;
         private Telerik.WinControls.UI.RadTextBox txtShipperAccountNo;
         private System.Windows.Forms.Label label3;
-        private Telerik.WinControls.UI.RadButton btnLogOut;
         private System.Windows.Forms.Label UserTxt;
         private System.Windows.Forms.ToolTip toolTip1;
         private Telerik.WinControls.UI.RadLabel radLabel3;
         private Telerik.WinControls.UI.RadMaskedEditBox txtAmountDue;
         private Telerik.WinControls.UI.RadPanel panel;
         private System.Windows.Forms.TableLayoutPanel panelUser;
-        private Telerik.WinControls.UI.RadButton btnSettings;
         private System.Windows.Forms.PictureBox pictureLogo;
         private Telerik.WinControls.UI.RadButton btnEdit;
         private Telerik.WinControls.UI.RadPanel GroupRemarks;
@@ -9045,5 +9041,7 @@
         private Telerik.WinControls.UI.RadLabel radLabel5;
         private Telerik.WinControls.UI.RadDropDownList lstHub;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+        private Telerik.WinControls.UI.RadButton btnLogOut;
+        private Telerik.WinControls.UI.RadButton btnSettings;
     }
 }
