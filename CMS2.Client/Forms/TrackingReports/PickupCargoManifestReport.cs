@@ -20,7 +20,7 @@ namespace CMS2.Client.Forms.TrackingReports
             ShipmentBL _shipmentService = new ShipmentBL();
             List<Shipment> _shipments = _shipmentService.GetAll().Where(x => x.Booking.BookingStatus.BookingStatusName == "Picked-up" && x.AcceptedBy.AssignedToArea.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.RecordStatus == 1 && (x.CreatedDate).ToShortDateString() == date.ToShortDateString()).ToList();
 
-            List<PickupCargoManifestViewModel> modelList = Match(_shipments);
+            List<PickupCargoManifestViewModel> modelList = Match(_shipments).OrderByDescending(x => x.AirwayBillNo).ToList();
 
             DataTable dt = new DataTable();
 

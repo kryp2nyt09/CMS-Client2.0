@@ -576,8 +576,8 @@
             this.dropDownHoldCargo_Branch = new Telerik.WinControls.UI.RadDropDownList();
             this.dateTimeHoldCargo_FromDate = new Telerik.WinControls.UI.RadDateTimePicker();
             this.label40 = new System.Windows.Forms.Label();
-            this.dropDownHoldCargo_BCO_BSO = new Telerik.WinControls.UI.RadDropDownList();
             this.dropDownHoldCargo_Status = new Telerik.WinControls.UI.RadDropDownList();
+            this.dropDownHoldCargo_BCO_BSO = new Telerik.WinControls.UI.RadDropDownList();
             this.label41 = new System.Windows.Forms.Label();
             this.label114 = new System.Windows.Forms.Label();
             this.label115 = new System.Windows.Forms.Label();
@@ -1042,8 +1042,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.btnHoldCargo_Search)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dropDownHoldCargo_Branch)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateTimeHoldCargo_FromDate)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dropDownHoldCargo_BCO_BSO)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dropDownHoldCargo_Status)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dropDownHoldCargo_BCO_BSO)).BeginInit();
             this.radPageViewPage18.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridDeliveryStatus)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridDeliveryStatus.MasterTemplate)).BeginInit();
@@ -4820,7 +4820,7 @@
             // txtTotalCash
             // 
             this.txtTotalCash.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtTotalCash.Location = new System.Drawing.Point(132, 3);
+            this.txtTotalCash.Location = new System.Drawing.Point(145, 3);
             this.txtTotalCash.Name = "txtTotalCash";
             this.txtTotalCash.ReadOnly = true;
             this.txtTotalCash.Size = new System.Drawing.Size(145, 20);
@@ -4832,7 +4832,7 @@
             // txtTotalPending
             // 
             this.txtTotalPending.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtTotalPending.Location = new System.Drawing.Point(132, 133);
+            this.txtTotalPending.Location = new System.Drawing.Point(145, 133);
             this.txtTotalPending.Name = "txtTotalPending";
             this.txtTotalPending.ReadOnly = true;
             this.txtTotalPending.Size = new System.Drawing.Size(145, 20);
@@ -4845,7 +4845,7 @@
             // txtTotalPdc
             // 
             this.txtTotalPdc.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtTotalPdc.Location = new System.Drawing.Point(132, 107);
+            this.txtTotalPdc.Location = new System.Drawing.Point(145, 107);
             this.txtTotalPdc.Name = "txtTotalPdc";
             this.txtTotalPdc.ReadOnly = true;
             this.txtTotalPdc.Size = new System.Drawing.Size(145, 20);
@@ -4860,7 +4860,7 @@
             this.label42.AutoSize = true;
             this.label42.Location = new System.Drawing.Point(3, 110);
             this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(55, 13);
+            this.label42.Size = new System.Drawing.Size(61, 14);
             this.label42.TabIndex = 2;
             this.label42.Text = "Total PDC";
             // 
@@ -4870,7 +4870,7 @@
             this.label47.AutoSize = true;
             this.label47.Location = new System.Drawing.Point(3, 84);
             this.label47.Name = "label47";
-            this.label47.Size = new System.Drawing.Size(101, 13);
+            this.label47.Size = new System.Drawing.Size(113, 14);
             this.label47.TabIndex = 1;
             this.label47.Text = "Total Tax WithHeld";
             // 
@@ -4880,14 +4880,14 @@
             this.label62.AutoSize = true;
             this.label62.Location = new System.Drawing.Point(3, 58);
             this.label62.Name = "label62";
-            this.label62.Size = new System.Drawing.Size(86, 13);
+            this.label62.Size = new System.Drawing.Size(91, 14);
             this.label62.TabIndex = 10;
             this.label62.Text = "Total Collection";
             // 
             // txtRemarksPaymentSummary
             // 
             this.txtRemarksPaymentSummary.AutoSize = false;
-            this.txtRemarksPaymentSummary.Location = new System.Drawing.Point(132, 263);
+            this.txtRemarksPaymentSummary.Location = new System.Drawing.Point(145, 263);
             this.txtRemarksPaymentSummary.Multiline = true;
             this.txtRemarksPaymentSummary.Name = "txtRemarksPaymentSummary";
             this.txtRemarksPaymentSummary.Size = new System.Drawing.Size(145, 44);
@@ -4897,7 +4897,7 @@
             // 
             // txtTotalCheckReceived
             // 
-            this.txtTotalCheckReceived.Location = new System.Drawing.Point(132, 185);
+            this.txtTotalCheckReceived.Location = new System.Drawing.Point(145, 185);
             this.txtTotalCheckReceived.Name = "txtTotalCheckReceived";
             this.txtTotalCheckReceived.ReadOnly = true;
             this.txtTotalCheckReceived.Size = new System.Drawing.Size(145, 20);
@@ -4908,7 +4908,7 @@
             // 
             // txtDifference
             // 
-            this.txtDifference.Location = new System.Drawing.Point(132, 237);
+            this.txtDifference.Location = new System.Drawing.Point(145, 237);
             this.txtDifference.Name = "txtDifference";
             this.txtDifference.ReadOnly = true;
             this.txtDifference.Size = new System.Drawing.Size(145, 20);
@@ -4923,13 +4923,13 @@
             this.label63.AutoSize = true;
             this.label63.Location = new System.Drawing.Point(3, 32);
             this.label63.Name = "label63";
-            this.label63.Size = new System.Drawing.Size(65, 13);
+            this.label63.Size = new System.Drawing.Size(72, 14);
             this.label63.TabIndex = 0;
             this.label63.Text = "Total Check";
             // 
             // txtTotalAmntReceived
             // 
-            this.txtTotalAmntReceived.Location = new System.Drawing.Point(132, 211);
+            this.txtTotalAmntReceived.Location = new System.Drawing.Point(145, 211);
             this.txtTotalAmntReceived.Name = "txtTotalAmntReceived";
             this.txtTotalAmntReceived.ReadOnly = true;
             this.txtTotalAmntReceived.Size = new System.Drawing.Size(145, 20);
@@ -4944,7 +4944,7 @@
             this.label64.AutoSize = true;
             this.label64.Location = new System.Drawing.Point(3, 188);
             this.label64.Name = "label64";
-            this.label64.Size = new System.Drawing.Size(113, 13);
+            this.label64.Size = new System.Drawing.Size(125, 14);
             this.label64.TabIndex = 28;
             this.label64.Text = "Total Check Received";
             // 
@@ -4954,7 +4954,7 @@
             this.label65.AutoSize = true;
             this.label65.Location = new System.Drawing.Point(3, 6);
             this.label65.Name = "label65";
-            this.label65.Size = new System.Drawing.Size(59, 13);
+            this.label65.Size = new System.Drawing.Size(64, 14);
             this.label65.TabIndex = 24;
             this.label65.Text = "Total Cash";
             // 
@@ -4964,7 +4964,7 @@
             this.label66.AutoSize = true;
             this.label66.Location = new System.Drawing.Point(3, 136);
             this.label66.Name = "label66";
-            this.label66.Size = new System.Drawing.Size(77, 13);
+            this.label66.Size = new System.Drawing.Size(83, 14);
             this.label66.TabIndex = 27;
             this.label66.Text = "Total Pending";
             this.label66.Visible = false;
@@ -4972,7 +4972,7 @@
             // txtTotalCashReceived
             // 
             this.txtTotalCashReceived.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtTotalCashReceived.Location = new System.Drawing.Point(132, 159);
+            this.txtTotalCashReceived.Location = new System.Drawing.Point(145, 159);
             this.txtTotalCashReceived.Name = "txtTotalCashReceived";
             this.txtTotalCashReceived.ReadOnly = true;
             this.txtTotalCashReceived.Size = new System.Drawing.Size(145, 20);
@@ -4987,7 +4987,7 @@
             this.label69.AutoSize = true;
             this.label69.Location = new System.Drawing.Point(3, 278);
             this.label69.Name = "label69";
-            this.label69.Size = new System.Drawing.Size(50, 13);
+            this.label69.Size = new System.Drawing.Size(52, 14);
             this.label69.TabIndex = 3;
             this.label69.Text = "Remarks";
             // 
@@ -4997,7 +4997,7 @@
             this.label70.AutoSize = true;
             this.label70.Location = new System.Drawing.Point(3, 240);
             this.label70.Name = "label70";
-            this.label70.Size = new System.Drawing.Size(60, 13);
+            this.label70.Size = new System.Drawing.Size(63, 14);
             this.label70.TabIndex = 1;
             this.label70.Text = "Difference";
             // 
@@ -5007,7 +5007,7 @@
             this.label71.AutoSize = true;
             this.label71.Location = new System.Drawing.Point(3, 214);
             this.label71.Name = "label71";
-            this.label71.Size = new System.Drawing.Size(123, 13);
+            this.label71.Size = new System.Drawing.Size(136, 14);
             this.label71.TabIndex = 26;
             this.label71.Text = "Total Amount Received";
             // 
@@ -5017,14 +5017,14 @@
             this.label72.AutoSize = true;
             this.label72.Location = new System.Drawing.Point(3, 162);
             this.label72.Name = "label72";
-            this.label72.Size = new System.Drawing.Size(107, 13);
+            this.label72.Size = new System.Drawing.Size(117, 14);
             this.label72.TabIndex = 30;
             this.label72.Text = "Total Cash Received";
             // 
             // txtTotalTax
             // 
             this.txtTotalTax.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtTotalTax.Location = new System.Drawing.Point(132, 81);
+            this.txtTotalTax.Location = new System.Drawing.Point(145, 81);
             this.txtTotalTax.Name = "txtTotalTax";
             this.txtTotalTax.ReadOnly = true;
             this.txtTotalTax.Size = new System.Drawing.Size(145, 20);
@@ -5036,7 +5036,7 @@
             // txtTotalCheck
             // 
             this.txtTotalCheck.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtTotalCheck.Location = new System.Drawing.Point(132, 29);
+            this.txtTotalCheck.Location = new System.Drawing.Point(145, 29);
             this.txtTotalCheck.Name = "txtTotalCheck";
             this.txtTotalCheck.ReadOnly = true;
             this.txtTotalCheck.Size = new System.Drawing.Size(145, 20);
@@ -5048,7 +5048,7 @@
             // txtTotalCollection
             // 
             this.txtTotalCollection.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtTotalCollection.Location = new System.Drawing.Point(132, 55);
+            this.txtTotalCollection.Location = new System.Drawing.Point(145, 55);
             this.txtTotalCollection.Name = "txtTotalCollection";
             this.txtTotalCollection.ReadOnly = true;
             this.txtTotalCollection.Size = new System.Drawing.Size(145, 20);
@@ -5471,7 +5471,7 @@
             this.pageViewTracking.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pageViewTracking.Location = new System.Drawing.Point(0, 0);
             this.pageViewTracking.Name = "pageViewTracking";
-            this.pageViewTracking.SelectedPage = this.radPageViewPage8;
+            this.pageViewTracking.SelectedPage = this.radPageViewPage14;
             this.pageViewTracking.Size = new System.Drawing.Size(1231, 571);
             this.pageViewTracking.TabIndex = 0;
             this.pageViewTracking.Text = " ";
@@ -7466,8 +7466,8 @@
             this.radPanel24.Controls.Add(this.dropDownHoldCargo_Branch);
             this.radPanel24.Controls.Add(this.dateTimeHoldCargo_FromDate);
             this.radPanel24.Controls.Add(this.label40);
-            this.radPanel24.Controls.Add(this.dropDownHoldCargo_BCO_BSO);
             this.radPanel24.Controls.Add(this.dropDownHoldCargo_Status);
+            this.radPanel24.Controls.Add(this.dropDownHoldCargo_BCO_BSO);
             this.radPanel24.Controls.Add(this.label41);
             this.radPanel24.Controls.Add(this.label114);
             this.radPanel24.Controls.Add(this.label115);
@@ -7578,15 +7578,6 @@
             this.label40.TabIndex = 84;
             this.label40.Text = "Date:";
             // 
-            // dropDownHoldCargo_BCO_BSO
-            // 
-            this.dropDownHoldCargo_BCO_BSO.Location = new System.Drawing.Point(527, 76);
-            this.dropDownHoldCargo_BCO_BSO.Name = "dropDownHoldCargo_BCO_BSO";
-            this.dropDownHoldCargo_BCO_BSO.Size = new System.Drawing.Size(170, 20);
-            this.dropDownHoldCargo_BCO_BSO.TabIndex = 82;
-            this.dropDownHoldCargo_BCO_BSO.ThemeName = "Office2010Black";
-            this.dropDownHoldCargo_BCO_BSO.Enter += new System.EventHandler(this.dropDownHoldCargo_BCO_BSO_Enter);
-            // 
             // dropDownHoldCargo_Status
             // 
             this.dropDownHoldCargo_Status.Location = new System.Drawing.Point(708, 76);
@@ -7595,6 +7586,15 @@
             this.dropDownHoldCargo_Status.TabIndex = 81;
             this.dropDownHoldCargo_Status.ThemeName = "Office2010Black";
             this.dropDownHoldCargo_Status.Enter += new System.EventHandler(this.dropDownHoldCargo_Status_Enter);
+            // 
+            // dropDownHoldCargo_BCO_BSO
+            // 
+            this.dropDownHoldCargo_BCO_BSO.Location = new System.Drawing.Point(527, 76);
+            this.dropDownHoldCargo_BCO_BSO.Name = "dropDownHoldCargo_BCO_BSO";
+            this.dropDownHoldCargo_BCO_BSO.Size = new System.Drawing.Size(170, 20);
+            this.dropDownHoldCargo_BCO_BSO.TabIndex = 82;
+            this.dropDownHoldCargo_BCO_BSO.ThemeName = "Office2010Black";
+            this.dropDownHoldCargo_BCO_BSO.Enter += new System.EventHandler(this.dropDownHoldCargo_BCO_BSO_Enter);
             // 
             // label41
             // 
@@ -8323,8 +8323,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.btnHoldCargo_Search)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dropDownHoldCargo_Branch)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateTimeHoldCargo_FromDate)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dropDownHoldCargo_BCO_BSO)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dropDownHoldCargo_Status)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dropDownHoldCargo_BCO_BSO)).EndInit();
             this.radPageViewPage18.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridDeliveryStatus.MasterTemplate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridDeliveryStatus)).EndInit();
