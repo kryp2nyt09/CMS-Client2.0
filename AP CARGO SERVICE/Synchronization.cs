@@ -334,8 +334,8 @@ namespace AP_CARGO_SERVICE
                                         "where city.BranchCorpOfficeId = @BranchCorpOfficeId)" +
                                         "UNION " +
                                         "(SELECT pack.PackageDimensionId FROM PackageDimension as pack " +
-                                        "LEFT JOIN Shipment SHIP ON SHIP.ShipmentId = pack.ShipmentId" +
-                                        "LEFT JOIN Booking book ON book.BookingId = SHIP.BookingId" +
+                                        "LEFT JOIN Shipment SHIP ON SHIP.ShipmentId = pack.ShipmentId " +
+                                        "LEFT JOIN Booking book ON book.BookingId = SHIP.BookingId " +
                                         "LEFT JOIN City c ON c.CityId = book.DestinationCityId " +
                                         "LEFT JOIN BranchCorpOffice bco ON bco.BranchCorpOfficeId = c.BranchCorpOfficeId " +
                                         "WHERE bco.BranchCorpOfficeId = @BranchCorpOfficeId)) c)";
@@ -385,8 +385,8 @@ namespace AP_CARGO_SERVICE
                                         "where city.BranchCorpOfficeId = @BranchCorpOfficeId)" +
                                         "UNION " +
                                         "(SELECT pack.PaymentId FROM Payment as pack " +
-                                        "LEFT JOIN Shipment SHIP ON SHIP.ShipmentId = pack.ShipmentId" +
-                                        "LEFT JOIN Booking book ON book.BookingId = SHIP.BookingId" +
+                                        "LEFT JOIN Shipment SHIP ON SHIP.ShipmentId = pack.ShipmentId " +
+                                        "LEFT JOIN Booking book ON book.BookingId = SHIP.BookingId " +
                                         "LEFT JOIN City c ON c.CityId = book.DestinationCityId " +
                                         "LEFT JOIN BranchCorpOffice bco ON bco.BranchCorpOfficeId = c.BranchCorpOfficeId " +
                                         "WHERE bco.BranchCorpOfficeId = @BranchCorpOfficeId)) c)";
@@ -455,8 +455,8 @@ namespace AP_CARGO_SERVICE
                                         "where city.BranchCorpOfficeId = @BranchCorpOfficeId)" +
                                         "UNION " +
                                         "(SELECT delivery.DeliveryId FROM Delivery as delivery " +
-                                        "LEFT JOIN Shipment SHIP ON SHIP.ShipmentId = delivery.ShipmentId" +
-                                        "LEFT JOIN Booking book ON book.BookingId = SHIP.BookingId" +
+                                        "LEFT JOIN Shipment SHIP ON SHIP.ShipmentId = delivery.ShipmentId " +
+                                        "LEFT JOIN Booking book ON book.BookingId = SHIP.BookingId " +
                                         "LEFT JOIN City c ON c.CityId = book.DestinationCityId " +
                                         "LEFT JOIN BranchCorpOffice bco ON bco.BranchCorpOfficeId = c.BranchCorpOfficeId " +
                                         "WHERE bco.BranchCorpOfficeId = @BranchCorpOfficeId)) c)";

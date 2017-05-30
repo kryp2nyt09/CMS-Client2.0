@@ -20,14 +20,14 @@ namespace CMS2.BusinessLogic
 
         }
 
-        public override Expression<Func<TransShipmentRoute, object>>[] Includes()
-        {
-            return new Expression<Func<TransShipmentRoute, object>>[]
-                {
-                    x => x.Legs,
-                    x=>x.OriginCity,
-                    x=>x.DestinationCity
-                };
-        }
+        //public override Expression<Func<TransShipmentRoute, object>>[] Includes()
+        //{
+        //    return new Expression<Func<TransShipmentRoute, object>>[]
+        //        {
+        //            x => x.Legs,
+        //            x=>x.OriginCity,
+        //            x=>x.DestinationCity
+        //        };
+        //}
     }
 }

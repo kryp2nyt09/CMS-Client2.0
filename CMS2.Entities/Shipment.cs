@@ -102,6 +102,12 @@ namespace CMS2.Entities
         [ForeignKey("ServiceTypeId")]
         public virtual ServiceType ServiceType { get; set; }
         public Guid ShipModeId { get; set; }
+
+        public Guid? TransShipmentLegId { get; set; }
+
+        [ForeignKey("TransShipmentLegId")]
+        public TransShipmentLeg TransShipmentLeg { get; set; }
+
         [ForeignKey("ShipModeId")]
         public virtual ShipMode ShipMode { get; set; }
         public Guid GoodsDescriptionId { get; set; }

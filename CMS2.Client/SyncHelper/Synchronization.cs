@@ -482,6 +482,7 @@ namespace CMS2.Client.SyncHelper
 
             SqlParameter param;
             ThreadState state = (ThreadState)obj;
+            List<ManualResetEvent> events = new List<ManualResetEvent>();
             try
             {
 
@@ -491,11 +492,17 @@ namespace CMS2.Client.SyncHelper
                 {
                     case "Booking":
 
-                        filterColumn = "AssignedToAreaId";
-                        filterClause = "[side].[AssignedToAreaId] IN (SELECT book.AssignedToAreaId  FROM Booking as book " +
+                        filterColumn = "BookingId";
+                        filterClause = "[side].[BookingId] IN (SELECT c.BookingId FROM " +
+                                        "((SELECT book.BookingId  FROM Booking as book " +
                                         "left join RevenueUnit as ru on ru.RevenueUnitId = book.AssignedToAreaId " +
                                         "left join City as city on city.CityId = ru.CityId " +
-                                        "where city.BranchCorpOfficeId = @BranchCorpOfficeId)";
+                                        "where city.BranchCorpOfficeId = @BranchCorpOfficeId) " +
+                                        "UNION " +
+                                        "(SELECT b.BookingId FROM Booking b " +
+                                        "LEFT JOIN City c ON c.CityId = b.DestinationCityId " +
+                                        "LEFT JOIN BranchCorpOffice bco ON bco.BranchCorpOfficeId = c.BranchCorpOfficeId " +
+                                        "WHERE bco.BranchCorpOfficeId = @BranchCorpOfficeId)) c )";
                         param = new SqlParameter("@BranchCorpOfficeId", SqlDbType.UniqueIdentifier);
 
                         CreateTemplate(_tableName, filterColumn, filterClause, param);
@@ -511,11 +518,18 @@ namespace CMS2.Client.SyncHelper
                     case "Shipment":
 
                         filterColumn = "ShipmentId";
-                        filterClause = "[side].[ShipmentId] In (SELECT ship.ShipmentId FROM Shipment as ship " +
-                                        "left join Booking as book on book.BookingId = ship.BookingId " +
-                                        "left join RevenueUnit as ru on ru.RevenueUnitId = book.AssignedToAreaId " +
-                                        "left join City as city on city.CityId = ru.CityId " +
-                                        "where city.BranchCorpOfficeId = @BranchCorpOfficeId)";
+                        filterClause = "[side].[ShipmentId] In (SELECT c.ShipmentId FROM " +
+                                        "((SELECT ship.ShipmentId FROM Shipment AS ship " +
+                                        "left join Booking AS book ON book.BookingId = ship.BookingId  " +
+                                        "left join RevenueUnit AS ru ON ru.RevenueUnitId = book.AssignedToAreaId  " +
+                                        "left join City AS city ON city.CityId = ru.CityId  " +
+                                        "WHERE city.BranchCorpOfficeId = @BranchCorpOfficeId) " +
+                                        "UNION " +
+                                        "(SELECT SHIP.ShipmentId FROM Shipment SHIP " +
+                                        "LEFT JOIN Booking book ON book.BookingId = SHIP.BookingId " +
+                                        "LEFT JOIN City c ON c.CityId = book.DestinationCityId  " +
+                                        "LEFT JOIN BranchCorpOffice bco ON bco.BranchCorpOfficeId = c.BranchCorpOfficeId  " +
+                                        "WHERE bco.BranchCorpOfficeId = @BranchCorpOfficeId)) c)";
                         param = new SqlParameter("@BranchCorpOfficeId", SqlDbType.UniqueIdentifier);
 
                         CreateTemplate(_tableName, filterColumn, filterClause, param);
@@ -531,13 +545,21 @@ namespace CMS2.Client.SyncHelper
 
                     case "PackageNumber":
 
-                        filterColumn = "ShipmentId";
-                        filterClause = "[side].[ShipmentId] In (SELECT pack.ShipmentId FROM PackageNumber as pack " +
-                                        "left join   Shipment as ship on ship.ShipmentId = pack.ShipmentId " +
-                                        "left join Booking as book on book.BookingId = ship.BookingId " +
-                                        "left join RevenueUnit as ru on ru.RevenueUnitId = book.AssignedToAreaId " +
-                                        "left join City as city on city.CityId = ru.CityId " +
-                                        "where city.BranchCorpOfficeId = @BranchCorpOfficeId)";
+                        filterColumn = "PackageNumberId";
+                        filterClause = "[side].[PackageNumberId] In (SELECT c.PackageNumberId FROM " +
+                                        "((SELECT pack.PackageNumberId FROM PackageNumber as pack  " +
+                                        "left join   Shipment as ship on ship.ShipmentId = pack.ShipmentId  " +
+                                        "left join Booking as book on book.BookingId = ship.BookingId  " +
+                                        "left join RevenueUnit as ru on ru.RevenueUnitId = book.AssignedToAreaId  " +
+                                        "left join City as city on city.CityId = ru.CityId  " +
+                                        "where city.BranchCorpOfficeId = @BranchCorpOfficeId) " +
+                                        "UNION  " +
+                                        "(SELECT pack.PackageNumberId FROM PackageNumber as pack  " +
+                                        "LEFT JOIN Shipment SHIP ON SHIP.ShipmentId = pack.ShipmentId " +
+                                        "LEFT JOIN Booking book ON book.BookingId = SHIP.BookingId " +
+                                        "LEFT JOIN City c ON c.CityId = book.DestinationCityId  " +
+                                        "LEFT JOIN BranchCorpOffice bco ON bco.BranchCorpOfficeId = c.BranchCorpOfficeId  " +
+                                        "WHERE bco.BranchCorpOfficeId = @BranchCorpOfficeId)) c)";
                         param = new SqlParameter("@BranchCorpOfficeId", SqlDbType.UniqueIdentifier);
 
                         CreateTemplate(_tableName, filterColumn, filterClause, param);
@@ -553,13 +575,21 @@ namespace CMS2.Client.SyncHelper
 
                     case "PackageDimension":
 
-                        filterColumn = "ShipmentId";
-                        filterClause = "[side].[ShipmentId] In (SELECT pack.ShipmentId FROM PackageDimension as pack " +
+                        filterColumn = "PackageDimensionId";
+                        filterClause = "[side].[PackageDimensionId] In (SELECT  c.PackageDimensionId FROM " +
+                                        "((SELECT pack.PackageDimensionId FROM PackageDimension as pack " +
                                         "left join   Shipment as ship on ship.ShipmentId = pack.ShipmentId " +
                                         "left join Booking as book on book.BookingId = ship.BookingId " +
                                         "left join RevenueUnit as ru on ru.RevenueUnitId = book.AssignedToAreaId " +
                                         "left join City as city on city.CityId = ru.CityId " +
-                                        "where city.BranchCorpOfficeId = @BranchCorpOfficeId)";
+                                        "where city.BranchCorpOfficeId = @BranchCorpOfficeId)" +
+                                        "UNION " +
+                                        "(SELECT pack.PackageDimensionId FROM PackageDimension as pack " +
+                                        "LEFT JOIN Shipment SHIP ON SHIP.ShipmentId = pack.ShipmentId " +
+                                        "LEFT JOIN Booking book ON book.BookingId = SHIP.BookingId " +
+                                        "LEFT JOIN City c ON c.CityId = book.DestinationCityId " +
+                                        "LEFT JOIN BranchCorpOffice bco ON bco.BranchCorpOfficeId = c.BranchCorpOfficeId " +
+                                        "WHERE bco.BranchCorpOfficeId = @BranchCorpOfficeId)) c)";
                         param = new SqlParameter("@BranchCorpOfficeId", SqlDbType.UniqueIdentifier);
 
                         CreateTemplate(_tableName, filterColumn, filterClause, param);
@@ -573,7 +603,7 @@ namespace CMS2.Client.SyncHelper
                         Log.WriteLogs(_tableName + " was provisioned.");
                         break;
 
-                    case "StateOfAccountPayment":
+                    case "StatementOfAccountPayment":
 
                         filterColumn = "StatementOfAccountId";
                         filterClause = "[side].[StatementOfAccountId] In (Select soaPayment.StatementOfAccountId from StatementOfAccountPayment as soaPayment " +
@@ -596,13 +626,21 @@ namespace CMS2.Client.SyncHelper
                         break;
                     case "Payment":
 
-                        filterColumn = "ShipmentId";
-                        filterClause = "[side].[ShipmentId] In (Select payment.ShipmentId from Payment as payment " +
-                                        "left join Shipment as shipment on shipment.ShipmentId = payment.ShipmentId " +
-                                        "left join Booking as book on book.BookingId = shipment.BookingId " +
+                        filterColumn = "PaymentId";
+                        filterClause = "[side].[PaymentId] In (SELECT  c.PaymentId FROM " +
+                                        "((SELECT pack.PaymentId FROM Payment as pack " +
+                                        "left join   Shipment as ship on ship.ShipmentId = pack.ShipmentId " +
+                                        "left join Booking as book on book.BookingId = ship.BookingId " +
                                         "left join RevenueUnit as ru on ru.RevenueUnitId = book.AssignedToAreaId " +
                                         "left join City as city on city.CityId = ru.CityId " +
-                                        "where city.BranchCorpOfficeId = @BranchCorpOfficeId)";
+                                        "where city.BranchCorpOfficeId = @BranchCorpOfficeId)" +
+                                        "UNION " +
+                                        "(SELECT pack.PaymentId FROM Payment as pack " +
+                                        "LEFT JOIN Shipment SHIP ON SHIP.ShipmentId = pack.ShipmentId " +
+                                        "LEFT JOIN Booking book ON book.BookingId = SHIP.BookingId " +
+                                        "LEFT JOIN City c ON c.CityId = book.DestinationCityId " +
+                                        "LEFT JOIN BranchCorpOffice bco ON bco.BranchCorpOfficeId = c.BranchCorpOfficeId " +
+                                        "WHERE bco.BranchCorpOfficeId = @BranchCorpOfficeId)) c)";
                         param = new SqlParameter("@BranchCorpOfficeId", SqlDbType.UniqueIdentifier);
 
                         CreateTemplate(_tableName, filterColumn, filterClause, param);
@@ -658,13 +696,21 @@ namespace CMS2.Client.SyncHelper
                         break;
                     case "Delivery":
 
-                        filterColumn = "ShipmentId";
-                        filterClause = "[side].[ShipmentId] In (Select delivery.ShipmentId from Delivery as delivery " +
-                                        "left join Shipment as shipment on shipment.ShipmentId = delivery.ShipmentId " +
-                                        "left join Booking as book on book.BookingId = shipment.BookingId " +
+                        filterColumn = "DeliveryId";
+                        filterClause = "[side].[DeliveryId] In (SELECT  c.DeliveryId FROM " +
+                                        "((SELECT delivery.DeliveryId FROM Delivery as delivery " +
+                                        "left join   Shipment as ship on ship.ShipmentId = delivery.ShipmentId " +
+                                        "left join Booking as book on book.BookingId = ship.BookingId " +
                                         "left join RevenueUnit as ru on ru.RevenueUnitId = book.AssignedToAreaId " +
                                         "left join City as city on city.CityId = ru.CityId " +
-                                        "where city.BranchCorpOfficeId = @BranchCorpOfficeId)";
+                                        "where city.BranchCorpOfficeId = @BranchCorpOfficeId)" +
+                                        "UNION " +
+                                        "(SELECT delivery.DeliveryId FROM Delivery as delivery " +
+                                        "LEFT JOIN Shipment SHIP ON SHIP.ShipmentId = delivery.ShipmentId " +
+                                        "LEFT JOIN Booking book ON book.BookingId = SHIP.BookingId " +
+                                        "LEFT JOIN City c ON c.CityId = book.DestinationCityId " +
+                                        "LEFT JOIN BranchCorpOffice bco ON bco.BranchCorpOfficeId = c.BranchCorpOfficeId " +
+                                        "WHERE bco.BranchCorpOfficeId = @BranchCorpOfficeId)) c)";
                         param = new SqlParameter("@BranchCorpOfficeId", SqlDbType.UniqueIdentifier);
 
                         CreateTemplate(_tableName, filterColumn, filterClause, param);
@@ -679,14 +725,22 @@ namespace CMS2.Client.SyncHelper
                         break;
                     case "DeliveryPackage":
 
-                        filterColumn = "DeliveryId";
-                        filterClause = "[side].[DeliveryId] In (Select package.DeliveryId from DeliveredPackage as package  " +
-                                        "left join Delivery as delivery on delivery.DeliveryId = package.DeliveryId " +
-                                        "left join Shipment as shipment on shipment.ShipmentId = delivery.ShipmentId " +
-                                        "left join Booking as book on book.BookingId = shipment.BookingId " +
-                                        "left join RevenueUnit as ru on ru.RevenueUnitId = book.AssignedToAreaId " +
-                                        "left join City as city on city.CityId = ru.CityId " +
-                                        "where city.BranchCorpOfficeId = @BranchCorpOfficeId)";
+                        filterColumn = "DeliveredPackageId";
+                        filterClause = "[side].[DeliveredPackageId] In (SELECT  c.DeliveredPackageId FROM " +
+                                        "LEFT JOIN Delivery delivery on delivery.DeliveryId = package.DeliveryId " +
+                                        "LEFT JOIN   Shipment as ship on ship.ShipmentId = delivery.DeliveryId " +
+                                        "left join Booking as book on book.BookingId = ship.BookingId  " +
+                                        "left join RevenueUnit as ru on ru.RevenueUnitId = book.AssignedToAreaId  " +
+                                        "left join City as city on city.CityId = ru.CityId  " +
+                                        "where city.BranchCorpOfficeId = @BranchCorpOfficeId) " +
+                                        "UNION  " +
+                                        "(SELECT package.DeliveredPackageId from DeliveredPackage as package " +
+                                        "LEFT JOIN Delivery delivery on delivery.DeliveryId = package.DeliveryId " +
+                                        "LEFT JOIN   Shipment as ship on ship.ShipmentId = delivery.DeliveryId " +
+                                        "LEFT JOIN Booking book ON book.BookingId = SHIP.BookingId " +
+                                        "LEFT JOIN City c ON c.CityId = book.DestinationCityId  " +
+                                        "LEFT JOIN BranchCorpOffice bco ON bco.BranchCorpOfficeId = c.BranchCorpOfficeId  " +
+                                        "WHERE bco.BranchCorpOfficeId = @BranchCorpOfficeId)) c)";
                         param = new SqlParameter("@BranchCorpOfficeId", SqlDbType.UniqueIdentifier);
 
                         CreateTemplate(_tableName, filterColumn, filterClause, param);
@@ -701,14 +755,23 @@ namespace CMS2.Client.SyncHelper
                         break;
                     case "DeliveryReceipt":
 
-                        filterColumn = "DeliveryId";
-                        filterClause = "[side].[DeliveryId] In (Select receipt.DeliveryId from DeliveryReceipt as receipt " +
-                                        "left join Delivery as delivery on delivery.DeliveryId = receipt.DeliveryId " +
-                                        "left join Shipment as shipment on shipment.ShipmentId = delivery.ShipmentId " +
-                                        "left join Booking as book on book.BookingId = shipment.BookingId " +
-                                        "left join RevenueUnit as ru on ru.RevenueUnitId = book.AssignedToAreaId " +
-                                        "left join City as city on city.CityId = ru.CityId " +
-                                        "where city.BranchCorpOfficeId = @BranchCorpOfficeId)";
+                        filterColumn = "DeliveryReceiptId";
+                        filterClause = "[side].[DeliveryReceiptId] In (SELECT  c.DeliveryReceiptId FROM " +
+                                        "((SELECT reciept.DeliveryReceiptId from DeliveryReceipt as reciept " +
+                                        "left join Delivery delivery on delivery.DeliveryId = reciept.DeliveryId " +
+                                        "left join   Shipment as ship on ship.ShipmentId = delivery.DeliveryId  " +
+                                        "left join Booking as book on book.BookingId = ship.BookingId  " +
+                                        "left join RevenueUnit as ru on ru.RevenueUnitId = book.AssignedToAreaId  " +
+                                        "left join City as city on city.CityId = ru.CityId  " +
+                                        "where city.BranchCorpOfficeId = @BranchCorpOfficeId) " +
+                                        "UNION  " +
+                                        "(SELECT reciept.DeliveryReceiptId from DeliveryReceipt as reciept " +
+                                        "LEFT JOIN Delivery delivery on delivery.DeliveryId = reciept.DeliveryId " +
+                                        "LEFT JOIN   Shipment as ship on ship.ShipmentId = delivery.DeliveryId  " +
+                                        "LEFT JOIN Booking book ON book.BookingId = SHIP.BookingId " +
+                                        "LEFT JOIN City c ON c.CityId = book.DestinationCityId  " +
+                                        "LEFT JOIN BranchCorpOffice bco ON bco.BranchCorpOfficeId = c.BranchCorpOfficeId  " +
+                                        "WHERE bco.BranchCorpOfficeId = @BranchCorpOfficeId)) c)";
                         param = new SqlParameter("@BranchCorpOfficeId", SqlDbType.UniqueIdentifier);
 
                         CreateTemplate(_tableName, filterColumn, filterClause, param);

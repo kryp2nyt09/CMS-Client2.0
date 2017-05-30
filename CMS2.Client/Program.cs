@@ -34,6 +34,8 @@ namespace CMS2.Client
             }
             else
             {
+                cmsMainWindow.Height = 755;
+                cmsMainWindow.Width = 1266;
                 Application.Run(cmsMainWindow);
             }
 
