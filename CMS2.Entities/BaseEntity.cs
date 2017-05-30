@@ -8,6 +8,7 @@ namespace CMS2.Entities
     public abstract class BaseEntity
     {
         public Guid CreatedBy { get; set; }
+        
 
         public DateTime CreatedDate { get; set; }
 

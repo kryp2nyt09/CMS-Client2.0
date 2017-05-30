@@ -25,5 +25,6 @@ namespace CMS2.Entities.ReportModel
         public string BCO { get; set; }
         public string PaymentCode { get; set; }
         public string Scannedby { get; set; }
+        public string BatchName { get; set; }
     }
 }

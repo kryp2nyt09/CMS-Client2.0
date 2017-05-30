@@ -47,6 +47,9 @@ namespace CMS2.Entities
         [ForeignKey("RemarkID")]
         public virtual Remarks Remarks { get; set; }
 
+        [ForeignKey("UserID")]
+        public virtual User Users { get; set; }
+
 
     }
 }

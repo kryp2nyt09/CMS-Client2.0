@@ -19,5 +19,7 @@ namespace CMS2.Entities.ReportModel
         public string Batch { get; set; }
         public string BCO { get; set; }
         public string ScannedBy { get; set; }
+        public string DeliveredBy { get; set; }
+        public string ReceivedBy { get; set; }
     }
 }

@@ -102,8 +102,40 @@ namespace CMS2.Client
 
         #endregion
 
+
+        #region track
+        private BindingSource bsDriver;
+        private BindingSource bsBatch;
+        private BindingSource bsEmployee;
+        private BindingSource bsStatus;
+        private BindingSource bsGTCommodityType;
+        private BindingSource bstrackRevenueUnitType;
+        private BindingSource bstrackBARevenueUnitName;
+        private BindingSource bsBundleBSO;
+        private BindingSource bsUnbundleBCO;
+        private BindingSource bsGTDestinationBCO;
+        private BindingSource bsGTBatch;
+        private BindingSource bsGODestinationBCO;
+        private BindingSource bsGOBatch;
+        private BindingSource bsGOCommodityType;
+        private BindingSource bsGICommodityType;
+        private BindingSource bsCTBatch;
+        private BindingSource bsSGBCO;
+        private BindingSource bsSGBatch;
+
+        private BranchAcceptanceBL branchAcceptanceService;
+        private BatchBL batchService;
+        private DeliveryStatusBL deliveryStatusService;
+        private ReasonBL reasonService;
+        private GatewayInboundBL gwInboundService;
+
+        
+        #endregion
+
+
         #region Acceptance
 
+        private BindingSource bsBCO;
         private ShipmentModel shipment;
         private PackageDimensionModel packageDimensionModel;
         private BindingSource bsCommodityType;
@@ -142,6 +174,7 @@ namespace CMS2.Client
         private RateMatrixBL rateMatrixService;
         private PaymentTermBL paymentTermService;
         private TransShipmentLegBL transShipmentLegService;
+       
 
 
         private CommodityType commodityType;
@@ -275,6 +308,7 @@ namespace CMS2.Client
             GlobalVars.UnitOfWork = new CmsUoW();
 
             LoadInit();
+            TrackingLoadInit();
 
             BookingResetAll();
             //PopulateGrid();
@@ -382,6 +416,7 @@ namespace CMS2.Client
                     dropDownPickUpCargo_BCO.SelectedValue = GlobalVars.DeviceBcoId;
 
                     //List<RevenueUnit> _revenueUnit = getRevenueList();
+                    //List<RevenueUnit> _revenueUnit = areas.Where(x => x.City.BranchCorpOfficeId == GlobalVars.DeviceBcoId).ToList();
                     //dropDownPickUpCargo_Area.DataSource = _revenueUnit;
                     //dropDownPickUpCargo_Area.DisplayMember = "RevenueUnitName";
                     //dropDownPickUpCargo_Area.ValueMember = "RevenueUnitId";
@@ -395,8 +430,36 @@ namespace CMS2.Client
                     dateTimePickerBranchAcceptance_Date.Value = DateTime.Now;
 
                     /******** SET COMBOBOX (BRANCH) *******/
-                    dropDownBundle_Branch.SelectedIndex = 0;
-                    dropDownBranchAcceptance_Branch.SelectedIndex = 0;
+                    //dropDownBundle_Branch.SelectedIndex = 0;
+                    //dropDownBranchAcceptance_Branch.SelectedIndex = 0;
+
+                    //PickupCargo
+                    PickUpCargoLoadData();
+                    BranchAcceptanceLoadData();
+                    UnbundleLoadData();
+                    BundleLoadData();
+                    GatewayTransmittalLoadData();
+                    GatewayOutboundLoadData();
+                    GatewayInboundLoadData();
+                    CargoTransferLoadData();
+                    SegregationLoadData();
+                    DailyTripLoadData();
+                    HoldCargoLoadData();
+                    DeliveryStatusLoadData();
+
+                    //List<RevenueUnitType> rUniType = paymentSummary_revenueUnitType.Where(x => x.RecordStatus == 1).ToList();
+                    //cmb_RevenueUnitType.DataSource = rUniType;
+                    //cmb_RevenueUnitType.DisplayMember = "RevenueUnitTypeName";
+                    //cmb_RevenueUnitType.ValueMember = "RevenueUnitTypeId";
+
+                    //cmb_RevenueUnitType.Items.Add("All");
+                    //cmb_RevenueUnitType.SelectedValue = "All";
+
+                    //cmb_RevenueUnit
+
+
+
+
 
                     break;
                 default:
@@ -2668,6 +2731,40 @@ namespace CMS2.Client
             lstDestinationBco.SelectedIndex = -1;
 
         }
+
+        private void TrackingLoadInit()
+        {
+            bsDriver = new BindingSource();
+            bsBatch = new BindingSource();
+            bsEmployee = new BindingSource();
+            bsStatus = new BindingSource();
+            bsBCO = new BindingSource();
+            bstrackRevenueUnitType = new BindingSource();
+            bstrackBARevenueUnitName = new BindingSource();
+            bsBundleBSO = new BindingSource();
+            bsUnbundleBCO = new BindingSource();
+            bsGTDestinationBCO = new BindingSource();
+            bsGTBatch = new BindingSource();
+            bsGODestinationBCO = new BindingSource();
+            bsGOBatch = new BindingSource();
+            bsGICommodityType = new BindingSource();
+            bsCTBatch = new BindingSource();
+            bsSGBCO = new BindingSource();
+            bsSGBatch = new BindingSource();
+
+
+
+            branchAcceptanceService = new BranchAcceptanceBL(GlobalVars.UnitOfWork);
+            batchService = new BatchBL(GlobalVars.UnitOfWork);
+            deliveryStatusService = new DeliveryStatusBL(GlobalVars.UnitOfWork);
+            revenueUnitTypeService = new RevenueUnitTypeBL(GlobalVars.UnitOfWork);
+            revenueUnitservice = new RevenueUnitBL(GlobalVars.UnitOfWork);
+            reasonService = new ReasonBL(GlobalVars.UnitOfWork);
+            gwInboundService = new GatewayInboundBL(GlobalVars.UnitOfWork);
+
+
+        }
+
 
         private void NewShipment()
         {
@@ -5465,6 +5562,7 @@ namespace CMS2.Client
 
             return dt;
         }
+
         private void SelectedRevenueUnit(Guid revenueUnitTypeId)
         {
             lstRevenueUnitName.DataSource = null;
@@ -5729,7 +5827,7 @@ namespace CMS2.Client
             }
 
             dt.BeginLoadData();
-            foreach (GridRowElement row in this.gridPickupCargo.TableElement.VisualRows)
+            foreach (GridRowElement row in this.gridPickupCargo.TableElement.RowScroller)
             {
                 if (row is GridDataRowElement)
                 {
@@ -5743,6 +5841,7 @@ namespace CMS2.Client
                 }
             }
             dt.EndLoadData();
+            TrackingReportGlobalModel.table = dt;
             return dt;
         }
         public DataTable getBranchAcceptanceGrid()
@@ -6023,15 +6122,17 @@ namespace CMS2.Client
                 DataView view = new DataView(dataTable);
                 gridPickupCargo.DataSource = dataTable;
 
+                TrackingReportGlobalModel.table = dataTable;
+
                 //AREA
-                DataTable table = view.ToTable(true, "Area");
-                dropDownPickUpCargo_Area.Items.Clear();
-                dropDownPickUpCargo_Area.Items.Add("All");
-                foreach (DataRow x in table.Rows)
-                {
-                    dropDownPickUpCargo_Area.Items.Add(x["Area"].ToString());
-                }
-                dropDownPickUpCargo_Area.SelectedIndex = 0;
+                //DataTable table = view.ToTable(true, "Area");
+                //dropDownPickUpCargo_Area.Items.Clear();
+                //dropDownPickUpCargo_Area.Items.Add("All");
+                //foreach (DataRow x in table.Rows)
+                //{
+                //    dropDownPickUpCargo_Area.Items.Add(x["Area"].ToString());
+                //}
+                //dropDownPickUpCargo_Area.SelectedIndex = 0;
 
                 #region PickupCargo Grid Design
                 if (gridPickupCargo.DataSource != null)
@@ -6053,6 +6154,60 @@ namespace CMS2.Client
                 Logs.ErrorLogs(LogPath, "Pickup Cargo", ex.Message);
             }
         }
+
+        public void getPickupCargoDataByRevenueUnit()
+        {
+            Guid revenueUnitTypeId = new Guid();
+            Guid revenueUnitId = new Guid();
+            try
+            {
+                
+                revenueUnitTypeId = Guid.Parse(cmb_RevenueUnitType.SelectedValue.ToString());
+                revenueUnitId = Guid.Parse(cmb_RevenueUnit.SelectedValue.ToString());
+
+
+
+                PickupCargoManifestReport pickup = new PickupCargoManifestReport();
+                DataTable dataTable = pickup.getPickupCargoDataByRevenueUnit(dateTimePicker_PickupCargo.Value, revenueUnitTypeId, revenueUnitId);
+                DataView view = new DataView(dataTable);
+                gridPickupCargo.DataSource = dataTable;
+
+                TrackingReportGlobalModel.table = dataTable;
+
+                //AREA
+                //DataTable table = view.ToTable(true, "Area");
+                //dropDownPickUpCargo_Area.Items.Clear();
+                //dropDownPickUpCargo_Area.Items.Add("All");
+                //foreach (DataRow x in table.Rows)
+                //{
+                //    dropDownPickUpCargo_Area.Items.Add(x["Area"].ToString());
+                //}
+                //dropDownPickUpCargo_Area.SelectedIndex = 0;
+
+                #region PickupCargo Grid Design
+                if (gridPickupCargo.DataSource != null)
+                {
+                    List<int> width = pickup.setPickUpCargoWidth();
+                    int ctr = 0;
+                    foreach (int x in width)
+                    {
+                        if (x == 0) { gridPickupCargo.Columns[ctr].IsVisible = false; }
+                        gridPickupCargo.Columns[ctr].Width = x;
+                        ctr++;
+                    }
+
+                }
+                #endregion PickupCargo Grid Design
+            }
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs(LogPath, "Pickup Cargo", ex.Message);
+            }
+        }
+
+
+
+
         /// <summary>
         /// BRANCH ACCEPTANCE
         /// </summary>
@@ -6064,28 +6219,28 @@ namespace CMS2.Client
                 DataTable dataTable = branchAccept.getBranchAcceptanceData(dateTimePickerBranchAcceptance_Date.Value);
                 DataView view = new DataView(dataTable);
 
-                //DRIVER
-                DataTable table = view.ToTable(true, "Driver");
-                dropDownBranchAcceptance_Driver.Items.Clear();
-                dropDownBranchAcceptance_Driver.Items.Add("All");
-                foreach (DataRow x in table.Rows)
-                {
-                    dropDownBranchAcceptance_Driver.Items.Add(x["Driver"].ToString());
-                }
-                dropDownBranchAcceptance_Driver.SelectedIndex = 0;
+                ////DRIVER
+                //DataTable table = view.ToTable(true, "Driver");
+                //dropDownBranchAcceptance_Driver.Items.Clear();
+                //dropDownBranchAcceptance_Driver.Items.Add("All");
+                //foreach (DataRow x in table.Rows)
+                //{
+                //    dropDownBranchAcceptance_Driver.Items.Add(x["Driver"].ToString());
+                //}
+                //dropDownBranchAcceptance_Driver.SelectedIndex = 0;
 
-                //BATCH
-                table = view.ToTable(true, "Batch");
-                dropDownBranchAcceptance_Batch.Items.Clear();
-                dropDownBranchAcceptance_Batch.Items.Add("All");
-                foreach (DataRow x in table.Rows)
-                {
-                    dropDownBranchAcceptance_Batch.Items.Add(x["Batch"].ToString());
-                }
-                dropDownBranchAcceptance_Batch.SelectedIndex = 0;
+                ////BATCH
+                //table = view.ToTable(true, "Batch");
+                //dropDownBranchAcceptance_Batch.Items.Clear();
+                //dropDownBranchAcceptance_Batch.Items.Add("All");
+                //foreach (DataRow x in table.Rows)
+                //{
+                //    dropDownBranchAcceptance_Batch.Items.Add(x["Batch"].ToString());
+                //}
+                //dropDownBranchAcceptance_Batch.SelectedIndex = 0;
 
-                dropDownBranchAcceptance_BCO_BSO.Items.Clear();
-                dropDownBranchAcceptance_BCO_BSO.Items.Add("All");
+                //dropDownBranchAcceptance_BCO_BSO.Items.Clear();
+                //dropDownBranchAcceptance_BCO_BSO.Items.Add("All");
 
                 gridBranchAcceptance.DataSource = dataTable;
 
@@ -6110,6 +6265,131 @@ namespace CMS2.Client
             }
 
         }
+
+        public void getBranchAcceptanceDataByBatch()
+        {
+            Guid revenueUnitId = new Guid();
+            Guid batchId = new Guid();
+            try
+            {
+                revenueUnitId = Guid.Parse(dropDownBranchAcceptance_BCO_BSO.SelectedValue.ToString());
+                batchId = Guid.Parse(dropDownBranchAcceptance_Batch.SelectedValue.ToString());
+
+
+                BranchAcceptanceReport branchAccept = new BranchAcceptanceReport();
+                DataTable dataTable = branchAccept.getBranchAcceptanceDataByBatch(dateTimePickerBranchAcceptance_Date.Value, revenueUnitId, batchId);
+                DataView view = new DataView(dataTable);
+
+               
+                gridBranchAcceptance.DataSource = dataTable;
+
+                #region Branch Acceptance Grid Design
+                if (gridBranchAcceptance.DataSource != null)
+                {
+                    List<int> width = branchAccept.setBranchAcceptanceWidth();
+                    int ctr = 0;
+                    foreach (int x in width)
+                    {
+                        if (x == 0) { gridBranchAcceptance.Columns[ctr].IsVisible = false; }
+                        gridBranchAcceptance.Columns[ctr].Width = x;
+                        ctr++;
+                    }
+
+                }
+                #endregion Branch Acceptance Grid Design
+            }
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs(LogPath, "Branch Acceptance", ex.Message);
+            }
+
+        }
+
+        public void getBranchAcceptanceData1()
+        {
+            Guid revenueUnitId = new Guid();
+            string Driver = "";
+            try
+            {
+                revenueUnitId = Guid.Parse(dropDownBranchAcceptance_BCO_BSO.SelectedValue.ToString());
+                Driver = dropDownBranchAcceptance_Driver.SelectedItem.ToString();
+
+
+                BranchAcceptanceReport branchAccept = new BranchAcceptanceReport();
+                DataTable dataTable = branchAccept.getBranchAcceptanceData1(dateTimePickerBranchAcceptance_Date.Value, revenueUnitId, Driver);
+                DataView view = new DataView(dataTable);
+
+
+                gridBranchAcceptance.DataSource = dataTable;
+
+                #region Branch Acceptance Grid Design
+                if (gridBranchAcceptance.DataSource != null)
+                {
+                    List<int> width = branchAccept.setBranchAcceptanceWidth();
+                    int ctr = 0;
+                    foreach (int x in width)
+                    {
+                        if (x == 0) { gridBranchAcceptance.Columns[ctr].IsVisible = false; }
+                        gridBranchAcceptance.Columns[ctr].Width = x;
+                        ctr++;
+                    }
+
+                }
+                #endregion Branch Acceptance Grid Design
+            }
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs(LogPath, "Branch Acceptance", ex.Message);
+            }
+
+        }
+
+        public void getBranchAcceptanceDataByFilter()
+        {
+            Guid revenueUnitId = new Guid();
+            string Driver = "";
+            Guid batchId = new Guid();
+            try
+            {
+                revenueUnitId = Guid.Parse(dropDownBranchAcceptance_BCO_BSO.SelectedValue.ToString());
+                Driver = dropDownBranchAcceptance_Driver.SelectedItem.ToString();
+                batchId = Guid.Parse(dropDownBranchAcceptance_Batch.SelectedValue.ToString());
+
+                BranchAcceptanceReport branchAccept = new BranchAcceptanceReport();
+                DataTable dataTable = branchAccept.getBranchAcceptanceDataByFilter(dateTimePickerBranchAcceptance_Date.Value, revenueUnitId, Driver, batchId);
+                DataView view = new DataView(dataTable);
+
+
+                gridBranchAcceptance.DataSource = dataTable;
+
+                #region Branch Acceptance Grid Design
+                if (gridBranchAcceptance.DataSource != null)
+                {
+                    List<int> width = branchAccept.setBranchAcceptanceWidth();
+                    int ctr = 0;
+                    foreach (int x in width)
+                    {
+                        if (x == 0) { gridBranchAcceptance.Columns[ctr].IsVisible = false; }
+                        gridBranchAcceptance.Columns[ctr].Width = x;
+                        ctr++;
+                    }
+
+                }
+                #endregion Branch Acceptance Grid Design
+            }
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs(LogPath, "Branch Acceptance", ex.Message);
+            }
+
+        }
+
+
+
+
+
+
+
         /// <summary>
         /// BUNDLE
         /// </summary>
@@ -6121,31 +6401,32 @@ namespace CMS2.Client
                 DataTable dataTable = bundle.getBundleData(dateTimeBundle_Date.Value);
 
                 DataView view = new DataView(dataTable);
-                //SACK NO
-                DataTable table = view.ToTable(true, "SackNo");
-                dropDownBundle_SackNo.Items.Clear();
-                dropDownBundle_SackNo.Items.Add("All");
-                foreach (DataRow x in table.Rows)
-                {
-                    if (x["SackNo"].ToString().Trim() != null)
-                    {
-                        dropDownBundle_SackNo.Items.Add(x["SackNo"].ToString());
-                    }
-                }
-                dropDownBundle_SackNo.SelectedIndex = 0;
+                
+                ////SACK NO
+                //DataTable table = view.ToTable(true, "SackNo");
+                //dropDownBundle_SackNo.Items.Clear();
+                //dropDownBundle_SackNo.Items.Add("All");
+                //foreach (DataRow x in table.Rows)
+                //{
+                //    if (x["SackNo"].ToString().Trim() != null)
+                //    {
+                //        dropDownBundle_SackNo.Items.Add(x["SackNo"].ToString());
+                //    }
+                //}
+                //dropDownBundle_SackNo.SelectedIndex = 0;
 
-                //DESTINATION
-                table = view.ToTable(true, "Destination");
-                dropDownBundle_Destination.Items.Clear();
-                dropDownBundle_Destination.Items.Add("All");
-                foreach (DataRow x in table.Rows)
-                {
-                    if (x["Destination"].ToString().Trim() != null)
-                    {
-                        dropDownBundle_Destination.Items.Add(x["Destination"].ToString());
-                    }
-                }
-                dropDownBundle_Destination.SelectedIndex = 0;
+                ////DESTINATION
+                //table = view.ToTable(true, "Destination");
+                //dropDownBundle_Destination.Items.Clear();
+                //dropDownBundle_Destination.Items.Add("All");
+                //foreach (DataRow x in table.Rows)
+                //{
+                //    if (x["Destination"].ToString().Trim() != null)
+                //    {
+                //        dropDownBundle_Destination.Items.Add(x["Destination"].ToString());
+                //    }
+                //}
+                //dropDownBundle_Destination.SelectedIndex = 0;
 
                 dropDownBundle_BCO_BSO.Items.Clear();
                 dropDownBundle_BCO_BSO.Items.Add("All");
@@ -6199,17 +6480,17 @@ namespace CMS2.Client
                 dropDownUnbundle_BCO.SelectedIndex = 0;
 
                 //SACK NO
-                table = view.ToTable(true, "Sack No");
-                dropDownUnbundle_SackNo.Items.Clear();
-                dropDownUnbundle_SackNo.Items.Add("All");
-                foreach (DataRow x in table.Rows)
-                {
-                    if (x["Sack No"].ToString().Trim() != "")
-                    {
-                        dropDownUnbundle_SackNo.Items.Add(x["Sack No"].ToString());
-                    }
-                }
-                dropDownUnbundle_SackNo.SelectedIndex = 0;
+                //table = view.ToTable(true, "Sack No");
+                //dropDownUnbundle_SackNo.Items.Clear();
+                //dropDownUnbundle_SackNo.Items.Add("All");
+                //foreach (DataRow x in table.Rows)
+                //{
+                //    if (x["Sack No"].ToString().Trim() != "")
+                //    {
+                //        dropDownUnbundle_SackNo.Items.Add(x["Sack No"].ToString());
+                //    }
+                //}
+                //dropDownUnbundle_SackNo.SelectedIndex = 0;
 
                 gridUnbundle.DataSource = dataTable;
 
@@ -6379,48 +6660,71 @@ namespace CMS2.Client
 
                 DataTable dataTable = gatewayInbound.getData(dateTimePickerGatewayInbound_Date.Value);
 
-                DataView view = new DataView(dataTable);
+                //DataView view = new DataView(dataTable);
 
-                DataTable table = view.ToTable(true, "Gateway");
-                dropDownGatewayInbound_Gateway.Items.Clear();
-                dropDownGatewayInbound_Gateway.Items.Add("All");
-                foreach (DataRow x in table.Rows)
+                //DataTable table = view.ToTable(true, "Gateway");
+                //dropDownGatewayInbound_Gateway.Items.Clear();
+                //dropDownGatewayInbound_Gateway.Items.Add("All");
+                //foreach (DataRow x in table.Rows)
+                //{
+                //    dropDownGatewayInbound_Gateway.Items.Add(x["Gateway"].ToString());
+                //}
+                //dropDownGatewayInbound_Gateway.SelectedIndex = 0;
+
+                //table = view.ToTable(true, "Origin");
+                //dropDownGatewayInbound_Origin.Items.Clear();
+                //dropDownGatewayInbound_Origin.Items.Add("All");
+                //foreach (DataRow x in table.Rows)
+                //{
+                //    dropDownGatewayInbound_Origin.Items.Add(x["Origin"].ToString());
+                //}
+                //dropDownGatewayInbound_Origin.SelectedIndex = 0;
+
+                //table = view.ToTable(true, "Commodity Type");
+                //dropDownGatewayInbound_Commodity.Items.Clear();
+                //dropDownGatewayInbound_Commodity.Items.Add("All");
+                //foreach (DataRow x in table.Rows)
+                //{
+                //    dropDownGatewayInbound_Commodity.Items.Add(x["Commodity Type"].ToString());
+                //}
+                //dropDownGatewayInbound_Commodity.SelectedIndex = 0;
+
+                //gridGatewayInbound.DataSource = dataTable;
+
+                //if (gridGatewayInbound.DataSource != null)
+                //{
+                //    List<int> width = gatewayInbound.setWidth();
+                //    int ctr = 0;
+                //    foreach (int x in width)
+                //    {
+                //        if (x == 0) { gridGatewayInbound.Columns[ctr].IsVisible = false; }
+                //        gridGatewayInbound.Columns[ctr].Width = x;
+                //        ctr++;
+                //    }
+
+                //}
+            }
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs(LogPath, "Gateway Inbound", ex.Message);
+            }
+        }
+        private void getGatewayInBoundDatabyFilter(int num)
+        {
+            Guid areaid = new Guid();
+            Guid batchid = new Guid();
+            Guid paymentmodeid = new Guid();
+            try
+            {
+                GatewayInboundReport gatewayInbound = new GatewayInboundReport();
+                areaid = Guid.Parse(dropDownDailyTrip_Area.SelectedValue.ToString());
+                batchid = Guid.Parse(cmbDTR_Batch.SelectedValue.ToString());
+                paymentmodeid = Guid.Parse(dropDownDailyTrip_PaymentMode.SelectedValue.ToString());
+
+                DataTable dataTable;
+                if (num == 0)
                 {
-                    dropDownGatewayInbound_Gateway.Items.Add(x["Gateway"].ToString());
-                }
-                dropDownGatewayInbound_Gateway.SelectedIndex = 0;
-
-                table = view.ToTable(true, "Origin");
-                dropDownGatewayInbound_Origin.Items.Clear();
-                dropDownGatewayInbound_Origin.Items.Add("All");
-                foreach (DataRow x in table.Rows)
-                {
-                    dropDownGatewayInbound_Origin.Items.Add(x["Origin"].ToString());
-                }
-                dropDownGatewayInbound_Origin.SelectedIndex = 0;
-
-                table = view.ToTable(true, "Commodity Type");
-                dropDownGatewayInbound_Commodity.Items.Clear();
-                dropDownGatewayInbound_Commodity.Items.Add("All");
-                foreach (DataRow x in table.Rows)
-                {
-                    dropDownGatewayInbound_Commodity.Items.Add(x["Commodity Type"].ToString());
-                }
-                dropDownGatewayInbound_Commodity.SelectedIndex = 0;
-
-                gridGatewayInbound.DataSource = dataTable;
-
-                if (gridGatewayInbound.DataSource != null)
-                {
-                    List<int> width = gatewayInbound.setWidth();
-                    int ctr = 0;
-                    foreach (int x in width)
-                    {
-                        if (x == 0) { gridGatewayInbound.Columns[ctr].IsVisible = false; }
-                        gridGatewayInbound.Columns[ctr].Width = x;
-                        ctr++;
-                    }
-
+                    dataTable = gatewayInbound.getData(dateTimePickerGatewayInbound_Date.Value);
                 }
             }
             catch (Exception ex)
@@ -6428,6 +6732,9 @@ namespace CMS2.Client
                 Logs.ErrorLogs(LogPath, "Gateway Inbound", ex.Message);
             }
         }
+
+
+
         /// <summary>
         /// CARGO TRANSFER
         /// </summary>
@@ -6442,32 +6749,57 @@ namespace CMS2.Client
 
                 DataView view = new DataView(dataTable);
 
-                //ORIGIN
-                DataTable table = view.ToTable(true, "Origin");
-                dropDownCargoTransfer_City.Items.Clear();
-                dropDownCargoTransfer_City.Items.Add("All");
-                foreach (DataRow x in table.Rows)
-                {
-                    if (x["Origin"].ToString().Trim() != "")
-                    {
-                        dropDownCargoTransfer_City.Items.Add(x["Origin"].ToString());
-                    }
-                }
-                dropDownCargoTransfer_City.SelectedIndex = 0;
+                ////ORIGIN
+                //DataTable table = view.ToTable(true, "Origin");
+                //dropDownCargoTransfer_City.Items.Clear();
+                //dropDownCargoTransfer_City.Items.Add("All");
+                //foreach (DataRow x in table.Rows)
+                //{
+                //    if (x["Origin"].ToString().Trim() != "")
+                //    {
+                //        dropDownCargoTransfer_City.Items.Add(x["Origin"].ToString());
+                //    }
+                //}
+                //dropDownCargoTransfer_City.SelectedIndex = 0;
 
-                table = view.ToTable(true, "Destination");
-                dropDownCargoTransfer_Destination.Items.Clear();
-                dropDownCargoTransfer_Destination.Items.Add("All");
-                foreach (DataRow x in table.Rows)
-                {
-                    if (x["Destination"].ToString() != "")
-                    {
-                        dropDownCargoTransfer_Destination.Items.Add(x["Destination"].ToString());
-                    }
-                }
-                dropDownCargoTransfer_Destination.SelectedIndex = 0;
+                //table = view.ToTable(true, "Destination");
+                //dropDownCargoTransfer_Destination.Items.Clear();
+                //dropDownCargoTransfer_Destination.Items.Add("All");
+                //foreach (DataRow x in table.Rows)
+                //{
+                //    if (x["Destination"].ToString() != "")
+                //    {
+                //        dropDownCargoTransfer_Destination.Items.Add(x["Destination"].ToString());
+                //    }
+                //}
+                //dropDownCargoTransfer_Destination.SelectedIndex = 0;
 
 
+
+                //table = view.ToTable(true, "Plate #");
+                //cmbCT_PlateNo.Items.Clear();
+                //cmbCT_PlateNo.Items.Add("All");
+                //foreach (DataRow x in table.Rows)
+                //{
+                //    if (x["Plate #"].ToString() != "")
+                //    {
+                //        cmbCT_PlateNo.Items.Add(x["Plate #"].ToString());
+                //    }
+                //}
+                //cmbCT_PlateNo.SelectedIndex = 0;
+
+                //table = view.ToTable(true, "Batch");
+                //cmbCT_Batch.Items.Clear();
+                //cmbCT_Batch.Items.Add("All");
+                //foreach (DataRow x in table.Rows)
+                //{
+                //    if (x["Batch"].ToString() != "")
+                //    {
+                //        cmbCT_Batch.Items.Add(x["Batch"].ToString());
+                //    }
+                //}
+                //cmbCT_Batch.SelectedIndex = 0;
+                
                 gridCargoTransfer.DataSource = dataTable;
 
                 #region Cargo Transfer Design
@@ -6587,58 +6919,58 @@ namespace CMS2.Client
                 DataTable dataTable = dailyTrip.getData(dateTimeDailyTrip_Date.Value);
 
 
-                ////AREA
-                DataView view = new DataView(dataTable);
-                DataTable table = view.ToTable(true, "Area");
-                dropDownDailyTrip_Area.Items.Clear();
-                dropDownDailyTrip_Area.Items.Add("All");
-                foreach (DataRow x in table.Rows)
-                {
-                    if (x["Area"].ToString().Trim() != "")
-                    {
-                        dropDownDailyTrip_Area.Items.Add(x["Area"].ToString());
-                    }
-                }
-                dropDownDailyTrip_Area.SelectedIndex = 0;
+                //////AREA
+                //DataView view = new DataView(dataTable);
+                //DataTable table = view.ToTable(true, "Area");
+                //dropDownDailyTrip_Area.Items.Clear();
+                //dropDownDailyTrip_Area.Items.Add("All");
+                //foreach (DataRow x in table.Rows)
+                //{
+                //    if (x["Area"].ToString().Trim() != "")
+                //    {
+                //        dropDownDailyTrip_Area.Items.Add(x["Area"].ToString());
+                //    }
+                //}
+                //dropDownDailyTrip_Area.SelectedIndex = 0;
 
-                //DRIVER
-                table = view.ToTable(true, "Driver");
-                dropDownDailyTrip_Driver.Items.Clear();
-                dropDownDailyTrip_Driver.Items.Add("All");
-                foreach (DataRow x in table.Rows)
-                {
-                    if (x["Driver"].ToString().Trim() != "")
-                    {
-                        dropDownDailyTrip_Driver.Items.Add(x["Driver"].ToString());
-                    }
-                }
-                dropDownDailyTrip_Driver.SelectedIndex = 0;
+                ////DRIVER
+                //table = view.ToTable(true, "Driver");
+                //dropDownDailyTrip_Driver.Items.Clear();
+                //dropDownDailyTrip_Driver.Items.Add("All");
+                //foreach (DataRow x in table.Rows)
+                //{
+                //    if (x["Driver"].ToString().Trim() != "")
+                //    {
+                //        dropDownDailyTrip_Driver.Items.Add(x["Batch"].ToString());
+                //    }
+                //}
+                //dropDownDailyTrip_Driver.SelectedIndex = 0;
 
-                //PAYMENT MODE
-                table = view.ToTable(true, "Payment Mode");
-                dropDownDailyTrip_PaymentMode.Items.Clear();
-                dropDownDailyTrip_PaymentMode.Items.Add("All");
-                foreach (DataRow x in table.Rows)
-                {
-                    if (x["Payment Mode"].ToString().Trim() != "")
-                    {
-                        dropDownDailyTrip_PaymentMode.Items.Add(x["Payment Mode"].ToString());
-                    }
-                }
-                dropDownDailyTrip_PaymentMode.SelectedIndex = 0;
+                ////PAYMENT MODE
+                //table = view.ToTable(true, "Payment Mode");
+                //dropDownDailyTrip_PaymentMode.Items.Clear();
+                //dropDownDailyTrip_PaymentMode.Items.Add("All");
+                //foreach (DataRow x in table.Rows)
+                //{
+                //    if (x["Payment Mode"].ToString().Trim() != "")
+                //    {
+                //        dropDownDailyTrip_PaymentMode.Items.Add(x["Payment Mode"].ToString());
+                //    }
+                //}
+                //dropDownDailyTrip_PaymentMode.SelectedIndex = 0;
 
-                //BCO
-                table = view.ToTable(true, "BCO");
-                dropDownDailyTrip_BCO.Items.Clear();
-                dropDownDailyTrip_BCO.Items.Add("All");
-                foreach (DataRow x in table.Rows)
-                {
-                    if (x["BCO"].ToString().Trim() != "")
-                    {
-                        dropDownDailyTrip_BCO.Items.Add(x["BCO"].ToString());
-                    }
-                }
-                dropDownDailyTrip_BCO.SelectedIndex = 0;
+                ////BCO
+                //table = view.ToTable(true, "BCO");
+                //dropDownDailyTrip_BCO.Items.Clear();
+                //dropDownDailyTrip_BCO.Items.Add("All");
+                //foreach (DataRow x in table.Rows)
+                //{
+                //    if (x["BCO"].ToString().Trim() != "")
+                //    {
+                //        dropDownDailyTrip_BCO.Items.Add(x["BCO"].ToString());
+                //    }
+                //}
+                //dropDownDailyTrip_BCO.SelectedIndex = 0;
 
                 gridDailyTrip.DataSource = dataTable;
 
@@ -6662,6 +6994,66 @@ namespace CMS2.Client
                 Logs.ErrorLogs(LogPath, "Daily Trip", ex.Message);
             }
         }
+
+
+        private void getDailyTripDatabyAllFilter(int num)
+        {
+            Guid areaid = new Guid();
+            Guid batchid = new Guid();
+            Guid paymentmodeid = new Guid();
+            try
+            {
+                DailyTripReport dailyTrip = new DailyTripReport();
+                areaid = Guid.Parse(dropDownDailyTrip_Area.SelectedValue.ToString());
+                batchid = Guid.Parse(cmbDTR_Batch.SelectedValue.ToString());
+                paymentmodeid = Guid.Parse(dropDownDailyTrip_PaymentMode.SelectedValue.ToString());
+
+                DataTable dataTable;
+                if (num == 1)
+                {
+                    dataTable = dailyTrip.getDailyTripDatabyAllFilter(dateTimeDailyTrip_Date.Value, areaid, batchid, paymentmodeid, num);
+                }
+                else if(num == 2)
+                {
+                     dataTable = dailyTrip.getDailyTripDatabyAllFilter(dateTimeDailyTrip_Date.Value, areaid, batchid, null, num);
+                }
+                else if(num == 3)
+                {
+                    dataTable = dailyTrip.getDailyTripDatabyAllFilter(dateTimeDailyTrip_Date.Value, areaid, null, paymentmodeid, num);
+                }
+                else if(num == 4)
+                {
+                    dataTable = dailyTrip.getDailyTripDatabyAllFilter(dateTimeDailyTrip_Date.Value, areaid, null, null, num);
+                }
+                else if(num == 5)
+                {
+                    dataTable = dailyTrip.getDailyTripDatabyAllFilter(dateTimeDailyTrip_Date.Value, null, null, null, num);
+                }
+
+
+                #region
+                if (gridDailyTrip.DataSource != null)
+                {
+                    List<int> width = dailyTrip.setWidth();
+                    int ctr = 0;
+                    foreach (int x in width)
+                    {
+                        if (x == 0) { gridDailyTrip.Columns[ctr].IsVisible = false; }
+                        gridDailyTrip.Columns[ctr].Width = x;
+                        ctr++;
+                    }
+
+                }
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+        }
+
+
+
         /// <summary>
         /// HOLD CARGO
         /// </summary>
@@ -6712,68 +7104,134 @@ namespace CMS2.Client
             }
         }
 
-        /// <summary>
-        /// DELIVERY STATUS
-        /// </summary>
+
         private void getDeliveryStatusData()
         {
             try
             {
                 DeliveryStatusReport deliveryStatus = new DeliveryStatusReport();
+
                 DataTable dataTable = deliveryStatus.getData(dateTimeDeliveryStatus_Date.Value);
+
+                gridDeliveryStatus.DataSource = dataTable;
+
+                #region
+                if (gridDeliveryStatus.DataSource != null)
+                {
+                    List<int> width = deliveryStatus.setWidth();
+                    int ctr = 0;
+                    foreach (int x in width)
+                    {
+                        if (x == 0) { gridDeliveryStatus.Columns[ctr].IsVisible = false; }
+                        gridDeliveryStatus.Columns[ctr].Width = x;
+                        ctr++;
+                    }
+
+                }
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs(LogPath, "Hold Cargo", ex.Message);
+            }
+        }
+
+
+        /// <summary>
+        /// DELIVERY STATUS
+        /// </summary>
+        private void getDeliveryStatusDataByFilter(int num)
+        {
+            Guid revenueUnitId = new Guid();
+            Guid deliveredById = new Guid();
+            Guid statusId = new Guid();
+            string revenueUnitName = "";
+            try
+            {
+                revenueUnitId = Guid.Parse(cmbDS_RevenueUnit.SelectedValue.ToString());
+                deliveredById = Guid.Parse(cmbDS_DeliveredBy.SelectedValue.ToString());
+                statusId = Guid.Parse(cmbDS_Status.SelectedValue.ToString());
+                revenueUnitName = cmbDS_RevenueUnit.SelectedItem.Text;
+
+
+                DeliveryStatusReport deliveryStatus = new DeliveryStatusReport();
+                DataTable dataTable = new DataTable();
+                if (num == 1)
+                {
+                    dataTable = deliveryStatus.getDataByAllFilter(dateTimeDeliveryStatus_Date.Value, revenueUnitName, deliveredById, statusId, num);
+                }
+                else if (num == 2)
+                {
+                    dataTable = deliveryStatus.getDataByAllFilter(dateTimeDeliveryStatus_Date.Value, revenueUnitName, null, statusId, num);
+                }
+                else if (num == 3)
+                {
+                    dataTable = deliveryStatus.getDataByAllFilter(dateTimeDeliveryStatus_Date.Value, revenueUnitName, null, null, num);
+                }
+                else if (num == 4)
+                {
+                    dataTable = deliveryStatus.getDataByAllFilter(dateTimeDeliveryStatus_Date.Value, revenueUnitName, deliveredById, null, num);
+                }
+                else if (num == 5)
+                {
+                    dataTable = deliveryStatus.getDataByAllFilter(dateTimeDeliveryStatus_Date.Value, "", null, null, num);
+                }
+
+
+
                 ////AREA
-                DataView view = new DataView(dataTable);
+                //DataView view = new DataView(dataTable);
 
-                DataTable table = view.ToTable(true, "Area");
-                dropDownDeliveryStatus_Area.Items.Clear();
-                dropDownDeliveryStatus_Area.Items.Add("All");
-                foreach (DataRow x in table.Rows)
-                {
-                    if (x["Area"].ToString().Trim() != "")
-                    {
-                        dropDownDeliveryStatus_Area.Items.Add(x["Area"].ToString());
-                    }
-                }
-                dropDownDeliveryStatus_Area.SelectedIndex = 0;
+                //DataTable table = view.ToTable(true, "Area");
+                //dropDownDeliveryStatus_Area.Items.Clear();
+                //dropDownDeliveryStatus_Area.Items.Add("All");
+                //foreach (DataRow x in table.Rows)
+                //{
+                //    if (x["Area"].ToString().Trim() != "")
+                //    {
+                //        dropDownDeliveryStatus_Area.Items.Add(x["Area"].ToString());
+                //    }
+                //}
+                //dropDownDeliveryStatus_Area.SelectedIndex = 0;
 
-                //DRIVER
-                table = view.ToTable(true, "Driver");
-                dropDownDeliveryStatus_Driver.Items.Clear();
-                dropDownDeliveryStatus_Driver.Items.Add("All");
-                foreach (DataRow x in table.Rows)
-                {
-                    if (x["Driver"].ToString().Trim() != "")
-                    {
-                        dropDownDeliveryStatus_Driver.Items.Add(x["Driver"].ToString());
-                    }
-                }
-                dropDownDeliveryStatus_Driver.SelectedIndex = 0;
+                ////DRIVER
+                //table = view.ToTable(true, "Driver");
+                //dropDownDeliveryStatus_Driver.Items.Clear();
+                //dropDownDeliveryStatus_Driver.Items.Add("All");
+                //foreach (DataRow x in table.Rows)
+                //{
+                //    if (x["Driver"].ToString().Trim() != "")
+                //    {
+                //        dropDownDeliveryStatus_Driver.Items.Add(x["Driver"].ToString());
+                //    }
+                //}
+                //dropDownDeliveryStatus_Driver.SelectedIndex = 0;
 
-                //STATUS
-                table = view.ToTable(true, "Status");
-                dropDownDeliveryStatus_Status.Items.Clear();
-                dropDownDeliveryStatus_Status.Items.Add("All");
-                foreach (DataRow x in table.Rows)
-                {
-                    if (x["Status"].ToString().Trim() != "")
-                    {
-                        dropDownDeliveryStatus_Status.Items.Add(x["Status"].ToString());
-                    }
-                }
-                dropDownDeliveryStatus_Status.SelectedIndex = 0;
+                ////STATUS
+                //table = view.ToTable(true, "Status");
+                //dropDownDeliveryStatus_Status.Items.Clear();
+                //dropDownDeliveryStatus_Status.Items.Add("All");
+                //foreach (DataRow x in table.Rows)
+                //{
+                //    if (x["Status"].ToString().Trim() != "")
+                //    {
+                //        dropDownDeliveryStatus_Status.Items.Add(x["Status"].ToString());
+                //    }
+                //}
+                //dropDownDeliveryStatus_Status.SelectedIndex = 0;
 
-                //BCO
-                table = view.ToTable(true, "BCO");
-                dropDownDeliveryStatus_BCO.Items.Clear();
-                dropDownDeliveryStatus_BCO.Items.Add("All");
-                foreach (DataRow x in table.Rows)
-                {
-                    if (x["BCO"].ToString().Trim() != "")
-                    {
-                        dropDownDeliveryStatus_BCO.Items.Add(x["BCO"].ToString());
-                    }
-                }
-                dropDownDeliveryStatus_BCO.SelectedIndex = 0;
+                ////BCO
+                //table = view.ToTable(true, "BCO");
+                //dropDownDeliveryStatus_BCO.Items.Clear();
+                //dropDownDeliveryStatus_BCO.Items.Add("All");
+                //foreach (DataRow x in table.Rows)
+                //{
+                //    if (x["BCO"].ToString().Trim() != "")
+                //    {
+                //        dropDownDeliveryStatus_BCO.Items.Add(x["BCO"].ToString());
+                //    }
+                //}
+                //dropDownDeliveryStatus_BCO.SelectedIndex = 0;
 
                 gridDeliveryStatus.DataSource = dataTable;
 
@@ -6855,14 +7313,15 @@ namespace CMS2.Client
         {
             try
             {
-                DataTable dataTable = getPickupCargoGrid();
-                TrackingReportGlobalModel.table = dataTable;
+                //DataTable dataTable = getPickupCargoGrid();
+                //TrackingReportGlobalModel.table = dataTable;
 
                 TrackingReportGlobalModel.Date = dateTimePicker_PickupCargo.Value.ToLongDateString();
-                TrackingReportGlobalModel.Area = dropDownPickUpCargo_Area.SelectedItem.ToString();
-                TrackingReportGlobalModel.Driver = get_Column_DataView(dataTable, "Driver");
-                TrackingReportGlobalModel.Checker = get_Column_DataView(dataTable, "Checker");
-                TrackingReportGlobalModel.ScannedBy = get_Column_DataView(dataTable, "ScannedBy");
+                //TrackingReportGlobalModel.Area = dropDownPickUpCargo_Area.SelectedItem.ToString();
+                TrackingReportGlobalModel.Area = cmb_RevenueUnit.SelectedItem.ToString();
+                //TrackingReportGlobalModel.Driver = get_Column_DataView(dataTable, "Driver");
+                //TrackingReportGlobalModel.Checker = get_Column_DataView(dataTable, "Checker");
+               TrackingReportGlobalModel.ScannedBy = get_Column_DataView(TrackingReportGlobalModel.table, "ScannedBy");
 
                 TrackingReportGlobalModel.Report = "PickUpCargo";
 
@@ -6884,24 +7343,32 @@ namespace CMS2.Client
                 CompositeFilterDescriptor compositeFilter = new CompositeFilterDescriptor();
 
                 String Area = "";
+                string ruType = "";
                 try
                 {
-                    Area = dropDownPickUpCargo_Area.SelectedItem.ToString();
+                    //Area = dropDownPickUpCargo_Area.SelectedItem.ToString();
+                    ruType= cmb_RevenueUnitType.SelectedItem.ToString();
                 }
                 catch (Exception)
                 {
-                    Area = "All";
-                    dropDownPickUpCargo_Area.SelectedText = "All";
+                    ruType = "All";
+                    // dropDownPickUpCargo_Area.SelectedText = "All";
+                    cmb_RevenueUnitType.SelectedText = "All";
                 }
 
-                if (Area == "All")
+                if (ruType == "All")
                 {
                     gridPickupCargo.EnableFiltering = false;
                     getPickupCargoData();
                 }
-                else if (Area != null)
+                //else if (Area != null)
+                //{
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Area));
+                //}
+                else
                 {
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Area));
+                    gridPickupCargo.EnableFiltering = false;
+                    getPickupCargoDataByRevenueUnit();
                 }
                 compositeFilter.LogicalOperator = FilterLogicalOperator.And;
                 this.gridPickupCargo.FilterDescriptors.Add(compositeFilter);
@@ -6915,7 +7382,7 @@ namespace CMS2.Client
         {
             try
             {
-                dropDownPickUpCargo_Area.SelectedIndex = 0;
+                //dropDownPickUpCargo_Area.SelectedIndex = 0;
                 gridPickupCargo.EnableFiltering = false;
                 getPickupCargoData();
             }
@@ -6934,30 +7401,30 @@ namespace CMS2.Client
                 DataTable dataTable = branchAccept.getBranchAcceptanceData(dateTimePickerBranchAcceptance_Date.Value);
                 DataView view = new DataView(dataTable);
 
-                if (dropDownBranchAcceptance_Branch.SelectedIndex == 0)
-                {
-                    label100.Text = "BCO:";
-                    List<BranchCorpOffice> branchCorpOffices = getBranchCorpOffice().OrderBy(x => x.BranchCorpOfficeName).ToList();
-                    dropDownBranchAcceptance_BCO_BSO.DataSource = branchCorpOffices;
-                    dropDownBranchAcceptance_BCO_BSO.DisplayMember = "BranchCorpOfficeName";
-                    dropDownBranchAcceptance_BCO_BSO.ValueMember = "BranchCorpOfficeId";
-                    dropDownBranchAcceptance_BCO_BSO.SelectedValue = GlobalVars.DeviceBcoId;
-                    dropDownBranchAcceptance_BCO_BSO.Enabled = false;
-                }
-                else
-                {
-                    label100.Text = "BSO:";
-                    dropDownBranchAcceptance_BCO_BSO.Enabled = true;
-                    //BSO
-                    DataTable table = view.ToTable(true, "BSO");
-                    dropDownBranchAcceptance_BCO_BSO.Items.Clear();
-                    dropDownBranchAcceptance_BCO_BSO.Items.Add("All");
-                    foreach (DataRow x in table.Rows)
-                    {
-                        dropDownBranchAcceptance_BCO_BSO.Items.Add(x["BSO"].ToString());
-                    }
-                    dropDownBranchAcceptance_BCO_BSO.SelectedIndex = 0;
-                }
+                //if (dropDownBranchAcceptance_Branch.SelectedIndex == 0)
+                //{
+                //    label100.Text = "BCO:";
+                //    List<BranchCorpOffice> branchCorpOffices = getBranchCorpOffice().OrderBy(x => x.BranchCorpOfficeName).ToList();
+                //    dropDownBranchAcceptance_BCO_BSO.DataSource = branchCorpOffices;
+                //    dropDownBranchAcceptance_BCO_BSO.DisplayMember = "BranchCorpOfficeName";
+                //    dropDownBranchAcceptance_BCO_BSO.ValueMember = "BranchCorpOfficeId";
+                //    dropDownBranchAcceptance_BCO_BSO.SelectedValue = GlobalVars.DeviceBcoId;
+                //    dropDownBranchAcceptance_BCO_BSO.Enabled = false;
+                //}
+                //else
+                //{
+                //    label100.Text = "BSO:";
+                //    dropDownBranchAcceptance_BCO_BSO.Enabled = true;
+                //    //BSO
+                //    DataTable table = view.ToTable(true, "BSO");
+                //    dropDownBranchAcceptance_BCO_BSO.Items.Clear();
+                //    dropDownBranchAcceptance_BCO_BSO.Items.Add("All");
+                //    foreach (DataRow x in table.Rows)
+                //    {
+                //        dropDownBranchAcceptance_BCO_BSO.Items.Add(x["BSO"].ToString());
+                //    }
+                //    dropDownBranchAcceptance_BCO_BSO.SelectedIndex = 0;
+                //}
             }
             catch (Exception ex)
             {
@@ -6990,72 +7457,92 @@ namespace CMS2.Client
                     Driver = "All"; dropDownBranchAcceptance_Driver.SelectedText = "All";
                     Batch = "All"; dropDownBranchAcceptance_Batch.SelectedText = "All";
                 }
-                if (Branch_Area == "All" && Driver == "All" && Batch == "All")
+                if (Branch_Area == "All" && Batch == "All")
                 {
                     gridBranchAcceptance.EnableFiltering = false;
                     getBrancAcceptanceData();
                 }
-                if (Branch_Area != null && Driver == "All" && Batch == "All")
+                else if(Branch_Area == "All" && Batch != "All")
                 {
-                    if (dropDownBranchAcceptance_Branch.SelectedIndex == 0)
-                    {
-                        compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, Branch_Area));
-                    }
-                    else
-                    {
-                        compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BSO", FilterOperator.IsEqualTo, Branch_Area));
-                    }
+                    gridBranchAcceptance.EnableFiltering = false;
+                    getBranchAcceptanceDataByBatch();
                 }
-                else if (Branch_Area == "All" && Driver != null && Batch == "All")
+                else if(Branch_Area != "All" && Driver != "All" && Batch == "All")
                 {
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
+                    gridBranchAcceptance.EnableFiltering = false;
+                    getBranchAcceptanceData1();
                 }
-                else if (Branch_Area == "All" && Driver == "All" && Batch != null)
+                else if(Branch_Area != "All" && Driver != "All" && Batch != "All")
                 {
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Batch", FilterOperator.IsEqualTo, Batch));
+                    gridBranchAcceptance.EnableFiltering = false;
+                    getBranchAcceptanceDataByFilter();
                 }
-                else if (Branch_Area != null && Driver != null && Batch == "All")
-                {
-                    if (dropDownBranchAcceptance_Branch.SelectedIndex == 0)
-                    {
-                        compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, Branch_Area));
-                    }
-                    else
-                    {
-                        compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BSO", FilterOperator.IsEqualTo, Branch_Area));
-                    }
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
-                }
-                else if (Branch_Area != null && Driver == "All" && Batch != null)
-                {
-                    if (dropDownBranchAcceptance_Branch.SelectedIndex == 0)
-                    {
-                        compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, Branch_Area));
-                    }
-                    else
-                    {
-                        compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BSO", FilterOperator.IsEqualTo, Branch_Area));
-                    }
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Batch", FilterOperator.IsEqualTo, Batch));
-                }
-                else if (Branch_Area == "All" && Driver != null && Batch != null)
-                {
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Batch", FilterOperator.IsEqualTo, Batch));
-                }
-                else if (Branch_Area != null && Driver != null && Batch != null)
-                {
-                    if (dropDownBranchAcceptance_Branch.SelectedIndex == 0)
-                    {
-                        compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, Branch_Area));
-                    }
-                    else
-                    {
-                        compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BSO", FilterOperator.IsEqualTo, Branch_Area));
-                    }
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Batch", FilterOperator.IsEqualTo, Batch));
-                }
+                //if (Branch_Area == "All" && Driver == "All" && Batch == "All")
+                //{
+                //    gridBranchAcceptance.EnableFiltering = false;
+                //    getBrancAcceptanceData();
+                //}
+                //if (Branch_Area != null && Driver == "All" && Batch == "All")
+                //{
+                //    if (dropDownBranchAcceptance_Branch.SelectedIndex == 0)
+                //    {
+                //        compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, Branch_Area));
+                //    }
+                //    else
+                //    {
+                //        compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BSO", FilterOperator.IsEqualTo, Branch_Area));
+                //    }
+                //}
+                //else if (Branch_Area == "All" && Driver != null && Batch == "All")
+                //{
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
+                //}
+                //else if (Branch_Area == "All" && Driver == "All" && Batch != null)
+                //{
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Batch", FilterOperator.IsEqualTo, Batch));
+                //}
+                //else if (Branch_Area != null && Driver != null && Batch == "All")
+                //{
+                //    if (dropDownBranchAcceptance_Branch.SelectedIndex == 0)
+                //    {
+                //        compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, Branch_Area));
+                //    }
+                //    else
+                //    {
+                //        compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BSO", FilterOperator.IsEqualTo, Branch_Area));
+                //    }
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
+                //}
+                //else if (Branch_Area != null && Driver == "All" && Batch != null)
+                //{
+                //    if (dropDownBranchAcceptance_Branch.SelectedIndex == 0)
+                //    {
+                //        compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, Branch_Area));
+                //    }
+                //    else
+                //    {
+                //        compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BSO", FilterOperator.IsEqualTo, Branch_Area));
+                //    }
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Batch", FilterOperator.IsEqualTo, Batch));
+                //}
+                //else if (Branch_Area == "All" && Driver != null && Batch != null)
+                //{
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Batch", FilterOperator.IsEqualTo, Batch));
+                //}
+                //else if (Branch_Area != null && Driver != null && Batch != null)
+                //{
+                //    if (dropDownBranchAcceptance_Branch.SelectedIndex == 0)
+                //    {
+                //        compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, Branch_Area));
+                //    }
+                //    else
+                //    {
+                //        compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BSO", FilterOperator.IsEqualTo, Branch_Area));
+                //    }
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Batch", FilterOperator.IsEqualTo, Batch));
+                //}
 
                 compositeFilter.LogicalOperator = FilterLogicalOperator.And;
 
@@ -7096,9 +7583,9 @@ namespace CMS2.Client
         {
             try
             {
-                dropDownBranchAcceptance_Branch.SelectedIndex = 0;
-                dropDownBranchAcceptance_BCO_BSO.Items.Clear();
-                dropDownBranchAcceptance_BCO_BSO.Items.Add("All");
+                //dropDownBranchAcceptance_Branch.SelectedIndex = 0;
+                //dropDownBranchAcceptance_BCO_BSO.Items.Clear();
+                //dropDownBranchAcceptance_BCO_BSO.Items.Add("All");
                 dropDownBranchAcceptance_Driver.SelectedIndex = 0;
                 dropDownBranchAcceptance_Batch.SelectedIndex = 0;
                 gridBranchAcceptance.EnableFiltering = false;
@@ -7119,30 +7606,30 @@ namespace CMS2.Client
                 DataTable dataTable = bundle.getBundleData(dateTimeBundle_Date.Value);
                 DataView view = new DataView(dataTable);
 
-                if (dropDownBundle_Branch.SelectedIndex == 0)
-                {
-                    label113.Text = "BCO:";
-                    List<BranchCorpOffice> branchCorpOffices = getBranchCorpOffice().OrderBy(x => x.BranchCorpOfficeName).ToList();
-                    dropDownBundle_BCO_BSO.DataSource = branchCorpOffices;
-                    dropDownBundle_BCO_BSO.DisplayMember = "BranchCorpOfficeName";
-                    dropDownBundle_BCO_BSO.ValueMember = "BranchCorpOfficeId";
-                    dropDownBundle_BCO_BSO.SelectedValue = GlobalVars.DeviceBcoId;
-                    dropDownBundle_BCO_BSO.Enabled = false;
-                }
-                else
-                {
-                    label113.Text = "BSO:";
-                    dropDownBundle_BCO_BSO.Enabled = true;
-                    //BSO
-                    DataTable table = view.ToTable(true, "BSO");
-                    dropDownBundle_BCO_BSO.Items.Clear();
-                    dropDownBundle_BCO_BSO.Items.Add("All");
-                    foreach (DataRow x in table.Rows)
-                    {
-                        dropDownBundle_BCO_BSO.Items.Add(x["BSO"].ToString());
-                    }
-                    dropDownBundle_BCO_BSO.SelectedIndex = 0;
-                }
+                //if (dropDownBundle_Branch.SelectedIndex == 0)
+                //{
+                //    label113.Text = "BCO:";
+                //    List<BranchCorpOffice> branchCorpOffices = getBranchCorpOffice().OrderBy(x => x.BranchCorpOfficeName).ToList();
+                //    dropDownBundle_BCO_BSO.DataSource = branchCorpOffices;
+                //    dropDownBundle_BCO_BSO.DisplayMember = "BranchCorpOfficeName";
+                //    dropDownBundle_BCO_BSO.ValueMember = "BranchCorpOfficeId";
+                //    dropDownBundle_BCO_BSO.SelectedValue = GlobalVars.DeviceBcoId;
+                //    dropDownBundle_BCO_BSO.Enabled = false;
+                //}
+                //else
+                //{
+                //    label113.Text = "BSO:";
+                //    dropDownBundle_BCO_BSO.Enabled = true;
+                //    //BSO
+                //    DataTable table = view.ToTable(true, "BSO");
+                //    dropDownBundle_BCO_BSO.Items.Clear();
+                //    dropDownBundle_BCO_BSO.Items.Add("All");
+                //    foreach (DataRow x in table.Rows)
+                //    {
+                //        dropDownBundle_BCO_BSO.Items.Add(x["BSO"].ToString());
+                //    }
+                //    dropDownBundle_BCO_BSO.SelectedIndex = 0;
+                //}
             }
             catch (Exception ex)
             {
@@ -7164,14 +7651,14 @@ namespace CMS2.Client
                 try
                 {
                     Area = dropDownBundle_BCO_BSO.SelectedItem.ToString();
-                    SackNo = dropDownBundle_SackNo.SelectedItem.ToString();
-                    Destination = dropDownBundle_Destination.SelectedItem.ToString();
+                    //SackNo = dropDownBundle_SackNo.SelectedItem.ToString();
+                    //Destination = dropDownBundle_Destination.SelectedItem.ToString();
                 }
                 catch
                 {
                     Area = "All"; dropDownBundle_BCO_BSO.SelectedText = "All";
-                    SackNo = "All"; dropDownBundle_SackNo.SelectedText = "All";
-                    Destination = "All"; dropDownBundle_Destination.SelectedText = "All";
+                    //SackNo = "All"; dropDownBundle_SackNo.SelectedText = "All";
+                    //Destination = "All"; dropDownBundle_Destination.SelectedText = "All";
                 }
 
                 if (Area == "All" && SackNo == "All" && Destination == "All")
@@ -7182,21 +7669,21 @@ namespace CMS2.Client
 
                 if (Area != null && SackNo == "All" && Destination == "All")
                 {
-                    if (dropDownBundle_Branch.SelectedIndex == 0) { compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, Area)); }
-                    else { compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BSO", FilterOperator.IsEqualTo, Area)); }
+                    //if (dropDownBundle_Branch.SelectedIndex == 0) { compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, Area)); }
+                    //else { compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BSO", FilterOperator.IsEqualTo, Area)); }
 
                 }
                 else if (Area != null && SackNo != null && Destination == "All")
                 {
-                    if (dropDownBundle_Branch.SelectedIndex == 0) { compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, Area)); }
-                    else { compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BSO", FilterOperator.IsEqualTo, Area)); }
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("SackNo", FilterOperator.IsEqualTo, SackNo));
+                    //if (dropDownBundle_Branch.SelectedIndex == 0) { compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, Area)); }
+                    //else { compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BSO", FilterOperator.IsEqualTo, Area)); }
+                    //compositeFilter.FilterDescriptors.Add(new FilterDescriptor("SackNo", FilterOperator.IsEqualTo, SackNo));
                 }
                 else if (Area != null && SackNo == "All" && Destination != null)
                 {
-                    if (dropDownBundle_Branch.SelectedIndex == 0) { compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, Area)); }
-                    else { compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BSO", FilterOperator.IsEqualTo, Area)); }
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Destination", FilterOperator.IsEqualTo, Destination));
+                    //if (dropDownBundle_Branch.SelectedIndex == 0) { compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, Area)); }
+                    //else { compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BSO", FilterOperator.IsEqualTo, Area)); }
+                    //compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Destination", FilterOperator.IsEqualTo, Destination));
                 }
                 else if (Area == "All" && SackNo != null && Destination != null)
                 {
@@ -7213,10 +7700,10 @@ namespace CMS2.Client
                 }
                 else if (Area != null && SackNo != null && Destination != null)
                 {
-                    if (dropDownBundle_Branch.SelectedIndex == 0) { compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, Area)); }
-                    else { compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BSO", FilterOperator.IsEqualTo, Area)); }
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("SackNo", FilterOperator.IsEqualTo, SackNo));
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Destination", FilterOperator.IsEqualTo, Destination));
+                    //if (dropDownBundle_Branch.SelectedIndex == 0) { compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, Area)); }
+                    //else { compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BSO", FilterOperator.IsEqualTo, Area)); }
+                    //compositeFilter.FilterDescriptors.Add(new FilterDescriptor("SackNo", FilterOperator.IsEqualTo, SackNo));
+                    //compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Destination", FilterOperator.IsEqualTo, Destination));
                 }
 
                 //compositeFilter.FilterDescriptors.Add(new FilterDescriptor("CreatedDate", FilterOperator.IsEqualTo, CreatedDate));
@@ -7238,7 +7725,7 @@ namespace CMS2.Client
 
                 TrackingReportGlobalModel.Date = dateTimeBundle_Date.Value.ToLongDateString();
                 TrackingReportGlobalModel.SackNo = get_Column_DataView(dataTable, "SackNo");
-                TrackingReportGlobalModel.Destination = dropDownBundle_Destination.SelectedItem.ToString();
+               // TrackingReportGlobalModel.Destination = dropDownBundle_Destination.SelectedItem.ToString();
                 TrackingReportGlobalModel.Weight = get_Column_DataView(dataTable, "AGW");
                 TrackingReportGlobalModel.ScannedBy = UserTxt.Text.Replace("Welcome!", "");
 
@@ -7279,12 +7766,12 @@ namespace CMS2.Client
                 try
                 {
                     Branch = dropDownUnbundle_BCO.SelectedItem.ToString();
-                    SackNo = dropDownUnbundle_SackNo.SelectedItem.ToString();
+                   // SackNo = dropDownUnbundle_SackNo.SelectedItem.ToString();
                 }
                 catch (Exception)
                 {
                     Branch = "All"; dropDownUnbundle_BCO.SelectedText = "All";
-                    SackNo = "All"; dropDownUnbundle_SackNo.SelectedText = "All";
+                   // SackNo = "All"; dropDownUnbundle_SackNo.SelectedText = "All";
                 }
                 if (Branch == "All" && SackNo == "All")
                 {
@@ -7319,7 +7806,7 @@ namespace CMS2.Client
                 DataTable dataTable = getUnbundleGrid();
                 TrackingReportGlobalModel.table = dataTable;
                 TrackingReportGlobalModel.Date = dateTimeUnbunde_Date.Value.ToLongDateString();
-                TrackingReportGlobalModel.SackNo = dropDownUnbundle_SackNo.SelectedItem.ToString();
+                //TrackingReportGlobalModel.SackNo = dropDownUnbundle_SackNo.SelectedItem.ToString();
                 TrackingReportGlobalModel.Origin = get_Column_DataView(dataTable, "Origin");
                 TrackingReportGlobalModel.ScannedBy = UserTxt.Text.Replace("Welcome!", "");
                 TrackingReportGlobalModel.Report = "Unbundle";
@@ -7548,67 +8035,79 @@ namespace CMS2.Client
                 String Gateway = "";
                 String Origin = "";
                 String CommodityType = "";
+                string flightNo = "";
+                int num = 0;
                 try
                 {
                     Gateway = dropDownGatewayInbound_Gateway.SelectedItem.ToString();
                     Origin = dropDownGatewayInbound_Origin.SelectedItem.ToString();
                     CommodityType = dropDownGatewayInbound_Commodity.SelectedItem.ToString();
+                    flightNo = cmbGI_FlightNo.SelectedItem.ToString();
+                    
                 }
                 catch (Exception)
                 {
                     Gateway = "All"; dropDownGatewayInbound_Gateway.SelectedText = "All";
                     Origin = "All"; dropDownGatewayInbound_Origin.SelectedText = "All";
                     CommodityType = "All"; dropDownGatewayInbound_Commodity.SelectedText = "All";
+                    flightNo = "All"; cmbGI_FlightNo.SelectedText = "All";
                 }
-                if (txtBoxGatewayInbound_MasterAWB.Text != "")
+                if(txtBoxGatewayInbound_MasterAWB.Text != "")
                 {
-                    dropDownGatewayInbound_Gateway.SelectedIndex = 0;
-                    dropDownGatewayInbound_Origin.SelectedIndex = 0;
-                    dropDownGatewayInbound_Commodity.SelectedIndex = 0;
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("MAWB", FilterOperator.IsEqualTo, txtBoxGatewayInbound_MasterAWB.Text));
+                    gridGatewayInbound.EnableFiltering = false;
+                    getGatewayInBoundDatabyFilter(num);
                 }
-                else
-                {
-                    if (Gateway == "All" && Origin == "All" && CommodityType == "All")
-                    {
-                        gridGatewayInbound.EnableFiltering = false;
-                        getGatewayInBoundData();
-                    }
-                    else if (Gateway != null && Origin == "All" && CommodityType == "All")
-                    {
-                        compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Gateway", FilterOperator.IsEqualTo, Gateway));
-                    }
-                    else if (Gateway == "All" && Origin != null && CommodityType == "All")
-                    {
-                        compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Origin", FilterOperator.IsEqualTo, Origin));
-                    }
-                    else if (Gateway == "All" && Origin == "All" && CommodityType != null)
-                    {
-                        compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Commodity Type", FilterOperator.IsEqualTo, CommodityType));
-                    }
-                    else if (Gateway != null && Origin != null && CommodityType == "All")
-                    {
-                        compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Gateway", FilterOperator.IsEqualTo, Gateway));
-                        compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Origin", FilterOperator.IsEqualTo, Origin));
-                    }
-                    else if (Gateway != null && Origin == "All" && CommodityType != null)
-                    {
-                        compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Gateway", FilterOperator.IsEqualTo, Gateway));
-                        compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Commodity Type", FilterOperator.IsEqualTo, CommodityType));
-                    }
-                    else if (Gateway == "All" && Origin != null && CommodityType != null)
-                    {
-                        compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Origin", FilterOperator.IsEqualTo, Origin));
-                        compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Commodity Type", FilterOperator.IsEqualTo, CommodityType));
-                    }
-                    else if (Gateway != null && Origin != null && CommodityType != null)
-                    {
-                        compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Gateway", FilterOperator.IsEqualTo, Gateway));
-                        compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Origin", FilterOperator.IsEqualTo, Origin));
-                        compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Commodity Type", FilterOperator.IsEqualTo, CommodityType));
-                    }
 
-                }
+
+                //if (txtBoxGatewayInbound_MasterAWB.Text != "")
+                //{
+                //    dropDownGatewayInbound_Gateway.SelectedIndex = 0;
+                //    dropDownGatewayInbound_Origin.SelectedIndex = 0;
+                //    dropDownGatewayInbound_Commodity.SelectedIndex = 0;
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("MAWB", FilterOperator.IsEqualTo, txtBoxGatewayInbound_MasterAWB.Text));
+                //}
+                //else
+                //{
+                //    if (Gateway == "All" && Origin == "All" && CommodityType == "All")
+                //    {
+                //        gridGatewayInbound.EnableFiltering = false;
+                //        getGatewayInBoundData();
+                //    }
+                //    else if (Gateway != null && Origin == "All" && CommodityType == "All")
+                //    {
+                //        compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Gateway", FilterOperator.IsEqualTo, Gateway));
+                //    }
+                //    else if (Gateway == "All" && Origin != null && CommodityType == "All")
+                //    {
+                //        compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Origin", FilterOperator.IsEqualTo, Origin));
+                //    }
+                //    else if (Gateway == "All" && Origin == "All" && CommodityType != null)
+                //    {
+                //        compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Commodity Type", FilterOperator.IsEqualTo, CommodityType));
+                //    }
+                //    else if (Gateway != null && Origin != null && CommodityType == "All")
+                //    {
+                //        compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Gateway", FilterOperator.IsEqualTo, Gateway));
+                //        compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Origin", FilterOperator.IsEqualTo, Origin));
+                //    }
+                //    else if (Gateway != null && Origin == "All" && CommodityType != null)
+                //    {
+                //        compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Gateway", FilterOperator.IsEqualTo, Gateway));
+                //        compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Commodity Type", FilterOperator.IsEqualTo, CommodityType));
+                //    }
+                //    else if (Gateway == "All" && Origin != null && CommodityType != null)
+                //    {
+                //        compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Origin", FilterOperator.IsEqualTo, Origin));
+                //        compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Commodity Type", FilterOperator.IsEqualTo, CommodityType));
+                //    }
+                //    else if (Gateway != null && Origin != null && CommodityType != null)
+                //    {
+                //        compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Gateway", FilterOperator.IsEqualTo, Gateway));
+                //        compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Origin", FilterOperator.IsEqualTo, Origin));
+                //        compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Commodity Type", FilterOperator.IsEqualTo, CommodityType));
+                //    }
+
+                //}
                 //compositeFilter.FilterDescriptors.Add(new FilterDescriptor("CreatedDate", FilterOperator.IsEqualTo, dateTimePickerGatewayInbound_Date.Value.ToShortDateString()));
 
                 compositeFilter.LogicalOperator = FilterLogicalOperator.And;
@@ -7655,61 +8154,61 @@ namespace CMS2.Client
             }
         }
         // **** CARGO TRANSFER **** //
-        private void dropDownCargoTransfer_Origin_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
-        {
-            try
-            {
-                RevenueUnitBL revenueBL = new RevenueUnitBL();
+        //private void dropDownCargoTransfer_Origin_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
+        //{
+        //    try
+        //    {
+        //        RevenueUnitBL revenueBL = new RevenueUnitBL();
 
-                if (dropDownCargoTransfer_Origin.SelectedItem.ToString().Equals("Branch Corporate Office"))
-                {
-                    CargoTransferReport cargoTransfer = new CargoTransferReport();
-                    DataTable dataTable = cargoTransfer.getData(dateTimeCargoTransfer_Date.Value);
+        //        if (dropDownCargoTransfer_Origin.SelectedItem.ToString().Equals("Branch Corporate Office"))
+        //        {
+        //            CargoTransferReport cargoTransfer = new CargoTransferReport();
+        //            DataTable dataTable = cargoTransfer.getData(dateTimeCargoTransfer_Date.Value);
 
-                    DataView view = new DataView(dataTable);
+        //            DataView view = new DataView(dataTable);
 
-                    //ORIGIN
-                    DataTable table = view.ToTable(true, "BCO");
+        //            //ORIGIN
+        //            DataTable table = view.ToTable(true, "BCO");
 
-                    dropDownCargoTransfer_City.Items.Clear();
-                    dropDownCargoTransfer_City.Items.Add("All");
-                    dropDownCargoTransfer_Destination.Items.Clear();
-                    dropDownCargoTransfer_Destination.Items.Add("All");
+        //            dropDownCargoTransfer_City.Items.Clear();
+        //            dropDownCargoTransfer_City.Items.Add("All");
+        //            dropDownCargoTransfer_Destination.Items.Clear();
+        //            dropDownCargoTransfer_Destination.Items.Add("All");
 
-                    foreach (DataRow x in table.Rows)
-                    {
-                        if (x["BCO"].ToString().Trim() != "")
-                        {
-                            if (x["BCO"].ToString() != null)
-                            {
-                                dropDownCargoTransfer_City.Items.Add(x["BCO"].ToString());
-                                dropDownCargoTransfer_Destination.Items.Add(x["BCO"].ToString());
-                            }
-                        }
-                    }
-                    dropDownCargoTransfer_City.SelectedIndex = 0;
-                    dropDownCargoTransfer_Destination.SelectedIndex = 0;
-                }
-                else
-                {
-                    List<RevenueUnit> revenueList = revenueBL.GetAll().OrderBy(x => x.City.CityName).ToList();
-                    dropDownCargoTransfer_City.DataSource = revenueList;
-                    dropDownCargoTransfer_City.DisplayMember = "RevenueUnitName";
-                    dropDownCargoTransfer_City.ValueMember = "RevenueUnitId";
-                    dropDownCargoTransfer_City.SelectedIndex = 0;
+        //            foreach (DataRow x in table.Rows)
+        //            {
+        //                if (x["BCO"].ToString().Trim() != "")
+        //                {
+        //                    if (x["BCO"].ToString() != null)
+        //                    {
+        //                        dropDownCargoTransfer_City.Items.Add(x["BCO"].ToString());
+        //                        dropDownCargoTransfer_Destination.Items.Add(x["BCO"].ToString());
+        //                    }
+        //                }
+        //            }
+        //            dropDownCargoTransfer_City.SelectedIndex = 0;
+        //            dropDownCargoTransfer_Destination.SelectedIndex = 0;
+        //        }
+        //        else
+        //        {
+        //            List<RevenueUnit> revenueList = revenueBL.GetAll().OrderBy(x => x.City.CityName).ToList();
+        //            dropDownCargoTransfer_City.DataSource = revenueList;
+        //            dropDownCargoTransfer_City.DisplayMember = "RevenueUnitName";
+        //            dropDownCargoTransfer_City.ValueMember = "RevenueUnitId";
+        //            dropDownCargoTransfer_City.SelectedIndex = 0;
 
-                    revenueList = revenueBL.GetAll().OrderBy(x => x.City.CityName).ToList();
-                    dropDownCargoTransfer_Destination.DataSource = revenueList;
-                    dropDownCargoTransfer_Destination.DisplayMember = "RevenueUnitName";
-                    dropDownCargoTransfer_Destination.ValueMember = "RevenueUnitId";
-                    dropDownCargoTransfer_Destination.SelectedIndex = 0;
-                }
-            }
-            catch (Exception ex)
-            {
-                Logs.ErrorLogs(LogPath, "Cargo Transfer", ex.Message);
-            }
-        }
+        //            revenueList = revenueBL.GetAll().OrderBy(x => x.City.CityName).ToList();
+        //            dropDownCargoTransfer_Destination.DataSource = revenueList;
+        //            dropDownCargoTransfer_Destination.DisplayMember = "RevenueUnitName";
+        //            dropDownCargoTransfer_Destination.ValueMember = "RevenueUnitId";
+        //            dropDownCargoTransfer_Destination.SelectedIndex = 0;
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Logs.ErrorLogs(LogPath, "Cargo Transfer", ex.Message);
+        //    }
+        //}
         private void btnCargoTransfer_Search_Click(object sender, EventArgs e)
         {
             try
@@ -7722,13 +8221,13 @@ namespace CMS2.Client
                 string destination = "";
                 try
                 {
-                    origin = dropDownCargoTransfer_City.SelectedItem.ToString();
-                    destination = dropDownCargoTransfer_Destination.SelectedItem.ToString();
+                    //origin = dropDownCargoTransfer_City.SelectedItem.ToString();
+                    //destination = dropDownCargoTransfer_Destination.SelectedItem.ToString();
                 }
                 catch (Exception)
                 {
-                    origin = "All"; dropDownCargoTransfer_City.SelectedText = "All";
-                    destination = "All"; dropDownCargoTransfer_Destination.SelectedText = "All";
+                    //origin = "All"; dropDownCargoTransfer_City.SelectedText = "All";
+                    //destination = "All"; dropDownCargoTransfer_Destination.SelectedText = "All";
                 }
                 if (origin == "All" && destination == "All")
                 {
@@ -7764,8 +8263,8 @@ namespace CMS2.Client
                 DataTable dataTable = getCargoTranferGrid();
                 TrackingReportGlobalModel.table = dataTable;
                 TrackingReportGlobalModel.Date = dateTimeCargoTransfer_Date.Value.ToLongDateString();
-                TrackingReportGlobalModel.Origin = dropDownCargoTransfer_City.SelectedItem.ToString();
-                TrackingReportGlobalModel.Destination = dropDownCargoTransfer_Destination.SelectedItem.ToString();
+                //TrackingReportGlobalModel.Origin = dropDownCargoTransfer_City.SelectedItem.ToString();
+                //TrackingReportGlobalModel.Destination = dropDownCargoTransfer_Destination.SelectedItem.ToString();
                 TrackingReportGlobalModel.Driver = get_Column_DataView(dataTable, "Driver");
                 TrackingReportGlobalModel.Checker = get_Column_DataView(dataTable, "Checker");
                 TrackingReportGlobalModel.PlateNo = get_Column_DataView(dataTable, "Plate #");
@@ -7961,104 +8460,133 @@ namespace CMS2.Client
                 String Driver = "";
                 String PaymentMode = "";
                 String BCO = "";
+                string batch = "";
+                int num = 0;
 
                 try
                 {
                     Area = dropDownDailyTrip_Area.SelectedItem.ToString();
-                    Driver = dropDownDailyTrip_Driver.SelectedItem.ToString();
+                  //  Driver = dropDownDailyTrip_Driver.SelectedItem.ToString();
                     PaymentMode = dropDownDailyTrip_PaymentMode.SelectedItem.ToString();
-                    BCO = dropDownDailyTrip_BCO.SelectedItem.ToString();
+                   // BCO = dropDownDailyTrip_BCO.SelectedItem.ToString();
+                   batch = cmbDTR_Batch.SelectedItem.ToString();
                 }
                 catch (Exception)
                 {
                     Area = "All"; dropDownDailyTrip_Area.SelectedText = "All";
-                    Driver = "All"; dropDownDailyTrip_Driver.SelectedText = "All";
+                  //  Driver = "All"; dropDownDailyTrip_Driver.SelectedText = "All";
                     PaymentMode = "All"; dropDownDailyTrip_PaymentMode.SelectedText = "All";
-                    BCO = "All"; dropDownDailyTrip_BCO.SelectedText = "All";
+                    batch = "All"; cmbDTR_Batch.SelectedText = "All";
+                    // BCO = "All"; dropDownDailyTrip_BCO.SelectedText = "All";
                 }
-                if (Area == "All" && Driver == "All" && PaymentMode == "All" && BCO == "All")
+                if(Area != "All" && batch !="All" && PaymentMode != "All")
                 {
-                    gridDailyTrip.EnableFiltering = false;
-                    getDailyTripData();
+                    num = 1;
+                    getDailyTripDatabyAllFilter(num);
                 }
-                else if (Area != null && Driver == "All" && PaymentMode == "All" && BCO == "All")
+                else if (Area != "All" && batch != "All" && PaymentMode == "All")
                 {
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Area));
+                    num = 2;
+                    getDailyTripDatabyAllFilter(num);
                 }
-                else if (Area != null && Driver != null && PaymentMode == "All" && BCO == "All")
+                else if(Area != "All" && batch == "All" && PaymentMode != "All")
                 {
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Area));
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
+                    num = 3;
+                    getDailyTripDatabyAllFilter(num);
                 }
-                else if (Area != null && Driver == "All" && PaymentMode != null && BCO == "All")
+                else if (Area != "All" && batch == "All" && PaymentMode == "All")
                 {
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Area));
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Payment Mode", FilterOperator.IsEqualTo, PaymentMode));
+                    num = 4;
+                    getDailyTripDatabyAllFilter(num);
                 }
-                else if (Area == "All" && Driver != null && PaymentMode == "All" && BCO == "All")
+                else if (Area == "All" && batch == "All" && PaymentMode == "All")
                 {
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
+                    num = 5;
+                    getDailyTripDatabyAllFilter(num);
                 }
-                else if (Area == "All" && Driver != null && PaymentMode != null && BCO == "All")
-                {
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Payment Mode", FilterOperator.IsEqualTo, PaymentMode));
-                }
-                else if (Area == "All" && Driver == "All" && PaymentMode != null && BCO == "All")
-                {
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Payment Mode", FilterOperator.IsEqualTo, PaymentMode));
-                }
-                else if (Area != null && Driver != null && PaymentMode != null && BCO == "All")
-                {
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Area));
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Payment Mode", FilterOperator.IsEqualTo, PaymentMode));
-                }
-                else if (Area == "All" && Driver == "All" && PaymentMode == "All" && BCO != null)
-                {
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, BCO));
-                }
-                else if (Area == "All" && Driver == "All" && PaymentMode != null && BCO != null)
-                {
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, BCO));
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Payment Mode", FilterOperator.IsEqualTo, PaymentMode));
-                }
-                else if (Area == "All" && Driver != null && PaymentMode == "All" && BCO != null)
-                {
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, BCO));
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
-                }
-                else if (Area != null && Driver == "All" && PaymentMode == "All" && BCO != null)
-                {
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, BCO));
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Area));
-                }
+                //if (Area == "All" && Driver == "All" && PaymentMode == "All" && BCO == "All")
+                //{
+                //    gridDailyTrip.EnableFiltering = false;
+                //    getDailyTripData();
+                //}
+                //else if (Area != null && Driver == "All" && PaymentMode == "All" && BCO == "All")
+                //{
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Area));
+                //}
+                //else if (Area != null && Driver != null && PaymentMode == "All" && BCO == "All")
+                //{
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Area));
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
+                //}
+                //else if (Area != null && Driver == "All" && PaymentMode != null && BCO == "All")
+                //{
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Area));
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Payment Mode", FilterOperator.IsEqualTo, PaymentMode));
+                //}
+                //else if (Area == "All" && Driver != null && PaymentMode == "All" && BCO == "All")
+                //{
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
+                //}
+                //else if (Area == "All" && Driver != null && PaymentMode != null && BCO == "All")
+                //{
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Payment Mode", FilterOperator.IsEqualTo, PaymentMode));
+                //}
+                //else if (Area == "All" && Driver == "All" && PaymentMode != null && BCO == "All")
+                //{
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Payment Mode", FilterOperator.IsEqualTo, PaymentMode));
+                //}
+                //else if (Area != null && Driver != null && PaymentMode != null && BCO == "All")
+                //{
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Area));
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Payment Mode", FilterOperator.IsEqualTo, PaymentMode));
+                //}
+                //else if (Area == "All" && Driver == "All" && PaymentMode == "All" && BCO != null)
+                //{
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, BCO));
+                //}
+                //else if (Area == "All" && Driver == "All" && PaymentMode != null && BCO != null)
+                //{
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, BCO));
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Payment Mode", FilterOperator.IsEqualTo, PaymentMode));
+                //}
+                //else if (Area == "All" && Driver != null && PaymentMode == "All" && BCO != null)
+                //{
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, BCO));
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
+                //}
+                //else if (Area != null && Driver == "All" && PaymentMode == "All" && BCO != null)
+                //{
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, BCO));
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Area));
+                //}
 
-                else if (Area == "All" && Driver != null && PaymentMode != null && BCO != null)
-                {
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, BCO));
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Payment Mode", FilterOperator.IsEqualTo, PaymentMode));
-                }
-                else if (Area != null && Driver != null && PaymentMode == "All" && BCO != null)
-                {
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, BCO));
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Area));
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
-                }
-                else if (Area != null && Driver == "All" && PaymentMode != null && BCO != null)
-                {
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, BCO));
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Area));
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Payment Mode", FilterOperator.IsEqualTo, PaymentMode));
-                }
-                else if (Area != null && Driver != null && PaymentMode != null && BCO != null)
-                {
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, BCO));
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Area));
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Payment Mode", FilterOperator.IsEqualTo, PaymentMode));
-                }
+                //else if (Area == "All" && Driver != null && PaymentMode != null && BCO != null)
+                //{
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, BCO));
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Payment Mode", FilterOperator.IsEqualTo, PaymentMode));
+                //}
+                //else if (Area != null && Driver != null && PaymentMode == "All" && BCO != null)
+                //{
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, BCO));
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Area));
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
+                //}
+                //else if (Area != null && Driver == "All" && PaymentMode != null && BCO != null)
+                //{
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, BCO));
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Area));
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Payment Mode", FilterOperator.IsEqualTo, PaymentMode));
+                //}
+                //else if (Area != null && Driver != null && PaymentMode != null && BCO != null)
+                //{
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, BCO));
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Area));
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Payment Mode", FilterOperator.IsEqualTo, PaymentMode));
+                //}
 
 
                 compositeFilter.LogicalOperator = FilterLogicalOperator.And;
@@ -8075,7 +8603,7 @@ namespace CMS2.Client
             {
                 DataTable dataTable = getDailyTripGrid("PP");
                 TrackingReportGlobalModel.Date = dateTimeDailyTrip_Date.Value.ToLongDateString();
-                TrackingReportGlobalModel.Driver = dropDownDailyTrip_Driver.SelectedItem.ToString();
+                //TrackingReportGlobalModel.Driver = dropDownDailyTrip_Driver.SelectedItem.ToString();
 
                 TrackingReportGlobalModel.Checker = get_Column_DataView(dataTable, "Checker");
                 TrackingReportGlobalModel.PlateNo = "";
@@ -8108,44 +8636,44 @@ namespace CMS2.Client
             }
         }
         // **** HOLD CARGO **** //
-        private void dropDownHoldCargo_Branch_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
-        {
-            try
-            {
-                HoldCargoReport report = new HoldCargoReport();
-                DataTable dataTable = report.getData(dateTimeHoldCargo_FromDate.Value, dateTimeHoldCargo_ToDate.Value);
-                DataView view = new DataView(dataTable);
+        //private void dropDownHoldCargo_Branch_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
+        //{
+        //    try
+        //    {
+        //        HoldCargoReport report = new HoldCargoReport();
+        //        DataTable dataTable = report.getData(dateTimeHoldCargo_FromDate.Value, dateTimeHoldCargo_ToDate.Value);
+        //        DataView view = new DataView(dataTable);
 
-                if (dropDownHoldCargo_Branch.SelectedItem.ToString().Equals("Branch Corporate Office"))
-                {
-                    label104.Text = "BCO:";
-                    List<BranchCorpOffice> branchCorpOffices = getBranchCorpOffice().OrderBy(x => x.BranchCorpOfficeName).ToList();
-                    dropDownHoldCargo_BCO_BSO.DataSource = branchCorpOffices;
-                    dropDownHoldCargo_BCO_BSO.DisplayMember = "BranchCorpOfficeName";
-                    dropDownHoldCargo_BCO_BSO.ValueMember = "BranchCorpOfficeId";
-                    dropDownHoldCargo_BCO_BSO.SelectedValue = GlobalVars.DeviceBcoId;
-                    dropDownHoldCargo_BCO_BSO.Enabled = false;
-                }
-                else
-                {
-                    label104.Text = "BSO:";
-                    dropDownBranchAcceptance_BCO_BSO.Enabled = true;
-                    //BSO
-                    DataTable table = view.ToTable(true, "BSO");
-                    dropDownHoldCargo_BCO_BSO.Items.Clear();
-                    dropDownHoldCargo_BCO_BSO.Items.Add("All");
-                    foreach (DataRow x in table.Rows)
-                    {
-                        dropDownHoldCargo_BCO_BSO.Items.Add(x["BSO"].ToString());
-                    }
-                    dropDownHoldCargo_BCO_BSO.SelectedIndex = 0;
-                }
-            }
-            catch (Exception ex)
-            {
-                Logs.ErrorLogs(LogPath, "Hold Cargo", ex.Message);
-            }
-        }
+        //        if (dropDownHoldCargo_Branch.SelectedItem.ToString().Equals("Branch Corporate Office"))
+        //        {
+        //            label104.Text = "BCO:";
+        //            List<BranchCorpOffice> branchCorpOffices = getBranchCorpOffice().OrderBy(x => x.BranchCorpOfficeName).ToList();
+        //            dropDownHoldCargo_BCO_BSO.DataSource = branchCorpOffices;
+        //            dropDownHoldCargo_BCO_BSO.DisplayMember = "BranchCorpOfficeName";
+        //            dropDownHoldCargo_BCO_BSO.ValueMember = "BranchCorpOfficeId";
+        //            dropDownHoldCargo_BCO_BSO.SelectedValue = GlobalVars.DeviceBcoId;
+        //            dropDownHoldCargo_BCO_BSO.Enabled = false;
+        //        }
+        //        else
+        //        {
+        //            label104.Text = "BSO:";
+        //            //dropDownBranchAcceptance_BCO_BSO.Enabled = true;
+        //            //BSO
+        //            DataTable table = view.ToTable(true, "BSO");
+        //            dropDownHoldCargo_BCO_BSO.Items.Clear();
+        //            dropDownHoldCargo_BCO_BSO.Items.Add("All");
+        //            foreach (DataRow x in table.Rows)
+        //            {
+        //                dropDownHoldCargo_BCO_BSO.Items.Add(x["BSO"].ToString());
+        //            }
+        //            dropDownHoldCargo_BCO_BSO.SelectedIndex = 0;
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Logs.ErrorLogs(LogPath, "Hold Cargo", ex.Message);
+        //    }
+        //}
         private void btnHoldCargo_Search_Click(object sender, EventArgs e)
         {
             try
@@ -8160,12 +8688,12 @@ namespace CMS2.Client
 
                 try
                 {
-                    Branch = dropDownHoldCargo_BCO_BSO.SelectedItem.ToString();
+                   // Branch = dropDownHoldCargo_BCO_BSO.SelectedItem.ToString();
                     Status = dropDownHoldCargo_Status.SelectedItem.ToString();
                 }
                 catch (Exception)
                 {
-                    Branch = "All"; dropDownHoldCargo_BCO_BSO.SelectedText = "All";
+                   // Branch = "All"; dropDownHoldCargo_BCO_BSO.SelectedText = "All";
                     Status = "All"; dropDownHoldCargo_Status.SelectedText = "All";
 
                 }
@@ -8250,102 +8778,142 @@ namespace CMS2.Client
                 String Driver = "";
                 String Status = "";
                 String BCO = "";
+              
+
+                string revenueUnit = "";
+                string deliveredBy = "";
+                string statusName = "";
+                int num = 0;
                 try
                 {
-                    Area = dropDownDeliveryStatus_Area.SelectedItem.ToString();
-                    Driver = dropDownDeliveryStatus_Driver.SelectedItem.ToString();
-                    Status = dropDownDeliveryStatus_Status.SelectedItem.ToString();
-                    BCO = dropDownDeliveryStatus_BCO.SelectedItem.ToString();
+                    //Area = dropDownDeliveryStatus_Area.SelectedItem.ToString();
+                    //Driver = dropDownDeliveryStatus_Driver.SelectedItem.ToString();
+                    //Status = dropDownDeliveryStatus_Status.SelectedItem.ToString();
+                    //BCO = dropDownDeliveryStatus_BCO.SelectedItem.ToString();
+                    revenueUnit = cmbDS_RevenueUnit.SelectedItem.ToString();
+                    deliveredBy = cmbDS_DeliveredBy.SelectedItem.ToString();
+                    statusName = cmbDS_Status.SelectedItem.ToString();
+
                 }
                 catch (Exception)
                 {
-                    Area = "All"; dropDownDeliveryStatus_Area.SelectedText = "All";
-                    Driver = "All"; dropDownDeliveryStatus_Driver.SelectedText = "All";
-                    Status = "All"; dropDownDeliveryStatus_Status.SelectedText = "All";
-                    BCO = "All"; dropDownDeliveryStatus_BCO.SelectedText = "All";
+                    //Area = "All"; dropDownDeliveryStatus_Area.SelectedText = "All";
+                    //Driver = "All"; dropDownDeliveryStatus_Driver.SelectedText = "All";
+                    //Status = "All"; dropDownDeliveryStatus_Status.SelectedText = "All";
+                    //BCO = "All"; dropDownDeliveryStatus_BCO.SelectedText = "All";
                 }
-                if (Area == "All" && Driver == "All" && Status == "All" && BCO == "ALL")
+                if(revenueUnit != "All" && deliveredBy != "All" && statusName != "All")
                 {
                     gridDeliveryStatus.EnableFiltering = false;
-                    getDeliveryStatusData();
+                    num = 1;
+                    getDeliveryStatusDataByFilter(num);
                 }
-                else if (Area != null && Driver == "All" && Status == "All" && BCO == "ALL")
+                else if(revenueUnit != "All" && deliveredBy == "All" && statusName != "All")
                 {
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Area));
+                    gridDeliveryStatus.EnableFiltering = false;
+                    num = 2;
+                    getDeliveryStatusDataByFilter(num);
                 }
-                else if (Area != null && Driver != null && Status == "All" && BCO == "ALL")
+                else if (revenueUnit != "All" && deliveredBy == "All" && statusName == "All")
                 {
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Area));
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
+                    gridDeliveryStatus.EnableFiltering = false;
+                    num = 3;
+                    getDeliveryStatusDataByFilter(num);
                 }
-                else if (Area != null && Driver == "All" && Status != null && BCO == "ALL")
+                else if (revenueUnit != "All" && deliveredBy != "All" && statusName == "All")
                 {
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Area));
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Status", FilterOperator.IsEqualTo, Status));
+                    gridDeliveryStatus.EnableFiltering = false;
+                    num = 4;
+                    getDeliveryStatusDataByFilter(num);
                 }
-                else if (Area == "All" && Driver != null && Status == "All" && BCO == "ALL")
+                else if (revenueUnit == "All" && deliveredBy == "All" && statusName == "All")
                 {
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
+                    gridDeliveryStatus.EnableFiltering = false;
+                    num = 5;
+                    getDeliveryStatusDataByFilter(num);
                 }
-                else if (Area == "All" && Driver != null && Status != null && BCO == "ALL")
-                {
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Status", FilterOperator.IsEqualTo, Status));
-                }
-                else if (Area == "All" && Driver == "All" && Status != null && BCO == "ALL")
-                {
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Status", FilterOperator.IsEqualTo, Status));
-                }
-                else if (Area != null && Driver != null && Status != null && BCO != null)
-                {
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Area));
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Status", FilterOperator.IsEqualTo, Status));
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, BCO));
-                }
-                else if (Area == "All" && Driver == "All" && Status == "All" && BCO != null)
-                {
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, BCO));
-                }
-                else if (Area == "All" && Driver == "All" && Status != null && BCO != null)
-                {
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, BCO));
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Status", FilterOperator.IsEqualTo, Status));
-                }
-                else if (Area == "All" && Driver != null && Status != null && BCO != null)
-                {
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, BCO));
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Status", FilterOperator.IsEqualTo, Status));
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
-                }
-                else if (Area != null && Driver != null && Status != null && BCO == "All")
-                {
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Area));
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Status", FilterOperator.IsEqualTo, Status));
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
-                }
-                else if (Area != null && Driver != null && Status == "All" && BCO != null)
-                {
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Area));
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, BCO));
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
-                }
-                else if (Area != null && Driver == "All" && Status != null && BCO != null)
-                {
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, BCO));
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Status", FilterOperator.IsEqualTo, Status));
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Area));
-                }
-                else if (Area == "All" && Driver != null && Status == "All" && BCO != null)
-                {
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, BCO));
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
-                }
-                else if (Area != null && Driver == "All" && Status == "All" && BCO != null)
-                {
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Area));
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, BCO));
-                }
+                //if (Area == "All" && Driver == "All" && Status == "All" && BCO == "ALL")
+                //{
+                //    gridDeliveryStatus.EnableFiltering = false;
+                //    getDeliveryStatusData();
+                //}
+                //else if (Area != null && Driver == "All" && Status == "All" && BCO == "ALL")
+                //{
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Area));
+                //}
+                //else if (Area != null && Driver != null && Status == "All" && BCO == "ALL")
+                //{
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Area));
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
+                //}
+                //else if (Area != null && Driver == "All" && Status != null && BCO == "ALL")
+                //{
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Area));
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Status", FilterOperator.IsEqualTo, Status));
+                //}
+                //else if (Area == "All" && Driver != null && Status == "All" && BCO == "ALL")
+                //{
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
+                //}
+                //else if (Area == "All" && Driver != null && Status != null && BCO == "ALL")
+                //{
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Status", FilterOperator.IsEqualTo, Status));
+                //}
+                //else if (Area == "All" && Driver == "All" && Status != null && BCO == "ALL")
+                //{
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Status", FilterOperator.IsEqualTo, Status));
+                //}
+                //else if (Area != null && Driver != null && Status != null && BCO != null)
+                //{
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Area));
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Status", FilterOperator.IsEqualTo, Status));
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, BCO));
+                //}
+                //else if (Area == "All" && Driver == "All" && Status == "All" && BCO != null)
+                //{
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, BCO));
+                //}
+                //else if (Area == "All" && Driver == "All" && Status != null && BCO != null)
+                //{
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, BCO));
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Status", FilterOperator.IsEqualTo, Status));
+                //}
+                //else if (Area == "All" && Driver != null && Status != null && BCO != null)
+                //{
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, BCO));
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Status", FilterOperator.IsEqualTo, Status));
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
+                //}
+                //else if (Area != null && Driver != null && Status != null && BCO == "All")
+                //{
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Area));
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Status", FilterOperator.IsEqualTo, Status));
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
+                //}
+                //else if (Area != null && Driver != null && Status == "All" && BCO != null)
+                //{
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Area));
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, BCO));
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
+                //}
+                //else if (Area != null && Driver == "All" && Status != null && BCO != null)
+                //{
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, BCO));
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Status", FilterOperator.IsEqualTo, Status));
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Area));
+                //}
+                //else if (Area == "All" && Driver != null && Status == "All" && BCO != null)
+                //{
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, BCO));
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
+                //}
+                //else if (Area != null && Driver == "All" && Status == "All" && BCO != null)
+                //{
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Area", FilterOperator.IsEqualTo, Area));
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, BCO));
+                //}
 
                 compositeFilter.LogicalOperator = FilterLogicalOperator.And;
                 this.gridDeliveryStatus.FilterDescriptors.Add(compositeFilter);
@@ -8362,7 +8930,7 @@ namespace CMS2.Client
                 DataTable dataTable = getDeliveryStatusGrid();
                 TrackingReportGlobalModel.table = dataTable;
                 TrackingReportGlobalModel.Date = dateTimeDeliveryStatus_Date.Value.ToLongDateString();
-                TrackingReportGlobalModel.Driver = dropDownDeliveryStatus_Driver.SelectedItem.ToString();
+               // TrackingReportGlobalModel.Driver = dropDownDeliveryStatus_Driver.SelectedItem.ToString();
                 TrackingReportGlobalModel.Checker = get_Column_DataView(dataTable, "Checker");
                 TrackingReportGlobalModel.ScannedBy = UserTxt.Text.Replace("Welcome!", "");
                 TrackingReportGlobalModel.Report = "DeliveryStatus";
@@ -8414,23 +8982,23 @@ namespace CMS2.Client
         #endregion
 
         #region TRACKING = AUTOCOMPLETE Search
-        private void dropDownPickUpCargo_Area_Enter(object sender, EventArgs e)
-        {
-            try
-            {
-                dropDownPickUpCargo_Area.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
-            }
-            catch (Exception) { }
-        }
+        //private void dropDownPickUpCargo_Area_Enter(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        dropDownPickUpCargo_Area.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+        //    }
+        //    catch (Exception) { }
+        //}
 
-        private void dropDownBranchAcceptance_Branch_Enter(object sender, EventArgs e)
-        {
-            try
-            {
-                dropDownBranchAcceptance_Branch.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
-            }
-            catch (Exception) { }
-        }
+        //private void dropDownBranchAcceptance_Branch_Enter(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        dropDownBranchAcceptance_Branch.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+        //    }
+        //    catch (Exception) { }
+        //}
 
         private void dropDownBranchAcceptance_BCO_BSO_Enter(object sender, EventArgs e)
         {
@@ -8468,23 +9036,23 @@ namespace CMS2.Client
             catch (Exception) { }
         }
 
-        private void dropDownBundle_SackNo_Enter(object sender, EventArgs e)
-        {
-            try
-            {
-                dropDownBundle_SackNo.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
-            }
-            catch (Exception) { }
-        }
+        //private void dropDownBundle_SackNo_Enter(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        dropDownBundle_SackNo.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+        //    }
+        //    catch (Exception) { }
+        //}
 
-        private void dropDownBundle_Destination_Enter(object sender, EventArgs e)
-        {
-            try
-            {
-                dropDownBundle_Destination.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
-            }
-            catch (Exception) { }
-        }
+        //private void dropDownBundle_Destination_Enter(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        dropDownBundle_Destination.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+        //    }
+        //    catch (Exception) { }
+        //}
 
         private void dropDownUnbundle_BCO_Enter(object sender, EventArgs e)
         {
@@ -8495,14 +9063,14 @@ namespace CMS2.Client
             catch (Exception) { }
         }
 
-        private void dropDownUnbundle_SackNo_Enter(object sender, EventArgs e)
-        {
-            try
-            {
-                dropDownUnbundle_SackNo.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
-            }
-            catch (Exception) { }
-        }
+        //private void dropDownUnbundle_SackNo_Enter(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        dropDownUnbundle_SackNo.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+        //    }
+        //    catch (Exception) { }
+        //}
 
         private void dropDownGatewayTransmital_Gateway_Enter(object sender, EventArgs e)
         {
@@ -8635,32 +9203,32 @@ namespace CMS2.Client
             catch (Exception) { }
         }
 
-        private void dropDownCargoTransfer_Origin_Enter(object sender, EventArgs e)
-        {
-            try
-            {
-                dropDownCargoTransfer_Origin.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
-            }
-            catch (Exception) { }
-        }
+        //private void dropDownCargoTransfer_Origin_Enter(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        dropDownCargoTransfer_Origin.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+        //    }
+        //    catch (Exception) { }
+        //}
 
-        private void dropDownCargoTransfer_City_Enter(object sender, EventArgs e)
-        {
-            try
-            {
-                dropDownCargoTransfer_City.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
-            }
-            catch (Exception) { }
-        }
+        //private void dropDownCargoTransfer_City_Enter(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        dropDownCargoTransfer_City.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+        //    }
+        //    catch (Exception) { }
+        //}
 
-        private void dropDownCargoTransfer_Destination_Enter(object sender, EventArgs e)
-        {
-            try
-            {
-                dropDownCargoTransfer_Destination.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
-            }
-            catch (Exception) { }
-        }
+        //private void dropDownCargoTransfer_Destination_Enter(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        dropDownCargoTransfer_Destination.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+        //    }
+        //    catch (Exception) { }
+        //}
 
         private void dropDownSegregation_BCO_Enter(object sender, EventArgs e)
         {
@@ -8698,14 +9266,14 @@ namespace CMS2.Client
             catch (Exception) { }
         }
 
-        private void dropDownDailyTrip_BCO_Enter(object sender, EventArgs e)
-        {
-            try
-            {
-                dropDownDailyTrip_BCO.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
-            }
-            catch (Exception) { }
-        }
+        //private void dropDownDailyTrip_BCO_Enter(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        dropDownDailyTrip_BCO.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+        //    }
+        //    catch (Exception) { }
+        //}
 
         private void dropDownDailyTrip_Area_Enter(object sender, EventArgs e)
         {
@@ -8716,14 +9284,14 @@ namespace CMS2.Client
             catch (Exception) { }
         }
 
-        private void dropDownDailyTrip_Driver_Enter(object sender, EventArgs e)
-        {
-            try
-            {
-                dropDownDailyTrip_Driver.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
-            }
-            catch (Exception) { }
-        }
+        //private void dropDownDailyTrip_Driver_Enter(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        dropDownDailyTrip_Driver.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+        //    }
+        //    catch (Exception) { }
+        //}
 
         private void dropDownDailyTrip_PaymentMode_Enter(object sender, EventArgs e)
         {
@@ -8734,14 +9302,14 @@ namespace CMS2.Client
             catch (Exception) { }
         }
 
-        private void dropDownHoldCargo_BCO_BSO_Enter(object sender, EventArgs e)
-        {
-            try
-            {
-                dropDownHoldCargo_BCO_BSO.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
-            }
-            catch (Exception) { }
-        }
+        //private void dropDownHoldCargo_BCO_BSO_Enter(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        dropDownHoldCargo_BCO_BSO.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+        //    }
+        //    catch (Exception) { }
+        //}
 
         private void dropDownHoldCargo_Status_Enter(object sender, EventArgs e)
         {
@@ -8752,41 +9320,41 @@ namespace CMS2.Client
             catch (Exception) { }
         }
 
-        private void dropDownDeliveryStatus_BCO_Enter(object sender, EventArgs e)
-        {
-            try
-            {
-                dropDownDeliveryStatus_BCO.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
-            }
-            catch (Exception) { }
-        }
+        //private void dropDownDeliveryStatus_BCO_Enter(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        dropDownDeliveryStatus_BCO.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+        //    }
+        //    catch (Exception) { }
+        //}
 
-        private void dropDownDeliveryStatus_Status_Enter(object sender, EventArgs e)
-        {
-            try
-            {
-                dropDownDeliveryStatus_Status.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
-            }
-            catch (Exception) { }
-        }
+        //private void dropDownDeliveryStatus_Status_Enter(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        dropDownDeliveryStatus_Status.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+        //    }
+        //    catch (Exception) { }
+        //}
 
-        private void dropDownDeliveryStatus_Area_Enter(object sender, EventArgs e)
-        {
-            try
-            {
-                dropDownDeliveryStatus_Area.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
-            }
-            catch (Exception) { }
-        }
+        //private void dropDownDeliveryStatus_Area_Enter(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        dropDownDeliveryStatus_Area.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+        //    }
+        //    catch (Exception) { }
+        //}
 
-        private void dropDownDeliveryStatus_Driver_Enter(object sender, EventArgs e)
-        {
-            try
-            {
-                dropDownDeliveryStatus_Driver.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
-            }
-            catch (Exception) { }
-        }
+        //private void dropDownDeliveryStatus_Driver_Enter(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        dropDownDeliveryStatus_Driver.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+        //    }
+        //    catch (Exception) { }
+        //}
         /// <summary>
         /// PAGEVIEW TRACKING SELECTED PAGE CHANGED
         /// </summary>
@@ -8807,7 +9375,7 @@ namespace CMS2.Client
                     //DATE
                     dateTimePickerBranchAcceptance_Date.Value = DateTime.Now;
                     //SET DROPDOWN BRANCH IF BCO or BSO
-                    dropDownBranchAcceptance_Branch.SelectedIndex = 0;
+                    //dropDownBranchAcceptance_Branch.SelectedIndex = 0;
                     //CALL METHOD GET DATA - BRANCH ACCEPTANCE
                     getBrancAcceptanceData();
 
@@ -8816,7 +9384,7 @@ namespace CMS2.Client
                     //DATE 
                     dateTimeBundle_Date.Value = DateTime.Now;
                     //
-                    dropDownBundle_Branch.SelectedIndex = 0;
+                    //dropDownBundle_Branch.SelectedIndex = 0;
                     //CALL METHOD GET DATA - BUNDLE
                     getBundleData();
                     break;
@@ -8858,12 +9426,12 @@ namespace CMS2.Client
                     //DATE 
                     dateTimeCargoTransfer_Date.Value = DateTime.Now;
                     //SET DROPDOWN ORIGIN
-                    dropDownCargoTransfer_Origin.DataSource = getRevenueUnitType();
-                    dropDownCargoTransfer_Origin.DisplayMember = "RevenueUnitTypeName";
-                    dropDownCargoTransfer_Origin.ValueMember = "RevenueUnitTypeId";
+                    //dropDownCargoTransfer_Origin.DataSource = getRevenueUnitType();
+                    //dropDownCargoTransfer_Origin.DisplayMember = "RevenueUnitTypeName";
+                    //dropDownCargoTransfer_Origin.ValueMember = "RevenueUnitTypeId";
 
-                    dropDownCargoTransfer_Origin.Items.Add("Branch Corporate Office");
-                    dropDownCargoTransfer_Origin.SelectedValue = "Branch Corporate Office";
+                    //dropDownCargoTransfer_Origin.Items.Add("Branch Corporate Office");
+                    //dropDownCargoTransfer_Origin.SelectedValue = "Branch Corporate Office";
                     //CALL METHOD GET DATA - CARGO TRANSFER
                     getCargoTransferData();
 
@@ -8885,11 +9453,11 @@ namespace CMS2.Client
                     dateTimeHoldCargo_FromDate.Value = DateTime.Now;
                     dateTimeHoldCargo_ToDate.Value = DateTime.Now.AddDays(30);
 
-                    dropDownHoldCargo_Branch.DataSource = getRevenueUnitType();
-                    dropDownHoldCargo_Branch.DisplayMember = "RevenueUnitTypeName";
-                    dropDownHoldCargo_Branch.ValueMember = "RevenueUnitTypeId";
-                    dropDownHoldCargo_Branch.Items.Add("Branch Corporate Office");
-                    dropDownHoldCargo_Branch.SelectedValue = "Branch Corporate Office";
+                    //dropDownHoldCargo_Branch.DataSource = getRevenueUnitType();
+                    //dropDownHoldCargo_Branch.DisplayMember = "RevenueUnitTypeName";
+                    //dropDownHoldCargo_Branch.ValueMember = "RevenueUnitTypeId";
+                    //dropDownHoldCargo_Branch.Items.Add("Branch Corporate Office");
+                    //dropDownHoldCargo_Branch.SelectedValue = "Branch Corporate Office";
 
                     getHoldCargoData();
                     break;
@@ -8912,14 +9480,398 @@ namespace CMS2.Client
         }
         #endregion
 
-        private void radDropDownList1_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
+        #region Load Data- PickupCargo
+        public void PickUpCargoLoadData()
         {
+           
+            //bsRevenueUnitType = new BindingSource();
+            List<RevenueUnitType> _revenueUnitType = revenueUnitTypeService.GetAll().Where(x => x.RecordStatus == 1).ToList();
+            bstrackRevenueUnitType.DataSource = _revenueUnitType;
+            cmb_RevenueUnitType.DataSource = bstrackRevenueUnitType;
+            cmb_RevenueUnitType.DisplayMember = "RevenueUnitTypeName";
+            cmb_RevenueUnitType.ValueMember = "RevenueUnitTypeId";
+
+            cmb_RevenueUnitType.Items.Add("All");
+            cmb_RevenueUnitType.SelectedValue = "All";
+
+            if (cmb_RevenueUnitType.SelectedItem.Text == "All")
+            {
+                cmb_RevenueUnit.Enabled = false;
+            }
+        }
+        
+        private void RevenueUnitByUnitType(Guid revenueUnitTypeId)
+        {
+            cmb_RevenueUnit.Enabled = true;
+            cmb_RevenueUnit.DataSource = null;
+            List<RevenueUnit> _revenueUnit = revenueUnitservice.GetAll().Where(x => x.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.RevenueUnitTypeId == revenueUnitTypeId).OrderBy(x => x.RevenueUnitName).ToList();
+            cmb_RevenueUnit.DataSource = _revenueUnit;
+            cmb_RevenueUnit.DisplayMember = "RevenueUnitName";
+            cmb_RevenueUnit.ValueMember = "RevenueUnitId";
+            cmb_RevenueUnit.Items.Add("All");
+            cmb_RevenueUnit.SelectedValue = "All";
+        }
+
+        public void BranchAcceptanceLoadData()
+        {
+            List<RevenueUnit> _barevenueUnit = revenueUnitservice.GetAll().Where(x => x.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId).OrderBy(x => x.RevenueUnitName).ToList();
+            bstrackBARevenueUnitName.DataSource = _barevenueUnit;
+            dropDownBranchAcceptance_BCO_BSO.DataSource = bstrackBARevenueUnitName;
+            dropDownBranchAcceptance_BCO_BSO.DisplayMember = "RevenueUnitName";
+            dropDownBranchAcceptance_BCO_BSO.ValueMember = "RevenueUnitId";
+            dropDownBranchAcceptance_BCO_BSO.Items.Add("All");
+            dropDownBranchAcceptance_BCO_BSO.SelectedValue = "All";
+
+            if (dropDownBranchAcceptance_BCO_BSO.SelectedItem.Text == "All")
+            {
+                dropDownBranchAcceptance_Driver.Enabled = false;
+            }
+
+            List<BranchAcceptance> _driver = branchAcceptanceService.GetAll().Where(x => x.RecordStatus == 1 && x.Users.Employee.AssignedToArea.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId).ToList();
+            //bsDriver.DataSource = _driver;
+            List<string> selectDriver = _driver.Select(x => x.Driver).Distinct().OrderBy(x => x).ToList();
+            selectDriver.Add("All");
+            bsDriver.DataSource = selectDriver;
+            dropDownBranchAcceptance_Driver.DataSource = bsDriver;
+            dropDownBranchAcceptance_Driver.DisplayMember = "Driver";
+            dropDownBranchAcceptance_Driver.ValueMember = "Driver";
+            //dropDownBranchAcceptance_Driver.Items.Add("All");
+            dropDownBranchAcceptance_Driver.SelectedValue = "All";
+
+            List<Batch> _batch = batchService.GetAll().Where(x => x.RecordStatus == 1 && x.BatchCode == "branchacceptance").ToList();
+            //List<Batch> _batch = batchService.GetAll().Where(x => x.RecordStatus == 1 && x.BatchCode == "branchacceptance").OrderBy(x => x.CreatedDate).ToList();
+
+            bsBatch.DataSource = _batch;
+            dropDownBranchAcceptance_Batch.DataSource = bsBatch;
+            dropDownBranchAcceptance_Batch.DisplayMember = "BatchName";
+            dropDownBranchAcceptance_Batch.ValueMember = "BatchId";
+            dropDownBranchAcceptance_Batch.Items.Add("All");
+            dropDownBranchAcceptance_Batch.SelectedValue = "All";
+        }
+
+        private void DriverFilter(Guid revenueUnitId)
+        {
+            dropDownBranchAcceptance_Driver.Enabled = true;
+            dropDownBranchAcceptance_Driver.DataSource = null;
+            //List<string> _driver = branchAcceptanceService.GetAll().Where(x => x.RecordStatus == 1 && x.Users.Employee.AssignedToArea.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.Users.Employee.AssignedToArea.RevenueUnitId == revenueUnitId).Select(x => x.Driver).Distinct().OrderBy(x => x).ToList();
+            List<BranchAcceptance> _driver = branchAcceptanceService.GetAll().Where(x => x.RecordStatus == 1 && x.Users.Employee.AssignedToArea.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.Users.Employee.AssignedToArea.RevenueUnitId == revenueUnitId).Distinct().ToList();
+            List<string> selectDriver = _driver.Select(x => x.Driver).Distinct().OrderBy(x => x).ToList();
+            selectDriver.Add("All");
+            bsDriver.DataSource = selectDriver;
+            //bsDriver.DataSource = _driver;
+            dropDownBranchAcceptance_Driver.DataSource = bsDriver;
+            dropDownBranchAcceptance_Driver.DisplayMember = "Driver";
+            dropDownBranchAcceptance_Driver.ValueMember = "Driver";
+           // dropDownBranchAcceptance_Driver.Items.Add("All");
+            dropDownBranchAcceptance_Driver.SelectedValue = "All";
+        }
+
+
+        public void BundleLoadData()
+        {
+            List<RevenueUnit> _revenueUnit = revenueUnitservice.GetAll().Where(x => x.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.RevenueUnitType.RevenueUnitTypeName == "Branch Satellite").OrderBy(x => x.RevenueUnitName).ToList();
+            bsBundleBSO.DataSource = _revenueUnit;
+            dropDownBundle_BCO_BSO.DataSource = bsBundleBSO;
+            dropDownBundle_BCO_BSO.DisplayMember = "RevenueUnitName";
+            dropDownBundle_BCO_BSO.ValueMember = "RevenueUnitId";
+        }
+
+        public void UnbundleLoadData()
+        {
+            List<BranchCorpOffice> _bco = bcoService.GetAll().Where(x => x.RecordStatus == 1).OrderBy(x => x.BranchCorpOfficeName).ToList();
+            bsUnbundleBCO.DataSource = _bco;
+            dropDownUnbundle_BCO.DataSource = bsUnbundleBCO;
+            dropDownUnbundle_BCO.DisplayMember = "BranchCorpOfficeName";
+            dropDownUnbundle_BCO.ValueMember = "BranchCorpOfficeId";
+        }
+
+        public void GatewayTransmittalLoadData()
+        {
+
+            List<BranchCorpOffice> _bco = bcoService.GetAll().Where(x => x.RecordStatus == 1).OrderBy(x => x.BranchCorpOfficeName).ToList();
+            bsGTDestinationBCO.DataSource = _bco;
+            dropDownGatewayTransmital_Destination.DataSource = bsGTDestinationBCO;
+            dropDownGatewayTransmital_Destination.DisplayMember = "BranchCorpOfficeName";
+            dropDownGatewayTransmital_Destination.ValueMember = "BranchCorpOfficeId";
+
+            List<Batch> _batch = batchService.GetAll().Where(x => x.RecordStatus == 1 && x.BatchCode == "gatewaytransmittal").ToList();
+            bsGTBatch.DataSource = _batch;
+            dropDownGatewayTransmital_Batch.DataSource = bsGTBatch;
+            dropDownGatewayTransmital_Batch.DisplayMember = "BatchName";
+            dropDownGatewayTransmital_Batch.ValueMember = "BatchId";
+            dropDownGatewayTransmital_Batch.Items.Add("All");
+            dropDownGatewayTransmital_Batch.SelectedValue = "All";
+
+            
+            List<CommodityType> _commodityType = commodityTypeService.GetAll().Where(x => x.RecordStatus == 1).ToList();
+            bsGTCommodityType.DataSource = _commodityType;
+            cmbGt_CommodityType.DataSource = bsGTCommodityType;
+            cmbGt_CommodityType.DisplayMember = "CommodityTypeName";
+            cmbGt_CommodityType.ValueMember = "CommodityTypeId";
+        }
+
+        public void GatewayOutboundLoadData()
+        {
+            List<BranchCorpOffice> _bco = bcoService.GetAll().Where(x => x.RecordStatus == 1).OrderBy(x => x.BranchCorpOfficeName).ToList();
+            bsGODestinationBCO.DataSource = _bco;
+            dropDownGatewayOutbound_BCO.DataSource = bsGODestinationBCO;
+            dropDownGatewayOutbound_BCO.DisplayMember = "BranchCorpOfficeName";
+            dropDownGatewayOutbound_BCO.ValueMember = "BranchCorpOfficeId";
+
+            List<Batch> _batch = batchService.GetAll().Where(x => x.RecordStatus == 1 && x.BatchCode == "gatewayoutbound").ToList();
+            bsGOBatch.DataSource = _batch;
+            dropDownGatewayOutbound_Batch.DataSource = bsGOBatch;
+            dropDownGatewayOutbound_Batch.DisplayMember = "BatchName";
+            dropDownGatewayOutbound_Batch.ValueMember = "BatchId";
+            dropDownGatewayOutbound_Batch.Items.Add("All");
+            dropDownGatewayOutbound_Batch.SelectedValue = "All";
+
+            
+            List<CommodityType> _commodityType = commodityTypeService.GetAll().Where(x => x.RecordStatus == 1).ToList();
+            bsGOCommodityType.DataSource = _commodityType;
+            cmbGO_commoditType.DataSource = bsGOCommodityType;
+            cmbGO_commoditType.DisplayMember = "CommodityTypeName";
+            cmbGO_commoditType.ValueMember = "CommodityTypeId";
+        }
+
+        public void GatewayInboundLoadData()
+        {
+            List<GatewayInbound> _gatewayname = gwInboundService.GetAll().Where(x => x.RecordStatus == 1).ToList();
+            List<string> selectGateway = _gatewayname.Select(x => x.Gateway).Distinct().OrderBy(x => x).ToList();
+            selectGateway.Add("All");
+            // bsDriver.DataSource = selectDriver;
+            dropDownGatewayInbound_Gateway.DataSource = selectGateway;
+            dropDownGatewayInbound_Gateway.DisplayMember = "Gateway";
+            dropDownGatewayInbound_Gateway.ValueMember = "Gateway";
+            dropDownGatewayInbound_Gateway.SelectedValue = "All";
+
+            List<BranchCorpOffice> _bco = bcoService.GetAll().Where(x => x.RecordStatus == 1).OrderBy(x => x.BranchCorpOfficeName).ToList();
+           // bsGODestinationBCO.DataSource = _bco;
+            dropDownGatewayInbound_Origin.DataSource = _bco;
+            dropDownGatewayInbound_Origin.DisplayMember = "BranchCorpOfficeName";
+            dropDownGatewayInbound_Origin.ValueMember = "BranchCorpOfficeId";
+            
+            List<CommodityType> _commodityType = commodityTypeService.GetAll().Where(x => x.RecordStatus == 1).ToList();
+            bsGICommodityType.DataSource = _commodityType;
+            dropDownGatewayInbound_Commodity.DataSource = bsGICommodityType;
+            dropDownGatewayInbound_Commodity.DisplayMember = "CommodityTypeName";
+            dropDownGatewayInbound_Commodity.ValueMember = "CommodityTypeId";
+
+            List<string> selectFlightno = _gatewayname.Select(x => x.FlightNumber).Distinct().OrderBy(x => x).ToList();
+            selectFlightno.Add("All");
+            // bsDriver.DataSource = selectDriver;
+            cmbGI_FlightNo.DataSource = selectGateway;
+            cmbGI_FlightNo.DisplayMember = "Gateway";
+            cmbGI_FlightNo.ValueMember = "Gateway";
+            cmbGI_FlightNo.SelectedValue = "All";
 
         }
 
 
 
-        #endregion END MARK SANTOS REGION
+        public void CargoTransferLoadData()
+        {
+            List<BranchCorpOffice> _bco = bcoService.GetAll().Where(x => x.RecordStatus == 1).ToList();
+            bsBCO.DataSource = _bco;
+            cmbCT_BCO.DataSource = bsBCO;
+            cmbCT_BCO.DisplayMember = "BranchCorpOfficeName";
+            cmbCT_BCO.ValueMember = "BranchCorpOfficeId";
+
+            List<RevenueUnitType> _revenueUnitType = revenueUnitTypeService.GetAll().Where(x => x.RecordStatus == 1).ToList();
+            bsRevenueUnitType.DataSource = _revenueUnitType;
+            cmbCT_RevenueType.DataSource = bsRevenueUnitType;
+            cmbCT_RevenueType.DisplayMember = "RevenueUnitTypeName";
+            cmbCT_RevenueType.ValueMember = "RevenueUnitTypeId";
+
+            if (cmbCT_RevenueType.SelectedIndex == 0)
+            {
+                Guid revenueUnitTypeId = new Guid();
+                try
+                {
+                    revenueUnitTypeId = Guid.Parse(cmbCT_RevenueType.SelectedValue.ToString());
+                }
+                catch (Exception)
+                {
+                    return;
+                }
+
+                CTRevenueUnit(revenueUnitTypeId);
+            }
+
+
+            List<Batch> _batch = batchService.GetAll().Where(x => x.RecordStatus == 1 && x.BatchCode == "cargotransfer").ToList();
+            bsCTBatch.DataSource = _batch;
+            cmbCT_Batch.DataSource = bsCTBatch;
+            cmbCT_Batch.DisplayMember = "BatchName";
+            cmbCT_Batch.ValueMember = "BatchId";
+            cmbCT_Batch.Items.Add("All");
+            cmbCT_Batch.SelectedValue = "All";
+
+
+        }
+
+        private void CTRevenueUnit(Guid revenueUnitTypeId)
+        {
+            cmbCT_RevenueUnit.DataSource = null;
+            List<RevenueUnit> _revenueUnit = revenueUnitservice.GetAll().Where(x => x.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.RevenueUnitTypeId == revenueUnitTypeId).OrderBy(x => x.RevenueUnitName).ToList();
+            cmbCT_RevenueUnit.DataSource = _revenueUnit;
+            cmbCT_RevenueUnit.DisplayMember = "RevenueUnitName";
+            cmbCT_RevenueUnit.ValueMember = "RevenueUnitId";
+
+        }
+
+        public void SegregationLoadData()
+        {
+            List<BranchCorpOffice> _bco = bcoService.GetAll().Where(x => x.RecordStatus == 1).ToList();
+            bsSGBCO.DataSource = _bco;
+            dropDownSegregation_BCO.DataSource = bsSGBCO;
+            dropDownSegregation_BCO.DisplayMember = "BranchCorpOfficeName";
+            dropDownSegregation_BCO.ValueMember = "BranchCorpOfficeId";
+
+            List<Batch> _batch = batchService.GetAll().Where(x => x.RecordStatus == 1 && x.BatchCode == "cargotransfer").ToList();
+            bsSGBatch.DataSource = _batch;
+            dropDownSegregation_Batch.DataSource = bsCTBatch;
+            dropDownSegregation_Batch.DisplayMember = "BatchName";
+            dropDownSegregation_Batch.ValueMember = "BatchId";
+            dropDownSegregation_Batch.Items.Add("All");
+            dropDownSegregation_Batch.SelectedValue = "All";
+        }
+
+        public void DailyTripLoadData()
+        {
+            List<RevenueUnit> _revenueUnit = revenueUnitservice.GetAll().Where(x => x.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.RevenueUnitType.RevenueUnitTypeName == "Area").OrderBy(x => x.RevenueUnitName).ToList();
+            dropDownDailyTrip_Area.DataSource = _revenueUnit;
+            dropDownDailyTrip_Area.DisplayMember = "RevenueUnitName";
+            dropDownDailyTrip_Area.ValueMember = "RevenueUnitId";
+
+            List<Batch> _batch = batchService.GetAll().Where(x => x.RecordStatus == 1 && x.BatchCode == "distribution").ToList();
+            cmbDTR_Batch.DataSource = _batch;
+            cmbDTR_Batch.DisplayMember = "BatchName";
+            cmbDTR_Batch.ValueMember = "BatchId";
+            cmbDTR_Batch.Items.Add("All");
+            cmbDTR_Batch.SelectedValue = "All";
+
+            List<PaymentMode> _paymentMode = paymentModeService.GetAll().Where(x => x.RecordStatus == 1).OrderBy(x => x.PaymentModeName).ToList();
+            dropDownDailyTrip_PaymentMode.DataSource = _paymentMode;
+            dropDownDailyTrip_PaymentMode.DisplayMember = "PaymentModeName";
+            dropDownDailyTrip_PaymentMode.ValueMember = "PaymentModeId";
+            dropDownDailyTrip_PaymentMode.Items.Add("All");
+            dropDownDailyTrip_PaymentMode.SelectedValue = "All";
+
+            
+        }
+
+        public void HoldCargoLoadData()
+        {
+            List<Reason> _reasonName = reasonService.GetAll().Where(x => x.RecordStatus == 1).OrderBy(x => x.ReasonName).ToList();
+            cmbHC_Reason.DataSource = _reasonName;
+            cmbHC_Reason.DisplayMember = "ReasonName";
+            cmbHC_Reason.ValueMember = "ReasonID";
+
+            List<RevenueUnitType> _revenueUnitType = revenueUnitTypeService.GetAll().Where(x => x.RecordStatus == 1).ToList();
+            cmbCT_RevenueType.DataSource = _revenueUnitType;
+            cmbCT_RevenueType.DisplayMember = "RevenueUnitTypeName";
+            cmbCT_RevenueType.ValueMember = "RevenueUnitTypeId";
+
+            if (cmbHC_Revenuetype.SelectedIndex == 0)
+            {
+                Guid revenueUnitTypeId = new Guid();
+                try
+                {
+                    revenueUnitTypeId = Guid.Parse(cmbHC_Revenuetype.SelectedValue.ToString());
+                }
+                catch (Exception)
+                {
+                    return;
+                }
+
+                HCRevenueUnit(revenueUnitTypeId);
+            }
+
+
+        }
+
+        private void HCRevenueUnit(Guid revenueUnitTypeId)
+        {
+            cmbHC_RevenueUnit.DataSource = null;
+            List<RevenueUnit> _revenueUnit = revenueUnitservice.GetAll().Where(x => x.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.RevenueUnitTypeId == revenueUnitTypeId).OrderBy(x => x.RevenueUnitName).ToList();
+            cmbHC_RevenueUnit.DataSource = _revenueUnit;
+            cmbHC_RevenueUnit.DisplayMember = "RevenueUnitName";
+            cmbHC_RevenueUnit.ValueMember = "RevenueUnitId";
+
+        }
+
+
+
+
+        public void DeliveryStatusLoadData()
+        {
+            List<RevenueUnitType> _revenueUnitType = revenueUnitTypeService.GetAll().Where(x => x.RecordStatus == 1).ToList();
+          //  bsRevenueUnitType.DataSource = _revenueUnitType;
+            cmbDS_RevenueType.DataSource = _revenueUnitType;
+            cmbDS_RevenueType.DisplayMember = "RevenueUnitTypeName";
+            cmbDS_RevenueType.ValueMember = "RevenueUnitTypeId";
+
+            cmbDS_RevenueType.Items.Add("All");
+            cmbDS_RevenueType.SelectedValue = "All";
+
+            if (cmbDS_RevenueType.SelectedItem.Text == "All")
+            {
+                cmb_RevenueUnit.Enabled = false;
+            }
+
+            List<Employee> _employee = employeeService.GetAll().Where(x => x.RecordStatus == 1 && x.AssignedToArea.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId).ToList();
+            bsEmployee.DataSource = _employee;
+            cmbDS_DeliveredBy.DataSource = bsEmployee;
+            cmbDS_DeliveredBy.DisplayMember = "Fullname";
+            cmbDS_DeliveredBy.ValueMember = "EmployeeId";
+
+            cmbDS_DeliveredBy.Items.Add("All");
+            cmbDS_DeliveredBy.SelectedValue = "All";
+
+            List<DeliveryStatus> _deliveryStatus = deliveryStatusService.GetAll().Where(x => x.RecordStatus == 1).ToList();
+            bsStatus.DataSource = _deliveryStatus;
+            cmbDS_Status.DataSource = bsStatus;
+            cmbDS_Status.DisplayMember = "DeliveryStatusName";
+            cmbDS_Status.ValueMember = "DeliveryStatusId";
+
+            cmbDS_Status.Items.Add("All");
+            cmbDS_Status.SelectedValue = "All";
+        }
+
+        private void DSRevenueUnitByUnitType(Guid revenueUnitTypeId)
+        {
+            cmbDS_RevenueUnit.Enabled = true;
+            cmbDS_RevenueUnit.DataSource = null;
+            List<RevenueUnit> _revenueUnit = revenueUnitservice.GetAll().Where(x => x.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.RevenueUnitTypeId == revenueUnitTypeId).OrderBy(x => x.RevenueUnitName).ToList();
+            cmbDS_RevenueUnit.DataSource = _revenueUnit;
+            cmbDS_RevenueUnit.DisplayMember = "RevenueUnitName";
+            cmbDS_RevenueUnit.ValueMember = "RevenueUnitId";
+            cmbDS_RevenueUnit.Items.Add("All");
+            cmbDS_RevenueUnit.SelectedValue = "All";
+        }
+
+        private void DSEmployeeByRevenueUnit(Guid revenueUnitId)
+        {
+            cmbDS_DeliveredBy.Enabled = true;
+            cmbDS_DeliveredBy.DataSource = null;
+            List<Employee> _employee = employeeService.GetAll().Where(x => x.RecordStatus == 1 && x.AssignedToArea.RevenueUnitId == revenueUnitId && x.AssignedToArea.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId).ToList();
+            bsEmployee.DataSource = _employee;
+            cmbDS_DeliveredBy.DataSource = bsEmployee;
+            cmbDS_DeliveredBy.DisplayMember = "Fullname";
+            cmbDS_DeliveredBy.ValueMember = "EmployeeId";
+
+            cmbDS_DeliveredBy.Items.Add("All");
+            cmbDS_DeliveredBy.SelectedValue = "All";
+        }
+
+        #endregion
+
+        #region Method Tracking
+        private void radDropDownList1_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
+        {
+
+        }
 
         private void lstShipMode_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
         {
@@ -8942,5 +9894,157 @@ namespace CMS2.Client
 
         }
 
+
+        private void cmb_RevenueUnitType_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
+        {
+            if (cmb_RevenueUnitType.SelectedIndex >= 0)
+            {
+                if (cmb_RevenueUnitType.SelectedItem.Text == "All")
+                {
+                    cmb_RevenueUnit.Enabled = false;
+                }
+                else
+                {
+                    Guid revenueUnitTypeId = new Guid();
+                    try
+                    {
+                        revenueUnitTypeId = Guid.Parse(cmb_RevenueUnitType.SelectedValue.ToString());
+                    }
+                    catch (Exception)
+                    {
+                        return;
+                    }
+                    cmb_RevenueUnit.Enabled = true;
+                    RevenueUnitByUnitType(revenueUnitTypeId);
+                }
+
+               
+            }
+        }
+
+        private void cmbCT_RevenueType_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
+        {
+            if (cmbCT_RevenueType.SelectedIndex >= 0)
+            {
+                Guid revenueUnitTypeId = new Guid();
+                try
+                {
+                    revenueUnitTypeId = Guid.Parse(cmbCT_RevenueType.SelectedValue.ToString());
+                }
+                catch (Exception)
+                {
+                    return;
+                }
+
+                CTRevenueUnit(revenueUnitTypeId);
+            }
+        }
+
+        private void dropDownBranchAcceptance_BCO_BSO_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
+        {
+            if (dropDownBranchAcceptance_BCO_BSO.SelectedIndex >= 0)
+            {
+                if (dropDownBranchAcceptance_BCO_BSO.SelectedItem.Text == "All")
+                {
+                    dropDownBranchAcceptance_Driver.SelectedValue = "All";
+                    dropDownBranchAcceptance_Driver.Enabled = false;
+                }
+                else
+                {
+                    Guid revenueUnitId = new Guid();
+                    try
+                    {
+                        revenueUnitId = Guid.Parse(dropDownBranchAcceptance_BCO_BSO.SelectedValue.ToString());
+                    }
+                    catch (Exception)
+                    {
+                        return;
+                    }
+                    DriverFilter(revenueUnitId);
+                }
+            }
+        }
+
+        private void cmbDS_RevenueType_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
+        {
+            if (cmbDS_RevenueType.SelectedIndex >= 0)
+            {
+                if (cmbDS_RevenueType.SelectedItem.Text == "All")
+                {
+                    cmbDS_RevenueUnit.Enabled = false;
+                }
+                else
+                {
+                    Guid revenueUnitTypeId = new Guid();
+                    try
+                    {
+                        revenueUnitTypeId = Guid.Parse(cmbDS_RevenueType.SelectedValue.ToString());
+                    }
+                    catch (Exception)
+                    {
+                        return;
+                    }
+                    cmbDS_RevenueUnit.Enabled = true;
+                    DSRevenueUnitByUnitType(revenueUnitTypeId);
+                }
+
+
+            }
+        }
+
+        private void cmbDS_RevenueUnit_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
+        {
+            if (cmbDS_RevenueUnit.SelectedIndex >= 0)
+            {
+                Guid revenueUnitId = new Guid();
+                try
+                {
+                    revenueUnitId = Guid.Parse(cmbDS_RevenueUnit.SelectedValue.ToString());
+                }
+                catch (Exception)
+                {
+                    return;
+                }
+
+                DSEmployeeByRevenueUnit(revenueUnitId);
+            }
+        }
+
+        private void cmbHC_Revenuetype_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
+        {
+            if (cmbHC_Revenuetype.SelectedIndex >= 0)
+            {
+                Guid revenueUnittypeId = new Guid();
+                try
+                {
+                    revenueUnittypeId = Guid.Parse(cmbHC_Revenuetype.SelectedValue.ToString());
+                }
+                catch (Exception)
+                {
+                    return;
+                }
+
+                HCRevenueUnit(revenueUnittypeId);
+            }
+        }
+
+
+
+
+        #endregion
+
+        #endregion END MARK SANTOS REGION
+
+        private void dropDownDailyTrip_Driver_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
+        {
+
+        }
+
+        private void label108_Click(object sender, EventArgs e)
+        {
+
+        }
+
+       
     }
 }
