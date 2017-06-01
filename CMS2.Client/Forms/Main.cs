@@ -104,6 +104,7 @@ namespace CMS2.Client
 
 
         #region track
+        private BindingSource bsBCO1;
         private BindingSource bsDriver;
         private BindingSource bsBatch;
         private BindingSource bsEmployee;
@@ -2739,7 +2740,7 @@ namespace CMS2.Client
 
         private void TrackingLoadInit()
         {
-            bsBCO = new BindingSource();
+            bsBCO1 = new BindingSource();
             bsDriver = new BindingSource();
             bsBatch = new BindingSource();
             bsEmployee = new BindingSource();
@@ -10454,7 +10455,7 @@ namespace CMS2.Client
         {
             List<CargoTransfer> _cargotransfer = cargotransferService.GetAll().Where(x => x.RecordStatus == 1).ToList();
             List<BranchCorpOffice> _bco = bcoService.GetAll().Where(x => x.RecordStatus == 1).ToList();
-            bsBCO.DataSource = _bco;
+            bsBCO1.DataSource = _bco;
             cmbCT_BCO.DataSource = bsBCO;
             cmbCT_BCO.DisplayMember = "BranchCorpOfficeName";
             cmbCT_BCO.ValueMember = "BranchCorpOfficeId";

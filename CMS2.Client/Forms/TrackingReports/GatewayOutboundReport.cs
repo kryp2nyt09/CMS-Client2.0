@@ -74,6 +74,7 @@ namespace CMS2.Client.Forms.TrackingReports
             GatewayOutboundBL gatewayOutboundBl = new GatewayOutboundBL();
             GatewayInboundBL gatewayInboundBl = new GatewayInboundBL();
             CommodityTypeBL comtypeService = new CommodityTypeBL();
+            BranchCorpOfficeBL bcoService = new BranchCorpOfficeBL();
 
 
             List<GatewayInbound> Inboundlist = gatewayInboundBl.GetAll().ToList();
@@ -91,7 +92,7 @@ namespace CMS2.Client.Forms.TrackingReports
             {
                 Outboundlist = gatewayOutboundBl.GetAll().Where
                (x => x.RecordStatus == 1
-               && ((x.PackageNumber.Shipment.DestinationCity.BranchCorpOfficeId == bcoid && x.PackageNumber.Shipment.DestinationCity.BranchCorpOfficeId != null) || (x.PackageNumber.Shipment.DestinationCity.BranchCorpOfficeId == x.PackageNumber.Shipment.DestinationCity.BranchCorpOfficeId && x.PackageNumber.Shipment.DestinationCity.BranchCorpOfficeId == null))
+               //&& ((x.PackageNumber.Shipment.DestinationCity.BranchCorpOfficeId == bcoid && x.PackageNumber.Shipment.DestinationCity.BranchCorpOfficeId != null) || (x.PackageNumber.Shipment.DestinationCity.BranchCorpOfficeId == x.PackageNumber.Shipment.DestinationCity.BranchCorpOfficeId && x.PackageNumber.Shipment.DestinationCity.BranchCorpOfficeId == null))
                && ((x.Driver == driver && x.Driver != "All") || (x.Driver == x.Driver && x.Driver == "All"))
                && ((x.Gateway == gateway && x.Gateway != "All") || (x.Gateway == x.Gateway && x.Gateway == "All"))
                && ((x.BatchID == batchid && x.BatchID != null) || (x.BatchID == x.BatchID && x.BatchID == null))
@@ -99,10 +100,21 @@ namespace CMS2.Client.Forms.TrackingReports
                ).ToList();
             }
 
-            if(commodityTypeId != null)
+            if(commodityTypeId != null && bcoid !=null)
+            {
+                string comType = comtypeService.GetAll().Where(x => x.RecordStatus == 1 && x.CommodityTypeId == commodityTypeId).Select(x => x.CommodityTypeName).ToString();
+                string _bco = bcoService.GetAll().Where(x => x.RecordStatus == 1 && x.BranchCorpOfficeId == bcoid).Select(x => x.BranchCorpOfficeName).ToString();
+                modelList = Match(Inboundlist, Outboundlist).FindAll(x => x.CommodityTypeName == comType && x.Branch == _bco);
+            }
+            else if (commodityTypeId != null && bcoid == null)
             {
                 string comType = comtypeService.GetAll().Where(x => x.RecordStatus == 1 && x.CommodityTypeId == commodityTypeId).Select(x => x.CommodityTypeName).ToString();
                 modelList = Match(Inboundlist, Outboundlist).FindAll(x => x.CommodityTypeName == comType);
+            }
+            else if(commodityTypeId == null && bcoid != null)
+            {
+                string _bco = bcoService.GetAll().Where(x => x.RecordStatus == 1 && x.BranchCorpOfficeId == bcoid).Select(x => x.BranchCorpOfficeName).ToString();
+                 modelList = Match(Inboundlist, Outboundlist).FindAll(x => x.Branch == _bco);
             }
             else
             {

@@ -53,7 +53,7 @@ namespace CMS2.Entities
         public virtual BranchCorpOffice BranchCorpOffice { get; set; }
 
        
-        public virtual PackageNumber PackageNumber { get; set; }
+        //public virtual PackageNumber PackageNumber { get; set; }
 
     }
 }

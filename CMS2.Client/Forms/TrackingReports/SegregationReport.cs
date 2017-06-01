@@ -60,17 +60,31 @@ namespace CMS2.Client.Forms.TrackingReports
 
         public DataTable getSGDatabyFilter(DateTime date, Guid? originbcoid, string driver, string plateno, Guid? batchid)
         {
+
             SegregationBL segregationBL = new SegregationBL();
-            
+            BranchCorpOfficeBL bcoService = new BranchCorpOfficeBL();
+
+            List<SegregationViewModel> modelList = new List<SegregationViewModel>();
+
             List<Segregation> _segregation = segregationBL.GetAll().Where
                 (x => x.RecordStatus == 1
-                && ((x.PackageNumber.Shipment.OriginCity.BranchCorpOfficeId == originbcoid && x.PackageNumber.Shipment.OriginCity.BranchCorpOfficeId != null) || (x.PackageNumber.Shipment.OriginCity.BranchCorpOfficeId == x.PackageNumber.Shipment.OriginCity.BranchCorpOfficeId && x.PackageNumber.Shipment.OriginCity.BranchCorpOfficeId == null))
+                //&& ((x.PackageNumber.Shipment.OriginCity.BranchCorpOfficeId == originbcoid && x.PackageNumber.Shipment.OriginCity.BranchCorpOfficeId != null) || (x.PackageNumber.Shipment.OriginCity.BranchCorpOfficeId == x.PackageNumber.Shipment.OriginCity.BranchCorpOfficeId && x.PackageNumber.Shipment.OriginCity.BranchCorpOfficeId == null))
                 && ((x.Driver == driver && x.Driver != "All") || (x.Driver == x.Driver && x.Driver == "All"))
                 && ((x.PlateNo == plateno && x.PlateNo != "All") || (x.PlateNo == x.PlateNo && x.PlateNo == "All"))
                 && ((x.BatchID == batchid && x.BatchID != null) || (x.BatchID == x.BatchID && x.BatchID == null))
                 && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
 
-            List<SegregationViewModel> modelList = Macth(_segregation);
+            if(originbcoid != null)
+            {
+                string _bco = bcoService.GetAll().Where(x => x.RecordStatus == 1 && x.BranchCorpOfficeId == originbcoid).Select(x => x.BranchCorpOfficeName).ToString();
+                modelList = Macth(_segregation).FindAll(x => x.BranchCorpOffice == _bco);
+            }
+            else
+            {
+                modelList = Macth(_segregation);
+            }
+
+           // List<SegregationViewModel> modelList = Macth(_segregation);
 
             DataTable dt = new DataTable();
             dt.Columns.Add(new DataColumn("No", typeof(string)));
