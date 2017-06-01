@@ -52,5 +52,8 @@ namespace CMS2.Entities
         [ForeignKey("BranchCorpOfficeID")]
         public virtual BranchCorpOffice BranchCorpOffice { get; set; }
 
+       
+        public virtual PackageNumber PackageNumber { get; set; }
+
     }
 }

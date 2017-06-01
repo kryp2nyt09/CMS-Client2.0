@@ -21,6 +21,7 @@ namespace CMS2.Entities.ReportModel
         public string Branch { get; set; }
 
         public string ScannedBy { get; set; }
+        public string CommodityTypeName { get; set; }
 
     }
 }

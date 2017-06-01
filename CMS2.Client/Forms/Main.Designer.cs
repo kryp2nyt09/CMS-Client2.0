@@ -29,36 +29,36 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn37 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn38 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn39 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn40 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn41 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn42 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn43 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn44 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn45 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition73 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition74 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition75 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition76 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition77 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition78 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition79 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn10 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn11 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn12 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn13 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn14 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn15 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn16 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn17 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn18 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition19 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition20 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition21 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition22 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition23 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition24 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition25 = new Telerik.WinControls.UI.TableViewDefinition();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition80 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition81 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition82 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition83 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition84 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition85 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition86 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition87 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition88 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition89 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.RadListDataItem radListDataItem1 = new Telerik.WinControls.UI.RadListDataItem();
-            Telerik.WinControls.UI.RadListDataItem radListDataItem2 = new Telerik.WinControls.UI.RadListDataItem();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition90 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition26 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition27 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition28 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition29 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition30 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition31 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition32 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition33 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition34 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition35 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.RadListDataItem radListDataItem3 = new Telerik.WinControls.UI.RadListDataItem();
+            Telerik.WinControls.UI.RadListDataItem radListDataItem4 = new Telerik.WinControls.UI.RadListDataItem();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition36 = new Telerik.WinControls.UI.TableViewDefinition();
             this.office2010BlackTheme1 = new Telerik.WinControls.Themes.Office2010BlackTheme();
             this.radPanel1 = new Telerik.WinControls.UI.RadPanel();
             this.panel = new Telerik.WinControls.UI.RadPanel();
@@ -435,7 +435,7 @@
             this.radPageViewPage9 = new Telerik.WinControls.UI.RadPageViewPage();
             this.gridBundle = new Telerik.WinControls.UI.RadGridView();
             this.radPanel16 = new Telerik.WinControls.UI.RadPanel();
-            this.radTextBox1 = new Telerik.WinControls.UI.RadTextBox();
+            this.txtBU_SackNo = new Telerik.WinControls.UI.RadTextBox();
             this.btnBundle_Print = new Telerik.WinControls.UI.RadButton();
             this.btnBundle_Export = new Telerik.WinControls.UI.RadDropDownButton();
             this.exportBundle_PDF = new Telerik.WinControls.UI.RadMenuButtonItem();
@@ -451,7 +451,7 @@
             this.radPageViewPage10 = new Telerik.WinControls.UI.RadPageViewPage();
             this.gridUnbundle = new Telerik.WinControls.UI.RadGridView();
             this.radPanel17 = new Telerik.WinControls.UI.RadPanel();
-            this.radTextBox2 = new Telerik.WinControls.UI.RadTextBox();
+            this.txtUnbundle_SackNo = new Telerik.WinControls.UI.RadTextBox();
             this.label127 = new System.Windows.Forms.Label();
             this.btnUnbundle_Print = new Telerik.WinControls.UI.RadButton();
             this.btnUnbundle_Search = new Telerik.WinControls.UI.RadButton();
@@ -485,11 +485,11 @@
             this.radPageViewPage12 = new Telerik.WinControls.UI.RadPageViewPage();
             this.gridGatewayOutbound = new Telerik.WinControls.UI.RadGridView();
             this.radPanel19 = new Telerik.WinControls.UI.RadPanel();
-            this.radTextBox3 = new Telerik.WinControls.UI.RadTextBox();
+            this.txtGO_mawb = new Telerik.WinControls.UI.RadTextBox();
             this.label132 = new System.Windows.Forms.Label();
             this.label130 = new System.Windows.Forms.Label();
             this.label131 = new System.Windows.Forms.Label();
-            this.radDropDownList1 = new Telerik.WinControls.UI.RadDropDownList();
+            this.cmbGO_Driver = new Telerik.WinControls.UI.RadDropDownList();
             this.cmbGO_commoditType = new Telerik.WinControls.UI.RadDropDownList();
             this.btnGatewayOutbound_Print = new Telerik.WinControls.UI.RadButton();
             this.btnGatewayOutbound_Search = new Telerik.WinControls.UI.RadButton();
@@ -958,7 +958,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridBundle.MasterTemplate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radPanel16)).BeginInit();
             this.radPanel16.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.radTextBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtBU_SackNo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnBundle_Print)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnBundle_Export)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnBundle_Search)).BeginInit();
@@ -969,7 +969,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridUnbundle.MasterTemplate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radPanel17)).BeginInit();
             this.radPanel17.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.radTextBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtUnbundle_SackNo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnUnbundle_Print)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnUnbundle_Search)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dropDownUnbundle_BCO)).BeginInit();
@@ -993,8 +993,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridGatewayOutbound.MasterTemplate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radPanel19)).BeginInit();
             this.radPanel19.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.radTextBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radDropDownList1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtGO_mawb)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cmbGO_Driver)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbGO_commoditType)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnGatewayOutbound_Print)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnGatewayOutbound_Search)).BeginInit();
@@ -1257,50 +1257,50 @@
             this.BookingGridView.MasterTemplate.AllowEditRow = false;
             this.BookingGridView.MasterTemplate.AllowSearchRow = true;
             this.BookingGridView.MasterTemplate.AutoGenerateColumns = false;
-            gridViewTextBoxColumn37.FieldName = "BookingId";
-            gridViewTextBoxColumn37.HeaderText = "BookingID";
-            gridViewTextBoxColumn37.IsVisible = false;
-            gridViewTextBoxColumn37.Name = "BookingId";
-            gridViewTextBoxColumn38.FieldName = "DateBooked";
-            gridViewTextBoxColumn38.HeaderText = "Booking Date";
-            gridViewTextBoxColumn38.Name = "BookingDate";
-            gridViewTextBoxColumn38.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            gridViewTextBoxColumn39.FieldName = "BookingNo";
-            gridViewTextBoxColumn39.HeaderText = "Booking Number";
-            gridViewTextBoxColumn39.Name = "BookingNo";
-            gridViewTextBoxColumn40.Expression = "";
-            gridViewTextBoxColumn40.FieldName = "ShipperFullname";
-            gridViewTextBoxColumn40.HeaderText = "Shipper Name";
-            gridViewTextBoxColumn40.Name = "ShipperName";
-            gridViewTextBoxColumn41.FieldName = "OriginCity.CityName";
-            gridViewTextBoxColumn41.HeaderText = "Origin City";
-            gridViewTextBoxColumn41.Name = "OriginCity";
-            gridViewTextBoxColumn42.Expression = "";
-            gridViewTextBoxColumn42.FieldName = "ConsigneeFullname";
-            gridViewTextBoxColumn42.HeaderText = "Consignee Name";
-            gridViewTextBoxColumn42.Name = "ConsigneeName";
-            gridViewTextBoxColumn43.FieldName = "DestinationCity.CityName";
-            gridViewTextBoxColumn43.HeaderText = "Destination City";
-            gridViewTextBoxColumn43.Name = "DestinationCity";
-            gridViewTextBoxColumn44.FieldName = "BookedByFullname";
-            gridViewTextBoxColumn44.HeaderText = "Booked By";
-            gridViewTextBoxColumn44.Name = "BookedBy";
-            gridViewTextBoxColumn45.FieldName = "BookingStatus.BookingStatusName";
-            gridViewTextBoxColumn45.HeaderText = "Booking Status";
-            gridViewTextBoxColumn45.Name = "BookingStatus";
+            gridViewTextBoxColumn10.FieldName = "BookingId";
+            gridViewTextBoxColumn10.HeaderText = "BookingID";
+            gridViewTextBoxColumn10.IsVisible = false;
+            gridViewTextBoxColumn10.Name = "BookingId";
+            gridViewTextBoxColumn11.FieldName = "DateBooked";
+            gridViewTextBoxColumn11.HeaderText = "Booking Date";
+            gridViewTextBoxColumn11.Name = "BookingDate";
+            gridViewTextBoxColumn11.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            gridViewTextBoxColumn12.FieldName = "BookingNo";
+            gridViewTextBoxColumn12.HeaderText = "Booking Number";
+            gridViewTextBoxColumn12.Name = "BookingNo";
+            gridViewTextBoxColumn13.Expression = "";
+            gridViewTextBoxColumn13.FieldName = "ShipperFullname";
+            gridViewTextBoxColumn13.HeaderText = "Shipper Name";
+            gridViewTextBoxColumn13.Name = "ShipperName";
+            gridViewTextBoxColumn14.FieldName = "OriginCity.CityName";
+            gridViewTextBoxColumn14.HeaderText = "Origin City";
+            gridViewTextBoxColumn14.Name = "OriginCity";
+            gridViewTextBoxColumn15.Expression = "";
+            gridViewTextBoxColumn15.FieldName = "ConsigneeFullname";
+            gridViewTextBoxColumn15.HeaderText = "Consignee Name";
+            gridViewTextBoxColumn15.Name = "ConsigneeName";
+            gridViewTextBoxColumn16.FieldName = "DestinationCity.CityName";
+            gridViewTextBoxColumn16.HeaderText = "Destination City";
+            gridViewTextBoxColumn16.Name = "DestinationCity";
+            gridViewTextBoxColumn17.FieldName = "BookedByFullname";
+            gridViewTextBoxColumn17.HeaderText = "Booked By";
+            gridViewTextBoxColumn17.Name = "BookedBy";
+            gridViewTextBoxColumn18.FieldName = "BookingStatus.BookingStatusName";
+            gridViewTextBoxColumn18.HeaderText = "Booking Status";
+            gridViewTextBoxColumn18.Name = "BookingStatus";
             this.BookingGridView.MasterTemplate.Columns.AddRange(new Telerik.WinControls.UI.GridViewDataColumn[] {
-            gridViewTextBoxColumn37,
-            gridViewTextBoxColumn38,
-            gridViewTextBoxColumn39,
-            gridViewTextBoxColumn40,
-            gridViewTextBoxColumn41,
-            gridViewTextBoxColumn42,
-            gridViewTextBoxColumn43,
-            gridViewTextBoxColumn44,
-            gridViewTextBoxColumn45});
+            gridViewTextBoxColumn10,
+            gridViewTextBoxColumn11,
+            gridViewTextBoxColumn12,
+            gridViewTextBoxColumn13,
+            gridViewTextBoxColumn14,
+            gridViewTextBoxColumn15,
+            gridViewTextBoxColumn16,
+            gridViewTextBoxColumn17,
+            gridViewTextBoxColumn18});
             this.BookingGridView.MasterTemplate.EnableAlternatingRowColor = true;
             this.BookingGridView.MasterTemplate.EnableFiltering = true;
-            this.BookingGridView.MasterTemplate.ViewDefinition = tableViewDefinition73;
+            this.BookingGridView.MasterTemplate.ViewDefinition = tableViewDefinition19;
             this.BookingGridView.Name = "BookingGridView";
             this.BookingGridView.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.BookingGridView.Size = new System.Drawing.Size(1234, 208);
@@ -2528,306 +2528,323 @@
             // 
             this.txtSumTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSumTotal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
+            this.txtSumTotal.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtSumTotal.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSumTotal.Location = new System.Drawing.Point(129, 467);
+            this.txtSumTotal.Location = new System.Drawing.Point(129, 475);
             this.txtSumTotal.Mask = "C2";
             this.txtSumTotal.MaskType = Telerik.WinControls.UI.MaskType.Numeric;
             this.txtSumTotal.Name = "txtSumTotal";
-            this.txtSumTotal.Size = new System.Drawing.Size(182, 0);
+            this.txtSumTotal.Size = new System.Drawing.Size(182, 20);
             this.txtSumTotal.TabIndex = 70;
             this.txtSumTotal.TabStop = false;
-            this.txtSumTotal.Text = "$0.00";
+            this.txtSumTotal.Text = "₱0.00";
             this.txtSumTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtSumTotal.ThemeName = "VisualStudio2012Dark";
-            ((Telerik.WinControls.UI.RadMaskedEditBoxElement)(this.txtSumTotal.GetChildAt(0))).Text = "$0.00";
+            ((Telerik.WinControls.UI.RadMaskedEditBoxElement)(this.txtSumTotal.GetChildAt(0))).Text = "₱0.00";
             ((Telerik.WinControls.UI.RadTextBoxItem)(this.txtSumTotal.GetChildAt(0).GetChildAt(0))).ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             // 
             // txtSumDiscount
             // 
             this.txtSumDiscount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSumDiscount.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
+            this.txtSumDiscount.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtSumDiscount.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSumDiscount.Location = new System.Drawing.Point(129, 372);
+            this.txtSumDiscount.Location = new System.Drawing.Point(129, 393);
             this.txtSumDiscount.Mask = "C2";
             this.txtSumDiscount.MaskType = Telerik.WinControls.UI.MaskType.Numeric;
             this.txtSumDiscount.Name = "txtSumDiscount";
-            this.txtSumDiscount.Size = new System.Drawing.Size(182, 0);
+            this.txtSumDiscount.Size = new System.Drawing.Size(182, 20);
             this.txtSumDiscount.TabIndex = 67;
             this.txtSumDiscount.TabStop = false;
-            this.txtSumDiscount.Text = "$0.00";
+            this.txtSumDiscount.Text = "₱0.00";
             this.txtSumDiscount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtSumDiscount.ThemeName = "Office2010Black";
-            ((Telerik.WinControls.UI.RadMaskedEditBoxElement)(this.txtSumDiscount.GetChildAt(0))).Text = "$0.00";
+            ((Telerik.WinControls.UI.RadMaskedEditBoxElement)(this.txtSumDiscount.GetChildAt(0))).Text = "₱0.00";
             ((Telerik.WinControls.UI.RadTextBoxItem)(this.txtSumDiscount.GetChildAt(0).GetChildAt(0))).ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(8)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             // 
             // txtSumVatAmount
             // 
             this.txtSumVatAmount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSumVatAmount.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
+            this.txtSumVatAmount.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtSumVatAmount.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSumVatAmount.Location = new System.Drawing.Point(129, 420);
+            this.txtSumVatAmount.Location = new System.Drawing.Point(129, 445);
             this.txtSumVatAmount.Mask = "C2";
             this.txtSumVatAmount.MaskType = Telerik.WinControls.UI.MaskType.Numeric;
             this.txtSumVatAmount.Name = "txtSumVatAmount";
-            this.txtSumVatAmount.Size = new System.Drawing.Size(182, 0);
+            this.txtSumVatAmount.Size = new System.Drawing.Size(182, 20);
             this.txtSumVatAmount.TabIndex = 69;
             this.txtSumVatAmount.TabStop = false;
-            this.txtSumVatAmount.Text = "$0.00";
+            this.txtSumVatAmount.Text = "₱0.00";
             this.txtSumVatAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtSumVatAmount.ThemeName = "VisualStudio2012Dark";
-            ((Telerik.WinControls.UI.RadMaskedEditBoxElement)(this.txtSumVatAmount.GetChildAt(0))).Text = "$0.00";
+            ((Telerik.WinControls.UI.RadMaskedEditBoxElement)(this.txtSumVatAmount.GetChildAt(0))).Text = "₱0.00";
             ((Telerik.WinControls.UI.RadTextBoxItem)(this.txtSumVatAmount.GetChildAt(0).GetChildAt(0))).ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             // 
             // txtSumInsurance
             // 
             this.txtSumInsurance.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSumInsurance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
+            this.txtSumInsurance.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtSumInsurance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSumInsurance.Location = new System.Drawing.Point(129, 348);
+            this.txtSumInsurance.Location = new System.Drawing.Point(129, 367);
             this.txtSumInsurance.Mask = "C2";
             this.txtSumInsurance.MaskType = Telerik.WinControls.UI.MaskType.Numeric;
             this.txtSumInsurance.Name = "txtSumInsurance";
-            this.txtSumInsurance.Size = new System.Drawing.Size(182, 0);
+            this.txtSumInsurance.Size = new System.Drawing.Size(182, 20);
             this.txtSumInsurance.TabIndex = 66;
             this.txtSumInsurance.TabStop = false;
-            this.txtSumInsurance.Text = "$0.00";
+            this.txtSumInsurance.Text = "₱0.00";
             this.txtSumInsurance.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtSumInsurance.ThemeName = "Office2010Black";
-            ((Telerik.WinControls.UI.RadMaskedEditBoxElement)(this.txtSumInsurance.GetChildAt(0))).Text = "$0.00";
+            ((Telerik.WinControls.UI.RadMaskedEditBoxElement)(this.txtSumInsurance.GetChildAt(0))).Text = "₱0.00";
             ((Telerik.WinControls.UI.RadTextBoxItem)(this.txtSumInsurance.GetChildAt(0).GetChildAt(0))).ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             // 
             // txtSumQuarantineFee
             // 
             this.txtSumQuarantineFee.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSumQuarantineFee.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
+            this.txtSumQuarantineFee.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtSumQuarantineFee.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSumQuarantineFee.Location = new System.Drawing.Point(129, 324);
+            this.txtSumQuarantineFee.Location = new System.Drawing.Point(129, 341);
             this.txtSumQuarantineFee.Mask = "C2";
             this.txtSumQuarantineFee.MaskType = Telerik.WinControls.UI.MaskType.Numeric;
             this.txtSumQuarantineFee.Name = "txtSumQuarantineFee";
-            this.txtSumQuarantineFee.Size = new System.Drawing.Size(182, 0);
+            this.txtSumQuarantineFee.Size = new System.Drawing.Size(182, 20);
             this.txtSumQuarantineFee.TabIndex = 65;
             this.txtSumQuarantineFee.TabStop = false;
-            this.txtSumQuarantineFee.Text = "$0.00";
+            this.txtSumQuarantineFee.Text = "₱0.00";
             this.txtSumQuarantineFee.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtSumQuarantineFee.ThemeName = "Office2010Black";
-            ((Telerik.WinControls.UI.RadMaskedEditBoxElement)(this.txtSumQuarantineFee.GetChildAt(0))).Text = "$0.00";
+            ((Telerik.WinControls.UI.RadMaskedEditBoxElement)(this.txtSumQuarantineFee.GetChildAt(0))).Text = "₱0.00";
             ((Telerik.WinControls.UI.RadTextBoxItem)(this.txtSumQuarantineFee.GetChildAt(0).GetChildAt(0))).ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             // 
             // txtSumHandlingFee
             // 
             this.txtSumHandlingFee.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSumHandlingFee.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
+            this.txtSumHandlingFee.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtSumHandlingFee.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSumHandlingFee.Location = new System.Drawing.Point(129, 300);
+            this.txtSumHandlingFee.Location = new System.Drawing.Point(129, 315);
             this.txtSumHandlingFee.Mask = "C2";
             this.txtSumHandlingFee.MaskType = Telerik.WinControls.UI.MaskType.Numeric;
             this.txtSumHandlingFee.Name = "txtSumHandlingFee";
-            this.txtSumHandlingFee.Size = new System.Drawing.Size(182, 0);
+            this.txtSumHandlingFee.Size = new System.Drawing.Size(182, 20);
             this.txtSumHandlingFee.TabIndex = 64;
             this.txtSumHandlingFee.TabStop = false;
-            this.txtSumHandlingFee.Text = "$0.00";
+            this.txtSumHandlingFee.Text = "₱0.00";
             this.txtSumHandlingFee.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtSumHandlingFee.ThemeName = "Office2010Black";
-            ((Telerik.WinControls.UI.RadMaskedEditBoxElement)(this.txtSumHandlingFee.GetChildAt(0))).Text = "$0.00";
+            ((Telerik.WinControls.UI.RadMaskedEditBoxElement)(this.txtSumHandlingFee.GetChildAt(0))).Text = "₱0.00";
             ((Telerik.WinControls.UI.RadTextBoxItem)(this.txtSumHandlingFee.GetChildAt(0).GetChildAt(0))).ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(6)))), ((int)(((byte)(6)))));
             // 
             // txtSumPackagingFee
             // 
             this.txtSumPackagingFee.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSumPackagingFee.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
+            this.txtSumPackagingFee.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtSumPackagingFee.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSumPackagingFee.Location = new System.Drawing.Point(129, 276);
+            this.txtSumPackagingFee.Location = new System.Drawing.Point(129, 289);
             this.txtSumPackagingFee.Mask = "C2";
             this.txtSumPackagingFee.MaskType = Telerik.WinControls.UI.MaskType.Numeric;
             this.txtSumPackagingFee.Name = "txtSumPackagingFee";
-            this.txtSumPackagingFee.Size = new System.Drawing.Size(182, 0);
+            this.txtSumPackagingFee.Size = new System.Drawing.Size(182, 20);
             this.txtSumPackagingFee.TabIndex = 63;
             this.txtSumPackagingFee.TabStop = false;
-            this.txtSumPackagingFee.Text = "$0.00";
+            this.txtSumPackagingFee.Text = "₱0.00";
             this.txtSumPackagingFee.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtSumPackagingFee.ThemeName = "Office2010Black";
-            ((Telerik.WinControls.UI.RadMaskedEditBoxElement)(this.txtSumPackagingFee.GetChildAt(0))).Text = "$0.00";
+            ((Telerik.WinControls.UI.RadMaskedEditBoxElement)(this.txtSumPackagingFee.GetChildAt(0))).Text = "₱0.00";
             ((Telerik.WinControls.UI.RadTextBoxItem)(this.txtSumPackagingFee.GetChildAt(0).GetChildAt(0))).ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             // 
             // txtSumDrainingFee
             // 
             this.txtSumDrainingFee.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSumDrainingFee.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
+            this.txtSumDrainingFee.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtSumDrainingFee.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSumDrainingFee.Location = new System.Drawing.Point(129, 252);
+            this.txtSumDrainingFee.Location = new System.Drawing.Point(129, 263);
             this.txtSumDrainingFee.Mask = "C2";
             this.txtSumDrainingFee.MaskType = Telerik.WinControls.UI.MaskType.Numeric;
             this.txtSumDrainingFee.Name = "txtSumDrainingFee";
-            this.txtSumDrainingFee.Size = new System.Drawing.Size(182, 0);
+            this.txtSumDrainingFee.Size = new System.Drawing.Size(182, 20);
             this.txtSumDrainingFee.TabIndex = 62;
             this.txtSumDrainingFee.TabStop = false;
-            this.txtSumDrainingFee.Text = "$0.00";
+            this.txtSumDrainingFee.Text = "₱0.00";
             this.txtSumDrainingFee.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtSumDrainingFee.ThemeName = "Office2010Black";
-            ((Telerik.WinControls.UI.RadMaskedEditBoxElement)(this.txtSumDrainingFee.GetChildAt(0))).Text = "$0.00";
+            ((Telerik.WinControls.UI.RadMaskedEditBoxElement)(this.txtSumDrainingFee.GetChildAt(0))).Text = "₱0.00";
             ((Telerik.WinControls.UI.RadTextBoxItem)(this.txtSumDrainingFee.GetChildAt(0).GetChildAt(0))).ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             // 
             // txtSumCratingFee
             // 
             this.txtSumCratingFee.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSumCratingFee.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
+            this.txtSumCratingFee.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtSumCratingFee.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSumCratingFee.Location = new System.Drawing.Point(129, 228);
+            this.txtSumCratingFee.Location = new System.Drawing.Point(129, 237);
             this.txtSumCratingFee.Mask = "C2";
             this.txtSumCratingFee.MaskType = Telerik.WinControls.UI.MaskType.Numeric;
             this.txtSumCratingFee.Name = "txtSumCratingFee";
-            this.txtSumCratingFee.Size = new System.Drawing.Size(182, 0);
+            this.txtSumCratingFee.Size = new System.Drawing.Size(182, 20);
             this.txtSumCratingFee.TabIndex = 61;
             this.txtSumCratingFee.TabStop = false;
-            this.txtSumCratingFee.Text = "$0.00";
+            this.txtSumCratingFee.Text = "₱0.00";
             this.txtSumCratingFee.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtSumCratingFee.ThemeName = "Office2010Black";
-            ((Telerik.WinControls.UI.RadMaskedEditBoxElement)(this.txtSumCratingFee.GetChildAt(0))).Text = "$0.00";
+            ((Telerik.WinControls.UI.RadMaskedEditBoxElement)(this.txtSumCratingFee.GetChildAt(0))).Text = "₱0.00";
             ((Telerik.WinControls.UI.RadTextBoxItem)(this.txtSumCratingFee.GetChildAt(0).GetChildAt(0))).ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             // 
             // txtSumDangerousFee
             // 
             this.txtSumDangerousFee.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSumDangerousFee.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
+            this.txtSumDangerousFee.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtSumDangerousFee.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSumDangerousFee.Location = new System.Drawing.Point(129, 204);
+            this.txtSumDangerousFee.Location = new System.Drawing.Point(129, 211);
             this.txtSumDangerousFee.Mask = "C2";
             this.txtSumDangerousFee.MaskType = Telerik.WinControls.UI.MaskType.Numeric;
             this.txtSumDangerousFee.Name = "txtSumDangerousFee";
-            this.txtSumDangerousFee.Size = new System.Drawing.Size(182, 0);
+            this.txtSumDangerousFee.Size = new System.Drawing.Size(182, 20);
             this.txtSumDangerousFee.TabIndex = 60;
             this.txtSumDangerousFee.TabStop = false;
-            this.txtSumDangerousFee.Text = "$0.00";
+            this.txtSumDangerousFee.Text = "₱0.00";
             this.txtSumDangerousFee.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtSumDangerousFee.ThemeName = "Office2010Black";
-            ((Telerik.WinControls.UI.RadMaskedEditBoxElement)(this.txtSumDangerousFee.GetChildAt(0))).Text = "$0.00";
+            ((Telerik.WinControls.UI.RadMaskedEditBoxElement)(this.txtSumDangerousFee.GetChildAt(0))).Text = "₱0.00";
             ((Telerik.WinControls.UI.RadTextBoxItem)(this.txtSumDangerousFee.GetChildAt(0).GetChildAt(0))).ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             // 
             // txtSumFuelSurcharge
             // 
             this.txtSumFuelSurcharge.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSumFuelSurcharge.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
+            this.txtSumFuelSurcharge.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtSumFuelSurcharge.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSumFuelSurcharge.Location = new System.Drawing.Point(129, 180);
+            this.txtSumFuelSurcharge.Location = new System.Drawing.Point(129, 185);
             this.txtSumFuelSurcharge.Mask = "C2";
             this.txtSumFuelSurcharge.MaskType = Telerik.WinControls.UI.MaskType.Numeric;
             this.txtSumFuelSurcharge.Name = "txtSumFuelSurcharge";
-            this.txtSumFuelSurcharge.Size = new System.Drawing.Size(182, 0);
+            this.txtSumFuelSurcharge.Size = new System.Drawing.Size(182, 20);
             this.txtSumFuelSurcharge.TabIndex = 59;
             this.txtSumFuelSurcharge.TabStop = false;
-            this.txtSumFuelSurcharge.Text = "$0.00";
+            this.txtSumFuelSurcharge.Text = "₱0.00";
             this.txtSumFuelSurcharge.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtSumFuelSurcharge.ThemeName = "Office2010Black";
-            ((Telerik.WinControls.UI.RadMaskedEditBoxElement)(this.txtSumFuelSurcharge.GetChildAt(0))).Text = "$0.00";
+            ((Telerik.WinControls.UI.RadMaskedEditBoxElement)(this.txtSumFuelSurcharge.GetChildAt(0))).Text = "₱0.00";
             ((Telerik.WinControls.UI.RadTextBoxItem)(this.txtSumFuelSurcharge.GetChildAt(0).GetChildAt(0))).ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             // 
             // txtSumPeracFee
             // 
             this.txtSumPeracFee.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSumPeracFee.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
+            this.txtSumPeracFee.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtSumPeracFee.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSumPeracFee.Location = new System.Drawing.Point(129, 156);
+            this.txtSumPeracFee.Location = new System.Drawing.Point(129, 159);
             this.txtSumPeracFee.Mask = "C2";
             this.txtSumPeracFee.MaskType = Telerik.WinControls.UI.MaskType.Numeric;
             this.txtSumPeracFee.Name = "txtSumPeracFee";
-            this.txtSumPeracFee.Size = new System.Drawing.Size(182, 0);
+            this.txtSumPeracFee.Size = new System.Drawing.Size(182, 20);
             this.txtSumPeracFee.TabIndex = 58;
             this.txtSumPeracFee.TabStop = false;
-            this.txtSumPeracFee.Text = "$0.00";
+            this.txtSumPeracFee.Text = "₱0.00";
             this.txtSumPeracFee.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtSumPeracFee.ThemeName = "Office2010Black";
-            ((Telerik.WinControls.UI.RadMaskedEditBoxElement)(this.txtSumPeracFee.GetChildAt(0))).Text = "$0.00";
+            ((Telerik.WinControls.UI.RadMaskedEditBoxElement)(this.txtSumPeracFee.GetChildAt(0))).Text = "₱0.00";
             ((Telerik.WinControls.UI.RadTextBoxItem)(this.txtSumPeracFee.GetChildAt(0).GetChildAt(0))).ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             // 
             // txtSumFreightCollect
             // 
             this.txtSumFreightCollect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSumFreightCollect.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
+            this.txtSumFreightCollect.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtSumFreightCollect.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSumFreightCollect.Location = new System.Drawing.Point(129, 132);
+            this.txtSumFreightCollect.Location = new System.Drawing.Point(129, 133);
             this.txtSumFreightCollect.Mask = "C2";
             this.txtSumFreightCollect.MaskType = Telerik.WinControls.UI.MaskType.Numeric;
             this.txtSumFreightCollect.Name = "txtSumFreightCollect";
-            this.txtSumFreightCollect.Size = new System.Drawing.Size(182, 0);
+            this.txtSumFreightCollect.Size = new System.Drawing.Size(182, 20);
             this.txtSumFreightCollect.TabIndex = 57;
             this.txtSumFreightCollect.TabStop = false;
-            this.txtSumFreightCollect.Text = "$0.00";
+            this.txtSumFreightCollect.Text = "₱0.00";
             this.txtSumFreightCollect.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtSumFreightCollect.ThemeName = "Office2010Black";
-            ((Telerik.WinControls.UI.RadMaskedEditBoxElement)(this.txtSumFreightCollect.GetChildAt(0))).Text = "$0.00";
+            ((Telerik.WinControls.UI.RadMaskedEditBoxElement)(this.txtSumFreightCollect.GetChildAt(0))).Text = "₱0.00";
             ((Telerik.WinControls.UI.RadTextBoxItem)(this.txtSumFreightCollect.GetChildAt(0).GetChildAt(0))).ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             // 
             // txtSumDeliveryFee
             // 
             this.txtSumDeliveryFee.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSumDeliveryFee.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
+            this.txtSumDeliveryFee.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtSumDeliveryFee.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSumDeliveryFee.Location = new System.Drawing.Point(129, 108);
+            this.txtSumDeliveryFee.Location = new System.Drawing.Point(129, 107);
             this.txtSumDeliveryFee.Mask = "C2";
             this.txtSumDeliveryFee.MaskType = Telerik.WinControls.UI.MaskType.Numeric;
             this.txtSumDeliveryFee.Name = "txtSumDeliveryFee";
-            this.txtSumDeliveryFee.Size = new System.Drawing.Size(182, 0);
+            this.txtSumDeliveryFee.Size = new System.Drawing.Size(182, 20);
             this.txtSumDeliveryFee.TabIndex = 56;
             this.txtSumDeliveryFee.TabStop = false;
-            this.txtSumDeliveryFee.Text = "$0.00";
+            this.txtSumDeliveryFee.Text = "₱0.00";
             this.txtSumDeliveryFee.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtSumDeliveryFee.ThemeName = "Office2010Black";
-            ((Telerik.WinControls.UI.RadMaskedEditBoxElement)(this.txtSumDeliveryFee.GetChildAt(0))).Text = "$0.00";
+            ((Telerik.WinControls.UI.RadMaskedEditBoxElement)(this.txtSumDeliveryFee.GetChildAt(0))).Text = "₱0.00";
             ((Telerik.WinControls.UI.RadTextBoxItem)(this.txtSumDeliveryFee.GetChildAt(0).GetChildAt(0))).ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(3)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             // 
             // txtSumValuation
             // 
             this.txtSumValuation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSumValuation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
+            this.txtSumValuation.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtSumValuation.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSumValuation.Location = new System.Drawing.Point(129, 84);
+            this.txtSumValuation.Location = new System.Drawing.Point(129, 81);
             this.txtSumValuation.Mask = "C2";
             this.txtSumValuation.MaskType = Telerik.WinControls.UI.MaskType.Numeric;
             this.txtSumValuation.Name = "txtSumValuation";
-            this.txtSumValuation.Size = new System.Drawing.Size(182, 0);
+            this.txtSumValuation.Size = new System.Drawing.Size(182, 20);
             this.txtSumValuation.TabIndex = 55;
             this.txtSumValuation.TabStop = false;
-            this.txtSumValuation.Text = "$0.00";
+            this.txtSumValuation.Text = "₱0.00";
             this.txtSumValuation.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtSumValuation.ThemeName = "Office2010Black";
-            ((Telerik.WinControls.UI.RadMaskedEditBoxElement)(this.txtSumValuation.GetChildAt(0))).Text = "$0.00";
+            ((Telerik.WinControls.UI.RadMaskedEditBoxElement)(this.txtSumValuation.GetChildAt(0))).Text = "₱0.00";
             ((Telerik.WinControls.UI.RadTextBoxItem)(this.txtSumValuation.GetChildAt(0).GetChildAt(0))).ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             // 
             // txtSumAwbFee
             // 
             this.txtSumAwbFee.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSumAwbFee.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
+            this.txtSumAwbFee.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtSumAwbFee.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSumAwbFee.Location = new System.Drawing.Point(129, 60);
+            this.txtSumAwbFee.Location = new System.Drawing.Point(129, 55);
             this.txtSumAwbFee.Mask = "C2";
             this.txtSumAwbFee.MaskType = Telerik.WinControls.UI.MaskType.Numeric;
             this.txtSumAwbFee.Name = "txtSumAwbFee";
-            this.txtSumAwbFee.Size = new System.Drawing.Size(182, 0);
+            this.txtSumAwbFee.Size = new System.Drawing.Size(182, 20);
             this.txtSumAwbFee.TabIndex = 54;
             this.txtSumAwbFee.TabStop = false;
-            this.txtSumAwbFee.Text = "$0.00";
+            this.txtSumAwbFee.Text = "₱0.00";
             this.txtSumAwbFee.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtSumAwbFee.ThemeName = "Office2010Black";
-            ((Telerik.WinControls.UI.RadMaskedEditBoxElement)(this.txtSumAwbFee.GetChildAt(0))).Text = "$0.00";
+            ((Telerik.WinControls.UI.RadMaskedEditBoxElement)(this.txtSumAwbFee.GetChildAt(0))).Text = "₱0.00";
             ((Telerik.WinControls.UI.RadTextBoxItem)(this.txtSumAwbFee.GetChildAt(0).GetChildAt(0))).ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             // 
             // txtSumWeightCharge
             // 
             this.txtSumWeightCharge.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSumWeightCharge.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
+            this.txtSumWeightCharge.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtSumWeightCharge.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSumWeightCharge.Location = new System.Drawing.Point(129, 36);
+            this.txtSumWeightCharge.Location = new System.Drawing.Point(129, 29);
             this.txtSumWeightCharge.Mask = "C2";
             this.txtSumWeightCharge.MaskType = Telerik.WinControls.UI.MaskType.Numeric;
             this.txtSumWeightCharge.Name = "txtSumWeightCharge";
-            this.txtSumWeightCharge.Size = new System.Drawing.Size(182, 0);
+            this.txtSumWeightCharge.Size = new System.Drawing.Size(182, 20);
             this.txtSumWeightCharge.TabIndex = 53;
             this.txtSumWeightCharge.TabStop = false;
-            this.txtSumWeightCharge.Text = "$0.00";
+            this.txtSumWeightCharge.Text = "₱0.00";
             this.txtSumWeightCharge.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtSumWeightCharge.ThemeName = "Office2010Black";
-            ((Telerik.WinControls.UI.RadMaskedEditBoxElement)(this.txtSumWeightCharge.GetChildAt(0))).Text = "$0.00";
+            ((Telerik.WinControls.UI.RadMaskedEditBoxElement)(this.txtSumWeightCharge.GetChildAt(0))).Text = "₱0.00";
             ((Telerik.WinControls.UI.RadTextBoxItem)(this.txtSumWeightCharge.GetChildAt(0).GetChildAt(0))).ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             // 
             // radLabel16
@@ -2835,7 +2852,7 @@
             this.radLabel16.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.radLabel16.AutoSize = false;
             this.radLabel16.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radLabel16.Location = new System.Drawing.Point(3, 3);
+            this.radLabel16.Location = new System.Drawing.Point(3, 4);
             this.radLabel16.Name = "radLabel16";
             this.radLabel16.Size = new System.Drawing.Size(120, 18);
             this.radLabel16.TabIndex = 6;
@@ -2846,7 +2863,7 @@
             this.radLabel17.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.radLabel17.AutoSize = false;
             this.radLabel17.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radLabel17.Location = new System.Drawing.Point(3, 99);
+            this.radLabel17.Location = new System.Drawing.Point(3, 108);
             this.radLabel17.Name = "radLabel17";
             this.radLabel17.Size = new System.Drawing.Size(120, 18);
             this.radLabel17.TabIndex = 10;
@@ -2857,10 +2874,10 @@
             this.txtSumChargeableWeight.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSumChargeableWeight.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
             this.txtSumChargeableWeight.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSumChargeableWeight.Location = new System.Drawing.Point(129, 12);
+            this.txtSumChargeableWeight.Location = new System.Drawing.Point(129, 3);
             this.txtSumChargeableWeight.Name = "txtSumChargeableWeight";
             this.txtSumChargeableWeight.ReadOnly = true;
-            this.txtSumChargeableWeight.Size = new System.Drawing.Size(182, 0);
+            this.txtSumChargeableWeight.Size = new System.Drawing.Size(182, 20);
             this.txtSumChargeableWeight.TabIndex = 52;
             this.txtSumChargeableWeight.TabStop = false;
             this.txtSumChargeableWeight.Text = "0.00";
@@ -2875,7 +2892,7 @@
             this.radLabel18.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.radLabel18.AutoSize = false;
             this.radLabel18.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radLabel18.Location = new System.Drawing.Point(3, 27);
+            this.radLabel18.Location = new System.Drawing.Point(3, 30);
             this.radLabel18.Name = "radLabel18";
             this.radLabel18.Size = new System.Drawing.Size(120, 18);
             this.radLabel18.TabIndex = 7;
@@ -2886,7 +2903,7 @@
             this.radLabel19.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.radLabel19.AutoSize = false;
             this.radLabel19.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radLabel19.Location = new System.Drawing.Point(3, 51);
+            this.radLabel19.Location = new System.Drawing.Point(3, 56);
             this.radLabel19.Name = "radLabel19";
             this.radLabel19.Size = new System.Drawing.Size(120, 18);
             this.radLabel19.TabIndex = 8;
@@ -2897,7 +2914,7 @@
             this.radLabel87.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.radLabel87.AutoSize = false;
             this.radLabel87.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radLabel87.Location = new System.Drawing.Point(3, 75);
+            this.radLabel87.Location = new System.Drawing.Point(3, 82);
             this.radLabel87.Name = "radLabel87";
             this.radLabel87.Size = new System.Drawing.Size(120, 18);
             this.radLabel87.TabIndex = 9;
@@ -2908,7 +2925,7 @@
             this.radLabel88.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.radLabel88.AutoSize = false;
             this.radLabel88.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radLabel88.Location = new System.Drawing.Point(3, 123);
+            this.radLabel88.Location = new System.Drawing.Point(3, 134);
             this.radLabel88.Name = "radLabel88";
             this.radLabel88.Size = new System.Drawing.Size(120, 18);
             this.radLabel88.TabIndex = 12;
@@ -2919,7 +2936,7 @@
             this.radLabel89.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.radLabel89.AutoSize = false;
             this.radLabel89.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radLabel89.Location = new System.Drawing.Point(3, 147);
+            this.radLabel89.Location = new System.Drawing.Point(3, 160);
             this.radLabel89.Name = "radLabel89";
             this.radLabel89.Size = new System.Drawing.Size(120, 18);
             this.radLabel89.TabIndex = 11;
@@ -2930,7 +2947,7 @@
             this.radLabel90.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.radLabel90.AutoSize = false;
             this.radLabel90.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radLabel90.Location = new System.Drawing.Point(3, 171);
+            this.radLabel90.Location = new System.Drawing.Point(3, 186);
             this.radLabel90.Name = "radLabel90";
             this.radLabel90.Size = new System.Drawing.Size(120, 18);
             this.radLabel90.TabIndex = 13;
@@ -2941,7 +2958,7 @@
             this.radLabel91.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.radLabel91.AutoSize = false;
             this.radLabel91.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radLabel91.Location = new System.Drawing.Point(3, 219);
+            this.radLabel91.Location = new System.Drawing.Point(3, 238);
             this.radLabel91.Name = "radLabel91";
             this.radLabel91.Size = new System.Drawing.Size(120, 18);
             this.radLabel91.TabIndex = 3;
@@ -2952,7 +2969,7 @@
             this.radLabel92.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.radLabel92.AutoSize = false;
             this.radLabel92.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radLabel92.Location = new System.Drawing.Point(3, 195);
+            this.radLabel92.Location = new System.Drawing.Point(3, 212);
             this.radLabel92.Name = "radLabel92";
             this.radLabel92.Size = new System.Drawing.Size(120, 18);
             this.radLabel92.TabIndex = 4;
@@ -2963,7 +2980,7 @@
             this.radLabel93.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.radLabel93.AutoSize = false;
             this.radLabel93.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radLabel93.Location = new System.Drawing.Point(3, 243);
+            this.radLabel93.Location = new System.Drawing.Point(3, 264);
             this.radLabel93.Name = "radLabel93";
             this.radLabel93.Size = new System.Drawing.Size(120, 18);
             this.radLabel93.TabIndex = 2;
@@ -2974,7 +2991,7 @@
             this.radLabel94.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.radLabel94.AutoSize = false;
             this.radLabel94.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radLabel94.Location = new System.Drawing.Point(3, 267);
+            this.radLabel94.Location = new System.Drawing.Point(3, 290);
             this.radLabel94.Name = "radLabel94";
             this.radLabel94.Size = new System.Drawing.Size(120, 18);
             this.radLabel94.TabIndex = 38;
@@ -2985,7 +3002,7 @@
             this.radLabel95.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.radLabel95.AutoSize = false;
             this.radLabel95.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radLabel95.Location = new System.Drawing.Point(3, 458);
+            this.radLabel95.Location = new System.Drawing.Point(3, 476);
             this.radLabel95.Name = "radLabel95";
             this.radLabel95.Size = new System.Drawing.Size(120, 18);
             this.radLabel95.TabIndex = 33;
@@ -2996,7 +3013,7 @@
             this.radLabel96.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.radLabel96.AutoSize = false;
             this.radLabel96.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radLabel96.Location = new System.Drawing.Point(3, 411);
+            this.radLabel96.Location = new System.Drawing.Point(3, 446);
             this.radLabel96.Name = "radLabel96";
             this.radLabel96.Size = new System.Drawing.Size(120, 18);
             this.radLabel96.TabIndex = 32;
@@ -3007,7 +3024,7 @@
             this.radLabel97.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.radLabel97.AutoSize = false;
             this.radLabel97.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radLabel97.Location = new System.Drawing.Point(3, 291);
+            this.radLabel97.Location = new System.Drawing.Point(3, 316);
             this.radLabel97.Name = "radLabel97";
             this.radLabel97.Size = new System.Drawing.Size(120, 18);
             this.radLabel97.TabIndex = 39;
@@ -3018,7 +3035,7 @@
             this.radLabel98.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.radLabel98.AutoSize = false;
             this.radLabel98.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radLabel98.Location = new System.Drawing.Point(3, 315);
+            this.radLabel98.Location = new System.Drawing.Point(3, 342);
             this.radLabel98.Name = "radLabel98";
             this.radLabel98.Size = new System.Drawing.Size(120, 18);
             this.radLabel98.TabIndex = 40;
@@ -3029,7 +3046,7 @@
             this.radLabel99.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.radLabel99.AutoSize = false;
             this.radLabel99.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radLabel99.Location = new System.Drawing.Point(3, 339);
+            this.radLabel99.Location = new System.Drawing.Point(3, 368);
             this.radLabel99.Name = "radLabel99";
             this.radLabel99.Size = new System.Drawing.Size(120, 18);
             this.radLabel99.TabIndex = 30;
@@ -3039,18 +3056,19 @@
             // 
             this.txtSumSubTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSumSubTotal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
+            this.txtSumSubTotal.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtSumSubTotal.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSumSubTotal.Location = new System.Drawing.Point(129, 396);
+            this.txtSumSubTotal.Location = new System.Drawing.Point(129, 419);
             this.txtSumSubTotal.Mask = "C2";
             this.txtSumSubTotal.MaskType = Telerik.WinControls.UI.MaskType.Numeric;
             this.txtSumSubTotal.Name = "txtSumSubTotal";
-            this.txtSumSubTotal.Size = new System.Drawing.Size(182, 0);
+            this.txtSumSubTotal.Size = new System.Drawing.Size(182, 20);
             this.txtSumSubTotal.TabIndex = 68;
             this.txtSumSubTotal.TabStop = false;
-            this.txtSumSubTotal.Text = "$0.00";
+            this.txtSumSubTotal.Text = "₱0.00";
             this.txtSumSubTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtSumSubTotal.ThemeName = "Office2010Black";
-            ((Telerik.WinControls.UI.RadMaskedEditBoxElement)(this.txtSumSubTotal.GetChildAt(0))).Text = "$0.00";
+            ((Telerik.WinControls.UI.RadMaskedEditBoxElement)(this.txtSumSubTotal.GetChildAt(0))).Text = "₱0.00";
             ((Telerik.WinControls.UI.RadTextBoxItem)(this.txtSumSubTotal.GetChildAt(0).GetChildAt(0))).ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             // 
             // radLabel100
@@ -3058,7 +3076,7 @@
             this.radLabel100.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.radLabel100.AutoSize = false;
             this.radLabel100.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radLabel100.Location = new System.Drawing.Point(3, 387);
+            this.radLabel100.Location = new System.Drawing.Point(3, 420);
             this.radLabel100.Name = "radLabel100";
             this.radLabel100.Size = new System.Drawing.Size(120, 18);
             this.radLabel100.TabIndex = 31;
@@ -3069,7 +3087,7 @@
             this.radLabel101.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.radLabel101.AutoSize = false;
             this.radLabel101.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radLabel101.Location = new System.Drawing.Point(3, 363);
+            this.radLabel101.Location = new System.Drawing.Point(3, 394);
             this.radLabel101.Name = "radLabel101";
             this.radLabel101.Size = new System.Drawing.Size(120, 18);
             this.radLabel101.TabIndex = 44;
@@ -3178,6 +3196,7 @@
             // 
             // txtHandlingFee
             // 
+            this.txtHandlingFee.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtHandlingFee.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtHandlingFee.Location = new System.Drawing.Point(760, 174);
             this.txtHandlingFee.Mask = "C2";
@@ -3186,7 +3205,7 @@
             this.txtHandlingFee.Size = new System.Drawing.Size(94, 20);
             this.txtHandlingFee.TabIndex = 23;
             this.txtHandlingFee.TabStop = false;
-            this.txtHandlingFee.Text = "$0.00";
+            this.txtHandlingFee.Text = "₱0.00";
             this.txtHandlingFee.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtHandlingFee.ThemeName = "Office2010Black";
             // 
@@ -3194,10 +3213,10 @@
             // 
             this.txtHeight.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtHeight.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtHeight.Location = new System.Drawing.Point(483, 39);
+            this.txtHeight.Location = new System.Drawing.Point(483, 29);
             this.txtHeight.MaskType = Telerik.WinControls.UI.MaskType.Numeric;
             this.txtHeight.Name = "txtHeight";
-            this.txtHeight.Size = new System.Drawing.Size(37, 0);
+            this.txtHeight.Size = new System.Drawing.Size(37, 20);
             this.txtHeight.TabIndex = 17;
             this.txtHeight.TabStop = false;
             this.txtHeight.Text = "0";
@@ -3210,9 +3229,9 @@
             this.lstCrating.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel14.SetColumnSpan(this.lstCrating, 2);
             this.lstCrating.DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDownList;
-            this.lstCrating.Location = new System.Drawing.Point(526, 39);
+            this.lstCrating.Location = new System.Drawing.Point(526, 29);
             this.lstCrating.Name = "lstCrating";
-            this.lstCrating.Size = new System.Drawing.Size(102, 0);
+            this.lstCrating.Size = new System.Drawing.Size(102, 20);
             this.lstCrating.TabIndex = 18;
             this.lstCrating.ThemeName = "Office2010Black";
             // 
@@ -3243,10 +3262,10 @@
             // 
             this.txtWidth.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtWidth.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtWidth.Location = new System.Drawing.Point(436, 39);
+            this.txtWidth.Location = new System.Drawing.Point(436, 29);
             this.txtWidth.MaskType = Telerik.WinControls.UI.MaskType.Numeric;
             this.txtWidth.Name = "txtWidth";
-            this.txtWidth.Size = new System.Drawing.Size(41, 0);
+            this.txtWidth.Size = new System.Drawing.Size(41, 20);
             this.txtWidth.TabIndex = 16;
             this.txtWidth.TabStop = false;
             this.txtWidth.Text = "0";
@@ -3258,10 +3277,10 @@
             // 
             this.txtLength.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtLength.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtLength.Location = new System.Drawing.Point(389, 39);
+            this.txtLength.Location = new System.Drawing.Point(389, 29);
             this.txtLength.MaskType = Telerik.WinControls.UI.MaskType.Numeric;
             this.txtLength.Name = "txtLength";
-            this.txtLength.Size = new System.Drawing.Size(41, 0);
+            this.txtLength.Size = new System.Drawing.Size(41, 20);
             this.txtLength.TabIndex = 15;
             this.txtLength.TabStop = false;
             this.txtLength.Text = "0";
@@ -3628,7 +3647,7 @@
             this.gridPackage.MasterTemplate.EnableGrouping = false;
             this.gridPackage.MasterTemplate.MultiSelect = true;
             this.gridPackage.MasterTemplate.ShowFilteringRow = false;
-            this.gridPackage.MasterTemplate.ViewDefinition = tableViewDefinition74;
+            this.gridPackage.MasterTemplate.ViewDefinition = tableViewDefinition20;
             this.gridPackage.Name = "gridPackage";
             this.gridPackage.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.tableLayoutPanel14.SetRowSpan(this.gridPackage, 5);
@@ -3652,6 +3671,7 @@
             // 
             this.txtTotalEvm.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
             this.tableLayoutPanel14.SetColumnSpan(this.txtTotalEvm, 2);
+            this.txtTotalEvm.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtTotalEvm.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTotalEvm.Location = new System.Drawing.Point(483, 174);
             this.txtTotalEvm.Mask = "C2";
@@ -3660,7 +3680,7 @@
             this.txtTotalEvm.Size = new System.Drawing.Size(107, 20);
             this.txtTotalEvm.TabIndex = 44;
             this.txtTotalEvm.TabStop = false;
-            this.txtTotalEvm.Text = "$0.00";
+            this.txtTotalEvm.Text = "₱0.00";
             this.txtTotalEvm.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtTotalEvm.ThemeName = "Office2010Black";
             // 
@@ -3704,6 +3724,7 @@
             // 
             this.txtTotalWeightCharge.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
             this.tableLayoutPanel14.SetColumnSpan(this.txtTotalWeightCharge, 2);
+            this.txtTotalWeightCharge.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtTotalWeightCharge.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTotalWeightCharge.Location = new System.Drawing.Point(483, 200);
             this.txtTotalWeightCharge.Mask = "C2";
@@ -3712,13 +3733,14 @@
             this.txtTotalWeightCharge.Size = new System.Drawing.Size(107, 20);
             this.txtTotalWeightCharge.TabIndex = 46;
             this.txtTotalWeightCharge.TabStop = false;
-            this.txtTotalWeightCharge.Text = "$0.00";
+            this.txtTotalWeightCharge.Text = "₱0.00";
             this.txtTotalWeightCharge.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtTotalWeightCharge.ThemeName = "Office2010Black";
             // 
             // txtDeclaredValue
             // 
             this.tableLayoutPanel14.SetColumnSpan(this.txtDeclaredValue, 2);
+            this.txtDeclaredValue.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtDeclaredValue.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDeclaredValue.Location = new System.Drawing.Point(483, 226);
             this.txtDeclaredValue.Mask = "C2";
@@ -3727,7 +3749,7 @@
             this.txtDeclaredValue.Size = new System.Drawing.Size(107, 20);
             this.txtDeclaredValue.TabIndex = 22;
             this.txtDeclaredValue.TabStop = false;
-            this.txtDeclaredValue.Text = "$0.00";
+            this.txtDeclaredValue.Text = "₱0.00";
             this.txtDeclaredValue.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtDeclaredValue.ThemeName = "Office2010Black";
             this.txtDeclaredValue.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtDeclaredValue_KeyUp);
@@ -3758,6 +3780,7 @@
             // 
             // txtQuarantineFee
             // 
+            this.txtQuarantineFee.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtQuarantineFee.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtQuarantineFee.Location = new System.Drawing.Point(760, 200);
             this.txtQuarantineFee.Mask = "C2";
@@ -3766,7 +3789,7 @@
             this.txtQuarantineFee.Size = new System.Drawing.Size(94, 20);
             this.txtQuarantineFee.TabIndex = 24;
             this.txtQuarantineFee.TabStop = false;
-            this.txtQuarantineFee.Text = "$0.00";
+            this.txtQuarantineFee.Text = "₱0.00";
             this.txtQuarantineFee.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtQuarantineFee.ThemeName = "Office2010Black";
             // 
@@ -4390,10 +4413,10 @@
             this.AcceptancetxtAirwayBill.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.AcceptancetxtAirwayBill.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.AcceptancetxtAirwayBill.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.AcceptancetxtAirwayBill.Location = new System.Drawing.Point(105, 18);
+            this.AcceptancetxtAirwayBill.Location = new System.Drawing.Point(105, 8);
             this.AcceptancetxtAirwayBill.Name = "AcceptancetxtAirwayBill";
             this.AcceptancetxtAirwayBill.PromptChar = ' ';
-            this.AcceptancetxtAirwayBill.Size = new System.Drawing.Size(217, 0);
+            this.AcceptancetxtAirwayBill.Size = new System.Drawing.Size(217, 20);
             this.AcceptancetxtAirwayBill.TabIndex = 2;
             this.AcceptancetxtAirwayBill.TabStop = false;
             this.AcceptancetxtAirwayBill.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
@@ -4887,7 +4910,7 @@
             this.gridManifest.MasterTemplate.EnableFiltering = true;
             this.gridManifest.MasterTemplate.PageSize = 1;
             this.gridManifest.MasterTemplate.ShowGroupedColumns = true;
-            this.gridManifest.MasterTemplate.ViewDefinition = tableViewDefinition75;
+            this.gridManifest.MasterTemplate.ViewDefinition = tableViewDefinition21;
             this.gridManifest.Name = "gridManifest";
             this.gridManifest.Size = new System.Drawing.Size(1237, 637);
             this.gridManifest.TabIndex = 0;
@@ -5372,7 +5395,7 @@
             // 
             this.gridCorpAcctConsignee.MasterTemplate.AllowAddNewRow = false;
             this.gridCorpAcctConsignee.MasterTemplate.AllowDeleteRow = false;
-            this.gridCorpAcctConsignee.MasterTemplate.ViewDefinition = tableViewDefinition76;
+            this.gridCorpAcctConsignee.MasterTemplate.ViewDefinition = tableViewDefinition22;
             this.gridCorpAcctConsignee.Name = "gridCorpAcctConsignee";
             this.gridCorpAcctConsignee.Size = new System.Drawing.Size(794, 121);
             this.gridCorpAcctConsignee.TabIndex = 62;
@@ -5390,7 +5413,7 @@
             this.gridPrepaid.MasterTemplate.AllowColumnReorder = false;
             this.gridPrepaid.MasterTemplate.AllowColumnResize = false;
             this.gridPrepaid.MasterTemplate.AllowDeleteRow = false;
-            this.gridPrepaid.MasterTemplate.ViewDefinition = tableViewDefinition77;
+            this.gridPrepaid.MasterTemplate.ViewDefinition = tableViewDefinition23;
             this.gridPrepaid.Name = "gridPrepaid";
             this.gridPrepaid.Size = new System.Drawing.Size(794, 131);
             this.gridPrepaid.TabIndex = 60;
@@ -5562,7 +5585,7 @@
             this.gridFreightCollect.MasterTemplate.AllowAddNewRow = false;
             this.gridFreightCollect.MasterTemplate.AllowColumnResize = false;
             this.gridFreightCollect.MasterTemplate.AllowDeleteRow = false;
-            this.gridFreightCollect.MasterTemplate.ViewDefinition = tableViewDefinition78;
+            this.gridFreightCollect.MasterTemplate.ViewDefinition = tableViewDefinition24;
             this.gridFreightCollect.Name = "gridFreightCollect";
             this.gridFreightCollect.Size = new System.Drawing.Size(794, 127);
             this.gridFreightCollect.TabIndex = 61;
@@ -5650,7 +5673,7 @@
             this.pageViewTracking.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pageViewTracking.Location = new System.Drawing.Point(0, 0);
             this.pageViewTracking.Name = "pageViewTracking";
-            this.pageViewTracking.SelectedPage = this.radPageViewPage13;
+            this.pageViewTracking.SelectedPage = this.radPageViewPage18;
             this.pageViewTracking.Size = new System.Drawing.Size(1234, 587);
             this.pageViewTracking.TabIndex = 0;
             this.pageViewTracking.Text = " ";
@@ -5692,7 +5715,7 @@
             this.gridPickupCargo.MasterTemplate.AllowDragToGroup = false;
             this.gridPickupCargo.MasterTemplate.AllowEditRow = false;
             this.gridPickupCargo.MasterTemplate.ShowRowHeaderColumn = false;
-            this.gridPickupCargo.MasterTemplate.ViewDefinition = tableViewDefinition79;
+            this.gridPickupCargo.MasterTemplate.ViewDefinition = tableViewDefinition25;
             this.gridPickupCargo.Name = "gridPickupCargo";
             this.gridPickupCargo.ShowItemToolTips = false;
             this.gridPickupCargo.Size = new System.Drawing.Size(1086, 455);
@@ -5918,7 +5941,7 @@
             this.gridBranchAcceptance.MasterTemplate.AllowDeleteRow = false;
             this.gridBranchAcceptance.MasterTemplate.AllowEditRow = false;
             this.gridBranchAcceptance.MasterTemplate.ShowRowHeaderColumn = false;
-            this.gridBranchAcceptance.MasterTemplate.ViewDefinition = tableViewDefinition80;
+            this.gridBranchAcceptance.MasterTemplate.ViewDefinition = tableViewDefinition26;
             this.gridBranchAcceptance.Name = "gridBranchAcceptance";
             this.gridBranchAcceptance.ShowItemToolTips = false;
             this.gridBranchAcceptance.Size = new System.Drawing.Size(1086, 455);
@@ -6093,7 +6116,7 @@
             this.gridBundle.MasterTemplate.AllowDragToGroup = false;
             this.gridBundle.MasterTemplate.AllowEditRow = false;
             this.gridBundle.MasterTemplate.ShowRowHeaderColumn = false;
-            this.gridBundle.MasterTemplate.ViewDefinition = tableViewDefinition81;
+            this.gridBundle.MasterTemplate.ViewDefinition = tableViewDefinition27;
             this.gridBundle.Name = "gridBundle";
             this.gridBundle.ShowItemToolTips = false;
             this.gridBundle.Size = new System.Drawing.Size(1086, 455);
@@ -6103,7 +6126,7 @@
             // 
             // radPanel16
             // 
-            this.radPanel16.Controls.Add(this.radTextBox1);
+            this.radPanel16.Controls.Add(this.txtBU_SackNo);
             this.radPanel16.Controls.Add(this.btnBundle_Print);
             this.radPanel16.Controls.Add(this.btnBundle_Export);
             this.radPanel16.Controls.Add(this.label113);
@@ -6121,12 +6144,12 @@
             this.radPanel16.TabIndex = 2;
             this.radPanel16.ThemeName = "Office2010Black";
             // 
-            // radTextBox1
+            // txtBU_SackNo
             // 
-            this.radTextBox1.Location = new System.Drawing.Point(354, 80);
-            this.radTextBox1.Name = "radTextBox1";
-            this.radTextBox1.Size = new System.Drawing.Size(100, 20);
-            this.radTextBox1.TabIndex = 107;
+            this.txtBU_SackNo.Location = new System.Drawing.Point(354, 80);
+            this.txtBU_SackNo.Name = "txtBU_SackNo";
+            this.txtBU_SackNo.Size = new System.Drawing.Size(100, 20);
+            this.txtBU_SackNo.TabIndex = 107;
             // 
             // btnBundle_Print
             // 
@@ -6168,9 +6191,9 @@
             this.label113.AutoSize = true;
             this.label113.Location = new System.Drawing.Point(191, 57);
             this.label113.Name = "label113";
-            this.label113.Size = new System.Drawing.Size(32, 13);
+            this.label113.Size = new System.Drawing.Size(96, 13);
             this.label113.TabIndex = 92;
-            this.label113.Text = "BSO:";
+            this.label113.Text = "Destination BCO:";
             // 
             // label101
             // 
@@ -6268,7 +6291,7 @@
             this.gridUnbundle.MasterTemplate.AllowDragToGroup = false;
             this.gridUnbundle.MasterTemplate.AllowEditRow = false;
             this.gridUnbundle.MasterTemplate.ShowRowHeaderColumn = false;
-            this.gridUnbundle.MasterTemplate.ViewDefinition = tableViewDefinition82;
+            this.gridUnbundle.MasterTemplate.ViewDefinition = tableViewDefinition28;
             this.gridUnbundle.Name = "gridUnbundle";
             this.gridUnbundle.ShowItemToolTips = false;
             this.gridUnbundle.Size = new System.Drawing.Size(1086, 455);
@@ -6278,7 +6301,7 @@
             // 
             // radPanel17
             // 
-            this.radPanel17.Controls.Add(this.radTextBox2);
+            this.radPanel17.Controls.Add(this.txtUnbundle_SackNo);
             this.radPanel17.Controls.Add(this.label127);
             this.radPanel17.Controls.Add(this.btnUnbundle_Print);
             this.radPanel17.Controls.Add(this.btnUnbundle_Search);
@@ -6295,12 +6318,12 @@
             this.radPanel17.TabIndex = 2;
             this.radPanel17.ThemeName = "Office2010Black";
             // 
-            // radTextBox2
+            // txtUnbundle_SackNo
             // 
-            this.radTextBox2.Location = new System.Drawing.Point(358, 77);
-            this.radTextBox2.Name = "radTextBox2";
-            this.radTextBox2.Size = new System.Drawing.Size(100, 20);
-            this.radTextBox2.TabIndex = 109;
+            this.txtUnbundle_SackNo.Location = new System.Drawing.Point(358, 77);
+            this.txtUnbundle_SackNo.Name = "txtUnbundle_SackNo";
+            this.txtUnbundle_SackNo.Size = new System.Drawing.Size(100, 20);
+            this.txtUnbundle_SackNo.TabIndex = 109;
             // 
             // label127
             // 
@@ -6420,7 +6443,7 @@
             this.gridGatewayTransmital.MasterTemplate.AllowDragToGroup = false;
             this.gridGatewayTransmital.MasterTemplate.AllowEditRow = false;
             this.gridGatewayTransmital.MasterTemplate.ShowRowHeaderColumn = false;
-            this.gridGatewayTransmital.MasterTemplate.ViewDefinition = tableViewDefinition83;
+            this.gridGatewayTransmital.MasterTemplate.ViewDefinition = tableViewDefinition29;
             this.gridGatewayTransmital.Name = "gridGatewayTransmital";
             this.gridGatewayTransmital.ShowItemToolTips = false;
             this.gridGatewayTransmital.Size = new System.Drawing.Size(1086, 455);
@@ -6459,7 +6482,7 @@
             // 
             this.label129.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label129.AutoSize = true;
-            this.label129.Location = new System.Drawing.Point(837, 55);
+            this.label129.Location = new System.Drawing.Point(368, 55);
             this.label129.Name = "label129";
             this.label129.Size = new System.Drawing.Size(40, 13);
             this.label129.TabIndex = 97;
@@ -6469,7 +6492,7 @@
             // 
             this.label128.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label128.AutoSize = true;
-            this.label128.Location = new System.Drawing.Point(711, 55);
+            this.label128.Location = new System.Drawing.Point(707, 55);
             this.label128.Name = "label128";
             this.label128.Size = new System.Drawing.Size(93, 13);
             this.label128.TabIndex = 96;
@@ -6478,7 +6501,7 @@
             // cmbGT_Driver
             // 
             this.cmbGT_Driver.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmbGT_Driver.Location = new System.Drawing.Point(837, 76);
+            this.cmbGT_Driver.Location = new System.Drawing.Point(368, 77);
             this.cmbGT_Driver.Name = "cmbGT_Driver";
             this.cmbGT_Driver.Size = new System.Drawing.Size(94, 20);
             this.cmbGT_Driver.TabIndex = 95;
@@ -6487,7 +6510,7 @@
             // cmbGt_CommodityType
             // 
             this.cmbGt_CommodityType.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmbGt_CommodityType.Location = new System.Drawing.Point(714, 77);
+            this.cmbGt_CommodityType.Location = new System.Drawing.Point(709, 77);
             this.cmbGt_CommodityType.Name = "cmbGt_CommodityType";
             this.cmbGt_CommodityType.Size = new System.Drawing.Size(117, 20);
             this.cmbGt_CommodityType.TabIndex = 94;
@@ -6496,7 +6519,7 @@
             // btnGatewayTransmital_Print
             // 
             this.btnGatewayTransmital_Print.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnGatewayTransmital_Print.Location = new System.Drawing.Point(1013, 74);
+            this.btnGatewayTransmital_Print.Location = new System.Drawing.Point(1013, 76);
             this.btnGatewayTransmital_Print.Name = "btnGatewayTransmital_Print";
             this.btnGatewayTransmital_Print.Size = new System.Drawing.Size(70, 22);
             this.btnGatewayTransmital_Print.TabIndex = 84;
@@ -6507,18 +6530,19 @@
             // dropDownGatewayTransmital_Destination
             // 
             this.dropDownGatewayTransmital_Destination.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.dropDownGatewayTransmital_Destination.Location = new System.Drawing.Point(310, 79);
+            this.dropDownGatewayTransmital_Destination.Location = new System.Drawing.Point(191, 78);
             this.dropDownGatewayTransmital_Destination.Name = "dropDownGatewayTransmital_Destination";
             this.dropDownGatewayTransmital_Destination.Size = new System.Drawing.Size(169, 20);
             this.dropDownGatewayTransmital_Destination.TabIndex = 93;
             this.dropDownGatewayTransmital_Destination.ThemeName = "Office2010Black";
+            this.dropDownGatewayTransmital_Destination.SelectedIndexChanged += new Telerik.WinControls.UI.Data.PositionChangedEventHandler(this.dropDownGatewayTransmital_Destination_SelectedIndexChanged);
             this.dropDownGatewayTransmital_Destination.Enter += new System.EventHandler(this.dropDownGatewayTransmital_Destination_Enter);
             // 
             // label59
             // 
             this.label59.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label59.AutoSize = true;
-            this.label59.Location = new System.Drawing.Point(307, 58);
+            this.label59.Location = new System.Drawing.Point(188, 57);
             this.label59.Name = "label59";
             this.label59.Size = new System.Drawing.Size(96, 13);
             this.label59.TabIndex = 92;
@@ -6528,7 +6552,7 @@
             // 
             this.label58.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label58.AutoSize = true;
-            this.label58.Location = new System.Drawing.Point(491, 57);
+            this.label58.Location = new System.Drawing.Point(589, 58);
             this.label58.Name = "label58";
             this.label58.Size = new System.Drawing.Size(39, 13);
             this.label58.TabIndex = 91;
@@ -6536,7 +6560,7 @@
             // 
             // txtGatewayTransmital_MAWB
             // 
-            this.txtGatewayTransmital_MAWB.Location = new System.Drawing.Point(608, 78);
+            this.txtGatewayTransmital_MAWB.Location = new System.Drawing.Point(832, 78);
             this.txtGatewayTransmital_MAWB.Name = "txtGatewayTransmital_MAWB";
             this.txtGatewayTransmital_MAWB.Size = new System.Drawing.Size(100, 20);
             this.txtGatewayTransmital_MAWB.TabIndex = 90;
@@ -6545,7 +6569,7 @@
             // dropDownGatewayTransmital_Batch
             // 
             this.dropDownGatewayTransmital_Batch.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.dropDownGatewayTransmital_Batch.Location = new System.Drawing.Point(485, 77);
+            this.dropDownGatewayTransmital_Batch.Location = new System.Drawing.Point(587, 78);
             this.dropDownGatewayTransmital_Batch.Name = "dropDownGatewayTransmital_Batch";
             this.dropDownGatewayTransmital_Batch.Size = new System.Drawing.Size(117, 20);
             this.dropDownGatewayTransmital_Batch.TabIndex = 85;
@@ -6556,7 +6580,7 @@
             // 
             this.label55.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label55.AutoSize = true;
-            this.label55.Location = new System.Drawing.Point(605, 55);
+            this.label55.Location = new System.Drawing.Point(834, 55);
             this.label55.Name = "label55";
             this.label55.Size = new System.Drawing.Size(72, 13);
             this.label55.TabIndex = 84;
@@ -6565,7 +6589,7 @@
             // btnGatewayTransmital_Search
             // 
             this.btnGatewayTransmital_Search.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnGatewayTransmital_Search.Location = new System.Drawing.Point(937, 74);
+            this.btnGatewayTransmital_Search.Location = new System.Drawing.Point(937, 76);
             this.btnGatewayTransmital_Search.Name = "btnGatewayTransmital_Search";
             this.btnGatewayTransmital_Search.Size = new System.Drawing.Size(70, 22);
             this.btnGatewayTransmital_Search.TabIndex = 83;
@@ -6577,7 +6601,7 @@
             // 
             this.label35.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label35.AutoSize = true;
-            this.label35.Location = new System.Drawing.Point(188, 58);
+            this.label35.Location = new System.Drawing.Point(467, 58);
             this.label35.Name = "label35";
             this.label35.Size = new System.Drawing.Size(54, 13);
             this.label35.TabIndex = 81;
@@ -6586,7 +6610,7 @@
             // dropDownGatewayTransmital_Gateway
             // 
             this.dropDownGatewayTransmital_Gateway.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.dropDownGatewayTransmital_Gateway.Location = new System.Drawing.Point(191, 78);
+            this.dropDownGatewayTransmital_Gateway.Location = new System.Drawing.Point(470, 78);
             this.dropDownGatewayTransmital_Gateway.Name = "dropDownGatewayTransmital_Gateway";
             this.dropDownGatewayTransmital_Gateway.Size = new System.Drawing.Size(113, 20);
             this.dropDownGatewayTransmital_Gateway.TabIndex = 80;
@@ -6609,7 +6633,7 @@
             // 
             this.label54.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label54.AutoSize = true;
-            this.label54.Location = new System.Drawing.Point(9, 58);
+            this.label54.Location = new System.Drawing.Point(9, 57);
             this.label54.Name = "label54";
             this.label54.Size = new System.Drawing.Size(34, 13);
             this.label54.TabIndex = 79;
@@ -6659,7 +6683,7 @@
             this.gridGatewayOutbound.MasterTemplate.AllowDragToGroup = false;
             this.gridGatewayOutbound.MasterTemplate.AllowEditRow = false;
             this.gridGatewayOutbound.MasterTemplate.ShowRowHeaderColumn = false;
-            this.gridGatewayOutbound.MasterTemplate.ViewDefinition = tableViewDefinition84;
+            this.gridGatewayOutbound.MasterTemplate.ViewDefinition = tableViewDefinition30;
             this.gridGatewayOutbound.Name = "gridGatewayOutbound";
             this.gridGatewayOutbound.ShowItemToolTips = false;
             this.gridGatewayOutbound.Size = new System.Drawing.Size(1086, 455);
@@ -6669,11 +6693,11 @@
             // 
             // radPanel19
             // 
-            this.radPanel19.Controls.Add(this.radTextBox3);
+            this.radPanel19.Controls.Add(this.txtGO_mawb);
             this.radPanel19.Controls.Add(this.label132);
             this.radPanel19.Controls.Add(this.label130);
             this.radPanel19.Controls.Add(this.label131);
-            this.radPanel19.Controls.Add(this.radDropDownList1);
+            this.radPanel19.Controls.Add(this.cmbGO_Driver);
             this.radPanel19.Controls.Add(this.cmbGO_commoditType);
             this.radPanel19.Controls.Add(this.btnGatewayOutbound_Print);
             this.radPanel19.Controls.Add(this.btnGatewayOutbound_Search);
@@ -6694,12 +6718,12 @@
             this.radPanel19.TabIndex = 2;
             this.radPanel19.ThemeName = "Office2010Black";
             // 
-            // radTextBox3
+            // txtGO_mawb
             // 
-            this.radTextBox3.Location = new System.Drawing.Point(822, 76);
-            this.radTextBox3.Name = "radTextBox3";
-            this.radTextBox3.Size = new System.Drawing.Size(100, 20);
-            this.radTextBox3.TabIndex = 107;
+            this.txtGO_mawb.Location = new System.Drawing.Point(822, 76);
+            this.txtGO_mawb.Name = "txtGO_mawb";
+            this.txtGO_mawb.Size = new System.Drawing.Size(100, 20);
+            this.txtGO_mawb.TabIndex = 107;
             // 
             // label132
             // 
@@ -6715,7 +6739,7 @@
             // 
             this.label130.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label130.AutoSize = true;
-            this.label130.Location = new System.Drawing.Point(723, 53);
+            this.label130.Location = new System.Drawing.Point(350, 56);
             this.label130.Name = "label130";
             this.label130.Size = new System.Drawing.Size(40, 13);
             this.label130.TabIndex = 105;
@@ -6725,25 +6749,25 @@
             // 
             this.label131.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label131.AutoSize = true;
-            this.label131.Location = new System.Drawing.Point(597, 53);
+            this.label131.Location = new System.Drawing.Point(695, 53);
             this.label131.Name = "label131";
             this.label131.Size = new System.Drawing.Size(93, 13);
             this.label131.TabIndex = 104;
             this.label131.Text = "Commodity Type:";
             // 
-            // radDropDownList1
+            // cmbGO_Driver
             // 
-            this.radDropDownList1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.radDropDownList1.Location = new System.Drawing.Point(723, 74);
-            this.radDropDownList1.Name = "radDropDownList1";
-            this.radDropDownList1.Size = new System.Drawing.Size(94, 20);
-            this.radDropDownList1.TabIndex = 103;
-            this.radDropDownList1.ThemeName = "Office2010Black";
+            this.cmbGO_Driver.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbGO_Driver.Location = new System.Drawing.Point(350, 77);
+            this.cmbGO_Driver.Name = "cmbGO_Driver";
+            this.cmbGO_Driver.Size = new System.Drawing.Size(94, 20);
+            this.cmbGO_Driver.TabIndex = 103;
+            this.cmbGO_Driver.ThemeName = "Office2010Black";
             // 
             // cmbGO_commoditType
             // 
             this.cmbGO_commoditType.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmbGO_commoditType.Location = new System.Drawing.Point(600, 75);
+            this.cmbGO_commoditType.Location = new System.Drawing.Point(698, 75);
             this.cmbGO_commoditType.Name = "cmbGO_commoditType";
             this.cmbGO_commoditType.Size = new System.Drawing.Size(117, 20);
             this.cmbGO_commoditType.TabIndex = 102;
@@ -6775,7 +6799,7 @@
             // 
             this.label78.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label78.AutoSize = true;
-            this.label78.Location = new System.Drawing.Point(472, 56);
+            this.label78.Location = new System.Drawing.Point(570, 56);
             this.label78.Name = "label78";
             this.label78.Size = new System.Drawing.Size(39, 13);
             this.label78.TabIndex = 95;
@@ -6794,7 +6818,7 @@
             // dropDownGatewayOutbound_Batch
             // 
             this.dropDownGatewayOutbound_Batch.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.dropDownGatewayOutbound_Batch.Location = new System.Drawing.Point(475, 76);
+            this.dropDownGatewayOutbound_Batch.Location = new System.Drawing.Point(573, 76);
             this.dropDownGatewayOutbound_Batch.Name = "dropDownGatewayOutbound_Batch";
             this.dropDownGatewayOutbound_Batch.Size = new System.Drawing.Size(117, 20);
             this.dropDownGatewayOutbound_Batch.TabIndex = 94;
@@ -6815,7 +6839,7 @@
             // 
             this.label60.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label60.AutoSize = true;
-            this.label60.Location = new System.Drawing.Point(349, 57);
+            this.label60.Location = new System.Drawing.Point(447, 57);
             this.label60.Name = "label60";
             this.label60.Size = new System.Drawing.Size(54, 13);
             this.label60.TabIndex = 85;
@@ -6824,7 +6848,7 @@
             // dropDownGatewayOutbound_Gateway
             // 
             this.dropDownGatewayOutbound_Gateway.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.dropDownGatewayOutbound_Gateway.Location = new System.Drawing.Point(352, 77);
+            this.dropDownGatewayOutbound_Gateway.Location = new System.Drawing.Point(450, 77);
             this.dropDownGatewayOutbound_Gateway.Name = "dropDownGatewayOutbound_Gateway";
             this.dropDownGatewayOutbound_Gateway.ReadOnly = true;
             this.dropDownGatewayOutbound_Gateway.Size = new System.Drawing.Size(113, 20);
@@ -6898,7 +6922,7 @@
             this.gridGatewayInbound.MasterTemplate.AllowDragToGroup = false;
             this.gridGatewayInbound.MasterTemplate.AllowEditRow = false;
             this.gridGatewayInbound.MasterTemplate.ShowRowHeaderColumn = false;
-            this.gridGatewayInbound.MasterTemplate.ViewDefinition = tableViewDefinition85;
+            this.gridGatewayInbound.MasterTemplate.ViewDefinition = tableViewDefinition31;
             this.gridGatewayInbound.Name = "gridGatewayInbound";
             this.gridGatewayInbound.ShowItemToolTips = false;
             this.gridGatewayInbound.Size = new System.Drawing.Size(1086, 455);
@@ -7116,7 +7140,7 @@
             this.gridCargoTransfer.MasterTemplate.AllowDragToGroup = false;
             this.gridCargoTransfer.MasterTemplate.AllowEditRow = false;
             this.gridCargoTransfer.MasterTemplate.ShowRowHeaderColumn = false;
-            this.gridCargoTransfer.MasterTemplate.ViewDefinition = tableViewDefinition86;
+            this.gridCargoTransfer.MasterTemplate.ViewDefinition = tableViewDefinition32;
             this.gridCargoTransfer.Name = "gridCargoTransfer";
             this.gridCargoTransfer.ShowItemToolTips = false;
             this.gridCargoTransfer.Size = new System.Drawing.Size(1086, 455);
@@ -7328,7 +7352,7 @@
             this.gridSegregation.MasterTemplate.AllowDragToGroup = false;
             this.gridSegregation.MasterTemplate.AllowEditRow = false;
             this.gridSegregation.MasterTemplate.ShowRowHeaderColumn = false;
-            this.gridSegregation.MasterTemplate.ViewDefinition = tableViewDefinition87;
+            this.gridSegregation.MasterTemplate.ViewDefinition = tableViewDefinition33;
             this.gridSegregation.Name = "gridSegregation";
             this.gridSegregation.ShowItemToolTips = false;
             this.gridSegregation.Size = new System.Drawing.Size(1086, 455);
@@ -7529,7 +7553,7 @@
             this.gridDailyTrip.MasterTemplate.AllowDragToGroup = false;
             this.gridDailyTrip.MasterTemplate.AllowEditRow = false;
             this.gridDailyTrip.MasterTemplate.ShowRowHeaderColumn = false;
-            this.gridDailyTrip.MasterTemplate.ViewDefinition = tableViewDefinition88;
+            this.gridDailyTrip.MasterTemplate.ViewDefinition = tableViewDefinition34;
             this.gridDailyTrip.Name = "gridDailyTrip";
             this.gridDailyTrip.ShowItemToolTips = false;
             this.gridDailyTrip.Size = new System.Drawing.Size(1086, 455);
@@ -7705,7 +7729,7 @@
             this.gridHoldCargo.MasterTemplate.AllowDragToGroup = false;
             this.gridHoldCargo.MasterTemplate.AllowEditRow = false;
             this.gridHoldCargo.MasterTemplate.ShowRowHeaderColumn = false;
-            this.gridHoldCargo.MasterTemplate.ViewDefinition = tableViewDefinition89;
+            this.gridHoldCargo.MasterTemplate.ViewDefinition = tableViewDefinition35;
             this.gridHoldCargo.Name = "gridHoldCargo";
             this.gridHoldCargo.ShowItemToolTips = false;
             this.gridHoldCargo.Size = new System.Drawing.Size(1086, 455);
@@ -7779,10 +7803,10 @@
             // cmbHC_Revenuetype
             // 
             this.cmbHC_Revenuetype.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            radListDataItem1.Text = "Branch Corporate Office";
-            radListDataItem2.Text = "Branch Satellite Office";
-            this.cmbHC_Revenuetype.Items.Add(radListDataItem1);
-            this.cmbHC_Revenuetype.Items.Add(radListDataItem2);
+            radListDataItem3.Text = "Branch Corporate Office";
+            radListDataItem4.Text = "Branch Satellite Office";
+            this.cmbHC_Revenuetype.Items.Add(radListDataItem3);
+            this.cmbHC_Revenuetype.Items.Add(radListDataItem4);
             this.cmbHC_Revenuetype.Location = new System.Drawing.Point(380, 76);
             this.cmbHC_Revenuetype.Name = "cmbHC_Revenuetype";
             this.cmbHC_Revenuetype.Size = new System.Drawing.Size(145, 20);
@@ -7927,7 +7951,7 @@
             this.gridDeliveryStatus.MasterTemplate.AllowDragToGroup = false;
             this.gridDeliveryStatus.MasterTemplate.AllowEditRow = false;
             this.gridDeliveryStatus.MasterTemplate.ShowRowHeaderColumn = false;
-            this.gridDeliveryStatus.MasterTemplate.ViewDefinition = tableViewDefinition90;
+            this.gridDeliveryStatus.MasterTemplate.ViewDefinition = tableViewDefinition36;
             this.gridDeliveryStatus.Name = "gridDeliveryStatus";
             this.gridDeliveryStatus.ShowItemToolTips = false;
             this.gridDeliveryStatus.Size = new System.Drawing.Size(1086, 455);
@@ -8496,7 +8520,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.radPanel16)).EndInit();
             this.radPanel16.ResumeLayout(false);
             this.radPanel16.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.radTextBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtBU_SackNo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnBundle_Print)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnBundle_Export)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnBundle_Search)).EndInit();
@@ -8508,7 +8532,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.radPanel17)).EndInit();
             this.radPanel17.ResumeLayout(false);
             this.radPanel17.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.radTextBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtUnbundle_SackNo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnUnbundle_Print)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnUnbundle_Search)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dropDownUnbundle_BCO)).EndInit();
@@ -8534,8 +8558,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.radPanel19)).EndInit();
             this.radPanel19.ResumeLayout(false);
             this.radPanel19.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.radTextBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radDropDownList1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtGO_mawb)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cmbGO_Driver)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbGO_commoditType)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnGatewayOutbound_Print)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnGatewayOutbound_Search)).EndInit();
@@ -9136,15 +9160,15 @@
         private System.Windows.Forms.Label label126;
         private System.Windows.Forms.Label label96;
         private Telerik.WinControls.UI.RadDropDownList cmb_RevenueUnit;
-        private Telerik.WinControls.UI.RadTextBox radTextBox1;
-        private Telerik.WinControls.UI.RadTextBox radTextBox2;
+        private Telerik.WinControls.UI.RadTextBox txtBU_SackNo;
+        private Telerik.WinControls.UI.RadTextBox txtUnbundle_SackNo;
         private System.Windows.Forms.Label label127;
         private System.Windows.Forms.Label label129;
         private System.Windows.Forms.Label label128;
         private Telerik.WinControls.UI.RadDropDownList cmbGT_Driver;
         private Telerik.WinControls.UI.RadDropDownList cmbGt_CommodityType;
-        private Telerik.WinControls.UI.RadDropDownList radDropDownList1;
-        private Telerik.WinControls.UI.RadTextBox radTextBox3;
+        private Telerik.WinControls.UI.RadDropDownList cmbGO_Driver;
+        private Telerik.WinControls.UI.RadTextBox txtGO_mawb;
         private System.Windows.Forms.Label label132;
         private System.Windows.Forms.Label label130;
         private System.Windows.Forms.Label label131;

@@ -76,6 +76,84 @@ namespace CMS2.Client.Forms.TrackingReports
             return dt;
         }
 
+        public DataTable getBundleDataByFilter(DateTime date, Guid? bcoid, string sackNo, int num)
+        {
+            BundleBL bundleBl = new BundleBL();
+
+            List<Bundle> list = new List<Bundle>();
+
+            if(num == 0)
+            {
+               list = bundleBl.GetAll().Where(x => x.RecordStatus == 1 && x.SackNo == sackNo && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
+            }
+            else if (num == 1)
+            {
+                list = bundleBl.GetAll().Where(x => x.RecordStatus == 1 && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
+            }
+            else if (num == 2)
+            {
+                // list = bundleBl.GetAll().Where(x => x.RecordStatus == 1 && x.User.Employee.AssignedToArea.City.BranchCorpOffice.BranchCorpOfficeId == bcoid && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
+                list = bundleBl.GetAll().Where(x => x.RecordStatus == 1 && x.BranchCorpOfficeID == bcoid && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
+
+            }
+
+            List<BundleViewModel> bundleList = Match(list);
+
+            DataTable dt = new DataTable();
+            dt.Columns.Add(new DataColumn("No", typeof(string)));
+            dt.Columns.Add(new DataColumn("AWB", typeof(string)));
+            dt.Columns.Add(new DataColumn("Shipper", typeof(string)));
+            dt.Columns.Add(new DataColumn("Consignee", typeof(string)));
+            dt.Columns.Add(new DataColumn("Address", typeof(string)));
+            dt.Columns.Add(new DataColumn("Commodity Type", typeof(string)));
+            dt.Columns.Add(new DataColumn("Commodity", typeof(string)));
+            dt.Columns.Add(new DataColumn("Qty", typeof(string)));
+            dt.Columns.Add(new DataColumn("AGW", typeof(string)));
+            dt.Columns.Add(new DataColumn("Service Mode", typeof(string)));
+            dt.Columns.Add(new DataColumn("Payment Mode", typeof(string)));
+            dt.Columns.Add(new DataColumn("Area", typeof(string)));
+            dt.Columns.Add(new DataColumn("SackNo", typeof(string)));
+
+            dt.Columns.Add(new DataColumn("CreatedDate", typeof(string)));
+            dt.Columns.Add(new DataColumn("Destination", typeof(string)));
+
+            dt.Columns.Add(new DataColumn("BCO", typeof(string)));
+            dt.Columns.Add(new DataColumn("BSO", typeof(string)));
+
+            dt.Columns.Add(new DataColumn("ScannedBy", typeof(string)));
+
+            dt.BeginLoadData();
+            int ctr = 1;
+            foreach (BundleViewModel item in bundleList)
+            {
+                DataRow row = dt.NewRow();
+                row[0] = "" + ctr++;
+                row[1] = item.AirwayBillNo;
+                row[2] = item.Shipper;
+                row[3] = item.Consignee;
+                row[4] = item.Address;
+                row[5] = item.CommodityType;
+                row[6] = item.Commodity;
+                row[7] = item.Qty.ToString();
+                row[8] = item.AGW.ToString();
+                row[9] = item.ServiceMode;
+                row[10] = item.PaymendMode;
+                row[11] = item.Area;
+                row[12] = item.SackNo;
+                row[13] = item.CreatedDate.ToShortDateString();
+                row[14] = item.Destination;
+
+                row[15] = item.BCO;
+                row[16] = item.BSO;
+
+                row[17] = item.Scannedby;
+                dt.Rows.Add(row);
+            }
+            dt.EndLoadData();
+
+            return dt;
+        }
+
         public List<int> setBundleWidth()
         {
             List<int> width = new List<int>();

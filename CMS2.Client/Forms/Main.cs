@@ -128,8 +128,13 @@ namespace CMS2.Client
         private DeliveryStatusBL deliveryStatusService;
         private ReasonBL reasonService;
         private GatewayInboundBL gwInboundService;
+        private GatewayTransmittalBL gwTransmittalService;
+        private GatewayOutboundBL gwOutboundService;
+        private CargoTransferBL cargotransferService;
+        private SegregationBL segregationService;
+        private StatusBL statusService;
 
-        
+
         #endregion
 
 
@@ -2734,11 +2739,12 @@ namespace CMS2.Client
 
         private void TrackingLoadInit()
         {
+            bsBCO = new BindingSource();
             bsDriver = new BindingSource();
             bsBatch = new BindingSource();
             bsEmployee = new BindingSource();
             bsStatus = new BindingSource();
-            bsBCO = new BindingSource();
+            bsGTCommodityType = new BindingSource();
             bstrackRevenueUnitType = new BindingSource();
             bstrackBARevenueUnitName = new BindingSource();
             bsBundleBSO = new BindingSource();
@@ -2747,13 +2753,12 @@ namespace CMS2.Client
             bsGTBatch = new BindingSource();
             bsGODestinationBCO = new BindingSource();
             bsGOBatch = new BindingSource();
+            bsGOCommodityType = new BindingSource();
             bsGICommodityType = new BindingSource();
             bsCTBatch = new BindingSource();
             bsSGBCO = new BindingSource();
             bsSGBatch = new BindingSource();
-
-
-
+            
             branchAcceptanceService = new BranchAcceptanceBL(GlobalVars.UnitOfWork);
             batchService = new BatchBL(GlobalVars.UnitOfWork);
             deliveryStatusService = new DeliveryStatusBL(GlobalVars.UnitOfWork);
@@ -2761,8 +2766,11 @@ namespace CMS2.Client
             revenueUnitservice = new RevenueUnitBL(GlobalVars.UnitOfWork);
             reasonService = new ReasonBL(GlobalVars.UnitOfWork);
             gwInboundService = new GatewayInboundBL(GlobalVars.UnitOfWork);
-
-
+            gwTransmittalService = new GatewayTransmittalBL(GlobalVars.UnitOfWork);
+            gwOutboundService = new GatewayOutboundBL(GlobalVars.UnitOfWork);
+            cargotransferService = new CargoTransferBL(GlobalVars.UnitOfWork);
+            segregationService = new SegregationBL(GlobalVars.UnitOfWork);
+            statusService = new StatusBL(GlobalVars.UnitOfWork);
         }
 
 
@@ -6432,6 +6440,7 @@ namespace CMS2.Client
                 dropDownBundle_BCO_BSO.Items.Add("All");
 
                 gridBundle.DataSource = dataTable;
+                TrackingReportGlobalModel.table = dataTable;
                 gridBundle.Columns["SackNo"].IsVisible = false;
 
                 #region Bundle Grid Design
@@ -6454,6 +6463,58 @@ namespace CMS2.Client
                 Logs.ErrorLogs(LogPath, "Bundle", ex.Message);
             }
         }
+
+        private void getBundleDataByFilter(int num)
+        {
+            Guid bcoid = new Guid();
+            string sackNo = "";
+            try
+            {
+                BundleReport bundle = new BundleReport();
+                bcoid = Guid.Parse(dropDownBundle_BCO_BSO.SelectedValue.ToString());
+                sackNo = txtBU_SackNo.Text;
+
+                DataTable dataTable = new DataTable();
+                if (num == 0)
+                {
+                    //dataTable = gatewayInbound.getDatabyFilter(dateTimePickerGatewayInbound_Date.Value, "", null, null, "", txtBoxGatewayInbound_MasterAWB.Text, num);
+                    dataTable = bundle.getBundleDataByFilter(dateTimeBundle_Date.Value, null, sackNo, num);
+                }
+                else if(num == 1)
+                {
+                    dataTable = bundle.getBundleDataByFilter(dateTimeBundle_Date.Value, null, "", num);
+                }
+                else if (num == 2)
+                {
+                    dataTable = bundle.getBundleDataByFilter(dateTimeBundle_Date.Value, bcoid, "", num);
+                }
+
+                gridBundle.DataSource = dataTable;
+                TrackingReportGlobalModel.table = dataTable;
+
+
+                #region Bundle Grid Design
+                if (gridBundle.DataSource != null)
+                {
+                    List<int> width = bundle.setBundleWidth();
+                    int ctr = 0;
+                    foreach (int x in width)
+                    {
+                        if (x == 0) { gridBundle.Columns[ctr].IsVisible = false; }
+                        gridBundle.Columns[ctr].Width = x;
+                        ctr++;
+                    }
+
+                }
+                #endregion Bundle Grid Design
+            }
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs(LogPath, "Bundle", ex.Message);
+            }
+        }
+
+
         /// <summary>
         /// UNBUNDLE
         /// </summary>
@@ -6467,17 +6528,17 @@ namespace CMS2.Client
                 DataView view = new DataView(dataTable);
 
                 //BRANCH
-                DataTable table = view.ToTable(true, "Branch");
-                dropDownUnbundle_BCO.Items.Clear();
-                dropDownUnbundle_BCO.Items.Add("All");
-                foreach (DataRow x in table.Rows)
-                {
-                    if (x["Branch"].ToString().Trim() != "")
-                    {
-                        dropDownUnbundle_BCO.Items.Add(x["Branch"].ToString());
-                    }
-                }
-                dropDownUnbundle_BCO.SelectedIndex = 0;
+                //DataTable table = view.ToTable(true, "Branch");
+                //dropDownUnbundle_BCO.Items.Clear();
+                //dropDownUnbundle_BCO.Items.Add("All");
+                //foreach (DataRow x in table.Rows)
+                //{
+                //    if (x["Branch"].ToString().Trim() != "")
+                //    {
+                //        dropDownUnbundle_BCO.Items.Add(x["Branch"].ToString());
+                //    }
+                //}
+                //dropDownUnbundle_BCO.SelectedIndex = 0;
 
                 //SACK NO
                 //table = view.ToTable(true, "Sack No");
@@ -6493,6 +6554,7 @@ namespace CMS2.Client
                 //dropDownUnbundle_SackNo.SelectedIndex = 0;
 
                 gridUnbundle.DataSource = dataTable;
+                TrackingReportGlobalModel.table = dataTable;
 
                 #region Bundle Grid Design
                 if (gridUnbundle.DataSource != null)
@@ -6515,6 +6577,59 @@ namespace CMS2.Client
             }
 
         }
+
+        private void getUnbundleDataByFilter(int num)
+        {
+            Guid bcoid = new Guid();
+            string sackNo = "";
+            try
+            {
+                UnbundleReport unbundle = new UnbundleReport();
+                bcoid = Guid.Parse(dropDownUnbundle_BCO.SelectedValue.ToString());
+                sackNo = txtUnbundle_SackNo.Text;
+
+                DataTable dataTable = new DataTable();
+                if (num == 0)
+                {
+                    //dataTable = gatewayInbound.getDatabyFilter(dateTimePickerGatewayInbound_Date.Value, "", null, null, "", txtBoxGatewayInbound_MasterAWB.Text, num);
+                    dataTable = unbundle.getUnbundleDataByFilter(dateTimeBundle_Date.Value, null, sackNo, num);
+                }
+                else if (num == 1)
+                {
+                    dataTable = unbundle.getUnbundleDataByFilter(dateTimeBundle_Date.Value, null, "", num);
+                }
+                else if (num == 2)
+                {
+                    dataTable = unbundle.getUnbundleDataByFilter(dateTimeBundle_Date.Value, bcoid, "", num);
+                }
+
+                gridBundle.DataSource = dataTable;
+                TrackingReportGlobalModel.table = dataTable;
+
+
+                #region Unbundle Grid Design
+                if (gridUnbundle.DataSource != null)
+                {
+                    List<int> width = unbundle.setBundleWidth();
+                    int ctr = 0;
+                    foreach (int x in width)
+                    {
+                        if (x == 0) { gridUnbundle.Columns[ctr].IsVisible = false; }
+                        gridUnbundle.Columns[ctr].Width = x;
+                        ctr++;
+                    }
+
+                }
+                #endregion Unbundle Grid Design
+            }
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs(LogPath, "Bundle", ex.Message);
+            }
+        }
+
+
+
         /// <summary>
         /// GATEWAY TRANSMITAL
         /// </summary>
@@ -6526,47 +6641,48 @@ namespace CMS2.Client
 
                 DataTable dataTable = gatewayTransmitalre.getData(dateTimeGatewayTransmital_Date.Value);
                 gridGatewayTransmital.DataSource = dataTable;
+                TrackingReportGlobalModel.table = dataTable;
 
-                DataView view = new DataView(dataTable);
+                //DataView view = new DataView(dataTable);
 
-                //GATEWAY
-                DataTable table = view.ToTable(true, "Gateway");
-                dropDownGatewayTransmital_Gateway.Items.Clear();
-                dropDownGatewayTransmital_Gateway.Items.Add("All");
-                foreach (DataRow x in table.Rows)
-                {
-                    if (x["Gateway"].ToString() != null)
-                    {
-                        dropDownGatewayTransmital_Gateway.Items.Add(x["Gateway"].ToString());
-                    }
-                }
-                dropDownGatewayTransmital_Gateway.SelectedIndex = 0;
+                ////GATEWAY
+                //DataTable table = view.ToTable(true, "Gateway");
+                //dropDownGatewayTransmital_Gateway.Items.Clear();
+                //dropDownGatewayTransmital_Gateway.Items.Add("All");
+                //foreach (DataRow x in table.Rows)
+                //{
+                //    if (x["Gateway"].ToString() != null)
+                //    {
+                //        dropDownGatewayTransmital_Gateway.Items.Add(x["Gateway"].ToString());
+                //    }
+                //}
+                //dropDownGatewayTransmital_Gateway.SelectedIndex = 0;
 
-                //DESTINATION
-                table = view.ToTable(true, "Destination");
-                dropDownGatewayTransmital_Destination.Items.Clear();
-                dropDownGatewayTransmital_Destination.Items.Add("All");
-                foreach (DataRow x in table.Rows)
-                {
-                    if (x["Destination"].ToString() != null)
-                    {
-                        dropDownGatewayTransmital_Destination.Items.Add(x["Destination"].ToString());
-                    }
-                }
-                dropDownGatewayTransmital_Destination.SelectedIndex = 0;
+                ////DESTINATION
+                //table = view.ToTable(true, "Destination");
+                //dropDownGatewayTransmital_Destination.Items.Clear();
+                //dropDownGatewayTransmital_Destination.Items.Add("All");
+                //foreach (DataRow x in table.Rows)
+                //{
+                //    if (x["Destination"].ToString() != null)
+                //    {
+                //        dropDownGatewayTransmital_Destination.Items.Add(x["Destination"].ToString());
+                //    }
+                //}
+                //dropDownGatewayTransmital_Destination.SelectedIndex = 0;
 
-                //BATCH
-                table = view.ToTable(true, "Batch");
-                dropDownGatewayTransmital_Batch.Items.Clear();
-                dropDownGatewayTransmital_Batch.Items.Add("All");
-                foreach (DataRow x in table.Rows)
-                {
-                    if (x["Batch"].ToString() != null)
-                    {
-                        dropDownGatewayTransmital_Batch.Items.Add(x["Batch"].ToString());
-                    }
-                }
-                dropDownGatewayTransmital_Batch.SelectedIndex = 0;
+                ////BATCH
+                //table = view.ToTable(true, "Batch");
+                //dropDownGatewayTransmital_Batch.Items.Clear();
+                //dropDownGatewayTransmital_Batch.Items.Add("All");
+                //foreach (DataRow x in table.Rows)
+                //{
+                //    if (x["Batch"].ToString() != null)
+                //    {
+                //        dropDownGatewayTransmital_Batch.Items.Add(x["Batch"].ToString());
+                //    }
+                //}
+                //dropDownGatewayTransmital_Batch.SelectedIndex = 0;
 
 
                 if (gridGatewayTransmital.DataSource != null)
@@ -6589,6 +6705,86 @@ namespace CMS2.Client
             }
 
         }
+
+        private void getGatewayTransmitalDatabyFilter(int num)
+        {
+            Guid? destinationId = new Guid();
+            string driver = "";
+            string gatewayname = "";
+            Guid? batchId = new Guid();
+            Guid? commodityTypeId = new Guid();
+            string mawb = "";
+
+            string destinationname = "";
+            string batchname = "";
+            string comtypename = "";
+
+            try
+            {
+                GatewayTransmitalReport gatewayTransmital = new GatewayTransmitalReport();
+                destinationname = dropDownGatewayTransmital_Destination.SelectedItem.ToString();
+                if(destinationname == "All")
+                {
+                    destinationId = null;
+                }
+                else
+                {
+                    destinationId = Guid.Parse(dropDownGatewayTransmital_Destination.SelectedValue.ToString());
+                }
+
+                batchname = dropDownGatewayTransmital_Batch.SelectedItem.ToString();
+                if (batchname == "All")
+                {
+                    batchId = null;
+                }
+                else
+                {
+                    batchId = Guid.Parse(dropDownGatewayTransmital_Batch.SelectedValue.ToString());
+                }
+
+                comtypename = cmbGt_CommodityType.SelectedItem.ToString();
+                if (comtypename == "All")
+                {
+                    commodityTypeId = null;
+                }
+                else
+                {
+                    commodityTypeId = Guid.Parse(cmbGt_CommodityType.SelectedValue.ToString());
+
+                }
+                
+                driver = cmbGT_Driver.SelectedItem.ToString();
+                gatewayname = dropDownGatewayTransmital_Gateway.SelectedItem.ToString();
+                mawb = txtGatewayTransmital_MAWB.Text;
+
+                DataTable dataTable = gatewayTransmital.getGWDatabyFilter(dateTimeGatewayTransmital_Date.Value, destinationId, driver, gatewayname, batchId, commodityTypeId, mawb, num);
+                
+                gridGatewayTransmital.DataSource = dataTable;
+                TrackingReportGlobalModel.table = dataTable;
+                
+                if (gridGatewayTransmital.DataSource != null)
+                {
+                    List<int> width = gatewayTransmital.setWidth();
+                    int ctr = 0;
+                    foreach (int x in width)
+                    {
+                        gridGatewayTransmital.Columns[ctr].Width = x;
+                        if (x == 0) { gridGatewayTransmital.Columns[ctr].IsVisible = false; }
+                        ctr++;
+                    }
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs(LogPath, "Gateway Transmital", ex.Message);
+            }
+
+        }
+
+
+
         /// <summary>
         /// GATEWAY OUTBOUND
         /// </summary>
@@ -6600,36 +6796,37 @@ namespace CMS2.Client
 
                 DataTable dataTable = gatewayOutbound.getData(dateTimeGatewayOutbound_Date.Value);
 
-                DataView view = new DataView(dataTable);
+                //DataView view = new DataView(dataTable);
 
-                //GATEWAY
-                DataTable table = view.ToTable(true, "Gateway");
-                dropDownGatewayOutbound_Gateway.Items.Clear();
-                dropDownGatewayOutbound_Gateway.Items.Add("All");
-                foreach (DataRow x in table.Rows)
-                {
-                    if (x["Gateway"].ToString() != null)
-                    {
-                        dropDownGatewayOutbound_Gateway.Items.Add(x["Gateway"].ToString());
-                    }
-                }
-                dropDownGatewayOutbound_Gateway.SelectedIndex = 0;
+                ////GATEWAY
+                //DataTable table = view.ToTable(true, "Gateway");
+                //dropDownGatewayOutbound_Gateway.Items.Clear();
+                //dropDownGatewayOutbound_Gateway.Items.Add("All");
+                //foreach (DataRow x in table.Rows)
+                //{
+                //    if (x["Gateway"].ToString() != null)
+                //    {
+                //        dropDownGatewayOutbound_Gateway.Items.Add(x["Gateway"].ToString());
+                //    }
+                //}
+                //dropDownGatewayOutbound_Gateway.SelectedIndex = 0;
 
-                //BATCH
-                table = view.ToTable(true, "Batch");
-                dropDownGatewayOutbound_Batch.Items.Clear();
-                dropDownGatewayOutbound_Batch.Items.Add("All");
-                foreach (DataRow x in table.Rows)
-                {
-                    if (!x["Batch"].ToString().Equals(""))
-                    {
-                        dropDownGatewayOutbound_Batch.Items.Add(x["Batch"].ToString());
-                    }
-                }
-                dropDownGatewayOutbound_Batch.SelectedIndex = 0;
+                ////BATCH
+                //table = view.ToTable(true, "Batch");
+                //dropDownGatewayOutbound_Batch.Items.Clear();
+                //dropDownGatewayOutbound_Batch.Items.Add("All");
+                //foreach (DataRow x in table.Rows)
+                //{
+                //    if (!x["Batch"].ToString().Equals(""))
+                //    {
+                //        dropDownGatewayOutbound_Batch.Items.Add(x["Batch"].ToString());
+                //    }
+                //}
+                //dropDownGatewayOutbound_Batch.SelectedIndex = 0;
 
 
                 gridGatewayOutbound.DataSource = dataTable;
+                TrackingReportGlobalModel.table = dataTable;
 
                 if (gridGatewayOutbound.DataSource != null)
                 {
@@ -6649,6 +6846,85 @@ namespace CMS2.Client
                 Logs.ErrorLogs(LogPath, "Gateway Outbound", ex.Message);
             }
         }
+
+        private void getGatewayOutBoundDataByFilter(int num)
+        {
+            Guid? destinationId = new Guid();
+            string driver = "";
+            string gatewayname = "";
+            Guid? batchId = new Guid();
+            Guid? commodityTypeId = new Guid();
+            string mawb = "";
+
+            string destinationname = "";
+            string batchname = "";
+            string comtypename = "";
+
+
+            try
+            {
+                GatewayOutboundReport gatewayOutbound = new GatewayOutboundReport();
+                destinationname = dropDownGatewayOutbound_BCO.SelectedItem.ToString();
+                if (destinationname == "All")
+                {
+                    destinationId = null;
+                }
+                else
+                {
+                    destinationId = Guid.Parse(dropDownGatewayOutbound_BCO.SelectedValue.ToString());
+                }
+
+                batchname = dropDownGatewayOutbound_Batch.SelectedItem.ToString();
+                if (batchname == "All")
+                {
+                    batchId = null;
+                }
+                else
+                {
+                    batchId = Guid.Parse(dropDownGatewayOutbound_Batch.SelectedValue.ToString());
+                }
+
+                comtypename = cmbGO_commoditType.SelectedItem.ToString();
+                if (comtypename == "All")
+                {
+                    commodityTypeId = null;
+                }
+                else
+                {
+                    commodityTypeId = Guid.Parse(cmbGO_commoditType.SelectedValue.ToString());
+
+                }
+
+                driver = cmbGO_Driver.SelectedItem.ToString();
+                gatewayname = dropDownGatewayOutbound_Gateway.SelectedItem.ToString();
+                mawb = txtGO_mawb.Text;
+                
+                DataTable dataTable = gatewayOutbound.getGODatabyFilter(dateTimeGatewayTransmital_Date.Value, destinationId, driver, gatewayname, batchId, commodityTypeId, mawb, num);
+
+                gridGatewayOutbound.DataSource = dataTable;
+                TrackingReportGlobalModel.table = dataTable;
+
+                if (gridGatewayOutbound.DataSource != null)
+                {
+                    List<int> width = gatewayOutbound.setWidth();
+                    int ctr = 0;
+                    foreach (int x in width)
+                    {
+                        if (x == 0) { gridGatewayOutbound.Columns[ctr].IsVisible = false; }
+                        gridGatewayOutbound.Columns[ctr].Width = x;
+                        ctr++;
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs(LogPath, "Gateway Outbound", ex.Message);
+            }
+        }
+
+
+
         /// <summary>
         /// GATEWAY INBOUND
         /// </summary>
@@ -6689,20 +6965,21 @@ namespace CMS2.Client
                 //}
                 //dropDownGatewayInbound_Commodity.SelectedIndex = 0;
 
-                //gridGatewayInbound.DataSource = dataTable;
+                gridGatewayInbound.DataSource = dataTable;
+                TrackingReportGlobalModel.table = dataTable;
 
-                //if (gridGatewayInbound.DataSource != null)
-                //{
-                //    List<int> width = gatewayInbound.setWidth();
-                //    int ctr = 0;
-                //    foreach (int x in width)
-                //    {
-                //        if (x == 0) { gridGatewayInbound.Columns[ctr].IsVisible = false; }
-                //        gridGatewayInbound.Columns[ctr].Width = x;
-                //        ctr++;
-                //    }
+                if (gridGatewayInbound.DataSource != null)
+                {
+                    List<int> width = gatewayInbound.setWidth();
+                    int ctr = 0;
+                    foreach (int x in width)
+                    {
+                        if (x == 0) { gridGatewayInbound.Columns[ctr].IsVisible = false; }
+                        gridGatewayInbound.Columns[ctr].Width = x;
+                        ctr++;
+                    }
 
-                //}
+                }
             }
             catch (Exception ex)
             {
@@ -6711,20 +6988,82 @@ namespace CMS2.Client
         }
         private void getGatewayInBoundDatabyFilter(int num)
         {
-            Guid areaid = new Guid();
-            Guid batchid = new Guid();
-            Guid paymentmodeid = new Guid();
+            Guid bcoid = new Guid();
+            Guid commoditytypeid = new Guid();
+            string gatewayName = "";
+            string flightNo = "";
             try
             {
                 GatewayInboundReport gatewayInbound = new GatewayInboundReport();
-                areaid = Guid.Parse(dropDownDailyTrip_Area.SelectedValue.ToString());
-                batchid = Guid.Parse(cmbDTR_Batch.SelectedValue.ToString());
-                paymentmodeid = Guid.Parse(dropDownDailyTrip_PaymentMode.SelectedValue.ToString());
+                bcoid = Guid.Parse(dropDownGatewayInbound_Origin.SelectedValue.ToString());
+                commoditytypeid = Guid.Parse(dropDownGatewayInbound_Commodity.SelectedValue.ToString());
+                gatewayName = dropDownGatewayInbound_Gateway.SelectedItem.Text;
+                flightNo = cmbGI_FlightNo.SelectedItem.Text;
 
-                DataTable dataTable;
+                DataTable dataTable = new DataTable();
                 if (num == 0)
                 {
+                    dataTable = gatewayInbound.getDatabyFilter(dateTimePickerGatewayInbound_Date.Value,"",null,null,"", txtBoxGatewayInbound_MasterAWB.Text,num);
+                }
+                else if(num == 1)
+                {
+                    dataTable = gatewayInbound.getDatabyFilter(dateTimePickerGatewayInbound_Date.Value, gatewayName, bcoid, commoditytypeid, flightNo, "", num);
+                }
+                else if (num == 2)
+                {
+                    dataTable = gatewayInbound.getDatabyFilter(dateTimePickerGatewayInbound_Date.Value, gatewayName, null, commoditytypeid, flightNo, "", num);
+                }
+                else if (num == 3)
+                {
+                    dataTable = gatewayInbound.getDatabyFilter(dateTimePickerGatewayInbound_Date.Value, gatewayName, null, null, flightNo, "", num);
+                }
+                else if (num == 4)
+                {
+                    dataTable = gatewayInbound.getDatabyFilter(dateTimePickerGatewayInbound_Date.Value, gatewayName, null, null, "", "", num);
+                }
+                else if (num == 5)
+                {
+                    dataTable = gatewayInbound.getDatabyFilter(dateTimePickerGatewayInbound_Date.Value, "", bcoid, commoditytypeid, flightNo, "", num);
+                }
+                else if (num == 6)
+                {
+                    dataTable = gatewayInbound.getDatabyFilter(dateTimePickerGatewayInbound_Date.Value, "", bcoid, null, flightNo, "", num);
+                }
+                else if (num == 7)
+                {
+                    dataTable = gatewayInbound.getDatabyFilter(dateTimePickerGatewayInbound_Date.Value, "", bcoid, commoditytypeid, "", "", num);
+                }
+                else if (num == 8)
+                {
+                    dataTable = gatewayInbound.getDatabyFilter(dateTimePickerGatewayInbound_Date.Value, "", bcoid, null, "", "", num);
+                }
+                else if (num == 9)
+                {
+                    dataTable = gatewayInbound.getDatabyFilter(dateTimePickerGatewayInbound_Date.Value, gatewayName, bcoid, null, "", "", num);
+                }
+                else if (num == 10)
+                {
+                    dataTable = gatewayInbound.getDatabyFilter(dateTimePickerGatewayInbound_Date.Value, gatewayName, bcoid, null, flightNo, "", num);
+                }
+                else if (num == 11)
+                {
                     dataTable = gatewayInbound.getData(dateTimePickerGatewayInbound_Date.Value);
+                }
+
+                gridGatewayInbound.DataSource = dataTable;
+                TrackingReportGlobalModel.table = dataTable;
+
+                if (gridGatewayInbound.DataSource != null)
+                {
+                    List<int> width = gatewayInbound.setWidth();
+                    int ctr = 0;
+                    foreach (int x in width)
+                    {
+                        if (x == 0) { gridGatewayInbound.Columns[ctr].IsVisible = false; }
+                        gridGatewayInbound.Columns[ctr].Width = x;
+                        ctr++;
+                    }
+
                 }
             }
             catch (Exception ex)
@@ -6822,6 +7161,72 @@ namespace CMS2.Client
                 Logs.ErrorLogs(LogPath, "Cargo Transfer", ex.Message);
             }
         }
+
+
+        private void getCargoTransferDataByFilter()
+        {
+            Guid? destinationId = new Guid();
+            Guid? batchId = new Guid();
+            Guid? revenueunitId = new Guid();
+            string plateno = "";
+            try
+            {
+                if(cmbCT_BCO.SelectedItem.ToString() == "All")
+                {
+                    destinationId = null;
+                }
+                else
+                {
+                    destinationId = Guid.Parse(cmbCT_BCO.SelectedValue.ToString());
+                }
+
+                if (cmbCT_Batch.SelectedItem.ToString() == "All")
+                {
+                    batchId = null;
+                }
+                else
+                {
+                    batchId = Guid.Parse(cmbCT_Batch.SelectedValue.ToString());
+                }
+
+                if (cmbCT_RevenueUnit.SelectedItem.ToString() == "All")
+                {
+                    revenueunitId = null;
+                }
+                else
+                {
+                    revenueunitId = Guid.Parse(cmbCT_RevenueUnit.SelectedValue.ToString());
+                }
+                
+                plateno = cmbCT_PlateNo.SelectedItem.ToString();
+
+                CargoTransferReport cargoTransfer = new CargoTransferReport();
+
+                DataTable dataTable = cargoTransfer.getCTDataByFilter(dateTimeCargoTransfer_Date.Value,destinationId,revenueunitId, plateno,batchId);
+
+                gridCargoTransfer.DataSource = dataTable;
+                TrackingReportGlobalModel.table = dataTable;
+
+                #region Cargo Transfer Design
+                if (gridCargoTransfer.DataSource != null)
+                {
+                    List<int> width = cargoTransfer.setWidth();
+                    int ctr = 0;
+                    foreach (int x in width)
+                    {
+                        if (x == 0) { gridCargoTransfer.Columns[ctr].IsVisible = false; }
+                        gridCargoTransfer.Columns[ctr].Width = x;
+                        ctr++;
+                    }
+
+                }
+                #endregion Cargo Transfer Grid Design
+            }
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs(LogPath, "Cargo Transfer", ex.Message);
+            }
+        }
         /// <summary>
         /// SEGREGATION
         /// </summary>
@@ -6832,62 +7237,65 @@ namespace CMS2.Client
                 SegregationReport segregation = new SegregationReport();
                 DataTable dataTable = segregation.getData(dateTimeSegregation_Date.Value);
 
-                DataView view = new DataView(dataTable);
+                //DataView view = new DataView(dataTable);
 
-                //BRANCH
-                DataTable table = view.ToTable(true, "Branch Corp Office");
-                dropDownSegregation_BCO.Items.Clear();
-                dropDownSegregation_BCO.Items.Add("All");
-                foreach (DataRow x in table.Rows)
-                {
-                    if (x["Branch Corp Office"].ToString().Trim() != "")
-                    {
-                        dropDownSegregation_BCO.Items.Add(x["Branch Corp Office"].ToString());
-                    }
-                }
-                dropDownSegregation_BCO.SelectedIndex = 0;
+                ////BRANCH
+                //DataTable table = view.ToTable(true, "Branch Corp Office");
+                //dropDownSegregation_BCO.Items.Clear();
+                //dropDownSegregation_BCO.Items.Add("All");
+                //foreach (DataRow x in table.Rows)
+                //{
+                //    if (x["Branch Corp Office"].ToString().Trim() != "")
+                //    {
+                //        dropDownSegregation_BCO.Items.Add(x["Branch Corp Office"].ToString());
+                //    }
+                //}
+                //dropDownSegregation_BCO.SelectedIndex = 0;
 
-                //DRIVER
-                table = view.ToTable(true, "Driver");
-                dropDownSegregation_Driver.Items.Clear();
-                dropDownSegregation_Driver.Items.Add("All");
-                foreach (DataRow x in table.Rows)
-                {
-                    if (x["Driver"].ToString().Trim() != "")
-                    {
-                        dropDownSegregation_Driver.Items.Add(x["Driver"].ToString());
-                    }
-                }
-                dropDownSegregation_Driver.SelectedIndex = 0;
+                ////DRIVER
+                //table = view.ToTable(true, "Driver");
+                //dropDownSegregation_Driver.Items.Clear();
+                //dropDownSegregation_Driver.Items.Add("All");
+                //foreach (DataRow x in table.Rows)
+                //{
+                //    if (x["Driver"].ToString().Trim() != "")
+                //    {
+                //        dropDownSegregation_Driver.Items.Add(x["Driver"].ToString());
+                //    }
+                //}
+                //dropDownSegregation_Driver.SelectedIndex = 0;
 
-                //PLATE NO
-                table = view.ToTable(true, "Plate #");
-                dropDownSegregation_PlateNo.Items.Clear();
-                dropDownSegregation_PlateNo.Items.Add("All");
-                foreach (DataRow x in table.Rows)
-                {
-                    if (x["Plate #"].ToString().Trim() != "")
-                    {
-                        dropDownSegregation_PlateNo.Items.Add(x["Plate #"].ToString());
-                    }
-                }
-                dropDownSegregation_PlateNo.SelectedIndex = 0;
+                ////PLATE NO
+                //table = view.ToTable(true, "Plate #");
+                //dropDownSegregation_PlateNo.Items.Clear();
+                //dropDownSegregation_PlateNo.Items.Add("All");
+                //foreach (DataRow x in table.Rows)
+                //{
+                //    if (x["Plate #"].ToString().Trim() != "")
+                //    {
+                //        dropDownSegregation_PlateNo.Items.Add(x["Plate #"].ToString());
+                //    }
+                //}
+                //dropDownSegregation_PlateNo.SelectedIndex = 0;
 
-                //BATCH
-                table = view.ToTable(true, "Batch");
-                dropDownSegregation_Batch.Items.Clear();
-                dropDownSegregation_Batch.Items.Add("All");
-                foreach (DataRow x in table.Rows)
-                {
-                    if (x["Batch"].ToString().Trim() != "")
-                    {
-                        dropDownSegregation_Batch.Items.Add(x["Batch"].ToString());
-                    }
-                }
-                dropDownSegregation_Batch.SelectedIndex = 0;
+                ////BATCH
+                //table = view.ToTable(true, "Batch");
+                //dropDownSegregation_Batch.Items.Clear();
+                //dropDownSegregation_Batch.Items.Add("All");
+                //foreach (DataRow x in table.Rows)
+                //{
+                //    if (x["Batch"].ToString().Trim() != "")
+                //    {
+                //        dropDownSegregation_Batch.Items.Add(x["Batch"].ToString());
+                //    }
+                //}
+                //dropDownSegregation_Batch.SelectedIndex = 0;
 
 
                 gridSegregation.DataSource = dataTable;
+                TrackingReportGlobalModel.table = dataTable;
+
+
                 #region
                 if (gridSegregation.DataSource != null)
                 {
@@ -6908,6 +7316,68 @@ namespace CMS2.Client
                 Logs.ErrorLogs(LogPath, "Segregation", ex.Message);
             }
         }
+
+        private void getSegregationDatabyFilter()
+        {
+            Guid? originbcoid = new Guid();
+            Guid? batchid = new Guid();
+            string plateno = "";
+            string driver = "";
+
+            try
+            {
+                SegregationReport segregation = new SegregationReport();
+                if (dropDownSegregation_BCO.SelectedItem.ToString() == "All")
+                {
+                    originbcoid = null;
+                }
+                else
+                {
+                    originbcoid = Guid.Parse(dropDownSegregation_BCO.SelectedValue.ToString());
+                }
+                if (dropDownSegregation_Batch.SelectedItem.ToString() == "All")
+                {
+                    batchid = null;
+                }
+                else
+                {
+                    batchid = Guid.Parse(dropDownSegregation_Batch.SelectedValue.ToString());
+                }
+
+                plateno = dropDownSegregation_Driver.SelectedItem.ToString();
+                driver = dropDownSegregation_PlateNo.SelectedItem.ToString();
+                
+                DataTable dataTable = segregation.getSGDatabyFilter(dateTimeSegregation_Date.Value, originbcoid, driver, plateno,batchid);
+
+                gridSegregation.DataSource = dataTable;
+                TrackingReportGlobalModel.table = dataTable;
+
+
+                #region
+                if (gridSegregation.DataSource != null)
+                {
+                    List<int> width = segregation.setWidth();
+                    int ctr = 0;
+                    foreach (int x in width)
+                    {
+                        if (x == 0) { gridSegregation.Columns[ctr].IsVisible = false; }
+                        gridSegregation.Columns[ctr].Width = x;
+                        ctr++;
+                    }
+
+                }
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs(LogPath, "Segregation", ex.Message);
+            }
+        }
+
+
+
+
+
         /// <summary>
         /// DAILY TRIP
         /// </summary>
@@ -6973,6 +7443,7 @@ namespace CMS2.Client
                 //dropDownDailyTrip_BCO.SelectedIndex = 0;
 
                 gridDailyTrip.DataSource = dataTable;
+                TrackingReportGlobalModel.table = dataTable;
 
                 #region
                 if (gridDailyTrip.DataSource != null)
@@ -7008,7 +7479,7 @@ namespace CMS2.Client
                 batchid = Guid.Parse(cmbDTR_Batch.SelectedValue.ToString());
                 paymentmodeid = Guid.Parse(dropDownDailyTrip_PaymentMode.SelectedValue.ToString());
 
-                DataTable dataTable;
+                DataTable dataTable = new DataTable();
                 if (num == 1)
                 {
                     dataTable = dailyTrip.getDailyTripDatabyAllFilter(dateTimeDailyTrip_Date.Value, areaid, batchid, paymentmodeid, num);
@@ -7030,6 +7501,8 @@ namespace CMS2.Client
                     dataTable = dailyTrip.getDailyTripDatabyAllFilter(dateTimeDailyTrip_Date.Value, null, null, null, num);
                 }
 
+                gridDailyTrip.DataSource = dataTable;
+                TrackingReportGlobalModel.table = dataTable;
 
                 #region
                 if (gridDailyTrip.DataSource != null)
@@ -7066,20 +7539,85 @@ namespace CMS2.Client
                 DataTable dataTable = holdCargo.getData(dateTimeHoldCargo_FromDate.Value, dateTimeHoldCargo_ToDate.Value);
 
                 //STATUS
-                DataView view = new DataView(dataTable);
-                DataTable table = view.ToTable(true, "Status");
-                dropDownHoldCargo_Status.Items.Clear();
-                dropDownHoldCargo_Status.Items.Add("All");
-                foreach (DataRow x in table.Rows)
-                {
-                    if (x["Status"].ToString() != null)
-                    {
-                        dropDownHoldCargo_Status.Items.Add(x["Status"].ToString());
-                    }
-                }
-                dropDownHoldCargo_Status.SelectedIndex = 0;
+                //DataView view = new DataView(dataTable);
+                //DataTable table = view.ToTable(true, "Status");
+                //dropDownHoldCargo_Status.Items.Clear();
+                //dropDownHoldCargo_Status.Items.Add("All");
+                //foreach (DataRow x in table.Rows)
+                //{
+                //    if (x["Status"].ToString() != null)
+                //    {
+                //        dropDownHoldCargo_Status.Items.Add(x["Status"].ToString());
+                //    }
+                //}
+                //dropDownHoldCargo_Status.SelectedIndex = 0;
 
                 gridHoldCargo.DataSource = dataTable;
+                TrackingReportGlobalModel.table = dataTable;
+
+                #region Hold Cargo Grid Design
+                if (gridHoldCargo.DataSource != null)
+                {
+                    List<int> width = holdCargo.setWidth();
+                    int ctr = 0;
+                    foreach (int x in width)
+                    {
+                        if (x == 0) { gridHoldCargo.Columns[ctr].IsVisible = false; }
+                        gridHoldCargo.Columns[ctr].Width = x;
+                        ctr++;
+                    }
+
+                }
+                #endregion Hold Cargo Grid Design
+
+
+            }
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs(LogPath, "Hold Cargo", ex.Message);
+            }
+        }
+
+        private void getHoldCargoDatabyFilter()
+        {
+            Guid? revenueunitid = new Guid();
+            Guid? statusid = new Guid();
+            Guid? reasonid = new Guid();
+            try
+            {
+                HoldCargoReport holdCargo = new HoldCargoReport();
+                if (cmbHC_RevenueUnit.SelectedItem.ToString() == "All")
+                {
+                    revenueunitid = null;
+                }
+                else
+                {
+                    revenueunitid = Guid.Parse(cmbHC_RevenueUnit.SelectedValue.ToString());
+                }
+
+                if (dropDownHoldCargo_Status.SelectedItem.ToString() == "All")
+                {
+                    statusid = null;
+                }
+                else
+                {
+                    statusid = Guid.Parse(dropDownHoldCargo_Status.SelectedValue.ToString());
+                }
+
+                if (cmbHC_Reason.SelectedItem.ToString() == "All")
+                {
+                    reasonid = null;
+                }
+                else
+                {
+                    reasonid = Guid.Parse(cmbHC_Reason.SelectedValue.ToString());
+                }
+
+                DataTable dataTable = holdCargo.getHCDataByFilter(dateTimeHoldCargo_FromDate.Value, dateTimeHoldCargo_ToDate.Value, revenueunitid, statusid, reasonid);
+
+                gridHoldCargo.DataSource = dataTable;
+                TrackingReportGlobalModel.table = dataTable;
+
 
                 #region Hold Cargo Grid Design
                 if (gridHoldCargo.DataSource != null)
@@ -7105,6 +7643,7 @@ namespace CMS2.Client
         }
 
 
+
         private void getDeliveryStatusData()
         {
             try
@@ -7114,6 +7653,7 @@ namespace CMS2.Client
                 DataTable dataTable = deliveryStatus.getData(dateTimeDeliveryStatus_Date.Value);
 
                 gridDeliveryStatus.DataSource = dataTable;
+                TrackingReportGlobalModel.table = dataTable;
 
                 #region
                 if (gridDeliveryStatus.DataSource != null)
@@ -7234,6 +7774,7 @@ namespace CMS2.Client
                 //dropDownDeliveryStatus_BCO.SelectedIndex = 0;
 
                 gridDeliveryStatus.DataSource = dataTable;
+                TrackingReportGlobalModel.table = dataTable;
 
                 #region
                 if (gridDeliveryStatus.DataSource != null)
@@ -7607,7 +8148,7 @@ namespace CMS2.Client
                 DataView view = new DataView(dataTable);
 
                 //if (dropDownBundle_Branch.SelectedIndex == 0)
-                //{
+                //
                 //    label113.Text = "BCO:";
                 //    List<BranchCorpOffice> branchCorpOffices = getBranchCorpOffice().OrderBy(x => x.BranchCorpOfficeName).ToList();
                 //    dropDownBundle_BCO_BSO.DataSource = branchCorpOffices;
@@ -7647,10 +8188,12 @@ namespace CMS2.Client
                 CompositeFilterDescriptor compositeFilter = new CompositeFilterDescriptor();
                 String Area = "";
                 String SackNo = "";
-                String Destination = "";
+                //String Destination = "";
+                int num = 0;
                 try
                 {
                     Area = dropDownBundle_BCO_BSO.SelectedItem.ToString();
+                    SackNo = txtBU_SackNo.Text;
                     //SackNo = dropDownBundle_SackNo.SelectedItem.ToString();
                     //Destination = dropDownBundle_Destination.SelectedItem.ToString();
                 }
@@ -7660,51 +8203,69 @@ namespace CMS2.Client
                     //SackNo = "All"; dropDownBundle_SackNo.SelectedText = "All";
                     //Destination = "All"; dropDownBundle_Destination.SelectedText = "All";
                 }
-
-                if (Area == "All" && SackNo == "All" && Destination == "All")
+                if(SackNo != "")
                 {
                     gridBundle.EnableFiltering = false;
-                    getBundleData();
+                    getBundleDataByFilter(num);
+                }
+                else
+                {
+                    if(Area == "All")
+                    {
+                        num = 1;
+                        getBundleDataByFilter(num);
+                    }
+                    else
+                    {
+                        num = 2;
+                        getBundleDataByFilter(num);
+                    }
                 }
 
-                if (Area != null && SackNo == "All" && Destination == "All")
-                {
-                    //if (dropDownBundle_Branch.SelectedIndex == 0) { compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, Area)); }
-                    //else { compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BSO", FilterOperator.IsEqualTo, Area)); }
+                //if (Area == "All" && SackNo == "All" && Destination == "All")
+                //{
+                //    gridBundle.EnableFiltering = false;
+                //    getBundleData();
+                //}
 
-                }
-                else if (Area != null && SackNo != null && Destination == "All")
-                {
-                    //if (dropDownBundle_Branch.SelectedIndex == 0) { compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, Area)); }
-                    //else { compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BSO", FilterOperator.IsEqualTo, Area)); }
-                    //compositeFilter.FilterDescriptors.Add(new FilterDescriptor("SackNo", FilterOperator.IsEqualTo, SackNo));
-                }
-                else if (Area != null && SackNo == "All" && Destination != null)
-                {
-                    //if (dropDownBundle_Branch.SelectedIndex == 0) { compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, Area)); }
-                    //else { compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BSO", FilterOperator.IsEqualTo, Area)); }
-                    //compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Destination", FilterOperator.IsEqualTo, Destination));
-                }
-                else if (Area == "All" && SackNo != null && Destination != null)
-                {
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("SackNo", FilterOperator.IsEqualTo, SackNo));
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Destination", FilterOperator.IsEqualTo, Destination));
-                }
-                else if (Area == "All" && SackNo != null && Destination == "All")
-                {
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("SackNo", FilterOperator.IsEqualTo, SackNo));
-                }
-                else if (Area == "All" && SackNo == "All" && Destination != null)
-                {
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Destination", FilterOperator.IsEqualTo, Destination));
-                }
-                else if (Area != null && SackNo != null && Destination != null)
-                {
-                    //if (dropDownBundle_Branch.SelectedIndex == 0) { compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, Area)); }
-                    //else { compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BSO", FilterOperator.IsEqualTo, Area)); }
-                    //compositeFilter.FilterDescriptors.Add(new FilterDescriptor("SackNo", FilterOperator.IsEqualTo, SackNo));
-                    //compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Destination", FilterOperator.IsEqualTo, Destination));
-                }
+                //if (Area != null && SackNo == "All" && Destination == "All")
+                //{
+                //    //if (dropDownBundle_Branch.SelectedIndex == 0) { compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, Area)); }
+                //    //else { compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BSO", FilterOperator.IsEqualTo, Area)); }
+
+                //}
+                //else if (Area != null && SackNo != null && Destination == "All")
+                //{
+                //    //if (dropDownBundle_Branch.SelectedIndex == 0) { compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, Area)); }
+                //    //else { compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BSO", FilterOperator.IsEqualTo, Area)); }
+                //    //compositeFilter.FilterDescriptors.Add(new FilterDescriptor("SackNo", FilterOperator.IsEqualTo, SackNo));
+                //}
+                //else if (Area != null && SackNo == "All" && Destination != null)
+                //{
+                //    //if (dropDownBundle_Branch.SelectedIndex == 0) { compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, Area)); }
+                //    //else { compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BSO", FilterOperator.IsEqualTo, Area)); }
+                //    //compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Destination", FilterOperator.IsEqualTo, Destination));
+                //}
+                //else if (Area == "All" && SackNo != null && Destination != null)
+                //{
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("SackNo", FilterOperator.IsEqualTo, SackNo));
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Destination", FilterOperator.IsEqualTo, Destination));
+                //}
+                //else if (Area == "All" && SackNo != null && Destination == "All")
+                //{
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("SackNo", FilterOperator.IsEqualTo, SackNo));
+                //}
+                //else if (Area == "All" && SackNo == "All" && Destination != null)
+                //{
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Destination", FilterOperator.IsEqualTo, Destination));
+                //}
+                //else if (Area != null && SackNo != null && Destination != null)
+                //{
+                //    //if (dropDownBundle_Branch.SelectedIndex == 0) { compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BCO", FilterOperator.IsEqualTo, Area)); }
+                //    //else { compositeFilter.FilterDescriptors.Add(new FilterDescriptor("BSO", FilterOperator.IsEqualTo, Area)); }
+                //    //compositeFilter.FilterDescriptors.Add(new FilterDescriptor("SackNo", FilterOperator.IsEqualTo, SackNo));
+                //    //compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Destination", FilterOperator.IsEqualTo, Destination));
+                //}
 
                 //compositeFilter.FilterDescriptors.Add(new FilterDescriptor("CreatedDate", FilterOperator.IsEqualTo, CreatedDate));
                 compositeFilter.LogicalOperator = FilterLogicalOperator.And;
@@ -7763,9 +8324,11 @@ namespace CMS2.Client
                 CompositeFilterDescriptor compositeFilter = new CompositeFilterDescriptor();
                 String Branch = "";
                 String SackNo = "";
+                int num = 0;
                 try
                 {
                     Branch = dropDownUnbundle_BCO.SelectedItem.ToString();
+                    SackNo = txtUnbundle_SackNo.Text;
                    // SackNo = dropDownUnbundle_SackNo.SelectedItem.ToString();
                 }
                 catch (Exception)
@@ -7773,24 +8336,43 @@ namespace CMS2.Client
                     Branch = "All"; dropDownUnbundle_BCO.SelectedText = "All";
                    // SackNo = "All"; dropDownUnbundle_SackNo.SelectedText = "All";
                 }
-                if (Branch == "All" && SackNo == "All")
+                if(SackNo !="")
                 {
                     gridUnbundle.EnableFiltering = false;
-                    getUnbundle();
+                    getUnbundleDataByFilter(num);
                 }
-                if (Branch != null && SackNo == "All")
+                else
                 {
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Branch", FilterOperator.IsEqualTo, Branch));
+                    if (Branch == "All")
+                    {
+                        num = 1;
+                        getUnbundleDataByFilter(num);
+                    }
+                    else
+                    {
+                        num = 2;
+                        getUnbundleDataByFilter(num);
+                    }
                 }
-                else if (Branch == "All" && SackNo != null)
-                {
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Sack No", FilterOperator.IsEqualTo, SackNo));
-                }
-                else if (Branch != null && SackNo != null)
-                {
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Branch", FilterOperator.IsEqualTo, Branch));
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Sack No", FilterOperator.IsEqualTo, SackNo));
-                }
+
+                //if (Branch == "All" && SackNo == "All")
+                //{
+                //    gridUnbundle.EnableFiltering = false;
+                //    getUnbundle();
+                //}
+                //if (Branch != null && SackNo == "All")
+                //{
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Branch", FilterOperator.IsEqualTo, Branch));
+                //}
+                //else if (Branch == "All" && SackNo != null)
+                //{
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Sack No", FilterOperator.IsEqualTo, SackNo));
+                //}
+                //else if (Branch != null && SackNo != null)
+                //{
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Branch", FilterOperator.IsEqualTo, Branch));
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Sack No", FilterOperator.IsEqualTo, SackNo));
+                //}
                 compositeFilter.LogicalOperator = FilterLogicalOperator.And;
                 this.gridUnbundle.FilterDescriptors.Add(compositeFilter);
             }
@@ -7838,11 +8420,18 @@ namespace CMS2.Client
                 String Gateway = "";
                 String Destination = "";
                 String Batch = "";
+                String commodityType = "";
+                String driver = "";
+                string mawb = "";
+                int num = 0;
                 try
                 {
-                    Gateway = dropDownGatewayTransmital_Gateway.SelectedItem.ToString();
                     Destination = dropDownGatewayTransmital_Destination.SelectedItem.ToString();
+                    driver = cmbGT_Driver.SelectedItem.ToString();
+                    Gateway = dropDownGatewayTransmital_Gateway.SelectedItem.ToString();
                     Batch = dropDownGatewayTransmital_Batch.SelectedItem.ToString();
+                    commodityType = cmbGt_CommodityType.SelectedItem.ToString();
+                    mawb = txtGatewayTransmital_MAWB.Text;
                 }
                 catch (Exception)
                 {
@@ -7851,55 +8440,67 @@ namespace CMS2.Client
                     Batch = "All"; dropDownGatewayTransmital_Batch.SelectedText = "All";
                 }
                 String CreatedDate = dateTimeGatewayTransmital_Date.Value.ToShortDateString();
-
-                if (Gateway == "All" && Destination == "All" && Batch == "All")
+                if(mawb != "")
                 {
                     gridGatewayTransmital.EnableFiltering = false;
-                    getGatewayTransmitalData();
-                }
-                if (txtGatewayTransmital_MAWB.Text != "")
-                {
-                    dropDownGatewayTransmital_Gateway.SelectedIndex = 0;
-                    dropDownGatewayTransmital_Destination.SelectedIndex = 0;
-                    dropDownGatewayTransmital_Batch.SelectedIndex = 0;
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("AWB", FilterOperator.IsEqualTo, txtGatewayTransmital_MAWB.Text.Trim().ToString()));
+                    getGatewayTransmitalDatabyFilter(num);
                 }
                 else
                 {
-                    if (Gateway != null && Destination != null && Batch != null)
-                    {
-                        compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Gateway", FilterOperator.IsEqualTo, Gateway));
-                        compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Destination", FilterOperator.IsEqualTo, Destination));
-                        compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Batch", FilterOperator.IsEqualTo, Batch));
-                    }
-                    else if (Gateway != null && Destination == "All" && Batch == "All")
-                    {
-                        compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Gateway", FilterOperator.IsEqualTo, Gateway));
-                    }
-                    else if (Gateway == "All" && Destination != null && Batch == "All")
-                    {
-                        compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Destination", FilterOperator.IsEqualTo, Destination));
-                    }
-                    else if (Gateway == "All" && Destination == "All" && Batch != null)
-                    {
-                        compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Batch", FilterOperator.IsEqualTo, Batch));
-                    }
-                    else if (Gateway != null && Destination != null && Batch == "All")
-                    {
-                        compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Gateway", FilterOperator.IsEqualTo, Gateway));
-                        compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Destination", FilterOperator.IsEqualTo, Destination));
-                    }
-                    else if (Gateway != null && Destination == "All" && Batch != null)
-                    {
-                        compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Gateway", FilterOperator.IsEqualTo, Gateway));
-                        compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Batch", FilterOperator.IsEqualTo, Batch));
-                    }
-                    else if (Gateway == "All" && Destination != null && Batch != null)
-                    {
-                        compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Destination", FilterOperator.IsEqualTo, Destination));
-                        compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Batch", FilterOperator.IsEqualTo, Batch));
-                    }
+                    num = 1;
+                    gridGatewayTransmital.EnableFiltering = false;
+                    getGatewayTransmitalDatabyFilter(num);
                 }
+
+
+                //if (Gateway == "All" && Destination == "All" && Batch == "All")
+                //{
+                //    gridGatewayTransmital.EnableFiltering = false;
+                //    getGatewayTransmitalData();
+                //}
+                //if (txtGatewayTransmital_MAWB.Text != "")
+                //{
+                //    dropDownGatewayTransmital_Gateway.SelectedIndex = 0;
+                //    dropDownGatewayTransmital_Destination.SelectedIndex = 0;
+                //    dropDownGatewayTransmital_Batch.SelectedIndex = 0;
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("AWB", FilterOperator.IsEqualTo, txtGatewayTransmital_MAWB.Text.Trim().ToString()));
+                //}
+                //else
+                //{
+                //    if (Gateway != null && Destination != null && Batch != null)
+                //    {
+                //        compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Gateway", FilterOperator.IsEqualTo, Gateway));
+                //        compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Destination", FilterOperator.IsEqualTo, Destination));
+                //        compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Batch", FilterOperator.IsEqualTo, Batch));
+                //    }
+                //    else if (Gateway != null && Destination == "All" && Batch == "All")
+                //    {
+                //        compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Gateway", FilterOperator.IsEqualTo, Gateway));
+                //    }
+                //    else if (Gateway == "All" && Destination != null && Batch == "All")
+                //    {
+                //        compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Destination", FilterOperator.IsEqualTo, Destination));
+                //    }
+                //    else if (Gateway == "All" && Destination == "All" && Batch != null)
+                //    {
+                //        compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Batch", FilterOperator.IsEqualTo, Batch));
+                //    }
+                //    else if (Gateway != null && Destination != null && Batch == "All")
+                //    {
+                //        compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Gateway", FilterOperator.IsEqualTo, Gateway));
+                //        compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Destination", FilterOperator.IsEqualTo, Destination));
+                //    }
+                //    else if (Gateway != null && Destination == "All" && Batch != null)
+                //    {
+                //        compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Gateway", FilterOperator.IsEqualTo, Gateway));
+                //        compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Batch", FilterOperator.IsEqualTo, Batch));
+                //    }
+                //    else if (Gateway == "All" && Destination != null && Batch != null)
+                //    {
+                //        compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Destination", FilterOperator.IsEqualTo, Destination));
+                //        compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Batch", FilterOperator.IsEqualTo, Batch));
+                //    }
+                //}
                 compositeFilter.LogicalOperator = FilterLogicalOperator.And;
                 this.gridGatewayTransmital.FilterDescriptors.Add(compositeFilter);
             }
@@ -7917,7 +8518,7 @@ namespace CMS2.Client
                 TrackingReportGlobalModel.Date = dateTimeGatewayTransmital_Date.Value.ToLongDateString();
                 TrackingReportGlobalModel.Driver = get_Column_DataView(dataTable, "Driver");
                 TrackingReportGlobalModel.PlateNo = get_Column_DataView(dataTable, "PlateNo");
-                TrackingReportGlobalModel.AirwayBillNo = get_Column_DataView(dataTable, "AWB");
+                TrackingReportGlobalModel.AirwayBillNo = get_Column_DataView(dataTable, "MAWB");
                 TrackingReportGlobalModel.Area = dropDownGatewayTransmital_Destination.SelectedItem.ToString();
                 TrackingReportGlobalModel.Gateway = dropDownGatewayTransmital_Gateway.SelectedItem.ToString();
                 TrackingReportGlobalModel.ScannedBy = UserTxt.Text.Replace("Welcome!", "");
@@ -7950,10 +8551,13 @@ namespace CMS2.Client
                 CompositeFilterDescriptor compositeFilter = new CompositeFilterDescriptor();
                 String Gateway = "";
                 String Batch = "";
+                string mawb = "";
+                int num = 0;
                 try
                 {
                     Gateway = dropDownGatewayOutbound_Gateway.SelectedItem.ToString();
                     Batch = dropDownGatewayOutbound_Batch.SelectedItem.ToString();
+                    mawb = txtGO_mawb.Text;
                 }
                 catch (Exception)
                 {
@@ -7961,24 +8565,35 @@ namespace CMS2.Client
                     Batch = "All"; dropDownGatewayOutbound_Batch.SelectedText = "All";
 
                 }
-                if (Gateway == "All" && Batch == "All")
+                if(mawb != "")
                 {
                     gridGatewayOutbound.EnableFiltering = false;
-                    getGatewayOutBoundData();
+                    getGatewayOutBoundDataByFilter(num);
                 }
-                if (Gateway != null && Batch != null)
+                else
                 {
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Gateway", FilterOperator.IsEqualTo, Gateway));
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Batch", FilterOperator.IsEqualTo, Batch));
+                    gridGatewayOutbound.EnableFiltering = false;
+                    num = 1;
+                    getGatewayOutBoundDataByFilter(num);
                 }
-                else if (Gateway != null && Batch == "All")
-                {
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Gateway", FilterOperator.IsEqualTo, Gateway));
-                }
-                else if (Gateway == "All" && Batch != null)
-                {
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Batch", FilterOperator.IsEqualTo, Batch));
-                }
+                //if (Gateway == "All" && Batch == "All")
+                //{
+                //    gridGatewayOutbound.EnableFiltering = false;
+                //    getGatewayOutBoundData();
+                //}
+                //if (Gateway != null && Batch != null)
+                //{
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Gateway", FilterOperator.IsEqualTo, Gateway));
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Batch", FilterOperator.IsEqualTo, Batch));
+                //}
+                //else if (Gateway != null && Batch == "All")
+                //{
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Gateway", FilterOperator.IsEqualTo, Gateway));
+                //}
+                //else if (Gateway == "All" && Batch != null)
+                //{
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Batch", FilterOperator.IsEqualTo, Batch));
+                //}
 
                 compositeFilter.LogicalOperator = FilterLogicalOperator.And;
 
@@ -8056,6 +8671,75 @@ namespace CMS2.Client
                 {
                     gridGatewayInbound.EnableFiltering = false;
                     getGatewayInBoundDatabyFilter(num);
+                }
+                else
+                {
+                    if (Gateway != "All" && Origin != "All" && CommodityType != "All" && flightNo !="All")
+                    {
+                        gridGatewayInbound.EnableFiltering = false;
+                        num = 1;
+                        getGatewayInBoundDatabyFilter(num);
+                    }
+                    else if (Gateway != "All" && Origin == "All" && CommodityType != "All" && flightNo != "All")
+                    {
+                        gridGatewayInbound.EnableFiltering = false;
+                        num = 2;
+                        getGatewayInBoundDatabyFilter(num);
+                    }
+                    else if (Gateway != "All" && Origin == "All" && CommodityType == "All" && flightNo != "All")
+                    {
+                        gridGatewayInbound.EnableFiltering = false;
+                        num = 3;
+                        getGatewayInBoundDatabyFilter(num);
+                    }
+                    else if (Gateway != "All" && Origin == "All" && CommodityType == "All" && flightNo == "All")
+                    {
+                        gridGatewayInbound.EnableFiltering = false;
+                        num = 4;
+                        getGatewayInBoundDatabyFilter(num);
+                    }
+                    else if (Gateway == "All" && Origin != "All" && CommodityType != "All" && flightNo != "All")
+                    {
+                        gridGatewayInbound.EnableFiltering = false;
+                        num = 5;
+                        getGatewayInBoundDatabyFilter(num);
+                    }
+                    else if (Gateway == "All" && Origin != "All" && CommodityType == "All" && flightNo != "All")
+                    {
+                        gridGatewayInbound.EnableFiltering = false;
+                        num = 6;
+                        getGatewayInBoundDatabyFilter(num);
+                    }
+                    else if (Gateway == "All" && Origin != "All" && CommodityType != "All" && flightNo == "All")
+                    {
+                        gridGatewayInbound.EnableFiltering = false;
+                        num = 7;
+                        getGatewayInBoundDatabyFilter(num);
+                    }
+                    else if (Gateway == "All" && Origin != "All" && CommodityType == "All" && flightNo == "All")
+                    {
+                        gridGatewayInbound.EnableFiltering = false;
+                        num = 8;
+                        getGatewayInBoundDatabyFilter(num);
+                    }
+                    else if (Gateway != "All" && Origin != "All" && CommodityType == "All" && flightNo == "All")
+                    {
+                        gridGatewayInbound.EnableFiltering = false;
+                        num = 9;
+                        getGatewayInBoundDatabyFilter(num);
+                    }
+                    else if (Gateway != "All" && Origin != "All" && CommodityType == "All" && flightNo != "All")
+                    {
+                        gridGatewayInbound.EnableFiltering = false;
+                        num = 10;
+                        getGatewayInBoundDatabyFilter(num);
+                    }
+                    else if (Gateway == "All" && Origin == "All" && CommodityType == "All" && flightNo == "All")
+                    {
+                        gridGatewayInbound.EnableFiltering = false;
+                        num = 11;
+                        getGatewayInBoundDatabyFilter(num);
+                    }
                 }
 
 
@@ -8221,6 +8905,7 @@ namespace CMS2.Client
                 string destination = "";
                 try
                 {
+                    getCargoTransferDataByFilter();
                     //origin = dropDownCargoTransfer_City.SelectedItem.ToString();
                     //destination = dropDownCargoTransfer_Destination.SelectedItem.ToString();
                 }
@@ -8229,27 +8914,27 @@ namespace CMS2.Client
                     //origin = "All"; dropDownCargoTransfer_City.SelectedText = "All";
                     //destination = "All"; dropDownCargoTransfer_Destination.SelectedText = "All";
                 }
-                if (origin == "All" && destination == "All")
-                {
-                    gridCargoTransfer.EnableFiltering = false;
-                    getCargoTransferData();
-                }
-                else if (origin != null && destination == "All")
-                {
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Origin", FilterOperator.IsEqualTo, origin));
-                }
-                else if (destination != null && origin == "All")
-                {
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Destination", FilterOperator.IsEqualTo, destination));
-                }
-                else if (origin != null && destination != null)
-                {
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Destination", FilterOperator.IsEqualTo, destination));
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Origin", FilterOperator.IsEqualTo, origin));
-                }
-                //compositeFilter.FilterDescriptors.Add(new FilterDescriptor("CreatedDate", FilterOperator.IsEqualTo, dateTimeCargoTransfer_Date.Value.ToShortDateString()));
-                compositeFilter.LogicalOperator = FilterLogicalOperator.And;
-                this.gridCargoTransfer.FilterDescriptors.Add(compositeFilter);
+                //if (origin == "All" && destination == "All")
+                //{
+                //    gridCargoTransfer.EnableFiltering = false;
+                //    getCargoTransferData();
+                //}
+                //else if (origin != null && destination == "All")
+                //{
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Origin", FilterOperator.IsEqualTo, origin));
+                //}
+                //else if (destination != null && origin == "All")
+                //{
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Destination", FilterOperator.IsEqualTo, destination));
+                //}
+                //else if (origin != null && destination != null)
+                //{
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Destination", FilterOperator.IsEqualTo, destination));
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Origin", FilterOperator.IsEqualTo, origin));
+                //}
+                ////compositeFilter.FilterDescriptors.Add(new FilterDescriptor("CreatedDate", FilterOperator.IsEqualTo, dateTimeCargoTransfer_Date.Value.ToShortDateString()));
+                //compositeFilter.LogicalOperator = FilterLogicalOperator.And;
+                //this.gridCargoTransfer.FilterDescriptors.Add(compositeFilter);
             }
             catch (Exception ex)
             {
@@ -8263,8 +8948,8 @@ namespace CMS2.Client
                 DataTable dataTable = getCargoTranferGrid();
                 TrackingReportGlobalModel.table = dataTable;
                 TrackingReportGlobalModel.Date = dateTimeCargoTransfer_Date.Value.ToLongDateString();
-                //TrackingReportGlobalModel.Origin = dropDownCargoTransfer_City.SelectedItem.ToString();
-                //TrackingReportGlobalModel.Destination = dropDownCargoTransfer_Destination.SelectedItem.ToString();
+                TrackingReportGlobalModel.Origin = get_Column_DataView(dataTable, "Origin");
+                TrackingReportGlobalModel.Destination = cmbCT_BCO.SelectedItem.ToString();
                 TrackingReportGlobalModel.Driver = get_Column_DataView(dataTable, "Driver");
                 TrackingReportGlobalModel.Checker = get_Column_DataView(dataTable, "Checker");
                 TrackingReportGlobalModel.PlateNo = get_Column_DataView(dataTable, "Plate #");
@@ -8311,6 +8996,8 @@ namespace CMS2.Client
                     Driver = dropDownSegregation_Driver.SelectedItem.ToString();
                     PlateNo = dropDownSegregation_PlateNo.SelectedItem.ToString();
                     Batch = dropDownSegregation_Batch.SelectedItem.ToString();
+                    getSegregationDatabyFilter();
+
                 }
                 catch (Exception)
                 {
@@ -8319,89 +9006,89 @@ namespace CMS2.Client
                     PlateNo = "All"; dropDownSegregation_PlateNo.SelectedText = "All";
                     Batch = "All"; dropDownSegregation_Batch.SelectedText = "All";
                 }
-                if (BCO == "All" && Driver == "All" && PlateNo == "All" && Batch == "All")
-                {
-                    gridSegregation.EnableFiltering = false;
-                    getSegregationData();
-                }
+                //if (BCO == "All" && Driver == "All" && PlateNo == "All" && Batch == "All")
+                //{
+                //    gridSegregation.EnableFiltering = false;
+                //    getSegregationData();
+                //}
 
-                if (BCO != null && Driver == "All" && PlateNo == "All" && Batch == "All")
-                {
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Branch Corp Office", FilterOperator.IsEqualTo, BCO));
-                }
-                else if (BCO == "All" && Driver != null && PlateNo == "All" && Batch == "All")
-                {
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
-                }
-                else if (BCO == "All" && Driver == "All" && PlateNo != null && Batch == "All")
-                {
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Plate # ", FilterOperator.IsEqualTo, PlateNo));
-                }
-                else if (BCO == "All" && Driver == "All" && PlateNo == "All" && Batch != null)
-                {
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Batch", FilterOperator.IsEqualTo, Batch));
-                }
-                else if (BCO != null && Driver != null && PlateNo == "All" && Batch == "All")
-                {
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Branch Corp Office", FilterOperator.IsEqualTo, BCO));
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
-                }
-                else if (BCO != null && Driver == "All" && PlateNo != null && Batch == "All")
-                {
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Branch Corp Office", FilterOperator.IsEqualTo, BCO));
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Plate # ", FilterOperator.IsEqualTo, PlateNo));
-                }
-                else if (BCO != null && Driver == "All" && PlateNo == "All" && Batch != null)
-                {
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Branch Corp Office", FilterOperator.IsEqualTo, BCO));
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Batch", FilterOperator.IsEqualTo, Batch));
-                }
-                else if (BCO == "All" && Driver != null && PlateNo != null && Batch == "All")
-                {
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Plate # ", FilterOperator.IsEqualTo, PlateNo));
-                }
-                else if (BCO == "All" && Driver != null && PlateNo == "All" && Batch != null)
-                {
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Batch", FilterOperator.IsEqualTo, Batch));
-                }
-                else if (BCO == "All" && Driver == "All" && PlateNo != null && Batch != null)
-                {
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Plate # ", FilterOperator.IsEqualTo, PlateNo));
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Batch", FilterOperator.IsEqualTo, Batch));
-                }
-                else if (BCO != null && Driver != null && PlateNo != null && Batch == "All")
-                {
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Branch Corp Office", FilterOperator.IsEqualTo, BCO));
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Plate # ", FilterOperator.IsEqualTo, PlateNo));
-                }
-                else if (BCO != null && Driver != null && PlateNo == "All" && Batch != null)
-                {
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Branch Corp Office", FilterOperator.IsEqualTo, BCO));
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
+                //if (BCO != null && Driver == "All" && PlateNo == "All" && Batch == "All")
+                //{
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Branch Corp Office", FilterOperator.IsEqualTo, BCO));
+                //}
+                //else if (BCO == "All" && Driver != null && PlateNo == "All" && Batch == "All")
+                //{
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
+                //}
+                //else if (BCO == "All" && Driver == "All" && PlateNo != null && Batch == "All")
+                //{
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Plate # ", FilterOperator.IsEqualTo, PlateNo));
+                //}
+                //else if (BCO == "All" && Driver == "All" && PlateNo == "All" && Batch != null)
+                //{
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Batch", FilterOperator.IsEqualTo, Batch));
+                //}
+                //else if (BCO != null && Driver != null && PlateNo == "All" && Batch == "All")
+                //{
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Branch Corp Office", FilterOperator.IsEqualTo, BCO));
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
+                //}
+                //else if (BCO != null && Driver == "All" && PlateNo != null && Batch == "All")
+                //{
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Branch Corp Office", FilterOperator.IsEqualTo, BCO));
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Plate # ", FilterOperator.IsEqualTo, PlateNo));
+                //}
+                //else if (BCO != null && Driver == "All" && PlateNo == "All" && Batch != null)
+                //{
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Branch Corp Office", FilterOperator.IsEqualTo, BCO));
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Batch", FilterOperator.IsEqualTo, Batch));
+                //}
+                //else if (BCO == "All" && Driver != null && PlateNo != null && Batch == "All")
+                //{
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Plate # ", FilterOperator.IsEqualTo, PlateNo));
+                //}
+                //else if (BCO == "All" && Driver != null && PlateNo == "All" && Batch != null)
+                //{
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Batch", FilterOperator.IsEqualTo, Batch));
+                //}
+                //else if (BCO == "All" && Driver == "All" && PlateNo != null && Batch != null)
+                //{
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Plate # ", FilterOperator.IsEqualTo, PlateNo));
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Batch", FilterOperator.IsEqualTo, Batch));
+                //}
+                //else if (BCO != null && Driver != null && PlateNo != null && Batch == "All")
+                //{
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Branch Corp Office", FilterOperator.IsEqualTo, BCO));
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Plate # ", FilterOperator.IsEqualTo, PlateNo));
+                //}
+                //else if (BCO != null && Driver != null && PlateNo == "All" && Batch != null)
+                //{
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Branch Corp Office", FilterOperator.IsEqualTo, BCO));
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
 
-                }
-                else if (BCO != null && Driver == "All" && PlateNo != null && Batch != null)
-                {
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Branch Corp Office", FilterOperator.IsEqualTo, BCO));
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Batch", FilterOperator.IsEqualTo, Batch));
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Plate # ", FilterOperator.IsEqualTo, PlateNo));
-                }
-                else if (BCO == "All" && Driver != null && PlateNo != null && Batch != null)
-                {
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Batch", FilterOperator.IsEqualTo, Batch));
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Plate # ", FilterOperator.IsEqualTo, PlateNo));
-                }
-                else if (BCO != null && Driver != null && PlateNo != null && Batch != null)
-                {
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Branch Corp Office", FilterOperator.IsEqualTo, BCO));
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Batch", FilterOperator.IsEqualTo, Batch));
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Plate # ", FilterOperator.IsEqualTo, PlateNo));
-                }
+                //}
+                //else if (BCO != null && Driver == "All" && PlateNo != null && Batch != null)
+                //{
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Branch Corp Office", FilterOperator.IsEqualTo, BCO));
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Batch", FilterOperator.IsEqualTo, Batch));
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Plate # ", FilterOperator.IsEqualTo, PlateNo));
+                //}
+                //else if (BCO == "All" && Driver != null && PlateNo != null && Batch != null)
+                //{
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Batch", FilterOperator.IsEqualTo, Batch));
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Plate # ", FilterOperator.IsEqualTo, PlateNo));
+                //}
+                //else if (BCO != null && Driver != null && PlateNo != null && Batch != null)
+                //{
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Branch Corp Office", FilterOperator.IsEqualTo, BCO));
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Driver", FilterOperator.IsEqualTo, Driver));
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Batch", FilterOperator.IsEqualTo, Batch));
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Plate # ", FilterOperator.IsEqualTo, PlateNo));
+                //}
 
                 compositeFilter.FilterDescriptors.Add(new FilterDescriptor("CreatedDate", FilterOperator.IsEqualTo, dateTimeSegregation_Date.Value.ToShortDateString()));
                 compositeFilter.LogicalOperator = FilterLogicalOperator.And;
@@ -8607,7 +9294,11 @@ namespace CMS2.Client
 
                 TrackingReportGlobalModel.Checker = get_Column_DataView(dataTable, "Checker");
                 TrackingReportGlobalModel.PlateNo = "";
-                TrackingReportGlobalModel.Area = get_Column_DataView(dataTable, "Area");
+                // TrackingReportGlobalModel.Area = get_Column_DataView(dataTable, "Area");
+                TrackingReportGlobalModel.Area = dropDownDailyTrip_Area.SelectedItem.ToString();
+                TrackingReportGlobalModel.Batch = cmbDTR_Batch.SelectedItem.ToString();
+                TrackingReportGlobalModel.PaymentMode = dropDownDailyTrip_PaymentMode.SelectedItem.ToString();
+
                 TrackingReportGlobalModel.ScannedBy = UserTxt.Text.Replace("Welcome!", "");
                 TrackingReportGlobalModel.table = getDailyTripGrid("PP");
                 TrackingReportGlobalModel.table2 = getDailyTripGrid("CAS");
@@ -8690,6 +9381,7 @@ namespace CMS2.Client
                 {
                    // Branch = dropDownHoldCargo_BCO_BSO.SelectedItem.ToString();
                     Status = dropDownHoldCargo_Status.SelectedItem.ToString();
+                    getHoldCargoDatabyFilter();
                 }
                 catch (Exception)
                 {
@@ -8697,24 +9389,24 @@ namespace CMS2.Client
                     Status = "All"; dropDownHoldCargo_Status.SelectedText = "All";
 
                 }
-                if (Branch == "All" && Status == "All")
-                {
-                    gridHoldCargo.EnableFiltering = false;
-                    getHoldCargoData();
-                }
-                if (Branch != null && Status == "All")
-                {
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Branch", FilterOperator.IsEqualTo, Branch));
-                }
-                else if (Branch == "All" && Status != null)
-                {
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Status", FilterOperator.IsEqualTo, Status));
-                }
-                else if (Branch != null && Status != null)
-                {
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Branch", FilterOperator.IsEqualTo, Branch));
-                    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Status", FilterOperator.IsEqualTo, Status));
-                }
+                //if (Branch == "All" && Status == "All")
+                //{
+                //    gridHoldCargo.EnableFiltering = false;
+                //    getHoldCargoData();
+                //}
+                //if (Branch != null && Status == "All")
+                //{
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Branch", FilterOperator.IsEqualTo, Branch));
+                //}
+                //else if (Branch == "All" && Status != null)
+                //{
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Status", FilterOperator.IsEqualTo, Status));
+                //}
+                //else if (Branch != null && Status != null)
+                //{
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Branch", FilterOperator.IsEqualTo, Branch));
+                //    compositeFilter.FilterDescriptors.Add(new FilterDescriptor("Status", FilterOperator.IsEqualTo, Status));
+                //}
 
                 compositeFilter.LogicalOperator = FilterLogicalOperator.And;
 
@@ -8930,7 +9622,9 @@ namespace CMS2.Client
                 DataTable dataTable = getDeliveryStatusGrid();
                 TrackingReportGlobalModel.table = dataTable;
                 TrackingReportGlobalModel.Date = dateTimeDeliveryStatus_Date.Value.ToLongDateString();
-               // TrackingReportGlobalModel.Driver = dropDownDeliveryStatus_Driver.SelectedItem.ToString();
+                // TrackingReportGlobalModel.Driver = dropDownDeliveryStatus_Driver.SelectedItem.ToString();
+                TrackingReportGlobalModel.Area = cmbDS_RevenueUnit.SelectedItem.ToString();
+                TrackingReportGlobalModel.Driver = get_Column_DataView(dataTable, "Driver");
                 TrackingReportGlobalModel.Checker = get_Column_DataView(dataTable, "Checker");
                 TrackingReportGlobalModel.ScannedBy = UserTxt.Text.Replace("Welcome!", "");
                 TrackingReportGlobalModel.Report = "DeliveryStatus";
@@ -9569,11 +10263,19 @@ namespace CMS2.Client
 
         public void BundleLoadData()
         {
-            List<RevenueUnit> _revenueUnit = revenueUnitservice.GetAll().Where(x => x.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.RevenueUnitType.RevenueUnitTypeName == "Branch Satellite").OrderBy(x => x.RevenueUnitName).ToList();
-            bsBundleBSO.DataSource = _revenueUnit;
+            List<BranchCorpOffice> _bco = bcoService.GetAll().Where(x => x.RecordStatus == 1).OrderBy(x => x.BranchCorpOfficeName).ToList();
+            bsBundleBSO.DataSource = _bco;
             dropDownBundle_BCO_BSO.DataSource = bsBundleBSO;
-            dropDownBundle_BCO_BSO.DisplayMember = "RevenueUnitName";
-            dropDownBundle_BCO_BSO.ValueMember = "RevenueUnitId";
+            dropDownBundle_BCO_BSO.DisplayMember = "BranchCorpOfficeName";
+            dropDownBundle_BCO_BSO.ValueMember = "BranchCorpOfficeId";
+            dropDownBundle_BCO_BSO.Items.Add("All");
+            dropDownBundle_BCO_BSO.SelectedValue = "All";
+
+            //List<RevenueUnit> _revenueUnit = revenueUnitservice.GetAll().Where(x => x.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.RevenueUnitType.RevenueUnitTypeName == "Branch Satellite").OrderBy(x => x.RevenueUnitName).ToList();
+            //bsBundleBSO.DataSource = _revenueUnit;
+            //dropDownBundle_BCO_BSO.DataSource = bsBundleBSO;
+            //dropDownBundle_BCO_BSO.DisplayMember = "RevenueUnitName";
+            //dropDownBundle_BCO_BSO.ValueMember = "RevenueUnitId";
         }
 
         public void UnbundleLoadData()
@@ -9583,7 +10285,37 @@ namespace CMS2.Client
             dropDownUnbundle_BCO.DataSource = bsUnbundleBCO;
             dropDownUnbundle_BCO.DisplayMember = "BranchCorpOfficeName";
             dropDownUnbundle_BCO.ValueMember = "BranchCorpOfficeId";
+            dropDownUnbundle_BCO.Items.Add("All");
+            dropDownUnbundle_BCO.SelectedValue = "All";
         }
+
+        private void FilterbyDestination(Guid bcoId)
+        {
+            cmbGT_Driver.Enabled = true;
+            cmbGT_Driver.DataSource = null;
+            List<GatewayTransmittal> _driver = gwTransmittalService.GetAll().Where(x => x.RecordStatus == 1 && x.DestinationID == bcoId).Distinct().ToList();
+            List<string> selectDriver = _driver.Select(x => x.Driver).Distinct().OrderBy(x => x).ToList();
+            selectDriver.Add("All");
+            cmbGT_Driver.DataSource = selectDriver;
+            cmbGT_Driver.DisplayMember = "Driver";
+            cmbGT_Driver.ValueMember = "Driver";
+            cmbGT_Driver.SelectedValue = "All";
+
+            dropDownGatewayTransmital_Gateway.Enabled = true;
+            dropDownGatewayTransmital_Gateway.DataSource = null;
+            
+            List<GatewayTransmittal> _gatewayName = gwTransmittalService.GetAll().Where(x => x.RecordStatus == 1 && x.DestinationID == bcoId).ToList();
+            List<string> selectGateway = _gatewayName.Select(x => x.Gateway).Distinct().OrderBy(x => x).ToList();
+            selectGateway.Add("All");
+            dropDownGatewayTransmital_Gateway.DataSource = selectDriver;
+            dropDownGatewayTransmital_Gateway.DisplayMember = "Gateway";
+            dropDownGatewayTransmital_Gateway.ValueMember = "Gateway";
+            dropDownGatewayTransmital_Gateway.SelectedValue = "All";
+
+
+        }
+
+
 
         public void GatewayTransmittalLoadData()
         {
@@ -9593,7 +10325,27 @@ namespace CMS2.Client
             dropDownGatewayTransmital_Destination.DataSource = bsGTDestinationBCO;
             dropDownGatewayTransmital_Destination.DisplayMember = "BranchCorpOfficeName";
             dropDownGatewayTransmital_Destination.ValueMember = "BranchCorpOfficeId";
+            dropDownGatewayTransmital_Destination.Items.Add("All");
+            dropDownGatewayTransmital_Destination.SelectedValue = "All";
 
+
+            List<GatewayTransmittal> _driver = gwTransmittalService.GetAll().Where(x => x.RecordStatus == 1).ToList();
+            //bsDriver.DataSource = _driver;
+            List<string> selectDriver = _driver.Select(x => x.Driver).Distinct().OrderBy(x => x).ToList();
+            selectDriver.Add("All");
+            cmbGT_Driver.DataSource = selectDriver;
+            cmbGT_Driver.DisplayMember = "Driver";
+            cmbGT_Driver.ValueMember = "Driver";
+            cmbGT_Driver.SelectedValue = "All";
+
+            List<GatewayTransmittal> _gatewayName = gwTransmittalService.GetAll().Where(x => x.RecordStatus == 1).ToList();
+            List<string> selectGateway = _gatewayName.Select(x => x.Gateway).Distinct().OrderBy(x => x).ToList();
+            selectGateway.Add("All");
+            dropDownGatewayTransmital_Gateway.DataSource = selectDriver;
+            dropDownGatewayTransmital_Gateway.DisplayMember = "Gateway";
+            dropDownGatewayTransmital_Gateway.ValueMember = "Gateway";
+            dropDownGatewayTransmital_Gateway.SelectedValue = "All";
+            
             List<Batch> _batch = batchService.GetAll().Where(x => x.RecordStatus == 1 && x.BatchCode == "gatewaytransmittal").ToList();
             bsGTBatch.DataSource = _batch;
             dropDownGatewayTransmital_Batch.DataSource = bsGTBatch;
@@ -9608,6 +10360,9 @@ namespace CMS2.Client
             cmbGt_CommodityType.DataSource = bsGTCommodityType;
             cmbGt_CommodityType.DisplayMember = "CommodityTypeName";
             cmbGt_CommodityType.ValueMember = "CommodityTypeId";
+
+
+
         }
 
         public void GatewayOutboundLoadData()
@@ -9617,6 +10372,26 @@ namespace CMS2.Client
             dropDownGatewayOutbound_BCO.DataSource = bsGODestinationBCO;
             dropDownGatewayOutbound_BCO.DisplayMember = "BranchCorpOfficeName";
             dropDownGatewayOutbound_BCO.ValueMember = "BranchCorpOfficeId";
+            dropDownGatewayOutbound_BCO.Items.Add("All");
+            dropDownGatewayOutbound_BCO.SelectedValue = "All";
+
+
+            List<GatewayOutbound> _driver = gwOutboundService.GetAll().Where(x => x.RecordStatus == 1).ToList();
+            //bsDriver.DataSource = _driver;
+            List<string> selectDriver = _driver.Select(x => x.Driver).Distinct().OrderBy(x => x).ToList();
+            selectDriver.Add("All");
+            cmbGO_Driver.DataSource = selectDriver;
+            cmbGO_Driver.DisplayMember = "Driver";
+            cmbGO_Driver.ValueMember = "Driver";
+            cmbGO_Driver.SelectedValue = "All";
+
+            List<GatewayOutbound> _gatewayName = gwOutboundService.GetAll().Where(x => x.RecordStatus == 1).ToList();
+            List<string> selectGateway = _gatewayName.Select(x => x.Gateway).Distinct().OrderBy(x => x).ToList();
+            selectGateway.Add("All");
+            dropDownGatewayOutbound_Gateway.DataSource = selectDriver;
+            dropDownGatewayOutbound_Gateway.DisplayMember = "Gateway";
+            dropDownGatewayOutbound_Gateway.ValueMember = "Gateway";
+            dropDownGatewayOutbound_Gateway.SelectedValue = "All";
 
             List<Batch> _batch = batchService.GetAll().Where(x => x.RecordStatus == 1 && x.BatchCode == "gatewayoutbound").ToList();
             bsGOBatch.DataSource = _batch;
@@ -9626,12 +10401,13 @@ namespace CMS2.Client
             dropDownGatewayOutbound_Batch.Items.Add("All");
             dropDownGatewayOutbound_Batch.SelectedValue = "All";
 
-            
             List<CommodityType> _commodityType = commodityTypeService.GetAll().Where(x => x.RecordStatus == 1).ToList();
             bsGOCommodityType.DataSource = _commodityType;
             cmbGO_commoditType.DataSource = bsGOCommodityType;
             cmbGO_commoditType.DisplayMember = "CommodityTypeName";
             cmbGO_commoditType.ValueMember = "CommodityTypeId";
+            cmbGO_commoditType.Items.Add("All");
+            cmbGO_commoditType.SelectedValue = "All";
         }
 
         public void GatewayInboundLoadData()
@@ -9650,12 +10426,17 @@ namespace CMS2.Client
             dropDownGatewayInbound_Origin.DataSource = _bco;
             dropDownGatewayInbound_Origin.DisplayMember = "BranchCorpOfficeName";
             dropDownGatewayInbound_Origin.ValueMember = "BranchCorpOfficeId";
-            
+            dropDownGatewayInbound_Origin.Items.Add("All");
+            dropDownGatewayInbound_Origin.SelectedValue = "All";
+
             List<CommodityType> _commodityType = commodityTypeService.GetAll().Where(x => x.RecordStatus == 1).ToList();
             bsGICommodityType.DataSource = _commodityType;
             dropDownGatewayInbound_Commodity.DataSource = bsGICommodityType;
             dropDownGatewayInbound_Commodity.DisplayMember = "CommodityTypeName";
             dropDownGatewayInbound_Commodity.ValueMember = "CommodityTypeId";
+            dropDownGatewayInbound_Commodity.Items.Add("All");
+            dropDownGatewayInbound_Commodity.SelectedValue = "All";
+
 
             List<string> selectFlightno = _gatewayname.Select(x => x.FlightNumber).Distinct().OrderBy(x => x).ToList();
             selectFlightno.Add("All");
@@ -9671,33 +10452,45 @@ namespace CMS2.Client
 
         public void CargoTransferLoadData()
         {
+            List<CargoTransfer> _cargotransfer = cargotransferService.GetAll().Where(x => x.RecordStatus == 1).ToList();
             List<BranchCorpOffice> _bco = bcoService.GetAll().Where(x => x.RecordStatus == 1).ToList();
             bsBCO.DataSource = _bco;
             cmbCT_BCO.DataSource = bsBCO;
             cmbCT_BCO.DisplayMember = "BranchCorpOfficeName";
             cmbCT_BCO.ValueMember = "BranchCorpOfficeId";
+            cmbCT_BCO.Items.Add("All");
+            cmbCT_BCO.SelectedValue = "All";
 
             List<RevenueUnitType> _revenueUnitType = revenueUnitTypeService.GetAll().Where(x => x.RecordStatus == 1).ToList();
             bsRevenueUnitType.DataSource = _revenueUnitType;
-            cmbCT_RevenueType.DataSource = bsRevenueUnitType;
+            cmbCT_RevenueType.DataSource = _revenueUnitType;
             cmbCT_RevenueType.DisplayMember = "RevenueUnitTypeName";
             cmbCT_RevenueType.ValueMember = "RevenueUnitTypeId";
+            cmbCT_RevenueType.Items.Add("All");
+            cmbCT_RevenueType.SelectedValue = "All";
 
-            if (cmbCT_RevenueType.SelectedIndex == 0)
-            {
-                Guid revenueUnitTypeId = new Guid();
-                try
-                {
-                    revenueUnitTypeId = Guid.Parse(cmbCT_RevenueType.SelectedValue.ToString());
-                }
-                catch (Exception)
-                {
-                    return;
-                }
+            List<RevenueUnit> _ctrevenueUnit = revenueUnitservice.GetAll().Where(x => x.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId).OrderBy(x => x.RevenueUnitName).ToList();
+            cmbCT_RevenueUnit.DataSource = _ctrevenueUnit;
+            cmbCT_RevenueUnit.DisplayMember = "RevenueUnitName";
+            cmbCT_RevenueUnit.ValueMember = "RevenueUnitId";
+            cmbCT_RevenueUnit.Items.Add("All");
+            cmbCT_RevenueUnit.SelectedValue = "All";
 
-                CTRevenueUnit(revenueUnitTypeId);
-            }
 
+            //if (cmbCT_RevenueType.SelectedIndex == 0)
+            //{
+            //    Guid revenueUnitTypeId = new Guid();
+            //    try
+            //    {
+            //        revenueUnitTypeId = Guid.Parse(cmbCT_RevenueType.SelectedValue.ToString());
+            //    }
+            //    catch (Exception)
+            //    {
+            //        return;
+            //    }
+
+            //    CTRevenueUnit(revenueUnitTypeId);
+            //}
 
             List<Batch> _batch = batchService.GetAll().Where(x => x.RecordStatus == 1 && x.BatchCode == "cargotransfer").ToList();
             bsCTBatch.DataSource = _batch;
@@ -9707,7 +10500,13 @@ namespace CMS2.Client
             cmbCT_Batch.Items.Add("All");
             cmbCT_Batch.SelectedValue = "All";
 
-
+            List<string> plateno = _cargotransfer.Select(x => x.PlateNo).Distinct().OrderBy(x => x).ToList();
+            plateno.Add("All");
+            cmbGI_FlightNo.DataSource = plateno;
+            cmbGI_FlightNo.DisplayMember = "PlateNo";
+            cmbGI_FlightNo.ValueMember = "PlateNo";
+            cmbGI_FlightNo.SelectedValue = "All";
+            
         }
 
         private void CTRevenueUnit(Guid revenueUnitTypeId)
@@ -9717,16 +10516,21 @@ namespace CMS2.Client
             cmbCT_RevenueUnit.DataSource = _revenueUnit;
             cmbCT_RevenueUnit.DisplayMember = "RevenueUnitName";
             cmbCT_RevenueUnit.ValueMember = "RevenueUnitId";
+            cmbCT_RevenueUnit.Items.Add("All");
+            cmbCT_RevenueUnit.SelectedValue = "All";
 
         }
 
         public void SegregationLoadData()
         {
+            List<Segregation> _segregation = segregationService.GetAll().Where(x => x.RecordStatus == 1).ToList();
             List<BranchCorpOffice> _bco = bcoService.GetAll().Where(x => x.RecordStatus == 1).ToList();
             bsSGBCO.DataSource = _bco;
             dropDownSegregation_BCO.DataSource = bsSGBCO;
             dropDownSegregation_BCO.DisplayMember = "BranchCorpOfficeName";
             dropDownSegregation_BCO.ValueMember = "BranchCorpOfficeId";
+            dropDownSegregation_BCO.Items.Add("All");
+            dropDownSegregation_BCO.SelectedValue = "All";
 
             List<Batch> _batch = batchService.GetAll().Where(x => x.RecordStatus == 1 && x.BatchCode == "cargotransfer").ToList();
             bsSGBatch.DataSource = _batch;
@@ -9735,6 +10539,22 @@ namespace CMS2.Client
             dropDownSegregation_Batch.ValueMember = "BatchId";
             dropDownSegregation_Batch.Items.Add("All");
             dropDownSegregation_Batch.SelectedValue = "All";
+
+            List<string> driver = _segregation.Select(x => x.Driver).Distinct().OrderBy(x => x).ToList();
+            driver.Add("All");
+            dropDownSegregation_Driver.DataSource = driver;
+            dropDownSegregation_Driver.DisplayMember = "Driver";
+            dropDownSegregation_Driver.ValueMember = "Driver";
+            dropDownSegregation_Driver.SelectedValue = "All";
+
+            List<string> plateno = _segregation.Select(x => x.PlateNo).Distinct().OrderBy(x => x).ToList();
+            plateno.Add("All");
+            dropDownSegregation_PlateNo.DataSource = plateno;
+            dropDownSegregation_PlateNo.DisplayMember = "PlateNo";
+            dropDownSegregation_PlateNo.ValueMember = "PlateNo";
+            dropDownSegregation_PlateNo.SelectedValue = "All";
+
+
         }
 
         public void DailyTripLoadData()
@@ -9743,6 +10563,8 @@ namespace CMS2.Client
             dropDownDailyTrip_Area.DataSource = _revenueUnit;
             dropDownDailyTrip_Area.DisplayMember = "RevenueUnitName";
             dropDownDailyTrip_Area.ValueMember = "RevenueUnitId";
+            dropDownDailyTrip_Area.Items.Add("All");
+            dropDownDailyTrip_Area.SelectedValue = "All";
 
             List<Batch> _batch = batchService.GetAll().Where(x => x.RecordStatus == 1 && x.BatchCode == "distribution").ToList();
             cmbDTR_Batch.DataSource = _batch;
@@ -9767,26 +10589,46 @@ namespace CMS2.Client
             cmbHC_Reason.DataSource = _reasonName;
             cmbHC_Reason.DisplayMember = "ReasonName";
             cmbHC_Reason.ValueMember = "ReasonID";
+            cmbHC_Reason.Items.Add("All");
+            cmbHC_Reason.SelectedValue = "All";
 
             List<RevenueUnitType> _revenueUnitType = revenueUnitTypeService.GetAll().Where(x => x.RecordStatus == 1).ToList();
             cmbCT_RevenueType.DataSource = _revenueUnitType;
             cmbCT_RevenueType.DisplayMember = "RevenueUnitTypeName";
             cmbCT_RevenueType.ValueMember = "RevenueUnitTypeId";
+            cmbHC_Revenuetype.Items.Add("All");
+            cmbHC_Revenuetype.SelectedValue = "All";
 
-            if (cmbHC_Revenuetype.SelectedIndex == 0)
-            {
-                Guid revenueUnitTypeId = new Guid();
-                try
-                {
-                    revenueUnitTypeId = Guid.Parse(cmbHC_Revenuetype.SelectedValue.ToString());
-                }
-                catch (Exception)
-                {
-                    return;
-                }
 
-                HCRevenueUnit(revenueUnitTypeId);
-            }
+            List<RevenueUnit> _revenueUnit = revenueUnitservice.GetAll().Where(x => x.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId).OrderBy(x => x.RevenueUnitName).ToList();
+            cmbHC_RevenueUnit.DataSource = _revenueUnit;
+            cmbHC_RevenueUnit.DisplayMember = "RevenueUnitName";
+            cmbHC_RevenueUnit.ValueMember = "RevenueUnitId";
+            cmbHC_RevenueUnit.Items.Add("All");
+            cmbHC_RevenueUnit.SelectedValue = "All";
+
+            List<Status> _status = statusService.GetAll().Where(x => x.RecordStatus == 1).OrderBy(x => x.StatusName).ToList();
+            dropDownHoldCargo_Status.DataSource = _status;
+            dropDownHoldCargo_Status.DisplayMember = "StatusName";
+            dropDownHoldCargo_Status.ValueMember = "StatusID";
+            dropDownHoldCargo_Status.Items.Add("All");
+            dropDownHoldCargo_Status.SelectedValue = "All";
+
+
+            //if (cmbHC_Revenuetype.SelectedIndex == 0)
+            //{
+            //    Guid revenueUnitTypeId = new Guid();
+            //    try
+            //    {
+            //        revenueUnitTypeId = Guid.Parse(cmbHC_Revenuetype.SelectedValue.ToString());
+            //    }
+            //    catch (Exception)
+            //    {
+            //        return;
+            //    }
+
+            //    HCRevenueUnit(revenueUnitTypeId);
+            //}
 
 
         }
@@ -9817,7 +10659,7 @@ namespace CMS2.Client
 
             if (cmbDS_RevenueType.SelectedItem.Text == "All")
             {
-                cmb_RevenueUnit.Enabled = false;
+                cmbDS_RevenueUnit.Enabled = false;
             }
 
             List<Employee> _employee = employeeService.GetAll().Where(x => x.RecordStatus == 1 && x.AssignedToArea.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId).ToList();
@@ -10029,6 +10871,30 @@ namespace CMS2.Client
         }
 
 
+        private void dropDownGatewayTransmital_Destination_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
+        {
+            if (dropDownGatewayTransmital_Destination.SelectedIndex >= 0)
+            {
+                if (dropDownGatewayTransmital_Destination.SelectedItem.Text == "All")
+                {
+                    cmbGT_Driver.Enabled = false;
+                    dropDownGatewayTransmital_Gateway.Enabled = false;
+                }
+                else
+                {
+                    Guid bcoid = new Guid();
+                    try
+                    {
+                        bcoid = Guid.Parse(dropDownGatewayTransmital_Destination.SelectedValue.ToString());
+                    }
+                    catch (Exception)
+                    {
+                        return;
+                    }
+                    FilterbyDestination(bcoid);
+                }
+            }
+        }
 
 
         #endregion

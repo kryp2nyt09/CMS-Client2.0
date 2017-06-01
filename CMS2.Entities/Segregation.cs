@@ -48,5 +48,7 @@ namespace CMS2.Entities
         [ForeignKey("BatchID")]
         public virtual Batch Batch { get; set; }
 
+        public virtual PackageNumber PackageNumber { get; set; }
+
     }
 }

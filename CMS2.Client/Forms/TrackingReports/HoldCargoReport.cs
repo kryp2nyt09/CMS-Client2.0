@@ -67,6 +67,69 @@ namespace CMS2.Client.Forms.TrackingReports
             return dt;
         }
 
+        public DataTable getHCDataByFilter(DateTime fromdate, DateTime todate, Guid? revenueunitid, Guid? statusid, Guid? reasonid)
+        {
+
+            HoldCargoBL holdcargoBl = new HoldCargoBL();
+            
+            List<HoldCargo> list = holdcargoBl.GetAll().Where
+                (x => x.CreatedDate >= fromdate && x.CreatedDate <= todate
+                && ((x.User.Employee.AssignedToArea.RevenueUnitId == revenueunitid && x.User.Employee.AssignedToArea.RevenueUnitId != null) || (x.User.Employee.AssignedToArea.RevenueUnitId == x.User.Employee.AssignedToArea.RevenueUnitId && x.User.Employee.AssignedToArea.RevenueUnitId == null))
+                && ((x.StatusID == statusid && x.StatusID != null) || (x.StatusID == x.StatusID && x.StatusID == null))
+                && ((x.ReasonID == reasonid && x.ReasonID != null) || (x.ReasonID == x.ReasonID && x.ReasonID == null))
+                ).ToList();
+            List<HoldCargoViewModel> modelList = Match(list);
+
+            DataTable dt = new DataTable();
+            dt.Columns.Add(new DataColumn("No", typeof(string)));
+            dt.Columns.Add(new DataColumn("Date", typeof(string)));
+            dt.Columns.Add(new DataColumn("AWB", typeof(string)));
+            dt.Columns.Add(new DataColumn("Shipper", typeof(string)));
+            dt.Columns.Add(new DataColumn("Consignee", typeof(string)));
+            dt.Columns.Add(new DataColumn("Address", typeof(string)));
+            dt.Columns.Add(new DataColumn("Payment Mode", typeof(string)));
+            dt.Columns.Add(new DataColumn("Service Mode", typeof(string)));
+            dt.Columns.Add(new DataColumn("Status", typeof(string)));
+            dt.Columns.Add(new DataColumn("Reason", typeof(string)));
+            dt.Columns.Add(new DataColumn("Endorse by", typeof(string)));
+            dt.Columns.Add(new DataColumn("Scanned by", typeof(string)));
+            dt.Columns.Add(new DataColumn("Prepared by(Cut by)", typeof(string)));
+            dt.Columns.Add(new DataColumn("Aging", typeof(string)));
+
+            dt.Columns.Add(new DataColumn("Branch", typeof(string)));
+
+            dt.Columns.Add(new DataColumn("BSO", typeof(string)));
+
+            dt.BeginLoadData();
+            int ctr = 1;
+            foreach (HoldCargoViewModel item in modelList)
+            {
+                DataRow row = dt.NewRow();
+                row[0] = (ctr++).ToString();
+                row[1] = item.Date.ToShortDateString();
+                row[2] = item.AirwayBillNo;
+                row[3] = item.Shipper;
+                row[4] = item.Consignee;
+                row[5] = item.Address;
+                row[6] = item.PaymentMode;
+                row[7] = item.ServiceMode;
+                row[8] = item.Status;
+                row[9] = item.Reason;
+                row[10] = item.EndorseBy;
+                row[11] = item.ScannedBy;
+                row[12] = item.PreparedBy;
+                row[13] = item.Aging; //Present Date - Transaction Date
+                row[14] = item.Branch;
+                row[15] = item.BSO;
+                dt.Rows.Add(row);
+            }
+            dt.EndLoadData();
+
+            return dt;
+        }
+
+
+
         public List<int> setWidth()
         {
             List<int> width = new List<int>();

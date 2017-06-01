@@ -66,7 +66,12 @@ namespace CMS2.Client.Forms.TrackingReports
             List <DeliveryStatusViewModel> resultList = new List<DeliveryStatusViewModel>();
             if (num == 1)
             {
-                list = deliveryStatusBL.GetAll().Where(x => x.RecordStatus == 1 && x.DeliveredBy.EmployeeId == deliveredById && x.DeliveryStatus.DeliveryStatusId == statusId && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
+                list = deliveryStatusBL.GetAll().Where
+                    (x => x.RecordStatus == 1 
+                    && x.DeliveredBy.EmployeeId == deliveredById 
+                    && x.DeliveryStatus.DeliveryStatusId == statusId 
+                    //&& x.DeliveredBy.AssignedToArea.RevenueUnitName == revenueUnitName
+                    && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
                 List<DeliveryStatusViewModel> modelList = Match(list);
                 resultList = modelList.FindAll(x => x.Area == revenueUnitName);
 
@@ -155,6 +160,7 @@ namespace CMS2.Client.Forms.TrackingReports
             width.Add(100);
             width.Add(110);
             width.Add(0);
+            width.Add(110);
             width.Add(110);
             return width;
         }
