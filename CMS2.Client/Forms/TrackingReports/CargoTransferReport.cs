@@ -69,6 +69,70 @@ namespace CMS2.Client.Forms.TrackingReports
             return dt;
         }
 
+
+        public DataTable getCTDataByFilter(DateTime date, Guid? destinationId, Guid? revenueunitId, string plateno, Guid? batchId)
+        {
+
+            CargoTransferBL cargoTransferBl = new CargoTransferBL();
+            List<CargoTransfer> list = cargoTransferBl.GetAll().Where
+                (x => x.RecordStatus == 1
+                && ((x.BranchCorpOfficeID == destinationId && x.BranchCorpOfficeID != null) || (x.BranchCorpOfficeID == x.BranchCorpOfficeID && x.BranchCorpOfficeID == null))
+                && ((x.RevenueUnitID == revenueunitId && x.RevenueUnitID != null) || (x.RevenueUnitID == x.RevenueUnitID && x.RevenueUnitID == null))
+                && ((x.BatchID == batchId && x.BatchID != null) || (x.BatchID == x.BatchID && x.BatchID == null))
+                && ((x.PlateNo == plateno && x.PlateNo != "All") || (x.PlateNo == x.PlateNo && x.PlateNo == "All"))
+                && x.CreatedDate.ToShortDateString() == date.ToShortDateString()
+                ).ToList();
+
+            List<CargoTransferViewModel> modelList = Match(list);
+
+            DataTable dt = new DataTable();
+            dt.Columns.Add(new DataColumn("No", typeof(string)));
+            dt.Columns.Add(new DataColumn("Origin", typeof(string)));
+            dt.Columns.Add(new DataColumn("Destination", typeof(string)));
+            dt.Columns.Add(new DataColumn("Driver", typeof(string)));
+            dt.Columns.Add(new DataColumn("Checker", typeof(string)));
+            dt.Columns.Add(new DataColumn("Pieces", typeof(string)));
+            dt.Columns.Add(new DataColumn("Plate #", typeof(string)));
+            dt.Columns.Add(new DataColumn("Batch", typeof(string)));
+            dt.Columns.Add(new DataColumn("AWB", typeof(string)));
+            dt.Columns.Add(new DataColumn("QTY", typeof(string)));
+
+            dt.Columns.Add(new DataColumn("CreatedDate", typeof(string)));
+
+            dt.Columns.Add(new DataColumn("BCO", typeof(string)));
+            dt.Columns.Add(new DataColumn("GATEWAY", typeof(string)));
+            dt.Columns.Add(new DataColumn("SATELLITE", typeof(string)));
+            dt.Columns.Add(new DataColumn("ScannedBy", typeof(string)));
+            dt.BeginLoadData();
+            int ctr = 1;
+            foreach (CargoTransferViewModel item in modelList)
+            {
+                DataRow row = dt.NewRow();
+                row[0] = (ctr++).ToString();
+                row[1] = item.Origin;
+                row[2] = item.Destination;
+                row[3] = item.Driver;
+                row[4] = item.Checker;
+                row[5] = item.Pieces;
+                row[6] = item.PlateNo;
+                row[7] = item.Batch;
+                row[8] = item.AWB;
+                row[9] = item.QTY;
+                row[10] = item.CreatedDate.ToShortDateString();
+
+                row[11] = item.BCO;
+                row[12] = item.GATEWAY;
+                row[13] = item.SATELLITE;
+
+                row[14] = item.ScannedBy;
+
+                dt.Rows.Add(row);
+            }
+            dt.EndLoadData();
+
+            return dt;
+        }
+
         public List<int> setWidth()
         {
             List<int> width = new List<int>();

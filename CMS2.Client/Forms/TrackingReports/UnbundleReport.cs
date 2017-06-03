@@ -18,7 +18,7 @@ namespace CMS2.Client.Forms.TrackingReports
             UnbundleBL unbundlebl = new UnbundleBL();
             BundleBL bundlebl = new BundleBL();
 
-            List<Unbundle> unbundleList = unbundlebl.GetAll().Where(x => x.RecordStatus == 1 && x.BranchCorpOfficeID == GlobalVars.DeviceBcoId).ToList();
+            List<Unbundle> unbundleList = unbundlebl.GetAll().Where(x => x.RecordStatus == 1 && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
             List<Bundle> bundleList = bundlebl.GetAll().Where(x => x.RecordStatus == 1 && x.BranchCorpOfficeID == GlobalVars.DeviceBcoId && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
 
             List<UnbundleViewModel> modelList = Match(unbundleList , bundleList);
@@ -57,6 +57,67 @@ namespace CMS2.Client.Forms.TrackingReports
 
             return dt;
         }
+       
+        public DataTable getUnbundleDataByFilter(DateTime date, Guid? bcoid, string sackNo, int num)
+        {
+            UnbundleBL unbundlebl = new UnbundleBL();
+            BundleBL bundlebl = new BundleBL();
+
+            List<Unbundle> unbundleList = new List<Unbundle>();
+            List<Bundle> bundleList = bundleList = bundlebl.GetAll().Where(x => x.RecordStatus == 1).ToList();
+
+            if (num == 0)
+            {
+                unbundleList = unbundlebl.GetAll().Where(x => x.RecordStatus == 1 && x.CreatedDate.ToShortDateString() == date.ToShortDateString() && x.SackNo == sackNo).ToList();
+                
+                //bundleList = bundlebl.GetAll().Where(x => x.RecordStatus == 1 && x.BranchCorpOfficeID == GlobalVars.DeviceBcoId && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
+            }
+            else if(num ==1)
+            {
+                unbundleList = unbundlebl.GetAll().Where(x => x.RecordStatus == 1 && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
+            }
+            else if(num == 2)
+            {
+                unbundleList = unbundlebl.GetAll().Where(x => x.RecordStatus == 1 && x.CreatedDate.ToShortDateString() == date.ToShortDateString() && x.BranchCorpOfficeID == bcoid).ToList();
+            }
+            
+            List<UnbundleViewModel> modelList = Match(unbundleList, bundleList);
+
+            DataTable dt = new DataTable();
+            dt.Columns.Add(new DataColumn("No", typeof(string)));
+            dt.Columns.Add(new DataColumn("Sack No", typeof(string)));
+            dt.Columns.Add(new DataColumn("Total Pieces", typeof(string)));
+            dt.Columns.Add(new DataColumn("Scanned Pieces", typeof(string)));
+            dt.Columns.Add(new DataColumn("Discrepancy Pieces", typeof(string)));
+            dt.Columns.Add(new DataColumn("Origin", typeof(string)));
+            dt.Columns.Add(new DataColumn("Weight", typeof(string)));
+            dt.Columns.Add(new DataColumn("AWB", typeof(string)));
+            dt.Columns.Add(new DataColumn("CreatedDate", typeof(string)));
+            dt.Columns.Add(new DataColumn("Branch", typeof(string)));
+            dt.Columns.Add(new DataColumn("ScannedBy", typeof(string)));
+            dt.BeginLoadData();
+            int ctr = 1;
+            foreach (UnbundleViewModel item in modelList)
+            {
+                DataRow row = dt.NewRow();
+                row[0] = "" + ctr++;
+                row[1] = item.SackNo;
+                row[2] = item.TotalPcs;
+                row[3] = item.ScannedPcs;
+                row[4] = item.TotalDiscrepency;
+                row[5] = item.Origin;
+                row[6] = item.Weight;
+                row[7] = item.AirwayBillNo;
+                row[8] = item.CreatedDate;
+                row[9] = item.Branch;
+                row[10] = item.ScannedBy;
+                dt.Rows.Add(row);
+            }
+            dt.EndLoadData();
+
+            return dt;
+        }
+
         public List<int> setBundleWidth()
         {
             List<int> width = new List<int>();

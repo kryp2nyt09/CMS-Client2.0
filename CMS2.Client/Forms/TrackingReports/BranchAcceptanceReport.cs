@@ -17,8 +17,10 @@ namespace CMS2.Client.Forms.TrackingReports
         {
             BranchAcceptanceBL branchAcceptanceBl = new BranchAcceptanceBL();
             ShipmentBL shipmentService = new ShipmentBL();
-            List<Shipment> shipments = shipmentService.FilterActive().Where(x => x.AcceptedBy.AssignedToArea.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.RecordStatus == 1 && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
-            List<BranchAcceptance> branchAcceptance = branchAcceptanceBl.GetAll().Where(x => x.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.RecordStatus == 1).ToList();
+            //List<Shipment> shipments = shipmentService.FilterActive().Where(x => x.AcceptedBy.AssignedToArea.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.RecordStatus == 1 && x.CreatedDate.ToShortDateString() == date.ToShortDateString() && x.Booking.BookingStatus.BookingStatusName == "Picked-up").ToList();
+
+            List<Shipment> shipments = shipmentService.FilterActive().Where(x => x.AcceptedBy.AssignedToArea.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.RecordStatus == 1 && x.Booking.BookingStatus.BookingStatusName == "Picked-up").ToList();
+            List<BranchAcceptance> branchAcceptance = branchAcceptanceBl.GetAll().Where(x => x.Users.Employee.AssignedToArea.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.RecordStatus == 1 && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
 
             List<BranchAcceptanceViewModel> list = Match(branchAcceptance, shipments);
 
@@ -67,6 +69,183 @@ namespace CMS2.Client.Forms.TrackingReports
             return dt;
         }
 
+        //Complete Filter
+        public DataTable getBranchAcceptanceDataByFilter(DateTime date, Guid revenueUnitId, string driver, Guid batchId)
+        {
+            BranchAcceptanceBL branchAcceptanceBl = new BranchAcceptanceBL();
+            ShipmentBL shipmentService = new ShipmentBL();
+            //List<Shipment> shipments = shipmentService.FilterActive().Where(x => x.AcceptedBy.AssignedToArea.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.RecordStatus == 1 && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
+            List<Shipment> shipments = shipmentService.FilterActive().Where(x => x.AcceptedBy.AssignedToArea.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.RecordStatus == 1 && x.Booking.BookingStatus.BookingStatusName == "Picked-up").ToList();
+            // List<BranchAcceptance> branchAcceptance = branchAcceptanceBl.GetAll().Where(x => x.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.RecordStatus == 1 && x.BatchID == batchId && x.Driver == driver).ToList();
+            //List<BranchAcceptance> branchAcceptance = branchAcceptanceBl.GetAll().Where(x => x.Users.Employee.AssignedToArea.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.Users.Employee.AssignedToArea.RevenueUnitId == revenueUnitId && x.RecordStatus == 1 && x.BatchID == batchId && x.Driver == driver && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
+            List<BranchAcceptance> branchAcceptance = branchAcceptanceBl.GetAll().Where(x => x.Users.Employee.AssignedToArea.RevenueUnitId == revenueUnitId && x.RecordStatus == 1 && x.BatchID == batchId && x.Driver == driver && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
+            List<BranchAcceptanceViewModel> list = Match(branchAcceptance, shipments);
+
+            DataTable dt = new DataTable();
+            dt.Columns.Add(new DataColumn("No", typeof(string)));
+            dt.Columns.Add(new DataColumn("Area/Branch", typeof(string)));
+            dt.Columns.Add(new DataColumn("Driver", typeof(string)));
+            dt.Columns.Add(new DataColumn("Checker", typeof(string)));
+            dt.Columns.Add(new DataColumn("Plate #", typeof(string)));
+            dt.Columns.Add(new DataColumn("Batch", typeof(string)));
+            dt.Columns.Add(new DataColumn("AWB", typeof(string)));
+            dt.Columns.Add(new DataColumn("Recieved(Qty)", typeof(string)));
+            dt.Columns.Add(new DataColumn("Discrepancy(Qty)", typeof(string)));
+            dt.Columns.Add(new DataColumn("Total Qty", typeof(string)));
+            dt.Columns.Add(new DataColumn("BCO", typeof(string)));
+            dt.Columns.Add(new DataColumn("BSO", typeof(string)));
+
+            dt.Columns.Add(new DataColumn("ScannedBy", typeof(string)));
+            dt.Columns.Add(new DataColumn("Remarks", typeof(string)));
+            dt.Columns.Add(new DataColumn("Notes", typeof(string)));
+            dt.BeginLoadData();
+            int ctr = 1;
+            foreach (BranchAcceptanceViewModel item in list)
+            {
+                DataRow row = dt.NewRow();
+                row[0] = ctr++.ToString();
+                row[1] = item.Area.ToString();
+                row[2] = item.Driver.ToString();
+                row[3] = item.Checker.ToString();
+                row[4] = item.PlateNo.ToString();
+                row[5] = item.Batch.ToString();
+                row[6] = item.AirwayBillNo.ToString();
+                row[7] = item.TotalRecieved.ToString();
+                row[8] = item.TotalDiscrepency.ToString();
+                row[9] = item.Total.ToString();
+
+                row[10] = item.BCO;
+                row[11] = item.BSO;
+                row[12] = item.ScannedBy;
+                row[13] = item.Remarks;
+                row[14] = item.Notes;
+                dt.Rows.Add(row);
+            }
+            dt.EndLoadData();
+
+            return dt;
+        }
+
+        //Filter By Batch and BCO only
+        public DataTable getBranchAcceptanceDataByBatch(DateTime date, Guid revenueUnitId, Guid batchId)
+        {
+            BranchAcceptanceBL branchAcceptanceBl = new BranchAcceptanceBL();
+            ShipmentBL shipmentService = new ShipmentBL();
+            // List<Shipment> shipments = shipmentService.FilterActive().Where(x => x.AcceptedBy.AssignedToArea.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.RecordStatus == 1 && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
+            //List<BranchAcceptance> branchAcceptance = branchAcceptanceBl.GetAll().Where(x => x.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.RecordStatus == 1 && x.BatchID == batchId).ToList();
+            List<Shipment> shipments = shipmentService.FilterActive().Where(x => x.AcceptedBy.AssignedToArea.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.RecordStatus == 1 && x.Booking.BookingStatus.BookingStatusName == "Picked-up").ToList();
+            //List<BranchAcceptance> branchAcceptance = branchAcceptanceBl.GetAll().Where(x => x.RecordStatus == 1 && x.Users.Employee.AssignedToArea.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.Users.Employee.AssignedToArea.RevenueUnitId == revenueUnitId && x.BatchID == batchId && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).Distinct().ToList();
+            List<BranchAcceptance> branchAcceptance = branchAcceptanceBl.GetAll().Where(x => x.RecordStatus == 1 && x.Users.Employee.AssignedToArea.RevenueUnitId == revenueUnitId && x.BatchID == batchId && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).Distinct().ToList();
+
+            List<BranchAcceptanceViewModel> list = Match(branchAcceptance, shipments);
+
+            DataTable dt = new DataTable();
+            dt.Columns.Add(new DataColumn("No", typeof(string)));
+            dt.Columns.Add(new DataColumn("Area/Branch", typeof(string)));
+            dt.Columns.Add(new DataColumn("Driver", typeof(string)));
+            dt.Columns.Add(new DataColumn("Checker", typeof(string)));
+            dt.Columns.Add(new DataColumn("Plate #", typeof(string)));
+            dt.Columns.Add(new DataColumn("Batch", typeof(string)));
+            dt.Columns.Add(new DataColumn("AWB", typeof(string)));
+            dt.Columns.Add(new DataColumn("Recieved(Qty)", typeof(string)));
+            dt.Columns.Add(new DataColumn("Discrepancy(Qty)", typeof(string)));
+            dt.Columns.Add(new DataColumn("Total Qty", typeof(string)));
+            dt.Columns.Add(new DataColumn("BCO", typeof(string)));
+            dt.Columns.Add(new DataColumn("BSO", typeof(string)));
+
+            dt.Columns.Add(new DataColumn("ScannedBy", typeof(string)));
+            dt.Columns.Add(new DataColumn("Remarks", typeof(string)));
+            dt.Columns.Add(new DataColumn("Notes", typeof(string)));
+            dt.BeginLoadData();
+            int ctr = 1;
+            foreach (BranchAcceptanceViewModel item in list)
+            {
+                DataRow row = dt.NewRow();
+                row[0] = ctr++.ToString();
+                row[1] = item.Area.ToString();
+                row[2] = item.Driver.ToString();
+                row[3] = item.Checker.ToString();
+                row[4] = item.PlateNo.ToString();
+                row[5] = item.Batch.ToString();
+                row[6] = item.AirwayBillNo.ToString();
+                row[7] = item.TotalRecieved.ToString();
+                row[8] = item.TotalDiscrepency.ToString();
+                row[9] = item.Total.ToString();
+
+                row[10] = item.BCO;
+                row[11] = item.BSO;
+                row[12] = item.ScannedBy;
+                row[13] = item.Remarks;
+                row[14] = item.Notes;
+                dt.Rows.Add(row);
+            }
+            dt.EndLoadData();
+
+            return dt;
+        }
+
+
+        //Filter By BCOID and Driver and ALl batch
+        public DataTable getBranchAcceptanceData1(DateTime date, Guid revenueUnitId, string driver)
+        {
+            BranchAcceptanceBL branchAcceptanceBl = new BranchAcceptanceBL();
+            ShipmentBL shipmentService = new ShipmentBL();
+            //List<Shipment> shipments = shipmentService.FilterActive().Where(x => x.AcceptedBy.AssignedToArea.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.RecordStatus == 1 && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
+            //List<BranchAcceptance> branchAcceptance = branchAcceptanceBl.GetAll().Where(x => x.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.RecordStatus == 1 && x.BatchID == batchId).ToList();
+            List<Shipment> shipments = shipmentService.FilterActive().Where(x => x.AcceptedBy.AssignedToArea.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.RecordStatus == 1 && x.Booking.BookingStatus.BookingStatusName == "Picked-up").ToList();
+
+            //List<BranchAcceptance> branchAcceptance = branchAcceptanceBl.GetAll().Where(x => x.RecordStatus == 1 && x.Users.Employee.AssignedToArea.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.Users.Employee.AssignedToArea.RevenueUnitId == revenueUnitId && x.Driver == driver && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).Distinct().ToList();
+            List<BranchAcceptance> branchAcceptance = branchAcceptanceBl.GetAll().Where(x => x.RecordStatus == 1 && x.Users.Employee.AssignedToArea.RevenueUnitId == revenueUnitId && x.Driver == driver && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).Distinct().ToList();
+            List<BranchAcceptanceViewModel> list = Match(branchAcceptance, shipments);
+
+            DataTable dt = new DataTable();
+            dt.Columns.Add(new DataColumn("No", typeof(string)));
+            dt.Columns.Add(new DataColumn("Area/Branch", typeof(string)));
+            dt.Columns.Add(new DataColumn("Driver", typeof(string)));
+            dt.Columns.Add(new DataColumn("Checker", typeof(string)));
+            dt.Columns.Add(new DataColumn("Plate #", typeof(string)));
+            dt.Columns.Add(new DataColumn("Batch", typeof(string)));
+            dt.Columns.Add(new DataColumn("AWB", typeof(string)));
+            dt.Columns.Add(new DataColumn("Recieved(Qty)", typeof(string)));
+            dt.Columns.Add(new DataColumn("Discrepancy(Qty)", typeof(string)));
+            dt.Columns.Add(new DataColumn("Total Qty", typeof(string)));
+            dt.Columns.Add(new DataColumn("BCO", typeof(string)));
+            dt.Columns.Add(new DataColumn("BSO", typeof(string)));
+
+            dt.Columns.Add(new DataColumn("ScannedBy", typeof(string)));
+            dt.Columns.Add(new DataColumn("Remarks", typeof(string)));
+            dt.Columns.Add(new DataColumn("Notes", typeof(string)));
+            dt.BeginLoadData();
+            int ctr = 1;
+            foreach (BranchAcceptanceViewModel item in list.Distinct())
+            {
+                DataRow row = dt.NewRow();
+                row[0] = ctr++.ToString();
+                row[1] = item.Area.ToString();
+                row[2] = item.Driver.ToString();
+                row[3] = item.Checker.ToString();
+                row[4] = item.PlateNo.ToString();
+                row[5] = item.Batch.ToString();
+                row[6] = item.AirwayBillNo.ToString();
+                row[7] = item.TotalRecieved.ToString();
+                row[8] = item.TotalDiscrepency.ToString();
+                row[9] = item.Total.ToString();
+
+                row[10] = item.BCO;
+                row[11] = item.BSO;
+                row[12] = item.ScannedBy;
+                row[13] = item.Remarks;
+                row[14] = item.Notes;
+                dt.Rows.Add(row);
+            }
+            dt.EndLoadData();
+
+            return dt;
+        }
+
+
+
+
         public List<int> setBranchAcceptanceWidth()
         {
             List<int> width = new List<int>();
@@ -95,9 +274,10 @@ namespace CMS2.Client.Forms.TrackingReports
         {
 
             PackageNumberBL _packageNumberService = new PackageNumberBL();
-            BranchAcceptanceBL _branchAcceptanceService = new BranchAcceptanceBL();
+            //BranchAcceptanceBL _branchAcceptanceService = new BranchAcceptanceBL();
             List<BranchAcceptanceViewModel> _results = new List<BranchAcceptanceViewModel>();
-           
+            List<BranchAcceptanceViewModel> _resultsFilter = new List<BranchAcceptanceViewModel>();
+
 
             foreach (Shipment shipment in _shipments)
             {
@@ -107,7 +287,7 @@ namespace CMS2.Client.Forms.TrackingReports
 
                 foreach (PackageNumber packagenumber in _packageNumbers)
                 {
-                    BranchAcceptance _brachAcceptance = _branchAcceptanceService.GetAll().Where(x => x.Cargo == packagenumber.PackageNo).FirstOrDefault();
+                    BranchAcceptance _brachAcceptance = _branchAcceptances.Find(x => x.Cargo == packagenumber.PackageNo);
 
 
                     if (_brachAcceptance != null)
@@ -115,7 +295,7 @@ namespace CMS2.Client.Forms.TrackingReports
                         if (isAirawayBillExist != null)
                         {
                             isAirawayBillExist.TotalRecieved++;
-                            isAirawayBillExist.Total += model.TotalRecieved;
+                            isAirawayBillExist.Total += isAirawayBillExist.TotalRecieved;
                         }
                         else
                         {
@@ -149,7 +329,7 @@ namespace CMS2.Client.Forms.TrackingReports
                         if (isAirawayBillExist != null)
                         {
                             isAirawayBillExist.TotalDiscrepency++;
-                            isAirawayBillExist.Total += model.TotalDiscrepency;
+                            isAirawayBillExist.Total += isAirawayBillExist.TotalDiscrepency;
                         }
                         else
                         {
@@ -178,9 +358,11 @@ namespace CMS2.Client.Forms.TrackingReports
                 }
             }
 
-            return _results;
-
-
+            _resultsFilter = _results.GroupBy(d => new { d.Area, d.Driver, d.Checker, d.PlateNo, d.Batch, d.AirwayBillNo,
+                                d.TotalRecieved, d.TotalDiscrepency, d.Total, d.Match, d.CreatedBy, d.BCO, d.BSO, d.ScannedBy, d.Remarks, d.Notes})
+                                .Select(d => d.First())
+                                .ToList();
+            return _resultsFilter;
 
         }
     }

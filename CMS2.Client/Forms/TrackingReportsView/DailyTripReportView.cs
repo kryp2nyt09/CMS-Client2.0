@@ -40,8 +40,8 @@ namespace CMS2.Client.Forms.TrackingReportsView
 
             txtDate.Value = TrackingReportGlobalModel.Date;
             txtArea.Value = TrackingReportGlobalModel.Area;
-            txtDriver.Value = TrackingReportGlobalModel.Driver;
-            txtChecker.Value = TrackingReportGlobalModel.Checker;
+            txtBatch.Value = TrackingReportGlobalModel.Batch;
+            txtpaymentMode.Value = TrackingReportGlobalModel.PaymentMode;
             txtPlateNo.Value = TrackingReportGlobalModel.PlateNo;
 
             txtScannedBy.Value = TrackingReportGlobalModel.ScannedBy;

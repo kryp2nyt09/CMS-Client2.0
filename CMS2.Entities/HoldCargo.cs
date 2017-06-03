@@ -35,6 +35,9 @@ namespace CMS2.Entities
         public string Notes { get; set; }
 
         public bool Uploaded { get; set; }
-        
+
+        [ForeignKey("UserID")]
+        public virtual User User { get; set; }
+
     }
 }

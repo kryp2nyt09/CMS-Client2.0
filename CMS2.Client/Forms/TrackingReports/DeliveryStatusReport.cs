@@ -58,6 +58,94 @@ namespace CMS2.Client.Forms.TrackingReports
             return dt;
         }
 
+        public DataTable getDataByAllFilter(DateTime date, string revenueUnitName, Guid? deliveredById, Guid? statusId, int num)
+        {
+
+            DeliveryBL deliveryStatusBL = new DeliveryBL();
+            List<Delivery> list = new List<Delivery>();
+            List <DeliveryStatusViewModel> resultList = new List<DeliveryStatusViewModel>();
+            if (num == 1)
+            {
+                list = deliveryStatusBL.GetAll().Where
+                    (x => x.RecordStatus == 1 
+                    && x.DeliveredBy.EmployeeId == deliveredById 
+                    && x.DeliveryStatus.DeliveryStatusId == statusId 
+                    //&& x.DeliveredBy.AssignedToArea.RevenueUnitName == revenueUnitName
+                    && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
+                List<DeliveryStatusViewModel> modelList = Match(list);
+                resultList = modelList.FindAll(x => x.Area == revenueUnitName);
+
+            }
+            else if(num == 2)
+            {
+                list = deliveryStatusBL.GetAll().Where(x => x.RecordStatus == 1 && x.DeliveryStatus.DeliveryStatusId == statusId && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
+                List<DeliveryStatusViewModel> modelList = Match(list);
+                resultList = modelList.FindAll(x => x.Area == revenueUnitName);
+            }
+            else if (num == 3)
+            {
+                list = deliveryStatusBL.GetAll().Where(x => x.RecordStatus == 1 && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
+                List<DeliveryStatusViewModel> modelList = Match(list);
+                resultList = modelList.FindAll(x => x.Area == revenueUnitName);
+            }
+            else if (num == 4)
+            {
+                list = deliveryStatusBL.GetAll().Where(x => x.RecordStatus == 1 && x.DeliveredBy.EmployeeId == deliveredById && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
+                List<DeliveryStatusViewModel> modelList = Match(list);
+                resultList = modelList.FindAll(x => x.Area == revenueUnitName);
+            }
+            else if (num == 5)
+            {
+                list = deliveryStatusBL.GetAll().Where(x => x.RecordStatus == 1 && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
+                List<DeliveryStatusViewModel> modelList = Match(list);
+                resultList = modelList;
+            }
+
+            
+
+            DataTable dt = new DataTable();
+            dt.Columns.Add(new DataColumn("No", typeof(string)));
+            dt.Columns.Add(new DataColumn("AWB", typeof(string)));
+            dt.Columns.Add(new DataColumn("QTY", typeof(string)));
+            dt.Columns.Add(new DataColumn("Status", typeof(string)));
+            dt.Columns.Add(new DataColumn("Remarks", typeof(string)));
+            dt.Columns.Add(new DataColumn("Area", typeof(string)));
+            dt.Columns.Add(new DataColumn("Driver", typeof(string)));
+            dt.Columns.Add(new DataColumn("Checker", typeof(string)));
+            dt.Columns.Add(new DataColumn("Plate No", typeof(string)));
+            dt.Columns.Add(new DataColumn("Batch", typeof(string)));
+
+            dt.Columns.Add(new DataColumn("BCO", typeof(string)));
+            dt.Columns.Add(new DataColumn("ScannedBy", typeof(string)));
+            dt.Columns.Add(new DataColumn("DeliveredBy", typeof(string)));
+            dt.Columns.Add(new DataColumn("ReceivedBy", typeof(string)));
+            dt.BeginLoadData();
+            int ctr = 1;
+            foreach (DeliveryStatusViewModel item in resultList)
+            {
+                DataRow row = dt.NewRow();
+                row[0] = (ctr++).ToString();
+                row[1] = item.AirwayBillNo;
+                row[2] = item.QTY.ToString();
+                row[3] = item.Status;
+                row[4] = item.Remarks;
+                row[5] = item.Area;
+                row[6] = item.Driver;
+                row[7] = item.Checker;
+                row[8] = item.PlateNo;
+                row[9] = item.Batch;
+                row[10] = item.BCO;
+                row[11] = item.ScannedBy;
+                row[12] = item.DeliveredBy;
+                row[13] = item.ReceivedBy;
+
+                dt.Rows.Add(row);
+            }
+            dt.EndLoadData();
+
+            return dt;
+        }
+
         public List<int> setWidth()
         {
             List<int> width = new List<int>();
@@ -73,19 +161,25 @@ namespace CMS2.Client.Forms.TrackingReports
             width.Add(110);
             width.Add(0);
             width.Add(110);
+            width.Add(110);
             return width;
         }
 
         public List<DeliveryStatusViewModel> Match(List<Delivery> _deliveries)
         {
+            BranchCorpOfficeBL bcoService = new BranchCorpOfficeBL();
             DeliveryStatusBL status = new DeliveryStatusBL();
             DeliveryRemarkBL remark = new DeliveryRemarkBL();
             DistributionBL distributionService = new DistributionBL();
+            DeliveryReceiptBL deliveryReceiptService = new DeliveryReceiptBL();
             ShipmentBL shipmentService = new ShipmentBL();            
             PackageNumberBL _packageNumberService = new PackageNumberBL();
 
             List<DeliveryStatusViewModel> _results = new List<DeliveryStatusViewModel>();
+            
             List<Distribution> distributions = distributionService.GetAll().ToList();
+
+            List<DeliveryReceipt> deliveryReceipt = deliveryReceiptService.GetAll().ToList();
 
             foreach (Delivery delivery in _deliveries)
             {               
@@ -104,11 +198,13 @@ namespace CMS2.Client.Forms.TrackingReports
                     model.QTY++;
                     model.Status = delivery.DeliveryStatus.DeliveryStatusName;
                     model.Remarks = "NA";
+                    model.DeliveredBy = delivery.DeliveredBy.FullName;
                     if (delivery.DeliveryRemark != null)
                     {
                         model.Remarks = delivery.DeliveryRemark.DeliveryRemarkName;
                     }
                     Distribution dis = distributions.Find(x => x.ShipmentId == delivery.ShipmentId);
+                    DeliveryReceipt dReceipt = deliveryReceipt.Find(x => x.DeliveryId == delivery.DeliveryId);
                     //List<Distribution> list = distributions.Where( x => x.ShipmentId == delivery.ShipmentId).Distinct().ToList();
                     //foreach(Distribution dis in list)
                     //{
@@ -126,10 +222,16 @@ namespace CMS2.Client.Forms.TrackingReports
                     model.PlateNo = dis.PlateNo;
                     model.BCO = dis.Area.City.BranchCorpOffice.BranchCorpOfficeName;
                     model.ScannedBy = AppUser.User.Employee.FullName;
+                    model.ReceivedBy = dReceipt.ReceivedBy;
                     _results.Add(model);
                 }
             }
-            return _results;
+
+            string bcoName = bcoService.GetAll().Where(x => x.BranchCorpOfficeId == GlobalVars.DeviceBcoId).Select(x => x.BranchCorpOfficeName).ToString();
+            List<DeliveryStatusViewModel> _resultsFilter = _results.FindAll(x => x.BCO == bcoName);
+            //List<DeliveryStatusViewModel> resultList = modelList.FindAll(x => x.Area == revenueUnitName);
+            //return _results;
+            return _resultsFilter;
 
         }
     }

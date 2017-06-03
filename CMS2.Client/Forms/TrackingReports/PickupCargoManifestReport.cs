@@ -20,7 +20,7 @@ namespace CMS2.Client.Forms.TrackingReports
             ShipmentBL _shipmentService = new ShipmentBL();
             List<Shipment> _shipments = _shipmentService.GetAll().Where(x => x.Booking.BookingStatus.BookingStatusName == "Picked-up" && x.AcceptedBy.AssignedToArea.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.RecordStatus == 1 && (x.CreatedDate).ToShortDateString() == date.ToShortDateString()).ToList();
 
-            List<PickupCargoManifestViewModel> modelList = Match(_shipments);
+            List<PickupCargoManifestViewModel> modelList = Match(_shipments).OrderByDescending(x => x.AirwayBillNo).ToList();
 
             DataTable dt = new DataTable();
 
@@ -68,6 +68,66 @@ namespace CMS2.Client.Forms.TrackingReports
 
             return dt;
         }
+
+
+        public DataTable getPickupCargoDataByRevenueUnit(DateTime date, Guid revenueUnitTypeId, Guid revenueUnitId)
+        {
+            //GET LIST 
+            ShipmentBL _shipmentService = new ShipmentBL();
+            List<Shipment> _shipments = _shipmentService.GetAll().Where(x => x.Booking.BookingStatus.BookingStatusName == "Picked-up" && x.AcceptedBy.AssignedToArea.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.RecordStatus == 1 && (x.CreatedDate).ToShortDateString() == date.ToShortDateString() && x.AcceptedBy.AssignedToAreaId == revenueUnitId && x.AcceptedBy.AssignedToArea.RevenueUnitTypeId == revenueUnitTypeId).ToList();
+
+            List<PickupCargoManifestViewModel> modelList = Match(_shipments).OrderByDescending(x => x.AirwayBillNo).ToList();
+
+            DataTable dt = new DataTable();
+
+            dt.Columns.Add(new DataColumn("No", typeof(string)));
+            dt.Columns.Add(new DataColumn("AWB", typeof(string)));
+            dt.Columns.Add(new DataColumn("Shipper", typeof(string)));
+            dt.Columns.Add(new DataColumn("Shipper Address", typeof(string)));
+            dt.Columns.Add(new DataColumn("Consignee", typeof(string)));
+            dt.Columns.Add(new DataColumn("Consignee Address", typeof(string)));
+            dt.Columns.Add(new DataColumn("Commodity", typeof(string)));
+            dt.Columns.Add(new DataColumn("QTY", typeof(string)));
+            dt.Columns.Add(new DataColumn("AGW", typeof(string)));
+            dt.Columns.Add(new DataColumn("Service Mode", typeof(string)));
+            dt.Columns.Add(new DataColumn("Payment Mode", typeof(string)));
+            dt.Columns.Add(new DataColumn("Amount", typeof(string)));
+
+            dt.Columns.Add(new DataColumn("Area", typeof(string)));
+            dt.Columns.Add(new DataColumn("Driver", typeof(string)));
+            dt.Columns.Add(new DataColumn("Checker", typeof(string)));
+            dt.Columns.Add(new DataColumn("Checker", typeof(string)));
+            dt.BeginLoadData();
+            int ctr = 1;
+            foreach (PickupCargoManifestViewModel item in modelList)
+            {
+                DataRow row = dt.NewRow();
+                row[0] = (ctr++).ToString();
+                row[1] = item.AirwayBillNo;
+                row[2] = item.Shipper;
+                row[3] = item.ShipperAddress;
+                row[4] = item.Consignee;
+                row[5] = item.ConsigneeAddress;
+                row[6] = item.Commodity;
+                row[7] = item.QTY.ToString();
+                row[8] = item.AGW.ToString();
+                row[9] = item.ServiceMode;
+                row[10] = item.PaymentMode;
+                row[11] = item.Amount;
+                row[12] = item.Area;
+                row[13] = item.Driver;
+                row[14] = item.Checker;
+                row[15] = item.ScannedBy;
+                dt.Rows.Add(row);
+            }
+            dt.EndLoadData();
+
+            return dt;
+        }
+
+
+
+
 
         public List<int> setPickUpCargoWidth()
         {
@@ -136,6 +196,7 @@ namespace CMS2.Client.Forms.TrackingReports
                     model.ServiceMode = shipment.ServiceMode.ServiceModeName;
                     model.PaymentMode = shipment.PaymentMode.PaymentModeName;
                     model.Amount = shipment.TotalAmount.ToString();
+                    model.ScannedBy = shipment.AcceptedBy.FullName;
                     try
                     {
                         model.Area = (shipment.Booking.AssignedToArea != null) ? shipment.Booking.AssignedToArea.City.CityName : "N/A";

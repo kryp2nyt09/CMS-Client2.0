@@ -28,9 +28,9 @@ namespace CMS2.Client
             bool xBool = Convert.ToBoolean(ConfigurationManager.AppSettings["isSync"]);
             if (!xBool)
             {
-                Extract_Database extract = new Extract_Database();
-                Application.Run(extract);
-                Application.Exit();
+                //Extract_Database extract = new Extract_Database();
+                //Application.Run(extract);
+                //Application.Exit();
             }
             else
             {

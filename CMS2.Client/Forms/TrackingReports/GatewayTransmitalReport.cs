@@ -78,6 +78,93 @@ namespace CMS2.Client.Forms.TrackingReports
             return dt;
         }
 
+        public DataTable getGWDatabyFilter(DateTime date, Guid? bcoid, string driver, string gateway, Guid? batchid, Guid? commodityTypeId, string mawb, int num)
+        {
+            GatewayTransmittalBL gatewayBl = new GatewayTransmittalBL();
+
+            List<GatewayTransmittal> list = new List<GatewayTransmittal>();
+
+            if (num == 0)
+            {
+                list = gatewayBl.GetAll().Where(x => x.RecordStatus == 1 && x.CreatedDate.ToShortDateString() == date.ToShortDateString() && x.MasterAirwayBillNo == mawb).ToList();
+            }
+            else if(num == 1)
+            {
+                list = gatewayBl.GetAll().Where
+                (x => x.RecordStatus == 1
+                && ((x.DestinationID == bcoid && x.DestinationID != null) || (x.DestinationID == x.DestinationID && x.DestinationID == null))
+                && ((x.Driver == driver && x.Driver != "All") || (x.Driver == x.Driver && x.Driver == "All"))
+                && ((x.Gateway == gateway && x.Gateway != "All") || (x.Gateway == x.Gateway && x.Gateway == "All"))
+                && ((x.BatchID == batchid && x.BatchID != null) || (x.BatchID == x.BatchID && x.BatchID == null))
+                && ((x.CommodityTypeID == commodityTypeId && x.CommodityTypeID != null) || (x.CommodityTypeID == x.CommodityTypeID && x.CommodityTypeID == null))
+                && x.CreatedDate.ToShortDateString() == date.ToShortDateString()
+                ).ToList();
+            }
+
+             List<GatewayTransmitalViewModel> modelList = Match(list);
+
+            DataTable dt = new DataTable();
+            dt.Columns.Add(new DataColumn("No", typeof(string)));
+            dt.Columns.Add(new DataColumn("AWB", typeof(string)));
+            dt.Columns.Add(new DataColumn("Shipper", typeof(string)));
+            dt.Columns.Add(new DataColumn("Consignee", typeof(string)));
+            dt.Columns.Add(new DataColumn("Address", typeof(string)));
+            dt.Columns.Add(new DataColumn("Commodity Type", typeof(string)));
+            dt.Columns.Add(new DataColumn("Commodity", typeof(string)));
+            dt.Columns.Add(new DataColumn("Qty", typeof(string)));
+            dt.Columns.Add(new DataColumn("AGW", typeof(string)));
+            dt.Columns.Add(new DataColumn("Service Mode", typeof(string)));
+            dt.Columns.Add(new DataColumn("Payment Mode", typeof(string)));
+
+            dt.Columns.Add(new DataColumn("Gateway", typeof(string)));
+            dt.Columns.Add(new DataColumn("Destination", typeof(string)));
+            dt.Columns.Add(new DataColumn("Batch", typeof(string)));
+
+            dt.Columns.Add(new DataColumn("CreatedDate", typeof(string)));
+
+            dt.Columns.Add(new DataColumn("Driver", typeof(string)));
+            dt.Columns.Add(new DataColumn("PlateNo", typeof(string)));
+            dt.Columns.Add(new DataColumn("MAWB", typeof(string)));
+            dt.Columns.Add(new DataColumn("ScannedBy", typeof(string)));
+
+            dt.BeginLoadData();
+            int ctr = 1;
+            foreach (GatewayTransmitalViewModel item in modelList)
+            {
+                DataRow row = dt.NewRow();
+                row[0] = (ctr++).ToString();
+                row[1] = item.AirwayBillNo;
+                row[2] = item.Shipper;
+                row[3] = item.Consignee;
+                row[4] = item.Address;
+                row[5] = item.CommodityType;
+                row[6] = item.Commodity;
+                row[7] = item.QTY;
+                row[8] = item.AGW;
+                row[9] = item.ServiceMode;
+                row[10] = item.PaymentMode;
+
+                row[11] = item.Gateway;
+                row[12] = item.Destination;
+                row[13] = item.Batch;
+
+                row[14] = item.CreatedDate.ToShortDateString();
+
+                row[15] = item.Driver;
+                row[16] = item.PlateNo;
+                row[17] = item.MAWB;
+                row[18] = item.ScannedBy;
+                dt.Rows.Add(row);
+            }
+            dt.EndLoadData();
+
+            return dt;
+        }
+
+
+
+
+
         public List<int> setWidth()
         {
             List<int> width = new List<int>();

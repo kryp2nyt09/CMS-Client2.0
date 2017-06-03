@@ -29,6 +29,7 @@ namespace CMS2.Client.Forms.TrackingReportsView
             txtDriver.Value = TrackingReportGlobalModel.Driver;
             txtChecker.Value = TrackingReportGlobalModel.Checker;
             txtScannedBy.Value = TrackingReportGlobalModel.ScannedBy;
+            txtRevenueUnit.Value = TrackingReportGlobalModel.Area;
             //txtRemarks.Value = TrackingReportGlobalModel.Remarks;
             //txtNotes.Value = TrackingReportGlobalModel.Notes;
         

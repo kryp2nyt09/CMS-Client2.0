@@ -53,6 +53,92 @@ namespace CMS2.Client.Forms.TrackingReports
             return dt;
         }
 
+        public DataTable getDatabyFilter(DateTime date, string gatewayName, Guid? bcoid, Guid? commodityTypeId, string flightNumber, string mawb, int num)
+        {
+            GatewayInboundBL gatewayInboundBl = new GatewayInboundBL();
+            //List<GatewayInbound> list = list = gatewayInboundBl.GetAll().Where(x => x.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.RecordStatus == 1 && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
+            List<GatewayInbound> list = new List<GatewayInbound>();
+            if (num == 0)
+            {
+                list = gatewayInboundBl.GetAll().Where(x => x.MasterAirwayBill == mawb && x.RecordStatus == 1 && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
+            }
+            else if(num == 1)
+            {
+                list = gatewayInboundBl.GetAll().Where(x => x.Gateway == gatewayName && x.OriginBCOID == bcoid && x.CommodityID == commodityTypeId && x.FlightNumber == flightNumber && x.RecordStatus == 1 && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
+            }
+            else if (num == 2)
+            {
+                list = gatewayInboundBl.GetAll().Where(x => x.Gateway == gatewayName && x.CommodityID == commodityTypeId && x.FlightNumber == flightNumber && x.RecordStatus == 1 && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
+            }
+            else if (num == 3)
+            {
+                list = gatewayInboundBl.GetAll().Where(x => x.Gateway == gatewayName && x.FlightNumber == flightNumber && x.RecordStatus == 1 && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
+            }
+            else if (num == 4)
+            {
+                list = gatewayInboundBl.GetAll().Where(x => x.Gateway == gatewayName && x.RecordStatus == 1 && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
+            }
+            else if (num == 5)
+            {
+                list = gatewayInboundBl.GetAll().Where(x => x.RecordStatus == 1 && x.OriginBCOID == bcoid && x.CommodityID == commodityTypeId && x.FlightNumber == flightNumber && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
+            }
+            else if (num == 6)
+            {
+                list = gatewayInboundBl.GetAll().Where(x => x.RecordStatus == 1 && x.OriginBCOID == bcoid && x.FlightNumber == flightNumber && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
+            }
+            else if (num == 7)
+            {
+                list = gatewayInboundBl.GetAll().Where(x => x.RecordStatus == 1 && x.OriginBCOID == bcoid && x.CommodityID == commodityTypeId && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
+            }
+            else if (num == 8)
+            {
+                list = gatewayInboundBl.GetAll().Where(x => x.RecordStatus == 1 && x.OriginBCOID == bcoid && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
+            }
+            else if (num == 9)
+            {
+                list = gatewayInboundBl.GetAll().Where(x => x.RecordStatus == 1 && x.Gateway == gatewayName && x.OriginBCOID == bcoid && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
+            }
+            else if (num == 10)
+            {
+                list = gatewayInboundBl.GetAll().Where(x => x.RecordStatus == 1 && x.Gateway == gatewayName && x.OriginBCOID == bcoid && x.FlightNumber == flightNumber && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
+            }
+
+            List<GatewayInboundViewModel> modelList = Match(list);
+
+            DataTable dt = new DataTable();
+            dt.Columns.Add(new DataColumn("No", typeof(string)));
+            dt.Columns.Add(new DataColumn("Gateway", typeof(string)));
+            dt.Columns.Add(new DataColumn("Origin", typeof(string)));
+            dt.Columns.Add(new DataColumn("Pieces", typeof(string)));
+            dt.Columns.Add(new DataColumn("MAWB", typeof(string)));
+            dt.Columns.Add(new DataColumn("Flight #", typeof(string)));
+            dt.Columns.Add(new DataColumn("Commodity Type", typeof(string)));
+            dt.Columns.Add(new DataColumn("AWB", typeof(string)));
+            dt.Columns.Add(new DataColumn("CreatedDate", typeof(string)));
+
+            dt.Columns.Add(new DataColumn("ScannedBy", typeof(string)));
+            dt.BeginLoadData();
+            int ctr = 1;
+            foreach (GatewayInboundViewModel item in modelList)
+            {
+                DataRow row = dt.NewRow();
+                row[0] = (ctr++).ToString();
+                row[1] = item.Gateway;
+                row[2] = item.Origin;
+                row[3] = item.Pieces;
+                row[4] = item.MAWB;
+                row[5] = item.FlightNo;
+                row[6] = item.CommodityType;
+                row[7] = item.AirwayBillNo;
+                row[8] = item.CreatedDate.ToShortDateString();
+                row[9] = item.ScannedBy;
+                dt.Rows.Add(row);
+            }
+            dt.EndLoadData();
+
+            return dt;
+        }
+
         public List<int> setWidth()
         {
             List<int> width = new List<int>();

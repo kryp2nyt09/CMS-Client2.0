@@ -29,5 +29,8 @@ namespace CMS2.Entities
 
         [ForeignKey("BranchCorpOfficeID")]
         public virtual BranchCorpOffice BranchCorpOffice { get; set; }
+
+        [ForeignKey("UserID")]
+        public virtual User User { get; set; }
     }
 }

@@ -32,6 +32,10 @@ namespace CMS2.Client.Forms.TrackingReportsView
         public static DataTable table2 { get; set; }
         public static DataTable table3 { get; set; }
         public static DataTable table4 { get; set; }
+        public static String PaymentMode { get; set; }
+        public static String Status { get; set; }
+        public static String DeliveredBy { get; set; }
+
 
     }
 }
