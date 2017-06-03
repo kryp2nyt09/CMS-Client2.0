@@ -9202,5 +9202,8 @@
         private System.Windows.Forms.Label label145;
         private Telerik.WinControls.UI.RadDropDownList cmbHC_Revenuetype;
         private Telerik.WinControls.UI.RadDropDownList cmbHC_RevenueUnit;
+
+        private Telerik.WinControls.UI.RadDropDownList dropDownBranchAcceptance_Branch;
+
     }
 }
