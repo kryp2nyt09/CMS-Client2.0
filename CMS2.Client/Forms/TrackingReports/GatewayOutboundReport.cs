@@ -93,9 +93,9 @@ namespace CMS2.Client.Forms.TrackingReports
                 Outboundlist = gatewayOutboundBl.GetAll().Where
                (x => x.RecordStatus == 1
                //&& ((x.PackageNumber.Shipment.DestinationCity.BranchCorpOfficeId == bcoid && x.PackageNumber.Shipment.DestinationCity.BranchCorpOfficeId != null) || (x.PackageNumber.Shipment.DestinationCity.BranchCorpOfficeId == x.PackageNumber.Shipment.DestinationCity.BranchCorpOfficeId && x.PackageNumber.Shipment.DestinationCity.BranchCorpOfficeId == null))
-               && ((x.Driver == driver && x.Driver != "All") || (x.Driver == x.Driver && x.Driver == "All"))
-               && ((x.Gateway == gateway && x.Gateway != "All") || (x.Gateway == x.Gateway && x.Gateway == "All"))
-               && ((x.BatchID == batchid && x.BatchID != null) || (x.BatchID == x.BatchID && x.BatchID == null))
+               && ((x.Driver == driver && x.Driver != "All") || (x.Driver == x.Driver && driver == "All"))
+               && ((x.Gateway == gateway && x.Gateway != "All") || (x.Gateway == x.Gateway && gateway == "All"))
+               && ((x.BatchID == batchid && x.BatchID != null) || (x.BatchID == x.BatchID && batchid == null))
                && x.CreatedDate.ToShortDateString() == date.ToShortDateString()
                ).ToList();
             }

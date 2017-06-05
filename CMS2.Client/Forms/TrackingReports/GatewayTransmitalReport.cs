@@ -17,7 +17,7 @@ namespace CMS2.Client.Forms.TrackingReports
         {
             GatewayTransmittalBL gatewayBl = new GatewayTransmittalBL();
 
-            List<GatewayTransmittal> list = gatewayBl.GetAll().Where(x => x.RecordStatus == 1 && x.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
+            List<GatewayTransmittal> list = gatewayBl.GetAll().Where(x => x.RecordStatus == 1 && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
             List<GatewayTransmitalViewModel> modelList = Match(list);
 
             DataTable dt = new DataTable();
@@ -86,17 +86,18 @@ namespace CMS2.Client.Forms.TrackingReports
 
             if (num == 0)
             {
-                list = gatewayBl.GetAll().Where(x => x.RecordStatus == 1 && x.CreatedDate.ToShortDateString() == date.ToShortDateString() && x.MasterAirwayBillNo == mawb).ToList();
+                //list = gatewayBl.GetAll().Where(x => x.RecordStatus == 1 && x.CreatedDate.ToShortDateString() == date.ToShortDateString() && x.MasterAirwayBillNo == mawb).ToList();
+                list = gatewayBl.GetAll().Where(x => x.RecordStatus == 1 && x.MasterAirwayBillNo == mawb).ToList();
             }
             else if(num == 1)
             {
                 list = gatewayBl.GetAll().Where
                 (x => x.RecordStatus == 1
-                && ((x.DestinationID == bcoid && x.DestinationID != null) || (x.DestinationID == x.DestinationID && x.DestinationID == null))
-                && ((x.Driver == driver && x.Driver != "All") || (x.Driver == x.Driver && x.Driver == "All"))
-                && ((x.Gateway == gateway && x.Gateway != "All") || (x.Gateway == x.Gateway && x.Gateway == "All"))
-                && ((x.BatchID == batchid && x.BatchID != null) || (x.BatchID == x.BatchID && x.BatchID == null))
-                && ((x.CommodityTypeID == commodityTypeId && x.CommodityTypeID != null) || (x.CommodityTypeID == x.CommodityTypeID && x.CommodityTypeID == null))
+                && ((x.DestinationID == bcoid && x.DestinationID != Guid.Empty) || (x.DestinationID == x.DestinationID && bcoid == Guid.Empty))
+                && ((x.Driver == driver && x.Driver != "All") || (x.Driver == x.Driver && driver == "All"))
+                && ((x.Gateway == gateway && x.Gateway != "All") || (x.Gateway == x.Gateway && gateway == "All"))
+                && ((x.BatchID == batchid && x.BatchID != Guid.Empty) || (x.BatchID == x.BatchID && batchid == Guid.Empty))
+                && ((x.CommodityTypeID == commodityTypeId && x.CommodityTypeID != Guid.Empty) || (x.CommodityTypeID == x.CommodityTypeID && commodityTypeId == Guid.Empty))
                 && x.CreatedDate.ToShortDateString() == date.ToShortDateString()
                 ).ToList();
             }
@@ -211,9 +212,14 @@ namespace CMS2.Client.Forms.TrackingReports
                 string _airwaybill = "";
 
                 _shipment = shipmentService.FilterActive().Where(x => x.AirwayBillNo == transmital.AirwayBillNo).FirstOrDefault();
+                
                 if (_shipment == null)
                 {
                     continue;
+                }
+                else
+                {
+                    _airwaybill = _shipment.AirwayBillNo;
                 }
 
                 GatewayTransmitalViewModel isExist = _results.Find(x => x.AirwayBillNo == _airwaybill);

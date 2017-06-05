@@ -199,7 +199,7 @@ namespace CMS2.Client.Forms.TrackingReports
                     model.Status = delivery.DeliveryStatus.DeliveryStatusName;
                     model.Remarks = "NA";
                     model.DeliveredBy = delivery.DeliveredBy.FullName;
-                    if (delivery.DeliveryRemark != null)
+                    if (delivery.DeliveryRemarkId != null)
                     {
                         model.Remarks = delivery.DeliveryRemark.DeliveryRemarkName;
                     }
@@ -222,12 +222,19 @@ namespace CMS2.Client.Forms.TrackingReports
                     model.PlateNo = dis.PlateNo;
                     model.BCO = dis.Area.City.BranchCorpOffice.BranchCorpOfficeName;
                     model.ScannedBy = AppUser.User.Employee.FullName;
-                    model.ReceivedBy = dReceipt.ReceivedBy;
+                    model.ReceivedBy = "NA";
+                    if (dReceipt !=null)
+                    {
+                        model.ReceivedBy = dReceipt.ReceivedBy;
+                    }
+                    
                     _results.Add(model);
                 }
             }
 
-            string bcoName = bcoService.GetAll().Where(x => x.BranchCorpOfficeId == GlobalVars.DeviceBcoId).Select(x => x.BranchCorpOfficeName).ToString();
+            List<BranchCorpOffice> _bco= bcoService.GetAll().Where(x => x.RecordStatus == 1 && x.BranchCorpOfficeId == GlobalVars.DeviceBcoId).ToList();
+            //string bcoName = bcoService.GetAll().Where(x => x.BranchCorpOfficeId == GlobalVars.DeviceBcoId).Select(x => x.BranchCorpOfficeName).ToString();
+            string bcoName = _bco.Select(x => x.BranchCorpOfficeName).ToString();
             List<DeliveryStatusViewModel> _resultsFilter = _results.FindAll(x => x.BCO == bcoName);
             //List<DeliveryStatusViewModel> resultList = modelList.FindAll(x => x.Area == revenueUnitName);
             //return _results;

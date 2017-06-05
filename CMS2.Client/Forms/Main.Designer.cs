@@ -29,36 +29,36 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn37 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn38 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn39 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn40 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn41 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn42 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn43 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn44 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn45 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition73 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition74 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition75 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition76 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition77 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition78 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition79 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn46 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn47 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn48 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn49 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn50 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn51 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn52 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn53 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn54 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition91 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition92 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition93 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition94 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition95 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition96 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition97 = new Telerik.WinControls.UI.TableViewDefinition();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition80 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition81 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition82 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition83 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition84 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition85 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition86 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition87 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition88 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition89 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.RadListDataItem radListDataItem1 = new Telerik.WinControls.UI.RadListDataItem();
-            Telerik.WinControls.UI.RadListDataItem radListDataItem2 = new Telerik.WinControls.UI.RadListDataItem();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition90 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition98 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition99 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition100 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition101 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition102 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition103 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition104 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition105 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition106 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition107 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.RadListDataItem radListDataItem3 = new Telerik.WinControls.UI.RadListDataItem();
+            Telerik.WinControls.UI.RadListDataItem radListDataItem4 = new Telerik.WinControls.UI.RadListDataItem();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition108 = new Telerik.WinControls.UI.TableViewDefinition();
             this.office2010BlackTheme1 = new Telerik.WinControls.Themes.Office2010BlackTheme();
             this.radPanel1 = new Telerik.WinControls.UI.RadPanel();
             this.panel = new Telerik.WinControls.UI.RadPanel();
@@ -411,8 +411,6 @@
             this.btnPickupCargo_Docs = new Telerik.WinControls.UI.RadMenuButtonItem();
             this.btnExport_PickupCargo = new Telerik.WinControls.UI.RadButton();
             this.btnSearch_PicupCargo = new Telerik.WinControls.UI.RadButton();
-            this.label19 = new System.Windows.Forms.Label();
-            this.dropDownPickUpCargo_BCO = new Telerik.WinControls.UI.RadDropDownList();
             this.dateTimePicker_PickupCargo = new Telerik.WinControls.UI.RadDateTimePicker();
             this.label76 = new System.Windows.Forms.Label();
             this.label68 = new System.Windows.Forms.Label();
@@ -485,6 +483,7 @@
             this.radPageViewPage12 = new Telerik.WinControls.UI.RadPageViewPage();
             this.gridGatewayOutbound = new Telerik.WinControls.UI.RadGridView();
             this.radPanel19 = new Telerik.WinControls.UI.RadPanel();
+            this.dropDownGatewayOutbound_BCO = new Telerik.WinControls.UI.RadDropDownList();
             this.txtGO_mawb = new Telerik.WinControls.UI.RadTextBox();
             this.label132 = new System.Windows.Forms.Label();
             this.label130 = new System.Windows.Forms.Label();
@@ -494,7 +493,6 @@
             this.btnGatewayOutbound_Print = new Telerik.WinControls.UI.RadButton();
             this.btnGatewayOutbound_Search = new Telerik.WinControls.UI.RadButton();
             this.label78 = new System.Windows.Forms.Label();
-            this.dropDownGatewayOutbound_BCO = new Telerik.WinControls.UI.RadDropDownList();
             this.dropDownGatewayOutbound_Batch = new Telerik.WinControls.UI.RadDropDownList();
             this.label79 = new System.Windows.Forms.Label();
             this.label60 = new System.Windows.Forms.Label();
@@ -595,12 +593,12 @@
             this.radPageViewPage18 = new Telerik.WinControls.UI.RadPageViewPage();
             this.gridDeliveryStatus = new Telerik.WinControls.UI.RadGridView();
             this.radPanel25 = new Telerik.WinControls.UI.RadPanel();
-            this.label140 = new System.Windows.Forms.Label();
             this.cmbDS_Status = new Telerik.WinControls.UI.RadDropDownList();
+            this.cmbDS_RevenueUnit = new Telerik.WinControls.UI.RadDropDownList();
+            this.label140 = new System.Windows.Forms.Label();
             this.label141 = new System.Windows.Forms.Label();
             this.cmbDS_DeliveredBy = new Telerik.WinControls.UI.RadDropDownList();
             this.label138 = new System.Windows.Forms.Label();
-            this.cmbDS_RevenueUnit = new Telerik.WinControls.UI.RadDropDownList();
             this.label139 = new System.Windows.Forms.Label();
             this.cmbDS_RevenueType = new Telerik.WinControls.UI.RadDropDownList();
             this.btnDeliveryStatus_Print = new Telerik.WinControls.UI.RadButton();
@@ -940,7 +938,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.btnPickupCargo_Export)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnExport_PickupCargo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnSearch_PicupCargo)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dropDownPickUpCargo_BCO)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateTimePicker_PickupCargo)).BeginInit();
             this.radPageViewPage8.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridBranchAcceptance)).BeginInit();
@@ -993,12 +990,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridGatewayOutbound.MasterTemplate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radPanel19)).BeginInit();
             this.radPanel19.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dropDownGatewayOutbound_BCO)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtGO_mawb)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbGO_Driver)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbGO_commoditType)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnGatewayOutbound_Print)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnGatewayOutbound_Search)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dropDownGatewayOutbound_BCO)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dropDownGatewayOutbound_Batch)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dropDownGatewayOutbound_Gateway)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateTimeGatewayOutbound_Date)).BeginInit();
@@ -1070,8 +1067,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.radPanel25)).BeginInit();
             this.radPanel25.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cmbDS_Status)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cmbDS_DeliveredBy)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbDS_RevenueUnit)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cmbDS_DeliveredBy)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbDS_RevenueType)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnDeliveryStatus_Print)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnDeliveryStatus_Search)).BeginInit();
@@ -1257,50 +1254,50 @@
             this.BookingGridView.MasterTemplate.AllowEditRow = false;
             this.BookingGridView.MasterTemplate.AllowSearchRow = true;
             this.BookingGridView.MasterTemplate.AutoGenerateColumns = false;
-            gridViewTextBoxColumn37.FieldName = "BookingId";
-            gridViewTextBoxColumn37.HeaderText = "BookingID";
-            gridViewTextBoxColumn37.IsVisible = false;
-            gridViewTextBoxColumn37.Name = "BookingId";
-            gridViewTextBoxColumn38.FieldName = "DateBooked";
-            gridViewTextBoxColumn38.HeaderText = "Booking Date";
-            gridViewTextBoxColumn38.Name = "BookingDate";
-            gridViewTextBoxColumn38.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            gridViewTextBoxColumn39.FieldName = "BookingNo";
-            gridViewTextBoxColumn39.HeaderText = "Booking Number";
-            gridViewTextBoxColumn39.Name = "BookingNo";
-            gridViewTextBoxColumn40.Expression = "";
-            gridViewTextBoxColumn40.FieldName = "ShipperFullname";
-            gridViewTextBoxColumn40.HeaderText = "Shipper Name";
-            gridViewTextBoxColumn40.Name = "ShipperName";
-            gridViewTextBoxColumn41.FieldName = "OriginCity.CityName";
-            gridViewTextBoxColumn41.HeaderText = "Origin City";
-            gridViewTextBoxColumn41.Name = "OriginCity";
-            gridViewTextBoxColumn42.Expression = "";
-            gridViewTextBoxColumn42.FieldName = "ConsigneeFullname";
-            gridViewTextBoxColumn42.HeaderText = "Consignee Name";
-            gridViewTextBoxColumn42.Name = "ConsigneeName";
-            gridViewTextBoxColumn43.FieldName = "DestinationCity.CityName";
-            gridViewTextBoxColumn43.HeaderText = "Destination City";
-            gridViewTextBoxColumn43.Name = "DestinationCity";
-            gridViewTextBoxColumn44.FieldName = "BookedByFullname";
-            gridViewTextBoxColumn44.HeaderText = "Booked By";
-            gridViewTextBoxColumn44.Name = "BookedBy";
-            gridViewTextBoxColumn45.FieldName = "BookingStatus.BookingStatusName";
-            gridViewTextBoxColumn45.HeaderText = "Booking Status";
-            gridViewTextBoxColumn45.Name = "BookingStatus";
+            gridViewTextBoxColumn46.FieldName = "BookingId";
+            gridViewTextBoxColumn46.HeaderText = "BookingID";
+            gridViewTextBoxColumn46.IsVisible = false;
+            gridViewTextBoxColumn46.Name = "BookingId";
+            gridViewTextBoxColumn47.FieldName = "DateBooked";
+            gridViewTextBoxColumn47.HeaderText = "Booking Date";
+            gridViewTextBoxColumn47.Name = "BookingDate";
+            gridViewTextBoxColumn47.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            gridViewTextBoxColumn48.FieldName = "BookingNo";
+            gridViewTextBoxColumn48.HeaderText = "Booking Number";
+            gridViewTextBoxColumn48.Name = "BookingNo";
+            gridViewTextBoxColumn49.Expression = "";
+            gridViewTextBoxColumn49.FieldName = "ShipperFullname";
+            gridViewTextBoxColumn49.HeaderText = "Shipper Name";
+            gridViewTextBoxColumn49.Name = "ShipperName";
+            gridViewTextBoxColumn50.FieldName = "OriginCity.CityName";
+            gridViewTextBoxColumn50.HeaderText = "Origin City";
+            gridViewTextBoxColumn50.Name = "OriginCity";
+            gridViewTextBoxColumn51.Expression = "";
+            gridViewTextBoxColumn51.FieldName = "ConsigneeFullname";
+            gridViewTextBoxColumn51.HeaderText = "Consignee Name";
+            gridViewTextBoxColumn51.Name = "ConsigneeName";
+            gridViewTextBoxColumn52.FieldName = "DestinationCity.CityName";
+            gridViewTextBoxColumn52.HeaderText = "Destination City";
+            gridViewTextBoxColumn52.Name = "DestinationCity";
+            gridViewTextBoxColumn53.FieldName = "BookedByFullname";
+            gridViewTextBoxColumn53.HeaderText = "Booked By";
+            gridViewTextBoxColumn53.Name = "BookedBy";
+            gridViewTextBoxColumn54.FieldName = "BookingStatus.BookingStatusName";
+            gridViewTextBoxColumn54.HeaderText = "Booking Status";
+            gridViewTextBoxColumn54.Name = "BookingStatus";
             this.BookingGridView.MasterTemplate.Columns.AddRange(new Telerik.WinControls.UI.GridViewDataColumn[] {
-            gridViewTextBoxColumn37,
-            gridViewTextBoxColumn38,
-            gridViewTextBoxColumn39,
-            gridViewTextBoxColumn40,
-            gridViewTextBoxColumn41,
-            gridViewTextBoxColumn42,
-            gridViewTextBoxColumn43,
-            gridViewTextBoxColumn44,
-            gridViewTextBoxColumn45});
+            gridViewTextBoxColumn46,
+            gridViewTextBoxColumn47,
+            gridViewTextBoxColumn48,
+            gridViewTextBoxColumn49,
+            gridViewTextBoxColumn50,
+            gridViewTextBoxColumn51,
+            gridViewTextBoxColumn52,
+            gridViewTextBoxColumn53,
+            gridViewTextBoxColumn54});
             this.BookingGridView.MasterTemplate.EnableAlternatingRowColor = true;
             this.BookingGridView.MasterTemplate.EnableFiltering = true;
-            this.BookingGridView.MasterTemplate.ViewDefinition = tableViewDefinition73;
+            this.BookingGridView.MasterTemplate.ViewDefinition = tableViewDefinition91;
             this.BookingGridView.Name = "BookingGridView";
             this.BookingGridView.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.BookingGridView.Size = new System.Drawing.Size(1234, 208);
@@ -2530,11 +2527,11 @@
             this.txtSumTotal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
             this.txtSumTotal.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtSumTotal.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSumTotal.Location = new System.Drawing.Point(129, 475);
+            this.txtSumTotal.Location = new System.Drawing.Point(129, 467);
             this.txtSumTotal.Mask = "C2";
             this.txtSumTotal.MaskType = Telerik.WinControls.UI.MaskType.Numeric;
             this.txtSumTotal.Name = "txtSumTotal";
-            this.txtSumTotal.Size = new System.Drawing.Size(182, 20);
+            this.txtSumTotal.Size = new System.Drawing.Size(182, 0);
             this.txtSumTotal.TabIndex = 70;
             this.txtSumTotal.TabStop = false;
             this.txtSumTotal.Text = "₱0.00";
@@ -2549,11 +2546,11 @@
             this.txtSumDiscount.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
             this.txtSumDiscount.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtSumDiscount.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSumDiscount.Location = new System.Drawing.Point(129, 393);
+            this.txtSumDiscount.Location = new System.Drawing.Point(129, 372);
             this.txtSumDiscount.Mask = "C2";
             this.txtSumDiscount.MaskType = Telerik.WinControls.UI.MaskType.Numeric;
             this.txtSumDiscount.Name = "txtSumDiscount";
-            this.txtSumDiscount.Size = new System.Drawing.Size(182, 20);
+            this.txtSumDiscount.Size = new System.Drawing.Size(182, 0);
             this.txtSumDiscount.TabIndex = 67;
             this.txtSumDiscount.TabStop = false;
             this.txtSumDiscount.Text = "₱0.00";
@@ -2568,11 +2565,11 @@
             this.txtSumVatAmount.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
             this.txtSumVatAmount.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtSumVatAmount.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSumVatAmount.Location = new System.Drawing.Point(129, 445);
+            this.txtSumVatAmount.Location = new System.Drawing.Point(129, 420);
             this.txtSumVatAmount.Mask = "C2";
             this.txtSumVatAmount.MaskType = Telerik.WinControls.UI.MaskType.Numeric;
             this.txtSumVatAmount.Name = "txtSumVatAmount";
-            this.txtSumVatAmount.Size = new System.Drawing.Size(182, 20);
+            this.txtSumVatAmount.Size = new System.Drawing.Size(182, 0);
             this.txtSumVatAmount.TabIndex = 69;
             this.txtSumVatAmount.TabStop = false;
             this.txtSumVatAmount.Text = "₱0.00";
@@ -2587,11 +2584,11 @@
             this.txtSumInsurance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
             this.txtSumInsurance.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtSumInsurance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSumInsurance.Location = new System.Drawing.Point(129, 367);
+            this.txtSumInsurance.Location = new System.Drawing.Point(129, 348);
             this.txtSumInsurance.Mask = "C2";
             this.txtSumInsurance.MaskType = Telerik.WinControls.UI.MaskType.Numeric;
             this.txtSumInsurance.Name = "txtSumInsurance";
-            this.txtSumInsurance.Size = new System.Drawing.Size(182, 20);
+            this.txtSumInsurance.Size = new System.Drawing.Size(182, 0);
             this.txtSumInsurance.TabIndex = 66;
             this.txtSumInsurance.TabStop = false;
             this.txtSumInsurance.Text = "₱0.00";
@@ -2606,11 +2603,11 @@
             this.txtSumQuarantineFee.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
             this.txtSumQuarantineFee.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtSumQuarantineFee.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSumQuarantineFee.Location = new System.Drawing.Point(129, 341);
+            this.txtSumQuarantineFee.Location = new System.Drawing.Point(129, 324);
             this.txtSumQuarantineFee.Mask = "C2";
             this.txtSumQuarantineFee.MaskType = Telerik.WinControls.UI.MaskType.Numeric;
             this.txtSumQuarantineFee.Name = "txtSumQuarantineFee";
-            this.txtSumQuarantineFee.Size = new System.Drawing.Size(182, 20);
+            this.txtSumQuarantineFee.Size = new System.Drawing.Size(182, 0);
             this.txtSumQuarantineFee.TabIndex = 65;
             this.txtSumQuarantineFee.TabStop = false;
             this.txtSumQuarantineFee.Text = "₱0.00";
@@ -2625,11 +2622,11 @@
             this.txtSumHandlingFee.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
             this.txtSumHandlingFee.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtSumHandlingFee.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSumHandlingFee.Location = new System.Drawing.Point(129, 315);
+            this.txtSumHandlingFee.Location = new System.Drawing.Point(129, 300);
             this.txtSumHandlingFee.Mask = "C2";
             this.txtSumHandlingFee.MaskType = Telerik.WinControls.UI.MaskType.Numeric;
             this.txtSumHandlingFee.Name = "txtSumHandlingFee";
-            this.txtSumHandlingFee.Size = new System.Drawing.Size(182, 20);
+            this.txtSumHandlingFee.Size = new System.Drawing.Size(182, 0);
             this.txtSumHandlingFee.TabIndex = 64;
             this.txtSumHandlingFee.TabStop = false;
             this.txtSumHandlingFee.Text = "₱0.00";
@@ -2644,11 +2641,11 @@
             this.txtSumPackagingFee.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
             this.txtSumPackagingFee.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtSumPackagingFee.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSumPackagingFee.Location = new System.Drawing.Point(129, 289);
+            this.txtSumPackagingFee.Location = new System.Drawing.Point(129, 276);
             this.txtSumPackagingFee.Mask = "C2";
             this.txtSumPackagingFee.MaskType = Telerik.WinControls.UI.MaskType.Numeric;
             this.txtSumPackagingFee.Name = "txtSumPackagingFee";
-            this.txtSumPackagingFee.Size = new System.Drawing.Size(182, 20);
+            this.txtSumPackagingFee.Size = new System.Drawing.Size(182, 0);
             this.txtSumPackagingFee.TabIndex = 63;
             this.txtSumPackagingFee.TabStop = false;
             this.txtSumPackagingFee.Text = "₱0.00";
@@ -2663,11 +2660,11 @@
             this.txtSumDrainingFee.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
             this.txtSumDrainingFee.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtSumDrainingFee.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSumDrainingFee.Location = new System.Drawing.Point(129, 263);
+            this.txtSumDrainingFee.Location = new System.Drawing.Point(129, 252);
             this.txtSumDrainingFee.Mask = "C2";
             this.txtSumDrainingFee.MaskType = Telerik.WinControls.UI.MaskType.Numeric;
             this.txtSumDrainingFee.Name = "txtSumDrainingFee";
-            this.txtSumDrainingFee.Size = new System.Drawing.Size(182, 20);
+            this.txtSumDrainingFee.Size = new System.Drawing.Size(182, 0);
             this.txtSumDrainingFee.TabIndex = 62;
             this.txtSumDrainingFee.TabStop = false;
             this.txtSumDrainingFee.Text = "₱0.00";
@@ -2682,11 +2679,11 @@
             this.txtSumCratingFee.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
             this.txtSumCratingFee.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtSumCratingFee.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSumCratingFee.Location = new System.Drawing.Point(129, 237);
+            this.txtSumCratingFee.Location = new System.Drawing.Point(129, 228);
             this.txtSumCratingFee.Mask = "C2";
             this.txtSumCratingFee.MaskType = Telerik.WinControls.UI.MaskType.Numeric;
             this.txtSumCratingFee.Name = "txtSumCratingFee";
-            this.txtSumCratingFee.Size = new System.Drawing.Size(182, 20);
+            this.txtSumCratingFee.Size = new System.Drawing.Size(182, 0);
             this.txtSumCratingFee.TabIndex = 61;
             this.txtSumCratingFee.TabStop = false;
             this.txtSumCratingFee.Text = "₱0.00";
@@ -2701,11 +2698,11 @@
             this.txtSumDangerousFee.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
             this.txtSumDangerousFee.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtSumDangerousFee.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSumDangerousFee.Location = new System.Drawing.Point(129, 211);
+            this.txtSumDangerousFee.Location = new System.Drawing.Point(129, 204);
             this.txtSumDangerousFee.Mask = "C2";
             this.txtSumDangerousFee.MaskType = Telerik.WinControls.UI.MaskType.Numeric;
             this.txtSumDangerousFee.Name = "txtSumDangerousFee";
-            this.txtSumDangerousFee.Size = new System.Drawing.Size(182, 20);
+            this.txtSumDangerousFee.Size = new System.Drawing.Size(182, 0);
             this.txtSumDangerousFee.TabIndex = 60;
             this.txtSumDangerousFee.TabStop = false;
             this.txtSumDangerousFee.Text = "₱0.00";
@@ -2720,11 +2717,11 @@
             this.txtSumFuelSurcharge.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
             this.txtSumFuelSurcharge.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtSumFuelSurcharge.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSumFuelSurcharge.Location = new System.Drawing.Point(129, 185);
+            this.txtSumFuelSurcharge.Location = new System.Drawing.Point(129, 180);
             this.txtSumFuelSurcharge.Mask = "C2";
             this.txtSumFuelSurcharge.MaskType = Telerik.WinControls.UI.MaskType.Numeric;
             this.txtSumFuelSurcharge.Name = "txtSumFuelSurcharge";
-            this.txtSumFuelSurcharge.Size = new System.Drawing.Size(182, 20);
+            this.txtSumFuelSurcharge.Size = new System.Drawing.Size(182, 0);
             this.txtSumFuelSurcharge.TabIndex = 59;
             this.txtSumFuelSurcharge.TabStop = false;
             this.txtSumFuelSurcharge.Text = "₱0.00";
@@ -2739,11 +2736,11 @@
             this.txtSumPeracFee.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
             this.txtSumPeracFee.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtSumPeracFee.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSumPeracFee.Location = new System.Drawing.Point(129, 159);
+            this.txtSumPeracFee.Location = new System.Drawing.Point(129, 156);
             this.txtSumPeracFee.Mask = "C2";
             this.txtSumPeracFee.MaskType = Telerik.WinControls.UI.MaskType.Numeric;
             this.txtSumPeracFee.Name = "txtSumPeracFee";
-            this.txtSumPeracFee.Size = new System.Drawing.Size(182, 20);
+            this.txtSumPeracFee.Size = new System.Drawing.Size(182, 0);
             this.txtSumPeracFee.TabIndex = 58;
             this.txtSumPeracFee.TabStop = false;
             this.txtSumPeracFee.Text = "₱0.00";
@@ -2758,11 +2755,11 @@
             this.txtSumFreightCollect.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
             this.txtSumFreightCollect.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtSumFreightCollect.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSumFreightCollect.Location = new System.Drawing.Point(129, 133);
+            this.txtSumFreightCollect.Location = new System.Drawing.Point(129, 132);
             this.txtSumFreightCollect.Mask = "C2";
             this.txtSumFreightCollect.MaskType = Telerik.WinControls.UI.MaskType.Numeric;
             this.txtSumFreightCollect.Name = "txtSumFreightCollect";
-            this.txtSumFreightCollect.Size = new System.Drawing.Size(182, 20);
+            this.txtSumFreightCollect.Size = new System.Drawing.Size(182, 0);
             this.txtSumFreightCollect.TabIndex = 57;
             this.txtSumFreightCollect.TabStop = false;
             this.txtSumFreightCollect.Text = "₱0.00";
@@ -2777,11 +2774,11 @@
             this.txtSumDeliveryFee.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
             this.txtSumDeliveryFee.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtSumDeliveryFee.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSumDeliveryFee.Location = new System.Drawing.Point(129, 107);
+            this.txtSumDeliveryFee.Location = new System.Drawing.Point(129, 108);
             this.txtSumDeliveryFee.Mask = "C2";
             this.txtSumDeliveryFee.MaskType = Telerik.WinControls.UI.MaskType.Numeric;
             this.txtSumDeliveryFee.Name = "txtSumDeliveryFee";
-            this.txtSumDeliveryFee.Size = new System.Drawing.Size(182, 20);
+            this.txtSumDeliveryFee.Size = new System.Drawing.Size(182, 0);
             this.txtSumDeliveryFee.TabIndex = 56;
             this.txtSumDeliveryFee.TabStop = false;
             this.txtSumDeliveryFee.Text = "₱0.00";
@@ -2796,11 +2793,11 @@
             this.txtSumValuation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
             this.txtSumValuation.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtSumValuation.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSumValuation.Location = new System.Drawing.Point(129, 81);
+            this.txtSumValuation.Location = new System.Drawing.Point(129, 84);
             this.txtSumValuation.Mask = "C2";
             this.txtSumValuation.MaskType = Telerik.WinControls.UI.MaskType.Numeric;
             this.txtSumValuation.Name = "txtSumValuation";
-            this.txtSumValuation.Size = new System.Drawing.Size(182, 20);
+            this.txtSumValuation.Size = new System.Drawing.Size(182, 0);
             this.txtSumValuation.TabIndex = 55;
             this.txtSumValuation.TabStop = false;
             this.txtSumValuation.Text = "₱0.00";
@@ -2815,11 +2812,11 @@
             this.txtSumAwbFee.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
             this.txtSumAwbFee.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtSumAwbFee.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSumAwbFee.Location = new System.Drawing.Point(129, 55);
+            this.txtSumAwbFee.Location = new System.Drawing.Point(129, 60);
             this.txtSumAwbFee.Mask = "C2";
             this.txtSumAwbFee.MaskType = Telerik.WinControls.UI.MaskType.Numeric;
             this.txtSumAwbFee.Name = "txtSumAwbFee";
-            this.txtSumAwbFee.Size = new System.Drawing.Size(182, 20);
+            this.txtSumAwbFee.Size = new System.Drawing.Size(182, 0);
             this.txtSumAwbFee.TabIndex = 54;
             this.txtSumAwbFee.TabStop = false;
             this.txtSumAwbFee.Text = "₱0.00";
@@ -2834,11 +2831,11 @@
             this.txtSumWeightCharge.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
             this.txtSumWeightCharge.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtSumWeightCharge.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSumWeightCharge.Location = new System.Drawing.Point(129, 29);
+            this.txtSumWeightCharge.Location = new System.Drawing.Point(129, 36);
             this.txtSumWeightCharge.Mask = "C2";
             this.txtSumWeightCharge.MaskType = Telerik.WinControls.UI.MaskType.Numeric;
             this.txtSumWeightCharge.Name = "txtSumWeightCharge";
-            this.txtSumWeightCharge.Size = new System.Drawing.Size(182, 20);
+            this.txtSumWeightCharge.Size = new System.Drawing.Size(182, 0);
             this.txtSumWeightCharge.TabIndex = 53;
             this.txtSumWeightCharge.TabStop = false;
             this.txtSumWeightCharge.Text = "₱0.00";
@@ -2852,7 +2849,7 @@
             this.radLabel16.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.radLabel16.AutoSize = false;
             this.radLabel16.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radLabel16.Location = new System.Drawing.Point(3, 4);
+            this.radLabel16.Location = new System.Drawing.Point(3, 3);
             this.radLabel16.Name = "radLabel16";
             this.radLabel16.Size = new System.Drawing.Size(120, 18);
             this.radLabel16.TabIndex = 6;
@@ -2863,7 +2860,7 @@
             this.radLabel17.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.radLabel17.AutoSize = false;
             this.radLabel17.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radLabel17.Location = new System.Drawing.Point(3, 108);
+            this.radLabel17.Location = new System.Drawing.Point(3, 99);
             this.radLabel17.Name = "radLabel17";
             this.radLabel17.Size = new System.Drawing.Size(120, 18);
             this.radLabel17.TabIndex = 10;
@@ -2874,10 +2871,10 @@
             this.txtSumChargeableWeight.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSumChargeableWeight.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
             this.txtSumChargeableWeight.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSumChargeableWeight.Location = new System.Drawing.Point(129, 3);
+            this.txtSumChargeableWeight.Location = new System.Drawing.Point(129, 12);
             this.txtSumChargeableWeight.Name = "txtSumChargeableWeight";
             this.txtSumChargeableWeight.ReadOnly = true;
-            this.txtSumChargeableWeight.Size = new System.Drawing.Size(182, 20);
+            this.txtSumChargeableWeight.Size = new System.Drawing.Size(182, 0);
             this.txtSumChargeableWeight.TabIndex = 52;
             this.txtSumChargeableWeight.TabStop = false;
             this.txtSumChargeableWeight.Text = "0.00";
@@ -2892,7 +2889,7 @@
             this.radLabel18.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.radLabel18.AutoSize = false;
             this.radLabel18.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radLabel18.Location = new System.Drawing.Point(3, 30);
+            this.radLabel18.Location = new System.Drawing.Point(3, 27);
             this.radLabel18.Name = "radLabel18";
             this.radLabel18.Size = new System.Drawing.Size(120, 18);
             this.radLabel18.TabIndex = 7;
@@ -2903,7 +2900,7 @@
             this.radLabel19.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.radLabel19.AutoSize = false;
             this.radLabel19.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radLabel19.Location = new System.Drawing.Point(3, 56);
+            this.radLabel19.Location = new System.Drawing.Point(3, 51);
             this.radLabel19.Name = "radLabel19";
             this.radLabel19.Size = new System.Drawing.Size(120, 18);
             this.radLabel19.TabIndex = 8;
@@ -2914,7 +2911,7 @@
             this.radLabel87.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.radLabel87.AutoSize = false;
             this.radLabel87.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radLabel87.Location = new System.Drawing.Point(3, 82);
+            this.radLabel87.Location = new System.Drawing.Point(3, 75);
             this.radLabel87.Name = "radLabel87";
             this.radLabel87.Size = new System.Drawing.Size(120, 18);
             this.radLabel87.TabIndex = 9;
@@ -2925,7 +2922,7 @@
             this.radLabel88.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.radLabel88.AutoSize = false;
             this.radLabel88.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radLabel88.Location = new System.Drawing.Point(3, 134);
+            this.radLabel88.Location = new System.Drawing.Point(3, 123);
             this.radLabel88.Name = "radLabel88";
             this.radLabel88.Size = new System.Drawing.Size(120, 18);
             this.radLabel88.TabIndex = 12;
@@ -2936,7 +2933,7 @@
             this.radLabel89.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.radLabel89.AutoSize = false;
             this.radLabel89.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radLabel89.Location = new System.Drawing.Point(3, 160);
+            this.radLabel89.Location = new System.Drawing.Point(3, 147);
             this.radLabel89.Name = "radLabel89";
             this.radLabel89.Size = new System.Drawing.Size(120, 18);
             this.radLabel89.TabIndex = 11;
@@ -2947,7 +2944,7 @@
             this.radLabel90.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.radLabel90.AutoSize = false;
             this.radLabel90.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radLabel90.Location = new System.Drawing.Point(3, 186);
+            this.radLabel90.Location = new System.Drawing.Point(3, 171);
             this.radLabel90.Name = "radLabel90";
             this.radLabel90.Size = new System.Drawing.Size(120, 18);
             this.radLabel90.TabIndex = 13;
@@ -2958,7 +2955,7 @@
             this.radLabel91.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.radLabel91.AutoSize = false;
             this.radLabel91.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radLabel91.Location = new System.Drawing.Point(3, 238);
+            this.radLabel91.Location = new System.Drawing.Point(3, 219);
             this.radLabel91.Name = "radLabel91";
             this.radLabel91.Size = new System.Drawing.Size(120, 18);
             this.radLabel91.TabIndex = 3;
@@ -2969,7 +2966,7 @@
             this.radLabel92.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.radLabel92.AutoSize = false;
             this.radLabel92.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radLabel92.Location = new System.Drawing.Point(3, 212);
+            this.radLabel92.Location = new System.Drawing.Point(3, 195);
             this.radLabel92.Name = "radLabel92";
             this.radLabel92.Size = new System.Drawing.Size(120, 18);
             this.radLabel92.TabIndex = 4;
@@ -2980,7 +2977,7 @@
             this.radLabel93.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.radLabel93.AutoSize = false;
             this.radLabel93.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radLabel93.Location = new System.Drawing.Point(3, 264);
+            this.radLabel93.Location = new System.Drawing.Point(3, 243);
             this.radLabel93.Name = "radLabel93";
             this.radLabel93.Size = new System.Drawing.Size(120, 18);
             this.radLabel93.TabIndex = 2;
@@ -2991,7 +2988,7 @@
             this.radLabel94.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.radLabel94.AutoSize = false;
             this.radLabel94.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radLabel94.Location = new System.Drawing.Point(3, 290);
+            this.radLabel94.Location = new System.Drawing.Point(3, 267);
             this.radLabel94.Name = "radLabel94";
             this.radLabel94.Size = new System.Drawing.Size(120, 18);
             this.radLabel94.TabIndex = 38;
@@ -3002,7 +2999,7 @@
             this.radLabel95.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.radLabel95.AutoSize = false;
             this.radLabel95.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radLabel95.Location = new System.Drawing.Point(3, 476);
+            this.radLabel95.Location = new System.Drawing.Point(3, 458);
             this.radLabel95.Name = "radLabel95";
             this.radLabel95.Size = new System.Drawing.Size(120, 18);
             this.radLabel95.TabIndex = 33;
@@ -3013,7 +3010,7 @@
             this.radLabel96.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.radLabel96.AutoSize = false;
             this.radLabel96.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radLabel96.Location = new System.Drawing.Point(3, 446);
+            this.radLabel96.Location = new System.Drawing.Point(3, 411);
             this.radLabel96.Name = "radLabel96";
             this.radLabel96.Size = new System.Drawing.Size(120, 18);
             this.radLabel96.TabIndex = 32;
@@ -3024,7 +3021,7 @@
             this.radLabel97.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.radLabel97.AutoSize = false;
             this.radLabel97.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radLabel97.Location = new System.Drawing.Point(3, 316);
+            this.radLabel97.Location = new System.Drawing.Point(3, 291);
             this.radLabel97.Name = "radLabel97";
             this.radLabel97.Size = new System.Drawing.Size(120, 18);
             this.radLabel97.TabIndex = 39;
@@ -3035,7 +3032,7 @@
             this.radLabel98.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.radLabel98.AutoSize = false;
             this.radLabel98.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radLabel98.Location = new System.Drawing.Point(3, 342);
+            this.radLabel98.Location = new System.Drawing.Point(3, 315);
             this.radLabel98.Name = "radLabel98";
             this.radLabel98.Size = new System.Drawing.Size(120, 18);
             this.radLabel98.TabIndex = 40;
@@ -3046,7 +3043,7 @@
             this.radLabel99.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.radLabel99.AutoSize = false;
             this.radLabel99.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radLabel99.Location = new System.Drawing.Point(3, 368);
+            this.radLabel99.Location = new System.Drawing.Point(3, 339);
             this.radLabel99.Name = "radLabel99";
             this.radLabel99.Size = new System.Drawing.Size(120, 18);
             this.radLabel99.TabIndex = 30;
@@ -3058,11 +3055,11 @@
             this.txtSumSubTotal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
             this.txtSumSubTotal.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtSumSubTotal.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSumSubTotal.Location = new System.Drawing.Point(129, 419);
+            this.txtSumSubTotal.Location = new System.Drawing.Point(129, 396);
             this.txtSumSubTotal.Mask = "C2";
             this.txtSumSubTotal.MaskType = Telerik.WinControls.UI.MaskType.Numeric;
             this.txtSumSubTotal.Name = "txtSumSubTotal";
-            this.txtSumSubTotal.Size = new System.Drawing.Size(182, 20);
+            this.txtSumSubTotal.Size = new System.Drawing.Size(182, 0);
             this.txtSumSubTotal.TabIndex = 68;
             this.txtSumSubTotal.TabStop = false;
             this.txtSumSubTotal.Text = "₱0.00";
@@ -3076,7 +3073,7 @@
             this.radLabel100.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.radLabel100.AutoSize = false;
             this.radLabel100.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radLabel100.Location = new System.Drawing.Point(3, 420);
+            this.radLabel100.Location = new System.Drawing.Point(3, 387);
             this.radLabel100.Name = "radLabel100";
             this.radLabel100.Size = new System.Drawing.Size(120, 18);
             this.radLabel100.TabIndex = 31;
@@ -3087,7 +3084,7 @@
             this.radLabel101.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.radLabel101.AutoSize = false;
             this.radLabel101.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radLabel101.Location = new System.Drawing.Point(3, 394);
+            this.radLabel101.Location = new System.Drawing.Point(3, 363);
             this.radLabel101.Name = "radLabel101";
             this.radLabel101.Size = new System.Drawing.Size(120, 18);
             this.radLabel101.TabIndex = 44;
@@ -3213,10 +3210,10 @@
             // 
             this.txtHeight.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtHeight.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtHeight.Location = new System.Drawing.Point(483, 29);
+            this.txtHeight.Location = new System.Drawing.Point(483, 39);
             this.txtHeight.MaskType = Telerik.WinControls.UI.MaskType.Numeric;
             this.txtHeight.Name = "txtHeight";
-            this.txtHeight.Size = new System.Drawing.Size(37, 20);
+            this.txtHeight.Size = new System.Drawing.Size(37, 0);
             this.txtHeight.TabIndex = 17;
             this.txtHeight.TabStop = false;
             this.txtHeight.Text = "0";
@@ -3229,9 +3226,9 @@
             this.lstCrating.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel14.SetColumnSpan(this.lstCrating, 2);
             this.lstCrating.DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDownList;
-            this.lstCrating.Location = new System.Drawing.Point(526, 29);
+            this.lstCrating.Location = new System.Drawing.Point(526, 39);
             this.lstCrating.Name = "lstCrating";
-            this.lstCrating.Size = new System.Drawing.Size(102, 20);
+            this.lstCrating.Size = new System.Drawing.Size(102, 0);
             this.lstCrating.TabIndex = 18;
             this.lstCrating.ThemeName = "Office2010Black";
             // 
@@ -3262,10 +3259,10 @@
             // 
             this.txtWidth.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtWidth.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtWidth.Location = new System.Drawing.Point(436, 29);
+            this.txtWidth.Location = new System.Drawing.Point(436, 39);
             this.txtWidth.MaskType = Telerik.WinControls.UI.MaskType.Numeric;
             this.txtWidth.Name = "txtWidth";
-            this.txtWidth.Size = new System.Drawing.Size(41, 20);
+            this.txtWidth.Size = new System.Drawing.Size(41, 0);
             this.txtWidth.TabIndex = 16;
             this.txtWidth.TabStop = false;
             this.txtWidth.Text = "0";
@@ -3277,10 +3274,10 @@
             // 
             this.txtLength.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtLength.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtLength.Location = new System.Drawing.Point(389, 29);
+            this.txtLength.Location = new System.Drawing.Point(389, 39);
             this.txtLength.MaskType = Telerik.WinControls.UI.MaskType.Numeric;
             this.txtLength.Name = "txtLength";
-            this.txtLength.Size = new System.Drawing.Size(41, 20);
+            this.txtLength.Size = new System.Drawing.Size(41, 0);
             this.txtLength.TabIndex = 15;
             this.txtLength.TabStop = false;
             this.txtLength.Text = "0";
@@ -3647,7 +3644,7 @@
             this.gridPackage.MasterTemplate.EnableGrouping = false;
             this.gridPackage.MasterTemplate.MultiSelect = true;
             this.gridPackage.MasterTemplate.ShowFilteringRow = false;
-            this.gridPackage.MasterTemplate.ViewDefinition = tableViewDefinition74;
+            this.gridPackage.MasterTemplate.ViewDefinition = tableViewDefinition92;
             this.gridPackage.Name = "gridPackage";
             this.gridPackage.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.tableLayoutPanel14.SetRowSpan(this.gridPackage, 5);
@@ -4413,10 +4410,10 @@
             this.AcceptancetxtAirwayBill.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.AcceptancetxtAirwayBill.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.AcceptancetxtAirwayBill.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.AcceptancetxtAirwayBill.Location = new System.Drawing.Point(105, 8);
+            this.AcceptancetxtAirwayBill.Location = new System.Drawing.Point(105, 18);
             this.AcceptancetxtAirwayBill.Name = "AcceptancetxtAirwayBill";
             this.AcceptancetxtAirwayBill.PromptChar = ' ';
-            this.AcceptancetxtAirwayBill.Size = new System.Drawing.Size(217, 20);
+            this.AcceptancetxtAirwayBill.Size = new System.Drawing.Size(217, 0);
             this.AcceptancetxtAirwayBill.TabIndex = 2;
             this.AcceptancetxtAirwayBill.TabStop = false;
             this.AcceptancetxtAirwayBill.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
@@ -4910,7 +4907,7 @@
             this.gridManifest.MasterTemplate.EnableFiltering = true;
             this.gridManifest.MasterTemplate.PageSize = 1;
             this.gridManifest.MasterTemplate.ShowGroupedColumns = true;
-            this.gridManifest.MasterTemplate.ViewDefinition = tableViewDefinition75;
+            this.gridManifest.MasterTemplate.ViewDefinition = tableViewDefinition93;
             this.gridManifest.Name = "gridManifest";
             this.gridManifest.Size = new System.Drawing.Size(1237, 637);
             this.gridManifest.TabIndex = 0;
@@ -5022,7 +5019,7 @@
             // txtTotalCash
             // 
             this.txtTotalCash.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtTotalCash.Location = new System.Drawing.Point(132, 3);
+            this.txtTotalCash.Location = new System.Drawing.Point(145, 3);
             this.txtTotalCash.Name = "txtTotalCash";
             this.txtTotalCash.ReadOnly = true;
             this.txtTotalCash.Size = new System.Drawing.Size(145, 20);
@@ -5034,7 +5031,7 @@
             // txtTotalPending
             // 
             this.txtTotalPending.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtTotalPending.Location = new System.Drawing.Point(132, 133);
+            this.txtTotalPending.Location = new System.Drawing.Point(145, 133);
             this.txtTotalPending.Name = "txtTotalPending";
             this.txtTotalPending.ReadOnly = true;
             this.txtTotalPending.Size = new System.Drawing.Size(145, 20);
@@ -5047,7 +5044,7 @@
             // txtTotalPdc
             // 
             this.txtTotalPdc.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtTotalPdc.Location = new System.Drawing.Point(132, 107);
+            this.txtTotalPdc.Location = new System.Drawing.Point(145, 107);
             this.txtTotalPdc.Name = "txtTotalPdc";
             this.txtTotalPdc.ReadOnly = true;
             this.txtTotalPdc.Size = new System.Drawing.Size(145, 20);
@@ -5062,7 +5059,7 @@
             this.label42.AutoSize = true;
             this.label42.Location = new System.Drawing.Point(3, 110);
             this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(55, 13);
+            this.label42.Size = new System.Drawing.Size(61, 14);
             this.label42.TabIndex = 2;
             this.label42.Text = "Total PDC";
             // 
@@ -5072,7 +5069,7 @@
             this.label47.AutoSize = true;
             this.label47.Location = new System.Drawing.Point(3, 84);
             this.label47.Name = "label47";
-            this.label47.Size = new System.Drawing.Size(101, 13);
+            this.label47.Size = new System.Drawing.Size(113, 14);
             this.label47.TabIndex = 1;
             this.label47.Text = "Total Tax WithHeld";
             // 
@@ -5082,14 +5079,14 @@
             this.label62.AutoSize = true;
             this.label62.Location = new System.Drawing.Point(3, 58);
             this.label62.Name = "label62";
-            this.label62.Size = new System.Drawing.Size(86, 13);
+            this.label62.Size = new System.Drawing.Size(91, 14);
             this.label62.TabIndex = 10;
             this.label62.Text = "Total Collection";
             // 
             // txtRemarksPaymentSummary
             // 
             this.txtRemarksPaymentSummary.AutoSize = false;
-            this.txtRemarksPaymentSummary.Location = new System.Drawing.Point(132, 263);
+            this.txtRemarksPaymentSummary.Location = new System.Drawing.Point(145, 263);
             this.txtRemarksPaymentSummary.Multiline = true;
             this.txtRemarksPaymentSummary.Name = "txtRemarksPaymentSummary";
             this.txtRemarksPaymentSummary.Size = new System.Drawing.Size(145, 44);
@@ -5099,7 +5096,7 @@
             // 
             // txtTotalCheckReceived
             // 
-            this.txtTotalCheckReceived.Location = new System.Drawing.Point(132, 185);
+            this.txtTotalCheckReceived.Location = new System.Drawing.Point(145, 185);
             this.txtTotalCheckReceived.Name = "txtTotalCheckReceived";
             this.txtTotalCheckReceived.ReadOnly = true;
             this.txtTotalCheckReceived.Size = new System.Drawing.Size(145, 20);
@@ -5110,7 +5107,7 @@
             // 
             // txtDifference
             // 
-            this.txtDifference.Location = new System.Drawing.Point(132, 237);
+            this.txtDifference.Location = new System.Drawing.Point(145, 237);
             this.txtDifference.Name = "txtDifference";
             this.txtDifference.ReadOnly = true;
             this.txtDifference.Size = new System.Drawing.Size(145, 20);
@@ -5125,13 +5122,13 @@
             this.label63.AutoSize = true;
             this.label63.Location = new System.Drawing.Point(3, 32);
             this.label63.Name = "label63";
-            this.label63.Size = new System.Drawing.Size(65, 13);
+            this.label63.Size = new System.Drawing.Size(72, 14);
             this.label63.TabIndex = 0;
             this.label63.Text = "Total Check";
             // 
             // txtTotalAmntReceived
             // 
-            this.txtTotalAmntReceived.Location = new System.Drawing.Point(132, 211);
+            this.txtTotalAmntReceived.Location = new System.Drawing.Point(145, 211);
             this.txtTotalAmntReceived.Name = "txtTotalAmntReceived";
             this.txtTotalAmntReceived.ReadOnly = true;
             this.txtTotalAmntReceived.Size = new System.Drawing.Size(145, 20);
@@ -5146,7 +5143,7 @@
             this.label64.AutoSize = true;
             this.label64.Location = new System.Drawing.Point(3, 188);
             this.label64.Name = "label64";
-            this.label64.Size = new System.Drawing.Size(113, 13);
+            this.label64.Size = new System.Drawing.Size(125, 14);
             this.label64.TabIndex = 28;
             this.label64.Text = "Total Check Received";
             // 
@@ -5156,7 +5153,7 @@
             this.label65.AutoSize = true;
             this.label65.Location = new System.Drawing.Point(3, 6);
             this.label65.Name = "label65";
-            this.label65.Size = new System.Drawing.Size(59, 13);
+            this.label65.Size = new System.Drawing.Size(64, 14);
             this.label65.TabIndex = 24;
             this.label65.Text = "Total Cash";
             // 
@@ -5166,7 +5163,7 @@
             this.label66.AutoSize = true;
             this.label66.Location = new System.Drawing.Point(3, 136);
             this.label66.Name = "label66";
-            this.label66.Size = new System.Drawing.Size(77, 13);
+            this.label66.Size = new System.Drawing.Size(83, 14);
             this.label66.TabIndex = 27;
             this.label66.Text = "Total Pending";
             this.label66.Visible = false;
@@ -5174,7 +5171,7 @@
             // txtTotalCashReceived
             // 
             this.txtTotalCashReceived.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtTotalCashReceived.Location = new System.Drawing.Point(132, 159);
+            this.txtTotalCashReceived.Location = new System.Drawing.Point(145, 159);
             this.txtTotalCashReceived.Name = "txtTotalCashReceived";
             this.txtTotalCashReceived.ReadOnly = true;
             this.txtTotalCashReceived.Size = new System.Drawing.Size(145, 20);
@@ -5189,7 +5186,7 @@
             this.label69.AutoSize = true;
             this.label69.Location = new System.Drawing.Point(3, 278);
             this.label69.Name = "label69";
-            this.label69.Size = new System.Drawing.Size(50, 13);
+            this.label69.Size = new System.Drawing.Size(52, 14);
             this.label69.TabIndex = 3;
             this.label69.Text = "Remarks";
             // 
@@ -5199,7 +5196,7 @@
             this.label70.AutoSize = true;
             this.label70.Location = new System.Drawing.Point(3, 240);
             this.label70.Name = "label70";
-            this.label70.Size = new System.Drawing.Size(60, 13);
+            this.label70.Size = new System.Drawing.Size(63, 14);
             this.label70.TabIndex = 1;
             this.label70.Text = "Difference";
             // 
@@ -5209,7 +5206,7 @@
             this.label71.AutoSize = true;
             this.label71.Location = new System.Drawing.Point(3, 214);
             this.label71.Name = "label71";
-            this.label71.Size = new System.Drawing.Size(123, 13);
+            this.label71.Size = new System.Drawing.Size(136, 14);
             this.label71.TabIndex = 26;
             this.label71.Text = "Total Amount Received";
             // 
@@ -5219,14 +5216,14 @@
             this.label72.AutoSize = true;
             this.label72.Location = new System.Drawing.Point(3, 162);
             this.label72.Name = "label72";
-            this.label72.Size = new System.Drawing.Size(107, 13);
+            this.label72.Size = new System.Drawing.Size(117, 14);
             this.label72.TabIndex = 30;
             this.label72.Text = "Total Cash Received";
             // 
             // txtTotalTax
             // 
             this.txtTotalTax.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtTotalTax.Location = new System.Drawing.Point(132, 81);
+            this.txtTotalTax.Location = new System.Drawing.Point(145, 81);
             this.txtTotalTax.Name = "txtTotalTax";
             this.txtTotalTax.ReadOnly = true;
             this.txtTotalTax.Size = new System.Drawing.Size(145, 20);
@@ -5238,7 +5235,7 @@
             // txtTotalCheck
             // 
             this.txtTotalCheck.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtTotalCheck.Location = new System.Drawing.Point(132, 29);
+            this.txtTotalCheck.Location = new System.Drawing.Point(145, 29);
             this.txtTotalCheck.Name = "txtTotalCheck";
             this.txtTotalCheck.ReadOnly = true;
             this.txtTotalCheck.Size = new System.Drawing.Size(145, 20);
@@ -5250,7 +5247,7 @@
             // txtTotalCollection
             // 
             this.txtTotalCollection.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtTotalCollection.Location = new System.Drawing.Point(132, 55);
+            this.txtTotalCollection.Location = new System.Drawing.Point(145, 55);
             this.txtTotalCollection.Name = "txtTotalCollection";
             this.txtTotalCollection.ReadOnly = true;
             this.txtTotalCollection.Size = new System.Drawing.Size(145, 20);
@@ -5395,7 +5392,7 @@
             // 
             this.gridCorpAcctConsignee.MasterTemplate.AllowAddNewRow = false;
             this.gridCorpAcctConsignee.MasterTemplate.AllowDeleteRow = false;
-            this.gridCorpAcctConsignee.MasterTemplate.ViewDefinition = tableViewDefinition76;
+            this.gridCorpAcctConsignee.MasterTemplate.ViewDefinition = tableViewDefinition94;
             this.gridCorpAcctConsignee.Name = "gridCorpAcctConsignee";
             this.gridCorpAcctConsignee.Size = new System.Drawing.Size(794, 121);
             this.gridCorpAcctConsignee.TabIndex = 62;
@@ -5413,7 +5410,7 @@
             this.gridPrepaid.MasterTemplate.AllowColumnReorder = false;
             this.gridPrepaid.MasterTemplate.AllowColumnResize = false;
             this.gridPrepaid.MasterTemplate.AllowDeleteRow = false;
-            this.gridPrepaid.MasterTemplate.ViewDefinition = tableViewDefinition77;
+            this.gridPrepaid.MasterTemplate.ViewDefinition = tableViewDefinition95;
             this.gridPrepaid.Name = "gridPrepaid";
             this.gridPrepaid.Size = new System.Drawing.Size(794, 131);
             this.gridPrepaid.TabIndex = 60;
@@ -5585,7 +5582,7 @@
             this.gridFreightCollect.MasterTemplate.AllowAddNewRow = false;
             this.gridFreightCollect.MasterTemplate.AllowColumnResize = false;
             this.gridFreightCollect.MasterTemplate.AllowDeleteRow = false;
-            this.gridFreightCollect.MasterTemplate.ViewDefinition = tableViewDefinition78;
+            this.gridFreightCollect.MasterTemplate.ViewDefinition = tableViewDefinition96;
             this.gridFreightCollect.Name = "gridFreightCollect";
             this.gridFreightCollect.Size = new System.Drawing.Size(794, 127);
             this.gridFreightCollect.TabIndex = 61;
@@ -5673,7 +5670,7 @@
             this.pageViewTracking.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pageViewTracking.Location = new System.Drawing.Point(0, 0);
             this.pageViewTracking.Name = "pageViewTracking";
-            this.pageViewTracking.SelectedPage = this.radPageViewPage18;
+            this.pageViewTracking.SelectedPage = this.radPageViewPage14;
             this.pageViewTracking.Size = new System.Drawing.Size(1234, 587);
             this.pageViewTracking.TabIndex = 0;
             this.pageViewTracking.Text = " ";
@@ -5715,7 +5712,7 @@
             this.gridPickupCargo.MasterTemplate.AllowDragToGroup = false;
             this.gridPickupCargo.MasterTemplate.AllowEditRow = false;
             this.gridPickupCargo.MasterTemplate.ShowRowHeaderColumn = false;
-            this.gridPickupCargo.MasterTemplate.ViewDefinition = tableViewDefinition79;
+            this.gridPickupCargo.MasterTemplate.ViewDefinition = tableViewDefinition97;
             this.gridPickupCargo.Name = "gridPickupCargo";
             this.gridPickupCargo.ShowItemToolTips = false;
             this.gridPickupCargo.Size = new System.Drawing.Size(1086, 455);
@@ -5732,8 +5729,6 @@
             this.radPanel13.Controls.Add(this.btnPickupCargo_Export);
             this.radPanel13.Controls.Add(this.btnExport_PickupCargo);
             this.radPanel13.Controls.Add(this.btnSearch_PicupCargo);
-            this.radPanel13.Controls.Add(this.label19);
-            this.radPanel13.Controls.Add(this.dropDownPickUpCargo_BCO);
             this.radPanel13.Controls.Add(this.dateTimePicker_PickupCargo);
             this.radPanel13.Controls.Add(this.label76);
             this.radPanel13.Controls.Add(this.label68);
@@ -5749,7 +5744,7 @@
             // 
             this.label126.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label126.AutoSize = true;
-            this.label126.Location = new System.Drawing.Point(538, 60);
+            this.label126.Location = new System.Drawing.Point(322, 60);
             this.label126.Name = "label126";
             this.label126.Size = new System.Drawing.Size(76, 13);
             this.label126.TabIndex = 82;
@@ -5759,7 +5754,7 @@
             // 
             this.label96.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label96.AutoSize = true;
-            this.label96.Location = new System.Drawing.Point(408, 60);
+            this.label96.Location = new System.Drawing.Point(192, 60);
             this.label96.Name = "label96";
             this.label96.Size = new System.Drawing.Size(101, 13);
             this.label96.TabIndex = 81;
@@ -5768,7 +5763,7 @@
             // cmb_RevenueUnit
             // 
             this.cmb_RevenueUnit.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmb_RevenueUnit.Location = new System.Drawing.Point(541, 78);
+            this.cmb_RevenueUnit.Location = new System.Drawing.Point(325, 78);
             this.cmb_RevenueUnit.Name = "cmb_RevenueUnit";
             this.cmb_RevenueUnit.Size = new System.Drawing.Size(125, 20);
             this.cmb_RevenueUnit.TabIndex = 80;
@@ -5777,7 +5772,7 @@
             // cmb_RevenueUnitType
             // 
             this.cmb_RevenueUnitType.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmb_RevenueUnitType.Location = new System.Drawing.Point(410, 78);
+            this.cmb_RevenueUnitType.Location = new System.Drawing.Point(194, 78);
             this.cmb_RevenueUnitType.Name = "cmb_RevenueUnitType";
             this.cmb_RevenueUnitType.Size = new System.Drawing.Size(125, 20);
             this.cmb_RevenueUnitType.TabIndex = 79;
@@ -5847,34 +5842,13 @@
             // btnSearch_PicupCargo
             // 
             this.btnSearch_PicupCargo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnSearch_PicupCargo.Location = new System.Drawing.Point(672, 76);
+            this.btnSearch_PicupCargo.Location = new System.Drawing.Point(456, 76);
             this.btnSearch_PicupCargo.Name = "btnSearch_PicupCargo";
             this.btnSearch_PicupCargo.Size = new System.Drawing.Size(70, 22);
             this.btnSearch_PicupCargo.TabIndex = 76;
             this.btnSearch_PicupCargo.Text = "Search";
             this.btnSearch_PicupCargo.ThemeName = "Office2010Black";
             this.btnSearch_PicupCargo.Click += new System.EventHandler(this.btnSearch_PicupCargo_Click);
-            // 
-            // label19
-            // 
-            this.label19.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(189, 60);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(36, 13);
-            this.label19.TabIndex = 74;
-            this.label19.Text = "BCO :";
-            // 
-            // dropDownPickUpCargo_BCO
-            // 
-            this.dropDownPickUpCargo_BCO.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.dropDownPickUpCargo_BCO.Enabled = false;
-            this.dropDownPickUpCargo_BCO.Location = new System.Drawing.Point(192, 80);
-            this.dropDownPickUpCargo_BCO.Name = "dropDownPickUpCargo_BCO";
-            this.dropDownPickUpCargo_BCO.ReadOnly = true;
-            this.dropDownPickUpCargo_BCO.Size = new System.Drawing.Size(209, 20);
-            this.dropDownPickUpCargo_BCO.TabIndex = 73;
-            this.dropDownPickUpCargo_BCO.ThemeName = "Office2010Black";
             // 
             // dateTimePicker_PickupCargo
             // 
@@ -5941,7 +5915,7 @@
             this.gridBranchAcceptance.MasterTemplate.AllowDeleteRow = false;
             this.gridBranchAcceptance.MasterTemplate.AllowEditRow = false;
             this.gridBranchAcceptance.MasterTemplate.ShowRowHeaderColumn = false;
-            this.gridBranchAcceptance.MasterTemplate.ViewDefinition = tableViewDefinition80;
+            this.gridBranchAcceptance.MasterTemplate.ViewDefinition = tableViewDefinition98;
             this.gridBranchAcceptance.Name = "gridBranchAcceptance";
             this.gridBranchAcceptance.ShowItemToolTips = false;
             this.gridBranchAcceptance.Size = new System.Drawing.Size(1086, 455);
@@ -6116,7 +6090,7 @@
             this.gridBundle.MasterTemplate.AllowDragToGroup = false;
             this.gridBundle.MasterTemplate.AllowEditRow = false;
             this.gridBundle.MasterTemplate.ShowRowHeaderColumn = false;
-            this.gridBundle.MasterTemplate.ViewDefinition = tableViewDefinition81;
+            this.gridBundle.MasterTemplate.ViewDefinition = tableViewDefinition99;
             this.gridBundle.Name = "gridBundle";
             this.gridBundle.ShowItemToolTips = false;
             this.gridBundle.Size = new System.Drawing.Size(1086, 455);
@@ -6291,7 +6265,7 @@
             this.gridUnbundle.MasterTemplate.AllowDragToGroup = false;
             this.gridUnbundle.MasterTemplate.AllowEditRow = false;
             this.gridUnbundle.MasterTemplate.ShowRowHeaderColumn = false;
-            this.gridUnbundle.MasterTemplate.ViewDefinition = tableViewDefinition82;
+            this.gridUnbundle.MasterTemplate.ViewDefinition = tableViewDefinition100;
             this.gridUnbundle.Name = "gridUnbundle";
             this.gridUnbundle.ShowItemToolTips = false;
             this.gridUnbundle.Size = new System.Drawing.Size(1086, 455);
@@ -6443,7 +6417,7 @@
             this.gridGatewayTransmital.MasterTemplate.AllowDragToGroup = false;
             this.gridGatewayTransmital.MasterTemplate.AllowEditRow = false;
             this.gridGatewayTransmital.MasterTemplate.ShowRowHeaderColumn = false;
-            this.gridGatewayTransmital.MasterTemplate.ViewDefinition = tableViewDefinition83;
+            this.gridGatewayTransmital.MasterTemplate.ViewDefinition = tableViewDefinition101;
             this.gridGatewayTransmital.Name = "gridGatewayTransmital";
             this.gridGatewayTransmital.ShowItemToolTips = false;
             this.gridGatewayTransmital.Size = new System.Drawing.Size(1086, 455);
@@ -6683,7 +6657,7 @@
             this.gridGatewayOutbound.MasterTemplate.AllowDragToGroup = false;
             this.gridGatewayOutbound.MasterTemplate.AllowEditRow = false;
             this.gridGatewayOutbound.MasterTemplate.ShowRowHeaderColumn = false;
-            this.gridGatewayOutbound.MasterTemplate.ViewDefinition = tableViewDefinition84;
+            this.gridGatewayOutbound.MasterTemplate.ViewDefinition = tableViewDefinition102;
             this.gridGatewayOutbound.Name = "gridGatewayOutbound";
             this.gridGatewayOutbound.ShowItemToolTips = false;
             this.gridGatewayOutbound.Size = new System.Drawing.Size(1086, 455);
@@ -6693,6 +6667,7 @@
             // 
             // radPanel19
             // 
+            this.radPanel19.Controls.Add(this.dropDownGatewayOutbound_BCO);
             this.radPanel19.Controls.Add(this.txtGO_mawb);
             this.radPanel19.Controls.Add(this.label132);
             this.radPanel19.Controls.Add(this.label130);
@@ -6702,7 +6677,6 @@
             this.radPanel19.Controls.Add(this.btnGatewayOutbound_Print);
             this.radPanel19.Controls.Add(this.btnGatewayOutbound_Search);
             this.radPanel19.Controls.Add(this.label78);
-            this.radPanel19.Controls.Add(this.dropDownGatewayOutbound_BCO);
             this.radPanel19.Controls.Add(this.dropDownGatewayOutbound_Batch);
             this.radPanel19.Controls.Add(this.label79);
             this.radPanel19.Controls.Add(this.label60);
@@ -6717,6 +6691,15 @@
             this.radPanel19.Size = new System.Drawing.Size(1086, 108);
             this.radPanel19.TabIndex = 2;
             this.radPanel19.ThemeName = "Office2010Black";
+            // 
+            // dropDownGatewayOutbound_BCO
+            // 
+            this.dropDownGatewayOutbound_BCO.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.dropDownGatewayOutbound_BCO.Location = new System.Drawing.Point(191, 76);
+            this.dropDownGatewayOutbound_BCO.Name = "dropDownGatewayOutbound_BCO";
+            this.dropDownGatewayOutbound_BCO.Size = new System.Drawing.Size(153, 20);
+            this.dropDownGatewayOutbound_BCO.TabIndex = 108;
+            this.dropDownGatewayOutbound_BCO.ThemeName = "Office2010Black";
             // 
             // txtGO_mawb
             // 
@@ -6804,16 +6787,6 @@
             this.label78.Size = new System.Drawing.Size(39, 13);
             this.label78.TabIndex = 95;
             this.label78.Text = "Batch:";
-            // 
-            // dropDownGatewayOutbound_BCO
-            // 
-            this.dropDownGatewayOutbound_BCO.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.dropDownGatewayOutbound_BCO.Location = new System.Drawing.Point(191, 77);
-            this.dropDownGatewayOutbound_BCO.Name = "dropDownGatewayOutbound_BCO";
-            this.dropDownGatewayOutbound_BCO.Size = new System.Drawing.Size(155, 20);
-            this.dropDownGatewayOutbound_BCO.TabIndex = 93;
-            this.dropDownGatewayOutbound_BCO.ThemeName = "Office2010Black";
-            this.dropDownGatewayOutbound_BCO.Enter += new System.EventHandler(this.dropDownGatewayOutbound_BCO_Enter);
             // 
             // dropDownGatewayOutbound_Batch
             // 
@@ -6922,7 +6895,7 @@
             this.gridGatewayInbound.MasterTemplate.AllowDragToGroup = false;
             this.gridGatewayInbound.MasterTemplate.AllowEditRow = false;
             this.gridGatewayInbound.MasterTemplate.ShowRowHeaderColumn = false;
-            this.gridGatewayInbound.MasterTemplate.ViewDefinition = tableViewDefinition85;
+            this.gridGatewayInbound.MasterTemplate.ViewDefinition = tableViewDefinition103;
             this.gridGatewayInbound.Name = "gridGatewayInbound";
             this.gridGatewayInbound.ShowItemToolTips = false;
             this.gridGatewayInbound.Size = new System.Drawing.Size(1086, 455);
@@ -7140,7 +7113,7 @@
             this.gridCargoTransfer.MasterTemplate.AllowDragToGroup = false;
             this.gridCargoTransfer.MasterTemplate.AllowEditRow = false;
             this.gridCargoTransfer.MasterTemplate.ShowRowHeaderColumn = false;
-            this.gridCargoTransfer.MasterTemplate.ViewDefinition = tableViewDefinition86;
+            this.gridCargoTransfer.MasterTemplate.ViewDefinition = tableViewDefinition104;
             this.gridCargoTransfer.Name = "gridCargoTransfer";
             this.gridCargoTransfer.ShowItemToolTips = false;
             this.gridCargoTransfer.Size = new System.Drawing.Size(1086, 455);
@@ -7263,6 +7236,7 @@
             this.cmbCT_BCO.Size = new System.Drawing.Size(143, 20);
             this.cmbCT_BCO.TabIndex = 92;
             this.cmbCT_BCO.ThemeName = "Office2010Black";
+            this.cmbCT_BCO.SelectedIndexChanged += new Telerik.WinControls.UI.Data.PositionChangedEventHandler(this.cmbCT_BCO_SelectedIndexChanged);
             // 
             // btnCargoTransfer_Print
             // 
@@ -7352,7 +7326,7 @@
             this.gridSegregation.MasterTemplate.AllowDragToGroup = false;
             this.gridSegregation.MasterTemplate.AllowEditRow = false;
             this.gridSegregation.MasterTemplate.ShowRowHeaderColumn = false;
-            this.gridSegregation.MasterTemplate.ViewDefinition = tableViewDefinition87;
+            this.gridSegregation.MasterTemplate.ViewDefinition = tableViewDefinition105;
             this.gridSegregation.Name = "gridSegregation";
             this.gridSegregation.ShowItemToolTips = false;
             this.gridSegregation.Size = new System.Drawing.Size(1086, 455);
@@ -7553,7 +7527,7 @@
             this.gridDailyTrip.MasterTemplate.AllowDragToGroup = false;
             this.gridDailyTrip.MasterTemplate.AllowEditRow = false;
             this.gridDailyTrip.MasterTemplate.ShowRowHeaderColumn = false;
-            this.gridDailyTrip.MasterTemplate.ViewDefinition = tableViewDefinition88;
+            this.gridDailyTrip.MasterTemplate.ViewDefinition = tableViewDefinition106;
             this.gridDailyTrip.Name = "gridDailyTrip";
             this.gridDailyTrip.ShowItemToolTips = false;
             this.gridDailyTrip.Size = new System.Drawing.Size(1086, 455);
@@ -7729,7 +7703,7 @@
             this.gridHoldCargo.MasterTemplate.AllowDragToGroup = false;
             this.gridHoldCargo.MasterTemplate.AllowEditRow = false;
             this.gridHoldCargo.MasterTemplate.ShowRowHeaderColumn = false;
-            this.gridHoldCargo.MasterTemplate.ViewDefinition = tableViewDefinition89;
+            this.gridHoldCargo.MasterTemplate.ViewDefinition = tableViewDefinition107;
             this.gridHoldCargo.Name = "gridHoldCargo";
             this.gridHoldCargo.ShowItemToolTips = false;
             this.gridHoldCargo.Size = new System.Drawing.Size(1086, 455);
@@ -7803,10 +7777,10 @@
             // cmbHC_Revenuetype
             // 
             this.cmbHC_Revenuetype.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            radListDataItem1.Text = "Branch Corporate Office";
-            radListDataItem2.Text = "Branch Satellite Office";
-            this.cmbHC_Revenuetype.Items.Add(radListDataItem1);
-            this.cmbHC_Revenuetype.Items.Add(radListDataItem2);
+            radListDataItem3.Text = "Branch Corporate Office";
+            radListDataItem4.Text = "Branch Satellite Office";
+            this.cmbHC_Revenuetype.Items.Add(radListDataItem3);
+            this.cmbHC_Revenuetype.Items.Add(radListDataItem4);
             this.cmbHC_Revenuetype.Location = new System.Drawing.Point(380, 76);
             this.cmbHC_Revenuetype.Name = "cmbHC_Revenuetype";
             this.cmbHC_Revenuetype.Size = new System.Drawing.Size(145, 20);
@@ -7951,7 +7925,7 @@
             this.gridDeliveryStatus.MasterTemplate.AllowDragToGroup = false;
             this.gridDeliveryStatus.MasterTemplate.AllowEditRow = false;
             this.gridDeliveryStatus.MasterTemplate.ShowRowHeaderColumn = false;
-            this.gridDeliveryStatus.MasterTemplate.ViewDefinition = tableViewDefinition90;
+            this.gridDeliveryStatus.MasterTemplate.ViewDefinition = tableViewDefinition108;
             this.gridDeliveryStatus.Name = "gridDeliveryStatus";
             this.gridDeliveryStatus.ShowItemToolTips = false;
             this.gridDeliveryStatus.Size = new System.Drawing.Size(1086, 455);
@@ -7961,12 +7935,12 @@
             // 
             // radPanel25
             // 
-            this.radPanel25.Controls.Add(this.label140);
             this.radPanel25.Controls.Add(this.cmbDS_Status);
+            this.radPanel25.Controls.Add(this.cmbDS_RevenueUnit);
+            this.radPanel25.Controls.Add(this.label140);
             this.radPanel25.Controls.Add(this.label141);
             this.radPanel25.Controls.Add(this.cmbDS_DeliveredBy);
             this.radPanel25.Controls.Add(this.label138);
-            this.radPanel25.Controls.Add(this.cmbDS_RevenueUnit);
             this.radPanel25.Controls.Add(this.label139);
             this.radPanel25.Controls.Add(this.cmbDS_RevenueType);
             this.radPanel25.Controls.Add(this.btnDeliveryStatus_Print);
@@ -7982,6 +7956,25 @@
             this.radPanel25.TabIndex = 4;
             this.radPanel25.ThemeName = "Office2010Black";
             // 
+            // cmbDS_Status
+            // 
+            this.cmbDS_Status.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbDS_Status.Location = new System.Drawing.Point(700, 78);
+            this.cmbDS_Status.Name = "cmbDS_Status";
+            this.cmbDS_Status.Size = new System.Drawing.Size(156, 20);
+            this.cmbDS_Status.TabIndex = 97;
+            this.cmbDS_Status.ThemeName = "Office2010Black";
+            // 
+            // cmbDS_RevenueUnit
+            // 
+            this.cmbDS_RevenueUnit.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbDS_RevenueUnit.Location = new System.Drawing.Point(354, 79);
+            this.cmbDS_RevenueUnit.Name = "cmbDS_RevenueUnit";
+            this.cmbDS_RevenueUnit.Size = new System.Drawing.Size(156, 20);
+            this.cmbDS_RevenueUnit.TabIndex = 96;
+            this.cmbDS_RevenueUnit.ThemeName = "Office2010Black";
+            this.cmbDS_RevenueUnit.SelectedIndexChanged += new Telerik.WinControls.UI.Data.PositionChangedEventHandler(this.cmbDS_RevenueUnit_SelectedIndexChanged);
+            // 
             // label140
             // 
             this.label140.Anchor = System.Windows.Forms.AnchorStyles.Left;
@@ -7991,16 +7984,6 @@
             this.label140.Size = new System.Drawing.Size(73, 13);
             this.label140.TabIndex = 95;
             this.label140.Text = "Delivered By:";
-            // 
-            // cmbDS_Status
-            // 
-            this.cmbDS_Status.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmbDS_Status.Location = new System.Drawing.Point(698, 78);
-            this.cmbDS_Status.Name = "cmbDS_Status";
-            this.cmbDS_Status.ReadOnly = true;
-            this.cmbDS_Status.Size = new System.Drawing.Size(177, 20);
-            this.cmbDS_Status.TabIndex = 94;
-            this.cmbDS_Status.ThemeName = "Office2010Black";
             // 
             // label141
             // 
@@ -8030,17 +8013,6 @@
             this.label138.Size = new System.Drawing.Size(79, 13);
             this.label138.TabIndex = 91;
             this.label138.Text = "Revenue Unit:";
-            // 
-            // cmbDS_RevenueUnit
-            // 
-            this.cmbDS_RevenueUnit.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmbDS_RevenueUnit.Location = new System.Drawing.Point(352, 78);
-            this.cmbDS_RevenueUnit.Name = "cmbDS_RevenueUnit";
-            this.cmbDS_RevenueUnit.ReadOnly = true;
-            this.cmbDS_RevenueUnit.Size = new System.Drawing.Size(177, 20);
-            this.cmbDS_RevenueUnit.TabIndex = 90;
-            this.cmbDS_RevenueUnit.ThemeName = "Office2010Black";
-            this.cmbDS_RevenueUnit.SelectedIndexChanged += new Telerik.WinControls.UI.Data.PositionChangedEventHandler(this.cmbDS_RevenueUnit_SelectedIndexChanged);
             // 
             // label139
             // 
@@ -8500,7 +8472,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.btnPickupCargo_Export)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnExport_PickupCargo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnSearch_PicupCargo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dropDownPickUpCargo_BCO)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateTimePicker_PickupCargo)).EndInit();
             this.radPageViewPage8.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridBranchAcceptance.MasterTemplate)).EndInit();
@@ -8558,12 +8529,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.radPanel19)).EndInit();
             this.radPanel19.ResumeLayout(false);
             this.radPanel19.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dropDownGatewayOutbound_BCO)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtGO_mawb)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbGO_Driver)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbGO_commoditType)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnGatewayOutbound_Print)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnGatewayOutbound_Search)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dropDownGatewayOutbound_BCO)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dropDownGatewayOutbound_Batch)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dropDownGatewayOutbound_Gateway)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateTimeGatewayOutbound_Date)).EndInit();
@@ -8641,8 +8612,8 @@
             this.radPanel25.ResumeLayout(false);
             this.radPanel25.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cmbDS_Status)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cmbDS_DeliveredBy)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbDS_RevenueUnit)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cmbDS_DeliveredBy)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbDS_RevenueType)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnDeliveryStatus_Print)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnDeliveryStatus_Search)).EndInit();
@@ -8978,8 +8949,6 @@
         private Telerik.WinControls.UI.RadMaskedEditBox txtTotalWeightCharge;
         private Telerik.WinControls.UI.RadMaskedEditBox AcceptancetxtAirwayBill;
         private Telerik.WinControls.UI.RadButton btnSearchShipment;
-        private System.Windows.Forms.Label label19;
-        private Telerik.WinControls.UI.RadDropDownList dropDownPickUpCargo_BCO;
         private Telerik.WinControls.UI.RadDropDownList dropDownBranchAcceptance_BCO_BSO;
         private Telerik.WinControls.UI.RadButton btnSearch_PicupCargo;
         private Telerik.WinControls.UI.RadButton btnBranchAcceptance_Search;
@@ -9051,7 +9020,6 @@
         private System.Windows.Forms.Label label101;
         private System.Windows.Forms.Label label113;
         private Telerik.WinControls.UI.RadGridView gridUnbundle;
-        private Telerik.WinControls.UI.RadDropDownList dropDownGatewayOutbound_BCO;
         private Telerik.WinControls.UI.RadGridView gridSegregation;
         private System.Windows.Forms.Label label83;
         private Telerik.WinControls.UI.RadDropDownList dropDownSegregation_PlateNo;
@@ -9185,11 +9153,9 @@
         private Telerik.WinControls.UI.RadDropDownList cmbCT_BCO;
         private Telerik.WinControls.UI.RadPanel radPanel25;
         private System.Windows.Forms.Label label140;
-        private Telerik.WinControls.UI.RadDropDownList cmbDS_Status;
         private System.Windows.Forms.Label label141;
         private Telerik.WinControls.UI.RadDropDownList cmbDS_DeliveredBy;
         private System.Windows.Forms.Label label138;
-        private Telerik.WinControls.UI.RadDropDownList cmbDS_RevenueUnit;
         private System.Windows.Forms.Label label139;
         private Telerik.WinControls.UI.RadDropDownList cmbDS_RevenueType;
         private Telerik.WinControls.UI.RadButton btnDeliveryStatus_Print;
@@ -9208,5 +9174,8 @@
         private System.Windows.Forms.Label label145;
         private Telerik.WinControls.UI.RadDropDownList cmbHC_Revenuetype;
         private Telerik.WinControls.UI.RadDropDownList cmbHC_RevenueUnit;
+        private Telerik.WinControls.UI.RadDropDownList cmbDS_RevenueUnit;
+        private Telerik.WinControls.UI.RadDropDownList cmbDS_Status;
+        private Telerik.WinControls.UI.RadDropDownList dropDownGatewayOutbound_BCO;
     }
 }

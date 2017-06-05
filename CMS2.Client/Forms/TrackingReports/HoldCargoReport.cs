@@ -74,9 +74,9 @@ namespace CMS2.Client.Forms.TrackingReports
             
             List<HoldCargo> list = holdcargoBl.GetAll().Where
                 (x => x.CreatedDate >= fromdate && x.CreatedDate <= todate
-                && ((x.User.Employee.AssignedToArea.RevenueUnitId == revenueunitid && x.User.Employee.AssignedToArea.RevenueUnitId != null) || (x.User.Employee.AssignedToArea.RevenueUnitId == x.User.Employee.AssignedToArea.RevenueUnitId && x.User.Employee.AssignedToArea.RevenueUnitId == null))
-                && ((x.StatusID == statusid && x.StatusID != null) || (x.StatusID == x.StatusID && x.StatusID == null))
-                && ((x.ReasonID == reasonid && x.ReasonID != null) || (x.ReasonID == x.ReasonID && x.ReasonID == null))
+                && ((x.User.Employee.AssignedToArea.RevenueUnitId == revenueunitid && x.User.Employee.AssignedToArea.RevenueUnitId != Guid.Empty) || (x.User.Employee.AssignedToArea.RevenueUnitId == x.User.Employee.AssignedToArea.RevenueUnitId && revenueunitid == Guid.Empty))
+                && ((x.StatusID == statusid && x.StatusID != Guid.Empty) || (x.StatusID == x.StatusID && statusid == Guid.Empty))
+                && ((x.ReasonID == reasonid && x.ReasonID != Guid.Empty) || (x.ReasonID == x.ReasonID && reasonid == Guid.Empty))
                 ).ToList();
             List<HoldCargoViewModel> modelList = Match(list);
 

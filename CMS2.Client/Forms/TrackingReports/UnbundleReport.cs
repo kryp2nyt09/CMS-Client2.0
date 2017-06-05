@@ -19,7 +19,7 @@ namespace CMS2.Client.Forms.TrackingReports
             BundleBL bundlebl = new BundleBL();
 
             List<Unbundle> unbundleList = unbundlebl.GetAll().Where(x => x.RecordStatus == 1 && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
-            List<Bundle> bundleList = bundlebl.GetAll().Where(x => x.RecordStatus == 1 && x.BranchCorpOfficeID == GlobalVars.DeviceBcoId && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
+            List<Bundle> bundleList = bundlebl.GetAll().Where(x => x.RecordStatus == 1 && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
 
             List<UnbundleViewModel> modelList = Match(unbundleList , bundleList);
 
@@ -68,8 +68,9 @@ namespace CMS2.Client.Forms.TrackingReports
 
             if (num == 0)
             {
-                unbundleList = unbundlebl.GetAll().Where(x => x.RecordStatus == 1 && x.CreatedDate.ToShortDateString() == date.ToShortDateString() && x.SackNo == sackNo).ToList();
-                
+                //unbundleList = unbundlebl.GetAll().Where(x => x.RecordStatus == 1 && x.CreatedDate.ToShortDateString() == date.ToShortDateString() && x.SackNo == sackNo).ToList();
+                unbundleList = unbundlebl.GetAll().Where(x => x.RecordStatus == 1 && x.SackNo == sackNo).ToList();
+
                 //bundleList = bundlebl.GetAll().Where(x => x.RecordStatus == 1 && x.BranchCorpOfficeID == GlobalVars.DeviceBcoId && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
             }
             else if(num ==1)

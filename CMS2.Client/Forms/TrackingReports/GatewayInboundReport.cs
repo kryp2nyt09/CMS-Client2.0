@@ -15,7 +15,8 @@ namespace CMS2.Client.Forms.TrackingReports
         public DataTable getData(DateTime date)
         {
             GatewayInboundBL gatewayInboundBl = new GatewayInboundBL();
-            List<GatewayInbound> list = list = gatewayInboundBl.GetAll().Where(x => x.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.RecordStatus == 1 && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
+            //List<GatewayInbound> list = list = gatewayInboundBl.GetAll().Where(x => x.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.RecordStatus == 1 && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
+            List<GatewayInbound> list = list = gatewayInboundBl.GetAll().Where(x => x.RecordStatus == 1 && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
 
             List<GatewayInboundViewModel> modelList = Match(list);
 
