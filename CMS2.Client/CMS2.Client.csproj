@@ -46,6 +46,7 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Prefer32Bit>false</Prefer32Bit>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -402,6 +403,7 @@
     </Compile>
     <Compile Include="ReportModels\PaymentSummary.cs">
       <DependentUpon>PaymentSummary.xsd</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="ReportModels\PaymentSummary.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -420,6 +422,7 @@
     </Compile>
     <Compile Include="ReportModels\TrackingDailyTrip.cs">
       <DependentUpon>TrackingDailyTrip.xsd</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="ReportModels\TrackingDailyTrip.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -434,6 +437,7 @@
     </Compile>
     <Compile Include="ReportModels\TrackingInsack.cs">
       <DependentUpon>TrackingInsack.xsd</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="ReportModels\TrackingInsack.Designer.cs">
       <AutoGen>True</AutoGen>
