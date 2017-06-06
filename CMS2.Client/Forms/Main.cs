@@ -6218,7 +6218,7 @@ namespace CMS2.Client
 
                 PickupCargoManifestReport pickup = new PickupCargoManifestReport();
                 DataTable dataTable = pickup.getPickupCargoDataByRevenueUnit(dateTimePicker_PickupCargo.Value, revenueUnitTypeId, revenueUnitId);
-                DataView view = new DataView(dataTable);
+                //DataView view = new DataView(dataTable);
                 gridPickupCargo.DataSource = dataTable;
 
                 TrackingReportGlobalModel.table = dataTable;
@@ -6250,6 +6250,7 @@ namespace CMS2.Client
             }
             catch (Exception ex)
             {
+                MessageBox.Show(ex.ToString());
                 Logs.ErrorLogs(LogPath, "Pickup Cargo", ex.Message);
             }
         }
