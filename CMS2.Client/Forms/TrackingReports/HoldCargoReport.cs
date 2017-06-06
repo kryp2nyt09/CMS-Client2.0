@@ -145,7 +145,7 @@ namespace CMS2.Client.Forms.TrackingReports
             width.Add(100);
             width.Add(100);
             width.Add(100);
-            width.Add(100);
+            width.Add(0);
             width.Add(100);
             width.Add(0);
             width.Add(0);
@@ -178,23 +178,24 @@ namespace CMS2.Client.Forms.TrackingReports
                     model.AirwayBillNo = holdCargo.AirwayBillNo;
 
                     Shipment ship = shipList.Find(x => x.AirwayBillNo == holdCargo.AirwayBillNo);
-
-                    //foreach (Shipment x in shipList)
-                    //{
+                    
+                    if (ship !=null)
+                    {
                         model.Shipper = ship.Shipper.FullName;
                         model.Consignee = ship.Consignee.FullName;
                         model.Address = ship.Consignee.Address1;
                         model.PaymentMode = ship.PaymentMode.PaymentModeName;
                         model.ServiceMode = ship.ServiceMode.ServiceModeName;
-                    //}
-                    model.Status = status.GetById(holdCargo.StatusID).StatusName; // status.GetAll().Find(x => x.StatusID == holdCargo.StatusID).StatusName;
-                    model.Reason = reason.GetById(holdCargo.ReasonID).ReasonName; // .Find(x => x.ReasonID == holdCargo.ReasonID).ReasonName;
-                    model.EndorseBy = holdCargo.Endorsedby;
-                    model.ScannedBy = user.GetActiveRoles().Find(x => x.RoleId == AppUser.User.UserId).RoleName;
-                    //model.PreparedBy = user.GetAllUsers().Find(x => x.UserId == shi)
-                    model.Aging = (DateTime.Now - holdCargo.HoldCargoDate).TotalDays;
-                   //model.Branch = 
-                    _results.Add(model);
+                        model.Status = status.GetById(holdCargo.StatusID).StatusName; // status.GetAll().Find(x => x.StatusID == holdCargo.StatusID).StatusName;
+                        model.Reason = reason.GetById(holdCargo.ReasonID).ReasonName; // .Find(x => x.ReasonID == holdCargo.ReasonID).ReasonName;
+                        model.EndorseBy = holdCargo.Endorsedby;
+                        //model.ScannedBy = user.GetActiveRoles().Find(x => x.RoleId == AppUser.User.UserId).RoleName;
+                        model.ScannedBy = holdCargo.User.Employee.FullName;
+                        //model.PreparedBy = user.GetAllUsers().Find(x => x.UserId == shi)
+                        model.Aging = Math.Round((DateTime.Now - holdCargo.HoldCargoDate).TotalDays,2);
+                        _results.Add(model);
+                    }
+                    
                 }
             }
             return _results;

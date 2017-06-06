@@ -74,13 +74,15 @@ namespace CMS2.Client.Forms.TrackingReports
                 && ((x.BatchID == batchid && x.BatchID != null) || (x.BatchID == x.BatchID && batchid == null))
                 && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
 
+            string bcoName = "";
             if(originbcoid != null)
             {
 
-                List<BranchCorpOffice> _bco = bcoService.GetAll().Where(x => x.RecordStatus == 1 && x.BranchCorpOfficeId == originbcoid).ToList();
+                //List<BranchCorpOffice> _bco = bcoService.GetAll().Where(x => x.RecordStatus == 1 && x.BranchCorpOfficeId == originbcoid).ToList();
                 //string bcoName = bcoService.GetAll().Where(x => x.BranchCorpOfficeId == GlobalVars.DeviceBcoId).Select(x => x.BranchCorpOfficeName).ToString();
-               string bcoName = _bco.Select(x => x.BranchCorpOfficeName).ToString();
+                //string bcoName = _bco.Select(x => x.BranchCorpOfficeName).ToString();
                 //string _bco = bcoService.GetAll().Where(x => x.RecordStatus == 1 && x.BranchCorpOfficeId == originbcoid).Select(x => x.BranchCorpOfficeName).ToString();
+                bcoName = bcoService.GetAll().Find(x => x.BranchCorpOfficeId == originbcoid).BranchCorpOfficeName;
                 modelList = Macth(_segregation).FindAll(x => x.BranchCorpOffice == bcoName);
             }
             else

@@ -84,7 +84,7 @@ namespace CMS2.Client.Forms.TrackingReports
             {
                 Outboundlist = gatewayOutboundBl.GetAll().Where
                     (x => x.RecordStatus == 1 
-                    && x.CreatedDate.ToShortDateString() == date.ToShortDateString() 
+                    //&& x.CreatedDate.ToShortDateString() == date.ToShortDateString() 
                     && x.MasterAirwayBill == mawb).ToList();
 
             }
@@ -95,26 +95,43 @@ namespace CMS2.Client.Forms.TrackingReports
                //&& ((x.PackageNumber.Shipment.DestinationCity.BranchCorpOfficeId == bcoid && x.PackageNumber.Shipment.DestinationCity.BranchCorpOfficeId != null) || (x.PackageNumber.Shipment.DestinationCity.BranchCorpOfficeId == x.PackageNumber.Shipment.DestinationCity.BranchCorpOfficeId && x.PackageNumber.Shipment.DestinationCity.BranchCorpOfficeId == null))
                && ((x.Driver == driver && x.Driver != "All") || (x.Driver == x.Driver && driver == "All"))
                && ((x.Gateway == gateway && x.Gateway != "All") || (x.Gateway == x.Gateway && gateway == "All"))
-               && ((x.BatchID == batchid && x.BatchID != null) || (x.BatchID == x.BatchID && batchid == null))
+               && ((x.BatchID == batchid && x.BatchID != Guid.Empty) || (x.BatchID == x.BatchID && batchid == Guid.Empty))
                && x.CreatedDate.ToShortDateString() == date.ToShortDateString()
                ).ToList();
             }
+            string comType = "";
+            string _bco = "";
 
-            if(commodityTypeId != null && bcoid !=null)
+            if (commodityTypeId != Guid.Empty && bcoid != Guid.Empty)
             {
-                string comType = comtypeService.GetAll().Where(x => x.RecordStatus == 1 && x.CommodityTypeId == commodityTypeId).Select(x => x.CommodityTypeName).ToString();
-                string _bco = bcoService.GetAll().Where(x => x.RecordStatus == 1 && x.BranchCorpOfficeId == bcoid).Select(x => x.BranchCorpOfficeName).ToString();
+                //string comType = comtypeService.GetAll().Where(x => x.RecordStatus == 1 && x.CommodityTypeId == commodityTypeId).Select(x => x.CommodityTypeName).ToString();
+                //string _bco = bcoService.GetAll().Where(x => x.RecordStatus == 1 && x.BranchCorpOfficeId == bcoid).Select(x => x.BranchCorpOfficeName).ToString();
+                //List<CommodityType> _ctype = comtypeService.FilterActiveBy(x => x.CommodityTypeId == commodityTypeId).ToList();
+                //string comType = _ctype.Select(x => x.CommodityTypeName).ToString();
+
+                //List<BranchCorpOffice> _branch = bcoService.FilterActiveBy(x => x.BranchCorpOfficeId == bcoid).ToList();
+                //string _bco = _branch.Select(x => x.BranchCorpOfficeName).ToString();
+
+                comType = comtypeService.GetAll().Find(x => x.CommodityTypeId == commodityTypeId).CommodityTypeName;
+                _bco = bcoService.GetAll().Find(x => x.BranchCorpOfficeId == bcoid).BranchCorpOfficeName;
+
                 modelList = Match(Inboundlist, Outboundlist).FindAll(x => x.CommodityTypeName == comType && x.Branch == _bco);
             }
-            else if (commodityTypeId != null && bcoid == null)
+            else if (commodityTypeId != Guid.Empty && bcoid == Guid.Empty)
             {
-                string comType = comtypeService.GetAll().Where(x => x.RecordStatus == 1 && x.CommodityTypeId == commodityTypeId).Select(x => x.CommodityTypeName).ToString();
+                //string comType = comtypeService.GetAll().Where(x => x.RecordStatus == 1 && x.CommodityTypeId == commodityTypeId).Select(x => x.CommodityTypeName).ToString();
+                //List<CommodityType> _ctype = comtypeService.FilterActiveBy(x => x.CommodityTypeId == commodityTypeId).ToList();
+                //string comType = _ctype.Select(x => x.CommodityTypeName).ToString();
+                comType = comtypeService.GetAll().Find(x => x.CommodityTypeId == commodityTypeId).CommodityTypeName;
                 modelList = Match(Inboundlist, Outboundlist).FindAll(x => x.CommodityTypeName == comType);
             }
-            else if(commodityTypeId == null && bcoid != null)
+            else if(commodityTypeId == Guid.Empty && bcoid != Guid.Empty)
             {
-                string _bco = bcoService.GetAll().Where(x => x.RecordStatus == 1 && x.BranchCorpOfficeId == bcoid).Select(x => x.BranchCorpOfficeName).ToString();
-                 modelList = Match(Inboundlist, Outboundlist).FindAll(x => x.Branch == _bco);
+                //string _bco = bcoService.GetAll().Where(x => x.RecordStatus == 1 && x.BranchCorpOfficeId == bcoid).Select(x => x.BranchCorpOfficeName).ToString();
+                //List<BranchCorpOffice> _branch = bcoService.FilterActiveBy(x => x.BranchCorpOfficeId == bcoid).ToList();
+                //string _bco = _branch.Select(x => x.BranchCorpOfficeName).ToString();
+                _bco = bcoService.GetAll().Find(x => x.BranchCorpOfficeId == bcoid).BranchCorpOfficeName;
+                modelList = Match(Inboundlist, Outboundlist).FindAll(x => x.Branch == _bco);
             }
             else
             {
@@ -224,7 +241,8 @@ namespace CMS2.Client.Forms.TrackingReports
                         model.Total += model.TotalRecieved;
                         model.Branch = outbound.BranchCorpOffice.BranchCorpOfficeName;
                         model.ScannedBy = AppUser.User.Employee.FullName;
-                        model.CommodityTypeName = _inbound.Where(x => x.Cargo == outbound.Cargo).Select(x => x.CommodityType.CommodityTypeName).ToString();
+                        //model.CommodityTypeName = _inbound.Where(x => x.Cargo == outbound.Cargo).Select(x => x.CommodityType.CommodityTypeName).ToString();
+                        model.CommodityTypeName = _inbound.Find(x => x.Cargo == outbound.Cargo).CommodityType.CommodityTypeName;
                         _results.Add(model);
 
                     }
@@ -248,7 +266,8 @@ namespace CMS2.Client.Forms.TrackingReports
                         model.Total += model.TotalDiscrepency;
                         model.Branch = outbound.BranchCorpOffice.BranchCorpOfficeName;
                         model.ScannedBy = AppUser.User.Employee.FullName;
-                        model.CommodityTypeName = _inbound.Where(x => x.Cargo == outbound.Cargo).Select(x => x.CommodityType.CommodityTypeName).ToString();
+                        model.CommodityTypeName = _inbound.Find(x => x.Cargo == outbound.Cargo).CommodityType.CommodityTypeName;
+                       // model.CommodityTypeName = _inbound.Where(x => x.Cargo == outbound.Cargo).Select(x => x.CommodityType.CommodityTypeName).ToString();
                         _results.Add(model);
 
                     }

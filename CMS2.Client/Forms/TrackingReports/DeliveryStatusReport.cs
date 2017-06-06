@@ -232,9 +232,10 @@ namespace CMS2.Client.Forms.TrackingReports
                 }
             }
 
-            List<BranchCorpOffice> _bco= bcoService.GetAll().Where(x => x.RecordStatus == 1 && x.BranchCorpOfficeId == GlobalVars.DeviceBcoId).ToList();
+            //List<BranchCorpOffice> _bco= bcoService.GetAll().Where(x => x.RecordStatus == 1 && x.BranchCorpOfficeId == GlobalVars.DeviceBcoId).ToList();
             //string bcoName = bcoService.GetAll().Where(x => x.BranchCorpOfficeId == GlobalVars.DeviceBcoId).Select(x => x.BranchCorpOfficeName).ToString();
-            string bcoName = _bco.Select(x => x.BranchCorpOfficeName).ToString();
+            //string bcoName = _bco.Select(x => x.BranchCorpOfficeName).ToString();
+            string bcoName = bcoService.GetAll().Find(x => x.BranchCorpOfficeId == GlobalVars.DeviceBcoId).BranchCorpOfficeName;
             List<DeliveryStatusViewModel> _resultsFilter = _results.FindAll(x => x.BCO == bcoName);
             //List<DeliveryStatusViewModel> resultList = modelList.FindAll(x => x.Area == revenueUnitName);
             //return _results;
