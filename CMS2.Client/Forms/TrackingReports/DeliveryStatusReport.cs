@@ -58,50 +58,69 @@ namespace CMS2.Client.Forms.TrackingReports
             return dt;
         }
 
-        public DataTable getDataByAllFilter(DateTime date, string revenueUnitName, Guid? deliveredById, Guid? statusId, int num)
+        public DataTable getDataByAllFilter(DateTime date, string revenueUnitName, Guid? deliveredById, Guid? statusId)
         {
 
             DeliveryBL deliveryStatusBL = new DeliveryBL();
-            List<Delivery> list = new List<Delivery>();
+           
             List <DeliveryStatusViewModel> resultList = new List<DeliveryStatusViewModel>();
-            if (num == 1)
-            {
-                list = deliveryStatusBL.GetAll().Where
-                    (x => x.RecordStatus == 1 
-                    && x.DeliveredBy.EmployeeId == deliveredById 
-                    && x.DeliveryStatus.DeliveryStatusId == statusId 
-                    //&& x.DeliveredBy.AssignedToArea.RevenueUnitName == revenueUnitName
-                    && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
-                List<DeliveryStatusViewModel> modelList = Match(list);
-                resultList = modelList.FindAll(x => x.Area == revenueUnitName);
+            List<DeliveryStatusViewModel> modelList = new List<DeliveryStatusViewModel>();
 
-            }
-            else if(num == 2)
+
+            List<Delivery> list = deliveryStatusBL.GetAll().Where
+                (x => x.RecordStatus == 1
+                && ((x.DeliveredBy.EmployeeId == deliveredById && x.DeliveredBy.EmployeeId != Guid.Empty) || (x.DeliveredBy.EmployeeId == x.DeliveredBy.EmployeeId && deliveredById == Guid.Empty))
+                && ((x.DeliveryStatus.DeliveryStatusId == statusId && x.DeliveryStatus.DeliveryStatusId != Guid.Empty) || (x.DeliveryStatus.DeliveryStatusId == x.DeliveryStatus.DeliveryStatusId && statusId == Guid.Empty))
+                && x.CreatedDate.ToShortDateString() == date.ToShortDateString()
+                ).ToList();
+
+            if(revenueUnitName != "All")
             {
-                list = deliveryStatusBL.GetAll().Where(x => x.RecordStatus == 1 && x.DeliveryStatus.DeliveryStatusId == statusId && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
-                List<DeliveryStatusViewModel> modelList = Match(list);
-                resultList = modelList.FindAll(x => x.Area == revenueUnitName);
+                modelList = Match(list).FindAll(x => x.Area == revenueUnitName);
             }
-            else if (num == 3)
+            else
             {
-                list = deliveryStatusBL.GetAll().Where(x => x.RecordStatus == 1 && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
-                List<DeliveryStatusViewModel> modelList = Match(list);
-                resultList = modelList.FindAll(x => x.Area == revenueUnitName);
-            }
-            else if (num == 4)
-            {
-                list = deliveryStatusBL.GetAll().Where(x => x.RecordStatus == 1 && x.DeliveredBy.EmployeeId == deliveredById && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
-                List<DeliveryStatusViewModel> modelList = Match(list);
-                resultList = modelList.FindAll(x => x.Area == revenueUnitName);
-            }
-            else if (num == 5)
-            {
-                list = deliveryStatusBL.GetAll().Where(x => x.RecordStatus == 1 && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
-                List<DeliveryStatusViewModel> modelList = Match(list);
-                resultList = modelList;
+                modelList = Match(list);
             }
 
-            
+            //if (num == 1)
+            //{
+            //    list = deliveryStatusBL.GetAll().Where
+            //        (x => x.RecordStatus == 1 
+            //        && x.DeliveredBy.EmployeeId == deliveredById 
+            //        && x.DeliveryStatus.DeliveryStatusId == statusId 
+            //        //&& x.DeliveredBy.AssignedToArea.RevenueUnitName == revenueUnitName
+            //        && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
+            //    List<DeliveryStatusViewModel> modelList = Match(list);
+            //    resultList = modelList.FindAll(x => x.Area == revenueUnitName);
+
+            //}
+            //else if(num == 2)
+            //{
+            //    list = deliveryStatusBL.GetAll().Where(x => x.RecordStatus == 1 && x.DeliveryStatus.DeliveryStatusId == statusId && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
+            //    List<DeliveryStatusViewModel> modelList = Match(list);
+            //    resultList = modelList.FindAll(x => x.Area == revenueUnitName);
+            //}
+            //else if (num == 3)
+            //{
+            //    list = deliveryStatusBL.GetAll().Where(x => x.RecordStatus == 1 && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
+            //    List<DeliveryStatusViewModel> modelList = Match(list);
+            //    resultList = modelList.FindAll(x => x.Area == revenueUnitName);
+            //}
+            //else if (num == 4)
+            //{
+            //    list = deliveryStatusBL.GetAll().Where(x => x.RecordStatus == 1 && x.DeliveredBy.EmployeeId == deliveredById && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
+            //    List<DeliveryStatusViewModel> modelList = Match(list);
+            //    resultList = modelList.FindAll(x => x.Area == revenueUnitName);
+            //}
+            //else if (num == 5)
+            //{
+            //    list = deliveryStatusBL.GetAll().Where(x => x.RecordStatus == 1 && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
+            //    List<DeliveryStatusViewModel> modelList = Match(list);
+            //    resultList = modelList;
+            //}
+
+
 
             DataTable dt = new DataTable();
             dt.Columns.Add(new DataColumn("No", typeof(string)));
@@ -121,7 +140,8 @@ namespace CMS2.Client.Forms.TrackingReports
             dt.Columns.Add(new DataColumn("ReceivedBy", typeof(string)));
             dt.BeginLoadData();
             int ctr = 1;
-            foreach (DeliveryStatusViewModel item in resultList)
+            //foreach (DeliveryStatusViewModel item in resultList)
+            foreach (DeliveryStatusViewModel item in modelList)
             {
                 DataRow row = dt.NewRow();
                 row[0] = (ctr++).ToString();

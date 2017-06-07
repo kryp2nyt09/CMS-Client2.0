@@ -7774,98 +7774,79 @@ namespace CMS2.Client
         /// <summary>
         /// DELIVERY STATUS
         /// </summary>
-        private void getDeliveryStatusDataByFilter(int num)
+        private void getDeliveryStatusDataByFilter()
         {
-            Guid revenueUnitId = new Guid();
-            Guid deliveredById = new Guid();
-            Guid statusId = new Guid();
+            //Guid revenueUnitId = new Guid();
+            //Guid deliveredById = new Guid();
+            //Guid statusId = new Guid();
+            //string revenueUnitName = "";
+
+            Guid? revenueUnitId;
+            Guid? deliveredById;
+            Guid? statusId;
             string revenueUnitName = "";
+            
+            string deliveredByName = "";
+            string statusName = "";
+
+
             try
             {
-                revenueUnitId = Guid.Parse(cmbDS_RevenueUnit.SelectedValue.ToString());
-                deliveredById = Guid.Parse(cmbDS_DeliveredBy.SelectedValue.ToString());
-                statusId = Guid.Parse(cmbDS_Status.SelectedValue.ToString());
-                revenueUnitName = cmbDS_RevenueUnit.SelectedItem.Text;
-
-
                 DeliveryStatusReport deliveryStatus = new DeliveryStatusReport();
-                DataTable dataTable = new DataTable();
-                if (num == 1)
+                revenueUnitName = cmbDS_RevenueUnit.SelectedItem.Text;
+                deliveredByName = cmbDS_DeliveredBy.SelectedItem.Text;
+                statusName = cmbDS_Status.SelectedItem.Text;
+
+                if (revenueUnitName == "All")
                 {
-                    dataTable = deliveryStatus.getDataByAllFilter(dateTimeDeliveryStatus_Date.Value, revenueUnitName, deliveredById, statusId, num);
+                    revenueUnitId = Guid.Empty;
                 }
-                else if (num == 2)
+                else
                 {
-                    dataTable = deliveryStatus.getDataByAllFilter(dateTimeDeliveryStatus_Date.Value, revenueUnitName, null, statusId, num);
-                }
-                else if (num == 3)
-                {
-                    dataTable = deliveryStatus.getDataByAllFilter(dateTimeDeliveryStatus_Date.Value, revenueUnitName, null, null, num);
-                }
-                else if (num == 4)
-                {
-                    dataTable = deliveryStatus.getDataByAllFilter(dateTimeDeliveryStatus_Date.Value, revenueUnitName, deliveredById, null, num);
-                }
-                else if (num == 5)
-                {
-                    dataTable = deliveryStatus.getDataByAllFilter(dateTimeDeliveryStatus_Date.Value, "", null, null, num);
+                    revenueUnitId = Guid.Parse(cmbDS_RevenueUnit.SelectedValue.ToString());
                 }
 
+                if (deliveredByName == "All")
+                {
+                    deliveredById = Guid.Empty;
+                }
+                else
+                {
+                    deliveredById = Guid.Parse(cmbDS_DeliveredBy.SelectedValue.ToString());
+                }
 
+                if (statusName == "All")
+                {
+                    statusId = Guid.Empty;
+                }
+                else
+                {
+                    statusId = Guid.Parse(cmbDS_Status.SelectedValue.ToString());
+                }
 
-                ////AREA
-                //DataView view = new DataView(dataTable);
+                DataTable dataTable = deliveryStatus.getDataByAllFilter(dateTimeDeliveryStatus_Date.Value, revenueUnitName, deliveredById, statusId);
 
-                //DataTable table = view.ToTable(true, "Area");
-                //dropDownDeliveryStatus_Area.Items.Clear();
-                //dropDownDeliveryStatus_Area.Items.Add("All");
-                //foreach (DataRow x in table.Rows)
+                //DataTable dataTable = new DataTable();
+                //if (num == 1)
                 //{
-                //    if (x["Area"].ToString().Trim() != "")
-                //    {
-                //        dropDownDeliveryStatus_Area.Items.Add(x["Area"].ToString());
-                //    }
+                //    dataTable = deliveryStatus.getDataByAllFilter(dateTimeDeliveryStatus_Date.Value, revenueUnitName, deliveredById, statusId, num);
                 //}
-                //dropDownDeliveryStatus_Area.SelectedIndex = 0;
-
-                ////DRIVER
-                //table = view.ToTable(true, "Driver");
-                //dropDownDeliveryStatus_Driver.Items.Clear();
-                //dropDownDeliveryStatus_Driver.Items.Add("All");
-                //foreach (DataRow x in table.Rows)
+                //else if (num == 2)
                 //{
-                //    if (x["Driver"].ToString().Trim() != "")
-                //    {
-                //        dropDownDeliveryStatus_Driver.Items.Add(x["Driver"].ToString());
-                //    }
+                //    dataTable = deliveryStatus.getDataByAllFilter(dateTimeDeliveryStatus_Date.Value, revenueUnitName, null, statusId, num);
                 //}
-                //dropDownDeliveryStatus_Driver.SelectedIndex = 0;
-
-                ////STATUS
-                //table = view.ToTable(true, "Status");
-                //dropDownDeliveryStatus_Status.Items.Clear();
-                //dropDownDeliveryStatus_Status.Items.Add("All");
-                //foreach (DataRow x in table.Rows)
+                //else if (num == 3)
                 //{
-                //    if (x["Status"].ToString().Trim() != "")
-                //    {
-                //        dropDownDeliveryStatus_Status.Items.Add(x["Status"].ToString());
-                //    }
+                //    dataTable = deliveryStatus.getDataByAllFilter(dateTimeDeliveryStatus_Date.Value, revenueUnitName, null, null, num);
                 //}
-                //dropDownDeliveryStatus_Status.SelectedIndex = 0;
-
-                ////BCO
-                //table = view.ToTable(true, "BCO");
-                //dropDownDeliveryStatus_BCO.Items.Clear();
-                //dropDownDeliveryStatus_BCO.Items.Add("All");
-                //foreach (DataRow x in table.Rows)
+                //else if (num == 4)
                 //{
-                //    if (x["BCO"].ToString().Trim() != "")
-                //    {
-                //        dropDownDeliveryStatus_BCO.Items.Add(x["BCO"].ToString());
-                //    }
+                //    dataTable = deliveryStatus.getDataByAllFilter(dateTimeDeliveryStatus_Date.Value, revenueUnitName, deliveredById, null, num);
                 //}
-                //dropDownDeliveryStatus_BCO.SelectedIndex = 0;
+                //else if (num == 5)
+                //{
+                //    dataTable = deliveryStatus.getDataByAllFilter(dateTimeDeliveryStatus_Date.Value, "", null, null, num);
+                //}
 
                 gridDeliveryStatus.DataSource = dataTable;
                 TrackingReportGlobalModel.table = dataTable;
@@ -9580,7 +9561,7 @@ namespace CMS2.Client
                     revenueUnit = cmbDS_RevenueUnit.SelectedItem.ToString();
                     deliveredBy = cmbDS_DeliveredBy.SelectedItem.ToString();
                     statusName = cmbDS_Status.SelectedItem.ToString();
-
+                    getDeliveryStatusDataByFilter();
                 }
                 catch (Exception ex)
                 {
@@ -9590,36 +9571,36 @@ namespace CMS2.Client
                     //Status = "All"; dropDownDeliveryStatus_Status.SelectedText = "All";
                     //BCO = "All"; dropDownDeliveryStatus_BCO.SelectedText = "All";
                 }
-                if(revenueUnit != "All" && deliveredBy != "All" && statusName != "All")
-                {
-                    gridDeliveryStatus.EnableFiltering = false;
-                    num = 1;
-                    getDeliveryStatusDataByFilter(num);
-                }
-                else if(revenueUnit != "All" && deliveredBy == "All" && statusName != "All")
-                {
-                    gridDeliveryStatus.EnableFiltering = false;
-                    num = 2;
-                    getDeliveryStatusDataByFilter(num);
-                }
-                else if (revenueUnit != "All" && deliveredBy == "All" && statusName == "All")
-                {
-                    gridDeliveryStatus.EnableFiltering = false;
-                    num = 3;
-                    getDeliveryStatusDataByFilter(num);
-                }
-                else if (revenueUnit != "All" && deliveredBy != "All" && statusName == "All")
-                {
-                    gridDeliveryStatus.EnableFiltering = false;
-                    num = 4;
-                    getDeliveryStatusDataByFilter(num);
-                }
-                else if (revenueUnit == "All" && deliveredBy == "All" && statusName == "All")
-                {
-                    gridDeliveryStatus.EnableFiltering = false;
-                    num = 5;
-                    getDeliveryStatusDataByFilter(num);
-                }
+                //if(revenueUnit != "All" && deliveredBy != "All" && statusName != "All")
+                //{
+                //    gridDeliveryStatus.EnableFiltering = false;
+                //    num = 1;
+                //    getDeliveryStatusDataByFilter(num);
+                //}
+                //else if(revenueUnit != "All" && deliveredBy == "All" && statusName != "All")
+                //{
+                //    gridDeliveryStatus.EnableFiltering = false;
+                //    num = 2;
+                //    getDeliveryStatusDataByFilter(num);
+                //}
+                //else if (revenueUnit != "All" && deliveredBy == "All" && statusName == "All")
+                //{
+                //    gridDeliveryStatus.EnableFiltering = false;
+                //    num = 3;
+                //    getDeliveryStatusDataByFilter(num);
+                //}
+                //else if (revenueUnit != "All" && deliveredBy != "All" && statusName == "All")
+                //{
+                //    gridDeliveryStatus.EnableFiltering = false;
+                //    num = 4;
+                //    getDeliveryStatusDataByFilter(num);
+                //}
+                //else if (revenueUnit == "All" && deliveredBy == "All" && statusName == "All")
+                //{
+                //    gridDeliveryStatus.EnableFiltering = false;
+                //    num = 5;
+                //    getDeliveryStatusDataByFilter(num);
+                //}
                 //if (Area == "All" && Driver == "All" && Status == "All" && BCO == "ALL")
                 //{
                 //    gridDeliveryStatus.EnableFiltering = false;
