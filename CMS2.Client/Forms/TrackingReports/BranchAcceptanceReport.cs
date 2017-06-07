@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace CMS2.Client.Forms.TrackingReports
 {
-    public class BranchAcceptanceReport
+    public  class BranchAcceptanceReport
     {
 
         public DataTable getBranchAcceptanceData(DateTime date)
@@ -18,6 +18,7 @@ namespace CMS2.Client.Forms.TrackingReports
             BranchCorpOfficeBL bcoService = new BranchCorpOfficeBL();
             BranchAcceptanceBL branchAcceptanceBl = new BranchAcceptanceBL();
             ShipmentBL shipmentService = new ShipmentBL();
+            
             //List<Shipment> shipments = shipmentService.FilterActive().Where(x => x.AcceptedBy.AssignedToArea.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.RecordStatus == 1 && x.CreatedDate.ToShortDateString() == date.ToShortDateString() && x.Booking.BookingStatus.BookingStatusName == "Picked-up").ToList();
 
             List<Shipment> shipments = shipmentService.FilterActive().Where(x => x.AcceptedBy.AssignedToArea.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.RecordStatus == 1 && x.Booking.BookingStatus.BookingStatusName == "Picked-up" && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
@@ -271,9 +272,6 @@ namespace CMS2.Client.Forms.TrackingReports
 
             return dt;
         }
-
-
-
 
         public List<int> setBranchAcceptanceWidth()
         {

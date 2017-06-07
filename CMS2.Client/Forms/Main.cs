@@ -36,6 +36,7 @@ using Telerik.WinControls.Data;
 using CMS2.Client.Forms.TrackingReportsView;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using CMS2.Entities.ReportModel;
 
 namespace CMS2.Client
 {
@@ -11029,19 +11030,10 @@ namespace CMS2.Client
 
 
         #endregion
+                
 
         #endregion END MARK SANTOS REGION
 
-        private void dropDownDailyTrip_Driver_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
-        {
 
-        }
-
-        private void label108_Click(object sender, EventArgs e)
-        {
-
-        }
-
-       
     }
 }
