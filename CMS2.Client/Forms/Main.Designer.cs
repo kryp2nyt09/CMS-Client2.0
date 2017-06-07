@@ -29,40 +29,40 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn1 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn2 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn3 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn4 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn5 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn6 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn7 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn8 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn9 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition1 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition2 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition3 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition4 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition5 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition6 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition7 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn10 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn11 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn12 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn13 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn14 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn15 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn16 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn17 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn18 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition20 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition21 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition22 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition23 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition24 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition25 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition19 = new Telerik.WinControls.UI.TableViewDefinition();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition8 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition26 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition27 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition28 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition29 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition30 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition31 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition32 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition33 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition34 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition35 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition36 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.RadListDataItem radListDataItem7 = new Telerik.WinControls.UI.RadListDataItem();
+            Telerik.WinControls.UI.RadListDataItem radListDataItem8 = new Telerik.WinControls.UI.RadListDataItem();
             Telerik.WinControls.UI.RadListDataItem radListDataItem1 = new Telerik.WinControls.UI.RadListDataItem();
             Telerik.WinControls.UI.RadListDataItem radListDataItem2 = new Telerik.WinControls.UI.RadListDataItem();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition9 = new Telerik.WinControls.UI.TableViewDefinition();
             Telerik.WinControls.UI.RadListDataItem radListDataItem3 = new Telerik.WinControls.UI.RadListDataItem();
             Telerik.WinControls.UI.RadListDataItem radListDataItem4 = new Telerik.WinControls.UI.RadListDataItem();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition10 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition11 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition12 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition13 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition14 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition15 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition16 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition17 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.RadListDataItem radListDataItem5 = new Telerik.WinControls.UI.RadListDataItem();
-            Telerik.WinControls.UI.RadListDataItem radListDataItem6 = new Telerik.WinControls.UI.RadListDataItem();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition18 = new Telerik.WinControls.UI.TableViewDefinition();
             this.office2010BlackTheme1 = new Telerik.WinControls.Themes.Office2010BlackTheme();
             this.radPanel1 = new Telerik.WinControls.UI.RadPanel();
             this.panel = new Telerik.WinControls.UI.RadPanel();
@@ -415,8 +415,6 @@
             this.btnPickupCargo_Docs = new Telerik.WinControls.UI.RadMenuButtonItem();
             this.btnExport_PickupCargo = new Telerik.WinControls.UI.RadButton();
             this.btnSearch_PicupCargo = new Telerik.WinControls.UI.RadButton();
-            this.label19 = new System.Windows.Forms.Label();
-            this.dropDownPickUpCargo_BCO = new Telerik.WinControls.UI.RadDropDownList();
             this.dateTimePicker_PickupCargo = new Telerik.WinControls.UI.RadDateTimePicker();
             this.label76 = new System.Windows.Forms.Label();
             this.label68 = new System.Windows.Forms.Label();
@@ -616,6 +614,14 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.saveFileDialog2 = new System.Windows.Forms.SaveFileDialog();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.dropDownDeliveryStatus_Area = new Telerik.WinControls.UI.RadDropDownList();
+            this.dropDownDeliveryStatus_BCO = new Telerik.WinControls.UI.RadDropDownList();
+            this.dropDownBranchAcceptance_Branch = new Telerik.WinControls.UI.RadDropDownList();
+            this.dropDownBundle_Branch = new Telerik.WinControls.UI.RadDropDownList();
+            this.dropDownHoldCargo_Branch = new Telerik.WinControls.UI.RadDropDownList();
+            this.label45 = new Telerik.WinControls.UI.RadLabel();
+            this.label23 = new Telerik.WinControls.UI.RadLabel();
+            this.label39 = new Telerik.WinControls.UI.RadLabel();
             ((System.ComponentModel.ISupportInitialize)(this.radPanel1)).BeginInit();
             this.radPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panel)).BeginInit();
@@ -944,7 +950,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.btnPickupCargo_Export)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnExport_PickupCargo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnSearch_PicupCargo)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dropDownPickUpCargo_BCO)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateTimePicker_PickupCargo)).BeginInit();
             this.radPageViewPage8.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridBranchAcceptance)).BeginInit();
@@ -1082,8 +1087,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.dateTimeDeliveryStatus_Date)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dropDownDeliveryStatus_Area)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dropDownDeliveryStatus_BCO)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnSettings)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnLogOut)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dropDownBranchAcceptance_Branch)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dropDownBundle_Branch)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dropDownHoldCargo_Branch)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.label45)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.label23)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.label39)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
             // 
@@ -1218,7 +1227,7 @@
             this.pageViewMain.Font = new System.Drawing.Font("Tahoma", 9F);
             this.pageViewMain.Location = new System.Drawing.Point(0, 0);
             this.pageViewMain.Name = "pageViewMain";
-            this.pageViewMain.SelectedPage = this.BookingPage;
+            this.pageViewMain.SelectedPage = this.TrackingPage;
             this.pageViewMain.Size = new System.Drawing.Size(1258, 639);
             this.pageViewMain.TabIndex = 0;
             this.pageViewMain.Text = "Manifest";
@@ -1243,7 +1252,7 @@
             this.radPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.radPanel4.Location = new System.Drawing.Point(0, 382);
             this.radPanel4.Name = "radPanel4";
-            this.radPanel4.Size = new System.Drawing.Size(1234, 235);
+            this.radPanel4.Size = new System.Drawing.Size(1234, 205);
             this.radPanel4.TabIndex = 1;
             this.radPanel4.Text = "radPanel4";
             // 
@@ -1253,8 +1262,11 @@
             this.BookingGridView.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
             this.BookingGridView.Cursor = System.Windows.Forms.Cursors.Default;
             this.BookingGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BookingGridView.EnableKeyMap = true;
+            this.BookingGridView.EnableKineticScrolling = true;
             this.BookingGridView.Font = new System.Drawing.Font("Tahoma", 9F);
             this.BookingGridView.ForeColor = System.Drawing.Color.Black;
+            this.BookingGridView.GroupExpandAnimationType = Telerik.WinControls.UI.GridExpandAnimationType.Fade;
             this.BookingGridView.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.BookingGridView.Location = new System.Drawing.Point(0, 0);
             // 
@@ -1265,53 +1277,62 @@
             this.BookingGridView.MasterTemplate.AllowEditRow = false;
             this.BookingGridView.MasterTemplate.AllowSearchRow = true;
             this.BookingGridView.MasterTemplate.AutoGenerateColumns = false;
-            gridViewTextBoxColumn1.FieldName = "BookingId";
-            gridViewTextBoxColumn1.HeaderText = "BookingID";
-            gridViewTextBoxColumn1.IsVisible = false;
-            gridViewTextBoxColumn1.Name = "BookingId";
-            gridViewTextBoxColumn2.FieldName = "DateBooked";
-            gridViewTextBoxColumn2.HeaderText = "Booking Date";
-            gridViewTextBoxColumn2.Name = "BookingDate";
-            gridViewTextBoxColumn2.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            gridViewTextBoxColumn3.FieldName = "BookingNo";
-            gridViewTextBoxColumn3.HeaderText = "Booking Number";
-            gridViewTextBoxColumn3.Name = "BookingNo";
-            gridViewTextBoxColumn4.Expression = "";
-            gridViewTextBoxColumn4.FieldName = "ShipperFullname";
-            gridViewTextBoxColumn4.HeaderText = "Shipper Name";
-            gridViewTextBoxColumn4.Name = "ShipperName";
-            gridViewTextBoxColumn5.FieldName = "OriginCity.CityName";
-            gridViewTextBoxColumn5.HeaderText = "Origin City";
-            gridViewTextBoxColumn5.Name = "OriginCity";
-            gridViewTextBoxColumn6.Expression = "";
-            gridViewTextBoxColumn6.FieldName = "ConsigneeFullname";
-            gridViewTextBoxColumn6.HeaderText = "Consignee Name";
-            gridViewTextBoxColumn6.Name = "ConsigneeName";
-            gridViewTextBoxColumn7.FieldName = "DestinationCity.CityName";
-            gridViewTextBoxColumn7.HeaderText = "Destination City";
-            gridViewTextBoxColumn7.Name = "DestinationCity";
-            gridViewTextBoxColumn8.FieldName = "BookedByFullname";
-            gridViewTextBoxColumn8.HeaderText = "Booked By";
-            gridViewTextBoxColumn8.Name = "BookedBy";
-            gridViewTextBoxColumn9.FieldName = "BookingStatus.BookingStatusName";
-            gridViewTextBoxColumn9.HeaderText = "Booking Status";
-            gridViewTextBoxColumn9.Name = "BookingStatus";
+            this.BookingGridView.MasterTemplate.AutoSizeColumnsMode = Telerik.WinControls.UI.GridViewAutoSizeColumnsMode.Fill;
+            gridViewTextBoxColumn10.FieldName = "BookingId";
+            gridViewTextBoxColumn10.HeaderText = "BookingID";
+            gridViewTextBoxColumn10.IsVisible = false;
+            gridViewTextBoxColumn10.Name = "BookingId";
+            gridViewTextBoxColumn11.FieldName = "DateBooked";
+            gridViewTextBoxColumn11.HeaderText = "Booking Date";
+            gridViewTextBoxColumn11.Name = "BookingDate";
+            gridViewTextBoxColumn11.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            gridViewTextBoxColumn11.Width = 152;
+            gridViewTextBoxColumn12.FieldName = "BookingNo";
+            gridViewTextBoxColumn12.HeaderText = "Booking Number";
+            gridViewTextBoxColumn12.Name = "BookingNo";
+            gridViewTextBoxColumn12.Width = 152;
+            gridViewTextBoxColumn13.Expression = "";
+            gridViewTextBoxColumn13.FieldName = "ShipperFullname";
+            gridViewTextBoxColumn13.HeaderText = "Shipper Name";
+            gridViewTextBoxColumn13.Name = "ShipperName";
+            gridViewTextBoxColumn13.Width = 152;
+            gridViewTextBoxColumn14.FieldName = "OriginCity.CityName";
+            gridViewTextBoxColumn14.HeaderText = "Origin City";
+            gridViewTextBoxColumn14.Name = "OriginCity";
+            gridViewTextBoxColumn14.Width = 152;
+            gridViewTextBoxColumn15.Expression = "";
+            gridViewTextBoxColumn15.FieldName = "ConsigneeFullname";
+            gridViewTextBoxColumn15.HeaderText = "Consignee Name";
+            gridViewTextBoxColumn15.Name = "ConsigneeName";
+            gridViewTextBoxColumn15.Width = 152;
+            gridViewTextBoxColumn16.FieldName = "DestinationCity.CityName";
+            gridViewTextBoxColumn16.HeaderText = "Destination City";
+            gridViewTextBoxColumn16.Name = "DestinationCity";
+            gridViewTextBoxColumn16.Width = 152;
+            gridViewTextBoxColumn17.FieldName = "BookedByFullname";
+            gridViewTextBoxColumn17.HeaderText = "Booked By";
+            gridViewTextBoxColumn17.Name = "BookedBy";
+            gridViewTextBoxColumn17.Width = 152;
+            gridViewTextBoxColumn18.FieldName = "BookingStatus.BookingStatusName";
+            gridViewTextBoxColumn18.HeaderText = "Booking Status";
+            gridViewTextBoxColumn18.Name = "BookingStatus";
+            gridViewTextBoxColumn18.Width = 156;
             this.BookingGridView.MasterTemplate.Columns.AddRange(new Telerik.WinControls.UI.GridViewDataColumn[] {
-            gridViewTextBoxColumn1,
-            gridViewTextBoxColumn2,
-            gridViewTextBoxColumn3,
-            gridViewTextBoxColumn4,
-            gridViewTextBoxColumn5,
-            gridViewTextBoxColumn6,
-            gridViewTextBoxColumn7,
-            gridViewTextBoxColumn8,
-            gridViewTextBoxColumn9});
+            gridViewTextBoxColumn10,
+            gridViewTextBoxColumn11,
+            gridViewTextBoxColumn12,
+            gridViewTextBoxColumn13,
+            gridViewTextBoxColumn14,
+            gridViewTextBoxColumn15,
+            gridViewTextBoxColumn16,
+            gridViewTextBoxColumn17,
+            gridViewTextBoxColumn18});
             this.BookingGridView.MasterTemplate.EnableAlternatingRowColor = true;
             this.BookingGridView.MasterTemplate.EnableFiltering = true;
-            this.BookingGridView.MasterTemplate.ViewDefinition = tableViewDefinition1;
+            this.BookingGridView.MasterTemplate.ViewDefinition = tableViewDefinition20;
             this.BookingGridView.Name = "BookingGridView";
             this.BookingGridView.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.BookingGridView.Size = new System.Drawing.Size(1234, 235);
+            this.BookingGridView.Size = new System.Drawing.Size(1234, 205);
             this.BookingGridView.TabIndex = 30;
             this.BookingGridView.ThemeName = "Office2010Black";
             this.BookingGridView.CellClick += new Telerik.WinControls.UI.GridViewCellEventHandler(this.BookingGridView_CellClick);
@@ -1502,7 +1523,7 @@
             this.dateDateBooked.Size = new System.Drawing.Size(145, 20);
             this.dateDateBooked.TabIndex = 30;
             this.dateDateBooked.TabStop = false;
-            this.dateDateBooked.Text = "Friday, December 2, 2016";
+            this.dateDateBooked.Text = "Friday, 2 December 2016";
             this.dateDateBooked.ThemeName = "Office2010Black";
             this.dateDateBooked.Value = new System.DateTime(2016, 12, 2, 15, 47, 16, 261);
             // 
@@ -2539,7 +2560,6 @@
             // 
             this.txtSumTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSumTotal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
-            this.txtSumTotal.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtSumTotal.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSumTotal.Location = new System.Drawing.Point(129, 467);
             this.txtSumTotal.Mask = "C2";
@@ -2558,7 +2578,6 @@
             // 
             this.txtSumDiscount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSumDiscount.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
-            this.txtSumDiscount.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtSumDiscount.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSumDiscount.Location = new System.Drawing.Point(129, 372);
             this.txtSumDiscount.Mask = "C2";
@@ -2577,7 +2596,6 @@
             // 
             this.txtSumVatAmount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSumVatAmount.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
-            this.txtSumVatAmount.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtSumVatAmount.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSumVatAmount.Location = new System.Drawing.Point(129, 420);
             this.txtSumVatAmount.Mask = "C2";
@@ -2596,7 +2614,6 @@
             // 
             this.txtSumInsurance.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSumInsurance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
-            this.txtSumInsurance.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtSumInsurance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSumInsurance.Location = new System.Drawing.Point(129, 348);
             this.txtSumInsurance.Mask = "C2";
@@ -2615,7 +2632,6 @@
             // 
             this.txtSumQuarantineFee.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSumQuarantineFee.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
-            this.txtSumQuarantineFee.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtSumQuarantineFee.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSumQuarantineFee.Location = new System.Drawing.Point(129, 324);
             this.txtSumQuarantineFee.Mask = "C2";
@@ -2634,7 +2650,6 @@
             // 
             this.txtSumHandlingFee.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSumHandlingFee.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
-            this.txtSumHandlingFee.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtSumHandlingFee.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSumHandlingFee.Location = new System.Drawing.Point(129, 300);
             this.txtSumHandlingFee.Mask = "C2";
@@ -2653,7 +2668,6 @@
             // 
             this.txtSumPackagingFee.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSumPackagingFee.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
-            this.txtSumPackagingFee.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtSumPackagingFee.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSumPackagingFee.Location = new System.Drawing.Point(129, 276);
             this.txtSumPackagingFee.Mask = "C2";
@@ -2672,7 +2686,6 @@
             // 
             this.txtSumDrainingFee.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSumDrainingFee.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
-            this.txtSumDrainingFee.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtSumDrainingFee.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSumDrainingFee.Location = new System.Drawing.Point(129, 252);
             this.txtSumDrainingFee.Mask = "C2";
@@ -2691,7 +2704,6 @@
             // 
             this.txtSumCratingFee.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSumCratingFee.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
-            this.txtSumCratingFee.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtSumCratingFee.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSumCratingFee.Location = new System.Drawing.Point(129, 228);
             this.txtSumCratingFee.Mask = "C2";
@@ -2710,7 +2722,6 @@
             // 
             this.txtSumDangerousFee.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSumDangerousFee.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
-            this.txtSumDangerousFee.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtSumDangerousFee.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSumDangerousFee.Location = new System.Drawing.Point(129, 204);
             this.txtSumDangerousFee.Mask = "C2";
@@ -2729,7 +2740,6 @@
             // 
             this.txtSumFuelSurcharge.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSumFuelSurcharge.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
-            this.txtSumFuelSurcharge.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtSumFuelSurcharge.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSumFuelSurcharge.Location = new System.Drawing.Point(129, 180);
             this.txtSumFuelSurcharge.Mask = "C2";
@@ -2748,7 +2758,6 @@
             // 
             this.txtSumPeracFee.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSumPeracFee.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
-            this.txtSumPeracFee.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtSumPeracFee.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSumPeracFee.Location = new System.Drawing.Point(129, 156);
             this.txtSumPeracFee.Mask = "C2";
@@ -2767,7 +2776,6 @@
             // 
             this.txtSumFreightCollect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSumFreightCollect.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
-            this.txtSumFreightCollect.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtSumFreightCollect.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSumFreightCollect.Location = new System.Drawing.Point(129, 132);
             this.txtSumFreightCollect.Mask = "C2";
@@ -2786,7 +2794,6 @@
             // 
             this.txtSumDeliveryFee.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSumDeliveryFee.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
-            this.txtSumDeliveryFee.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtSumDeliveryFee.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSumDeliveryFee.Location = new System.Drawing.Point(129, 108);
             this.txtSumDeliveryFee.Mask = "C2";
@@ -2805,7 +2812,6 @@
             // 
             this.txtSumValuation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSumValuation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
-            this.txtSumValuation.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtSumValuation.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSumValuation.Location = new System.Drawing.Point(129, 84);
             this.txtSumValuation.Mask = "C2";
@@ -2824,7 +2830,6 @@
             // 
             this.txtSumAwbFee.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSumAwbFee.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
-            this.txtSumAwbFee.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtSumAwbFee.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSumAwbFee.Location = new System.Drawing.Point(129, 60);
             this.txtSumAwbFee.Mask = "C2";
@@ -2843,7 +2848,6 @@
             // 
             this.txtSumWeightCharge.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSumWeightCharge.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
-            this.txtSumWeightCharge.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtSumWeightCharge.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSumWeightCharge.Location = new System.Drawing.Point(129, 36);
             this.txtSumWeightCharge.Mask = "C2";
@@ -3067,7 +3071,6 @@
             // 
             this.txtSumSubTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSumSubTotal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
-            this.txtSumSubTotal.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtSumSubTotal.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSumSubTotal.Location = new System.Drawing.Point(129, 396);
             this.txtSumSubTotal.Mask = "C2";
@@ -3207,7 +3210,6 @@
             // 
             // txtHandlingFee
             // 
-            this.txtHandlingFee.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtHandlingFee.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtHandlingFee.Location = new System.Drawing.Point(760, 174);
             this.txtHandlingFee.Mask = "C2";
@@ -3658,7 +3660,7 @@
             this.gridPackage.MasterTemplate.EnableGrouping = false;
             this.gridPackage.MasterTemplate.MultiSelect = true;
             this.gridPackage.MasterTemplate.ShowFilteringRow = false;
-            this.gridPackage.MasterTemplate.ViewDefinition = tableViewDefinition2;
+            this.gridPackage.MasterTemplate.ViewDefinition = tableViewDefinition21;
             this.gridPackage.Name = "gridPackage";
             this.gridPackage.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.tableLayoutPanel14.SetRowSpan(this.gridPackage, 5);
@@ -3682,7 +3684,6 @@
             // 
             this.txtTotalEvm.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
             this.tableLayoutPanel14.SetColumnSpan(this.txtTotalEvm, 2);
-            this.txtTotalEvm.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtTotalEvm.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTotalEvm.Location = new System.Drawing.Point(483, 174);
             this.txtTotalEvm.Mask = "C2";
@@ -3735,7 +3736,6 @@
             // 
             this.txtTotalWeightCharge.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
             this.tableLayoutPanel14.SetColumnSpan(this.txtTotalWeightCharge, 2);
-            this.txtTotalWeightCharge.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtTotalWeightCharge.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTotalWeightCharge.Location = new System.Drawing.Point(483, 200);
             this.txtTotalWeightCharge.Mask = "C2";
@@ -3747,6 +3747,58 @@
             this.txtTotalWeightCharge.Text = "₱0.00";
             this.txtTotalWeightCharge.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtTotalWeightCharge.ThemeName = "Office2010Black";
+            // 
+            // txtDeclaredValue
+            // 
+            this.txtDeclaredValue.Location = new System.Drawing.Point(483, 226);
+            this.txtDeclaredValue.Name = "txtDeclaredValue";
+            this.txtDeclaredValue.Size = new System.Drawing.Size(37, 20);
+            this.txtDeclaredValue.TabIndex = 53;
+            this.txtDeclaredValue.TabStop = false;
+            // 
+            // radLabel54
+            // 
+            this.radLabel54.Location = new System.Drawing.Point(389, 226);
+            this.radLabel54.Name = "radLabel54";
+            this.radLabel54.Size = new System.Drawing.Size(41, 18);
+            this.radLabel54.TabIndex = 54;
+            // 
+            // radLabel81
+            // 
+            this.radLabel81.Location = new System.Drawing.Point(634, 200);
+            this.radLabel81.Name = "radLabel81";
+            this.radLabel81.Size = new System.Drawing.Size(62, 18);
+            this.radLabel81.TabIndex = 55;
+            // 
+            // txtQuarantineFee
+            // 
+            this.txtQuarantineFee.Location = new System.Drawing.Point(760, 200);
+            this.txtQuarantineFee.Name = "txtQuarantineFee";
+            this.txtQuarantineFee.Size = new System.Drawing.Size(94, 20);
+            this.txtQuarantineFee.TabIndex = 56;
+            this.txtQuarantineFee.TabStop = false;
+            // 
+            // txtRfa
+            // 
+            this.txtRfa.Location = new System.Drawing.Point(760, 226);
+            this.txtRfa.Name = "txtRfa";
+            this.txtRfa.Size = new System.Drawing.Size(94, 20);
+            this.txtRfa.TabIndex = 57;
+            this.txtRfa.TabStop = false;
+            // 
+            // radLabel83
+            // 
+            this.radLabel83.Location = new System.Drawing.Point(634, 226);
+            this.radLabel83.Name = "radLabel83";
+            this.radLabel83.Size = new System.Drawing.Size(62, 18);
+            this.radLabel83.TabIndex = 58;
+            // 
+            // radLabel84
+            // 
+            this.radLabel84.Location = new System.Drawing.Point(634, 252);
+            this.radLabel84.Name = "radLabel84";
+            this.radLabel84.Size = new System.Drawing.Size(62, 18);
+            this.radLabel84.TabIndex = 59;
             // 
             // chkNonVatable
             // 
@@ -4375,7 +4427,7 @@
             this.dateAcceptedDate.Size = new System.Drawing.Size(202, 20);
             this.dateAcceptedDate.TabIndex = 4;
             this.dateAcceptedDate.TabStop = false;
-            this.dateAcceptedDate.Text = "11/26/2015";
+            this.dateAcceptedDate.Text = "26/11/2015";
             this.dateAcceptedDate.ThemeName = "Office2010Black";
             this.dateAcceptedDate.Value = new System.DateTime(2015, 11, 26, 0, 0, 0, 0);
             this.dateAcceptedDate.KeyUp += new System.Windows.Forms.KeyEventHandler(this.dateAcceptedDate_KeyUp);
@@ -4598,7 +4650,7 @@
             this.datePaymentDate.Size = new System.Drawing.Size(161, 20);
             this.datePaymentDate.TabIndex = 4;
             this.datePaymentDate.TabStop = false;
-            this.datePaymentDate.Text = "12/10/2016";
+            this.datePaymentDate.Text = "10/12/2016";
             this.datePaymentDate.ThemeName = "Office2010Black";
             this.datePaymentDate.Value = new System.DateTime(2016, 12, 10, 10, 55, 47, 86);
             // 
@@ -4692,7 +4744,7 @@
             this.dateCheckDate.Size = new System.Drawing.Size(161, 20);
             this.dateCheckDate.TabIndex = 12;
             this.dateCheckDate.TabStop = false;
-            this.dateCheckDate.Text = "12/10/2016";
+            this.dateCheckDate.Text = "10/12/2016";
             this.dateCheckDate.ThemeName = "Office2010Black";
             this.dateCheckDate.Value = new System.DateTime(2016, 12, 10, 10, 55, 47, 14);
             // 
@@ -4736,7 +4788,7 @@
             this.txtNetCollection.Size = new System.Drawing.Size(161, 20);
             this.txtNetCollection.TabIndex = 8;
             this.txtNetCollection.TabStop = false;
-            this.txtNetCollection.Text = "$0.00";
+            this.txtNetCollection.Text = "₱0.00";
             this.txtNetCollection.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtNetCollection.ThemeName = "Office2010Black";
             // 
@@ -4749,7 +4801,7 @@
             this.txtTaxWithheld.Size = new System.Drawing.Size(161, 20);
             this.txtTaxWithheld.TabIndex = 7;
             this.txtTaxWithheld.TabStop = false;
-            this.txtTaxWithheld.Text = "$0.00";
+            this.txtTaxWithheld.Text = "₱0.00";
             this.txtTaxWithheld.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtTaxWithheld.ThemeName = "Office2010Black";
             this.txtTaxWithheld.Leave += new System.EventHandler(this.txtTaxWithheld_Leave);
@@ -4763,7 +4815,7 @@
             this.txtAmountPaid.Size = new System.Drawing.Size(161, 20);
             this.txtAmountPaid.TabIndex = 6;
             this.txtAmountPaid.TabStop = false;
-            this.txtAmountPaid.Text = "$0.00";
+            this.txtAmountPaid.Text = "₱0.00";
             this.txtAmountPaid.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtAmountPaid.ThemeName = "Office2010Black";
             this.txtAmountPaid.TextChanged += new System.EventHandler(this.txtAmountPaid_Leave);
@@ -4778,7 +4830,7 @@
             this.txtAmountDue.Size = new System.Drawing.Size(161, 20);
             this.txtAmountDue.TabIndex = 5;
             this.txtAmountDue.TabStop = false;
-            this.txtAmountDue.Text = "$0.00";
+            this.txtAmountDue.Text = "₱0.00";
             this.txtAmountDue.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtAmountDue.ThemeName = "Office2010Black";
             // 
@@ -4827,7 +4879,7 @@
             this.gridManifest.MasterTemplate.EnableFiltering = true;
             this.gridManifest.MasterTemplate.PageSize = 1;
             this.gridManifest.MasterTemplate.ShowGroupedColumns = true;
-            this.gridManifest.MasterTemplate.ViewDefinition = tableViewDefinition3;
+            this.gridManifest.MasterTemplate.ViewDefinition = tableViewDefinition22;
             this.gridManifest.Name = "gridManifest";
             this.gridManifest.Size = new System.Drawing.Size(1237, 637);
             this.gridManifest.TabIndex = 0;
@@ -4939,7 +4991,7 @@
             // txtTotalCash
             // 
             this.txtTotalCash.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtTotalCash.Location = new System.Drawing.Point(132, 3);
+            this.txtTotalCash.Location = new System.Drawing.Point(145, 3);
             this.txtTotalCash.Name = "txtTotalCash";
             this.txtTotalCash.ReadOnly = true;
             this.txtTotalCash.Size = new System.Drawing.Size(145, 20);
@@ -4951,7 +5003,7 @@
             // txtTotalPending
             // 
             this.txtTotalPending.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtTotalPending.Location = new System.Drawing.Point(132, 133);
+            this.txtTotalPending.Location = new System.Drawing.Point(145, 133);
             this.txtTotalPending.Name = "txtTotalPending";
             this.txtTotalPending.ReadOnly = true;
             this.txtTotalPending.Size = new System.Drawing.Size(145, 20);
@@ -4964,7 +5016,7 @@
             // txtTotalPdc
             // 
             this.txtTotalPdc.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtTotalPdc.Location = new System.Drawing.Point(132, 107);
+            this.txtTotalPdc.Location = new System.Drawing.Point(145, 107);
             this.txtTotalPdc.Name = "txtTotalPdc";
             this.txtTotalPdc.ReadOnly = true;
             this.txtTotalPdc.Size = new System.Drawing.Size(145, 20);
@@ -4979,7 +5031,7 @@
             this.label42.AutoSize = true;
             this.label42.Location = new System.Drawing.Point(3, 110);
             this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(55, 13);
+            this.label42.Size = new System.Drawing.Size(61, 14);
             this.label42.TabIndex = 2;
             this.label42.Text = "Total PDC";
             // 
@@ -4989,7 +5041,7 @@
             this.label47.AutoSize = true;
             this.label47.Location = new System.Drawing.Point(3, 84);
             this.label47.Name = "label47";
-            this.label47.Size = new System.Drawing.Size(101, 13);
+            this.label47.Size = new System.Drawing.Size(113, 14);
             this.label47.TabIndex = 1;
             this.label47.Text = "Total Tax WithHeld";
             // 
@@ -4999,14 +5051,14 @@
             this.label62.AutoSize = true;
             this.label62.Location = new System.Drawing.Point(3, 58);
             this.label62.Name = "label62";
-            this.label62.Size = new System.Drawing.Size(86, 13);
+            this.label62.Size = new System.Drawing.Size(91, 14);
             this.label62.TabIndex = 10;
             this.label62.Text = "Total Collection";
             // 
             // txtRemarksPaymentSummary
             // 
             this.txtRemarksPaymentSummary.AutoSize = false;
-            this.txtRemarksPaymentSummary.Location = new System.Drawing.Point(132, 263);
+            this.txtRemarksPaymentSummary.Location = new System.Drawing.Point(145, 263);
             this.txtRemarksPaymentSummary.Multiline = true;
             this.txtRemarksPaymentSummary.Name = "txtRemarksPaymentSummary";
             this.txtRemarksPaymentSummary.Size = new System.Drawing.Size(145, 44);
@@ -5016,7 +5068,7 @@
             // 
             // txtTotalCheckReceived
             // 
-            this.txtTotalCheckReceived.Location = new System.Drawing.Point(132, 185);
+            this.txtTotalCheckReceived.Location = new System.Drawing.Point(145, 185);
             this.txtTotalCheckReceived.Name = "txtTotalCheckReceived";
             this.txtTotalCheckReceived.ReadOnly = true;
             this.txtTotalCheckReceived.Size = new System.Drawing.Size(145, 20);
@@ -5027,7 +5079,7 @@
             // 
             // txtDifference
             // 
-            this.txtDifference.Location = new System.Drawing.Point(132, 237);
+            this.txtDifference.Location = new System.Drawing.Point(145, 237);
             this.txtDifference.Name = "txtDifference";
             this.txtDifference.ReadOnly = true;
             this.txtDifference.Size = new System.Drawing.Size(145, 20);
@@ -5042,13 +5094,13 @@
             this.label63.AutoSize = true;
             this.label63.Location = new System.Drawing.Point(3, 32);
             this.label63.Name = "label63";
-            this.label63.Size = new System.Drawing.Size(65, 13);
+            this.label63.Size = new System.Drawing.Size(72, 14);
             this.label63.TabIndex = 0;
             this.label63.Text = "Total Check";
             // 
             // txtTotalAmntReceived
             // 
-            this.txtTotalAmntReceived.Location = new System.Drawing.Point(132, 211);
+            this.txtTotalAmntReceived.Location = new System.Drawing.Point(145, 211);
             this.txtTotalAmntReceived.Name = "txtTotalAmntReceived";
             this.txtTotalAmntReceived.ReadOnly = true;
             this.txtTotalAmntReceived.Size = new System.Drawing.Size(145, 20);
@@ -5063,7 +5115,7 @@
             this.label64.AutoSize = true;
             this.label64.Location = new System.Drawing.Point(3, 188);
             this.label64.Name = "label64";
-            this.label64.Size = new System.Drawing.Size(113, 13);
+            this.label64.Size = new System.Drawing.Size(125, 14);
             this.label64.TabIndex = 28;
             this.label64.Text = "Total Check Received";
             // 
@@ -5073,7 +5125,7 @@
             this.label65.AutoSize = true;
             this.label65.Location = new System.Drawing.Point(3, 6);
             this.label65.Name = "label65";
-            this.label65.Size = new System.Drawing.Size(59, 13);
+            this.label65.Size = new System.Drawing.Size(64, 14);
             this.label65.TabIndex = 24;
             this.label65.Text = "Total Cash";
             // 
@@ -5083,7 +5135,7 @@
             this.label66.AutoSize = true;
             this.label66.Location = new System.Drawing.Point(3, 136);
             this.label66.Name = "label66";
-            this.label66.Size = new System.Drawing.Size(77, 13);
+            this.label66.Size = new System.Drawing.Size(83, 14);
             this.label66.TabIndex = 27;
             this.label66.Text = "Total Pending";
             this.label66.Visible = false;
@@ -5091,7 +5143,7 @@
             // txtTotalCashReceived
             // 
             this.txtTotalCashReceived.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtTotalCashReceived.Location = new System.Drawing.Point(132, 159);
+            this.txtTotalCashReceived.Location = new System.Drawing.Point(145, 159);
             this.txtTotalCashReceived.Name = "txtTotalCashReceived";
             this.txtTotalCashReceived.ReadOnly = true;
             this.txtTotalCashReceived.Size = new System.Drawing.Size(145, 20);
@@ -5106,7 +5158,7 @@
             this.label69.AutoSize = true;
             this.label69.Location = new System.Drawing.Point(3, 278);
             this.label69.Name = "label69";
-            this.label69.Size = new System.Drawing.Size(50, 13);
+            this.label69.Size = new System.Drawing.Size(52, 14);
             this.label69.TabIndex = 3;
             this.label69.Text = "Remarks";
             // 
@@ -5116,7 +5168,7 @@
             this.label70.AutoSize = true;
             this.label70.Location = new System.Drawing.Point(3, 240);
             this.label70.Name = "label70";
-            this.label70.Size = new System.Drawing.Size(60, 13);
+            this.label70.Size = new System.Drawing.Size(63, 14);
             this.label70.TabIndex = 1;
             this.label70.Text = "Difference";
             // 
@@ -5126,7 +5178,7 @@
             this.label71.AutoSize = true;
             this.label71.Location = new System.Drawing.Point(3, 214);
             this.label71.Name = "label71";
-            this.label71.Size = new System.Drawing.Size(123, 13);
+            this.label71.Size = new System.Drawing.Size(136, 14);
             this.label71.TabIndex = 26;
             this.label71.Text = "Total Amount Received";
             // 
@@ -5136,14 +5188,14 @@
             this.label72.AutoSize = true;
             this.label72.Location = new System.Drawing.Point(3, 162);
             this.label72.Name = "label72";
-            this.label72.Size = new System.Drawing.Size(107, 13);
+            this.label72.Size = new System.Drawing.Size(117, 14);
             this.label72.TabIndex = 30;
             this.label72.Text = "Total Cash Received";
             // 
             // txtTotalTax
             // 
             this.txtTotalTax.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtTotalTax.Location = new System.Drawing.Point(132, 81);
+            this.txtTotalTax.Location = new System.Drawing.Point(145, 81);
             this.txtTotalTax.Name = "txtTotalTax";
             this.txtTotalTax.ReadOnly = true;
             this.txtTotalTax.Size = new System.Drawing.Size(145, 20);
@@ -5155,7 +5207,7 @@
             // txtTotalCheck
             // 
             this.txtTotalCheck.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtTotalCheck.Location = new System.Drawing.Point(132, 29);
+            this.txtTotalCheck.Location = new System.Drawing.Point(145, 29);
             this.txtTotalCheck.Name = "txtTotalCheck";
             this.txtTotalCheck.ReadOnly = true;
             this.txtTotalCheck.Size = new System.Drawing.Size(145, 20);
@@ -5167,7 +5219,7 @@
             // txtTotalCollection
             // 
             this.txtTotalCollection.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtTotalCollection.Location = new System.Drawing.Point(132, 55);
+            this.txtTotalCollection.Location = new System.Drawing.Point(145, 55);
             this.txtTotalCollection.Name = "txtTotalCollection";
             this.txtTotalCollection.ReadOnly = true;
             this.txtTotalCollection.Size = new System.Drawing.Size(145, 20);
@@ -5312,7 +5364,7 @@
             // 
             this.gridCorpAcctConsignee.MasterTemplate.AllowAddNewRow = false;
             this.gridCorpAcctConsignee.MasterTemplate.AllowDeleteRow = false;
-            this.gridCorpAcctConsignee.MasterTemplate.ViewDefinition = tableViewDefinition4;
+            this.gridCorpAcctConsignee.MasterTemplate.ViewDefinition = tableViewDefinition23;
             this.gridCorpAcctConsignee.Name = "gridCorpAcctConsignee";
             this.gridCorpAcctConsignee.Size = new System.Drawing.Size(794, 121);
             this.gridCorpAcctConsignee.TabIndex = 62;
@@ -5330,7 +5382,7 @@
             this.gridPrepaid.MasterTemplate.AllowColumnReorder = false;
             this.gridPrepaid.MasterTemplate.AllowColumnResize = false;
             this.gridPrepaid.MasterTemplate.AllowDeleteRow = false;
-            this.gridPrepaid.MasterTemplate.ViewDefinition = tableViewDefinition5;
+            this.gridPrepaid.MasterTemplate.ViewDefinition = tableViewDefinition24;
             this.gridPrepaid.Name = "gridPrepaid";
             this.gridPrepaid.Size = new System.Drawing.Size(794, 131);
             this.gridPrepaid.TabIndex = 60;
@@ -5369,7 +5421,7 @@
             this.dateCollectionDate.Size = new System.Drawing.Size(87, 20);
             this.dateCollectionDate.TabIndex = 3;
             this.dateCollectionDate.TabStop = false;
-            this.dateCollectionDate.Text = "12/29/2016";
+            this.dateCollectionDate.Text = "29/12/2016";
             this.dateCollectionDate.ThemeName = "Office2010Black";
             this.dateCollectionDate.Value = new System.DateTime(2016, 12, 29, 13, 24, 31, 594);
             // 
@@ -5502,7 +5554,7 @@
             this.gridFreightCollect.MasterTemplate.AllowAddNewRow = false;
             this.gridFreightCollect.MasterTemplate.AllowColumnResize = false;
             this.gridFreightCollect.MasterTemplate.AllowDeleteRow = false;
-            this.gridFreightCollect.MasterTemplate.ViewDefinition = tableViewDefinition6;
+            this.gridFreightCollect.MasterTemplate.ViewDefinition = tableViewDefinition25;
             this.gridFreightCollect.Name = "gridFreightCollect";
             this.gridFreightCollect.Size = new System.Drawing.Size(794, 127);
             this.gridFreightCollect.TabIndex = 61;
@@ -5590,7 +5642,7 @@
             this.pageViewTracking.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pageViewTracking.Location = new System.Drawing.Point(0, 0);
             this.pageViewTracking.Name = "pageViewTracking";
-            this.pageViewTracking.SelectedPage = this.radPageViewPage18;
+            this.pageViewTracking.SelectedPage = this.radPageViewPage7;
             this.pageViewTracking.Size = new System.Drawing.Size(1234, 587);
             this.pageViewTracking.TabIndex = 0;
             this.pageViewTracking.Text = " ";
@@ -5632,7 +5684,7 @@
             this.gridPickupCargo.MasterTemplate.AllowDragToGroup = false;
             this.gridPickupCargo.MasterTemplate.AllowEditRow = false;
             this.gridPickupCargo.MasterTemplate.ShowRowHeaderColumn = false;
-            this.gridPickupCargo.MasterTemplate.ViewDefinition = tableViewDefinition7;
+            this.gridPickupCargo.MasterTemplate.ViewDefinition = tableViewDefinition19;
             this.gridPickupCargo.Name = "gridPickupCargo";
             this.gridPickupCargo.ShowItemToolTips = false;
             this.gridPickupCargo.Size = new System.Drawing.Size(1086, 455);
@@ -5649,8 +5701,6 @@
             this.radPanel13.Controls.Add(this.btnPickupCargo_Export);
             this.radPanel13.Controls.Add(this.btnExport_PickupCargo);
             this.radPanel13.Controls.Add(this.btnSearch_PicupCargo);
-            this.radPanel13.Controls.Add(this.label19);
-            this.radPanel13.Controls.Add(this.dropDownPickUpCargo_BCO);
             this.radPanel13.Controls.Add(this.dateTimePicker_PickupCargo);
             this.radPanel13.Controls.Add(this.label76);
             this.radPanel13.Controls.Add(this.label68);
@@ -5666,7 +5716,7 @@
             // 
             this.label126.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label126.AutoSize = true;
-            this.label126.Location = new System.Drawing.Point(538, 60);
+            this.label126.Location = new System.Drawing.Point(318, 62);
             this.label126.Name = "label126";
             this.label126.Size = new System.Drawing.Size(76, 13);
             this.label126.TabIndex = 82;
@@ -5676,7 +5726,7 @@
             // 
             this.label96.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label96.AutoSize = true;
-            this.label96.Location = new System.Drawing.Point(408, 60);
+            this.label96.Location = new System.Drawing.Point(188, 62);
             this.label96.Name = "label96";
             this.label96.Size = new System.Drawing.Size(101, 13);
             this.label96.TabIndex = 81;
@@ -5685,7 +5735,7 @@
             // cmb_RevenueUnit
             // 
             this.cmb_RevenueUnit.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmb_RevenueUnit.Location = new System.Drawing.Point(541, 78);
+            this.cmb_RevenueUnit.Location = new System.Drawing.Point(321, 80);
             this.cmb_RevenueUnit.Name = "cmb_RevenueUnit";
             this.cmb_RevenueUnit.Size = new System.Drawing.Size(125, 20);
             this.cmb_RevenueUnit.TabIndex = 80;
@@ -5694,7 +5744,7 @@
             // cmb_RevenueUnitType
             // 
             this.cmb_RevenueUnitType.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmb_RevenueUnitType.Location = new System.Drawing.Point(410, 78);
+            this.cmb_RevenueUnitType.Location = new System.Drawing.Point(190, 80);
             this.cmb_RevenueUnitType.Name = "cmb_RevenueUnitType";
             this.cmb_RevenueUnitType.Size = new System.Drawing.Size(125, 20);
             this.cmb_RevenueUnitType.TabIndex = 79;
@@ -5764,34 +5814,13 @@
             // btnSearch_PicupCargo
             // 
             this.btnSearch_PicupCargo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnSearch_PicupCargo.Location = new System.Drawing.Point(672, 76);
+            this.btnSearch_PicupCargo.Location = new System.Drawing.Point(452, 78);
             this.btnSearch_PicupCargo.Name = "btnSearch_PicupCargo";
             this.btnSearch_PicupCargo.Size = new System.Drawing.Size(70, 22);
             this.btnSearch_PicupCargo.TabIndex = 76;
             this.btnSearch_PicupCargo.Text = "Search";
             this.btnSearch_PicupCargo.ThemeName = "Office2010Black";
             this.btnSearch_PicupCargo.Click += new System.EventHandler(this.btnSearch_PicupCargo_Click);
-            // 
-            // label19
-            // 
-            this.label19.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(189, 60);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(36, 13);
-            this.label19.TabIndex = 74;
-            this.label19.Text = "BCO :";
-            // 
-            // dropDownPickUpCargo_BCO
-            // 
-            this.dropDownPickUpCargo_BCO.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.dropDownPickUpCargo_BCO.Enabled = false;
-            this.dropDownPickUpCargo_BCO.Location = new System.Drawing.Point(192, 80);
-            this.dropDownPickUpCargo_BCO.Name = "dropDownPickUpCargo_BCO";
-            this.dropDownPickUpCargo_BCO.ReadOnly = true;
-            this.dropDownPickUpCargo_BCO.Size = new System.Drawing.Size(209, 20);
-            this.dropDownPickUpCargo_BCO.TabIndex = 73;
-            this.dropDownPickUpCargo_BCO.ThemeName = "Office2010Black";
             // 
             // dateTimePicker_PickupCargo
             // 
@@ -5800,7 +5829,7 @@
             this.dateTimePicker_PickupCargo.Size = new System.Drawing.Size(171, 20);
             this.dateTimePicker_PickupCargo.TabIndex = 70;
             this.dateTimePicker_PickupCargo.TabStop = false;
-            this.dateTimePicker_PickupCargo.Text = "Thursday, December 29, 2016";
+            this.dateTimePicker_PickupCargo.Text = "Thursday, 29 December 2016";
             this.dateTimePicker_PickupCargo.ThemeName = "Office2010Black";
             this.dateTimePicker_PickupCargo.Value = new System.DateTime(2016, 12, 29, 16, 31, 36, 782);
             this.dateTimePicker_PickupCargo.ValueChanged += new System.EventHandler(this.dateTimePicker_PickupCargo_ValueChanged);
@@ -5858,7 +5887,7 @@
             this.gridBranchAcceptance.MasterTemplate.AllowDeleteRow = false;
             this.gridBranchAcceptance.MasterTemplate.AllowEditRow = false;
             this.gridBranchAcceptance.MasterTemplate.ShowRowHeaderColumn = false;
-            this.gridBranchAcceptance.MasterTemplate.ViewDefinition = tableViewDefinition8;
+            this.gridBranchAcceptance.MasterTemplate.ViewDefinition = tableViewDefinition26;
             this.gridBranchAcceptance.Name = "gridBranchAcceptance";
             this.gridBranchAcceptance.ShowItemToolTips = false;
             this.gridBranchAcceptance.Size = new System.Drawing.Size(1086, 455);
@@ -5938,31 +5967,6 @@
             this.btnBranchAcceptance_Search.ThemeName = "Office2010Black";
             this.btnBranchAcceptance_Search.Click += new System.EventHandler(this.btnBranchAcceptance_Search_Click);
             // 
-            // label45
-            // 
-            this.label45.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label45.AutoSize = true;
-            this.label45.Location = new System.Drawing.Point(184, 58);
-            this.label45.Name = "label45";
-            this.label45.Size = new System.Drawing.Size(48, 14);
-            this.label45.TabIndex = 78;
-            this.label45.Text = "Branch:";
-            // 
-            // dropDownBranchAcceptance_Branch
-            // 
-            this.dropDownBranchAcceptance_Branch.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            radListDataItem1.Text = "Branch Corporate Office";
-            radListDataItem2.Text = "Branch Satellite Office";
-            this.dropDownBranchAcceptance_Branch.Items.Add(radListDataItem1);
-            this.dropDownBranchAcceptance_Branch.Items.Add(radListDataItem2);
-            this.dropDownBranchAcceptance_Branch.Location = new System.Drawing.Point(187, 79);
-            this.dropDownBranchAcceptance_Branch.Name = "dropDownBranchAcceptance_Branch";
-            this.dropDownBranchAcceptance_Branch.Size = new System.Drawing.Size(176, 20);
-            this.dropDownBranchAcceptance_Branch.TabIndex = 77;
-            this.dropDownBranchAcceptance_Branch.ThemeName = "Office2010Black";
-            this.dropDownBranchAcceptance_Branch.SelectedIndexChanged += new Telerik.WinControls.UI.Data.PositionChangedEventHandler(this.dropDownBranchAcceptance_Branch_SelectedIndexChanged);
-            this.dropDownBranchAcceptance_Branch.Enter += new System.EventHandler(this.dropDownBranchAcceptance_Branch_Enter);
-            // 
             // dateTimePickerBranchAcceptance_Date
             // 
             this.dateTimePickerBranchAcceptance_Date.Location = new System.Drawing.Point(13, 79);
@@ -5970,7 +5974,7 @@
             this.dateTimePickerBranchAcceptance_Date.Size = new System.Drawing.Size(168, 20);
             this.dateTimePickerBranchAcceptance_Date.TabIndex = 75;
             this.dateTimePickerBranchAcceptance_Date.TabStop = false;
-            this.dateTimePickerBranchAcceptance_Date.Text = "Thursday, December 29, 2016";
+            this.dateTimePickerBranchAcceptance_Date.Text = "Thursday, 29 December 2016";
             this.dateTimePickerBranchAcceptance_Date.ThemeName = "Office2010Black";
             this.dateTimePickerBranchAcceptance_Date.Value = new System.DateTime(2016, 12, 29, 16, 31, 36, 782);
             this.dateTimePickerBranchAcceptance_Date.ValueChanged += new System.EventHandler(this.dateTimePickerBranchAcceptance_Date_ValueChanged);
@@ -6058,7 +6062,7 @@
             this.gridBundle.MasterTemplate.AllowDragToGroup = false;
             this.gridBundle.MasterTemplate.AllowEditRow = false;
             this.gridBundle.MasterTemplate.ShowRowHeaderColumn = false;
-            this.gridBundle.MasterTemplate.ViewDefinition = tableViewDefinition9;
+            this.gridBundle.MasterTemplate.ViewDefinition = tableViewDefinition27;
             this.gridBundle.Name = "gridBundle";
             this.gridBundle.ShowItemToolTips = false;
             this.gridBundle.Size = new System.Drawing.Size(1086, 455);
@@ -6158,30 +6162,6 @@
             this.btnBundle_Search.ThemeName = "Office2010Black";
             this.btnBundle_Search.Click += new System.EventHandler(this.btnBundle_Search_Click);
             // 
-            // label23
-            // 
-            this.label23.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(185, 57);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(48, 14);
-            this.label23.TabIndex = 86;
-            this.label23.Text = "Branch:";
-            // 
-            // dropDownBundle_Branch
-            // 
-            this.dropDownBundle_Branch.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            radListDataItem3.Text = "Branch Corporate Office";
-            radListDataItem4.Text = "Branch Satellite Office";
-            this.dropDownBundle_Branch.Items.Add(radListDataItem3);
-            this.dropDownBundle_Branch.Items.Add(radListDataItem4);
-            this.dropDownBundle_Branch.Location = new System.Drawing.Point(188, 80);
-            this.dropDownBundle_Branch.Name = "dropDownBundle_Branch";
-            this.dropDownBundle_Branch.Size = new System.Drawing.Size(175, 20);
-            this.dropDownBundle_Branch.TabIndex = 85;
-            this.dropDownBundle_Branch.ThemeName = "Office2010Black";
-            this.dropDownBundle_Branch.SelectedIndexChanged += new Telerik.WinControls.UI.Data.PositionChangedEventHandler(this.dropDownBundle_Branch_SelectedIndexChanged);
-            // 
             // dateTimeBundle_Date
             // 
             this.dateTimeBundle_Date.Location = new System.Drawing.Point(14, 80);
@@ -6189,7 +6169,7 @@
             this.dateTimeBundle_Date.Size = new System.Drawing.Size(168, 20);
             this.dateTimeBundle_Date.TabIndex = 83;
             this.dateTimeBundle_Date.TabStop = false;
-            this.dateTimeBundle_Date.Text = "Thursday, December 29, 2016";
+            this.dateTimeBundle_Date.Text = "Thursday, 29 December 2016";
             this.dateTimeBundle_Date.ThemeName = "Office2010Black";
             this.dateTimeBundle_Date.Value = new System.DateTime(2016, 12, 29, 16, 31, 36, 782);
             this.dateTimeBundle_Date.ValueChanged += new System.EventHandler(this.dateTimeBundle_Date_ValueChanged);
@@ -6257,7 +6237,7 @@
             this.gridUnbundle.MasterTemplate.AllowDragToGroup = false;
             this.gridUnbundle.MasterTemplate.AllowEditRow = false;
             this.gridUnbundle.MasterTemplate.ShowRowHeaderColumn = false;
-            this.gridUnbundle.MasterTemplate.ViewDefinition = tableViewDefinition10;
+            this.gridUnbundle.MasterTemplate.ViewDefinition = tableViewDefinition28;
             this.gridUnbundle.Name = "gridUnbundle";
             this.gridUnbundle.ShowItemToolTips = false;
             this.gridUnbundle.Size = new System.Drawing.Size(1086, 455);
@@ -6350,7 +6330,7 @@
             this.dateTimeUnbunde_Date.Size = new System.Drawing.Size(171, 20);
             this.dateTimeUnbunde_Date.TabIndex = 83;
             this.dateTimeUnbunde_Date.TabStop = false;
-            this.dateTimeUnbunde_Date.Text = "Thursday, December 29, 2016";
+            this.dateTimeUnbunde_Date.Text = "Thursday, 29 December 2016";
             this.dateTimeUnbunde_Date.ThemeName = "Office2010Black";
             this.dateTimeUnbunde_Date.Value = new System.DateTime(2016, 12, 29, 16, 31, 36, 782);
             this.dateTimeUnbunde_Date.ValueChanged += new System.EventHandler(this.dateTimeUnbunde_Date_ValueChanged);
@@ -6409,7 +6389,7 @@
             this.gridGatewayTransmital.MasterTemplate.AllowDragToGroup = false;
             this.gridGatewayTransmital.MasterTemplate.AllowEditRow = false;
             this.gridGatewayTransmital.MasterTemplate.ShowRowHeaderColumn = false;
-            this.gridGatewayTransmital.MasterTemplate.ViewDefinition = tableViewDefinition11;
+            this.gridGatewayTransmital.MasterTemplate.ViewDefinition = tableViewDefinition29;
             this.gridGatewayTransmital.Name = "gridGatewayTransmital";
             this.gridGatewayTransmital.ShowItemToolTips = false;
             this.gridGatewayTransmital.Size = new System.Drawing.Size(1086, 455);
@@ -6590,7 +6570,7 @@
             this.dateTimeGatewayTransmital_Date.Size = new System.Drawing.Size(171, 20);
             this.dateTimeGatewayTransmital_Date.TabIndex = 78;
             this.dateTimeGatewayTransmital_Date.TabStop = false;
-            this.dateTimeGatewayTransmital_Date.Text = "Thursday, December 29, 2016";
+            this.dateTimeGatewayTransmital_Date.Text = "Thursday, 29 December 2016";
             this.dateTimeGatewayTransmital_Date.ThemeName = "Office2010Black";
             this.dateTimeGatewayTransmital_Date.Value = new System.DateTime(2016, 12, 29, 16, 31, 36, 782);
             this.dateTimeGatewayTransmital_Date.ValueChanged += new System.EventHandler(this.dateTimeGatewayTransmital_Date_ValueChanged);
@@ -6649,7 +6629,7 @@
             this.gridGatewayOutbound.MasterTemplate.AllowDragToGroup = false;
             this.gridGatewayOutbound.MasterTemplate.AllowEditRow = false;
             this.gridGatewayOutbound.MasterTemplate.ShowRowHeaderColumn = false;
-            this.gridGatewayOutbound.MasterTemplate.ViewDefinition = tableViewDefinition12;
+            this.gridGatewayOutbound.MasterTemplate.ViewDefinition = tableViewDefinition30;
             this.gridGatewayOutbound.Name = "gridGatewayOutbound";
             this.gridGatewayOutbound.ShowItemToolTips = false;
             this.gridGatewayOutbound.Size = new System.Drawing.Size(1086, 455);
@@ -6829,7 +6809,7 @@
             this.dateTimeGatewayOutbound_Date.Size = new System.Drawing.Size(171, 20);
             this.dateTimeGatewayOutbound_Date.TabIndex = 82;
             this.dateTimeGatewayOutbound_Date.TabStop = false;
-            this.dateTimeGatewayOutbound_Date.Text = "Thursday, December 29, 2016";
+            this.dateTimeGatewayOutbound_Date.Text = "Thursday, 29 December 2016";
             this.dateTimeGatewayOutbound_Date.ThemeName = "Office2010Black";
             this.dateTimeGatewayOutbound_Date.Value = new System.DateTime(2016, 12, 29, 16, 31, 36, 782);
             this.dateTimeGatewayOutbound_Date.ValueChanged += new System.EventHandler(this.dateTimeGatewayOutbound_Date_ValueChanged);
@@ -6888,7 +6868,7 @@
             this.gridGatewayInbound.MasterTemplate.AllowDragToGroup = false;
             this.gridGatewayInbound.MasterTemplate.AllowEditRow = false;
             this.gridGatewayInbound.MasterTemplate.ShowRowHeaderColumn = false;
-            this.gridGatewayInbound.MasterTemplate.ViewDefinition = tableViewDefinition13;
+            this.gridGatewayInbound.MasterTemplate.ViewDefinition = tableViewDefinition31;
             this.gridGatewayInbound.Name = "gridGatewayInbound";
             this.gridGatewayInbound.ShowItemToolTips = false;
             this.gridGatewayInbound.Size = new System.Drawing.Size(1086, 455);
@@ -7047,7 +7027,7 @@
             this.dateTimePickerGatewayInbound_Date.Size = new System.Drawing.Size(171, 20);
             this.dateTimePickerGatewayInbound_Date.TabIndex = 94;
             this.dateTimePickerGatewayInbound_Date.TabStop = false;
-            this.dateTimePickerGatewayInbound_Date.Text = "Thursday, December 29, 2016";
+            this.dateTimePickerGatewayInbound_Date.Text = "Thursday, 29 December 2016";
             this.dateTimePickerGatewayInbound_Date.ThemeName = "Office2010Black";
             this.dateTimePickerGatewayInbound_Date.Value = new System.DateTime(2016, 12, 29, 16, 31, 36, 782);
             this.dateTimePickerGatewayInbound_Date.ValueChanged += new System.EventHandler(this.dateTimePickerGatewayInbound_Date_ValueChanged);
@@ -7106,7 +7086,7 @@
             this.gridCargoTransfer.MasterTemplate.AllowDragToGroup = false;
             this.gridCargoTransfer.MasterTemplate.AllowEditRow = false;
             this.gridCargoTransfer.MasterTemplate.ShowRowHeaderColumn = false;
-            this.gridCargoTransfer.MasterTemplate.ViewDefinition = tableViewDefinition14;
+            this.gridCargoTransfer.MasterTemplate.ViewDefinition = tableViewDefinition32;
             this.gridCargoTransfer.Name = "gridCargoTransfer";
             this.gridCargoTransfer.ShowItemToolTips = false;
             this.gridCargoTransfer.Size = new System.Drawing.Size(1086, 455);
@@ -7259,7 +7239,7 @@
             this.dateTimeCargoTransfer_Date.Size = new System.Drawing.Size(168, 20);
             this.dateTimeCargoTransfer_Date.TabIndex = 83;
             this.dateTimeCargoTransfer_Date.TabStop = false;
-            this.dateTimeCargoTransfer_Date.Text = "Thursday, December 29, 2016";
+            this.dateTimeCargoTransfer_Date.Text = "Thursday, 29 December 2016";
             this.dateTimeCargoTransfer_Date.ThemeName = "Office2010Black";
             this.dateTimeCargoTransfer_Date.Value = new System.DateTime(2016, 12, 29, 16, 31, 36, 782);
             this.dateTimeCargoTransfer_Date.ValueChanged += new System.EventHandler(this.dateTimeCargoTransfer_Date_ValueChanged);
@@ -7318,7 +7298,7 @@
             this.gridSegregation.MasterTemplate.AllowDragToGroup = false;
             this.gridSegregation.MasterTemplate.AllowEditRow = false;
             this.gridSegregation.MasterTemplate.ShowRowHeaderColumn = false;
-            this.gridSegregation.MasterTemplate.ViewDefinition = tableViewDefinition15;
+            this.gridSegregation.MasterTemplate.ViewDefinition = tableViewDefinition33;
             this.gridSegregation.Name = "gridSegregation";
             this.gridSegregation.ShowItemToolTips = false;
             this.gridSegregation.Size = new System.Drawing.Size(1086, 455);
@@ -7460,7 +7440,7 @@
             this.dateTimeSegregation_Date.Size = new System.Drawing.Size(171, 20);
             this.dateTimeSegregation_Date.TabIndex = 101;
             this.dateTimeSegregation_Date.TabStop = false;
-            this.dateTimeSegregation_Date.Text = "Thursday, December 29, 2016";
+            this.dateTimeSegregation_Date.Text = "Thursday, 29 December 2016";
             this.dateTimeSegregation_Date.ThemeName = "Office2010Black";
             this.dateTimeSegregation_Date.Value = new System.DateTime(2016, 12, 29, 16, 31, 36, 782);
             this.dateTimeSegregation_Date.ValueChanged += new System.EventHandler(this.dateTimeSegregation_Date_ValueChanged);
@@ -7519,7 +7499,7 @@
             this.gridDailyTrip.MasterTemplate.AllowDragToGroup = false;
             this.gridDailyTrip.MasterTemplate.AllowEditRow = false;
             this.gridDailyTrip.MasterTemplate.ShowRowHeaderColumn = false;
-            this.gridDailyTrip.MasterTemplate.ViewDefinition = tableViewDefinition16;
+            this.gridDailyTrip.MasterTemplate.ViewDefinition = tableViewDefinition34;
             this.gridDailyTrip.Name = "gridDailyTrip";
             this.gridDailyTrip.ShowItemToolTips = false;
             this.gridDailyTrip.Size = new System.Drawing.Size(1086, 455);
@@ -7616,7 +7596,7 @@
             this.dateTimeDailyTrip_Date.Size = new System.Drawing.Size(171, 20);
             this.dateTimeDailyTrip_Date.TabIndex = 89;
             this.dateTimeDailyTrip_Date.TabStop = false;
-            this.dateTimeDailyTrip_Date.Text = "Thursday, December 29, 2016";
+            this.dateTimeDailyTrip_Date.Text = "Thursday, 29 December 2016";
             this.dateTimeDailyTrip_Date.ThemeName = "Office2010Black";
             this.dateTimeDailyTrip_Date.Value = new System.DateTime(2016, 12, 29, 16, 31, 36, 782);
             this.dateTimeDailyTrip_Date.ValueChanged += new System.EventHandler(this.dateTimeDailyTrip_Date_ValueChanged);
@@ -7695,7 +7675,7 @@
             this.gridHoldCargo.MasterTemplate.AllowDragToGroup = false;
             this.gridHoldCargo.MasterTemplate.AllowEditRow = false;
             this.gridHoldCargo.MasterTemplate.ShowRowHeaderColumn = false;
-            this.gridHoldCargo.MasterTemplate.ViewDefinition = tableViewDefinition17;
+            this.gridHoldCargo.MasterTemplate.ViewDefinition = tableViewDefinition35;
             this.gridHoldCargo.Name = "gridHoldCargo";
             this.gridHoldCargo.ShowItemToolTips = false;
             this.gridHoldCargo.Size = new System.Drawing.Size(1086, 455);
@@ -7769,10 +7749,6 @@
             // cmbHC_Revenuetype
             // 
             this.cmbHC_Revenuetype.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            radListDataItem1.Text = "Branch Corporate Office";
-            radListDataItem2.Text = "Branch Satellite Office";
-            this.cmbHC_Revenuetype.Items.Add(radListDataItem1);
-            this.cmbHC_Revenuetype.Items.Add(radListDataItem2);
             this.cmbHC_Revenuetype.Location = new System.Drawing.Point(380, 76);
             this.cmbHC_Revenuetype.Name = "cmbHC_Revenuetype";
             this.cmbHC_Revenuetype.Size = new System.Drawing.Size(145, 20);
@@ -7816,7 +7792,7 @@
             this.dateTimeHoldCargo_ToDate.Size = new System.Drawing.Size(169, 20);
             this.dateTimeHoldCargo_ToDate.TabIndex = 84;
             this.dateTimeHoldCargo_ToDate.TabStop = false;
-            this.dateTimeHoldCargo_ToDate.Text = "Thursday, December 29, 2016";
+            this.dateTimeHoldCargo_ToDate.Text = "Thursday, 29 December 2016";
             this.dateTimeHoldCargo_ToDate.ThemeName = "Office2010Black";
             this.dateTimeHoldCargo_ToDate.Value = new System.DateTime(2016, 12, 29, 16, 31, 36, 782);
             this.dateTimeHoldCargo_ToDate.ValueChanged += new System.EventHandler(this.dateTimeHoldCargo_ToDate_ValueChanged);
@@ -7832,30 +7808,6 @@
             this.btnHoldCargo_Search.ThemeName = "Office2010Black";
             this.btnHoldCargo_Search.Click += new System.EventHandler(this.btnHoldCargo_Search_Click);
             // 
-            // label39
-            // 
-            this.label39.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label39.AutoSize = true;
-            this.label39.Location = new System.Drawing.Point(373, 55);
-            this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(48, 14);
-            this.label39.TabIndex = 86;
-            this.label39.Text = "Branch:";
-            // 
-            // dropDownHoldCargo_Branch
-            // 
-            this.dropDownHoldCargo_Branch.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            radListDataItem5.Text = "Branch Corporate Office";
-            radListDataItem6.Text = "Branch Satellite Office";
-            this.dropDownHoldCargo_Branch.Items.Add(radListDataItem5);
-            this.dropDownHoldCargo_Branch.Items.Add(radListDataItem6);
-            this.dropDownHoldCargo_Branch.Location = new System.Drawing.Point(376, 76);
-            this.dropDownHoldCargo_Branch.Name = "dropDownHoldCargo_Branch";
-            this.dropDownHoldCargo_Branch.Size = new System.Drawing.Size(145, 20);
-            this.dropDownHoldCargo_Branch.TabIndex = 85;
-            this.dropDownHoldCargo_Branch.ThemeName = "Office2010Black";
-            this.dropDownHoldCargo_Branch.SelectedIndexChanged += new Telerik.WinControls.UI.Data.PositionChangedEventHandler(this.dropDownHoldCargo_Branch_SelectedIndexChanged);
-            // 
             // dateTimeHoldCargo_FromDate
             // 
             this.dateTimeHoldCargo_FromDate.Location = new System.Drawing.Point(14, 78);
@@ -7863,7 +7815,7 @@
             this.dateTimeHoldCargo_FromDate.Size = new System.Drawing.Size(169, 20);
             this.dateTimeHoldCargo_FromDate.TabIndex = 83;
             this.dateTimeHoldCargo_FromDate.TabStop = false;
-            this.dateTimeHoldCargo_FromDate.Text = "Thursday, December 29, 2016";
+            this.dateTimeHoldCargo_FromDate.Text = "Thursday, 29 December 2016";
             this.dateTimeHoldCargo_FromDate.ThemeName = "Office2010Black";
             this.dateTimeHoldCargo_FromDate.Value = new System.DateTime(2016, 12, 29, 16, 31, 36, 782);
             this.dateTimeHoldCargo_FromDate.ValueChanged += new System.EventHandler(this.dateTimeHoldCargo_FromDate_ValueChanged);
@@ -7941,7 +7893,7 @@
             this.gridDeliveryStatus.MasterTemplate.AllowDragToGroup = false;
             this.gridDeliveryStatus.MasterTemplate.AllowEditRow = false;
             this.gridDeliveryStatus.MasterTemplate.ShowRowHeaderColumn = false;
-            this.gridDeliveryStatus.MasterTemplate.ViewDefinition = tableViewDefinition18;
+            this.gridDeliveryStatus.MasterTemplate.ViewDefinition = tableViewDefinition36;
             this.gridDeliveryStatus.Name = "gridDeliveryStatus";
             this.gridDeliveryStatus.ShowItemToolTips = false;
             this.gridDeliveryStatus.Size = new System.Drawing.Size(1086, 455);
@@ -8081,7 +8033,7 @@
             this.dateTimeDeliveryStatus_Date.Size = new System.Drawing.Size(171, 20);
             this.dateTimeDeliveryStatus_Date.TabIndex = 80;
             this.dateTimeDeliveryStatus_Date.TabStop = false;
-            this.dateTimeDeliveryStatus_Date.Text = "Thursday, December 29, 2016";
+            this.dateTimeDeliveryStatus_Date.Text = "Thursday, 29 December 2016";
             this.dateTimeDeliveryStatus_Date.ThemeName = "Office2010Black";
             this.dateTimeDeliveryStatus_Date.Value = new System.DateTime(2016, 12, 29, 16, 31, 36, 782);
             this.dateTimeDeliveryStatus_Date.ValueChanged += new System.EventHandler(this.dateTimeDeliveryStatus_Date_ValueChanged);
@@ -8125,6 +8077,88 @@
             // backgroundWorker1
             // 
             this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
+            // 
+            // dropDownDeliveryStatus_Area
+            // 
+            this.dropDownDeliveryStatus_Area.Location = new System.Drawing.Point(0, 0);
+            this.dropDownDeliveryStatus_Area.Name = "dropDownDeliveryStatus_Area";
+            this.dropDownDeliveryStatus_Area.Size = new System.Drawing.Size(125, 20);
+            this.dropDownDeliveryStatus_Area.TabIndex = 0;
+            // 
+            // dropDownDeliveryStatus_BCO
+            // 
+            this.dropDownDeliveryStatus_BCO.Location = new System.Drawing.Point(0, 0);
+            this.dropDownDeliveryStatus_BCO.Name = "dropDownDeliveryStatus_BCO";
+            this.dropDownDeliveryStatus_BCO.Size = new System.Drawing.Size(125, 20);
+            this.dropDownDeliveryStatus_BCO.TabIndex = 0;
+            // 
+            // dropDownBranchAcceptance_Branch
+            // 
+            this.dropDownBranchAcceptance_Branch.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            radListDataItem7.Text = "Branch Corporate Office";
+            radListDataItem8.Text = "Branch Satellite Office";
+            this.dropDownBranchAcceptance_Branch.Items.Add(radListDataItem7);
+            this.dropDownBranchAcceptance_Branch.Items.Add(radListDataItem8);
+            this.dropDownBranchAcceptance_Branch.Location = new System.Drawing.Point(187, 79);
+            this.dropDownBranchAcceptance_Branch.Name = "dropDownBranchAcceptance_Branch";
+            this.dropDownBranchAcceptance_Branch.Size = new System.Drawing.Size(176, 20);
+            this.dropDownBranchAcceptance_Branch.TabIndex = 77;
+            this.dropDownBranchAcceptance_Branch.ThemeName = "Office2010Black";
+            this.dropDownBranchAcceptance_Branch.SelectedIndexChanged += new Telerik.WinControls.UI.Data.PositionChangedEventHandler(this.dropDownBranchAcceptance_Branch_SelectedIndexChanged);
+            // 
+            // dropDownBundle_Branch
+            // 
+            this.dropDownBundle_Branch.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            radListDataItem1.Text = "Branch Corporate Office";
+            radListDataItem2.Text = "Branch Satellite Office";
+            this.dropDownBundle_Branch.Items.Add(radListDataItem1);
+            this.dropDownBundle_Branch.Items.Add(radListDataItem2);
+            this.dropDownBundle_Branch.Location = new System.Drawing.Point(188, 80);
+            this.dropDownBundle_Branch.Name = "dropDownBundle_Branch";
+            this.dropDownBundle_Branch.Size = new System.Drawing.Size(175, 20);
+            this.dropDownBundle_Branch.TabIndex = 85;
+            this.dropDownBundle_Branch.ThemeName = "Office2010Black";
+            this.dropDownBundle_Branch.SelectedIndexChanged += new Telerik.WinControls.UI.Data.PositionChangedEventHandler(this.dropDownBundle_Branch_SelectedIndexChanged);
+            // 
+            // dropDownHoldCargo_Branch
+            // 
+            this.dropDownHoldCargo_Branch.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            radListDataItem3.Text = "Branch Corporate Office";
+            radListDataItem4.Text = "Branch Satellite Office";
+            this.dropDownHoldCargo_Branch.Items.Add(radListDataItem3);
+            this.dropDownHoldCargo_Branch.Items.Add(radListDataItem4);
+            this.dropDownHoldCargo_Branch.Location = new System.Drawing.Point(376, 76);
+            this.dropDownHoldCargo_Branch.Name = "dropDownHoldCargo_Branch";
+            this.dropDownHoldCargo_Branch.Size = new System.Drawing.Size(145, 20);
+            this.dropDownHoldCargo_Branch.TabIndex = 85;
+            this.dropDownHoldCargo_Branch.ThemeName = "Office2010Black";
+            // 
+            // label45
+            // 
+            this.label45.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label45.Location = new System.Drawing.Point(184, 58);
+            this.label45.Name = "label45";
+            this.label45.Size = new System.Drawing.Size(48, 14);
+            this.label45.TabIndex = 78;
+            this.label45.Text = "Branch:";
+            // 
+            // label23
+            // 
+            this.label23.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label23.Location = new System.Drawing.Point(185, 57);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(48, 14);
+            this.label23.TabIndex = 86;
+            this.label23.Text = "Branch:";
+            // 
+            // label39
+            // 
+            this.label39.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label39.Location = new System.Drawing.Point(373, 55);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(48, 14);
+            this.label39.TabIndex = 86;
+            this.label39.Text = "Branch:";
             // 
             // Main
             // 
@@ -8490,7 +8524,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.btnPickupCargo_Export)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnExport_PickupCargo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnSearch_PicupCargo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dropDownPickUpCargo_BCO)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateTimePicker_PickupCargo)).EndInit();
             this.radPageViewPage8.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridBranchAcceptance.MasterTemplate)).EndInit();
@@ -8639,8 +8672,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.dateTimeDeliveryStatus_Date)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dropDownDeliveryStatus_Area)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dropDownDeliveryStatus_BCO)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnSettings)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnLogOut)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dropDownBranchAcceptance_Branch)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dropDownBundle_Branch)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dropDownHoldCargo_Branch)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.label45)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.label23)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.label39)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
 
@@ -8972,8 +9009,6 @@
         private Telerik.WinControls.UI.RadMaskedEditBox txtTotalWeightCharge;
         private Telerik.WinControls.UI.RadMaskedEditBox AcceptancetxtAirwayBill;
         private Telerik.WinControls.UI.RadButton btnSearchShipment;
-        private System.Windows.Forms.Label label19;
-        private Telerik.WinControls.UI.RadDropDownList dropDownPickUpCargo_BCO;
         private Telerik.WinControls.UI.RadDropDownList dropDownBranchAcceptance_BCO_BSO;
         private Telerik.WinControls.UI.RadButton btnSearch_PicupCargo;
         private Telerik.WinControls.UI.RadButton btnBranchAcceptance_Search;
@@ -9204,6 +9239,14 @@
         private Telerik.WinControls.UI.RadDropDownList cmbHC_RevenueUnit;
 
         private Telerik.WinControls.UI.RadDropDownList dropDownBranchAcceptance_Branch;
+        private Telerik.WinControls.UI.RadDropDownList dropDownBundle_Branch;
+        private Telerik.WinControls.UI.RadDropDownList dropDownDeliveryStatus_Area;
+        private Telerik.WinControls.UI.RadDropDownList dropDownDeliveryStatus_BCO;
+        private Telerik.WinControls.UI.RadDropDownList dropDownHoldCargo_Branch;
+        //        private Telerik.WinControls.UI.RadDropDownList
 
+        private Telerik.WinControls.UI.RadLabel label23;
+        private Telerik.WinControls.UI.RadLabel label39;
+        private Telerik.WinControls.UI.RadLabel label45;
     }
 }
