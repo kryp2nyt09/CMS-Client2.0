@@ -15,14 +15,18 @@ namespace CMS2.Client.Forms.TrackingReports
 
         public DataTable getBranchAcceptanceData(DateTime date)
         {
+            BranchCorpOfficeBL bcoService = new BranchCorpOfficeBL();
             BranchAcceptanceBL branchAcceptanceBl = new BranchAcceptanceBL();
             ShipmentBL shipmentService = new ShipmentBL();
             
             //List<Shipment> shipments = shipmentService.FilterActive().Where(x => x.AcceptedBy.AssignedToArea.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.RecordStatus == 1 && x.CreatedDate.ToShortDateString() == date.ToShortDateString() && x.Booking.BookingStatus.BookingStatusName == "Picked-up").ToList();
 
-            List<Shipment> shipments = shipmentService.FilterActive().Where(x => x.AcceptedBy.AssignedToArea.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.RecordStatus == 1 && x.Booking.BookingStatus.BookingStatusName == "Picked-up").ToList();
+            List<Shipment> shipments = shipmentService.FilterActive().Where(x => x.AcceptedBy.AssignedToArea.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.RecordStatus == 1 && x.Booking.BookingStatus.BookingStatusName == "Picked-up" && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
             List<BranchAcceptance> branchAcceptance = branchAcceptanceBl.GetAll().Where(x => x.Users.Employee.AssignedToArea.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.RecordStatus == 1 && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
 
+            string bcoName = bcoService.GetAll().Find(x => x.BranchCorpOfficeId == GlobalVars.DeviceBcoId).BranchCorpOfficeName;
+
+            //List<BranchAcceptanceViewModel> list = Match(branchAcceptance, shipments).FindAll(x => x.BCO == bcoName);
             List<BranchAcceptanceViewModel> list = Match(branchAcceptance, shipments);
 
             DataTable dt = new DataTable();
@@ -71,17 +75,42 @@ namespace CMS2.Client.Forms.TrackingReports
         }
 
         //Complete Filter
-        public DataTable getBranchAcceptanceDataByFilter(DateTime date, Guid revenueUnitId, string driver, Guid batchId)
+        public DataTable getBranchAcceptanceDataByFilter(DateTime date, Guid? revenueUnitId, string driver, Guid? batchId)
         {
+            RevenueUnitBL revenueunitservice = new RevenueUnitBL();
             BranchAcceptanceBL branchAcceptanceBl = new BranchAcceptanceBL();
             ShipmentBL shipmentService = new ShipmentBL();
+            BranchCorpOfficeBL bcoService = new BranchCorpOfficeBL();
+
             //List<Shipment> shipments = shipmentService.FilterActive().Where(x => x.AcceptedBy.AssignedToArea.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.RecordStatus == 1 && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
-            List<Shipment> shipments = shipmentService.FilterActive().Where(x => x.AcceptedBy.AssignedToArea.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.RecordStatus == 1 && x.Booking.BookingStatus.BookingStatusName == "Picked-up").ToList();
+            List<Shipment> shipments = shipmentService.FilterActive().Where(x => x.AcceptedBy.AssignedToArea.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.RecordStatus == 1 && x.Booking.BookingStatus.BookingStatusName == "Picked-up" && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
             // List<BranchAcceptance> branchAcceptance = branchAcceptanceBl.GetAll().Where(x => x.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.RecordStatus == 1 && x.BatchID == batchId && x.Driver == driver).ToList();
             //List<BranchAcceptance> branchAcceptance = branchAcceptanceBl.GetAll().Where(x => x.Users.Employee.AssignedToArea.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.Users.Employee.AssignedToArea.RevenueUnitId == revenueUnitId && x.RecordStatus == 1 && x.BatchID == batchId && x.Driver == driver && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
-            List<BranchAcceptance> branchAcceptance = branchAcceptanceBl.GetAll().Where(x => x.Users.Employee.AssignedToArea.RevenueUnitId == revenueUnitId && x.RecordStatus == 1 && x.BatchID == batchId && x.Driver == driver && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
-            List<BranchAcceptanceViewModel> list = Match(branchAcceptance, shipments);
 
+            List<BranchAcceptanceViewModel> list = new List<BranchAcceptanceViewModel>();
+            List<BranchAcceptance> branchAcceptance = branchAcceptanceBl.GetAll().
+                Where(
+                x => x.RecordStatus == 1
+                //&& ((x.Users.Employee.AssignedToArea.RevenueUnitId == revenueUnitId && x.Users.Employee.AssignedToArea.RevenueUnitId != Guid.Empty) || (x.Users.Employee.AssignedToArea.RevenueUnitId == x.Users.Employee.AssignedToArea.RevenueUnitId && revenueUnitId == Guid.Empty))
+                && ((x.BatchID == batchId && x.BatchID != Guid.Empty) || (x.BatchID == x.BatchID && batchId == Guid.Empty))
+                && ((x.Driver == driver && x.Driver != "All") || (x.Driver == x.Driver && driver == "All"))
+                && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
+
+            string revenueunitname = "";
+            string bcoName = "";
+
+            if (revenueUnitId != Guid.Empty)
+            {
+                revenueunitname = revenueunitservice.GetAll().Find(x => x.RevenueUnitId == revenueUnitId).RevenueUnitName;
+                list = Match(branchAcceptance, shipments).FindAll(x => x.Area == revenueunitname);
+            }
+            else
+            {
+                bcoName = bcoService.GetAll().Find(x => x.BranchCorpOfficeId == GlobalVars.DeviceBcoId).BranchCorpOfficeName;
+                //list = Match(branchAcceptance, shipments).FindAll(x => x.BCO == bcoName);
+                list = Match(branchAcceptance, shipments);
+            }
+            
             DataTable dt = new DataTable();
             dt.Columns.Add(new DataColumn("No", typeof(string)));
             dt.Columns.Add(new DataColumn("Area/Branch", typeof(string)));
@@ -280,11 +309,12 @@ namespace CMS2.Client.Forms.TrackingReports
             foreach (Shipment shipment in _shipments)
             {
                 BranchAcceptanceViewModel model = new BranchAcceptanceViewModel();
-                BranchAcceptanceViewModel isAirawayBillExist = _results.Find(x => x.AirwayBillNo == shipment.AirwayBillNo);
                 List<PackageNumber> _packageNumbers = _packageNumberService.GetAll().Where(x => x.ShipmentId == shipment.ShipmentId).ToList();
 
                 foreach (PackageNumber packagenumber in _packageNumbers)
                 {
+                    BranchAcceptanceViewModel isAirawayBillExist = _results.Find(x => x.AirwayBillNo == shipment.AirwayBillNo);
+
                     BranchAcceptance _brachAcceptance = _branchAcceptances.Find(x => x.Cargo == packagenumber.PackageNo);
 
 
@@ -300,10 +330,12 @@ namespace CMS2.Client.Forms.TrackingReports
                             model.AirwayBillNo = shipment.AirwayBillNo;
 
                             model.Area = "N/A";
-
-                            if (shipment.Booking.AssignedToArea != null)
+                            if (shipment.Booking != null)
                             {
-                                model.Area = shipment.Booking.AssignedToArea.RevenueUnitName;
+                                if (shipment.Booking.AssignedToArea != null)
+                                {
+                                    model.Area = shipment.Booking.AssignedToArea.RevenueUnitName;
+                                }
                             }
                             model.Driver = _brachAcceptance.Driver;
                             model.Checker = _brachAcceptance.Checker;
@@ -311,10 +343,17 @@ namespace CMS2.Client.Forms.TrackingReports
                             model.Batch = _brachAcceptance.Batch.BatchName;
                             model.TotalRecieved++;
                             model.Total += model.TotalRecieved;
-                             model.CreatedBy = _brachAcceptance.CreatedDate;
+                            model.CreatedBy = _brachAcceptance.CreatedDate;
 
                             model.BCO = _brachAcceptance.BranchCorpOffice.BranchCorpOfficeName;
-                            model.BSO = shipment.Booking.AssignedToArea.RevenueUnitName;
+                            model.BSO = "N/A";
+                            if (shipment.Booking != null) {
+                                if (shipment.Booking.AssignedToArea != null)
+                                {
+                                    model.BSO = shipment.Booking.AssignedToArea.RevenueUnitName;
+                                }
+                                    
+                            }
                             model.ScannedBy = AppUser.User.Employee.FullName;
                             model.Remarks = shipment.Remarks;
                             model.Notes = _brachAcceptance.Notes;
@@ -333,9 +372,12 @@ namespace CMS2.Client.Forms.TrackingReports
                         {
                             model.AirwayBillNo = shipment.AirwayBillNo;
                             model.Area = "N/A";
-                            if (shipment.Booking.AssignedToArea != null)
+                            if (shipment.Booking != null)
                             {
-                                model.Area = shipment.Booking.AssignedToArea.RevenueUnitName;
+                                if (shipment.Booking.AssignedToArea != null)
+                                {
+                                    model.Area = shipment.Booking.AssignedToArea.RevenueUnitName;
+                                }
                             }
                             model.Driver = "N/A"; //_brachAcceptance.Driver;
                             model.Checker = "N/A"; //_brachAcceptance.Checker;
@@ -345,7 +387,17 @@ namespace CMS2.Client.Forms.TrackingReports
                             model.Total += model.TotalDiscrepency;
 
                             model.BCO = "N/A"; //_brachAcceptance.BranchCorpOffice.BranchCorpOfficeName;
-                            model.BSO = "N/A"; //shipment.Booking.AssignedToArea.RevenueUnitName;
+                            //model.BSO = "N/A"; //shipment.Booking.AssignedToArea.RevenueUnitName;
+                           // model.BCO = _brachAcceptance.BranchCorpOffice.BranchCorpOfficeName;
+                            model.BSO = "N/A";
+                            //if (shipment.Booking != null)
+                            //{
+                            //    if (shipment.Booking.AssignedToArea != null)
+                            //    {
+                            //        model.BSO = shipment.Booking.AssignedToArea.RevenueUnitName;
+                            //    }
+
+                            //}
                             model.ScannedBy = AppUser.User.Employee.FullName;
                             //model.Remarks = shipment.Remarks;
                             //model.Notes = _brachAcceptance.Notes;
@@ -356,11 +408,29 @@ namespace CMS2.Client.Forms.TrackingReports
                 }
             }
 
-            _resultsFilter = _results.GroupBy(d => new { d.Area, d.Driver, d.Checker, d.PlateNo, d.Batch, d.AirwayBillNo,
-                                d.TotalRecieved, d.TotalDiscrepency, d.Total, d.Match, d.CreatedBy, d.BCO, d.BSO, d.ScannedBy, d.Remarks, d.Notes})
-                                .Select(d => d.First())
-                                .ToList();
-            return _resultsFilter;
+            //_resultsFilter = _results.GroupBy(d => new
+            //{
+            //    d.Area,
+            //    d.Driver,
+            //    d.Checker,
+            //    d.PlateNo,
+            //    d.Batch,
+            //    d.AirwayBillNo,
+            //    d.TotalRecieved,
+            //    d.TotalDiscrepency,
+            //    d.Total,
+            //    d.Match,
+            //    d.CreatedBy,
+            //    d.BCO,
+            //    d.BSO,
+            //    d.ScannedBy,
+            //    d.Remarks,
+            //    d.Notes
+            //})
+            //                    .Select(d => d.First())
+            //                    .ToList();
+            return _results;
+            //return _resultsFilter;
 
         }
     }

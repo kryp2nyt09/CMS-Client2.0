@@ -17,8 +17,11 @@ namespace CMS2.Entities
         public Guid DeliveryStatusId { get; set; }
         public virtual DeliveryStatus DeliveryStatus { get; set; }
         public Guid? DeliveryRemarkId { get; set; }
+
+        [ForeignKey("DeliveryRemarkId")]
         public virtual DeliveryRemark DeliveryRemark { get; set; }
         public Guid? ShipmentId { get; set; }
+      
         public virtual Shipment Shipment { get; set; }
         [MaxLength(250)]
         public string Note { get; set; }

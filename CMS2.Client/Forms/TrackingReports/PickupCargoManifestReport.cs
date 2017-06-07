@@ -96,7 +96,7 @@ namespace CMS2.Client.Forms.TrackingReports
             dt.Columns.Add(new DataColumn("Area", typeof(string)));
             dt.Columns.Add(new DataColumn("Driver", typeof(string)));
             dt.Columns.Add(new DataColumn("Checker", typeof(string)));
-            dt.Columns.Add(new DataColumn("Checker", typeof(string)));
+            dt.Columns.Add(new DataColumn("Scanned By", typeof(string)));
             dt.BeginLoadData();
             int ctr = 1;
             foreach (PickupCargoManifestViewModel item in modelList)

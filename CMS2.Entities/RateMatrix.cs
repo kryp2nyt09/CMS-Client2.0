@@ -22,6 +22,7 @@ namespace CMS2.Entities
         [DisplayName("Service Mode")]
         public Guid? ServiceModeId { get; set; }
         public ServiceMode ServiceMode { get; set; }
+
         public virtual List<ExpressRate> ExpressRates { get; set; }
 
 

@@ -379,7 +379,7 @@ namespace CMS2.BusinessLogic
             model.FreightCollectCharge = null;
             if (model.PaymentMode.PaymentModeCode.Equals("FC") || model.PaymentMode.PaymentModeCode.Equals("PP"))
             {
-                matrix = rateMatrixService.FilterActiveBy(x => x.CommodityTypeId == model.CommodityTypeId && x.ServiceTypeId == model.ServiceTypeId && x.ServiceModeId == model.ServiceModeId).FirstOrDefault();
+                //matrix = rateMatrixService.FilterActiveBy(x => x.CommodityTypeId == model.a && x.ServiceTypeId == model.ServiceTypeId && x.ServiceModeId == model.ServiceModeId).FirstOrDefault();
                 if (model.PaymentMode.PaymentModeCode.Equals("FC"))
                 {
                     model.FreightCollectChargeId = basicFees.FirstOrDefault(x => x.ShipmentFeeName.Equals("FC")).ShipmentBasicFeeId;
@@ -667,15 +667,15 @@ namespace CMS2.BusinessLogic
 
             ApplicableRate _applicableRate = applicableRateService.GetApplicableRate(model.CommodityTypeId, model.ServiceModeId, model.ServiceTypeId);
 
-            if (_applicableRate != null)
-            {
+            //if (_applicableRate != null)
+            //{
                 matrix = rateMatrixService.GetMatrix(_applicableRate.ApplicableRateId);
-            }
-            else
-            {
-                matrix = rateMatrixService.GetMatrix(model.CommodityTypeId, model.ServiceTypeId,
-                model.ServiceModeId);
-            }
+            //}
+            //else
+            //{
+            //    //matrix = rateMatrixService.GetMatrix(model.CommodityTypeId, model.ServiceTypeId,
+            //    model.ServiceModeId);
+            //}
 
             
             ExpressRate rates = null;

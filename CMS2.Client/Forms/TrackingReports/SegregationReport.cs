@@ -16,7 +16,7 @@ namespace CMS2.Client.Forms.TrackingReports
         {
             SegregationBL segregationBL = new SegregationBL();
 
-            List<Segregation> _segregation = segregationBL.GetAll().Where(x => x.RecordStatus == 1 && x.BranchCorpOfficeID == GlobalVars.DeviceBcoId && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
+            List<Segregation> _segregation = segregationBL.GetAll().Where(x => x.RecordStatus == 1 && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
 
             List<SegregationViewModel> modelList = Macth(_segregation);
 
@@ -69,15 +69,21 @@ namespace CMS2.Client.Forms.TrackingReports
             List<Segregation> _segregation = segregationBL.GetAll().Where
                 (x => x.RecordStatus == 1
                 //&& ((x.PackageNumber.Shipment.OriginCity.BranchCorpOfficeId == originbcoid && x.PackageNumber.Shipment.OriginCity.BranchCorpOfficeId != null) || (x.PackageNumber.Shipment.OriginCity.BranchCorpOfficeId == x.PackageNumber.Shipment.OriginCity.BranchCorpOfficeId && x.PackageNumber.Shipment.OriginCity.BranchCorpOfficeId == null))
-                && ((x.Driver == driver && x.Driver != "All") || (x.Driver == x.Driver && x.Driver == "All"))
-                && ((x.PlateNo == plateno && x.PlateNo != "All") || (x.PlateNo == x.PlateNo && x.PlateNo == "All"))
-                && ((x.BatchID == batchid && x.BatchID != null) || (x.BatchID == x.BatchID && x.BatchID == null))
+                && ((x.Driver == driver && x.Driver != "All") || (x.Driver == x.Driver && driver == "All"))
+                && ((x.PlateNo == plateno && x.PlateNo != "All") || (x.PlateNo == x.PlateNo && plateno == "All"))
+                && ((x.BatchID == batchid && x.BatchID != null) || (x.BatchID == x.BatchID && batchid == null))
                 && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
 
+            string bcoName = "";
             if(originbcoid != null)
             {
-                string _bco = bcoService.GetAll().Where(x => x.RecordStatus == 1 && x.BranchCorpOfficeId == originbcoid).Select(x => x.BranchCorpOfficeName).ToString();
-                modelList = Macth(_segregation).FindAll(x => x.BranchCorpOffice == _bco);
+
+                //List<BranchCorpOffice> _bco = bcoService.GetAll().Where(x => x.RecordStatus == 1 && x.BranchCorpOfficeId == originbcoid).ToList();
+                //string bcoName = bcoService.GetAll().Where(x => x.BranchCorpOfficeId == GlobalVars.DeviceBcoId).Select(x => x.BranchCorpOfficeName).ToString();
+                //string bcoName = _bco.Select(x => x.BranchCorpOfficeName).ToString();
+                //string _bco = bcoService.GetAll().Where(x => x.RecordStatus == 1 && x.BranchCorpOfficeId == originbcoid).Select(x => x.BranchCorpOfficeName).ToString();
+                bcoName = bcoService.GetAll().Find(x => x.BranchCorpOfficeId == originbcoid).BranchCorpOfficeName;
+                modelList = Macth(_segregation).FindAll(x => x.BranchCorpOffice == bcoName);
             }
             else
             {

@@ -18,7 +18,7 @@ namespace CMS2.Client.Forms.TrackingReports
         {
             BundleBL bundleBl = new BundleBL();
 
-            List<Bundle> list = bundleBl.GetAll().Where(x => x.RecordStatus == 1 && x.BranchCorpOfficeID == GlobalVars.DeviceBcoId && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();                        
+            List<Bundle> list = bundleBl.GetAll().Where(x => x.RecordStatus == 1 && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();                        
             List<BundleViewModel> bundleList = Match(list);
             
             DataTable dt = new DataTable();
@@ -84,7 +84,7 @@ namespace CMS2.Client.Forms.TrackingReports
 
             if(num == 0)
             {
-               list = bundleBl.GetAll().Where(x => x.RecordStatus == 1 && x.SackNo == sackNo && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
+               list = bundleBl.GetAll().Where(x => x.RecordStatus == 1 && x.SackNo == sackNo).ToList();
             }
             else if (num == 1)
             {
@@ -170,7 +170,7 @@ namespace CMS2.Client.Forms.TrackingReports
             width.Add(110); // Payment Mode
                             
             width.Add(0);   // Area
-            width.Add(0);   // Sack No
+            width.Add(110);   // Sack No
             width.Add(0);   // Create Date
             width.Add(0);   // Destination
                             

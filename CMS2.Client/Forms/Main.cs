@@ -416,11 +416,11 @@ namespace CMS2.Client
                     PopulateGrid_FreightCollect();
                     PopulateGrid_CorpAcctConsignee();
                     List<BranchCorpOffice> branchCorpOffices = getBranchCorpOffice();
-                    dropDownPickUpCargo_BCO.DataSource = branchCorpOffices;
-                    dropDownPickUpCargo_BCO.DisplayMember = "BranchCorpOfficeName";
-                    dropDownPickUpCargo_BCO.ValueMember = "BranchCorpOfficeId";
-                    dropDownPickUpCargo_BCO.SelectedIndex = -1;
-                    dropDownPickUpCargo_BCO.SelectedValue = GlobalVars.DeviceBcoId;
+                    //dropDownPickUpCargo_BCO.DataSource = branchCorpOffices;
+                    //dropDownPickUpCargo_BCO.DisplayMember = "BranchCorpOfficeName";
+                    //dropDownPickUpCargo_BCO.ValueMember = "BranchCorpOfficeId";
+                    //dropDownPickUpCargo_BCO.SelectedIndex = -1;
+                    //dropDownPickUpCargo_BCO.SelectedValue = GlobalVars.DeviceBcoId;
 
                     //List<RevenueUnit> _revenueUnit = getRevenueList();
                     //List<RevenueUnit> _revenueUnit = areas.Where(x => x.City.BranchCorpOfficeId == GlobalVars.DeviceBcoId).ToList();
@@ -435,6 +435,16 @@ namespace CMS2.Client
 
                     dateTimePicker_PickupCargo.Value = DateTime.Now;
                     dateTimePickerBranchAcceptance_Date.Value = DateTime.Now;
+                    dateTimeBundle_Date.Value = DateTime.Now;
+                    dateTimeUnbunde_Date.Value = DateTime.Now;
+                    dateTimeGatewayTransmital_Date.Value = DateTime.Now;
+                    dateTimeGatewayOutbound_Date.Value = DateTime.Now;
+                    dateTimePickerGatewayInbound_Date.Value = DateTime.Now;
+                    dateTimeCargoTransfer_Date.Value = DateTime.Now;
+                    dateTimeSegregation_Date.Value = DateTime.Now;
+                    dateTimeDailyTrip_Date.Value = DateTime.Now;
+                    dateTimeHoldCargo_FromDate.Value = DateTime.Now;
+                    dateTimeDeliveryStatus_Date.Value = DateTime.Now;
 
                     /******** SET COMBOBOX (BRANCH) *******/
                     //dropDownBundle_Branch.SelectedIndex = 0;
@@ -4779,17 +4789,17 @@ namespace CMS2.Client
             if (lstServiceMode.SelectedValue != null)
                 serviceModeId = Guid.Parse(lstServiceMode.SelectedValue.ToString());
 
-            var matrix =
-                rateMatrixService.FilterActiveBy(
-                    x =>
-                        x.CommodityTypeId == commodityTypeId && x.ServiceTypeId == serviceTypeId &&
-                        x.ServiceModeId == serviceModeId).FirstOrDefault();
+            //var matrix =
+            //    rateMatrixService.FilterActiveBy(
+            //        x =>
+            //            x.CommodityTypeId == commodityTypeId && x.ServiceTypeId == serviceTypeId &&
+            //            x.ServiceModeId == serviceModeId).FirstOrDefault();
 
-            if (matrix != null)
-            {
-                //shipment. = matrix.DeliveryFee;
-                //shipment.DangerousFee = matrix.DangerousFee;
-            }
+            //if (matrix != null)
+            //{
+            //    //shipment. = matrix.DeliveryFee;
+            //    //shipment.DangerousFee = matrix.DangerousFee;
+            //}
         }
         private void RefreshGridPackages()
         {
@@ -5987,6 +5997,7 @@ namespace CMS2.Client
         public DataTable getGatewayInboundGrid()
         {
             DataTable dt = new DataTable();
+            
 
             foreach (GridViewColumn col in gridGatewayInbound.Columns)
             {
@@ -6007,9 +6018,12 @@ namespace CMS2.Client
                     dt.Rows.Add(dRow);
                 }
             }
-            dt.EndLoadData();
+            
+                dt.EndLoadData();
             return dt;
         }
+
+      
         public DataTable getCargoTranferGrid()
         {
             DataTable dt = new DataTable();
@@ -6065,6 +6079,8 @@ namespace CMS2.Client
         public DataTable getDeliveryStatusGrid()
         {
             DataTable dt = new DataTable();
+            int count = 0;
+            int i = 0;
 
             foreach (GridViewColumn col in gridDeliveryStatus.Columns)
             {
@@ -6072,22 +6088,46 @@ namespace CMS2.Client
             }
 
             dt.BeginLoadData();
-            foreach (GridRowElement row in this.gridDeliveryStatus.TableElement.VisualRows)
-            {
-                if (row is GridDataRowElement)
-                {
+            //foreach (GridRowElement row in this.gridDeliveryStatus.TableElement.VisualRows)
+            //{
+            //    if (row is GridDataRowElement)
+            //    {
 
-                    DataRow dRow = dt.NewRow();
-                    foreach (GridViewCellInfo cell in row.RowInfo.Cells)
-                    {
-                        dRow[cell.ColumnInfo.Index] = cell.Value.ToString();
-                    }
-                    dt.Rows.Add(dRow);
+            //        DataRow dRow = dt.NewRow();
+            //        foreach (GridViewCellInfo cell in row.RowInfo.Cells)
+            //        {
+            //            dRow[cell.ColumnInfo.Index] = cell.Value.ToString();
+            //        }
+            //        dt.Rows.Add(dRow);
+            //    }
+            //}
+            foreach (GridViewDataRowInfo dataRow in this.GetAllRows(this.gridDeliveryStatus.MasterTemplate))
+            {
+                count++;
+                DataRow dRow = dt.NewRow();
+                foreach (GridViewCellInfo cell in dataRow.Cells)
+                {
+                    dRow[cell.ColumnInfo.Index] = cell.Value.ToString();
                 }
+                dt.Rows.Add(dRow);
+                i++;
             }
             dt.EndLoadData();
             return dt;
         }
+
+        public List<GridViewRowInfo> GetAllRows(GridViewTemplate template)
+        {
+            List<GridViewRowInfo> allRows = new List<GridViewRowInfo>();
+            allRows.AddRange(template.Rows);
+            foreach (GridViewTemplate childTemplate in template.Templates)
+            {
+                List<GridViewRowInfo> childRows = this.GetAllRows(childTemplate);
+                allRows.AddRange(childRows);
+            }
+            return allRows;
+        }
+
         public DataTable getDailyTripGrid(string _paymentmode)
         {
             DataTable dt = new DataTable();
@@ -6179,7 +6219,7 @@ namespace CMS2.Client
 
                 PickupCargoManifestReport pickup = new PickupCargoManifestReport();
                 DataTable dataTable = pickup.getPickupCargoDataByRevenueUnit(dateTimePicker_PickupCargo.Value, revenueUnitTypeId, revenueUnitId);
-                DataView view = new DataView(dataTable);
+                //DataView view = new DataView(dataTable);
                 gridPickupCargo.DataSource = dataTable;
 
                 TrackingReportGlobalModel.table = dataTable;
@@ -6211,6 +6251,7 @@ namespace CMS2.Client
             }
             catch (Exception ex)
             {
+               // MessageBox.Show(ex.ToString());
                 Logs.ErrorLogs(LogPath, "Pickup Cargo", ex.Message);
             }
         }
@@ -6356,14 +6397,44 @@ namespace CMS2.Client
 
         public void getBranchAcceptanceDataByFilter()
         {
-            Guid revenueUnitId = new Guid();
+            //Guid revenueUnitId = new Guid();
+            //string Driver = "";
+            //Guid batchId = new Guid();
+
+            Guid? revenueUnitId;
             string Driver = "";
-            Guid batchId = new Guid();
+            Guid? batchId;
+
+            string revenueunitname = "";
+            string batchname = "";
+            
             try
             {
-                revenueUnitId = Guid.Parse(dropDownBranchAcceptance_BCO_BSO.SelectedValue.ToString());
+                revenueunitname = dropDownBranchAcceptance_BCO_BSO.SelectedItem.ToString();
+                if (revenueunitname == "All")
+                {
+                    revenueUnitId = Guid.Empty;
+                }
+                else
+                {
+                    revenueUnitId = Guid.Parse(dropDownBranchAcceptance_BCO_BSO.SelectedValue.ToString());
+                }
+
+
+                batchname = dropDownBranchAcceptance_Batch.SelectedItem.ToString();
+                if (batchname == "All")
+                {
+                    batchId = Guid.Empty;
+                }
+                else
+                {
+                    batchId = Guid.Parse(dropDownBranchAcceptance_Batch.SelectedValue.ToString());
+                }
+
+
+                //revenueUnitId = Guid.Parse(dropDownBranchAcceptance_BCO_BSO.SelectedValue.ToString());
                 Driver = dropDownBranchAcceptance_Driver.SelectedItem.ToString();
-                batchId = Guid.Parse(dropDownBranchAcceptance_Batch.SelectedValue.ToString());
+               // batchId = Guid.Parse(dropDownBranchAcceptance_Batch.SelectedValue.ToString());
 
                 BranchAcceptanceReport branchAccept = new BranchAcceptanceReport();
                 DataTable dataTable = branchAccept.getBranchAcceptanceDataByFilter(dateTimePickerBranchAcceptance_Date.Value, revenueUnitId, Driver, batchId);
@@ -6410,7 +6481,7 @@ namespace CMS2.Client
                 BundleReport bundle = new BundleReport();
                 DataTable dataTable = bundle.getBundleData(dateTimeBundle_Date.Value);
 
-                DataView view = new DataView(dataTable);
+               // DataView view = new DataView(dataTable);
                 
                 ////SACK NO
                 //DataTable table = view.ToTable(true, "SackNo");
@@ -6438,12 +6509,12 @@ namespace CMS2.Client
                 //}
                 //dropDownBundle_Destination.SelectedIndex = 0;
 
-                dropDownBundle_BCO_BSO.Items.Clear();
-                dropDownBundle_BCO_BSO.Items.Add("All");
+                //dropDownBundle_BCO_BSO.Items.Clear();
+               // dropDownBundle_BCO_BSO.Items.Add("All");
 
                 gridBundle.DataSource = dataTable;
                 TrackingReportGlobalModel.table = dataTable;
-                gridBundle.Columns["SackNo"].IsVisible = false;
+                //gridBundle.Columns["SackNo"].IsVisible = false;
 
                 #region Bundle Grid Design
                 if (gridBundle.DataSource != null)
@@ -6605,7 +6676,7 @@ namespace CMS2.Client
                     dataTable = unbundle.getUnbundleDataByFilter(dateTimeBundle_Date.Value, bcoid, "", num);
                 }
 
-                gridBundle.DataSource = dataTable;
+                gridUnbundle.DataSource = dataTable;
                 TrackingReportGlobalModel.table = dataTable;
 
 
@@ -6710,11 +6781,18 @@ namespace CMS2.Client
 
         private void getGatewayTransmitalDatabyFilter(int num)
         {
-            Guid? destinationId = new Guid();
+            //Guid? destinationId = new Guid();
+            //string driver = "";
+            //string gatewayname = "";
+            //Guid? batchId = new Guid();
+            //Guid? commodityTypeId = new Guid();
+            //string mawb = "";
+
+            Guid? destinationId;
             string driver = "";
             string gatewayname = "";
-            Guid? batchId = new Guid();
-            Guid? commodityTypeId = new Guid();
+            Guid? batchId;
+            Guid? commodityTypeId;
             string mawb = "";
 
             string destinationname = "";
@@ -6727,7 +6805,7 @@ namespace CMS2.Client
                 destinationname = dropDownGatewayTransmital_Destination.SelectedItem.ToString();
                 if(destinationname == "All")
                 {
-                    destinationId = null;
+                    destinationId = Guid.Empty;
                 }
                 else
                 {
@@ -6737,7 +6815,7 @@ namespace CMS2.Client
                 batchname = dropDownGatewayTransmital_Batch.SelectedItem.ToString();
                 if (batchname == "All")
                 {
-                    batchId = null;
+                    batchId = Guid.Empty;
                 }
                 else
                 {
@@ -6747,7 +6825,7 @@ namespace CMS2.Client
                 comtypename = cmbGt_CommodityType.SelectedItem.ToString();
                 if (comtypename == "All")
                 {
-                    commodityTypeId = null;
+                    commodityTypeId = Guid.Empty;
                 }
                 else
                 {
@@ -6758,7 +6836,7 @@ namespace CMS2.Client
                 driver = cmbGT_Driver.SelectedItem.ToString();
                 gatewayname = dropDownGatewayTransmital_Gateway.SelectedItem.ToString();
                 mawb = txtGatewayTransmital_MAWB.Text;
-
+                
                 DataTable dataTable = gatewayTransmital.getGWDatabyFilter(dateTimeGatewayTransmital_Date.Value, destinationId, driver, gatewayname, batchId, commodityTypeId, mawb, num);
                 
                 gridGatewayTransmital.DataSource = dataTable;
@@ -6780,6 +6858,7 @@ namespace CMS2.Client
             }
             catch (Exception ex)
             {
+                //MessageBox.Show(ex.ToString());
                 Logs.ErrorLogs(LogPath, "Gateway Transmital", ex.Message);
             }
 
@@ -6851,17 +6930,20 @@ namespace CMS2.Client
 
         private void getGatewayOutBoundDataByFilter(int num)
         {
-            Guid? destinationId = new Guid();
+            //Guid? destinationId = new Guid();
             string driver = "";
             string gatewayname = "";
-            Guid? batchId = new Guid();
-            Guid? commodityTypeId = new Guid();
+            //Guid? batchId = new Guid();
+            //Guid? commodityTypeId = new Guid();
             string mawb = "";
 
             string destinationname = "";
             string batchname = "";
             string comtypename = "";
 
+            Guid? destinationId;
+            Guid? batchId;
+            Guid? commodityTypeId;
 
             try
             {
@@ -6869,7 +6951,7 @@ namespace CMS2.Client
                 destinationname = dropDownGatewayOutbound_BCO.SelectedItem.ToString();
                 if (destinationname == "All")
                 {
-                    destinationId = null;
+                    destinationId = Guid.Empty;
                 }
                 else
                 {
@@ -6879,7 +6961,7 @@ namespace CMS2.Client
                 batchname = dropDownGatewayOutbound_Batch.SelectedItem.ToString();
                 if (batchname == "All")
                 {
-                    batchId = null;
+                    batchId = Guid.Empty;
                 }
                 else
                 {
@@ -6889,7 +6971,7 @@ namespace CMS2.Client
                 comtypename = cmbGO_commoditType.SelectedItem.ToString();
                 if (comtypename == "All")
                 {
-                    commodityTypeId = null;
+                    commodityTypeId = Guid.Empty;
                 }
                 else
                 {
@@ -6901,7 +6983,7 @@ namespace CMS2.Client
                 gatewayname = dropDownGatewayOutbound_Gateway.SelectedItem.ToString();
                 mawb = txtGO_mawb.Text;
                 
-                DataTable dataTable = gatewayOutbound.getGODatabyFilter(dateTimeGatewayTransmital_Date.Value, destinationId, driver, gatewayname, batchId, commodityTypeId, mawb, num);
+                DataTable dataTable = gatewayOutbound.getGODatabyFilter(dateTimeGatewayOutbound_Date.Value, destinationId, driver, gatewayname, batchId, commodityTypeId, mawb, num);
 
                 gridGatewayOutbound.DataSource = dataTable;
                 TrackingReportGlobalModel.table = dataTable;
@@ -7167,15 +7249,20 @@ namespace CMS2.Client
 
         private void getCargoTransferDataByFilter()
         {
-            Guid? destinationId = new Guid();
-            Guid? batchId = new Guid();
-            Guid? revenueunitId = new Guid();
+            //Guid? destinationId = new Guid();
+            //Guid? batchId = new Guid();
+            //Guid? revenueunitId = new Guid();
+            //string plateno = "";
+
+            Guid? destinationId;
+            Guid? batchId;
+            Guid? revenueunitId;
             string plateno = "";
             try
             {
                 if(cmbCT_BCO.SelectedItem.ToString() == "All")
                 {
-                    destinationId = null;
+                    destinationId = Guid.Empty;
                 }
                 else
                 {
@@ -7184,7 +7271,7 @@ namespace CMS2.Client
 
                 if (cmbCT_Batch.SelectedItem.ToString() == "All")
                 {
-                    batchId = null;
+                    batchId = Guid.Empty;
                 }
                 else
                 {
@@ -7193,7 +7280,7 @@ namespace CMS2.Client
 
                 if (cmbCT_RevenueUnit.SelectedItem.ToString() == "All")
                 {
-                    revenueunitId = null;
+                    revenueunitId = Guid.Empty;
                 }
                 else
                 {
@@ -7576,21 +7663,26 @@ namespace CMS2.Client
             }
             catch (Exception ex)
             {
+                //MessageBox.Show(ex.ToString());
                 Logs.ErrorLogs(LogPath, "Hold Cargo", ex.Message);
             }
         }
 
         private void getHoldCargoDatabyFilter()
         {
-            Guid? revenueunitid = new Guid();
-            Guid? statusid = new Guid();
-            Guid? reasonid = new Guid();
+            //Guid? revenueunitid = new Guid();
+            //Guid? statusid = new Guid();
+            //Guid? reasonid = new Guid();
+
+            Guid? revenueunitid;
+            Guid? statusid;
+            Guid? reasonid;
             try
             {
                 HoldCargoReport holdCargo = new HoldCargoReport();
                 if (cmbHC_RevenueUnit.SelectedItem.ToString() == "All")
                 {
-                    revenueunitid = null;
+                    revenueunitid = Guid.Empty;
                 }
                 else
                 {
@@ -7599,7 +7691,7 @@ namespace CMS2.Client
 
                 if (dropDownHoldCargo_Status.SelectedItem.ToString() == "All")
                 {
-                    statusid = null;
+                    statusid = Guid.Empty;
                 }
                 else
                 {
@@ -7608,7 +7700,7 @@ namespace CMS2.Client
 
                 if (cmbHC_Reason.SelectedItem.ToString() == "All")
                 {
-                    reasonid = null;
+                    reasonid = Guid.Empty;
                 }
                 else
                 {
@@ -7674,6 +7766,7 @@ namespace CMS2.Client
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex);
                 Logs.ErrorLogs(LogPath, "Hold Cargo", ex.Message);
             }
         }
@@ -7993,6 +8086,7 @@ namespace CMS2.Client
                     Branch_Area = dropDownBranchAcceptance_BCO_BSO.SelectedItem.ToString();
                     Driver = dropDownBranchAcceptance_Driver.SelectedItem.ToString();
                     Batch = dropDownBranchAcceptance_Batch.SelectedItem.ToString();
+                    getBranchAcceptanceDataByFilter();
                 }
                 catch (Exception)
                 {
@@ -8000,26 +8094,26 @@ namespace CMS2.Client
                     Driver = "All"; dropDownBranchAcceptance_Driver.SelectedText = "All";
                     Batch = "All"; dropDownBranchAcceptance_Batch.SelectedText = "All";
                 }
-                if (Branch_Area == "All" && Batch == "All")
-                {
-                    gridBranchAcceptance.EnableFiltering = false;
-                    getBrancAcceptanceData();
-                }
-                else if(Branch_Area == "All" && Batch != "All")
-                {
-                    gridBranchAcceptance.EnableFiltering = false;
-                    getBranchAcceptanceDataByBatch();
-                }
-                else if(Branch_Area != "All" && Driver != "All" && Batch == "All")
-                {
-                    gridBranchAcceptance.EnableFiltering = false;
-                    getBranchAcceptanceData1();
-                }
-                else if(Branch_Area != "All" && Driver != "All" && Batch != "All")
-                {
-                    gridBranchAcceptance.EnableFiltering = false;
-                    getBranchAcceptanceDataByFilter();
-                }
+                //if (Branch_Area == "All" && Batch == "All")
+                //{
+                //    gridBranchAcceptance.EnableFiltering = false;
+                //    getBrancAcceptanceData();
+                //}
+                //else if(Branch_Area == "All" && Batch != "All")
+                //{
+                //    gridBranchAcceptance.EnableFiltering = false;
+                //    getBranchAcceptanceDataByBatch();
+                //}
+                //else if(Branch_Area != "All" && Driver != "All" && Batch == "All")
+                //{
+                //    gridBranchAcceptance.EnableFiltering = false;
+                //    getBranchAcceptanceData1();
+                //}
+                //else if(Branch_Area != "All" && Driver != "All" && Batch != "All")
+                //{
+                //    gridBranchAcceptance.EnableFiltering = false;
+                //    getBranchAcceptanceDataByFilter();
+                //}
                 //if (Branch_Area == "All" && Driver == "All" && Batch == "All")
                 //{
                 //    gridBranchAcceptance.EnableFiltering = false;
@@ -8102,7 +8196,7 @@ namespace CMS2.Client
             {
                 DataTable dataTable = getBranchAcceptanceGrid();
                 TrackingReportGlobalModel.table = dataTable;
-                TrackingReportGlobalModel.Date = dateTimeGatewayTransmital_Date.Value.ToLongDateString();
+                TrackingReportGlobalModel.Date = dateTimePickerBranchAcceptance_Date.Value.ToLongDateString();
                 TrackingReportGlobalModel.Branch = get_Column_DataView(dataTable, "BCO");
                 TrackingReportGlobalModel.Driver = dropDownBranchAcceptance_Driver.SelectedItem.ToString();
                 TrackingReportGlobalModel.Checker = get_Column_DataView(dataTable, "Checker");
@@ -9437,7 +9531,7 @@ namespace CMS2.Client
         }
         private void dateTimeHoldCargo_FromDate_ValueChanged(object sender, EventArgs e)
         {
-            if (dateTimeHoldCargo_ToDate.Value <= dateTimeHoldCargo_FromDate.Value)
+            if (dateTimeHoldCargo_ToDate.Value >= dateTimeHoldCargo_FromDate.Value)
             {
                 dateTimeHoldCargo_ToDate.Value = dateTimeHoldCargo_FromDate.Value.AddDays(1);
             }
@@ -9489,8 +9583,9 @@ namespace CMS2.Client
                     statusName = cmbDS_Status.SelectedItem.ToString();
 
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    Console.WriteLine(ex);
                     //Area = "All"; dropDownDeliveryStatus_Area.SelectedText = "All";
                     //Driver = "All"; dropDownDeliveryStatus_Driver.SelectedText = "All";
                     //Status = "All"; dropDownDeliveryStatus_Status.SelectedText = "All";
@@ -9622,7 +9717,7 @@ namespace CMS2.Client
             try
             {
                 DataTable dataTable = getDeliveryStatusGrid();
-                TrackingReportGlobalModel.table = dataTable;
+                //TrackingReportGlobalModel.table = dataTable;
                 TrackingReportGlobalModel.Date = dateTimeDeliveryStatus_Date.Value.ToLongDateString();
                 // TrackingReportGlobalModel.Driver = dropDownDeliveryStatus_Driver.SelectedItem.ToString();
                 TrackingReportGlobalModel.Area = cmbDS_RevenueUnit.SelectedItem.ToString();
@@ -9647,6 +9742,7 @@ namespace CMS2.Client
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex);
                 Logs.ErrorLogs(LogPath, "Delivery Status", ex.Message);
             }
         }
@@ -10103,11 +10199,11 @@ namespace CMS2.Client
                     //DATE
                     dateTimeGatewayOutbound_Date.Value = DateTime.Now;
                     //SET DROPDOWN BRANCH BCO 
-                    dropDownGatewayOutbound_BCO.DataSource = getBranchCorpOffice();
-                    dropDownGatewayOutbound_BCO.DisplayMember = "BranchCorpOfficeName";
-                    dropDownGatewayOutbound_BCO.ValueMember = "BranchCorpOfficeId";
-                    dropDownGatewayOutbound_BCO.SelectedValue = GlobalVars.DeviceBcoId;
-                    dropDownGatewayOutbound_BCO.Enabled = false;
+                    //dropDownGatewayOutbound_BCO.DataSource = getBranchCorpOffice();
+                    //dropDownGatewayOutbound_BCO.DisplayMember = "BranchCorpOfficeName";
+                    //dropDownGatewayOutbound_BCO.ValueMember = "BranchCorpOfficeId";
+                    //dropDownGatewayOutbound_BCO.SelectedValue = GlobalVars.DeviceBcoId;
+                    //dropDownGatewayOutbound_BCO.Enabled = false;
                     //CALL METHOD GET DATA - GATEWAY OUTBOUND
                     getGatewayOutBoundData();
 
@@ -10272,7 +10368,7 @@ namespace CMS2.Client
             dropDownBundle_BCO_BSO.ValueMember = "BranchCorpOfficeId";
             dropDownBundle_BCO_BSO.Items.Add("All");
             dropDownBundle_BCO_BSO.SelectedValue = "All";
-
+            
             //List<RevenueUnit> _revenueUnit = revenueUnitservice.GetAll().Where(x => x.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.RevenueUnitType.RevenueUnitTypeName == "Branch Satellite").OrderBy(x => x.RevenueUnitName).ToList();
             //bsBundleBSO.DataSource = _revenueUnit;
             //dropDownBundle_BCO_BSO.DataSource = bsBundleBSO;
@@ -10309,7 +10405,7 @@ namespace CMS2.Client
             List<GatewayTransmittal> _gatewayName = gwTransmittalService.GetAll().Where(x => x.RecordStatus == 1 && x.DestinationID == bcoId).ToList();
             List<string> selectGateway = _gatewayName.Select(x => x.Gateway).Distinct().OrderBy(x => x).ToList();
             selectGateway.Add("All");
-            dropDownGatewayTransmital_Gateway.DataSource = selectDriver;
+            dropDownGatewayTransmital_Gateway.DataSource = selectGateway;
             dropDownGatewayTransmital_Gateway.DisplayMember = "Gateway";
             dropDownGatewayTransmital_Gateway.ValueMember = "Gateway";
             dropDownGatewayTransmital_Gateway.SelectedValue = "All";
@@ -10362,6 +10458,8 @@ namespace CMS2.Client
             cmbGt_CommodityType.DataSource = bsGTCommodityType;
             cmbGt_CommodityType.DisplayMember = "CommodityTypeName";
             cmbGt_CommodityType.ValueMember = "CommodityTypeId";
+            cmbGt_CommodityType.Items.Add("All");
+            cmbGt_CommodityType.SelectedValue = "All";
 
 
 
@@ -10390,7 +10488,7 @@ namespace CMS2.Client
             List<GatewayOutbound> _gatewayName = gwOutboundService.GetAll().Where(x => x.RecordStatus == 1).ToList();
             List<string> selectGateway = _gatewayName.Select(x => x.Gateway).Distinct().OrderBy(x => x).ToList();
             selectGateway.Add("All");
-            dropDownGatewayOutbound_Gateway.DataSource = selectDriver;
+            dropDownGatewayOutbound_Gateway.DataSource = selectGateway;
             dropDownGatewayOutbound_Gateway.DisplayMember = "Gateway";
             dropDownGatewayOutbound_Gateway.ValueMember = "Gateway";
             dropDownGatewayOutbound_Gateway.SelectedValue = "All";
@@ -10457,7 +10555,7 @@ namespace CMS2.Client
             List<CargoTransfer> _cargotransfer = cargotransferService.GetAll().Where(x => x.RecordStatus == 1).ToList();
             List<BranchCorpOffice> _bco = bcoService.GetAll().Where(x => x.RecordStatus == 1).ToList();
             bsBCO1.DataSource = _bco;
-            cmbCT_BCO.DataSource = bsBCO;
+            cmbCT_BCO.DataSource = bsBCO1;
             cmbCT_BCO.DisplayMember = "BranchCorpOfficeName";
             cmbCT_BCO.ValueMember = "BranchCorpOfficeId";
             cmbCT_BCO.Items.Add("All");
@@ -10471,7 +10569,7 @@ namespace CMS2.Client
             cmbCT_RevenueType.Items.Add("All");
             cmbCT_RevenueType.SelectedValue = "All";
 
-            List<RevenueUnit> _ctrevenueUnit = revenueUnitservice.GetAll().Where(x => x.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId).OrderBy(x => x.RevenueUnitName).ToList();
+            List<RevenueUnit> _ctrevenueUnit = revenueUnitservice.GetAll().Where(x => x.RecordStatus ==1).OrderBy(x => x.RevenueUnitName).ToList();
             cmbCT_RevenueUnit.DataSource = _ctrevenueUnit;
             cmbCT_RevenueUnit.DisplayMember = "RevenueUnitName";
             cmbCT_RevenueUnit.ValueMember = "RevenueUnitId";
@@ -10504,17 +10602,29 @@ namespace CMS2.Client
 
             List<string> plateno = _cargotransfer.Select(x => x.PlateNo).Distinct().OrderBy(x => x).ToList();
             plateno.Add("All");
-            cmbGI_FlightNo.DataSource = plateno;
-            cmbGI_FlightNo.DisplayMember = "PlateNo";
-            cmbGI_FlightNo.ValueMember = "PlateNo";
-            cmbGI_FlightNo.SelectedValue = "All";
+            cmbCT_PlateNo.DataSource = plateno;
+            cmbCT_PlateNo.DisplayMember = "PlateNo";
+            cmbCT_PlateNo.ValueMember = "PlateNo";
+            cmbCT_PlateNo.SelectedValue = "All";
             
         }
 
-        private void CTRevenueUnit(Guid revenueUnitTypeId)
+        private void CTRevenueUnit(Guid revenueUnitTypeId, Guid bcoid)
         {
             cmbCT_RevenueUnit.DataSource = null;
-            List<RevenueUnit> _revenueUnit = revenueUnitservice.GetAll().Where(x => x.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.RevenueUnitTypeId == revenueUnitTypeId).OrderBy(x => x.RevenueUnitName).ToList();
+            List<RevenueUnit> _revenueUnit = revenueUnitservice.GetAll().Where(x => x.City.BranchCorpOfficeId == bcoid && x.RevenueUnitTypeId == revenueUnitTypeId).OrderBy(x => x.RevenueUnitName).ToList();
+            cmbCT_RevenueUnit.DataSource = _revenueUnit;
+            cmbCT_RevenueUnit.DisplayMember = "RevenueUnitName";
+            cmbCT_RevenueUnit.ValueMember = "RevenueUnitId";
+            cmbCT_RevenueUnit.Items.Add("All");
+            cmbCT_RevenueUnit.SelectedValue = "All";
+
+        }
+
+        private void CTRevenueUnitbyBcoId(Guid bcoid)
+        {
+            cmbCT_RevenueUnit.DataSource = null;
+            List<RevenueUnit> _revenueUnit = revenueUnitservice.GetAll().Where(x => x.City.BranchCorpOfficeId == bcoid).OrderBy(x => x.RevenueUnitName).ToList();
             cmbCT_RevenueUnit.DataSource = _revenueUnit;
             cmbCT_RevenueUnit.DisplayMember = "RevenueUnitName";
             cmbCT_RevenueUnit.ValueMember = "RevenueUnitId";
@@ -10534,9 +10644,9 @@ namespace CMS2.Client
             dropDownSegregation_BCO.Items.Add("All");
             dropDownSegregation_BCO.SelectedValue = "All";
 
-            List<Batch> _batch = batchService.GetAll().Where(x => x.RecordStatus == 1 && x.BatchCode == "cargotransfer").ToList();
+            List<Batch> _batch = batchService.GetAll().Where(x => x.RecordStatus == 1 && x.BatchCode == "segregation").ToList();
             bsSGBatch.DataSource = _batch;
-            dropDownSegregation_Batch.DataSource = bsCTBatch;
+            dropDownSegregation_Batch.DataSource = bsSGBatch;
             dropDownSegregation_Batch.DisplayMember = "BatchName";
             dropDownSegregation_Batch.ValueMember = "BatchId";
             dropDownSegregation_Batch.Items.Add("All");
@@ -10595,9 +10705,9 @@ namespace CMS2.Client
             cmbHC_Reason.SelectedValue = "All";
 
             List<RevenueUnitType> _revenueUnitType = revenueUnitTypeService.GetAll().Where(x => x.RecordStatus == 1).ToList();
-            cmbCT_RevenueType.DataSource = _revenueUnitType;
-            cmbCT_RevenueType.DisplayMember = "RevenueUnitTypeName";
-            cmbCT_RevenueType.ValueMember = "RevenueUnitTypeId";
+            cmbHC_Revenuetype.DataSource = _revenueUnitType;
+            cmbHC_Revenuetype.DisplayMember = "RevenueUnitTypeName";
+            cmbHC_Revenuetype.ValueMember = "RevenueUnitTypeId";
             cmbHC_Revenuetype.Items.Add("All");
             cmbHC_Revenuetype.SelectedValue = "All";
 
@@ -10642,6 +10752,9 @@ namespace CMS2.Client
             cmbHC_RevenueUnit.DataSource = _revenueUnit;
             cmbHC_RevenueUnit.DisplayMember = "RevenueUnitName";
             cmbHC_RevenueUnit.ValueMember = "RevenueUnitId";
+            cmbHC_RevenueUnit.Items.Add("All");
+            cmbHC_RevenueUnit.SelectedValue = "All";
+
 
         }
 
@@ -10664,12 +10777,18 @@ namespace CMS2.Client
                 cmbDS_RevenueUnit.Enabled = false;
             }
 
+            List<RevenueUnit> _revenueUnit = revenueUnitservice.GetAll().Where(x => x.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId).OrderBy(x => x.RevenueUnitName).ToList();
+            cmbDS_RevenueUnit.DataSource = _revenueUnit;
+            cmbDS_RevenueUnit.DisplayMember = "RevenueUnitName";
+            cmbDS_RevenueUnit.ValueMember = "RevenueUnitId";
+            cmbDS_RevenueUnit.Items.Add("All");
+            cmbDS_RevenueUnit.SelectedValue = "All";
+
             List<Employee> _employee = employeeService.GetAll().Where(x => x.RecordStatus == 1 && x.AssignedToArea.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId).ToList();
             bsEmployee.DataSource = _employee;
             cmbDS_DeliveredBy.DataSource = bsEmployee;
             cmbDS_DeliveredBy.DisplayMember = "Fullname";
             cmbDS_DeliveredBy.ValueMember = "EmployeeId";
-
             cmbDS_DeliveredBy.Items.Add("All");
             cmbDS_DeliveredBy.SelectedValue = "All";
 
@@ -10678,9 +10797,9 @@ namespace CMS2.Client
             cmbDS_Status.DataSource = bsStatus;
             cmbDS_Status.DisplayMember = "DeliveryStatusName";
             cmbDS_Status.ValueMember = "DeliveryStatusId";
-
             cmbDS_Status.Items.Add("All");
             cmbDS_Status.SelectedValue = "All";
+            
         }
 
         private void DSRevenueUnitByUnitType(Guid revenueUnitTypeId)
@@ -10771,16 +10890,18 @@ namespace CMS2.Client
             if (cmbCT_RevenueType.SelectedIndex >= 0)
             {
                 Guid revenueUnitTypeId = new Guid();
+                Guid bcoid = new Guid();
                 try
                 {
                     revenueUnitTypeId = Guid.Parse(cmbCT_RevenueType.SelectedValue.ToString());
+                    bcoid = Guid.Parse(cmbCT_BCO.SelectedValue.ToString());
                 }
                 catch (Exception)
                 {
                     return;
                 }
 
-                CTRevenueUnit(revenueUnitTypeId);
+                CTRevenueUnit(revenueUnitTypeId, bcoid);
             }
         }
 
@@ -10836,23 +10957,7 @@ namespace CMS2.Client
             }
         }
 
-        private void cmbDS_RevenueUnit_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
-        {
-            if (cmbDS_RevenueUnit.SelectedIndex >= 0)
-            {
-                Guid revenueUnitId = new Guid();
-                try
-                {
-                    revenueUnitId = Guid.Parse(cmbDS_RevenueUnit.SelectedValue.ToString());
-                }
-                catch (Exception)
-                {
-                    return;
-                }
-
-                DSEmployeeByRevenueUnit(revenueUnitId);
-            }
-        }
+      
 
         private void cmbHC_Revenuetype_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
         {
@@ -10897,6 +11002,50 @@ namespace CMS2.Client
                 }
             }
         }
+
+        private void cmbDS_RevenueUnit_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
+        {
+            if (cmbDS_RevenueUnit.SelectedIndex >= 0)
+            {
+                Guid revenueUnitId = new Guid();
+                try
+                {
+                    revenueUnitId = Guid.Parse(cmbDS_RevenueUnit.SelectedValue.ToString());
+                }
+                catch (Exception)
+                {
+                    return;
+                }
+
+                DSEmployeeByRevenueUnit(revenueUnitId);
+            }
+        }
+
+
+        private void cmbCT_BCO_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
+        {
+            if (cmbCT_BCO.SelectedIndex >= 0)
+            {
+                if (cmbCT_BCO.SelectedItem.Text == "All")
+                {
+                   
+                }
+                else
+                {
+                    Guid bcoid = new Guid();
+                    try
+                    {
+                        bcoid = Guid.Parse(cmbCT_BCO.SelectedValue.ToString());
+                    }
+                    catch (Exception)
+                    {
+                        return;
+                    }
+                    CTRevenueUnitbyBcoId(bcoid);
+                }
+            }
+        }
+
 
 
         #endregion

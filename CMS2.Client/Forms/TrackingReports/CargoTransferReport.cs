@@ -17,7 +17,7 @@ namespace CMS2.Client.Forms.TrackingReports
 
             CargoTransferBL cargoTransferBl = new CargoTransferBL();
 
-            List<CargoTransfer> list = cargoTransferBl.GetAll().Where(x => x.RecordStatus == 1 && x.BranchCorpOfficeID == GlobalVars.DeviceBcoId && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
+            List<CargoTransfer> list = cargoTransferBl.GetAll().Where(x => x.RecordStatus == 1 && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
 
             List<CargoTransferViewModel> modelList = Match(list);
 
@@ -76,10 +76,10 @@ namespace CMS2.Client.Forms.TrackingReports
             CargoTransferBL cargoTransferBl = new CargoTransferBL();
             List<CargoTransfer> list = cargoTransferBl.GetAll().Where
                 (x => x.RecordStatus == 1
-                && ((x.BranchCorpOfficeID == destinationId && x.BranchCorpOfficeID != null) || (x.BranchCorpOfficeID == x.BranchCorpOfficeID && x.BranchCorpOfficeID == null))
-                && ((x.RevenueUnitID == revenueunitId && x.RevenueUnitID != null) || (x.RevenueUnitID == x.RevenueUnitID && x.RevenueUnitID == null))
-                && ((x.BatchID == batchId && x.BatchID != null) || (x.BatchID == x.BatchID && x.BatchID == null))
-                && ((x.PlateNo == plateno && x.PlateNo != "All") || (x.PlateNo == x.PlateNo && x.PlateNo == "All"))
+                && ((x.BranchCorpOfficeID == destinationId && x.BranchCorpOfficeID != Guid.Empty) || (x.BranchCorpOfficeID == x.BranchCorpOfficeID && destinationId == Guid.Empty))
+                && ((x.RevenueUnitID == revenueunitId && x.RevenueUnitID != Guid.Empty) || (x.RevenueUnitID == x.RevenueUnitID && revenueunitId == Guid.Empty))
+                && ((x.BatchID == batchId && x.BatchID != Guid.Empty) || (x.BatchID == x.BatchID && batchId == Guid.Empty))
+                && ((x.PlateNo == plateno && x.PlateNo != "All") || (x.PlateNo == x.PlateNo && plateno == "All"))
                 && x.CreatedDate.ToShortDateString() == date.ToShortDateString()
                 ).ToList();
 
