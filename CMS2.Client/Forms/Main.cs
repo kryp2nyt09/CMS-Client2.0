@@ -6250,7 +6250,7 @@ namespace CMS2.Client
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+               // MessageBox.Show(ex.ToString());
                 Logs.ErrorLogs(LogPath, "Pickup Cargo", ex.Message);
             }
         }
@@ -6857,7 +6857,7 @@ namespace CMS2.Client
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                //MessageBox.Show(ex.ToString());
                 Logs.ErrorLogs(LogPath, "Gateway Transmital", ex.Message);
             }
 
@@ -7662,7 +7662,7 @@ namespace CMS2.Client
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                //MessageBox.Show(ex.ToString());
                 Logs.ErrorLogs(LogPath, "Hold Cargo", ex.Message);
             }
         }
