@@ -9513,7 +9513,7 @@ namespace CMS2.Client
         }
         private void dateTimeHoldCargo_FromDate_ValueChanged(object sender, EventArgs e)
         {
-            if (dateTimeHoldCargo_ToDate.Value >= dateTimeHoldCargo_FromDate.Value)
+            if (dateTimeHoldCargo_ToDate.Value <= dateTimeHoldCargo_FromDate.Value)
             {
                 dateTimeHoldCargo_ToDate.Value = dateTimeHoldCargo_FromDate.Value.AddDays(1);
             }
