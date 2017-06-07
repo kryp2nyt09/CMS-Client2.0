@@ -6312,6 +6312,7 @@ namespace CMS2.Client
             }
             catch (Exception ex)
             {
+                MessageBox.Show(ex.ToString());
                 Logs.ErrorLogs(LogPath, "Branch Acceptance", ex.Message);
             }
 
@@ -8204,8 +8205,8 @@ namespace CMS2.Client
                 //dropDownBranchAcceptance_Branch.SelectedIndex = 0;
                 //dropDownBranchAcceptance_BCO_BSO.Items.Clear();
                 //dropDownBranchAcceptance_BCO_BSO.Items.Add("All");
-                dropDownBranchAcceptance_Driver.SelectedIndex = 0;
-                dropDownBranchAcceptance_Batch.SelectedIndex = 0;
+               // dropDownBranchAcceptance_Driver.SelectedIndex = 0;
+               // dropDownBranchAcceptance_Batch.SelectedIndex = 0;
                 gridBranchAcceptance.EnableFiltering = false;
                 getBrancAcceptanceData();
             }
@@ -10295,10 +10296,10 @@ namespace CMS2.Client
             dropDownBranchAcceptance_BCO_BSO.Items.Add("All");
             dropDownBranchAcceptance_BCO_BSO.SelectedValue = "All";
 
-            if (dropDownBranchAcceptance_BCO_BSO.SelectedItem.Text == "All")
-            {
-                dropDownBranchAcceptance_Driver.Enabled = false;
-            }
+            //if (dropDownBranchAcceptance_BCO_BSO.SelectedItem.Text == "All")
+            //{
+            //    dropDownBranchAcceptance_Driver.Enabled = false;
+            //}
 
             List<BranchAcceptance> _driver = branchAcceptanceService.GetAll().Where(x => x.RecordStatus == 1 && x.Users.Employee.AssignedToArea.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId).ToList();
             //bsDriver.DataSource = _driver;
@@ -10893,7 +10894,7 @@ namespace CMS2.Client
                 if (dropDownBranchAcceptance_BCO_BSO.SelectedItem.Text == "All")
                 {
                     dropDownBranchAcceptance_Driver.SelectedValue = "All";
-                    dropDownBranchAcceptance_Driver.Enabled = false;
+                   // dropDownBranchAcceptance_Driver.Enabled = false;
                 }
                 else
                 {
@@ -10906,7 +10907,7 @@ namespace CMS2.Client
                     {
                         return;
                     }
-                    DriverFilter(revenueUnitId);
+                   // DriverFilter(revenueUnitId);
                 }
             }
         }
