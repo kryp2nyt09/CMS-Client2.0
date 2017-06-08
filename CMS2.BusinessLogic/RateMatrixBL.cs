@@ -30,9 +30,9 @@ namespace CMS2.BusinessLogic
             return new Expression<Func<RateMatrix, object>>[]
             {
                 x=>x.ApplicableRate,
-                x => x.CommodityType,
-                x=>x.ServiceType,
-                x=>x.ServiceMode,
+                //x => x.CommodityType,
+                //x=>x.ServiceType,
+                //x=>x.ServiceMode,
                 x=>x.ExpressRates
             };
         }
@@ -58,9 +58,9 @@ namespace CMS2.BusinessLogic
                 RateMatrix newEntity = new RateMatrix();
                 newEntity.RateMatrixId = Guid.NewGuid();
                 newEntity.ApplicableRateId = targetId;
-                newEntity.CommodityTypeId = existingMatrix.CommodityTypeId;
-                newEntity.ServiceTypeId = existingMatrix.ServiceTypeId;
-                newEntity.ServiceModeId = existingMatrix.ServiceModeId;
+                //newEntity.CommodityTypeId = existingMatrix.CommodityTypeId;
+                //newEntity.ServiceTypeId = existingMatrix.ServiceTypeId;
+                //newEntity.ServiceModeId = existingMatrix.ServiceModeId;
                 newEntity.HasAwbFee = existingMatrix.HasAwbFee;
                 newEntity.HasInsurance = existingMatrix.HasInsurance;
                 newEntity.ApplyEvm = existingMatrix.ApplyEvm;
@@ -105,14 +105,14 @@ namespace CMS2.BusinessLogic
             }
         }
 
-        public RateMatrix GetMatrix(Guid CommodityTypeId, Guid ServiceTypeId, Guid ServiceModeId)
-        {
-            RateMatrix result = null;
-            result = FilterActiveBy(x => x.CommodityTypeId == CommodityTypeId && x.ServiceTypeId == ServiceTypeId &&
-                         x.ServiceModeId == ServiceModeId).FirstOrDefault();
+        //public RateMatrix GetMatrix(Guid CommodityTypeId, Guid ServiceTypeId, Guid ServiceModeId)
+        //{
+        //    RateMatrix result = null;
+        //    result = FilterActiveBy(x => x.CommodityTypeId == CommodityTypeId && x.ServiceTypeId == ServiceTypeId &&
+        //                 x.ServiceModeId == ServiceModeId).FirstOrDefault();
 
-            return result;
-        }
+        //    return result;
+        //}
 
         public RateMatrix GetMatrix(Guid ApplicableRateId)
         {

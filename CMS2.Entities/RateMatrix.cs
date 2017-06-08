@@ -13,15 +13,15 @@ namespace CMS2.Entities
         [DisplayName("Applicable Rate")]
         public Guid ApplicableRateId { get; set; }
         public ApplicableRate ApplicableRate { get; set; }
-        [DisplayName("Commodity Type")]
-        public Guid CommodityTypeId { get; set; }
-        public CommodityType CommodityType { get; set; }
-        [DisplayName("Service Type")]
-        public Guid? ServiceTypeId { get; set; }
-        public ServiceType ServiceType { get; set; }
-        [DisplayName("Service Mode")]
-        public Guid? ServiceModeId { get; set; }
-        public ServiceMode ServiceMode { get; set; }
+        //[DisplayName("Commodity Type")]
+        //public Guid CommodityTypeId { get; set; }
+        //public CommodityType CommodityType { get; set; }
+        //[DisplayName("Service Type")]
+        //public Guid? ServiceTypeId { get; set; }
+        //public ServiceType ServiceType { get; set; }
+        //[DisplayName("Service Mode")]
+        //public Guid? ServiceModeId { get; set; }
+        //public ServiceMode ServiceMode { get; set; }
 
         public virtual List<ExpressRate> ExpressRates { get; set; }
 
