@@ -379,6 +379,11 @@ namespace CMS2.BusinessLogic
             model.FreightCollectCharge = null;
             if (model.PaymentMode.PaymentModeCode.Equals("FC") || model.PaymentMode.PaymentModeCode.Equals("PP"))
             {
+                ApplicableRate _applicableRate = applicableRateService.GetApplicableRate(model.CommodityTypeId, model.ServiceModeId, model.ServiceTypeId);
+
+                //if (_applicableRate != null)
+                //{
+                matrix = rateMatrixService.GetMatrix(_applicableRate.ApplicableRateId);
                 //matrix = rateMatrixService.FilterActiveBy(x => x.CommodityTypeId == model.a && x.ServiceTypeId == model.ServiceTypeId && x.ServiceModeId == model.ServiceModeId).FirstOrDefault();
                 if (model.PaymentMode.PaymentModeCode.Equals("FC"))
                 {
