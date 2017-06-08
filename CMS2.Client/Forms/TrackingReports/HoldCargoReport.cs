@@ -15,9 +15,11 @@ namespace CMS2.Client.Forms.TrackingReports
         public DataTable getData(DateTime fromdate , DateTime todate) {
 
             HoldCargoBL holdcargoBl = new HoldCargoBL();
-
+            BranchCorpOfficeBL bcoService = new BranchCorpOfficeBL();
             List<HoldCargo> list = holdcargoBl.GetAll().Where(x => x.CreatedDate >= fromdate && x.CreatedDate <= todate ).ToList();
-            List<HoldCargoViewModel> modelList = Match(list);
+            string bcoName = bcoService.GetAll().Find(x => x.BranchCorpOfficeId == GlobalVars.DeviceBcoId).BranchCorpOfficeName;
+
+            List<HoldCargoViewModel> modelList = Match(list).FindAll(x => x.Branch == bcoName);
 
             DataTable dt = new DataTable();
             dt.Columns.Add(new DataColumn("No", typeof(string)));
@@ -71,14 +73,17 @@ namespace CMS2.Client.Forms.TrackingReports
         {
 
             HoldCargoBL holdcargoBl = new HoldCargoBL();
-            
+            BranchCorpOfficeBL bcoService = new BranchCorpOfficeBL();
+            string bcoName = bcoService.GetAll().Find(x => x.BranchCorpOfficeId == GlobalVars.DeviceBcoId).BranchCorpOfficeName;
+
             List<HoldCargo> list = holdcargoBl.GetAll().Where
                 (x => x.CreatedDate >= fromdate && x.CreatedDate <= todate
                 && ((x.User.Employee.AssignedToArea.RevenueUnitId == revenueunitid && x.User.Employee.AssignedToArea.RevenueUnitId != Guid.Empty) || (x.User.Employee.AssignedToArea.RevenueUnitId == x.User.Employee.AssignedToArea.RevenueUnitId && revenueunitid == Guid.Empty))
                 && ((x.StatusID == statusid && x.StatusID != Guid.Empty) || (x.StatusID == x.StatusID && statusid == Guid.Empty))
                 && ((x.ReasonID == reasonid && x.ReasonID != Guid.Empty) || (x.ReasonID == x.ReasonID && reasonid == Guid.Empty))
                 ).ToList();
-            List<HoldCargoViewModel> modelList = Match(list);
+
+            List<HoldCargoViewModel> modelList = Match(list).FindAll(x => x.Branch == bcoName);
 
             DataTable dt = new DataTable();
             dt.Columns.Add(new DataColumn("No", typeof(string)));
@@ -193,6 +198,7 @@ namespace CMS2.Client.Forms.TrackingReports
                         model.ScannedBy = holdCargo.User.Employee.FullName;
                         //model.PreparedBy = user.GetAllUsers().Find(x => x.UserId == shi)
                         model.Aging = Math.Round((DateTime.Now - holdCargo.HoldCargoDate).TotalDays,2);
+                        model.Branch = holdCargo.User.Employee.AssignedToArea.City.BranchCorpOffice.BranchCorpOfficeName;
                         _results.Add(model);
                     }
                     

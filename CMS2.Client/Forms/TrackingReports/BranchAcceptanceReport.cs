@@ -26,8 +26,8 @@ namespace CMS2.Client.Forms.TrackingReports
 
             string bcoName = bcoService.GetAll().Find(x => x.BranchCorpOfficeId == GlobalVars.DeviceBcoId).BranchCorpOfficeName;
 
-            //List<BranchAcceptanceViewModel> list = Match(branchAcceptance, shipments).FindAll(x => x.BCO == bcoName);
-            List<BranchAcceptanceViewModel> list = Match(branchAcceptance, shipments);
+            List<BranchAcceptanceViewModel> list = Match(branchAcceptance, shipments).FindAll(x => x.BCO == bcoName && x.Area != "N/A");
+            //List<BranchAcceptanceViewModel> list = Match(branchAcceptance, shipments);
 
             DataTable dt = new DataTable();
             dt.Columns.Add(new DataColumn("No", typeof(string)));
@@ -78,6 +78,7 @@ namespace CMS2.Client.Forms.TrackingReports
         public DataTable getBranchAcceptanceDataByFilter(DateTime date, Guid? revenueUnitId, string driver, Guid? batchId)
         {
             RevenueUnitBL revenueunitservice = new RevenueUnitBL();
+            BatchBL batchservice = new BatchBL();
             BranchAcceptanceBL branchAcceptanceBl = new BranchAcceptanceBL();
             ShipmentBL shipmentService = new ShipmentBL();
             BranchCorpOfficeBL bcoService = new BranchCorpOfficeBL();
@@ -97,20 +98,61 @@ namespace CMS2.Client.Forms.TrackingReports
                 && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
 
             string revenueunitname = "";
+            string batchname = "";
             string bcoName = "";
 
-            if (revenueUnitId != Guid.Empty)
+            if(batchId != Guid.Empty)
             {
-                revenueunitname = revenueunitservice.GetAll().Find(x => x.RevenueUnitId == revenueUnitId).RevenueUnitName;
-                list = Match(branchAcceptance, shipments).FindAll(x => x.Area == revenueunitname);
+                batchname = batchservice.GetAll().Find(x => x.BatchID == batchId).BatchName;
             }
             else
             {
-                bcoName = bcoService.GetAll().Find(x => x.BranchCorpOfficeId == GlobalVars.DeviceBcoId).BranchCorpOfficeName;
-                //list = Match(branchAcceptance, shipments).FindAll(x => x.BCO == bcoName);
-                list = Match(branchAcceptance, shipments);
+                batchname = "All";
             }
             
+            if(revenueUnitId != Guid.Empty)
+            {
+                revenueunitname = revenueunitservice.GetAll().Find(x => x.RevenueUnitId == revenueUnitId).RevenueUnitName;
+            }
+            else
+            {
+                revenueunitname = "All";
+            }
+            
+            bcoName = bcoService.GetAll().Find(x => x.BranchCorpOfficeId == GlobalVars.DeviceBcoId).BranchCorpOfficeName;
+
+            list = Match(branchAcceptance, shipments).
+                FindAll
+                (x => 
+                ((x.Area == revenueunitname && x.Area !="N/A") || (x.Area == x.Area && revenueunitname == "All"))
+                && ((x.Driver == driver && x.Driver != "N/A") || (x.Driver == x.Driver && driver == "All"))
+                && ((x.Batch == batchname && x.Batch != "N/A") || (x.Batch == x.Batch && batchname == "All"))
+                && ((x.BCO == bcoName && x.BCO != "N/A") || (x.BCO == x.BCO && bcoName == ""))
+                );
+
+            //if (revenueUnitId != Guid.Empty && batchId !=Guid.Empty)
+            //{
+            //    batchname = batchservice.GetAll().Find(x => x.BatchID == batchId).BatchName;
+            //    revenueunitname = revenueunitservice.GetAll().Find(x => x.RevenueUnitId == revenueUnitId).RevenueUnitName;
+            //    list = Match(branchAcceptance, shipments).FindAll(x => x.Area == revenueunitname && x.Batch == batchname);
+            //}
+            //else if (revenueUnitId == Guid.Empty && batchId != Guid.Empty)
+            //{
+            //    batchname = batchservice.GetAll().Find(x => x.BatchID == batchId).BatchName;
+            //    list = Match(branchAcceptance, shipments).FindAll(x => x.Batch == batchname && x.Area != "N/A");
+            //}
+            //else if (revenueUnitId != Guid.Empty && batchId == Guid.Empty)
+            //{
+            //    revenueunitname = revenueunitservice.GetAll().Find(x => x.RevenueUnitId == revenueUnitId).RevenueUnitName;
+            //    list = Match(branchAcceptance, shipments).FindAll(x => x.Area == revenueunitname);
+            //}
+            //else
+            //{
+            //    bcoName = bcoService.GetAll().Find(x => x.BranchCorpOfficeId == GlobalVars.DeviceBcoId).BranchCorpOfficeName;
+            //    list = Match(branchAcceptance, shipments).FindAll(x => x.BCO == bcoName && x.Area != "N/A");
+            //    //list = Match(branchAcceptance, shipments);
+            //}
+
             DataTable dt = new DataTable();
             dt.Columns.Add(new DataColumn("No", typeof(string)));
             dt.Columns.Add(new DataColumn("Area/Branch", typeof(string)));
@@ -323,7 +365,7 @@ namespace CMS2.Client.Forms.TrackingReports
                         if (isAirawayBillExist != null)
                         {
                             isAirawayBillExist.TotalRecieved++;
-                            isAirawayBillExist.Total += isAirawayBillExist.TotalRecieved;
+                            isAirawayBillExist.Total = isAirawayBillExist.TotalRecieved;
                         }
                         else
                         {
@@ -342,7 +384,7 @@ namespace CMS2.Client.Forms.TrackingReports
                             model.PlateNo = "N/A";
                             model.Batch = _brachAcceptance.Batch.BatchName;
                             model.TotalRecieved++;
-                            model.Total += model.TotalRecieved;
+                            model.Total = model.TotalRecieved;
                             model.CreatedBy = _brachAcceptance.CreatedDate;
 
                             model.BCO = _brachAcceptance.BranchCorpOffice.BranchCorpOfficeName;
@@ -366,7 +408,7 @@ namespace CMS2.Client.Forms.TrackingReports
                         if (isAirawayBillExist != null)
                         {
                             isAirawayBillExist.TotalDiscrepency++;
-                            isAirawayBillExist.Total += isAirawayBillExist.TotalDiscrepency;
+                            isAirawayBillExist.Total = isAirawayBillExist.TotalDiscrepency;
                         }
                         else
                         {
@@ -384,20 +426,30 @@ namespace CMS2.Client.Forms.TrackingReports
                             model.PlateNo = "N/A";
                             model.Batch = "N/A"; //_brachAcceptance.Batch.BatchName;
                             model.TotalDiscrepency++;
-                            model.Total += model.TotalDiscrepency;
+                            model.Total = model.TotalDiscrepency;
 
                             model.BCO = "N/A"; //_brachAcceptance.BranchCorpOffice.BranchCorpOfficeName;
-                            //model.BSO = "N/A"; //shipment.Booking.AssignedToArea.RevenueUnitName;
-                           // model.BCO = _brachAcceptance.BranchCorpOffice.BranchCorpOfficeName;
-                            model.BSO = "N/A";
-                            //if (shipment.Booking != null)
-                            //{
-                            //    if (shipment.Booking.AssignedToArea != null)
-                            //    {
-                            //        model.BSO = shipment.Booking.AssignedToArea.RevenueUnitName;
-                            //    }
+                            //model.BCO = shipment.Booking.AssignedToArea.City.BranchCorpOffice.BranchCorpOfficeName;
+                            if (shipment.Booking != null)
+                            {
+                                if (shipment.Booking.AssignedToArea != null)
+                                {
+                                    model.BCO = shipment.Booking.AssignedToArea.City.BranchCorpOffice.BranchCorpOfficeName;
+                                }
+                            }
 
-                            //}
+
+                            //model.BSO = "N/A"; //shipment.Booking.AssignedToArea.RevenueUnitName;
+                            // model.BCO = _brachAcceptance.BranchCorpOffice.BranchCorpOfficeName;
+                            model.BSO = "N/A";
+                            if (shipment.Booking != null)
+                            {
+                                if (shipment.Booking.AssignedToArea != null)
+                                {
+                                    model.BSO = shipment.Booking.AssignedToArea.RevenueUnitName;
+                                }
+
+                            }
                             model.ScannedBy = AppUser.User.Employee.FullName;
                             //model.Remarks = shipment.Remarks;
                             //model.Notes = _brachAcceptance.Notes;
