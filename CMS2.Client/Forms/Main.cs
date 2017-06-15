@@ -4410,7 +4410,9 @@ namespace CMS2.Client
                 txtDeclaredValue.Text = shipment.DeclaredValueString;
                 txtHandlingFee.Text = shipment.HandlingFeeString;
                 txtQuarantineFee.Text = shipment.QuanrantineFeeString;
-                txtRfa.Text = (shipment.Discount * 100).ToString();
+                int i = 10;
+                decimal number = (decimal)i / 100;
+                txtRfa.Text = (shipment.Discount * number).ToString();
                 txtNotes.Text = shipment.Notes;
                 chkNonVatable.Checked = false;
                 if (!shipment.IsVatable)
