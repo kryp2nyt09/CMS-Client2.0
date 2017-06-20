@@ -488,6 +488,7 @@ namespace CMS2.Client.SyncHelper
 
                 string filterColumn = "";
                 string filterClause = "";
+
                 switch (_tableName)
                 {
                     case "Booking":
@@ -726,9 +727,10 @@ namespace CMS2.Client.SyncHelper
                     case "DeliveryPackage":
 
                         filterColumn = "DeliveredPackageId";
-                        filterClause = "[side].[DeliveredPackageId] In (SELECT  c.DeliveredPackageId FROM " +
+                        filterClause = "[side].[DeliveredPackageId] In (SELECT c.DeliveredPackageId FROM " +
+                                        "((SELECT  package.DeliveredPackageId FROM DeliveredPackage as package " +
                                         "LEFT JOIN Delivery delivery on delivery.DeliveryId = package.DeliveryId " +
-                                        "LEFT JOIN   Shipment as ship on ship.ShipmentId = delivery.DeliveryId " +
+                                        "LEFT JOIN   Shipment as ship on ship.ShipmentId = delivery.ShipmentId " +
                                         "left join Booking as book on book.BookingId = ship.BookingId  " +
                                         "left join RevenueUnit as ru on ru.RevenueUnitId = book.AssignedToAreaId  " +
                                         "left join City as city on city.CityId = ru.CityId  " +
@@ -736,7 +738,7 @@ namespace CMS2.Client.SyncHelper
                                         "UNION  " +
                                         "(SELECT package.DeliveredPackageId from DeliveredPackage as package " +
                                         "LEFT JOIN Delivery delivery on delivery.DeliveryId = package.DeliveryId " +
-                                        "LEFT JOIN   Shipment as ship on ship.ShipmentId = delivery.DeliveryId " +
+                                        "LEFT JOIN   Shipment as ship on ship.ShipmentId = delivery.ShipmentId " +
                                         "LEFT JOIN Booking book ON book.BookingId = SHIP.BookingId " +
                                         "LEFT JOIN City c ON c.CityId = book.DestinationCityId  " +
                                         "LEFT JOIN BranchCorpOffice bco ON bco.BranchCorpOfficeId = c.BranchCorpOfficeId  " +
@@ -759,7 +761,7 @@ namespace CMS2.Client.SyncHelper
                         filterClause = "[side].[DeliveryReceiptId] In (SELECT  c.DeliveryReceiptId FROM " +
                                         "((SELECT reciept.DeliveryReceiptId from DeliveryReceipt as reciept " +
                                         "left join Delivery delivery on delivery.DeliveryId = reciept.DeliveryId " +
-                                        "left join   Shipment as ship on ship.ShipmentId = delivery.DeliveryId  " +
+                                        "left join   Shipment as ship on ship.ShipmentId = delivery.ShipmentId  " +
                                         "left join Booking as book on book.BookingId = ship.BookingId  " +
                                         "left join RevenueUnit as ru on ru.RevenueUnitId = book.AssignedToAreaId  " +
                                         "left join City as city on city.CityId = ru.CityId  " +
@@ -767,7 +769,7 @@ namespace CMS2.Client.SyncHelper
                                         "UNION  " +
                                         "(SELECT reciept.DeliveryReceiptId from DeliveryReceipt as reciept " +
                                         "LEFT JOIN Delivery delivery on delivery.DeliveryId = reciept.DeliveryId " +
-                                        "LEFT JOIN   Shipment as ship on ship.ShipmentId = delivery.DeliveryId  " +
+                                        "LEFT JOIN   Shipment as ship on ship.ShipmentId = delivery.ShipmentId  " +
                                         "LEFT JOIN Booking book ON book.BookingId = SHIP.BookingId " +
                                         "LEFT JOIN City c ON c.CityId = book.DestinationCityId  " +
                                         "LEFT JOIN BranchCorpOffice bco ON bco.BranchCorpOfficeId = c.BranchCorpOfficeId  " +
@@ -840,7 +842,7 @@ namespace CMS2.Client.SyncHelper
 
                 // create a server scope provisioning object based on the tableNameScope
                 SqlSyncScopeProvisioning serverProvision = new SqlSyncScopeProvisioning(_serverConnection, scopeDesc);
-
+                
                 // start the provisioning process
                 if (!serverProvision.ScopeExists(scopeDesc.ScopeName))
                 {

@@ -19,7 +19,7 @@ namespace AP_CARGO_SERVICE
         protected override void OnStart(string[] args)
         {            
             sync = new Synchronization();
-            _timer = new Timer(10000);
+            _timer = new Timer(60000);
             _timer.Elapsed += new System.Timers.ElapsedEventHandler(timer_Elapsed);
             _timer.Start();
         }
