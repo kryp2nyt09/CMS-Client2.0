@@ -1490,7 +1490,7 @@
             this.dateDateBooked.Size = new System.Drawing.Size(145, 20);
             this.dateDateBooked.TabIndex = 30;
             this.dateDateBooked.TabStop = false;
-            this.dateDateBooked.Text = "Friday, December 2, 2016";
+            this.dateDateBooked.Text = "Friday, 2 December 2016";
             this.dateDateBooked.ThemeName = "Office2010Black";
             this.dateDateBooked.Value = new System.DateTime(2016, 12, 2, 15, 47, 16, 261);
             // 
@@ -2525,7 +2525,6 @@
             // 
             this.txtSumTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSumTotal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
-            this.txtSumTotal.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtSumTotal.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSumTotal.Location = new System.Drawing.Point(129, 467);
             this.txtSumTotal.Mask = "C2";
@@ -2544,7 +2543,6 @@
             // 
             this.txtSumDiscount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSumDiscount.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
-            this.txtSumDiscount.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtSumDiscount.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSumDiscount.Location = new System.Drawing.Point(129, 372);
             this.txtSumDiscount.Mask = "C2";
@@ -2563,7 +2561,6 @@
             // 
             this.txtSumVatAmount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSumVatAmount.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
-            this.txtSumVatAmount.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtSumVatAmount.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSumVatAmount.Location = new System.Drawing.Point(129, 420);
             this.txtSumVatAmount.Mask = "C2";
@@ -2582,7 +2579,6 @@
             // 
             this.txtSumInsurance.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSumInsurance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
-            this.txtSumInsurance.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtSumInsurance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSumInsurance.Location = new System.Drawing.Point(129, 348);
             this.txtSumInsurance.Mask = "C2";
@@ -2601,7 +2597,6 @@
             // 
             this.txtSumQuarantineFee.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSumQuarantineFee.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
-            this.txtSumQuarantineFee.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtSumQuarantineFee.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSumQuarantineFee.Location = new System.Drawing.Point(129, 324);
             this.txtSumQuarantineFee.Mask = "C2";
@@ -2620,7 +2615,6 @@
             // 
             this.txtSumHandlingFee.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSumHandlingFee.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
-            this.txtSumHandlingFee.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtSumHandlingFee.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSumHandlingFee.Location = new System.Drawing.Point(129, 300);
             this.txtSumHandlingFee.Mask = "C2";
@@ -2639,7 +2633,6 @@
             // 
             this.txtSumPackagingFee.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSumPackagingFee.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
-            this.txtSumPackagingFee.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtSumPackagingFee.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSumPackagingFee.Location = new System.Drawing.Point(129, 276);
             this.txtSumPackagingFee.Mask = "C2";
@@ -2658,7 +2651,6 @@
             // 
             this.txtSumDrainingFee.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSumDrainingFee.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
-            this.txtSumDrainingFee.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtSumDrainingFee.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSumDrainingFee.Location = new System.Drawing.Point(129, 252);
             this.txtSumDrainingFee.Mask = "C2";
@@ -2677,7 +2669,6 @@
             // 
             this.txtSumCratingFee.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSumCratingFee.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
-            this.txtSumCratingFee.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtSumCratingFee.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSumCratingFee.Location = new System.Drawing.Point(129, 228);
             this.txtSumCratingFee.Mask = "C2";
@@ -2696,7 +2687,6 @@
             // 
             this.txtSumDangerousFee.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSumDangerousFee.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
-            this.txtSumDangerousFee.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtSumDangerousFee.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSumDangerousFee.Location = new System.Drawing.Point(129, 204);
             this.txtSumDangerousFee.Mask = "C2";
@@ -2715,7 +2705,6 @@
             // 
             this.txtSumFuelSurcharge.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSumFuelSurcharge.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
-            this.txtSumFuelSurcharge.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtSumFuelSurcharge.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSumFuelSurcharge.Location = new System.Drawing.Point(129, 180);
             this.txtSumFuelSurcharge.Mask = "C2";
@@ -2734,7 +2723,6 @@
             // 
             this.txtSumPeracFee.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSumPeracFee.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
-            this.txtSumPeracFee.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtSumPeracFee.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSumPeracFee.Location = new System.Drawing.Point(129, 156);
             this.txtSumPeracFee.Mask = "C2";
@@ -2753,7 +2741,6 @@
             // 
             this.txtSumFreightCollect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSumFreightCollect.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
-            this.txtSumFreightCollect.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtSumFreightCollect.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSumFreightCollect.Location = new System.Drawing.Point(129, 132);
             this.txtSumFreightCollect.Mask = "C2";
@@ -2772,7 +2759,6 @@
             // 
             this.txtSumDeliveryFee.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSumDeliveryFee.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
-            this.txtSumDeliveryFee.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtSumDeliveryFee.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSumDeliveryFee.Location = new System.Drawing.Point(129, 108);
             this.txtSumDeliveryFee.Mask = "C2";
@@ -2791,7 +2777,6 @@
             // 
             this.txtSumValuation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSumValuation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
-            this.txtSumValuation.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtSumValuation.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSumValuation.Location = new System.Drawing.Point(129, 84);
             this.txtSumValuation.Mask = "C2";
@@ -2810,7 +2795,6 @@
             // 
             this.txtSumAwbFee.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSumAwbFee.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
-            this.txtSumAwbFee.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtSumAwbFee.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSumAwbFee.Location = new System.Drawing.Point(129, 60);
             this.txtSumAwbFee.Mask = "C2";
@@ -2829,7 +2813,6 @@
             // 
             this.txtSumWeightCharge.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSumWeightCharge.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
-            this.txtSumWeightCharge.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtSumWeightCharge.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSumWeightCharge.Location = new System.Drawing.Point(129, 36);
             this.txtSumWeightCharge.Mask = "C2";
@@ -3053,7 +3036,6 @@
             // 
             this.txtSumSubTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSumSubTotal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
-            this.txtSumSubTotal.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtSumSubTotal.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSumSubTotal.Location = new System.Drawing.Point(129, 396);
             this.txtSumSubTotal.Mask = "C2";
@@ -3193,7 +3175,6 @@
             // 
             // txtHandlingFee
             // 
-            this.txtHandlingFee.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtHandlingFee.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtHandlingFee.Location = new System.Drawing.Point(760, 174);
             this.txtHandlingFee.Mask = "C2";
@@ -3668,7 +3649,6 @@
             // 
             this.txtTotalEvm.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
             this.tableLayoutPanel14.SetColumnSpan(this.txtTotalEvm, 2);
-            this.txtTotalEvm.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtTotalEvm.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTotalEvm.Location = new System.Drawing.Point(483, 174);
             this.txtTotalEvm.Mask = "C2";
@@ -3721,7 +3701,6 @@
             // 
             this.txtTotalWeightCharge.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(144)))), ((int)(((byte)(143)))), ((int)(((byte)(135)))));
             this.tableLayoutPanel14.SetColumnSpan(this.txtTotalWeightCharge, 2);
-            this.txtTotalWeightCharge.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtTotalWeightCharge.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTotalWeightCharge.Location = new System.Drawing.Point(483, 200);
             this.txtTotalWeightCharge.Mask = "C2";
@@ -3737,7 +3716,6 @@
             // txtDeclaredValue
             // 
             this.tableLayoutPanel14.SetColumnSpan(this.txtDeclaredValue, 2);
-            this.txtDeclaredValue.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtDeclaredValue.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDeclaredValue.Location = new System.Drawing.Point(483, 226);
             this.txtDeclaredValue.Mask = "C2";
@@ -3777,7 +3755,6 @@
             // 
             // txtQuarantineFee
             // 
-            this.txtQuarantineFee.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtQuarantineFee.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtQuarantineFee.Location = new System.Drawing.Point(760, 200);
             this.txtQuarantineFee.Mask = "C2";
@@ -3800,7 +3777,7 @@
             this.txtRfa.Size = new System.Drawing.Size(94, 20);
             this.txtRfa.TabIndex = 25;
             this.txtRfa.TabStop = false;
-            this.txtRfa.Text = "0.00 %";
+            this.txtRfa.Text = "0.00%";
             this.txtRfa.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtRfa.ThemeName = "Office2010Black";
             // 
@@ -4455,7 +4432,7 @@
             this.dateAcceptedDate.Size = new System.Drawing.Size(202, 20);
             this.dateAcceptedDate.TabIndex = 4;
             this.dateAcceptedDate.TabStop = false;
-            this.dateAcceptedDate.Text = "11/26/2015";
+            this.dateAcceptedDate.Text = "26/11/2015";
             this.dateAcceptedDate.ThemeName = "Office2010Black";
             this.dateAcceptedDate.Value = new System.DateTime(2015, 11, 26, 0, 0, 0, 0);
             this.dateAcceptedDate.KeyUp += new System.Windows.Forms.KeyEventHandler(this.dateAcceptedDate_KeyUp);
@@ -4678,7 +4655,7 @@
             this.datePaymentDate.Size = new System.Drawing.Size(161, 20);
             this.datePaymentDate.TabIndex = 4;
             this.datePaymentDate.TabStop = false;
-            this.datePaymentDate.Text = "12/10/2016";
+            this.datePaymentDate.Text = "10/12/2016";
             this.datePaymentDate.ThemeName = "Office2010Black";
             this.datePaymentDate.Value = new System.DateTime(2016, 12, 10, 10, 55, 47, 86);
             // 
@@ -4772,7 +4749,7 @@
             this.dateCheckDate.Size = new System.Drawing.Size(161, 20);
             this.dateCheckDate.TabIndex = 12;
             this.dateCheckDate.TabStop = false;
-            this.dateCheckDate.Text = "12/10/2016";
+            this.dateCheckDate.Text = "10/12/2016";
             this.dateCheckDate.ThemeName = "Office2010Black";
             this.dateCheckDate.Value = new System.DateTime(2016, 12, 10, 10, 55, 47, 14);
             // 
@@ -4808,7 +4785,6 @@
             // 
             // txtNetCollection
             // 
-            this.txtNetCollection.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtNetCollection.Location = new System.Drawing.Point(86, 211);
             this.txtNetCollection.Mask = "C2";
             this.txtNetCollection.MaskType = Telerik.WinControls.UI.MaskType.Numeric;
@@ -4823,22 +4799,21 @@
             // 
             // txtTaxWithheld
             // 
-            this.txtTaxWithheld.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtTaxWithheld.Location = new System.Drawing.Point(86, 185);
-            this.txtTaxWithheld.Mask = "C2";
+            this.txtTaxWithheld.Mask = "P0";
             this.txtTaxWithheld.MaskType = Telerik.WinControls.UI.MaskType.Numeric;
             this.txtTaxWithheld.Name = "txtTaxWithheld";
             this.txtTaxWithheld.Size = new System.Drawing.Size(161, 20);
             this.txtTaxWithheld.TabIndex = 7;
             this.txtTaxWithheld.TabStop = false;
-            this.txtTaxWithheld.Text = "₱0.00";
+            this.txtTaxWithheld.Text = "0%";
             this.txtTaxWithheld.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtTaxWithheld.ThemeName = "Office2010Black";
+            this.txtTaxWithheld.TextChanged += new System.EventHandler(this.txtTaxWithheld_TextChanged);
             this.txtTaxWithheld.Leave += new System.EventHandler(this.txtTaxWithheld_Leave);
             // 
             // txtAmountPaid
             // 
-            this.txtAmountPaid.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtAmountPaid.Location = new System.Drawing.Point(86, 159);
             this.txtAmountPaid.Mask = "C2";
             this.txtAmountPaid.MaskType = Telerik.WinControls.UI.MaskType.Numeric;
@@ -4853,7 +4828,6 @@
             // 
             // txtAmountDue
             // 
-            this.txtAmountDue.Culture = new System.Globalization.CultureInfo("en-PH");
             this.txtAmountDue.Location = new System.Drawing.Point(86, 133);
             this.txtAmountDue.Mask = "C2";
             this.txtAmountDue.MaskType = Telerik.WinControls.UI.MaskType.Numeric;
@@ -5453,7 +5427,7 @@
             this.dateCollectionDate.Size = new System.Drawing.Size(87, 20);
             this.dateCollectionDate.TabIndex = 3;
             this.dateCollectionDate.TabStop = false;
-            this.dateCollectionDate.Text = "12/29/2016";
+            this.dateCollectionDate.Text = "29/12/2016";
             this.dateCollectionDate.ThemeName = "Office2010Black";
             this.dateCollectionDate.Value = new System.DateTime(2016, 12, 29, 13, 24, 31, 594);
             // 
@@ -5861,7 +5835,7 @@
             this.dateTimePicker_PickupCargo.Size = new System.Drawing.Size(171, 20);
             this.dateTimePicker_PickupCargo.TabIndex = 70;
             this.dateTimePicker_PickupCargo.TabStop = false;
-            this.dateTimePicker_PickupCargo.Text = "Thursday, December 29, 2016";
+            this.dateTimePicker_PickupCargo.Text = "Thursday, 29 December 2016";
             this.dateTimePicker_PickupCargo.ThemeName = "Office2010Black";
             this.dateTimePicker_PickupCargo.Value = new System.DateTime(2016, 12, 29, 16, 31, 36, 782);
             this.dateTimePicker_PickupCargo.ValueChanged += new System.EventHandler(this.dateTimePicker_PickupCargo_ValueChanged);
@@ -6006,7 +5980,7 @@
             this.dateTimePickerBranchAcceptance_Date.Size = new System.Drawing.Size(168, 20);
             this.dateTimePickerBranchAcceptance_Date.TabIndex = 75;
             this.dateTimePickerBranchAcceptance_Date.TabStop = false;
-            this.dateTimePickerBranchAcceptance_Date.Text = "Thursday, December 29, 2016";
+            this.dateTimePickerBranchAcceptance_Date.Text = "Thursday, 29 December 2016";
             this.dateTimePickerBranchAcceptance_Date.ThemeName = "Office2010Black";
             this.dateTimePickerBranchAcceptance_Date.Value = new System.DateTime(2016, 12, 29, 16, 31, 36, 782);
             this.dateTimePickerBranchAcceptance_Date.ValueChanged += new System.EventHandler(this.dateTimePickerBranchAcceptance_Date_ValueChanged);
@@ -6201,7 +6175,7 @@
             this.dateTimeBundle_Date.Size = new System.Drawing.Size(168, 20);
             this.dateTimeBundle_Date.TabIndex = 83;
             this.dateTimeBundle_Date.TabStop = false;
-            this.dateTimeBundle_Date.Text = "Thursday, December 29, 2016";
+            this.dateTimeBundle_Date.Text = "Thursday, 29 December 2016";
             this.dateTimeBundle_Date.ThemeName = "Office2010Black";
             this.dateTimeBundle_Date.Value = new System.DateTime(2016, 12, 29, 16, 31, 36, 782);
             this.dateTimeBundle_Date.ValueChanged += new System.EventHandler(this.dateTimeBundle_Date_ValueChanged);
@@ -6362,7 +6336,7 @@
             this.dateTimeUnbunde_Date.Size = new System.Drawing.Size(171, 20);
             this.dateTimeUnbunde_Date.TabIndex = 83;
             this.dateTimeUnbunde_Date.TabStop = false;
-            this.dateTimeUnbunde_Date.Text = "Thursday, December 29, 2016";
+            this.dateTimeUnbunde_Date.Text = "Thursday, 29 December 2016";
             this.dateTimeUnbunde_Date.ThemeName = "Office2010Black";
             this.dateTimeUnbunde_Date.Value = new System.DateTime(2016, 12, 29, 16, 31, 36, 782);
             this.dateTimeUnbunde_Date.ValueChanged += new System.EventHandler(this.dateTimeUnbunde_Date_ValueChanged);
@@ -6602,7 +6576,7 @@
             this.dateTimeGatewayTransmital_Date.Size = new System.Drawing.Size(171, 20);
             this.dateTimeGatewayTransmital_Date.TabIndex = 78;
             this.dateTimeGatewayTransmital_Date.TabStop = false;
-            this.dateTimeGatewayTransmital_Date.Text = "Thursday, December 29, 2016";
+            this.dateTimeGatewayTransmital_Date.Text = "Thursday, 29 December 2016";
             this.dateTimeGatewayTransmital_Date.ThemeName = "Office2010Black";
             this.dateTimeGatewayTransmital_Date.Value = new System.DateTime(2016, 12, 29, 16, 31, 36, 782);
             this.dateTimeGatewayTransmital_Date.ValueChanged += new System.EventHandler(this.dateTimeGatewayTransmital_Date_ValueChanged);
@@ -6838,7 +6812,7 @@
             this.dateTimeGatewayOutbound_Date.Size = new System.Drawing.Size(171, 20);
             this.dateTimeGatewayOutbound_Date.TabIndex = 82;
             this.dateTimeGatewayOutbound_Date.TabStop = false;
-            this.dateTimeGatewayOutbound_Date.Text = "Thursday, December 29, 2016";
+            this.dateTimeGatewayOutbound_Date.Text = "Thursday, 29 December 2016";
             this.dateTimeGatewayOutbound_Date.ThemeName = "Office2010Black";
             this.dateTimeGatewayOutbound_Date.Value = new System.DateTime(2016, 12, 29, 16, 31, 36, 782);
             this.dateTimeGatewayOutbound_Date.ValueChanged += new System.EventHandler(this.dateTimeGatewayOutbound_Date_ValueChanged);
@@ -7056,7 +7030,7 @@
             this.dateTimePickerGatewayInbound_Date.Size = new System.Drawing.Size(171, 20);
             this.dateTimePickerGatewayInbound_Date.TabIndex = 94;
             this.dateTimePickerGatewayInbound_Date.TabStop = false;
-            this.dateTimePickerGatewayInbound_Date.Text = "Thursday, December 29, 2016";
+            this.dateTimePickerGatewayInbound_Date.Text = "Thursday, 29 December 2016";
             this.dateTimePickerGatewayInbound_Date.ThemeName = "Office2010Black";
             this.dateTimePickerGatewayInbound_Date.Value = new System.DateTime(2016, 12, 29, 16, 31, 36, 782);
             this.dateTimePickerGatewayInbound_Date.ValueChanged += new System.EventHandler(this.dateTimePickerGatewayInbound_Date_ValueChanged);
@@ -7269,7 +7243,7 @@
             this.dateTimeCargoTransfer_Date.Size = new System.Drawing.Size(168, 20);
             this.dateTimeCargoTransfer_Date.TabIndex = 83;
             this.dateTimeCargoTransfer_Date.TabStop = false;
-            this.dateTimeCargoTransfer_Date.Text = "Thursday, December 29, 2016";
+            this.dateTimeCargoTransfer_Date.Text = "Thursday, 29 December 2016";
             this.dateTimeCargoTransfer_Date.ThemeName = "Office2010Black";
             this.dateTimeCargoTransfer_Date.Value = new System.DateTime(2016, 12, 29, 16, 31, 36, 782);
             this.dateTimeCargoTransfer_Date.ValueChanged += new System.EventHandler(this.dateTimeCargoTransfer_Date_ValueChanged);
@@ -7470,7 +7444,7 @@
             this.dateTimeSegregation_Date.Size = new System.Drawing.Size(171, 20);
             this.dateTimeSegregation_Date.TabIndex = 101;
             this.dateTimeSegregation_Date.TabStop = false;
-            this.dateTimeSegregation_Date.Text = "Thursday, December 29, 2016";
+            this.dateTimeSegregation_Date.Text = "Thursday, 29 December 2016";
             this.dateTimeSegregation_Date.ThemeName = "Office2010Black";
             this.dateTimeSegregation_Date.Value = new System.DateTime(2016, 12, 29, 16, 31, 36, 782);
             this.dateTimeSegregation_Date.ValueChanged += new System.EventHandler(this.dateTimeSegregation_Date_ValueChanged);
@@ -7626,7 +7600,7 @@
             this.dateTimeDailyTrip_Date.Size = new System.Drawing.Size(171, 20);
             this.dateTimeDailyTrip_Date.TabIndex = 89;
             this.dateTimeDailyTrip_Date.TabStop = false;
-            this.dateTimeDailyTrip_Date.Text = "Thursday, December 29, 2016";
+            this.dateTimeDailyTrip_Date.Text = "Thursday, 29 December 2016";
             this.dateTimeDailyTrip_Date.ThemeName = "Office2010Black";
             this.dateTimeDailyTrip_Date.Value = new System.DateTime(2016, 12, 29, 16, 31, 36, 782);
             this.dateTimeDailyTrip_Date.ValueChanged += new System.EventHandler(this.dateTimeDailyTrip_Date_ValueChanged);
@@ -7826,7 +7800,7 @@
             this.dateTimeHoldCargo_ToDate.Size = new System.Drawing.Size(169, 20);
             this.dateTimeHoldCargo_ToDate.TabIndex = 84;
             this.dateTimeHoldCargo_ToDate.TabStop = false;
-            this.dateTimeHoldCargo_ToDate.Text = "Thursday, December 29, 2016";
+            this.dateTimeHoldCargo_ToDate.Text = "Thursday, 29 December 2016";
             this.dateTimeHoldCargo_ToDate.ThemeName = "Office2010Black";
             this.dateTimeHoldCargo_ToDate.Value = new System.DateTime(2016, 12, 29, 16, 31, 36, 782);
             this.dateTimeHoldCargo_ToDate.ValueChanged += new System.EventHandler(this.dateTimeHoldCargo_ToDate_ValueChanged);
@@ -7849,7 +7823,7 @@
             this.dateTimeHoldCargo_FromDate.Size = new System.Drawing.Size(169, 20);
             this.dateTimeHoldCargo_FromDate.TabIndex = 83;
             this.dateTimeHoldCargo_FromDate.TabStop = false;
-            this.dateTimeHoldCargo_FromDate.Text = "Thursday, December 29, 2016";
+            this.dateTimeHoldCargo_FromDate.Text = "Thursday, 29 December 2016";
             this.dateTimeHoldCargo_FromDate.ThemeName = "Office2010Black";
             this.dateTimeHoldCargo_FromDate.Value = new System.DateTime(2016, 12, 29, 16, 31, 36, 782);
             this.dateTimeHoldCargo_FromDate.ValueChanged += new System.EventHandler(this.dateTimeHoldCargo_FromDate_ValueChanged);
@@ -8065,7 +8039,7 @@
             this.dateTimeDeliveryStatus_Date.Size = new System.Drawing.Size(171, 20);
             this.dateTimeDeliveryStatus_Date.TabIndex = 80;
             this.dateTimeDeliveryStatus_Date.TabStop = false;
-            this.dateTimeDeliveryStatus_Date.Text = "Thursday, December 29, 2016";
+            this.dateTimeDeliveryStatus_Date.Text = "Thursday, 29 December 2016";
             this.dateTimeDeliveryStatus_Date.ThemeName = "Office2010Black";
             this.dateTimeDeliveryStatus_Date.Value = new System.DateTime(2016, 12, 29, 16, 31, 36, 782);
             this.dateTimeDeliveryStatus_Date.ValueChanged += new System.EventHandler(this.dateTimeDeliveryStatus_Date_ValueChanged);

@@ -169,7 +169,7 @@ namespace CMS2_Client
         private void Extract_Click(object sender, EventArgs e)
         {
 
-            //StartDeprovisionWholeServer();
+           StartDeprovisionWholeServer();
 
             int index = dboBranchCoprOffice.SelectedItem.ToString().IndexOf(" ");
             _filter = dboBranchCoprOffice.SelectedItem.ToString().Substring(0, index);

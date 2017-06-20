@@ -122,7 +122,7 @@ namespace CMS2.Entities
 
        public decimal? FreightCharge { get; set; }
 
-        public decimal? TotalAmount { get; set; }
+        public decimal TotalAmount { get; set; }
         [MaxLength(300)]
         public string Notes { get; set; }
         public Guid? DeliveryFeeId { get; set; }
