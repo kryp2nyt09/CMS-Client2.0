@@ -37,6 +37,8 @@ using CMS2.Client.Forms.TrackingReportsView;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using CMS2.Entities.ReportModel;
+using System.Net.Sockets;
+using System.Data.SqlClient;
 
 namespace CMS2.Client
 {
@@ -302,7 +304,7 @@ namespace CMS2.Client
         private void Main_Load(object sender, EventArgs e)
         {
             //rs.FindAllControls(this);
-
+            timer1.Start();
             GlobalVars.UnitOfWork = new CmsUoW();
             areaService = new AreaBL(GlobalVars.UnitOfWork);
             bsoService = new BranchSatOfficeBL(GlobalVars.UnitOfWork);
@@ -1851,7 +1853,7 @@ namespace CMS2.Client
 
         private void txtTaxWithheld_Leave(object sender, EventArgs e)
         {
-            ComputeNetCollection();
+           // ComputeNetCollection();
         }
 
         private void lstPaymentType_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
@@ -5056,11 +5058,11 @@ namespace CMS2.Client
 
                 if (txtTaxWithheld.Value.ToString().Contains("₱"))
                 {
-                    tax = decimal.Parse(txtTaxWithheld.Value.ToString().Replace("₱", ""));
+                    tax = decimal.Parse(txtTaxWithheld.Value.ToString());
                 }
                 else
                 {
-                    tax = decimal.Parse(txtTaxWithheld.Value.ToString().Replace("Php", ""));
+                    tax = decimal.Parse(txtTaxWithheld.Value.ToString());
                 }
 
                 txtNetCollection.Text = (amountdue - ((tax / (decimal)(100)) * amountdue)).ToString();
@@ -11056,12 +11058,63 @@ namespace CMS2.Client
 
         private void txtTaxWithheld_TextChanged(object sender, EventArgs e)
         {
-
+           ComputeNetCollection();
         }
+
 
 
         #endregion END MARK SANTOS REGION
 
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
 
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+          // string dataSource = ConfigurationManager.ConnectionStrings["Cms"].ConnectionString;
+            // Retrieve the ConnectionString from App.config 
+            string connectString = ConfigurationManager.ConnectionStrings["Cms"].ToString();
+            SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder(connectString);
+           
+            // Retrieve the DataSource property.    
+            string IPAddress = builder.DataSource;
+            using (TcpClient tcpClient = new TcpClient())
+            {
+                try
+                {
+                    tcpClient.Connect(IPAddress, 1433);
+                    //panel1
+                    panel1.BackgroundImage = Properties.Resources.online;
+                    lbl_Status.Text = "Online";
+                    lbl_Status.ForeColor = Color.Green;
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Port closed");
+                    panel1.BackgroundImage = Properties.Resources.offline;
+                    lbl_Status.Text = "Offline";
+                    lbl_Status.ForeColor = Color.Red;
+
+                }
+            }
+
+            System.ServiceProcess.ServiceController sc = new System.ServiceProcess.ServiceController("Sychronization Service");
+
+            switch (sc.Status)
+            {
+                case System.ServiceProcess.ServiceControllerStatus.Running:
+                    lblService.Text = "Sync service is running";
+                    break;
+                case System.ServiceProcess.ServiceControllerStatus.Stopped:
+                    lblService.Text = "Sync service has stopped";
+                    break;
+                default:
+                    lblService.Text = "Sync service has stopped";
+                    break;
+            }
+
+
+        }
     }
 }

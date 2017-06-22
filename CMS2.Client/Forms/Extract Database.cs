@@ -199,7 +199,7 @@ namespace CMS2_Client
             CreateDatabase();
 
             //Deprovision Server if theres an update on table
-            StartDeprovisionServer();
+            //StartDeprovisionServer();
             //Provisioning Server and Local for synchronization
             radProgressBar1.Value1 = 0;
             StartProvision();

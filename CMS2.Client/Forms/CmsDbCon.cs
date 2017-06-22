@@ -11,7 +11,7 @@ using CMS2.Client.Properties;
 using CMS2.Entities;
 using System.Data.Sql;
 using System.Data.SqlClient;
-using System.Data.Entity       .Infrastructure;
+using System.Data.Entity.Infrastructure;
 using CMS2.DataAccess;
 using System.Data.Entity.Core.Objects;
 using System.Data.Entity.Core.Metadata.Edm;
@@ -24,6 +24,7 @@ using System.ComponentModel;
 using System.ServiceProcess;
 using System.IO;
 using System.Security.Permissions;
+using System.Net.Sockets;
 
 namespace CMS2.Client
 {
@@ -141,6 +142,8 @@ namespace CMS2.Client
                 isMainConnected = true;
                 radPageViewPage2.Enabled = false;
             }
+
+          
 
         }
         private void btnSave_Click(object sender, EventArgs e)
