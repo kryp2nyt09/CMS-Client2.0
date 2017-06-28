@@ -415,8 +415,8 @@ namespace CMS2.Client
                     gridFreightCollect.Columns["Client"].PinPosition = Telerik.WinControls.UI.PinnedColumnPosition.Left;
                     break;
                 case "Tracking":
-                    PopulateGrid_FreightCollect();
-                    PopulateGrid_CorpAcctConsignee();
+                    //PopulateGrid_FreightCollect();
+                    //PopulateGrid_CorpAcctConsignee();
                     List<BranchCorpOffice> branchCorpOffices = getBranchCorpOffice();
                     //dropDownPickUpCargo_BCO.DataSource = branchCorpOffices;
                     //dropDownPickUpCargo_BCO.DisplayMember = "BranchCorpOfficeName";
@@ -2830,47 +2830,64 @@ namespace CMS2.Client
 
         private void AddDailyBooking()
         {
+            List<Booking> todayBooking = new List<Booking>();
+            List<Booking> yesterdayBooking = new List<Booking>();
+
             DateTime today = DateTime.Now;
-            DateTime yesterday = DateTime.Now.AddDays(-1);
-            List<Booking> todayBooking = bookingService.FilterActiveBy(x => x.DateBooked.Year == today.Year && x.DateBooked.Month == today.Month && x.DateBooked.Day == today.Day).ToList();
-            List<Booking> yesterdayBooking = bookingService.FilterActiveBy(x => x.HasDailyBooking == true && x.DateBooked.Year == yesterday.Year && x.DateBooked.Month == yesterday.Month && x.DateBooked.Day == yesterday.Day).ToList();
-            foreach (var item in yesterdayBooking)
+            string dayOfWeek = today.ToString("ddd");
+            if (!dayOfWeek.Equals("Sun"))
             {
-                if (!todayBooking.Exists(x => x.PreviousBookingId == item.BookingId))
+                if (dayOfWeek.Equals("Mon"))
                 {
-                    Booking newBooking = new Booking();
-                    newBooking.BookingId = Guid.NewGuid();
-                    newBooking.BookingNo = GetBookingNumber();
-                    newBooking.DateBooked = DateTime.Now;
-                    newBooking.ShipperId = item.ShipperId;
-                    newBooking.OriginAddress1 = item.OriginAddress1;
-                    newBooking.OriginAddress2 = item.OriginAddress2;
-                    newBooking.OriginBarangay = item.OriginBarangay;
-                    newBooking.OriginCityId = item.OriginCityId;
-                    newBooking.ConsigneeId = item.ConsigneeId;
-                    newBooking.DestinationAddress1 = item.DestinationAddress1;
-                    newBooking.DestinationAddress2 = item.DestinationAddress2;
-                    newBooking.DestinationBarangay = item.DestinationBarangay;
-                    newBooking.DestinationCityId = item.DestinationCityId;
-                    newBooking.Remarks = item.Remarks;
-                    newBooking.HasDailyBooking = item.HasDailyBooking;
-                    newBooking.BookedById = item.BookedById;
-                    newBooking.AssignedToAreaId = item.AssignedToAreaId;
-                    newBooking.BookingStatusId =
-                        bookingStatus.Where(x => x.BookingStatusName.Equals("Pending"))
-                            .First()
-                            .BookingStatusId;
-                    newBooking.BookingRemarkId =
-                        bookingRemarks.Where(x => x.BookingRemarkName.Equals("Lack of Time"))
-                            .First()
-                            .BookingRemarkId;
-                    newBooking.CreatedBy = item.CreatedBy;
-                    newBooking.CreatedDate = DateTime.Now;
-                    newBooking.ModifiedBy = item.CreatedBy;
-                    newBooking.ModifiedDate = DateTime.Now;
-                    newBooking.RecordStatus = (int)RecordStatus.Active;
-                    newBooking.PreviousBookingId = item.BookingId;
-                    bookingService.AddEdit(newBooking);
+                    DateTime saturdayBooking = DateTime.Now.AddDays(-2);
+                    todayBooking = bookingService.FilterActiveBy(x => x.DateBooked.Year == today.Year && x.DateBooked.Month == today.Month && x.DateBooked.Day == today.Day).ToList();
+                    yesterdayBooking = bookingService.FilterActiveBy(x => x.HasDailyBooking == true && x.DateBooked.Year == saturdayBooking.Year && x.DateBooked.Month == saturdayBooking.Month && x.DateBooked.Day == saturdayBooking.Day).ToList();
+                }
+                else
+                {
+                    DateTime yesterday = DateTime.Now.AddDays(-1);
+                    todayBooking = bookingService.FilterActiveBy(x => x.DateBooked.Year == today.Year && x.DateBooked.Month == today.Month && x.DateBooked.Day == today.Day).ToList();
+                    yesterdayBooking = bookingService.FilterActiveBy(x => x.HasDailyBooking == true && x.DateBooked.Year == yesterday.Year && x.DateBooked.Month == yesterday.Month && x.DateBooked.Day == yesterday.Day).ToList();
+                }
+
+                foreach (var item in yesterdayBooking)
+                {
+                    if (!todayBooking.Exists(x => x.PreviousBookingId == item.BookingId))
+                    {
+                        Booking newBooking = new Booking();
+                        newBooking.BookingId = Guid.NewGuid();
+                        newBooking.BookingNo = GetBookingNumber();
+                        newBooking.DateBooked = DateTime.Now;
+                        newBooking.ShipperId = item.ShipperId;
+                        newBooking.OriginAddress1 = item.OriginAddress1;
+                        newBooking.OriginAddress2 = item.OriginAddress2;
+                        newBooking.OriginBarangay = item.OriginBarangay;
+                        newBooking.OriginCityId = item.OriginCityId;
+                        newBooking.ConsigneeId = item.ConsigneeId;
+                        newBooking.DestinationAddress1 = item.DestinationAddress1;
+                        newBooking.DestinationAddress2 = item.DestinationAddress2;
+                        newBooking.DestinationBarangay = item.DestinationBarangay;
+                        newBooking.DestinationCityId = item.DestinationCityId;
+                        newBooking.Remarks = item.Remarks;
+                        newBooking.HasDailyBooking = item.HasDailyBooking;
+                        newBooking.BookedById = item.BookedById;
+                        newBooking.AssignedToAreaId = item.AssignedToAreaId;
+                        newBooking.BookingStatusId =
+                            bookingStatus.Where(x => x.BookingStatusName.Equals("Pending"))
+                                .First()
+                                .BookingStatusId;
+                        newBooking.BookingRemarkId =
+                            bookingRemarks.Where(x => x.BookingRemarkName.Equals("Lack of Times"))
+                                .First()
+                                .BookingRemarkId;
+                        newBooking.CreatedBy = item.CreatedBy;
+                        newBooking.CreatedDate = DateTime.Now;
+                        newBooking.ModifiedBy = item.CreatedBy;
+                        newBooking.ModifiedDate = DateTime.Now;
+                        newBooking.RecordStatus = (int)RecordStatus.Active;
+                        newBooking.PreviousBookingId = item.BookingId;
+                        bookingService.AddEdit(newBooking);
+                    }
                 }
             }
         }
@@ -10780,6 +10797,7 @@ namespace CMS2.Client
 
             if (cmbDS_RevenueType.SelectedItem.Text == "All")
             {
+                cmbDS_RevenueUnit.SelectedValue = "All";
                 cmbDS_RevenueUnit.Enabled = false;
             }
 
@@ -10940,12 +10958,13 @@ namespace CMS2.Client
         {
             if (cmbDS_RevenueType.SelectedIndex >= 0)
             {
-                if (cmbDS_RevenueType.SelectedItem.Text == "All")
-                {
-                    cmbDS_RevenueUnit.Enabled = false;
-                }
-                else
-                {
+                //if (cmbDS_RevenueType.SelectedItem.Text == "All")
+                //{
+                //    cmbDS_RevenueUnit.SelectedValue = "All";
+                //    cmbDS_RevenueUnit.Enabled = false;
+                //}
+                //else
+                //{
                     Guid revenueUnitTypeId = new Guid();
                     try
                     {
@@ -10957,7 +10976,7 @@ namespace CMS2.Client
                     }
                     cmbDS_RevenueUnit.Enabled = true;
                     DSRevenueUnitByUnitType(revenueUnitTypeId);
-                }
+                //}
 
 
             }

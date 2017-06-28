@@ -28,7 +28,7 @@ namespace CMS2.Client.Forms.TrackingReports
             dt.Columns.Add(new DataColumn("MAWB", typeof(string)));
             dt.Columns.Add(new DataColumn("Flight #", typeof(string)));
             dt.Columns.Add(new DataColumn("Commodity Type", typeof(string)));
-            dt.Columns.Add(new DataColumn("AWB", typeof(string)));
+            dt.Columns.Add(new DataColumn("AWB/Sack #", typeof(string)));
             dt.Columns.Add(new DataColumn("CreatedDate", typeof(string)));
 
             dt.Columns.Add(new DataColumn("ScannedBy", typeof(string)));
@@ -161,34 +161,72 @@ namespace CMS2.Client.Forms.TrackingReports
             
             PackageNumberBL _packageNumberService = new PackageNumberBL();
             List<GatewayInboundViewModel> _results = new List<GatewayInboundViewModel>();
+            PackageNumber _packageNumber = new PackageNumber();
+            BundleBL bundleService = new BundleBL();
+            List<string> listCargo = new List<string>();
 
             foreach (GatewayInbound inbound in _inbound)
             {
                 GatewayInboundViewModel model = new GatewayInboundViewModel();
                 string _airwaybill = "";
                 try {
-                    _airwaybill = _packageNumberService.GetAll().Find(x => x.PackageNo == inbound.Cargo).Shipment.AirwayBillNo;
+                    // _airwaybill = _packageNumberService.GetAll().Find(x => x.PackageNo == inbound.Cargo).Shipment.AirwayBillNo;
+                    _packageNumber = _packageNumberService.FilterActive().Where(x => x.PackageNo == inbound.Cargo).FirstOrDefault();
+                    if (_packageNumber == null)
+                    {
+                        GatewayInboundViewModel model1 = new GatewayInboundViewModel();
+                        listCargo = bundleService.GetAll().Where(x => x.SackNo == inbound.Cargo).Select(y => y.Cargo).ToList();
+                        if(listCargo !=null && listCargo.Count != 0)
+                        {
+                            GatewayInboundViewModel isExist = _results.Find(x => x.AirwayBillNo == inbound.Cargo);
+                            if (isExist != null)
+                            {
+                                isExist.Pieces++;
+                            }
+                            else
+                            {
+                                model1.AirwayBillNo = inbound.Cargo;
+                                model1.Gateway = inbound.Gateway;
+                                model1.Origin = inbound.BranchCorpOffice.BranchCorpOfficeName;
+                                model1.Pieces= listCargo.Count;
+                                model1.MAWB = inbound.MasterAirwayBill;
+                                model1.FlightNo = inbound.FlightNumber;
+                                model1.CommodityType = inbound.CommodityType.CommodityTypeName;
+                                model1.CreatedDate = inbound.CreatedDate;
+                                model1.ScannedBy = AppUser.User.Employee.FullName;
+                                _results.Add(model1);
+
+                            }
+                        }
+                    }
+                    else
+                    {
+                        _airwaybill = _packageNumber.Shipment.AirwayBillNo;
+
+                        GatewayInboundViewModel isExist = _results.Find(x => x.AirwayBillNo == _airwaybill);
+                        if (isExist != null)
+                        {
+                            isExist.Pieces++;
+                        }
+                        else
+                        {
+                            model.AirwayBillNo = _airwaybill;
+                            model.Gateway = inbound.Gateway;
+                            model.Origin = inbound.BranchCorpOffice.BranchCorpOfficeName;
+                            model.Pieces++;
+                            model.MAWB = inbound.MasterAirwayBill;
+                            model.FlightNo = inbound.FlightNumber;
+                            model.CommodityType = inbound.CommodityType.CommodityTypeName;
+                            model.CreatedDate = inbound.CreatedDate;
+                            model.ScannedBy = AppUser.User.Employee.FullName;
+                            _results.Add(model);
+
+                        }
+                    }
+
                 }
                 catch (Exception) { continue; }
-                GatewayInboundViewModel isExist = _results.Find(x => x.AirwayBillNo == _airwaybill);
-                  if (isExist != null)
-                  {
-                    isExist.Pieces++;
-                  }
-                  else
-                  {
-                    model.AirwayBillNo = _airwaybill;
-                    model.Gateway = inbound.Gateway;
-                    model.Origin = inbound.BranchCorpOffice.BranchCorpOfficeName;
-                    model.Pieces++;
-                    model.MAWB = inbound.MasterAirwayBill;
-                    model.FlightNo = inbound.FlightNumber;
-                    model.CommodityType = inbound.CommodityType.CommodityTypeName;
-                    model.CreatedDate = inbound.CreatedDate;
-                    model.ScannedBy = AppUser.User.Employee.FullName;
-                    _results.Add(model);
-                  
-                  }
+                
             }
 
 

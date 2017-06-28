@@ -227,7 +227,8 @@ namespace CMS2.Client.Forms.TrackingReports
                     if (isExist != null)
                     {
                         isExist.TotalRecieved++;
-                        model.Total += model.TotalRecieved;
+                        isExist.Total = isExist.TotalRecieved;
+                        //model.Total = model.TotalRecieved;
                         //_results.Add(isExist);
                     }
                     else
@@ -238,11 +239,12 @@ namespace CMS2.Client.Forms.TrackingReports
                         model.PlateNo = outbound.PlateNo;
                         model.Batch = outbound.Batch.BatchName;
                         model.TotalRecieved++;
-                        model.Total += model.TotalRecieved;
+                        model.Total = model.TotalRecieved;
                         model.Branch = outbound.BranchCorpOffice.BranchCorpOfficeName;
                         model.ScannedBy = AppUser.User.Employee.FullName;
                         //model.CommodityTypeName = _inbound.Where(x => x.Cargo == outbound.Cargo).Select(x => x.CommodityType.CommodityTypeName).ToString();
-                        model.CommodityTypeName = _inbound.Find(x => x.Cargo == outbound.Cargo).CommodityType.CommodityTypeName;
+                        // model.CommodityTypeName = _inbound.Find(x => x.Cargo == outbound.Cargo).CommodityType.CommodityTypeName;
+                        model.CommodityTypeName = _packageNumberService.FilterActiveBy(x => x.PackageNo == outbound.Cargo).First().Shipment.CommodityType.CommodityTypeName;
                         _results.Add(model);
 
                     }
@@ -252,7 +254,8 @@ namespace CMS2.Client.Forms.TrackingReports
                     if (isExist != null)
                     {
                         isExist.TotalDiscrepency++;
-                        model.Total += model.TotalDiscrepency;
+                        isExist.Total = isExist.TotalDiscrepency;
+                        //model.Total = model.TotalDiscrepency;
                         //_results.Add(isExist);
                     }
                     else
@@ -263,11 +266,12 @@ namespace CMS2.Client.Forms.TrackingReports
                         model.PlateNo = outbound.PlateNo;
                         model.Batch = outbound.Batch.BatchName;
                         model.TotalDiscrepency++;
-                        model.Total += model.TotalDiscrepency;
+                        model.Total = model.TotalDiscrepency;
                         model.Branch = outbound.BranchCorpOffice.BranchCorpOfficeName;
                         model.ScannedBy = AppUser.User.Employee.FullName;
-                        model.CommodityTypeName = _inbound.Find(x => x.Cargo == outbound.Cargo).CommodityType.CommodityTypeName;
-                       // model.CommodityTypeName = _inbound.Where(x => x.Cargo == outbound.Cargo).Select(x => x.CommodityType.CommodityTypeName).ToString();
+                        //model.CommodityTypeName = _inbound.Find(x => x.Cargo == outbound.Cargo).CommodityType.CommodityTypeName;
+                        // model.CommodityTypeName = _inbound.Where(x => x.Cargo == outbound.Cargo).Select(x => x.CommodityType.CommodityTypeName).ToString();
+                        model.CommodityTypeName = _packageNumberService.FilterActiveBy(x => x.PackageNo == outbound.Cargo).First().Shipment.CommodityType.CommodityTypeName;
                         _results.Add(model);
 
                     }
