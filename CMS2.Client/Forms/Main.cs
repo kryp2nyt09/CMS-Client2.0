@@ -8684,17 +8684,24 @@ namespace CMS2.Client
                     Batch = "All"; dropDownGatewayOutbound_Batch.SelectedText = "All";
 
                 }
-                if (mawb != "")
-                {
-                    gridGatewayOutbound.EnableFiltering = false;
-                    getGatewayOutBoundDataByFilter(num);
-                }
-                else
-                {
-                    gridGatewayOutbound.EnableFiltering = false;
-                    num = 1;
-                    getGatewayOutBoundDataByFilter(num);
-                }
+                //if (mawb != "")
+                //{
+                //    gridGatewayOutbound.EnableFiltering = false;
+                //    getGatewayOutBoundDataByFilter(num);
+                //}
+                //else
+                //{
+                //    gridGatewayOutbound.EnableFiltering = false;
+                //    num = 1;
+                //    getGatewayOutBoundDataByFilter(num);
+                //}
+                num = 1;
+                gridGatewayOutbound.EnableFiltering = false;
+                getGatewayOutBoundDataByFilter(num);
+
+
+
+
                 //if (Gateway == "All" && Batch == "All")
                 //{
                 //    gridGatewayOutbound.EnableFiltering = false;
@@ -9120,10 +9127,10 @@ namespace CMS2.Client
                 }
                 catch (Exception)
                 {
-                    BCO = "All"; dropDownSegregation_BCO.SelectedText = "All";
-                    Driver = "All"; dropDownSegregation_Driver.SelectedText = "All";
-                    PlateNo = "All"; dropDownSegregation_PlateNo.SelectedText = "All";
-                    Batch = "All"; dropDownSegregation_Batch.SelectedText = "All";
+                    //BCO = "All"; dropDownSegregation_BCO.SelectedText = "All";
+                    //Driver = "All"; dropDownSegregation_Driver.SelectedText = "All";
+                    //PlateNo = "All"; dropDownSegregation_PlateNo.SelectedText = "All";
+                    //Batch = "All"; dropDownSegregation_Batch.SelectedText = "All";
                 }
                 //if (BCO == "All" && Driver == "All" && PlateNo == "All" && Batch == "All")
                 //{

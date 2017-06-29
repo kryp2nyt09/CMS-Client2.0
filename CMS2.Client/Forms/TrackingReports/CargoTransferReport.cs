@@ -72,8 +72,10 @@ namespace CMS2.Client.Forms.TrackingReports
 
         public DataTable getCTDataByFilter(DateTime date, Guid? destinationId, Guid? revenueunitId, string plateno, Guid? batchId)
         {
-
+            BranchCorpOfficeBL bcoService = new BranchCorpOfficeBL();
             CargoTransferBL cargoTransferBl = new CargoTransferBL();
+
+            List<CargoTransferViewModel> modelList = new List<CargoTransferViewModel>();
             List<CargoTransfer> list = cargoTransferBl.GetAll().Where
                 (x => x.RecordStatus == 1
                 && ((x.BranchCorpOfficeID == destinationId && x.BranchCorpOfficeID != Guid.Empty) || (x.BranchCorpOfficeID == x.BranchCorpOfficeID && destinationId == Guid.Empty))
@@ -81,9 +83,20 @@ namespace CMS2.Client.Forms.TrackingReports
                 && ((x.BatchID == batchId && x.BatchID != Guid.Empty) || (x.BatchID == x.BatchID && batchId == Guid.Empty))
                 && ((x.PlateNo == plateno && x.PlateNo != "All") || (x.PlateNo == x.PlateNo && plateno == "All"))
                 && x.CreatedDate.ToShortDateString() == date.ToShortDateString()
-                ).ToList();
+                ).GroupBy(x => x.Cargo).Select(y => y.First()).ToList();
 
-            List<CargoTransferViewModel> modelList = Match(list);
+            //List<CargoTransferViewModel> modelList = Match(list);
+
+            string _bco = "";
+            if (destinationId != Guid.Empty)
+            {
+                _bco = bcoService.GetAll().Find(x => x.BranchCorpOfficeId == destinationId).BranchCorpOfficeName;
+                modelList = Match(list).FindAll(x => x.BCO == _bco);
+            }
+            else
+            {
+                modelList = Match(list);
+            }
 
             DataTable dt = new DataTable();
             dt.Columns.Add(new DataColumn("No", typeof(string)));
@@ -233,6 +246,7 @@ namespace CMS2.Client.Forms.TrackingReports
                             {
                                 model.Origin = x.OriginCity.CityName;
                                 model.Destination = x.DestinationCity.CityName;
+                                model.BCO = x.DestinationCity.BranchCorpOffice.BranchCorpOfficeName;
                             }
                             model.Driver = cargoTransfer.Driver;
                             model.Checker = cargoTransfer.Checker;
@@ -243,7 +257,8 @@ namespace CMS2.Client.Forms.TrackingReports
                             model.QTY++;
                             model.CreatedDate = cargoTransfer.CreatedDate;
 
-                            model.BCO = cargoTransfer.BranchCorpOffice.BranchCorpOfficeName;
+                            // model.BCO = cargoTransfer.BranchCorpOffice.BranchCorpOfficeName;
+                            //model.BCO = cargoTransfer.BranchCorpOffice.BranchCorpOfficeName;
                             model.GATEWAY = cargoTransfer.RevenueUnit.RevenueUnitName;
                             model.SATELLITE = cargoTransfer.RevenueUnit.RevenueUnitName;
                             model.ScannedBy = AppUser.User.Employee.FullName;

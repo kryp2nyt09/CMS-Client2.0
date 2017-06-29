@@ -18,8 +18,8 @@ namespace CMS2.Client.Forms.TrackingReports
             GatewayOutboundBL gatewayOutboundBl = new GatewayOutboundBL();
             GatewayInboundBL gatewayInboundBl = new GatewayInboundBL();
 
-            List<GatewayOutbound> Outboundlist = gatewayOutboundBl.GetAll().Where(x => x.RecordStatus == 1 && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
-            List<GatewayInbound> Inboundlist = gatewayInboundBl.GetAll().ToList();
+            List<GatewayOutbound> Outboundlist = gatewayOutboundBl.GetAll().Where(x => x.RecordStatus == 1 && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).GroupBy(x => x.Cargo).Select(y => y.First()).ToList();
+            List<GatewayInbound> Inboundlist = gatewayInboundBl.GetAll().GroupBy(x => x.Cargo).Select(y => y.First()).ToList();
 
             List<GatewayOutboundViewModel> modelList = Match(Inboundlist, Outboundlist);
 
@@ -77,7 +77,7 @@ namespace CMS2.Client.Forms.TrackingReports
             BranchCorpOfficeBL bcoService = new BranchCorpOfficeBL();
 
 
-            List<GatewayInbound> Inboundlist = gatewayInboundBl.GetAll().ToList();
+            List<GatewayInbound> Inboundlist = gatewayInboundBl.GetAll().GroupBy(x => x.Cargo).Select(y => y.First()).ToList();
             List<GatewayOutbound> Outboundlist = new List<GatewayOutbound>();
             List<GatewayOutboundViewModel> modelList = new List<GatewayOutboundViewModel>();
             if (num == 0)
@@ -85,7 +85,7 @@ namespace CMS2.Client.Forms.TrackingReports
                 Outboundlist = gatewayOutboundBl.GetAll().Where
                     (x => x.RecordStatus == 1 
                     //&& x.CreatedDate.ToShortDateString() == date.ToShortDateString() 
-                    && x.MasterAirwayBill == mawb).ToList();
+                    && x.MasterAirwayBill == mawb).GroupBy(x => x.Cargo).Select(y => y.First()).ToList();
 
             }
             else if(num == 1)
@@ -97,7 +97,8 @@ namespace CMS2.Client.Forms.TrackingReports
                && ((x.Gateway == gateway && x.Gateway != "All") || (x.Gateway == x.Gateway && gateway == "All"))
                && ((x.BatchID == batchid && x.BatchID != Guid.Empty) || (x.BatchID == x.BatchID && batchid == Guid.Empty))
                && x.CreatedDate.ToShortDateString() == date.ToShortDateString()
-               ).ToList();
+               && ((x.MasterAirwayBill == mawb && x.MasterAirwayBill != "") || (x.MasterAirwayBill == x.MasterAirwayBill && mawb == ""))
+               ).GroupBy(x => x.Cargo).Select(y => y.First()).ToList();
             }
             string comType = "";
             string _bco = "";
@@ -211,71 +212,134 @@ namespace CMS2.Client.Forms.TrackingReports
 
             PackageNumberBL _packageNumberService = new PackageNumberBL();
             List<GatewayOutboundViewModel> _results = new List<GatewayOutboundViewModel>();
-
+            PackageNumber _packageNumber = new PackageNumber();
+            List<string> listCargo = new List<string>();
+            BundleBL bundleService = new BundleBL();
             foreach (GatewayOutbound outbound in _outbound)
             {
 
                 GatewayOutboundViewModel model = new GatewayOutboundViewModel();
                 string _airwaybill = "";
                 try {
-                    _airwaybill = _packageNumberService.GetAll().Find(x => x.PackageNo == outbound.Cargo).Shipment.AirwayBillNo;
+                    //_airwaybill = _packageNumberService.GetAll().Find(x => x.PackageNo == outbound.Cargo).Shipment.AirwayBillNo;
+                    _packageNumber = _packageNumberService.FilterActive().Where(x => x.PackageNo == outbound.Cargo).FirstOrDefault();
+                    if (_packageNumber == null)
+                    {
+                        GatewayOutboundViewModel model1 = new GatewayOutboundViewModel();
+                        listCargo = bundleService.GetAll().Where(x => x.SackNo == outbound.Cargo).Select(y => y.Cargo).ToList();
+                        if (listCargo != null && listCargo.Count != 0)
+                        {
+                            GatewayOutboundViewModel isExist = _results.Find(x => x.AirwayBillNo == outbound.Cargo);
+                            if (_inbound.Exists(x => x.Cargo == outbound.Cargo))
+                            {
+                                if (isExist != null)
+                                {
+                                    isExist.TotalRecieved++;
+                                    isExist.Total = isExist.TotalRecieved;
+                                }
+                                else
+                                {
+                                    model1.AirwayBillNo = outbound.Cargo;
+                                    model1.Gateway = outbound.Gateway;
+                                    model1.Driver = outbound.Driver;
+                                    model1.PlateNo = outbound.PlateNo;
+                                    model1.Batch = outbound.Batch.BatchName;
+                                    model1.TotalRecieved = listCargo.Count;
+                                    model1.Total = model1.TotalRecieved;
+                                    model1.Branch = outbound.BranchCorpOffice.BranchCorpOfficeName;
+                                    model1.ScannedBy = AppUser.User.Employee.FullName;
+                                    model1.CommodityTypeName = "N/A";
+                                    //model1.CommodityTypeName = _packageNumberService.FilterActiveBy(x => x.PackageNo == outbound.Cargo).First().Shipment.CommodityType.CommodityTypeName;
+                                    _results.Add(model1);
+                                }
+                            }
+                            else
+                            {
+                                if (isExist != null)
+                                {
+                                    isExist.TotalDiscrepency++;
+                                    isExist.Total = isExist.TotalDiscrepency;
+                                }
+                                else
+                                {
+                                    model1.AirwayBillNo = outbound.Cargo;
+                                    model1.Gateway = outbound.Gateway;
+                                    model1.Driver = outbound.Driver;
+                                    model1.PlateNo = outbound.PlateNo;
+                                    model1.Batch = outbound.Batch.BatchName;
+                                    model1.TotalDiscrepency = listCargo.Count;
+                                    model1.Total = model1.TotalDiscrepency;
+                                    model1.Branch = outbound.BranchCorpOffice.BranchCorpOfficeName;
+                                    model1.ScannedBy = AppUser.User.Employee.FullName;
+                                    model1.CommodityTypeName = "N/A";
+                                    //model1.CommodityTypeName = _packageNumberService.FilterActiveBy(x => x.PackageNo == outbound.Cargo).First().Shipment.CommodityType.CommodityTypeName;
+                                    _results.Add(model1);
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        _airwaybill = _packageNumber.Shipment.AirwayBillNo;
+                        GatewayOutboundViewModel isExist = _results.Find(x => x.AirwayBillNo == _airwaybill);
+                        if (_inbound.Exists(x => x.Cargo == outbound.Cargo))
+                        {
+                            if (isExist != null)
+                            {
+                                isExist.TotalRecieved++;
+                                isExist.Total = isExist.TotalRecieved;
+                                //model.Total = model.TotalRecieved;
+                                //_results.Add(isExist);
+                            }
+                            else
+                            {
+                                model.AirwayBillNo = _airwaybill;
+                                model.Gateway = outbound.Gateway;
+                                model.Driver = outbound.Driver;
+                                model.PlateNo = outbound.PlateNo;
+                                model.Batch = outbound.Batch.BatchName;
+                                model.TotalRecieved++;
+                                model.Total = model.TotalRecieved;
+                                model.Branch = outbound.BranchCorpOffice.BranchCorpOfficeName;
+                                model.ScannedBy = AppUser.User.Employee.FullName;
+                                //model.CommodityTypeName = _inbound.Where(x => x.Cargo == outbound.Cargo).Select(x => x.CommodityType.CommodityTypeName).ToString();
+                                // model.CommodityTypeName = _inbound.Find(x => x.Cargo == outbound.Cargo).CommodityType.CommodityTypeName;
+                                model.CommodityTypeName = _packageNumberService.FilterActiveBy(x => x.PackageNo == outbound.Cargo).First().Shipment.CommodityType.CommodityTypeName;
+                                _results.Add(model);
+
+                            }
+                        }
+                        else
+                        {
+                            if (isExist != null)
+                            {
+                                isExist.TotalDiscrepency++;
+                                isExist.Total = isExist.TotalDiscrepency;
+                                //model.Total = model.TotalDiscrepency;
+                                //_results.Add(isExist);
+                            }
+                            else
+                            {
+                                model.AirwayBillNo = _airwaybill;
+                                model.Gateway = outbound.Gateway;
+                                model.Driver = outbound.Driver;
+                                model.PlateNo = outbound.PlateNo;
+                                model.Batch = outbound.Batch.BatchName;
+                                model.TotalDiscrepency++;
+                                model.Total = model.TotalDiscrepency;
+                                model.Branch = outbound.BranchCorpOffice.BranchCorpOfficeName;
+                                model.ScannedBy = AppUser.User.Employee.FullName;
+                                //model.CommodityTypeName = _inbound.Find(x => x.Cargo == outbound.Cargo).CommodityType.CommodityTypeName;
+                                // model.CommodityTypeName = _inbound.Where(x => x.Cargo == outbound.Cargo).Select(x => x.CommodityType.CommodityTypeName).ToString();
+                                model.CommodityTypeName = _packageNumberService.FilterActiveBy(x => x.PackageNo == outbound.Cargo).First().Shipment.CommodityType.CommodityTypeName;
+                                _results.Add(model);
+
+                            }
+                        }
+                    }
                 }
                 catch (Exception) { continue;  }
-                GatewayOutboundViewModel isExist = _results.Find(x => x.AirwayBillNo == _airwaybill);
-                if (_inbound.Exists(x => x.Cargo == outbound.Cargo))
-                {
-                    if (isExist != null)
-                    {
-                        isExist.TotalRecieved++;
-                        isExist.Total = isExist.TotalRecieved;
-                        //model.Total = model.TotalRecieved;
-                        //_results.Add(isExist);
-                    }
-                    else
-                    {
-                        model.AirwayBillNo = _airwaybill;
-                        model.Gateway = outbound.Gateway;
-                        model.Driver = outbound.Driver;
-                        model.PlateNo = outbound.PlateNo;
-                        model.Batch = outbound.Batch.BatchName;
-                        model.TotalRecieved++;
-                        model.Total = model.TotalRecieved;
-                        model.Branch = outbound.BranchCorpOffice.BranchCorpOfficeName;
-                        model.ScannedBy = AppUser.User.Employee.FullName;
-                        //model.CommodityTypeName = _inbound.Where(x => x.Cargo == outbound.Cargo).Select(x => x.CommodityType.CommodityTypeName).ToString();
-                        // model.CommodityTypeName = _inbound.Find(x => x.Cargo == outbound.Cargo).CommodityType.CommodityTypeName;
-                        model.CommodityTypeName = _packageNumberService.FilterActiveBy(x => x.PackageNo == outbound.Cargo).First().Shipment.CommodityType.CommodityTypeName;
-                        _results.Add(model);
-
-                    }
-                }
-                else
-                {
-                    if (isExist != null)
-                    {
-                        isExist.TotalDiscrepency++;
-                        isExist.Total = isExist.TotalDiscrepency;
-                        //model.Total = model.TotalDiscrepency;
-                        //_results.Add(isExist);
-                    }
-                    else
-                    {
-                        model.AirwayBillNo = _airwaybill;
-                        model.Gateway = outbound.Gateway;
-                        model.Driver = outbound.Driver;
-                        model.PlateNo = outbound.PlateNo;
-                        model.Batch = outbound.Batch.BatchName;
-                        model.TotalDiscrepency++;
-                        model.Total = model.TotalDiscrepency;
-                        model.Branch = outbound.BranchCorpOffice.BranchCorpOfficeName;
-                        model.ScannedBy = AppUser.User.Employee.FullName;
-                        //model.CommodityTypeName = _inbound.Find(x => x.Cargo == outbound.Cargo).CommodityType.CommodityTypeName;
-                        // model.CommodityTypeName = _inbound.Where(x => x.Cargo == outbound.Cargo).Select(x => x.CommodityType.CommodityTypeName).ToString();
-                        model.CommodityTypeName = _packageNumberService.FilterActiveBy(x => x.PackageNo == outbound.Cargo).First().Shipment.CommodityType.CommodityTypeName;
-                        _results.Add(model);
-
-                    }
-                }
+               
 
             }
 

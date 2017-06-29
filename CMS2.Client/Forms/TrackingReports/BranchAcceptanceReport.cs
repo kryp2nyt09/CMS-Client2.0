@@ -22,7 +22,7 @@ namespace CMS2.Client.Forms.TrackingReports
             //List<Shipment> shipments = shipmentService.FilterActive().Where(x => x.AcceptedBy.AssignedToArea.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.RecordStatus == 1 && x.CreatedDate.ToShortDateString() == date.ToShortDateString() && x.Booking.BookingStatus.BookingStatusName == "Picked-up").ToList();
 
             List<Shipment> shipments = shipmentService.FilterActive().Where(x => x.AcceptedBy.AssignedToArea.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.RecordStatus == 1 && x.Booking.BookingStatus.BookingStatusName == "Picked-up" && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
-            List<BranchAcceptance> branchAcceptance = branchAcceptanceBl.GetAll().Where(x => x.Users.Employee.AssignedToArea.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.RecordStatus == 1 && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
+            List<BranchAcceptance> branchAcceptance = branchAcceptanceBl.FilterActive().Where(x => x.Users.Employee.AssignedToArea.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.RecordStatus == 1 && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
 
             string bcoName = bcoService.GetAll().Find(x => x.BranchCorpOfficeId == GlobalVars.DeviceBcoId).BranchCorpOfficeName;
 
@@ -89,7 +89,7 @@ namespace CMS2.Client.Forms.TrackingReports
             //List<BranchAcceptance> branchAcceptance = branchAcceptanceBl.GetAll().Where(x => x.Users.Employee.AssignedToArea.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.Users.Employee.AssignedToArea.RevenueUnitId == revenueUnitId && x.RecordStatus == 1 && x.BatchID == batchId && x.Driver == driver && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
 
             List<BranchAcceptanceViewModel> list = new List<BranchAcceptanceViewModel>();
-            List<BranchAcceptance> branchAcceptance = branchAcceptanceBl.GetAll().
+            List<BranchAcceptance> branchAcceptance = branchAcceptanceBl.FilterActive().
                 Where(
                 x => x.RecordStatus == 1
                 //&& ((x.Users.Employee.AssignedToArea.RevenueUnitId == revenueUnitId && x.Users.Employee.AssignedToArea.RevenueUnitId != Guid.Empty) || (x.Users.Employee.AssignedToArea.RevenueUnitId == x.Users.Employee.AssignedToArea.RevenueUnitId && revenueUnitId == Guid.Empty))
@@ -103,7 +103,7 @@ namespace CMS2.Client.Forms.TrackingReports
 
             if(batchId != Guid.Empty)
             {
-                batchname = batchservice.GetAll().Find(x => x.BatchID == batchId).BatchName;
+                batchname = batchservice.FilterActive().Find(x => x.BatchID == batchId).BatchName;
             }
             else
             {
@@ -112,14 +112,14 @@ namespace CMS2.Client.Forms.TrackingReports
             
             if(revenueUnitId != Guid.Empty)
             {
-                revenueunitname = revenueunitservice.GetAll().Find(x => x.RevenueUnitId == revenueUnitId).RevenueUnitName;
+                revenueunitname = revenueunitservice.FilterActive().Find(x => x.RevenueUnitId == revenueUnitId).RevenueUnitName;
             }
             else
             {
                 revenueunitname = "All";
             }
             
-            bcoName = bcoService.GetAll().Find(x => x.BranchCorpOfficeId == GlobalVars.DeviceBcoId).BranchCorpOfficeName;
+            bcoName = bcoService.FilterActive().Find(x => x.BranchCorpOfficeId == GlobalVars.DeviceBcoId).BranchCorpOfficeName;
 
             list = Match(branchAcceptance, shipments).
                 FindAll
@@ -207,7 +207,7 @@ namespace CMS2.Client.Forms.TrackingReports
             //List<BranchAcceptance> branchAcceptance = branchAcceptanceBl.GetAll().Where(x => x.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.RecordStatus == 1 && x.BatchID == batchId).ToList();
             List<Shipment> shipments = shipmentService.FilterActive().Where(x => x.AcceptedBy.AssignedToArea.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.RecordStatus == 1 && x.Booking.BookingStatus.BookingStatusName == "Picked-up").ToList();
             //List<BranchAcceptance> branchAcceptance = branchAcceptanceBl.GetAll().Where(x => x.RecordStatus == 1 && x.Users.Employee.AssignedToArea.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.Users.Employee.AssignedToArea.RevenueUnitId == revenueUnitId && x.BatchID == batchId && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).Distinct().ToList();
-            List<BranchAcceptance> branchAcceptance = branchAcceptanceBl.GetAll().Where(x => x.RecordStatus == 1 && x.Users.Employee.AssignedToArea.RevenueUnitId == revenueUnitId && x.BatchID == batchId && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).Distinct().ToList();
+            List<BranchAcceptance> branchAcceptance = branchAcceptanceBl.FilterActive().Where(x => x.RecordStatus == 1 && x.Users.Employee.AssignedToArea.RevenueUnitId == revenueUnitId && x.BatchID == batchId && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).Distinct().ToList();
 
             List<BranchAcceptanceViewModel> list = Match(branchAcceptance, shipments);
 
@@ -267,7 +267,7 @@ namespace CMS2.Client.Forms.TrackingReports
             List<Shipment> shipments = shipmentService.FilterActive().Where(x => x.AcceptedBy.AssignedToArea.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.RecordStatus == 1 && x.Booking.BookingStatus.BookingStatusName == "Picked-up").ToList();
 
             //List<BranchAcceptance> branchAcceptance = branchAcceptanceBl.GetAll().Where(x => x.RecordStatus == 1 && x.Users.Employee.AssignedToArea.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.Users.Employee.AssignedToArea.RevenueUnitId == revenueUnitId && x.Driver == driver && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).Distinct().ToList();
-            List<BranchAcceptance> branchAcceptance = branchAcceptanceBl.GetAll().Where(x => x.RecordStatus == 1 && x.Users.Employee.AssignedToArea.RevenueUnitId == revenueUnitId && x.Driver == driver && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).Distinct().ToList();
+            List<BranchAcceptance> branchAcceptance = branchAcceptanceBl.FilterActive().Where(x => x.RecordStatus == 1 && x.Users.Employee.AssignedToArea.RevenueUnitId == revenueUnitId && x.Driver == driver && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).Distinct().ToList();
             List<BranchAcceptanceViewModel> list = Match(branchAcceptance, shipments);
 
             DataTable dt = new DataTable();
@@ -351,7 +351,7 @@ namespace CMS2.Client.Forms.TrackingReports
             foreach (Shipment shipment in _shipments)
             {
                 BranchAcceptanceViewModel model = new BranchAcceptanceViewModel();
-                List<PackageNumber> _packageNumbers = _packageNumberService.GetAll().Where(x => x.ShipmentId == shipment.ShipmentId).ToList();
+                List<PackageNumber> _packageNumbers = _packageNumberService.FilterActive().Where(x => x.ShipmentId == shipment.ShipmentId).ToList();
 
                 foreach (PackageNumber packagenumber in _packageNumbers)
                 {
