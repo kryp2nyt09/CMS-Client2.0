@@ -551,6 +551,8 @@
     <Compile Include="ViewModels\PaymentTurnoverViewModel.cs" />
     <Content Include="Images\logos.ico" />
     <Content Include="DfIcon.ico" />
+    <None Include="Resources\online.png" />
+    <None Include="Resources\offline.png" />
     <EmbeddedResource Include="Reports\PaymentSummaryReport.resx">
       <DependentUpon>PaymentSummaryReport.cs</DependentUpon>
     </EmbeddedResource>
@@ -634,6 +636,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Content Include="Images\offline.png" />
+    <Content Include="Images\online.png" />
     <Content Include="Reports\ShipmentPrintForm.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ShipmentPrintForm.cs</LastGenOutput>

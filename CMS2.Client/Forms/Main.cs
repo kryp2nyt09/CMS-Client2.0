@@ -37,6 +37,8 @@ using CMS2.Client.Forms.TrackingReportsView;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using CMS2.Entities.ReportModel;
+using System.Net.Sockets;
+using System.Data.SqlClient;
 
 namespace CMS2.Client
 {
@@ -302,7 +304,7 @@ namespace CMS2.Client
         private void Main_Load(object sender, EventArgs e)
         {
             //rs.FindAllControls(this);
-
+            timer1.Start();
             GlobalVars.UnitOfWork = new CmsUoW();
             areaService = new AreaBL(GlobalVars.UnitOfWork);
             bsoService = new BranchSatOfficeBL(GlobalVars.UnitOfWork);
@@ -413,8 +415,8 @@ namespace CMS2.Client
                     gridFreightCollect.Columns["Client"].PinPosition = Telerik.WinControls.UI.PinnedColumnPosition.Left;
                     break;
                 case "Tracking":
-                    PopulateGrid_FreightCollect();
-                    PopulateGrid_CorpAcctConsignee();
+                    //PopulateGrid_FreightCollect();
+                    //PopulateGrid_CorpAcctConsignee();
                     List<BranchCorpOffice> branchCorpOffices = getBranchCorpOffice();
                     //dropDownPickUpCargo_BCO.DataSource = branchCorpOffices;
                     //dropDownPickUpCargo_BCO.DisplayMember = "BranchCorpOfficeName";
@@ -1851,7 +1853,7 @@ namespace CMS2.Client
 
         private void txtTaxWithheld_Leave(object sender, EventArgs e)
         {
-            ComputeNetCollection();
+           // ComputeNetCollection();
         }
 
         private void lstPaymentType_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
@@ -2828,47 +2830,64 @@ namespace CMS2.Client
 
         private void AddDailyBooking()
         {
+            List<Booking> todayBooking = new List<Booking>();
+            List<Booking> yesterdayBooking = new List<Booking>();
+
             DateTime today = DateTime.Now;
-            DateTime yesterday = DateTime.Now.AddDays(-1);
-            List<Booking> todayBooking = bookingService.FilterActiveBy(x => x.DateBooked.Year == today.Year && x.DateBooked.Month == today.Month && x.DateBooked.Day == today.Day).ToList();
-            List<Booking> yesterdayBooking = bookingService.FilterActiveBy(x => x.HasDailyBooking == true && x.DateBooked.Year == yesterday.Year && x.DateBooked.Month == yesterday.Month && x.DateBooked.Day == yesterday.Day).ToList();
-            foreach (var item in yesterdayBooking)
+            string dayOfWeek = today.ToString("ddd");
+            if (!dayOfWeek.Equals("Sun"))
             {
-                if (!todayBooking.Exists(x => x.PreviousBookingId == item.BookingId))
+                if (dayOfWeek.Equals("Mon"))
                 {
-                    Booking newBooking = new Booking();
-                    newBooking.BookingId = Guid.NewGuid();
-                    newBooking.BookingNo = GetBookingNumber();
-                    newBooking.DateBooked = DateTime.Now;
-                    newBooking.ShipperId = item.ShipperId;
-                    newBooking.OriginAddress1 = item.OriginAddress1;
-                    newBooking.OriginAddress2 = item.OriginAddress2;
-                    newBooking.OriginBarangay = item.OriginBarangay;
-                    newBooking.OriginCityId = item.OriginCityId;
-                    newBooking.ConsigneeId = item.ConsigneeId;
-                    newBooking.DestinationAddress1 = item.DestinationAddress1;
-                    newBooking.DestinationAddress2 = item.DestinationAddress2;
-                    newBooking.DestinationBarangay = item.DestinationBarangay;
-                    newBooking.DestinationCityId = item.DestinationCityId;
-                    newBooking.Remarks = item.Remarks;
-                    newBooking.HasDailyBooking = item.HasDailyBooking;
-                    newBooking.BookedById = item.BookedById;
-                    newBooking.AssignedToAreaId = item.AssignedToAreaId;
-                    newBooking.BookingStatusId =
-                        bookingStatus.Where(x => x.BookingStatusName.Equals("Pending"))
-                            .First()
-                            .BookingStatusId;
-                    newBooking.BookingRemarkId =
-                        bookingRemarks.Where(x => x.BookingRemarkName.Equals("Lack of Time"))
-                            .First()
-                            .BookingRemarkId;
-                    newBooking.CreatedBy = item.CreatedBy;
-                    newBooking.CreatedDate = DateTime.Now;
-                    newBooking.ModifiedBy = item.CreatedBy;
-                    newBooking.ModifiedDate = DateTime.Now;
-                    newBooking.RecordStatus = (int)RecordStatus.Active;
-                    newBooking.PreviousBookingId = item.BookingId;
-                    bookingService.AddEdit(newBooking);
+                    DateTime saturdayBooking = DateTime.Now.AddDays(-2);
+                    todayBooking = bookingService.FilterActiveBy(x => x.DateBooked.Year == today.Year && x.DateBooked.Month == today.Month && x.DateBooked.Day == today.Day).ToList();
+                    yesterdayBooking = bookingService.FilterActiveBy(x => x.HasDailyBooking == true && x.DateBooked.Year == saturdayBooking.Year && x.DateBooked.Month == saturdayBooking.Month && x.DateBooked.Day == saturdayBooking.Day).ToList();
+                }
+                else
+                {
+                    DateTime yesterday = DateTime.Now.AddDays(-1);
+                    todayBooking = bookingService.FilterActiveBy(x => x.DateBooked.Year == today.Year && x.DateBooked.Month == today.Month && x.DateBooked.Day == today.Day).ToList();
+                    yesterdayBooking = bookingService.FilterActiveBy(x => x.HasDailyBooking == true && x.DateBooked.Year == yesterday.Year && x.DateBooked.Month == yesterday.Month && x.DateBooked.Day == yesterday.Day).ToList();
+                }
+
+                foreach (var item in yesterdayBooking)
+                {
+                    if (!todayBooking.Exists(x => x.PreviousBookingId == item.BookingId))
+                    {
+                        Booking newBooking = new Booking();
+                        newBooking.BookingId = Guid.NewGuid();
+                        newBooking.BookingNo = GetBookingNumber();
+                        newBooking.DateBooked = DateTime.Now;
+                        newBooking.ShipperId = item.ShipperId;
+                        newBooking.OriginAddress1 = item.OriginAddress1;
+                        newBooking.OriginAddress2 = item.OriginAddress2;
+                        newBooking.OriginBarangay = item.OriginBarangay;
+                        newBooking.OriginCityId = item.OriginCityId;
+                        newBooking.ConsigneeId = item.ConsigneeId;
+                        newBooking.DestinationAddress1 = item.DestinationAddress1;
+                        newBooking.DestinationAddress2 = item.DestinationAddress2;
+                        newBooking.DestinationBarangay = item.DestinationBarangay;
+                        newBooking.DestinationCityId = item.DestinationCityId;
+                        newBooking.Remarks = item.Remarks;
+                        newBooking.HasDailyBooking = item.HasDailyBooking;
+                        newBooking.BookedById = item.BookedById;
+                        newBooking.AssignedToAreaId = item.AssignedToAreaId;
+                        newBooking.BookingStatusId =
+                            bookingStatus.Where(x => x.BookingStatusName.Equals("Pending"))
+                                .First()
+                                .BookingStatusId;
+                        newBooking.BookingRemarkId =
+                            bookingRemarks.Where(x => x.BookingRemarkName.Equals("Lack of Times"))
+                                .First()
+                                .BookingRemarkId;
+                        newBooking.CreatedBy = item.CreatedBy;
+                        newBooking.CreatedDate = DateTime.Now;
+                        newBooking.ModifiedBy = item.CreatedBy;
+                        newBooking.ModifiedDate = DateTime.Now;
+                        newBooking.RecordStatus = (int)RecordStatus.Active;
+                        newBooking.PreviousBookingId = item.BookingId;
+                        bookingService.AddEdit(newBooking);
+                    }
                 }
             }
         }
@@ -5056,11 +5075,11 @@ namespace CMS2.Client
 
                 if (txtTaxWithheld.Value.ToString().Contains("₱"))
                 {
-                    tax = decimal.Parse(txtTaxWithheld.Value.ToString().Replace("₱", ""));
+                    tax = decimal.Parse(txtTaxWithheld.Value.ToString());
                 }
                 else
                 {
-                    tax = decimal.Parse(txtTaxWithheld.Value.ToString().Replace("Php", ""));
+                    tax = decimal.Parse(txtTaxWithheld.Value.ToString());
                 }
 
                 txtNetCollection.Text = (amountdue - ((tax / (decimal)(100)) * amountdue)).ToString();
@@ -8665,17 +8684,24 @@ namespace CMS2.Client
                     Batch = "All"; dropDownGatewayOutbound_Batch.SelectedText = "All";
 
                 }
-                if (mawb != "")
-                {
-                    gridGatewayOutbound.EnableFiltering = false;
-                    getGatewayOutBoundDataByFilter(num);
-                }
-                else
-                {
-                    gridGatewayOutbound.EnableFiltering = false;
-                    num = 1;
-                    getGatewayOutBoundDataByFilter(num);
-                }
+                //if (mawb != "")
+                //{
+                //    gridGatewayOutbound.EnableFiltering = false;
+                //    getGatewayOutBoundDataByFilter(num);
+                //}
+                //else
+                //{
+                //    gridGatewayOutbound.EnableFiltering = false;
+                //    num = 1;
+                //    getGatewayOutBoundDataByFilter(num);
+                //}
+                num = 1;
+                gridGatewayOutbound.EnableFiltering = false;
+                getGatewayOutBoundDataByFilter(num);
+
+
+
+
                 //if (Gateway == "All" && Batch == "All")
                 //{
                 //    gridGatewayOutbound.EnableFiltering = false;
@@ -9101,10 +9127,10 @@ namespace CMS2.Client
                 }
                 catch (Exception)
                 {
-                    BCO = "All"; dropDownSegregation_BCO.SelectedText = "All";
-                    Driver = "All"; dropDownSegregation_Driver.SelectedText = "All";
-                    PlateNo = "All"; dropDownSegregation_PlateNo.SelectedText = "All";
-                    Batch = "All"; dropDownSegregation_Batch.SelectedText = "All";
+                    //BCO = "All"; dropDownSegregation_BCO.SelectedText = "All";
+                    //Driver = "All"; dropDownSegregation_Driver.SelectedText = "All";
+                    //PlateNo = "All"; dropDownSegregation_PlateNo.SelectedText = "All";
+                    //Batch = "All"; dropDownSegregation_Batch.SelectedText = "All";
                 }
                 //if (BCO == "All" && Driver == "All" && PlateNo == "All" && Batch == "All")
                 //{
@@ -10778,6 +10804,7 @@ namespace CMS2.Client
 
             if (cmbDS_RevenueType.SelectedItem.Text == "All")
             {
+                cmbDS_RevenueUnit.SelectedValue = "All";
                 cmbDS_RevenueUnit.Enabled = false;
             }
 
@@ -10938,12 +10965,13 @@ namespace CMS2.Client
         {
             if (cmbDS_RevenueType.SelectedIndex >= 0)
             {
-                if (cmbDS_RevenueType.SelectedItem.Text == "All")
-                {
-                    cmbDS_RevenueUnit.Enabled = false;
-                }
-                else
-                {
+                //if (cmbDS_RevenueType.SelectedItem.Text == "All")
+                //{
+                //    cmbDS_RevenueUnit.SelectedValue = "All";
+                //    cmbDS_RevenueUnit.Enabled = false;
+                //}
+                //else
+                //{
                     Guid revenueUnitTypeId = new Guid();
                     try
                     {
@@ -10955,7 +10983,7 @@ namespace CMS2.Client
                     }
                     cmbDS_RevenueUnit.Enabled = true;
                     DSRevenueUnitByUnitType(revenueUnitTypeId);
-                }
+                //}
 
 
             }
@@ -11056,12 +11084,63 @@ namespace CMS2.Client
 
         private void txtTaxWithheld_TextChanged(object sender, EventArgs e)
         {
-
+           ComputeNetCollection();
         }
+
 
 
         #endregion END MARK SANTOS REGION
 
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
 
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+          // string dataSource = ConfigurationManager.ConnectionStrings["Cms"].ConnectionString;
+            // Retrieve the ConnectionString from App.config 
+            string connectString = ConfigurationManager.ConnectionStrings["Cms"].ToString();
+            SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder(connectString);
+           
+            // Retrieve the DataSource property.    
+            string IPAddress = builder.DataSource;
+            using (TcpClient tcpClient = new TcpClient())
+            {
+                try
+                {
+                    tcpClient.Connect(IPAddress, 1433);
+                    //panel1
+                    panel1.BackgroundImage = Properties.Resources.online;
+                    lbl_Status.Text = "Online";
+                    lbl_Status.ForeColor = Color.Green;
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Port closed");
+                    panel1.BackgroundImage = Properties.Resources.offline;
+                    lbl_Status.Text = "Offline";
+                    lbl_Status.ForeColor = Color.Red;
+
+                }
+            }
+
+            System.ServiceProcess.ServiceController sc = new System.ServiceProcess.ServiceController("Sychronization Service");
+
+            switch (sc.Status)
+            {
+                case System.ServiceProcess.ServiceControllerStatus.Running:
+                    lblService.Text = "Sync service is running";
+                    break;
+                case System.ServiceProcess.ServiceControllerStatus.Stopped:
+                    lblService.Text = "Sync service has stopped";
+                    break;
+                default:
+                    lblService.Text = "Sync service has stopped";
+                    break;
+            }
+
+
+        }
     }
 }

@@ -488,7 +488,6 @@ namespace CMS2.Client.SyncHelper
 
                 string filterColumn = "";
                 string filterClause = "";
-
                 switch (_tableName)
                 {
                     case "Booking":
@@ -727,10 +726,9 @@ namespace CMS2.Client.SyncHelper
                     case "DeliveryPackage":
 
                         filterColumn = "DeliveredPackageId";
-                        filterClause = "[side].[DeliveredPackageId] In (SELECT c.DeliveredPackageId FROM " +
-                                        "((SELECT  package.DeliveredPackageId FROM DeliveredPackage as package " +
+                        filterClause = "[side].[DeliveredPackageId] In (SELECT c.DeliveredPackageId FROM DeliveryPackage package" +
                                         "LEFT JOIN Delivery delivery on delivery.DeliveryId = package.DeliveryId " +
-                                        "LEFT JOIN   Shipment as ship on ship.ShipmentId = delivery.ShipmentId " +
+                                        "LEFT JOIN Shipment as ship on ship.ShipmentId = delivery.ShipmentId " +
                                         "left join Booking as book on book.BookingId = ship.BookingId  " +
                                         "left join RevenueUnit as ru on ru.RevenueUnitId = book.AssignedToAreaId  " +
                                         "left join City as city on city.CityId = ru.CityId  " +
@@ -738,7 +736,7 @@ namespace CMS2.Client.SyncHelper
                                         "UNION  " +
                                         "(SELECT package.DeliveredPackageId from DeliveredPackage as package " +
                                         "LEFT JOIN Delivery delivery on delivery.DeliveryId = package.DeliveryId " +
-                                        "LEFT JOIN   Shipment as ship on ship.ShipmentId = delivery.ShipmentId " +
+                                        "LEFT JOIN   Shipment as ship on ship.ShipmentId = delivery.DeliveryId " +
                                         "LEFT JOIN Booking book ON book.BookingId = SHIP.BookingId " +
                                         "LEFT JOIN City c ON c.CityId = book.DestinationCityId  " +
                                         "LEFT JOIN BranchCorpOffice bco ON bco.BranchCorpOfficeId = c.BranchCorpOfficeId  " +
@@ -769,7 +767,7 @@ namespace CMS2.Client.SyncHelper
                                         "UNION  " +
                                         "(SELECT reciept.DeliveryReceiptId from DeliveryReceipt as reciept " +
                                         "LEFT JOIN Delivery delivery on delivery.DeliveryId = reciept.DeliveryId " +
-                                        "LEFT JOIN   Shipment as ship on ship.ShipmentId = delivery.ShipmentId  " +
+                                        "LEFT JOIN   Shipment as ship on ship.ShipmentId = delivery.DeliveryId  " +
                                         "LEFT JOIN Booking book ON book.BookingId = SHIP.BookingId " +
                                         "LEFT JOIN City c ON c.CityId = book.DestinationCityId  " +
                                         "LEFT JOIN BranchCorpOffice bco ON bco.BranchCorpOfficeId = c.BranchCorpOfficeId  " +
@@ -787,17 +785,9 @@ namespace CMS2.Client.SyncHelper
                         Log.WriteLogs(_tableName + " was provisioned.");
                         break;
                     default:
-                       bool flag = false;
-                        while (!flag)
-                        {
-                            flag = ProvisionServer(_tableName);
-                        }
-                        flag = false;
-                        while (!flag)
-                        {
-                            flag = ProvisionClient(_tableName);
-                        }
-                       
+                        ProvisionServer(_tableName);
+                        ProvisionClient(_tableName);
+
 
                         state.table.Status = TableStatus.Provisioned;
                         state.worker.ReportProgress(1, _tableName + " was provisioned.");
@@ -858,19 +848,20 @@ namespace CMS2.Client.SyncHelper
                     serverProvision.Apply();
                     Console.WriteLine("Server " + TableName + " was provisioned.");
                     Log.WriteLogs("Server " + TableName + " was provisioned.");
+                    return true;
                 }
                 else
                 {
                     Console.WriteLine("Server " + TableName + " was already provisioned.");
                     Log.WriteLogs("Server " + TableName + " was already provisioned.");
+                    return true;
                 }
-                return true;
             }
             catch (Exception ex)
             {
                 Log.WriteErrorLogs(ex);
             }
-            return false;
+
 
         }
 
@@ -910,34 +901,27 @@ namespace CMS2.Client.SyncHelper
         public bool ProvisionClient(string TableName)
         {
             try
-            {
-                DbSyncScopeDescription scopeDescription = SqlSyncDescriptionBuilder.GetDescriptionForScope(TableName + _filter, _serverConnection);
+        {
+            DbSyncScopeDescription scopeDescription = SqlSyncDescriptionBuilder.GetDescriptionForScope(TableName + _filter, _serverConnection);
 
-                SqlSyncScopeProvisioning clientProvision = new SqlSyncScopeProvisioning(_localConnection, scopeDescription);
+            SqlSyncScopeProvisioning clientProvision = new SqlSyncScopeProvisioning(_localConnection, scopeDescription);
 
-                if (!clientProvision.ScopeExists(scopeDescription.ScopeName))
-                {
-                    clientProvision.Apply();
-                    Log.WriteLogs("Client " + TableName + " was provisioned.");
-                }
-                else
-                {
-                    Log.WriteLogs("Client " + TableName + " was already provisioned.");
-                }
-                return true;
-            }
-            catch (Exception ex)
+            if (!clientProvision.ScopeExists(scopeDescription.ScopeName))
             {
-                Log.WriteErrorLogs(ex);
+                clientProvision.Apply();
+                Log.WriteLogs("Client " + TableName + " was provisioned.");
             }
-            return false;
+            else
+            {
+                Log.WriteLogs("Client " + TableName + " was already provisioned.");
+            }
         }
 
         private void CreateTemplate(string TableName, string filterColumn, string filterClause, SqlParameter param)
         {
             try
             {
-                // Create a template named tableName + _Filter_Template
+                // Create a scope named tableName + _Filter_Template
                 scopeDesc = new DbSyncScopeDescription(TableName + "_Filter_Template");
 
                 // Set a friendly description of the template.

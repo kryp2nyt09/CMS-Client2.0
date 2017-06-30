@@ -89,7 +89,7 @@ namespace CMS2.Client.Forms.TrackingReports
                 //list = gatewayBl.GetAll().Where(x => x.RecordStatus == 1 && x.CreatedDate.ToShortDateString() == date.ToShortDateString() && x.MasterAirwayBillNo == mawb).ToList();
                 list = gatewayBl.GetAll().Where(x => x.RecordStatus == 1 && x.MasterAirwayBillNo == mawb).ToList();
             }
-            else if(num == 1)
+            else if (num == 1)
             {
                 list = gatewayBl.GetAll().Where
                 (x => x.RecordStatus == 1
@@ -102,11 +102,11 @@ namespace CMS2.Client.Forms.TrackingReports
                 ).ToList();
             }
 
-             List<GatewayTransmitalViewModel> modelList = Match(list);
+            List<GatewayTransmitalViewModel> modelList = Match(list);
 
             DataTable dt = new DataTable();
             dt.Columns.Add(new DataColumn("No", typeof(string)));
-            dt.Columns.Add(new DataColumn("AWB", typeof(string)));
+            dt.Columns.Add(new DataColumn("AWB/Sack #", typeof(string)));
             dt.Columns.Add(new DataColumn("Shipper", typeof(string)));
             dt.Columns.Add(new DataColumn("Consignee", typeof(string)));
             dt.Columns.Add(new DataColumn("Address", typeof(string)));
@@ -203,53 +203,100 @@ namespace CMS2.Client.Forms.TrackingReports
             CommodityBL commodityService = new CommodityBL();
             GatewayTransmittalBL transmitalService = new GatewayTransmittalBL();
             ShipmentBL shipmentService = new ShipmentBL();
-           
+            PackageNumberBL _packageNumberService = new PackageNumberBL();
+            BundleBL bundleService = new BundleBL();
+
 
             foreach (GatewayTransmittal transmital in _transmital)
             {
                 GatewayTransmitalViewModel model = new GatewayTransmitalViewModel();
                 Shipment _shipment = new Shipment();
                 string _airwaybill = "";
-
+                //List<string> listCargo = new List<string>();
+                //List<string> listAirwayBill = new List<string>();
+                List<Tuple<string, decimal>> listofSack = new List<Tuple<string, decimal>>();
+                int numberOfCargo = 0;
+                decimal WeightOfCargo = 0;
+                decimal totalWeightOfCargo = 0;
                 _shipment = shipmentService.FilterActive().Where(x => x.AirwayBillNo == transmital.AirwayBillNo).FirstOrDefault();
-                
+
                 if (_shipment == null)
                 {
-                    continue;
+                    listofSack = bundleService.GetAll().Where(x => x.SackNo == transmital.AirwayBillNo).Select(x => new Tuple<string, decimal>(x.Cargo, x.Weight)).ToList();
+                    if(listofSack != null)
+                    {
+                        for (int i = 0; i < listofSack.Count; i++)
+                        {
+                            WeightOfCargo = listofSack[i].Item2;
+                            totalWeightOfCargo += WeightOfCargo;
+                            numberOfCargo++;
+                        }
+
+                        GatewayTransmitalViewModel model1 = new GatewayTransmitalViewModel();
+                        GatewayTransmitalViewModel isExistSackNo = _results.Find(x => x.AirwayBillNo == transmital.AirwayBillNo);
+                        if (isExistSackNo != null)
+                        {
+                            isExistSackNo.QTY++;
+                            isExistSackNo.AGW += Convert.ToDecimal(totalWeightOfCargo);
+                        }
+                        else
+                        {
+                            model1.AirwayBillNo = transmital.AirwayBillNo;
+                            model1.Shipper = "N/A";
+                            model1.Consignee = "N/A";
+                            model1.Address = "N/A";
+                            model1.CommodityType = transmital.CommodityType.CommodityTypeName;
+                            model1.Commodity = "N/A";
+                            model1.QTY = listofSack.Count;
+                            model1.AGW = Convert.ToDecimal(totalWeightOfCargo);
+                            model1.ServiceMode = "N/A";
+                            model1.PaymentMode = "N/A";
+
+                            model1.Gateway = transmital.Gateway;
+                            model1.Destination = transmital.BranchCorpOffice.BranchCorpOfficeName;
+                            model1.Batch = transmital.Batch.BatchName;
+                            model1.CreatedDate = transmital.CreatedDate;
+                            model1.PlateNo = transmital.PlateNo;
+                            model1.MAWB = transmital.MasterAirwayBillNo;
+                            model1.ScannedBy = AppUser.User.Employee.FullName;
+                            _results.Add(model1);
+                        }
+                    }
                 }
                 else
                 {
                     _airwaybill = _shipment.AirwayBillNo;
-                }
 
-                GatewayTransmitalViewModel isExist = _results.Find(x => x.AirwayBillNo == _airwaybill);
+                    GatewayTransmitalViewModel isExist = _results.Find(x => x.AirwayBillNo == _airwaybill);
 
-                if (isExist != null)
-                {
-                    isExist.QTY++;
-                    isExist.AGW += Convert.ToDecimal(shipmentService.GetAll().Find(x => x.AirwayBillNo == transmital.AirwayBillNo).Weight);
-                }
-                else
-                {
-                    model.AirwayBillNo = transmital.AirwayBillNo;
-                    model.Shipper = _shipment.Shipper.FullName;
-                    model.Consignee = _shipment.Consignee.FullName;
-                    model.Address = _shipment.Consignee.Address1;
-                    model.CommodityType = transmital.CommodityType.CommodityTypeName;
-                    model.Commodity = _shipment.Commodity.CommodityName;
-                    model.QTY++;
-                    model.AGW = _shipment.Weight;
-                    model.ServiceMode = _shipment.ServiceMode.ServiceModeName;
-                    model.PaymentMode = _shipment.PaymentMode.PaymentModeName;
+                    if (isExist != null)
+                    {
+                        isExist.QTY++;
+                        isExist.AGW += Convert.ToDecimal(shipmentService.GetAll().Find(x => x.AirwayBillNo == transmital.AirwayBillNo).Weight);
+                    }
+                    else
+                    {
+                        model.AirwayBillNo = transmital.AirwayBillNo;
+                        model.Shipper = _shipment.Shipper.FullName;
+                        model.Consignee = _shipment.Consignee.FullName;
+                        model.Address = _shipment.Consignee.Address1;
+                        model.CommodityType = transmital.CommodityType.CommodityTypeName;
+                        model.Commodity = _shipment.Commodity.CommodityName;
+                        model.QTY++;
+                        model.AGW = _shipment.Weight;
+                        model.ServiceMode = _shipment.ServiceMode.ServiceModeName;
+                        model.PaymentMode = _shipment.PaymentMode.PaymentModeName;
 
-                    model.Gateway = transmital.Gateway;
-                    model.Destination = transmital.BranchCorpOffice.BranchCorpOfficeName;
-                    model.Batch = transmital.Batch.BatchName;
-                    model.CreatedDate = transmital.CreatedDate;
-                    model.PlateNo = transmital.PlateNo;
-                    model.MAWB = transmital.MasterAirwayBillNo;
-                    model.ScannedBy = AppUser.User.Employee.FullName;
-                    _results.Add(model);
+                        model.Gateway = transmital.Gateway;
+                        model.Destination = transmital.BranchCorpOffice.BranchCorpOfficeName;
+                        model.Batch = transmital.Batch.BatchName;
+                        model.CreatedDate = transmital.CreatedDate;
+                        model.PlateNo = transmital.PlateNo;
+                        model.MAWB = transmital.MasterAirwayBillNo;
+                        model.ScannedBy = AppUser.User.Employee.FullName;
+                        _results.Add(model);
+                    }
+
                 }
 
 

@@ -19,7 +19,8 @@ namespace CMS2.Client.Forms.TrackingReports
             List<HoldCargo> list = holdcargoBl.GetAll().Where(x => x.CreatedDate >= fromdate && x.CreatedDate <= todate ).ToList();
             string bcoName = bcoService.GetAll().Find(x => x.BranchCorpOfficeId == GlobalVars.DeviceBcoId).BranchCorpOfficeName;
 
-            List<HoldCargoViewModel> modelList = Match(list).FindAll(x => x.Branch == bcoName);
+            //List<HoldCargoViewModel> modelList = Match(list).FindAll(x => x.Branch == bcoName);
+            List<HoldCargoViewModel> modelList = Match(list);
 
             DataTable dt = new DataTable();
             dt.Columns.Add(new DataColumn("No", typeof(string)));
@@ -83,7 +84,8 @@ namespace CMS2.Client.Forms.TrackingReports
                 && ((x.ReasonID == reasonid && x.ReasonID != Guid.Empty) || (x.ReasonID == x.ReasonID && reasonid == Guid.Empty))
                 ).ToList();
 
-            List<HoldCargoViewModel> modelList = Match(list).FindAll(x => x.Branch == bcoName);
+            //List<HoldCargoViewModel> modelList = Match(list).FindAll(x => x.Branch == bcoName);
+            List<HoldCargoViewModel> modelList = Match(list);
 
             DataTable dt = new DataTable();
             dt.Columns.Add(new DataColumn("No", typeof(string)));

@@ -207,6 +207,7 @@ namespace CMS2.Client.Forms.TrackingReports
                 DeliveryStatusViewModel model = new DeliveryStatusViewModel();
 
                 DeliveryStatusViewModel isExist = _results.Find(x => x.AirwayBillNo == delivery.Shipment.AirwayBillNo);
+                
 
                 if (isExist != null)
                 {
@@ -215,7 +216,7 @@ namespace CMS2.Client.Forms.TrackingReports
                 else
                 {
                     model.AirwayBillNo = delivery.Shipment.AirwayBillNo;
-                    model.QTY++;
+                    model.QTY = _packageNumberService.FilterActiveBy(x => x.Shipment.AirwayBillNo == delivery.Shipment.AirwayBillNo).Count;
                     model.Status = delivery.DeliveryStatus.DeliveryStatusName;
                     model.Remarks = "NA";
                     model.DeliveredBy = delivery.DeliveredBy.FullName;

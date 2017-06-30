@@ -31,7 +31,7 @@ namespace CMS2.Client.Forms.TrackingReports
             dt.Columns.Add(new DataColumn("Discrepancy Pieces", typeof(string)));
             dt.Columns.Add(new DataColumn("Origin", typeof(string)));
             dt.Columns.Add(new DataColumn("Weight", typeof(string)));
-            dt.Columns.Add(new DataColumn("AWB", typeof(string)));
+            dt.Columns.Add(new DataColumn("AWB/Sack #", typeof(string)));
             dt.Columns.Add(new DataColumn("CreatedDate", typeof(string)));
             dt.Columns.Add(new DataColumn("Branch", typeof(string)));
             dt.Columns.Add(new DataColumn("ScannedBy", typeof(string)));
@@ -64,7 +64,7 @@ namespace CMS2.Client.Forms.TrackingReports
             BundleBL bundlebl = new BundleBL();
 
             List<Unbundle> unbundleList = new List<Unbundle>();
-            List<Bundle> bundleList = bundleList = bundlebl.GetAll().Where(x => x.RecordStatus == 1).ToList();
+            List<Bundle> bundleList = bundleList = bundlebl.GetAll().Where(x => x.RecordStatus == 1 && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
             List<UnbundleViewModel> modelList = new List<UnbundleViewModel>();
 
             string sackNum = "";
@@ -97,7 +97,7 @@ namespace CMS2.Client.Forms.TrackingReports
             dt.Columns.Add(new DataColumn("Discrepancy Pieces", typeof(string)));
             dt.Columns.Add(new DataColumn("Origin", typeof(string)));
             dt.Columns.Add(new DataColumn("Weight", typeof(string)));
-            dt.Columns.Add(new DataColumn("AWB", typeof(string)));
+            dt.Columns.Add(new DataColumn("AWB/Sack #", typeof(string)));
             dt.Columns.Add(new DataColumn("CreatedDate", typeof(string)));
             dt.Columns.Add(new DataColumn("Branch", typeof(string)));
             dt.Columns.Add(new DataColumn("ScannedBy", typeof(string)));
@@ -138,6 +138,7 @@ namespace CMS2.Client.Forms.TrackingReports
             width.Add(90);
             width.Add(0);
             width.Add(260);
+            width.Add(260);
 
             return width;
         }
@@ -167,7 +168,8 @@ namespace CMS2.Client.Forms.TrackingReports
                     if (isExist != null)
                     {
                         isExist.ScannedPcs++;
-                        isExist.TotalPcs += isExist.ScannedPcs;
+                        //isExist.TotalPcs += isExist.ScannedPcs;
+                        isExist.TotalPcs = isExist.ScannedPcs;
                     }
 
                     else
@@ -176,7 +178,7 @@ namespace CMS2.Client.Forms.TrackingReports
                         model.SackNo = bundle.SackNo;
                         model.ScannedPcs++;
                         model.Weight += bundle.Weight;
-                        model.TotalPcs += model.ScannedPcs;
+                        model.TotalPcs = model.ScannedPcs;
                         model.Origin = _shipment.OriginCity.CityName;
                         model.CreatedDate = bundle.CreatedDate;
                         model.Branch = bundle.BranchCorpOffice.BranchCorpOfficeName;
@@ -191,7 +193,8 @@ namespace CMS2.Client.Forms.TrackingReports
                     if (isExist != null)
                     {
                         isExist.TotalDiscrepency++;
-                        isExist.TotalPcs += isExist.TotalDiscrepency;
+                        //isExist.TotalPcs += isExist.TotalDiscrepency;
+                        isExist.TotalPcs = isExist.TotalDiscrepency;
                     }
 
                     else
@@ -199,7 +202,7 @@ namespace CMS2.Client.Forms.TrackingReports
                         model.AirwayBillNo = _shipment.AirwayBillNo;
                         model.SackNo = bundle.SackNo;
                         model.TotalDiscrepency++;
-                        model.TotalPcs += model.TotalDiscrepency;
+                        model.TotalPcs = model.TotalDiscrepency;
                         model.Weight += bundle.Weight;
 
                         model.Origin = _shipment.OriginCity.CityName;

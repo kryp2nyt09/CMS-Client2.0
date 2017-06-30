@@ -17,8 +17,8 @@ namespace CMS2.Client.Forms.TrackingReports
 
             CargoTransferBL cargoTransferBl = new CargoTransferBL();
 
-            List<CargoTransfer> list = cargoTransferBl.GetAll().Where(x => x.RecordStatus == 1 && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
-
+            List<CargoTransfer> list = cargoTransferBl.GetAll().Where(x => x.RecordStatus == 1 && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).GroupBy(x => x.Cargo).Select(y => y.First()).ToList();
+         
             List<CargoTransferViewModel> modelList = Match(list);
 
             DataTable dt = new DataTable();
@@ -30,7 +30,7 @@ namespace CMS2.Client.Forms.TrackingReports
             dt.Columns.Add(new DataColumn("Pieces", typeof(string)));
             dt.Columns.Add(new DataColumn("Plate #", typeof(string)));
             dt.Columns.Add(new DataColumn("Batch", typeof(string)));
-            dt.Columns.Add(new DataColumn("AWB", typeof(string)));
+            dt.Columns.Add(new DataColumn("AWB/Sack #", typeof(string)));
             dt.Columns.Add(new DataColumn("QTY", typeof(string)));
 
             dt.Columns.Add(new DataColumn("CreatedDate", typeof(string)));
@@ -72,8 +72,10 @@ namespace CMS2.Client.Forms.TrackingReports
 
         public DataTable getCTDataByFilter(DateTime date, Guid? destinationId, Guid? revenueunitId, string plateno, Guid? batchId)
         {
-
+            BranchCorpOfficeBL bcoService = new BranchCorpOfficeBL();
             CargoTransferBL cargoTransferBl = new CargoTransferBL();
+
+            List<CargoTransferViewModel> modelList = new List<CargoTransferViewModel>();
             List<CargoTransfer> list = cargoTransferBl.GetAll().Where
                 (x => x.RecordStatus == 1
                 && ((x.BranchCorpOfficeID == destinationId && x.BranchCorpOfficeID != Guid.Empty) || (x.BranchCorpOfficeID == x.BranchCorpOfficeID && destinationId == Guid.Empty))
@@ -81,9 +83,20 @@ namespace CMS2.Client.Forms.TrackingReports
                 && ((x.BatchID == batchId && x.BatchID != Guid.Empty) || (x.BatchID == x.BatchID && batchId == Guid.Empty))
                 && ((x.PlateNo == plateno && x.PlateNo != "All") || (x.PlateNo == x.PlateNo && plateno == "All"))
                 && x.CreatedDate.ToShortDateString() == date.ToShortDateString()
-                ).ToList();
+                ).GroupBy(x => x.Cargo).Select(y => y.First()).ToList();
 
-            List<CargoTransferViewModel> modelList = Match(list);
+            //List<CargoTransferViewModel> modelList = Match(list);
+
+            string _bco = "";
+            if (destinationId != Guid.Empty)
+            {
+                _bco = bcoService.GetAll().Find(x => x.BranchCorpOfficeId == destinationId).BranchCorpOfficeName;
+                modelList = Match(list).FindAll(x => x.BCO == _bco);
+            }
+            else
+            {
+                modelList = Match(list);
+            }
 
             DataTable dt = new DataTable();
             dt.Columns.Add(new DataColumn("No", typeof(string)));
@@ -94,7 +107,7 @@ namespace CMS2.Client.Forms.TrackingReports
             dt.Columns.Add(new DataColumn("Pieces", typeof(string)));
             dt.Columns.Add(new DataColumn("Plate #", typeof(string)));
             dt.Columns.Add(new DataColumn("Batch", typeof(string)));
-            dt.Columns.Add(new DataColumn("AWB", typeof(string)));
+            dt.Columns.Add(new DataColumn("AWB/Sack #", typeof(string)));
             dt.Columns.Add(new DataColumn("QTY", typeof(string)));
 
             dt.Columns.Add(new DataColumn("CreatedDate", typeof(string)));
@@ -141,14 +154,15 @@ namespace CMS2.Client.Forms.TrackingReports
             width.Add(190);
             width.Add(100);
             width.Add(100);
-            width.Add(100);
-            width.Add(100);
-            width.Add(90);
+            width.Add(0); //Pieces
+            width.Add(100); //PlateNo
+            width.Add(90);//Batch
 
-            width.Add(80);
-            width.Add(0);
+            width.Add(100);//AWB
+            width.Add(100);//Qty
             width.Add(0);
 
+            width.Add(0);
             width.Add(0);
             width.Add(0);
             width.Add(0);
@@ -161,46 +175,101 @@ namespace CMS2.Client.Forms.TrackingReports
             PackageNumberBL _packageNumberService = new PackageNumberBL();
             ShipmentBL shipment = new ShipmentBL();
             List<CargoTransferViewModel> _results = new List<CargoTransferViewModel>();
+            BundleBL bundleService = new BundleBL();
+            PackageNumber _packageNumber = new PackageNumber();
+            List<string> listCargo = new List<string>();
+
             foreach (CargoTransfer cargoTransfer in _cargoTransfers)
             {
                 CargoTransferViewModel model = new CargoTransferViewModel();
                 string _airwaybill = "";
                 try {
-                    _airwaybill = _packageNumberService.GetAll().Find(x => x.PackageNo == cargoTransfer.Cargo).Shipment.AirwayBillNo;
+                    // _airwaybill = _packageNumberService.GetAll().Find(x => x.PackageNo == cargoTransfer.Cargo).Shipment.AirwayBillNo;
+                    _packageNumber = _packageNumberService.FilterActive().Where(x => x.PackageNo == cargoTransfer.Cargo).FirstOrDefault();
+                    if(_packageNumber == null)
+                    {
+                        CargoTransferViewModel model1 = new CargoTransferViewModel();
+                        listCargo = bundleService.GetAll().Where(x => x.SackNo == cargoTransfer.Cargo).Select(y => y.Cargo).ToList();
+                        if (listCargo != null && listCargo.Count != 0)
+                        {
+                            CargoTransferViewModel isExist = _results.Find(x => x.AWB == cargoTransfer.Cargo);
+                            if (isExist != null)
+                            {
+                                isExist.QTY++;
+                                model.Pieces++;
+                            }
+                            else
+                            {
+                                //List<Shipment> list = shipment.GetAll().Where(x => x.AirwayBillNo.Equals(_airwaybill)).ToList();
+                                //model1.Origin = _airwaybill;
+                                //foreach (Shipment x in list)
+                                //{
+                                //    model1.Origin = x.OriginCity.CityName;
+                                //    model1.Destination = x.DestinationCity.CityName;
+                                //}
+                                model1.Origin = "N/A";
+                                model1.Destination = "N/A";
+                                model1.Driver = cargoTransfer.Driver;
+                                model1.Checker = cargoTransfer.Checker;
+                                model1.Pieces= listCargo.Count;
+                                model1.PlateNo = cargoTransfer.PlateNo;
+                                model1.Batch = cargoTransfer.Batch.BatchName;
+                                model1.AWB = cargoTransfer.Cargo;
+                                model1.QTY= listCargo.Count;
+                                model1.CreatedDate = cargoTransfer.CreatedDate;
+
+                                model1.BCO = cargoTransfer.BranchCorpOffice.BranchCorpOfficeName;
+                                model1.GATEWAY = cargoTransfer.RevenueUnit.RevenueUnitName;
+                                model1.SATELLITE = cargoTransfer.RevenueUnit.RevenueUnitName;
+                                model1.ScannedBy = AppUser.User.Employee.FullName;
+                                _results.Add(model1);
+
+                            }
+                        }
+                     }
+                    else
+                    {
+                        _airwaybill = _packageNumber.Shipment.AirwayBillNo;
+                        CargoTransferViewModel isExist = _results.Find(x => x.AWB == _airwaybill);
+
+                        if (isExist != null)
+                        {
+                            isExist.QTY++;
+                            model.Pieces++;
+                            //_results.Add(isExist);
+                        }
+                        else
+                        {
+                            List<Shipment> list = shipment.GetAll().Where(x => x.AirwayBillNo.Equals(_airwaybill)).ToList();
+                            model.Origin = _airwaybill;
+                            foreach (Shipment x in list)
+                            {
+                                model.Origin = x.OriginCity.CityName;
+                                model.Destination = x.DestinationCity.CityName;
+                                model.BCO = x.DestinationCity.BranchCorpOffice.BranchCorpOfficeName;
+                            }
+                            model.Driver = cargoTransfer.Driver;
+                            model.Checker = cargoTransfer.Checker;
+                            model.Pieces++;
+                            model.PlateNo = cargoTransfer.PlateNo;
+                            model.Batch = cargoTransfer.Batch.BatchName;
+                            model.AWB = _airwaybill;
+                            model.QTY++;
+                            model.CreatedDate = cargoTransfer.CreatedDate;
+
+                            // model.BCO = cargoTransfer.BranchCorpOffice.BranchCorpOfficeName;
+                            //model.BCO = cargoTransfer.BranchCorpOffice.BranchCorpOfficeName;
+                            model.GATEWAY = cargoTransfer.RevenueUnit.RevenueUnitName;
+                            model.SATELLITE = cargoTransfer.RevenueUnit.RevenueUnitName;
+                            model.ScannedBy = AppUser.User.Employee.FullName;
+                            _results.Add(model);
+
+                        }
+                    }
+
                 }
                 catch (Exception) { continue; }
-                CargoTransferViewModel isExist = _results.Find(x => x.AWB == _airwaybill);
-
-                if (isExist != null)
-                {
-                    isExist.QTY++;
-                    model.Pieces++;
-                    //_results.Add(isExist);
-                }
-                else
-                {
-                    List<Shipment> list = shipment.GetAll().Where(x => x.AirwayBillNo.Equals(_airwaybill)).ToList();
-                    model.Origin = _airwaybill;
-                    foreach (Shipment x in list) {
-                        model.Origin = x.OriginCity.CityName;
-                        model.Destination = x.DestinationCity.CityName;                        
-                    }
-                    model.Driver = cargoTransfer.Driver;
-                    model.Checker = cargoTransfer.Checker;
-                    model.Pieces++;
-                    model.PlateNo = cargoTransfer.PlateNo;
-                    model.Batch = cargoTransfer.Batch.BatchName;
-                    model.AWB = _airwaybill;
-                    model.QTY++;
-                    model.CreatedDate = cargoTransfer.CreatedDate;
-
-                    model.BCO = cargoTransfer.BranchCorpOffice.BranchCorpOfficeName;
-                    model.GATEWAY = cargoTransfer.RevenueUnit.RevenueUnitName;
-                    model.SATELLITE = cargoTransfer.RevenueUnit.RevenueUnitName;
-                    model.ScannedBy = AppUser.User.Employee.FullName;
-                    _results.Add(model);
-
-                }
+                
             }
             return _results;
         }

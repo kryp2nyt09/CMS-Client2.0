@@ -18,9 +18,9 @@ namespace CMS2.Client.Forms.TrackingReports
         {
             //GET LIST 
             ShipmentBL _shipmentService = new ShipmentBL();
-            List<Shipment> _shipments = _shipmentService.GetAll().Where(x => x.Booking.BookingStatus.BookingStatusName == "Picked-up" && x.AcceptedBy.AssignedToArea.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.RecordStatus == 1 && (x.CreatedDate).ToShortDateString() == date.ToShortDateString()).ToList();
+            List<Shipment> _shipments = _shipmentService.FilterActive().Where(x => x.Booking.BookingStatus.BookingStatusName == "Picked-up" && x.AcceptedBy.AssignedToArea.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.RecordStatus == 1 && (x.CreatedDate).ToShortDateString() == date.ToShortDateString()).ToList();
 
-            List<PickupCargoManifestViewModel> modelList = Match(_shipments).OrderByDescending(x => x.AirwayBillNo).ToList();
+            List<PickupCargoManifestViewModel> modelList = Match(_shipments).OrderByDescending(x => x.AirwayBillNo).Distinct().ToList();
 
             DataTable dt = new DataTable();
 
@@ -74,7 +74,7 @@ namespace CMS2.Client.Forms.TrackingReports
         {
             //GET LIST 
             ShipmentBL _shipmentService = new ShipmentBL();
-            List<Shipment> _shipments = _shipmentService.GetAll().Where(x => x.Booking.BookingStatus.BookingStatusName == "Picked-up" && x.AcceptedBy.AssignedToArea.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.RecordStatus == 1 && (x.CreatedDate).ToShortDateString() == date.ToShortDateString() && x.AcceptedBy.AssignedToAreaId == revenueUnitId && x.AcceptedBy.AssignedToArea.RevenueUnitTypeId == revenueUnitTypeId).ToList();
+            List<Shipment> _shipments = _shipmentService.FilterActive().Where(x => x.Booking.BookingStatus.BookingStatusName == "Picked-up" && x.AcceptedBy.AssignedToArea.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.RecordStatus == 1 && (x.CreatedDate).ToShortDateString() == date.ToShortDateString() && x.AcceptedBy.AssignedToAreaId == revenueUnitId && x.AcceptedBy.AssignedToArea.RevenueUnitTypeId == revenueUnitTypeId).ToList();
 
             List<PickupCargoManifestViewModel> modelList = Match(_shipments).OrderByDescending(x => x.AirwayBillNo).ToList();
 
@@ -158,17 +158,19 @@ namespace CMS2.Client.Forms.TrackingReports
             List<PickupCargoManifestViewModel> _results = new List<PickupCargoManifestViewModel>();
 
             List<PackageNumber> packageList = new List<PackageNumber>();
+            int numberOfPackage = 0;
 
             foreach (Shipment shipment  in _shipment)
             {
                 PickupCargoManifestViewModel model = new PickupCargoManifestViewModel();
                 try {
-                    packageList = _packageNumberService.GetAll().Where(x => x.ShipmentId == shipment.ShipmentId).Distinct().ToList();
+                    packageList = _packageNumberService.FilterActive().Where(x => x.ShipmentId == shipment.ShipmentId).Distinct().ToList();
+                    numberOfPackage = packageList.Count;
                 }
                 catch (Exception) { continue; }
                 foreach (PackageNumber number in packageList)
                 {
-                    List<BranchAcceptance> branchList = branchAcceptanceBL.GetAll().Where(x => x.Cargo == number.PackageNo).Distinct().ToList();
+                    List<BranchAcceptance> branchList = branchAcceptanceBL.FilterActive().Where(x => x.Cargo == number.PackageNo).Distinct().ToList();
                     foreach (BranchAcceptance branch in branchList)
                     {
                         model.Driver = (branch.Driver != null || branch.Driver != "") ? branch.Driver : "N/A";
@@ -191,7 +193,8 @@ namespace CMS2.Client.Forms.TrackingReports
                     model.ConsigneeAddress = shipment.Consignee.Address1 + " " + shipment.Consignee.Address2;
                     model.ShipperAddress = shipment.Shipper.Address1 + " " + shipment.Shipper.Address2;
                     model.Commodity = shipment.Commodity.CommodityName;
-                    model.QTY++;
+                    // model.QTY++;
+                    model.QTY = numberOfPackage;
                     model.AGW += shipment.Weight;
                     model.ServiceMode = shipment.ServiceMode.ServiceModeName;
                     model.PaymentMode = shipment.PaymentMode.PaymentModeName;
