@@ -482,7 +482,7 @@ namespace CMS2.Client.SyncHelper
 
             SqlParameter param;
             ThreadState state = (ThreadState)obj;
-            List<ManualResetEvent> events = new List<ManualResetEvent>();
+            //List<ManualResetEvent> events = new List<ManualResetEvent>();
             try
             {
 
@@ -787,8 +787,17 @@ namespace CMS2.Client.SyncHelper
                         Log.WriteLogs(_tableName + " was provisioned.");
                         break;
                     default:
-                        ProvisionServer(_tableName);
-                        ProvisionClient(_tableName);
+                       bool flag = false;
+                        while (!flag)
+                        {
+                            flag = ProvisionServer(_tableName);
+                        }
+                        flag = false;
+                        while (!flag)
+                        {
+                            flag = ProvisionClient(_tableName);
+                        }
+                       
 
                         state.table.Status = TableStatus.Provisioned;
                         state.worker.ReportProgress(1, _tableName + " was provisioned.");
@@ -828,7 +837,7 @@ namespace CMS2.Client.SyncHelper
             }
         }
 
-        private void ProvisionServer(string TableName)
+        private bool ProvisionServer(string TableName)
         {
             try
             {
@@ -855,12 +864,13 @@ namespace CMS2.Client.SyncHelper
                     Console.WriteLine("Server " + TableName + " was already provisioned.");
                     Log.WriteLogs("Server " + TableName + " was already provisioned.");
                 }
+                return true;
             }
             catch (Exception ex)
             {
                 Log.WriteErrorLogs(ex);
             }
-
+            return false;
 
         }
 
@@ -897,21 +907,30 @@ namespace CMS2.Client.SyncHelper
             }
         }
 
-        public void ProvisionClient(string TableName)
+        public bool ProvisionClient(string TableName)
         {
-            DbSyncScopeDescription scopeDescription = SqlSyncDescriptionBuilder.GetDescriptionForScope(TableName + _filter, _serverConnection);
-
-            SqlSyncScopeProvisioning clientProvision = new SqlSyncScopeProvisioning(_localConnection, scopeDescription);
-
-            if (!clientProvision.ScopeExists(scopeDescription.ScopeName))
+            try
             {
-                clientProvision.Apply();
-                Log.WriteLogs("Client " + TableName + " was provisioned.");
+                DbSyncScopeDescription scopeDescription = SqlSyncDescriptionBuilder.GetDescriptionForScope(TableName + _filter, _serverConnection);
+
+                SqlSyncScopeProvisioning clientProvision = new SqlSyncScopeProvisioning(_localConnection, scopeDescription);
+
+                if (!clientProvision.ScopeExists(scopeDescription.ScopeName))
+                {
+                    clientProvision.Apply();
+                    Log.WriteLogs("Client " + TableName + " was provisioned.");
+                }
+                else
+                {
+                    Log.WriteLogs("Client " + TableName + " was already provisioned.");
+                }
+                return true;
             }
-            else
+            catch (Exception ex)
             {
-                Log.WriteLogs("Client " + TableName + " was already provisioned.");
+                Log.WriteErrorLogs(ex);
             }
+            return false;
         }
 
         private void CreateTemplate(string TableName, string filterColumn, string filterClause, SqlParameter param)

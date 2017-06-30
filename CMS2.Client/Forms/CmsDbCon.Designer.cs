@@ -516,7 +516,7 @@
             this.radPageView1.Controls.Add(this.radPageViewPage2);
             this.radPageView1.Location = new System.Drawing.Point(12, 12);
             this.radPageView1.Name = "radPageView1";
-            this.radPageView1.SelectedPage = this.radPageViewPage1;
+            this.radPageView1.SelectedPage = this.radPageViewPage2;
             this.radPageView1.Size = new System.Drawing.Size(399, 590);
             this.radPageView1.TabIndex = 2;
             this.radPageView1.ThemeName = "Office2010Black";
