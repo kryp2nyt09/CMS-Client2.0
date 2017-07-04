@@ -2,30 +2,20 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
-using System.Text;
-using System.Web.UI.WebControls;
 using System.Windows.Forms;
 using System.Xml;
 using CMS2.BusinessLogic;
 using CMS2.Client.Properties;
 using CMS2.Entities;
-using System.Data.Sql;
 using System.Data.SqlClient;
-using System.Data.Entity.Infrastructure;
 using CMS2.DataAccess;
-using System.Data.Entity.Core.Objects;
-using System.Data.Entity.Core.Metadata.Edm;
 using CMS2.Client.SyncHelper;
 using System.Drawing;
 using CMS2.Common;
 using System.Threading;
-using System.Threading.Tasks;
 using System.ComponentModel;
 using System.ServiceProcess;
 using System.IO;
-using System.Security.Permissions;
-using System.Net.Sockets;
-using CMS2.Entities.ReportModel;
 
 namespace CMS2.Client
 {
@@ -74,6 +64,8 @@ namespace CMS2.Client
         private bool IsDeprovisionServer = true;
 
         private int DoneCount = 0;
+
+        private bool isRenew = false;
 
         private string fileName = @"C:\Program Files (x86)\APCargo\APCargo\AP CARGO SERVICE.exe.config";
 
@@ -144,7 +136,7 @@ namespace CMS2.Client
                 radPageViewPage2.Enabled = false;
             }
 
-          
+
 
         }
         private void btnSave_Click(object sender, EventArgs e)
@@ -213,7 +205,7 @@ namespace CMS2.Client
             txtServerPassword.Text = Settings.Default.CentralPassword;
             txtDeviceCode.Text = Settings.Default.DeviceCode;
 
-           
+
             try
             {
                 lstBco.SelectedValue = _branchCorpOffices.Find(x => x.BranchCorpOfficeId == Guid.Parse(_branchCorpOfficeId)).BranchCorpOfficeId;
@@ -430,38 +422,46 @@ namespace CMS2.Client
         {
             btnStart.Enabled = false;
             btnCancel.Enabled = true;
-            Worker.RunWorkerAsync();
+            isRenew = true;
+            Worker.RunWorkerAsync();            
         }
         private void Renew_Work(object sender, DoWorkEventArgs e)
         {
-            if (radPageView1.SelectedPage ==  radPageViewPage2)
+            if (radPageView1.SelectedPage == radPageViewPage2)
             {
-                if (isDeprovisionClient)
+                if (isRenew)
                 {
-                    radProgressBar1.Value1 = 0;
-                    StartDeprovisionLocal();
+
+                    if (isDeprovisionClient)
+                    {
+                        radProgressBar1.Value1 = 0;
+                        StartDeprovisionLocal();
+                    }
+                    if (IsDeprovisionServer)
+                    {
+                        radProgressBar1.Value1 = 0;
+                        //StartDeprovisionServer();
+                    }
+                    if (isProvision)
+                    {
+                        radProgressBar1.Value1 = 0;
+                        StartProvision();
+                    }
                 }
-                if (IsDeprovisionServer)
-                {
-                    radProgressBar1.Value1 = 0;
-                    StartDeprovisionServer();
-                }
-                if (isProvision)
-                {
-                    radProgressBar1.Value1 = 0;
-                    StartProvision();
-                }
+
                 radProgressBar1.Value1 = 0;
                 CheckTableState(Worker);
-               
-
             }
             else
             {
                 radProgressBar1.Value1 = 0;
                 CheckTableState(Worker);
-              
             }
+
+
+
+
+
         }
         private void btnCancel_Click(object sender, EventArgs e)
         {
@@ -476,12 +476,13 @@ namespace CMS2.Client
             lblProgressState.Text = e.UserState.ToString();
         }
         private void Worker_RunWorkerCompleted_1(object sender, RunWorkerCompletedEventArgs e)
-        {
-            lblProgressState.Text = "Completed.";
+        {            
             radProgressBar1.Value1 = radProgressBar1.Maximum;
             btnStart.Enabled = true;
             btnSaveSync.Enabled = true;
             btnCancel.Enabled = false;
+            isRenew = false;
+            lblProgressState.Text = "Completed.";
         }
         private void gridTables_CellValueChanged(object sender, Telerik.WinControls.UI.GridViewCellEventArgs e)
         {
@@ -548,10 +549,10 @@ namespace CMS2.Client
                 "Segregation", "ShipmentStatus", "ShipmentTracking", "StatementOfAccountNumber", "StatementOfAccountPrint",
                 "TntMaint", "TransmittalStatus", "TransShipmentLeg", "TransShipmentRoute",
                 "TruckAreaMapping", "Truck", "Unbundle", "RoleUser", "MenuAccess",  "SubMenu"};
-                
+
                 _entities = new BindingList<SyncTables>();
                 foreach (var item in list)
-                {                    
+                {
                     SyncTables table = new SyncTables();
                     table.TableName = item;
                     _entities.Add(table);
@@ -645,7 +646,7 @@ namespace CMS2.Client
             }
             //while (DoneCount != _entities.Count - 5)
             //{
-                
+
             //}
         }
         private void StartProvision()

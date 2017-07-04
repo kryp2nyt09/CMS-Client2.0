@@ -263,12 +263,12 @@ namespace CMS2.Client.SyncHelper
             {
                 //ObjectContext objContext = ((IObjectContextAdapter)context).ObjectContext;
                 //MetadataWorkspace workspace = objContext.MetadataWorkspace;
-
+                
                 //IEnumerable<EntityType> tables = workspace.GetItems<EntityType>(DataSpace.SSpace);
 
                 List<string> list = new List<string>(){"AccountStatus", "AccountType", "AdjustmentReason", "ApplicableRate", "ApplicationSetting",
                 "ApprovingAuthority", "Company", "Employee", "RevenueUnit", "City", "BranchCorpOffice", "Cluster", "Province", "Region",
-                "Group", "RevenueUnitType", "Department", "Position", "BillingPeriod", "BusinessType", "Client", "Industry",
+                "Group", "RevenueUnitType", "Department", "Position", "BillingPeriod", "BusinessType", "Client", "Industry", 
                 "OrganizationType", "PaymentMode", "PaymentTerm", "AwbIssuance", "Batch", "BookingRemark", "Booking", "BookingStatus",
                 "BranchAcceptance", "Remarks", "Bundle", "CargoTransfer", "Reason", "Status", "User", "Claim", "Role", "Commodity",
                 "CommodityType", "WeightBreak", "DeliveredPackage", "Delivery", "DeliveryReceipt", "DeliveryRemark", "DeliveryStatus",
@@ -466,6 +466,8 @@ namespace CMS2.Client.SyncHelper
         static DbSyncScopeDescription scopeDesc;
         static DbSyncTableDescription tableDescription;
         static SqlSyncScopeProvisioning serverTemplate;
+
+        bool flag = false;
         public Provision() { }
         public Provision(string tableName, SqlConnection localConnection, SqlConnection serverConnection, ManualResetEvent currentEvent, string filter, string branchCorpOfficeId)
         {
@@ -482,7 +484,7 @@ namespace CMS2.Client.SyncHelper
 
             SqlParameter param;
             ThreadState state = (ThreadState)obj;
-            List<ManualResetEvent> events = new List<ManualResetEvent>();
+
             try
             {
 
@@ -506,11 +508,17 @@ namespace CMS2.Client.SyncHelper
                         param = new SqlParameter("@BranchCorpOfficeId", SqlDbType.UniqueIdentifier);
 
                         CreateTemplate(_tableName, filterColumn, filterClause, param);
-
-                        ProvisionServer(_tableName, param, _branchCorpOfficeId);
-
-                        ProvisionClient(_tableName);
-
+                        
+                        while (!flag)
+                        {
+                            flag = ProvisionServer(_tableName, param, _branchCorpOfficeId);
+                        }
+                        flag = false;
+                        while (!flag)
+                        {
+                            flag = ProvisionClient(_tableName);
+                        }
+                        
                         state.table.Status = TableStatus.Provisioned;
                         state.worker.ReportProgress(1, _tableName + " was provisioned.");
                         Log.WriteLogs(_tableName + " was provisioned.");
@@ -533,11 +541,17 @@ namespace CMS2.Client.SyncHelper
                         param = new SqlParameter("@BranchCorpOfficeId", SqlDbType.UniqueIdentifier);
 
                         CreateTemplate(_tableName, filterColumn, filterClause, param);
-
-                        ProvisionServer(_tableName, param, _branchCorpOfficeId);
-
-                        ProvisionClient(_tableName);
-
+                        
+                        while (!flag)
+                        {
+                            flag = ProvisionServer(_tableName, param, _branchCorpOfficeId);
+                        }
+                        flag = false;
+                        while (!flag)
+                        {
+                            flag = ProvisionClient(_tableName);
+                        }
+                        
                         state.table.Status = TableStatus.Provisioned;
                         state.worker.ReportProgress(1, _tableName + " was provisioned.");
                         Log.WriteLogs(_tableName + " was provisioned.");
@@ -563,11 +577,17 @@ namespace CMS2.Client.SyncHelper
                         param = new SqlParameter("@BranchCorpOfficeId", SqlDbType.UniqueIdentifier);
 
                         CreateTemplate(_tableName, filterColumn, filterClause, param);
-
-                        ProvisionServer(_tableName, param, _branchCorpOfficeId);
-
-                        ProvisionClient(_tableName);
-
+                        
+                        while (!flag)
+                        {
+                            flag = ProvisionServer(_tableName, param, _branchCorpOfficeId);
+                        }
+                        flag = false;
+                        while (!flag)
+                        {
+                            flag = ProvisionClient(_tableName);
+                        }
+                        
                         state.table.Status = TableStatus.Provisioned;
                         state.worker.ReportProgress(1, _tableName + " was provisioned.");
                         Log.WriteLogs(_tableName + " was provisioned.");
@@ -593,11 +613,17 @@ namespace CMS2.Client.SyncHelper
                         param = new SqlParameter("@BranchCorpOfficeId", SqlDbType.UniqueIdentifier);
 
                         CreateTemplate(_tableName, filterColumn, filterClause, param);
-
-                        ProvisionServer(_tableName, param, _branchCorpOfficeId);
-
-                        ProvisionClient(_tableName);
-
+                        
+                        while (!flag)
+                        {
+                            flag = ProvisionServer(_tableName, param, _branchCorpOfficeId);
+                        }
+                        flag = false;
+                        while (!flag)
+                        {
+                            flag = ProvisionClient(_tableName);
+                        }
+                        
                         state.table.Status = TableStatus.Provisioned;
                         state.worker.ReportProgress(1, _tableName + " was provisioned.");
                         Log.WriteLogs(_tableName + " was provisioned.");
@@ -615,11 +641,17 @@ namespace CMS2.Client.SyncHelper
                         param = new SqlParameter("@BranchCorpOfficeId", SqlDbType.UniqueIdentifier);
 
                         CreateTemplate(_tableName, filterColumn, filterClause, param);
-
-                        ProvisionServer(_tableName, param, _branchCorpOfficeId);
-
-                        ProvisionClient(_tableName);
-
+                        
+                        while (!flag)
+                        {
+                            flag = ProvisionServer(_tableName, param, _branchCorpOfficeId);
+                        }
+                        flag = false;
+                        while (!flag)
+                        {
+                            flag = ProvisionClient(_tableName);
+                        }
+                        
                         state.table.Status = TableStatus.Provisioned;
                         state.worker.ReportProgress(1, _tableName + " was provisioned.");
                         Log.WriteLogs(_tableName + " was provisioned.");
@@ -644,11 +676,17 @@ namespace CMS2.Client.SyncHelper
                         param = new SqlParameter("@BranchCorpOfficeId", SqlDbType.UniqueIdentifier);
 
                         CreateTemplate(_tableName, filterColumn, filterClause, param);
-
-                        ProvisionServer(_tableName, param, _branchCorpOfficeId);
-
-                        ProvisionClient(_tableName);
-
+                        
+                        while (!flag)
+                        {
+                            flag = ProvisionServer(_tableName, param, _branchCorpOfficeId);
+                        }
+                        flag = false;
+                        while (!flag)
+                        {
+                            flag = ProvisionClient(_tableName);
+                        }
+                        
                         state.table.Status = TableStatus.Provisioned;
                         state.worker.ReportProgress(1, _tableName + " was provisioned.");
                         Log.WriteLogs(_tableName + " was provisioned.");
@@ -665,9 +703,17 @@ namespace CMS2.Client.SyncHelper
 
                         CreateTemplate(_tableName, filterColumn, filterClause, param);
 
-                        ProvisionServer(_tableName, param, _branchCorpOfficeId);
-
-                        ProvisionClient(_tableName);
+                        
+                        while (!flag)
+                        {
+                            flag = ProvisionServer(_tableName, param, _branchCorpOfficeId);
+                        }
+                        flag = false;
+                        while (!flag)
+                        {
+                            flag = ProvisionClient(_tableName);
+                        }
+                        
 
                         state.table.Status = TableStatus.Provisioned;
                         state.worker.ReportProgress(1, _tableName + " was provisioned.");
@@ -686,9 +732,17 @@ namespace CMS2.Client.SyncHelper
 
                         CreateTemplate(_tableName, filterColumn, filterClause, param);
 
-                        ProvisionServer(_tableName, param, _branchCorpOfficeId);
-
-                        ProvisionClient(_tableName);
+                        
+                        while (!flag)
+                        {
+                            flag = ProvisionServer(_tableName, param, _branchCorpOfficeId);
+                        }
+                        flag = false;
+                        while (!flag)
+                        {
+                            flag = ProvisionClient(_tableName);
+                        }
+                        
 
                         state.table.Status = TableStatus.Provisioned;
                         state.worker.ReportProgress(1, _tableName + " was provisioned.");
@@ -714,10 +768,16 @@ namespace CMS2.Client.SyncHelper
                         param = new SqlParameter("@BranchCorpOfficeId", SqlDbType.UniqueIdentifier);
 
                         CreateTemplate(_tableName, filterColumn, filterClause, param);
-
-                        ProvisionServer(_tableName, param, _branchCorpOfficeId);
-
-                        ProvisionClient(_tableName);
+                        while (!flag)
+                        {
+                            flag = ProvisionServer(_tableName, param, _branchCorpOfficeId);
+                        }
+                        flag = false;
+                        while (!flag)
+                        {
+                            flag = ProvisionClient(_tableName);
+                        }
+                        
 
                         state.table.Status = TableStatus.Provisioned;
                         state.worker.ReportProgress(1, _tableName + " was provisioned.");
@@ -744,10 +804,16 @@ namespace CMS2.Client.SyncHelper
                         param = new SqlParameter("@BranchCorpOfficeId", SqlDbType.UniqueIdentifier);
 
                         CreateTemplate(_tableName, filterColumn, filterClause, param);
-
-                        ProvisionServer(_tableName, param, _branchCorpOfficeId);
-
-                        ProvisionClient(_tableName);
+                                               
+                        while (!flag)
+                        {
+                            flag = ProvisionServer(_tableName, param, _branchCorpOfficeId);
+                        }
+                        flag = false;
+                        while (!flag)
+                        {
+                            flag = ProvisionClient(_tableName);
+                        }
 
                         state.table.Status = TableStatus.Provisioned;
                         state.worker.ReportProgress(1, _tableName + " was provisioned.");
@@ -776,16 +842,23 @@ namespace CMS2.Client.SyncHelper
 
                         CreateTemplate(_tableName, filterColumn, filterClause, param);
 
-                        ProvisionServer(_tableName, param, _branchCorpOfficeId);
-
-                        ProvisionClient(_tableName);
+                        while (!flag)
+                        {
+                            flag = ProvisionServer(_tableName, param, _branchCorpOfficeId);
+                        }
+                        flag = false;
+                        while (!flag)
+                        {
+                            flag = ProvisionClient(_tableName);
+                        }
+                        
 
                         state.table.Status = TableStatus.Provisioned;
                         state.worker.ReportProgress(1, _tableName + " was provisioned.");
                         Log.WriteLogs(_tableName + " was provisioned.");
                         break;
                     default:
-                        bool flag = false;
+                       
                         while (!flag)
                         {
                             flag = ProvisionServer(_tableName);
@@ -795,7 +868,6 @@ namespace CMS2.Client.SyncHelper
                         {
                             flag = ProvisionClient(_tableName);
                         }
-
 
                         state.table.Status = TableStatus.Provisioned;
                         state.worker.ReportProgress(1, _tableName + " was provisioned.");
@@ -849,7 +921,7 @@ namespace CMS2.Client.SyncHelper
 
                 // create a server scope provisioning object based on the tableNameScope
                 SqlSyncScopeProvisioning serverProvision = new SqlSyncScopeProvisioning(_serverConnection, scopeDesc);
-
+                
                 // start the provisioning process
                 if (!serverProvision.ScopeExists(scopeDesc.ScopeName))
                 {
@@ -864,18 +936,16 @@ namespace CMS2.Client.SyncHelper
                     Log.WriteLogs("Server " + TableName + " was already provisioned.");
                     return true;
                 }
-
-
             }
             catch (Exception ex)
             {
                 Log.WriteErrorLogs(ex);
             }
-
             return false;
+
         }
 
-        private void ProvisionServer(string TableName, SqlParameter Parameter, string ParamValue)
+        private bool ProvisionServer(string TableName, SqlParameter Parameter, string ParamValue)
         {
             try
             {
@@ -901,10 +971,12 @@ namespace CMS2.Client.SyncHelper
                 {
                     Log.WriteLogs("Server " + TableName + " was provisioned.");
                 }
+                return true;
             }
             catch (Exception ex)
             {
                 Log.WriteErrorLogs(ex);
+                return false;
             }
         }
 
@@ -927,12 +999,11 @@ namespace CMS2.Client.SyncHelper
                 }
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Log.WriteErrorLogs(ex);
-            }
-            return false;
-
+                return false;
+            }   
+           
         }
 
         private void CreateTemplate(string TableName, string filterColumn, string filterClause, SqlParameter param)
@@ -1019,7 +1090,7 @@ namespace CMS2.Client.SyncHelper
             try
             {
                 SqlSyncScopeDeprovisioning storeClientDeprovision = new SqlSyncScopeDeprovisioning(_connection);
-                storeClientDeprovision.DeprovisionScope(this._tableName + this._filter);
+                storeClientDeprovision.DeprovisionScope(this._tableName + this._filter);                
                 state.table.Status = TableStatus.Deprovisioned;
                 Log.WriteLogs(_tableName + " was deprovisioned.");
             }

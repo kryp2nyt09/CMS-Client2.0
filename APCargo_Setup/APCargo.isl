@@ -342,6 +342,7 @@
 		<col def="S0">ISDotNetInstallerArgsUninstall</col>
 		<col def="S0">ISDotNetInstallerArgsRollback</col>
 		<row><td>AP_CARGO_SERVICE.Primary_output</td><td>{058287EB-4FCD-4E5E-BA97-B6427EA68AAF}</td><td>INSTALLDIR</td><td>2</td><td/><td>ap_cargo_service.primary_out</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>CMS2.Client.Content_Files</td><td>{3D42B58F-441E-4734-BD47-349C577319CD}</td><td>INSTALLDIR</td><td>2</td><td/><td>cms2.client.content_files</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>CMS2.Client.Primary_output</td><td>{4B35A82C-AFAB-4747-BBF7-3BCD039E3C98}</td><td>INSTALLDIR</td><td>2</td><td/><td>cms2.client.primary_output</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>ISX_DEFAULTCOMPONENT</td><td>{44FFC76C-AC78-4C51-BE10-1C81795B97F4}</td><td>INSTALLDIR</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>ISX_DEFAULTCOMPONENT1</td><td>{AC2ABD86-214D-4A75-B5B2-F39BAEF50285}</td><td>CommonFilesFolder</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
@@ -1056,6 +1057,7 @@
 		<col key="yes" def="s72">Component_</col>
 		<row><td>CommonFilesFolder</td><td>ISX_DEFAULTCOMPONENT1</td></row>
 		<row><td>INSTALLDIR</td><td>AP_CARGO_SERVICE.Primary_output</td></row>
+		<row><td>INSTALLDIR</td><td>CMS2.Client.Content_Files</td></row>
 		<row><td>INSTALLDIR</td><td>CMS2.Client.Primary_output</td></row>
 		<row><td>INSTALLDIR</td><td>ISX_DEFAULTCOMPONENT</td></row>
 		<row><td>INSTALLDIR</td><td>ISX_DEFAULTCOMPONENT1</td></row>
@@ -1873,6 +1875,7 @@
 		<col key="yes" def="s38">Feature_</col>
 		<col key="yes" def="s72">Component_</col>
 		<row><td>AlwaysInstall</td><td>AP_CARGO_SERVICE.Primary_output</td></row>
+		<row><td>AlwaysInstall</td><td>CMS2.Client.Content_Files</td></row>
 		<row><td>AlwaysInstall</td><td>CMS2.Client.Primary_output</td></row>
 		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT</td></row>
 		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT1</td></row>
@@ -1891,6 +1894,7 @@
 		<col def="I4">ISAttributes</col>
 		<col def="S72">ISComponentSubFolder_</col>
 		<row><td>ap_cargo_service.primary_out</td><td>AP_CARGO_SERVICE.Primary_output</td><td>AP CARGO SERVICE.Primary output</td><td>0</td><td/><td/><td>0</td><td>1</td><td>&lt;AP CARGO SERVICE&gt;|Built</td><td>3</td><td/></row>
+		<row><td>cms2.client.content_files</td><td>CMS2.Client.Content_Files</td><td>CMS2.Client.Content Files</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;CMS2.Client&gt;|ContentFiles</td><td>3</td><td/></row>
 		<row><td>cms2.client.primary_output</td><td>CMS2.Client.Primary_output</td><td>CMS2.Client.Primary output</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;CMS2.Client&gt;|Built</td><td>3</td><td/></row>
 	</table>
 
@@ -2034,6 +2038,7 @@
 		<col def="S0">HTTPLocation</col>
 		<col def="S0">Miscellaneous</col>
 		<row><td>AP_CARGO_SERVICE.Primary_output</td><td/><td/><td>_589AF23C_CE46_4249_9BF1_086F9AAA7B55_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>CMS2.Client.Content_Files</td><td/><td/><td>_88BB5272_A8CA_4AE1_B528_60FCB213080A_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>CMS2.Client.Primary_output</td><td/><td/><td>_5C99DECD_D6D3_4C28_A072_BC4308644C5C_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>ISX_DEFAULTCOMPONENT</td><td/><td/><td>_17A76326_A819_4277_A19E_14A0BD07961F_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>ISX_DEFAULTCOMPONENT1</td><td/><td/><td>_2B7CDF73_1417_485B_A0A3_2E367533CBFB_FILTER</td><td/><td/><td/><td/></row>
@@ -4351,6 +4356,7 @@ RABWAEQALQA1AAEARQB4AHAAcgBlAHMAcwA=
 		<row><td>LAUNCHPROGRAMFILEKEY</td><td>cms2.client.primary_output</td><td/></row>
 		<row><td>LAUNCHREADME</td><td>1</td><td/></row>
 		<row><td>Manufacturer</td><td>##COMPANY_NAME##</td><td/></row>
+		<row><td>MsiLogging</td><td>voicewarmup</td><td/></row>
 		<row><td>PIDKEY</td><td/><td/></row>
 		<row><td>PIDTemplate</td><td>12345&lt;###-%%%%%%%&gt;@@@@@</td><td/></row>
 		<row><td>PROGMSG_IIS_CREATEAPPPOOL</td><td>##IDS_PROGMSG_IIS_CREATEAPPPOOL##</td><td/></row>

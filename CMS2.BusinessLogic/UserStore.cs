@@ -418,7 +418,8 @@ namespace CMS2.BusinessLogic
 
         public User GetUserByUsername(string name)
         {
-            return GetAllUsers().Where(x => x.UserName == name && x.RecordStatus == 1).FirstOrDefault();
+            //return GetAllUsers().Where(x => x.UserName == name && x.RecordStatus == 1).FirstOrDefault();
+            return _unitOfWork.UserRepository.FilterActiveBy(x => x.UserName == name && x.RecordStatus == 1).FirstOrDefault();
         }
     }
 }
