@@ -317,6 +317,7 @@ namespace CMS2.Client
 
             LoadBookingComponents();
             BookingResetAll();
+            PopulateGrid();
             AddDailyBooking();
 
         }
@@ -392,40 +393,40 @@ namespace CMS2.Client
                     gridFreightCollect.Columns["Client"].PinPosition = Telerik.WinControls.UI.PinnedColumnPosition.Left;
                     break;
                 case "Tracking":
-                    List<BranchCorpOffice> branchCorpOffices = getBranchCorpOffice();
-
-                    getPickupCargoData();
 
                     dateTimePicker_PickupCargo.Value = DateTime.Now;
                     dateTimePickerBranchAcceptance_Date.Value = DateTime.Now;
-                    dateTimeBundle_Date.Value = DateTime.Now;
-                    dateTimeUnbunde_Date.Value = DateTime.Now;
-                    dateTimeGatewayTransmital_Date.Value = DateTime.Now;
-                    dateTimeGatewayOutbound_Date.Value = DateTime.Now;
-                    dateTimePickerGatewayInbound_Date.Value = DateTime.Now;
-                    dateTimeCargoTransfer_Date.Value = DateTime.Now;
-                    dateTimeSegregation_Date.Value = DateTime.Now;
-                    dateTimeDailyTrip_Date.Value = DateTime.Now;
-                    dateTimeHoldCargo_FromDate.Value = DateTime.Now;
-                    dateTimeDeliveryStatus_Date.Value = DateTime.Now;
+                    getPickupCargoData();
+
+                    
+                    //dateTimeBundle_Date.Value = DateTime.Now;
+                    //dateTimeUnbunde_Date.Value = DateTime.Now;
+                    //dateTimeGatewayTransmital_Date.Value = DateTime.Now;
+                    //dateTimeGatewayOutbound_Date.Value = DateTime.Now;
+                    //dateTimePickerGatewayInbound_Date.Value = DateTime.Now;
+                    //dateTimeCargoTransfer_Date.Value = DateTime.Now;
+                    //dateTimeSegregation_Date.Value = DateTime.Now;
+                    //dateTimeDailyTrip_Date.Value = DateTime.Now;
+                    //dateTimeHoldCargo_FromDate.Value = DateTime.Now;
+                    //dateTimeDeliveryStatus_Date.Value = DateTime.Now;
 
                     /******** SET COMBOBOX (BRANCH) *******/
                     //dropDownBundle_Branch.SelectedIndex = 0;
                     //dropDownBranchAcceptance_Branch.SelectedIndex = 0;
 
                     //PickupCargo
-                    PickUpCargoLoadData();
-                    BranchAcceptanceLoadData();
-                    UnbundleLoadData();
-                    BundleLoadData();
-                    GatewayTransmittalLoadData();
-                    GatewayOutboundLoadData();
-                    GatewayInboundLoadData();
-                    CargoTransferLoadData();
-                    SegregationLoadData();
-                    DailyTripLoadData();
-                    HoldCargoLoadData();
-                    DeliveryStatusLoadData();
+                    //PickUpCargoLoadData();
+                    //BranchAcceptanceLoadData();
+                    //UnbundleLoadData();
+                    //BundleLoadData();
+                    //GatewayTransmittalLoadData();
+                    //GatewayOutboundLoadData();
+                    //GatewayInboundLoadData();
+                    //CargoTransferLoadData();
+                    //SegregationLoadData();
+                    //DailyTripLoadData();
+                    //HoldCargoLoadData();
+                    //DeliveryStatusLoadData();
 
                     break;
                 default:
@@ -2856,7 +2857,7 @@ namespace CMS2.Client
 
         private void PopulateGrid()
         {
-            GlobalVars.DeviceBcoId = Guid.Parse(ConfigurationManager.AppSettings["BcoId"]);
+            //GlobalVars.DeviceBcoId = Guid.Parse(ConfigurationManager.AppSettings["BcoId"]);
             List<Booking> books = bookingService.FilterActiveBy(x => x.AssignedToArea.City.BranchCorpOfficeId == GlobalVars.DeviceBcoId).OrderBy(x => x.DateBooked).OrderByDescending(x => x.CreatedDate).ToList(); //bookingService.FilterActiveBy(x => x.AssignedToArea.City.BranchCorpOfficeId == GlobalVars.DeviceBcoId).ToList().OrderByDescending(x => x.CreatedDate);
             if (books.Count > 0 && books != null)
             {
@@ -3635,7 +3636,7 @@ namespace CMS2.Client
                         shipper.CompanyName = txtShipperCompany.Text.Trim();
                     }
                 }
-
+                
                 shipper.Address1 = txtShipperAddress1.Text.Trim();
                 shipper.Address2 = txtShipperAddress2.Text.Trim();
                 shipper.Street = txtShipperStreet.Text.Trim();
@@ -11014,11 +11015,6 @@ namespace CMS2.Client
 
         #endregion END MARK SANTOS REGION
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
         private void timer1_Tick(object sender, EventArgs e)
         {
             // string dataSource = ConfigurationManager.ConnectionStrings["Cms"].ConnectionString;
@@ -11123,6 +11119,11 @@ namespace CMS2.Client
                 default:
                     break;
             }
+        }
+
+        private void txtAmountPaid_TextChanged(object sender, EventArgs e)
+        {
+            ComputeNetCollection();
         }
     }
 }

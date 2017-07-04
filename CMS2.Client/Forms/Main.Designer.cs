@@ -29,36 +29,36 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn1 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn2 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn3 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn4 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn5 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn6 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn7 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn8 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn9 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition1 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition2 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition3 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition4 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition5 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition6 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition7 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn19 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn20 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn21 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn22 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn23 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn24 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn25 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn26 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn27 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition37 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition38 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition39 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition40 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition41 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition42 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition43 = new Telerik.WinControls.UI.TableViewDefinition();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition8 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition9 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition10 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition11 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition12 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition13 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition14 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition15 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition16 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition17 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition44 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition45 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition46 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition47 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition48 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition49 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition50 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition51 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition52 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition53 = new Telerik.WinControls.UI.TableViewDefinition();
             Telerik.WinControls.UI.RadListDataItem radListDataItem1 = new Telerik.WinControls.UI.RadListDataItem();
             Telerik.WinControls.UI.RadListDataItem radListDataItem2 = new Telerik.WinControls.UI.RadListDataItem();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition18 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition54 = new Telerik.WinControls.UI.TableViewDefinition();
             this.office2010BlackTheme1 = new Telerik.WinControls.Themes.Office2010BlackTheme();
             this.radPanel1 = new Telerik.WinControls.UI.RadPanel();
             this.panel = new Telerik.WinControls.UI.RadPanel();
@@ -78,6 +78,13 @@
             this.lblService = new System.Windows.Forms.Label();
             this.BookingGridView = new Telerik.WinControls.UI.RadGridView();
             this.radPanel3 = new Telerik.WinControls.UI.RadPanel();
+            this.radGroupBox3 = new Telerik.WinControls.UI.RadGroupBox();
+            this.btnNew = new Telerik.WinControls.UI.RadButton();
+            this.btnSave = new Telerik.WinControls.UI.RadButton();
+            this.btnEdit = new Telerik.WinControls.UI.RadButton();
+            this.btnDelete = new Telerik.WinControls.UI.RadButton();
+            this.btnReset = new Telerik.WinControls.UI.RadButton();
+            this.btnAcceptance = new Telerik.WinControls.UI.RadButton();
             this.radGroupBox7 = new Telerik.WinControls.UI.RadGroupBox();
             this.GroupRemarks = new Telerik.WinControls.UI.RadPanel();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
@@ -96,12 +103,6 @@
             this.lstBookingRemarks = new Telerik.WinControls.UI.RadDropDownList();
             this.label14 = new System.Windows.Forms.Label();
             this.chkHasDailyBooking = new System.Windows.Forms.CheckBox();
-            this.btnEdit = new Telerik.WinControls.UI.RadButton();
-            this.btnAcceptance = new Telerik.WinControls.UI.RadButton();
-            this.btnReset = new Telerik.WinControls.UI.RadButton();
-            this.btnDelete = new Telerik.WinControls.UI.RadButton();
-            this.btnSave = new Telerik.WinControls.UI.RadButton();
-            this.btnNew = new Telerik.WinControls.UI.RadButton();
             this.GroupConsignee = new Telerik.WinControls.UI.RadGroupBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.txtConsigneeEmail = new Telerik.WinControls.UI.RadMaskedEditBox();
@@ -616,7 +617,6 @@
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.backLoader = new System.ComponentModel.BackgroundWorker();
-            this.radGroupBox3 = new Telerik.WinControls.UI.RadGroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.radPanel1)).BeginInit();
             this.radPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panel)).BeginInit();
@@ -638,6 +638,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.BookingGridView.MasterTemplate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radPanel3)).BeginInit();
             this.radPanel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.radGroupBox3)).BeginInit();
+            this.radGroupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btnNew)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnSave)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnEdit)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnDelete)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnReset)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnAcceptance)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radGroupBox7)).BeginInit();
             this.radGroupBox7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GroupRemarks)).BeginInit();
@@ -650,12 +658,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.lstAssignedTo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lstBookingStatus)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lstBookingRemarks)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnEdit)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnAcceptance)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnReset)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnDelete)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnSave)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnNew)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GroupConsignee)).BeginInit();
             this.GroupConsignee.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -1081,8 +1083,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.btnDeliveryStatus_Print)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnDeliveryStatus_Search)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateTimeDeliveryStatus_Date)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radGroupBox3)).BeginInit();
-            this.radGroupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
             // 
@@ -1216,7 +1216,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(20, 20);
             this.panel1.TabIndex = 37;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // radPanel2
             // 
@@ -1241,7 +1240,7 @@
             this.pageViewMain.Font = new System.Drawing.Font("Tahoma", 9F);
             this.pageViewMain.Location = new System.Drawing.Point(0, 0);
             this.pageViewMain.Name = "pageViewMain";
-            this.pageViewMain.SelectedPage = this.BookingPage;
+            this.pageViewMain.SelectedPage = this.PaymentPage;
             this.pageViewMain.Size = new System.Drawing.Size(1258, 639);
             this.pageViewMain.TabIndex = 0;
             this.pageViewMain.Text = "Manifest";
@@ -1311,58 +1310,58 @@
             this.BookingGridView.MasterTemplate.AllowSearchRow = true;
             this.BookingGridView.MasterTemplate.AutoGenerateColumns = false;
             this.BookingGridView.MasterTemplate.AutoSizeColumnsMode = Telerik.WinControls.UI.GridViewAutoSizeColumnsMode.Fill;
-            gridViewTextBoxColumn1.FieldName = "BookingId";
-            gridViewTextBoxColumn1.HeaderText = "BookingID";
-            gridViewTextBoxColumn1.IsVisible = false;
-            gridViewTextBoxColumn1.Name = "BookingId";
-            gridViewTextBoxColumn2.FieldName = "DateBooked";
-            gridViewTextBoxColumn2.HeaderText = "Booking Date";
-            gridViewTextBoxColumn2.Name = "BookingDate";
-            gridViewTextBoxColumn2.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            gridViewTextBoxColumn2.Width = 152;
-            gridViewTextBoxColumn3.FieldName = "BookingNo";
-            gridViewTextBoxColumn3.HeaderText = "Booking Number";
-            gridViewTextBoxColumn3.Name = "BookingNo";
-            gridViewTextBoxColumn3.Width = 152;
-            gridViewTextBoxColumn4.Expression = "";
-            gridViewTextBoxColumn4.FieldName = "ShipperFullname";
-            gridViewTextBoxColumn4.HeaderText = "Shipper Name";
-            gridViewTextBoxColumn4.Name = "ShipperName";
-            gridViewTextBoxColumn4.Width = 152;
-            gridViewTextBoxColumn5.FieldName = "OriginCity.CityName";
-            gridViewTextBoxColumn5.HeaderText = "Origin City";
-            gridViewTextBoxColumn5.Name = "OriginCity";
-            gridViewTextBoxColumn5.Width = 152;
-            gridViewTextBoxColumn6.Expression = "";
-            gridViewTextBoxColumn6.FieldName = "ConsigneeFullname";
-            gridViewTextBoxColumn6.HeaderText = "Consignee Name";
-            gridViewTextBoxColumn6.Name = "ConsigneeName";
-            gridViewTextBoxColumn6.Width = 152;
-            gridViewTextBoxColumn7.FieldName = "DestinationCity.CityName";
-            gridViewTextBoxColumn7.HeaderText = "Destination City";
-            gridViewTextBoxColumn7.Name = "DestinationCity";
-            gridViewTextBoxColumn7.Width = 152;
-            gridViewTextBoxColumn8.FieldName = "BookedByFullname";
-            gridViewTextBoxColumn8.HeaderText = "Booked By";
-            gridViewTextBoxColumn8.Name = "BookedBy";
-            gridViewTextBoxColumn8.Width = 152;
-            gridViewTextBoxColumn9.FieldName = "BookingStatus.BookingStatusName";
-            gridViewTextBoxColumn9.HeaderText = "Booking Status";
-            gridViewTextBoxColumn9.Name = "BookingStatus";
-            gridViewTextBoxColumn9.Width = 156;
+            gridViewTextBoxColumn19.FieldName = "BookingId";
+            gridViewTextBoxColumn19.HeaderText = "BookingID";
+            gridViewTextBoxColumn19.IsVisible = false;
+            gridViewTextBoxColumn19.Name = "BookingId";
+            gridViewTextBoxColumn20.FieldName = "DateBooked";
+            gridViewTextBoxColumn20.HeaderText = "Booking Date";
+            gridViewTextBoxColumn20.Name = "BookingDate";
+            gridViewTextBoxColumn20.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            gridViewTextBoxColumn20.Width = 152;
+            gridViewTextBoxColumn21.FieldName = "BookingNo";
+            gridViewTextBoxColumn21.HeaderText = "Booking Number";
+            gridViewTextBoxColumn21.Name = "BookingNo";
+            gridViewTextBoxColumn21.Width = 152;
+            gridViewTextBoxColumn22.Expression = "";
+            gridViewTextBoxColumn22.FieldName = "ShipperFullname";
+            gridViewTextBoxColumn22.HeaderText = "Shipper Name";
+            gridViewTextBoxColumn22.Name = "ShipperName";
+            gridViewTextBoxColumn22.Width = 152;
+            gridViewTextBoxColumn23.FieldName = "OriginCity.CityName";
+            gridViewTextBoxColumn23.HeaderText = "Origin City";
+            gridViewTextBoxColumn23.Name = "OriginCity";
+            gridViewTextBoxColumn23.Width = 152;
+            gridViewTextBoxColumn24.Expression = "";
+            gridViewTextBoxColumn24.FieldName = "ConsigneeFullname";
+            gridViewTextBoxColumn24.HeaderText = "Consignee Name";
+            gridViewTextBoxColumn24.Name = "ConsigneeName";
+            gridViewTextBoxColumn24.Width = 152;
+            gridViewTextBoxColumn25.FieldName = "DestinationCity.CityName";
+            gridViewTextBoxColumn25.HeaderText = "Destination City";
+            gridViewTextBoxColumn25.Name = "DestinationCity";
+            gridViewTextBoxColumn25.Width = 152;
+            gridViewTextBoxColumn26.FieldName = "BookedByFullname";
+            gridViewTextBoxColumn26.HeaderText = "Booked By";
+            gridViewTextBoxColumn26.Name = "BookedBy";
+            gridViewTextBoxColumn26.Width = 152;
+            gridViewTextBoxColumn27.FieldName = "BookingStatus.BookingStatusName";
+            gridViewTextBoxColumn27.HeaderText = "Booking Status";
+            gridViewTextBoxColumn27.Name = "BookingStatus";
+            gridViewTextBoxColumn27.Width = 156;
             this.BookingGridView.MasterTemplate.Columns.AddRange(new Telerik.WinControls.UI.GridViewDataColumn[] {
-            gridViewTextBoxColumn1,
-            gridViewTextBoxColumn2,
-            gridViewTextBoxColumn3,
-            gridViewTextBoxColumn4,
-            gridViewTextBoxColumn5,
-            gridViewTextBoxColumn6,
-            gridViewTextBoxColumn7,
-            gridViewTextBoxColumn8,
-            gridViewTextBoxColumn9});
+            gridViewTextBoxColumn19,
+            gridViewTextBoxColumn20,
+            gridViewTextBoxColumn21,
+            gridViewTextBoxColumn22,
+            gridViewTextBoxColumn23,
+            gridViewTextBoxColumn24,
+            gridViewTextBoxColumn25,
+            gridViewTextBoxColumn26,
+            gridViewTextBoxColumn27});
             this.BookingGridView.MasterTemplate.EnableAlternatingRowColor = true;
             this.BookingGridView.MasterTemplate.EnableFiltering = true;
-            this.BookingGridView.MasterTemplate.ViewDefinition = tableViewDefinition1;
+            this.BookingGridView.MasterTemplate.ViewDefinition = tableViewDefinition37;
             this.BookingGridView.Name = "BookingGridView";
             this.BookingGridView.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.BookingGridView.Size = new System.Drawing.Size(1234, 208);
@@ -1386,6 +1385,92 @@
             this.radPanel3.Text = "radPanel3";
             this.radPanel3.ThemeName = "Office2010Black";
             // 
+            // radGroupBox3
+            // 
+            this.radGroupBox3.AccessibleRole = System.Windows.Forms.AccessibleRole.Grouping;
+            this.radGroupBox3.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.radGroupBox3.Controls.Add(this.btnNew);
+            this.radGroupBox3.Controls.Add(this.btnSave);
+            this.radGroupBox3.Controls.Add(this.btnEdit);
+            this.radGroupBox3.Controls.Add(this.btnDelete);
+            this.radGroupBox3.Controls.Add(this.btnReset);
+            this.radGroupBox3.Controls.Add(this.btnAcceptance);
+            this.radGroupBox3.GroupBoxStyle = Telerik.WinControls.UI.RadGroupBoxStyle.Office;
+            this.radGroupBox3.HeaderText = "Controls";
+            this.radGroupBox3.Location = new System.Drawing.Point(834, 268);
+            this.radGroupBox3.Name = "radGroupBox3";
+            this.radGroupBox3.Size = new System.Drawing.Size(388, 108);
+            this.radGroupBox3.TabIndex = 43;
+            this.radGroupBox3.TabStop = false;
+            this.radGroupBox3.Text = "Controls";
+            this.radGroupBox3.ThemeName = "Office2010Black";
+            // 
+            // btnNew
+            // 
+            this.btnNew.Font = new System.Drawing.Font("Tahoma", 9F);
+            this.btnNew.Location = new System.Drawing.Point(48, 25);
+            this.btnNew.Name = "btnNew";
+            this.btnNew.Size = new System.Drawing.Size(95, 33);
+            this.btnNew.TabIndex = 37;
+            this.btnNew.Text = "&New";
+            this.btnNew.ThemeName = "Office2010Black";
+            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
+            // 
+            // btnSave
+            // 
+            this.btnSave.Font = new System.Drawing.Font("Tahoma", 9F);
+            this.btnSave.Location = new System.Drawing.Point(149, 26);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(95, 33);
+            this.btnSave.TabIndex = 38;
+            this.btnSave.Text = "&Save";
+            this.btnSave.ThemeName = "Office2010Black";
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // btnEdit
+            // 
+            this.btnEdit.Font = new System.Drawing.Font("Tahoma", 9F);
+            this.btnEdit.Location = new System.Drawing.Point(250, 26);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(95, 33);
+            this.btnEdit.TabIndex = 39;
+            this.btnEdit.Text = "&Edit";
+            this.btnEdit.ThemeName = "Office2010Black";
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.Font = new System.Drawing.Font("Tahoma", 9F);
+            this.btnDelete.Location = new System.Drawing.Point(48, 65);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(95, 33);
+            this.btnDelete.TabIndex = 40;
+            this.btnDelete.Text = "&Delete";
+            this.btnDelete.ThemeName = "Office2010Black";
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
+            // btnReset
+            // 
+            this.btnReset.Font = new System.Drawing.Font("Tahoma", 9F);
+            this.btnReset.Location = new System.Drawing.Point(149, 65);
+            this.btnReset.Name = "btnReset";
+            this.btnReset.Size = new System.Drawing.Size(95, 33);
+            this.btnReset.TabIndex = 41;
+            this.btnReset.Text = "&Reset/Cancel";
+            this.btnReset.ThemeName = "Office2010Black";
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
+            // 
+            // btnAcceptance
+            // 
+            this.btnAcceptance.Font = new System.Drawing.Font("Tahoma", 9F);
+            this.btnAcceptance.Location = new System.Drawing.Point(250, 65);
+            this.btnAcceptance.Name = "btnAcceptance";
+            this.btnAcceptance.Size = new System.Drawing.Size(95, 33);
+            this.btnAcceptance.TabIndex = 42;
+            this.btnAcceptance.Text = "&Acceptance";
+            this.btnAcceptance.ThemeName = "Office2010Black";
+            this.btnAcceptance.Click += new System.EventHandler(this.btnAcceptance_Click);
+            // 
             // radGroupBox7
             // 
             this.radGroupBox7.AccessibleRole = System.Windows.Forms.AccessibleRole.Grouping;
@@ -1393,7 +1478,7 @@
             this.radGroupBox7.Controls.Add(this.GroupRemarks);
             this.radGroupBox7.GroupBoxStyle = Telerik.WinControls.UI.RadGroupBoxStyle.Office;
             this.radGroupBox7.HeaderText = "Additional Info";
-            this.radGroupBox7.Location = new System.Drawing.Point(836, 3);
+            this.radGroupBox7.Location = new System.Drawing.Point(834, 3);
             this.radGroupBox7.Name = "radGroupBox7";
             this.radGroupBox7.Size = new System.Drawing.Size(388, 261);
             this.radGroupBox7.TabIndex = 28;
@@ -1606,72 +1691,6 @@
             this.chkHasDailyBooking.TabStop = false;
             this.chkHasDailyBooking.Text = "Has Daily Booking";
             this.chkHasDailyBooking.UseVisualStyleBackColor = true;
-            // 
-            // btnEdit
-            // 
-            this.btnEdit.Font = new System.Drawing.Font("Tahoma", 9F);
-            this.btnEdit.Location = new System.Drawing.Point(250, 26);
-            this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(95, 33);
-            this.btnEdit.TabIndex = 39;
-            this.btnEdit.Text = "&Edit";
-            this.btnEdit.ThemeName = "Office2010Black";
-            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
-            // 
-            // btnAcceptance
-            // 
-            this.btnAcceptance.Font = new System.Drawing.Font("Tahoma", 9F);
-            this.btnAcceptance.Location = new System.Drawing.Point(250, 65);
-            this.btnAcceptance.Name = "btnAcceptance";
-            this.btnAcceptance.Size = new System.Drawing.Size(95, 33);
-            this.btnAcceptance.TabIndex = 42;
-            this.btnAcceptance.Text = "&Acceptance";
-            this.btnAcceptance.ThemeName = "Office2010Black";
-            this.btnAcceptance.Click += new System.EventHandler(this.btnAcceptance_Click);
-            // 
-            // btnReset
-            // 
-            this.btnReset.Font = new System.Drawing.Font("Tahoma", 9F);
-            this.btnReset.Location = new System.Drawing.Point(149, 65);
-            this.btnReset.Name = "btnReset";
-            this.btnReset.Size = new System.Drawing.Size(95, 33);
-            this.btnReset.TabIndex = 41;
-            this.btnReset.Text = "&Reset/Cancel";
-            this.btnReset.ThemeName = "Office2010Black";
-            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
-            // 
-            // btnDelete
-            // 
-            this.btnDelete.Font = new System.Drawing.Font("Tahoma", 9F);
-            this.btnDelete.Location = new System.Drawing.Point(48, 65);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(95, 33);
-            this.btnDelete.TabIndex = 40;
-            this.btnDelete.Text = "&Delete";
-            this.btnDelete.ThemeName = "Office2010Black";
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
-            // 
-            // btnSave
-            // 
-            this.btnSave.Font = new System.Drawing.Font("Tahoma", 9F);
-            this.btnSave.Location = new System.Drawing.Point(149, 26);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(95, 33);
-            this.btnSave.TabIndex = 38;
-            this.btnSave.Text = "&Save";
-            this.btnSave.ThemeName = "Office2010Black";
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
-            // btnNew
-            // 
-            this.btnNew.Font = new System.Drawing.Font("Tahoma", 9F);
-            this.btnNew.Location = new System.Drawing.Point(48, 25);
-            this.btnNew.Name = "btnNew";
-            this.btnNew.Size = new System.Drawing.Size(95, 33);
-            this.btnNew.TabIndex = 37;
-            this.btnNew.Text = "&New";
-            this.btnNew.ThemeName = "Office2010Black";
-            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
             // 
             // GroupConsignee
             // 
@@ -3677,7 +3696,7 @@
             this.gridPackage.MasterTemplate.EnableGrouping = false;
             this.gridPackage.MasterTemplate.MultiSelect = true;
             this.gridPackage.MasterTemplate.ShowFilteringRow = false;
-            this.gridPackage.MasterTemplate.ViewDefinition = tableViewDefinition2;
+            this.gridPackage.MasterTemplate.ViewDefinition = tableViewDefinition38;
             this.gridPackage.Name = "gridPackage";
             this.gridPackage.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.tableLayoutPanel14.SetRowSpan(this.gridPackage, 5);
@@ -4777,7 +4796,7 @@
             this.radLabel44.Name = "radLabel44";
             this.radLabel44.Size = new System.Drawing.Size(77, 18);
             this.radLabel44.TabIndex = 14;
-            this.radLabel44.Text = "Net Collection";
+            this.radLabel44.Text = "Cash Collected";
             // 
             // radLabel45
             // 
@@ -4890,7 +4909,7 @@
             this.txtAmountPaid.Text = "₱0.00";
             this.txtAmountPaid.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtAmountPaid.ThemeName = "Office2010Black";
-            this.txtAmountPaid.TextChanged += new System.EventHandler(this.txtAmountPaid_Leave);
+            this.txtAmountPaid.TextChanged += new System.EventHandler(this.txtAmountPaid_TextChanged);
             // 
             // txtAmountDue
             // 
@@ -4951,7 +4970,7 @@
             this.gridManifest.MasterTemplate.EnableFiltering = true;
             this.gridManifest.MasterTemplate.PageSize = 1;
             this.gridManifest.MasterTemplate.ShowGroupedColumns = true;
-            this.gridManifest.MasterTemplate.ViewDefinition = tableViewDefinition3;
+            this.gridManifest.MasterTemplate.ViewDefinition = tableViewDefinition39;
             this.gridManifest.Name = "gridManifest";
             this.gridManifest.Size = new System.Drawing.Size(1234, 587);
             this.gridManifest.TabIndex = 0;
@@ -5436,7 +5455,7 @@
             // 
             this.gridCorpAcctConsignee.MasterTemplate.AllowAddNewRow = false;
             this.gridCorpAcctConsignee.MasterTemplate.AllowDeleteRow = false;
-            this.gridCorpAcctConsignee.MasterTemplate.ViewDefinition = tableViewDefinition4;
+            this.gridCorpAcctConsignee.MasterTemplate.ViewDefinition = tableViewDefinition40;
             this.gridCorpAcctConsignee.Name = "gridCorpAcctConsignee";
             this.gridCorpAcctConsignee.Size = new System.Drawing.Size(794, 121);
             this.gridCorpAcctConsignee.TabIndex = 62;
@@ -5454,7 +5473,7 @@
             this.gridPrepaid.MasterTemplate.AllowColumnReorder = false;
             this.gridPrepaid.MasterTemplate.AllowColumnResize = false;
             this.gridPrepaid.MasterTemplate.AllowDeleteRow = false;
-            this.gridPrepaid.MasterTemplate.ViewDefinition = tableViewDefinition5;
+            this.gridPrepaid.MasterTemplate.ViewDefinition = tableViewDefinition41;
             this.gridPrepaid.Name = "gridPrepaid";
             this.gridPrepaid.Size = new System.Drawing.Size(794, 131);
             this.gridPrepaid.TabIndex = 60;
@@ -5626,7 +5645,7 @@
             this.gridFreightCollect.MasterTemplate.AllowAddNewRow = false;
             this.gridFreightCollect.MasterTemplate.AllowColumnResize = false;
             this.gridFreightCollect.MasterTemplate.AllowDeleteRow = false;
-            this.gridFreightCollect.MasterTemplate.ViewDefinition = tableViewDefinition6;
+            this.gridFreightCollect.MasterTemplate.ViewDefinition = tableViewDefinition42;
             this.gridFreightCollect.Name = "gridFreightCollect";
             this.gridFreightCollect.Size = new System.Drawing.Size(794, 127);
             this.gridFreightCollect.TabIndex = 61;
@@ -5699,6 +5718,7 @@
             // 
             // pageViewTracking
             // 
+            this.pageViewTracking.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.pageViewTracking.Controls.Add(this.radPageViewPage7);
             this.pageViewTracking.Controls.Add(this.radPageViewPage8);
             this.pageViewTracking.Controls.Add(this.radPageViewPage9);
@@ -5711,7 +5731,6 @@
             this.pageViewTracking.Controls.Add(this.radPageViewPage16);
             this.pageViewTracking.Controls.Add(this.radPageViewPage17);
             this.pageViewTracking.Controls.Add(this.radPageViewPage18);
-            this.pageViewTracking.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pageViewTracking.Location = new System.Drawing.Point(0, 0);
             this.pageViewTracking.Name = "pageViewTracking";
             this.pageViewTracking.SelectedPage = this.radPageViewPage7;
@@ -5756,7 +5775,7 @@
             this.gridPickupCargo.MasterTemplate.AllowDragToGroup = false;
             this.gridPickupCargo.MasterTemplate.AllowEditRow = false;
             this.gridPickupCargo.MasterTemplate.ShowRowHeaderColumn = false;
-            this.gridPickupCargo.MasterTemplate.ViewDefinition = tableViewDefinition7;
+            this.gridPickupCargo.MasterTemplate.ViewDefinition = tableViewDefinition43;
             this.gridPickupCargo.Name = "gridPickupCargo";
             this.gridPickupCargo.ShowItemToolTips = false;
             this.gridPickupCargo.Size = new System.Drawing.Size(1086, 455);
@@ -5766,8 +5785,6 @@
             // 
             // radPanel13
             // 
-            this.radPanel13.Controls.Add(this.label126);
-            this.radPanel13.Controls.Add(this.label96);
             this.radPanel13.Controls.Add(this.cmb_RevenueUnit);
             this.radPanel13.Controls.Add(this.cmb_RevenueUnitType);
             this.radPanel13.Controls.Add(this.btnPickupCargo_Export);
@@ -5777,6 +5794,8 @@
             this.radPanel13.Controls.Add(this.label76);
             this.radPanel13.Controls.Add(this.label68);
             this.radPanel13.Controls.Add(this.label67);
+            this.radPanel13.Controls.Add(this.label126);
+            this.radPanel13.Controls.Add(this.label96);
             this.radPanel13.Dock = System.Windows.Forms.DockStyle.Top;
             this.radPanel13.Location = new System.Drawing.Point(0, 0);
             this.radPanel13.Name = "radPanel13";
@@ -5788,7 +5807,7 @@
             // 
             this.label126.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label126.AutoSize = true;
-            this.label126.Location = new System.Drawing.Point(322, 60);
+            this.label126.Location = new System.Drawing.Point(321, 63);
             this.label126.Name = "label126";
             this.label126.Size = new System.Drawing.Size(76, 13);
             this.label126.TabIndex = 82;
@@ -5798,7 +5817,7 @@
             // 
             this.label96.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label96.AutoSize = true;
-            this.label96.Location = new System.Drawing.Point(192, 60);
+            this.label96.Location = new System.Drawing.Point(184, 63);
             this.label96.Name = "label96";
             this.label96.Size = new System.Drawing.Size(101, 13);
             this.label96.TabIndex = 81;
@@ -5807,7 +5826,7 @@
             // cmb_RevenueUnit
             // 
             this.cmb_RevenueUnit.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmb_RevenueUnit.Location = new System.Drawing.Point(325, 78);
+            this.cmb_RevenueUnit.Location = new System.Drawing.Point(324, 80);
             this.cmb_RevenueUnit.Name = "cmb_RevenueUnit";
             this.cmb_RevenueUnit.Size = new System.Drawing.Size(125, 20);
             this.cmb_RevenueUnit.TabIndex = 80;
@@ -5816,7 +5835,7 @@
             // cmb_RevenueUnitType
             // 
             this.cmb_RevenueUnitType.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmb_RevenueUnitType.Location = new System.Drawing.Point(194, 78);
+            this.cmb_RevenueUnitType.Location = new System.Drawing.Point(189, 80);
             this.cmb_RevenueUnitType.Name = "cmb_RevenueUnitType";
             this.cmb_RevenueUnitType.Size = new System.Drawing.Size(125, 20);
             this.cmb_RevenueUnitType.TabIndex = 79;
@@ -5825,14 +5844,15 @@
             // 
             // btnPickupCargo_Export
             // 
+            this.btnPickupCargo_Export.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.btnPickupCargo_Export.Items.AddRange(new Telerik.WinControls.RadItem[] {
             this.btnPickupCargo_PDF,
             this.btnPickupCargo_Excel,
             this.btnPickupCargo_CSV,
             this.btnPickupCargo_Docs});
-            this.btnPickupCargo_Export.Location = new System.Drawing.Point(974, 50);
+            this.btnPickupCargo_Export.Location = new System.Drawing.Point(992, 51);
             this.btnPickupCargo_Export.Name = "btnPickupCargo_Export";
-            this.btnPickupCargo_Export.Size = new System.Drawing.Size(81, 22);
+            this.btnPickupCargo_Export.Size = new System.Drawing.Size(80, 22);
             this.btnPickupCargo_Export.TabIndex = 78;
             this.btnPickupCargo_Export.Text = "Export";
             this.btnPickupCargo_Export.ThemeName = "Office2010Black";
@@ -5874,10 +5894,10 @@
             // 
             // btnExport_PickupCargo
             // 
-            this.btnExport_PickupCargo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnExport_PickupCargo.Location = new System.Drawing.Point(974, 78);
+            this.btnExport_PickupCargo.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.btnExport_PickupCargo.Location = new System.Drawing.Point(992, 80);
             this.btnExport_PickupCargo.Name = "btnExport_PickupCargo";
-            this.btnExport_PickupCargo.Size = new System.Drawing.Size(81, 22);
+            this.btnExport_PickupCargo.Size = new System.Drawing.Size(80, 22);
             this.btnExport_PickupCargo.TabIndex = 77;
             this.btnExport_PickupCargo.Text = "Print";
             this.btnExport_PickupCargo.ThemeName = "Office2010Black";
@@ -5886,7 +5906,7 @@
             // btnSearch_PicupCargo
             // 
             this.btnSearch_PicupCargo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnSearch_PicupCargo.Location = new System.Drawing.Point(456, 76);
+            this.btnSearch_PicupCargo.Location = new System.Drawing.Point(460, 80);
             this.btnSearch_PicupCargo.Name = "btnSearch_PicupCargo";
             this.btnSearch_PicupCargo.Size = new System.Drawing.Size(70, 22);
             this.btnSearch_PicupCargo.TabIndex = 76;
@@ -5896,9 +5916,9 @@
             // 
             // dateTimePicker_PickupCargo
             // 
-            this.dateTimePicker_PickupCargo.Location = new System.Drawing.Point(13, 80);
+            this.dateTimePicker_PickupCargo.Location = new System.Drawing.Point(10, 80);
             this.dateTimePicker_PickupCargo.Name = "dateTimePicker_PickupCargo";
-            this.dateTimePicker_PickupCargo.Size = new System.Drawing.Size(171, 20);
+            this.dateTimePicker_PickupCargo.Size = new System.Drawing.Size(170, 20);
             this.dateTimePicker_PickupCargo.TabIndex = 70;
             this.dateTimePicker_PickupCargo.TabStop = false;
             this.dateTimePicker_PickupCargo.Text = "Thursday, 29 December 2016";
@@ -5959,7 +5979,7 @@
             this.gridBranchAcceptance.MasterTemplate.AllowDeleteRow = false;
             this.gridBranchAcceptance.MasterTemplate.AllowEditRow = false;
             this.gridBranchAcceptance.MasterTemplate.ShowRowHeaderColumn = false;
-            this.gridBranchAcceptance.MasterTemplate.ViewDefinition = tableViewDefinition8;
+            this.gridBranchAcceptance.MasterTemplate.ViewDefinition = tableViewDefinition44;
             this.gridBranchAcceptance.Name = "gridBranchAcceptance";
             this.gridBranchAcceptance.ShowItemToolTips = false;
             this.gridBranchAcceptance.Size = new System.Drawing.Size(1086, 455);
@@ -5990,10 +6010,10 @@
             // 
             // btnBranchAcceptance_Print
             // 
-            this.btnBranchAcceptance_Print.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnBranchAcceptance_Print.Location = new System.Drawing.Point(1001, 75);
+            this.btnBranchAcceptance_Print.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.btnBranchAcceptance_Print.Location = new System.Drawing.Point(992, 80);
             this.btnBranchAcceptance_Print.Name = "btnBranchAcceptance_Print";
-            this.btnBranchAcceptance_Print.Size = new System.Drawing.Size(70, 22);
+            this.btnBranchAcceptance_Print.Size = new System.Drawing.Size(80, 22);
             this.btnBranchAcceptance_Print.TabIndex = 80;
             this.btnBranchAcceptance_Print.Text = "Print";
             this.btnBranchAcceptance_Print.ThemeName = "Office2010Black";
@@ -6003,7 +6023,7 @@
             // 
             this.label100.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label100.AutoSize = true;
-            this.label100.Location = new System.Drawing.Point(186, 56);
+            this.label100.Location = new System.Drawing.Point(186, 60);
             this.label100.Name = "label100";
             this.label100.Size = new System.Drawing.Size(32, 13);
             this.label100.TabIndex = 82;
@@ -6011,7 +6031,7 @@
             // 
             // dropDownBranchAcceptance_Driver
             // 
-            this.dropDownBranchAcceptance_Driver.Location = new System.Drawing.Point(365, 79);
+            this.dropDownBranchAcceptance_Driver.Location = new System.Drawing.Point(365, 80);
             this.dropDownBranchAcceptance_Driver.Name = "dropDownBranchAcceptance_Driver";
             this.dropDownBranchAcceptance_Driver.Size = new System.Drawing.Size(135, 20);
             this.dropDownBranchAcceptance_Driver.TabIndex = 81;
@@ -6022,7 +6042,7 @@
             // 
             this.label97.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label97.AutoSize = true;
-            this.label97.Location = new System.Drawing.Point(362, 58);
+            this.label97.Location = new System.Drawing.Point(362, 60);
             this.label97.Name = "label97";
             this.label97.Size = new System.Drawing.Size(40, 13);
             this.label97.TabIndex = 80;
@@ -6031,7 +6051,7 @@
             // btnBranchAcceptance_Search
             // 
             this.btnBranchAcceptance_Search.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnBranchAcceptance_Search.Location = new System.Drawing.Point(628, 75);
+            this.btnBranchAcceptance_Search.Location = new System.Drawing.Point(628, 80);
             this.btnBranchAcceptance_Search.Name = "btnBranchAcceptance_Search";
             this.btnBranchAcceptance_Search.Size = new System.Drawing.Size(70, 22);
             this.btnBranchAcceptance_Search.TabIndex = 79;
@@ -6041,9 +6061,9 @@
             // 
             // dateTimePickerBranchAcceptance_Date
             // 
-            this.dateTimePickerBranchAcceptance_Date.Location = new System.Drawing.Point(13, 79);
+            this.dateTimePickerBranchAcceptance_Date.Location = new System.Drawing.Point(10, 80);
             this.dateTimePickerBranchAcceptance_Date.Name = "dateTimePickerBranchAcceptance_Date";
-            this.dateTimePickerBranchAcceptance_Date.Size = new System.Drawing.Size(168, 20);
+            this.dateTimePickerBranchAcceptance_Date.Size = new System.Drawing.Size(170, 20);
             this.dateTimePickerBranchAcceptance_Date.TabIndex = 75;
             this.dateTimePickerBranchAcceptance_Date.TabStop = false;
             this.dateTimePickerBranchAcceptance_Date.Text = "Thursday, 29 December 2016";
@@ -6055,7 +6075,7 @@
             // 
             this.label48.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label48.AutoSize = true;
-            this.label48.Location = new System.Drawing.Point(10, 58);
+            this.label48.Location = new System.Drawing.Point(10, 60);
             this.label48.Name = "label48";
             this.label48.Size = new System.Drawing.Size(34, 13);
             this.label48.TabIndex = 76;
@@ -6063,7 +6083,7 @@
             // 
             // dropDownBranchAcceptance_BCO_BSO
             // 
-            this.dropDownBranchAcceptance_BCO_BSO.Location = new System.Drawing.Point(189, 79);
+            this.dropDownBranchAcceptance_BCO_BSO.Location = new System.Drawing.Point(189, 80);
             this.dropDownBranchAcceptance_BCO_BSO.Name = "dropDownBranchAcceptance_BCO_BSO";
             this.dropDownBranchAcceptance_BCO_BSO.Size = new System.Drawing.Size(170, 20);
             this.dropDownBranchAcceptance_BCO_BSO.TabIndex = 73;
@@ -6073,7 +6093,7 @@
             // 
             // dropDownBranchAcceptance_Batch
             // 
-            this.dropDownBranchAcceptance_Batch.Location = new System.Drawing.Point(506, 77);
+            this.dropDownBranchAcceptance_Batch.Location = new System.Drawing.Point(506, 80);
             this.dropDownBranchAcceptance_Batch.Name = "dropDownBranchAcceptance_Batch";
             this.dropDownBranchAcceptance_Batch.Size = new System.Drawing.Size(116, 20);
             this.dropDownBranchAcceptance_Batch.TabIndex = 70;
@@ -6084,7 +6104,7 @@
             // 
             this.label77.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label77.AutoSize = true;
-            this.label77.Location = new System.Drawing.Point(503, 56);
+            this.label77.Location = new System.Drawing.Point(503, 60);
             this.label77.Name = "label77";
             this.label77.Size = new System.Drawing.Size(36, 13);
             this.label77.TabIndex = 69;
@@ -6134,7 +6154,7 @@
             this.gridBundle.MasterTemplate.AllowDragToGroup = false;
             this.gridBundle.MasterTemplate.AllowEditRow = false;
             this.gridBundle.MasterTemplate.ShowRowHeaderColumn = false;
-            this.gridBundle.MasterTemplate.ViewDefinition = tableViewDefinition9;
+            this.gridBundle.MasterTemplate.ViewDefinition = tableViewDefinition45;
             this.gridBundle.Name = "gridBundle";
             this.gridBundle.ShowItemToolTips = false;
             this.gridBundle.Size = new System.Drawing.Size(1086, 455);
@@ -6172,7 +6192,7 @@
             // btnBundle_Print
             // 
             this.btnBundle_Print.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnBundle_Print.Location = new System.Drawing.Point(978, 76);
+            this.btnBundle_Print.Location = new System.Drawing.Point(992, 80);
             this.btnBundle_Print.Name = "btnBundle_Print";
             this.btnBundle_Print.Size = new System.Drawing.Size(80, 22);
             this.btnBundle_Print.TabIndex = 88;
@@ -6185,9 +6205,9 @@
             this.btnBundle_Export.Items.AddRange(new Telerik.WinControls.RadItem[] {
             this.exportBundle_PDF,
             this.exportBundle_Excel});
-            this.btnBundle_Export.Location = new System.Drawing.Point(978, 27);
+            this.btnBundle_Export.Location = new System.Drawing.Point(992, 51);
             this.btnBundle_Export.Name = "btnBundle_Export";
-            this.btnBundle_Export.Size = new System.Drawing.Size(92, 22);
+            this.btnBundle_Export.Size = new System.Drawing.Size(80, 22);
             this.btnBundle_Export.TabIndex = 94;
             this.btnBundle_Export.Text = "Export";
             this.btnBundle_Export.ThemeName = "Office2010Black";
@@ -6207,7 +6227,7 @@
             // 
             this.label113.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label113.AutoSize = true;
-            this.label113.Location = new System.Drawing.Point(191, 57);
+            this.label113.Location = new System.Drawing.Point(186, 60);
             this.label113.Name = "label113";
             this.label113.Size = new System.Drawing.Size(96, 13);
             this.label113.TabIndex = 92;
@@ -6217,7 +6237,7 @@
             // 
             this.label101.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label101.AutoSize = true;
-            this.label101.Location = new System.Drawing.Point(351, 57);
+            this.label101.Location = new System.Drawing.Point(351, 60);
             this.label101.Name = "label101";
             this.label101.Size = new System.Drawing.Size(51, 13);
             this.label101.TabIndex = 89;
@@ -6226,7 +6246,7 @@
             // btnBundle_Search
             // 
             this.btnBundle_Search.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnBundle_Search.Location = new System.Drawing.Point(460, 79);
+            this.btnBundle_Search.Location = new System.Drawing.Point(460, 80);
             this.btnBundle_Search.Name = "btnBundle_Search";
             this.btnBundle_Search.Size = new System.Drawing.Size(70, 22);
             this.btnBundle_Search.TabIndex = 87;
@@ -6236,9 +6256,9 @@
             // 
             // dateTimeBundle_Date
             // 
-            this.dateTimeBundle_Date.Location = new System.Drawing.Point(14, 80);
+            this.dateTimeBundle_Date.Location = new System.Drawing.Point(10, 80);
             this.dateTimeBundle_Date.Name = "dateTimeBundle_Date";
-            this.dateTimeBundle_Date.Size = new System.Drawing.Size(168, 20);
+            this.dateTimeBundle_Date.Size = new System.Drawing.Size(170, 20);
             this.dateTimeBundle_Date.TabIndex = 83;
             this.dateTimeBundle_Date.TabStop = false;
             this.dateTimeBundle_Date.Text = "Thursday, 29 December 2016";
@@ -6250,7 +6270,7 @@
             // 
             this.label24.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(11, 57);
+            this.label24.Location = new System.Drawing.Point(10, 60);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(34, 13);
             this.label24.TabIndex = 84;
@@ -6258,7 +6278,7 @@
             // 
             // dropDownBundle_BCO_BSO
             // 
-            this.dropDownBundle_BCO_BSO.Location = new System.Drawing.Point(194, 80);
+            this.dropDownBundle_BCO_BSO.Location = new System.Drawing.Point(189, 80);
             this.dropDownBundle_BCO_BSO.Name = "dropDownBundle_BCO_BSO";
             this.dropDownBundle_BCO_BSO.Size = new System.Drawing.Size(153, 20);
             this.dropDownBundle_BCO_BSO.TabIndex = 82;
@@ -6309,7 +6329,7 @@
             this.gridUnbundle.MasterTemplate.AllowDragToGroup = false;
             this.gridUnbundle.MasterTemplate.AllowEditRow = false;
             this.gridUnbundle.MasterTemplate.ShowRowHeaderColumn = false;
-            this.gridUnbundle.MasterTemplate.ViewDefinition = tableViewDefinition10;
+            this.gridUnbundle.MasterTemplate.ViewDefinition = tableViewDefinition46;
             this.gridUnbundle.Name = "gridUnbundle";
             this.gridUnbundle.ShowItemToolTips = false;
             this.gridUnbundle.Size = new System.Drawing.Size(1086, 455);
@@ -6338,7 +6358,7 @@
             // 
             // txtUnbundle_SackNo
             // 
-            this.txtUnbundle_SackNo.Location = new System.Drawing.Point(358, 77);
+            this.txtUnbundle_SackNo.Location = new System.Drawing.Point(358, 80);
             this.txtUnbundle_SackNo.Name = "txtUnbundle_SackNo";
             this.txtUnbundle_SackNo.Size = new System.Drawing.Size(100, 20);
             this.txtUnbundle_SackNo.TabIndex = 109;
@@ -6347,7 +6367,7 @@
             // 
             this.label127.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label127.AutoSize = true;
-            this.label127.Location = new System.Drawing.Point(355, 59);
+            this.label127.Location = new System.Drawing.Point(355, 60);
             this.label127.Name = "label127";
             this.label127.Size = new System.Drawing.Size(51, 13);
             this.label127.TabIndex = 108;
@@ -6355,8 +6375,8 @@
             // 
             // btnUnbundle_Print
             // 
-            this.btnUnbundle_Print.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnUnbundle_Print.Location = new System.Drawing.Point(982, 76);
+            this.btnUnbundle_Print.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.btnUnbundle_Print.Location = new System.Drawing.Point(992, 80);
             this.btnUnbundle_Print.Name = "btnUnbundle_Print";
             this.btnUnbundle_Print.Size = new System.Drawing.Size(70, 22);
             this.btnUnbundle_Print.TabIndex = 89;
@@ -6367,7 +6387,7 @@
             // btnUnbundle_Search
             // 
             this.btnUnbundle_Search.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnUnbundle_Search.Location = new System.Drawing.Point(464, 74);
+            this.btnUnbundle_Search.Location = new System.Drawing.Point(464, 80);
             this.btnUnbundle_Search.Name = "btnUnbundle_Search";
             this.btnUnbundle_Search.Size = new System.Drawing.Size(70, 22);
             this.btnUnbundle_Search.TabIndex = 88;
@@ -6379,7 +6399,7 @@
             // 
             this.label34.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label34.AutoSize = true;
-            this.label34.Location = new System.Drawing.Point(191, 57);
+            this.label34.Location = new System.Drawing.Point(186, 60);
             this.label34.Name = "label34";
             this.label34.Size = new System.Drawing.Size(69, 13);
             this.label34.TabIndex = 86;
@@ -6388,7 +6408,7 @@
             // dropDownUnbundle_BCO
             // 
             this.dropDownUnbundle_BCO.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.dropDownUnbundle_BCO.Location = new System.Drawing.Point(194, 78);
+            this.dropDownUnbundle_BCO.Location = new System.Drawing.Point(189, 80);
             this.dropDownUnbundle_BCO.Name = "dropDownUnbundle_BCO";
             this.dropDownUnbundle_BCO.Size = new System.Drawing.Size(156, 20);
             this.dropDownUnbundle_BCO.TabIndex = 85;
@@ -6397,9 +6417,9 @@
             // 
             // dateTimeUnbunde_Date
             // 
-            this.dateTimeUnbunde_Date.Location = new System.Drawing.Point(15, 78);
+            this.dateTimeUnbunde_Date.Location = new System.Drawing.Point(10, 80);
             this.dateTimeUnbunde_Date.Name = "dateTimeUnbunde_Date";
-            this.dateTimeUnbunde_Date.Size = new System.Drawing.Size(171, 20);
+            this.dateTimeUnbunde_Date.Size = new System.Drawing.Size(170, 20);
             this.dateTimeUnbunde_Date.TabIndex = 83;
             this.dateTimeUnbunde_Date.TabStop = false;
             this.dateTimeUnbunde_Date.Text = "Thursday, 29 December 2016";
@@ -6411,7 +6431,7 @@
             // 
             this.label51.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label51.AutoSize = true;
-            this.label51.Location = new System.Drawing.Point(12, 57);
+            this.label51.Location = new System.Drawing.Point(10, 60);
             this.label51.Name = "label51";
             this.label51.Size = new System.Drawing.Size(34, 13);
             this.label51.TabIndex = 84;
@@ -6461,7 +6481,7 @@
             this.gridGatewayTransmital.MasterTemplate.AllowDragToGroup = false;
             this.gridGatewayTransmital.MasterTemplate.AllowEditRow = false;
             this.gridGatewayTransmital.MasterTemplate.ShowRowHeaderColumn = false;
-            this.gridGatewayTransmital.MasterTemplate.ViewDefinition = tableViewDefinition11;
+            this.gridGatewayTransmital.MasterTemplate.ViewDefinition = tableViewDefinition47;
             this.gridGatewayTransmital.Name = "gridGatewayTransmital";
             this.gridGatewayTransmital.ShowItemToolTips = false;
             this.gridGatewayTransmital.Size = new System.Drawing.Size(1086, 455);
@@ -6500,7 +6520,7 @@
             // 
             this.label129.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label129.AutoSize = true;
-            this.label129.Location = new System.Drawing.Point(368, 55);
+            this.label129.Location = new System.Drawing.Point(368, 60);
             this.label129.Name = "label129";
             this.label129.Size = new System.Drawing.Size(40, 13);
             this.label129.TabIndex = 97;
@@ -6510,7 +6530,7 @@
             // 
             this.label128.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label128.AutoSize = true;
-            this.label128.Location = new System.Drawing.Point(707, 55);
+            this.label128.Location = new System.Drawing.Point(707, 60);
             this.label128.Name = "label128";
             this.label128.Size = new System.Drawing.Size(93, 13);
             this.label128.TabIndex = 96;
@@ -6519,7 +6539,7 @@
             // cmbGT_Driver
             // 
             this.cmbGT_Driver.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmbGT_Driver.Location = new System.Drawing.Point(368, 77);
+            this.cmbGT_Driver.Location = new System.Drawing.Point(368, 80);
             this.cmbGT_Driver.Name = "cmbGT_Driver";
             this.cmbGT_Driver.Size = new System.Drawing.Size(94, 20);
             this.cmbGT_Driver.TabIndex = 95;
@@ -6528,7 +6548,7 @@
             // cmbGt_CommodityType
             // 
             this.cmbGt_CommodityType.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmbGt_CommodityType.Location = new System.Drawing.Point(709, 77);
+            this.cmbGt_CommodityType.Location = new System.Drawing.Point(709, 80);
             this.cmbGt_CommodityType.Name = "cmbGt_CommodityType";
             this.cmbGt_CommodityType.Size = new System.Drawing.Size(117, 20);
             this.cmbGt_CommodityType.TabIndex = 94;
@@ -6536,8 +6556,8 @@
             // 
             // btnGatewayTransmital_Print
             // 
-            this.btnGatewayTransmital_Print.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnGatewayTransmital_Print.Location = new System.Drawing.Point(1013, 76);
+            this.btnGatewayTransmital_Print.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.btnGatewayTransmital_Print.Location = new System.Drawing.Point(1013, 80);
             this.btnGatewayTransmital_Print.Name = "btnGatewayTransmital_Print";
             this.btnGatewayTransmital_Print.Size = new System.Drawing.Size(70, 22);
             this.btnGatewayTransmital_Print.TabIndex = 84;
@@ -6548,7 +6568,7 @@
             // dropDownGatewayTransmital_Destination
             // 
             this.dropDownGatewayTransmital_Destination.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.dropDownGatewayTransmital_Destination.Location = new System.Drawing.Point(191, 78);
+            this.dropDownGatewayTransmital_Destination.Location = new System.Drawing.Point(189, 80);
             this.dropDownGatewayTransmital_Destination.Name = "dropDownGatewayTransmital_Destination";
             this.dropDownGatewayTransmital_Destination.Size = new System.Drawing.Size(169, 20);
             this.dropDownGatewayTransmital_Destination.TabIndex = 93;
@@ -6560,7 +6580,7 @@
             // 
             this.label59.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label59.AutoSize = true;
-            this.label59.Location = new System.Drawing.Point(188, 57);
+            this.label59.Location = new System.Drawing.Point(186, 60);
             this.label59.Name = "label59";
             this.label59.Size = new System.Drawing.Size(96, 13);
             this.label59.TabIndex = 92;
@@ -6570,7 +6590,7 @@
             // 
             this.label58.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label58.AutoSize = true;
-            this.label58.Location = new System.Drawing.Point(589, 58);
+            this.label58.Location = new System.Drawing.Point(589, 60);
             this.label58.Name = "label58";
             this.label58.Size = new System.Drawing.Size(39, 13);
             this.label58.TabIndex = 91;
@@ -6578,7 +6598,7 @@
             // 
             // txtGatewayTransmital_MAWB
             // 
-            this.txtGatewayTransmital_MAWB.Location = new System.Drawing.Point(832, 78);
+            this.txtGatewayTransmital_MAWB.Location = new System.Drawing.Point(832, 80);
             this.txtGatewayTransmital_MAWB.Name = "txtGatewayTransmital_MAWB";
             this.txtGatewayTransmital_MAWB.Size = new System.Drawing.Size(100, 20);
             this.txtGatewayTransmital_MAWB.TabIndex = 90;
@@ -6587,7 +6607,7 @@
             // dropDownGatewayTransmital_Batch
             // 
             this.dropDownGatewayTransmital_Batch.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.dropDownGatewayTransmital_Batch.Location = new System.Drawing.Point(587, 78);
+            this.dropDownGatewayTransmital_Batch.Location = new System.Drawing.Point(587, 80);
             this.dropDownGatewayTransmital_Batch.Name = "dropDownGatewayTransmital_Batch";
             this.dropDownGatewayTransmital_Batch.Size = new System.Drawing.Size(117, 20);
             this.dropDownGatewayTransmital_Batch.TabIndex = 85;
@@ -6598,7 +6618,7 @@
             // 
             this.label55.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label55.AutoSize = true;
-            this.label55.Location = new System.Drawing.Point(834, 55);
+            this.label55.Location = new System.Drawing.Point(834, 60);
             this.label55.Name = "label55";
             this.label55.Size = new System.Drawing.Size(72, 13);
             this.label55.TabIndex = 84;
@@ -6607,7 +6627,7 @@
             // btnGatewayTransmital_Search
             // 
             this.btnGatewayTransmital_Search.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnGatewayTransmital_Search.Location = new System.Drawing.Point(937, 76);
+            this.btnGatewayTransmital_Search.Location = new System.Drawing.Point(937, 80);
             this.btnGatewayTransmital_Search.Name = "btnGatewayTransmital_Search";
             this.btnGatewayTransmital_Search.Size = new System.Drawing.Size(70, 22);
             this.btnGatewayTransmital_Search.TabIndex = 83;
@@ -6619,7 +6639,7 @@
             // 
             this.label35.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label35.AutoSize = true;
-            this.label35.Location = new System.Drawing.Point(467, 58);
+            this.label35.Location = new System.Drawing.Point(467, 60);
             this.label35.Name = "label35";
             this.label35.Size = new System.Drawing.Size(54, 13);
             this.label35.TabIndex = 81;
@@ -6628,7 +6648,7 @@
             // dropDownGatewayTransmital_Gateway
             // 
             this.dropDownGatewayTransmital_Gateway.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.dropDownGatewayTransmital_Gateway.Location = new System.Drawing.Point(470, 78);
+            this.dropDownGatewayTransmital_Gateway.Location = new System.Drawing.Point(470, 80);
             this.dropDownGatewayTransmital_Gateway.Name = "dropDownGatewayTransmital_Gateway";
             this.dropDownGatewayTransmital_Gateway.Size = new System.Drawing.Size(113, 20);
             this.dropDownGatewayTransmital_Gateway.TabIndex = 80;
@@ -6637,9 +6657,9 @@
             // 
             // dateTimeGatewayTransmital_Date
             // 
-            this.dateTimeGatewayTransmital_Date.Location = new System.Drawing.Point(12, 78);
+            this.dateTimeGatewayTransmital_Date.Location = new System.Drawing.Point(10, 80);
             this.dateTimeGatewayTransmital_Date.Name = "dateTimeGatewayTransmital_Date";
-            this.dateTimeGatewayTransmital_Date.Size = new System.Drawing.Size(171, 20);
+            this.dateTimeGatewayTransmital_Date.Size = new System.Drawing.Size(170, 20);
             this.dateTimeGatewayTransmital_Date.TabIndex = 78;
             this.dateTimeGatewayTransmital_Date.TabStop = false;
             this.dateTimeGatewayTransmital_Date.Text = "Thursday, 29 December 2016";
@@ -6651,7 +6671,7 @@
             // 
             this.label54.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label54.AutoSize = true;
-            this.label54.Location = new System.Drawing.Point(9, 57);
+            this.label54.Location = new System.Drawing.Point(10, 60);
             this.label54.Name = "label54";
             this.label54.Size = new System.Drawing.Size(34, 13);
             this.label54.TabIndex = 79;
@@ -6701,7 +6721,7 @@
             this.gridGatewayOutbound.MasterTemplate.AllowDragToGroup = false;
             this.gridGatewayOutbound.MasterTemplate.AllowEditRow = false;
             this.gridGatewayOutbound.MasterTemplate.ShowRowHeaderColumn = false;
-            this.gridGatewayOutbound.MasterTemplate.ViewDefinition = tableViewDefinition12;
+            this.gridGatewayOutbound.MasterTemplate.ViewDefinition = tableViewDefinition48;
             this.gridGatewayOutbound.Name = "gridGatewayOutbound";
             this.gridGatewayOutbound.ShowItemToolTips = false;
             this.gridGatewayOutbound.Size = new System.Drawing.Size(1086, 455);
@@ -6739,7 +6759,7 @@
             // dropDownGatewayOutbound_Gateway
             // 
             this.dropDownGatewayOutbound_Gateway.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.dropDownGatewayOutbound_Gateway.Location = new System.Drawing.Point(450, 76);
+            this.dropDownGatewayOutbound_Gateway.Location = new System.Drawing.Point(450, 80);
             this.dropDownGatewayOutbound_Gateway.Name = "dropDownGatewayOutbound_Gateway";
             this.dropDownGatewayOutbound_Gateway.Size = new System.Drawing.Size(117, 20);
             this.dropDownGatewayOutbound_Gateway.TabIndex = 109;
@@ -6748,7 +6768,7 @@
             // dropDownGatewayOutbound_BCO
             // 
             this.dropDownGatewayOutbound_BCO.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.dropDownGatewayOutbound_BCO.Location = new System.Drawing.Point(191, 76);
+            this.dropDownGatewayOutbound_BCO.Location = new System.Drawing.Point(189, 80);
             this.dropDownGatewayOutbound_BCO.Name = "dropDownGatewayOutbound_BCO";
             this.dropDownGatewayOutbound_BCO.Size = new System.Drawing.Size(153, 20);
             this.dropDownGatewayOutbound_BCO.TabIndex = 108;
@@ -6756,7 +6776,7 @@
             // 
             // txtGO_mawb
             // 
-            this.txtGO_mawb.Location = new System.Drawing.Point(822, 76);
+            this.txtGO_mawb.Location = new System.Drawing.Point(822, 80);
             this.txtGO_mawb.Name = "txtGO_mawb";
             this.txtGO_mawb.Size = new System.Drawing.Size(100, 20);
             this.txtGO_mawb.TabIndex = 107;
@@ -6765,7 +6785,7 @@
             // 
             this.label132.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label132.AutoSize = true;
-            this.label132.Location = new System.Drawing.Point(819, 53);
+            this.label132.Location = new System.Drawing.Point(819, 60);
             this.label132.Name = "label132";
             this.label132.Size = new System.Drawing.Size(72, 13);
             this.label132.TabIndex = 106;
@@ -6775,7 +6795,7 @@
             // 
             this.label130.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label130.AutoSize = true;
-            this.label130.Location = new System.Drawing.Point(350, 56);
+            this.label130.Location = new System.Drawing.Point(350, 60);
             this.label130.Name = "label130";
             this.label130.Size = new System.Drawing.Size(40, 13);
             this.label130.TabIndex = 105;
@@ -6785,7 +6805,7 @@
             // 
             this.label131.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label131.AutoSize = true;
-            this.label131.Location = new System.Drawing.Point(695, 53);
+            this.label131.Location = new System.Drawing.Point(695, 60);
             this.label131.Name = "label131";
             this.label131.Size = new System.Drawing.Size(93, 13);
             this.label131.TabIndex = 104;
@@ -6794,7 +6814,7 @@
             // cmbGO_Driver
             // 
             this.cmbGO_Driver.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmbGO_Driver.Location = new System.Drawing.Point(350, 77);
+            this.cmbGO_Driver.Location = new System.Drawing.Point(350, 80);
             this.cmbGO_Driver.Name = "cmbGO_Driver";
             this.cmbGO_Driver.Size = new System.Drawing.Size(94, 20);
             this.cmbGO_Driver.TabIndex = 103;
@@ -6803,7 +6823,7 @@
             // cmbGO_commoditType
             // 
             this.cmbGO_commoditType.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmbGO_commoditType.Location = new System.Drawing.Point(698, 75);
+            this.cmbGO_commoditType.Location = new System.Drawing.Point(698, 80);
             this.cmbGO_commoditType.Name = "cmbGO_commoditType";
             this.cmbGO_commoditType.Size = new System.Drawing.Size(117, 20);
             this.cmbGO_commoditType.TabIndex = 102;
@@ -6811,8 +6831,8 @@
             // 
             // btnGatewayOutbound_Print
             // 
-            this.btnGatewayOutbound_Print.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnGatewayOutbound_Print.Location = new System.Drawing.Point(1013, 75);
+            this.btnGatewayOutbound_Print.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.btnGatewayOutbound_Print.Location = new System.Drawing.Point(1004, 80);
             this.btnGatewayOutbound_Print.Name = "btnGatewayOutbound_Print";
             this.btnGatewayOutbound_Print.Size = new System.Drawing.Size(70, 22);
             this.btnGatewayOutbound_Print.TabIndex = 101;
@@ -6823,7 +6843,7 @@
             // btnGatewayOutbound_Search
             // 
             this.btnGatewayOutbound_Search.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnGatewayOutbound_Search.Location = new System.Drawing.Point(928, 77);
+            this.btnGatewayOutbound_Search.Location = new System.Drawing.Point(928, 80);
             this.btnGatewayOutbound_Search.Name = "btnGatewayOutbound_Search";
             this.btnGatewayOutbound_Search.Size = new System.Drawing.Size(70, 22);
             this.btnGatewayOutbound_Search.TabIndex = 100;
@@ -6835,7 +6855,7 @@
             // 
             this.label78.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label78.AutoSize = true;
-            this.label78.Location = new System.Drawing.Point(570, 56);
+            this.label78.Location = new System.Drawing.Point(570, 60);
             this.label78.Name = "label78";
             this.label78.Size = new System.Drawing.Size(39, 13);
             this.label78.TabIndex = 95;
@@ -6844,7 +6864,7 @@
             // dropDownGatewayOutbound_Batch
             // 
             this.dropDownGatewayOutbound_Batch.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.dropDownGatewayOutbound_Batch.Location = new System.Drawing.Point(573, 76);
+            this.dropDownGatewayOutbound_Batch.Location = new System.Drawing.Point(573, 80);
             this.dropDownGatewayOutbound_Batch.Name = "dropDownGatewayOutbound_Batch";
             this.dropDownGatewayOutbound_Batch.Size = new System.Drawing.Size(117, 20);
             this.dropDownGatewayOutbound_Batch.TabIndex = 94;
@@ -6855,7 +6875,7 @@
             // 
             this.label79.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label79.AutoSize = true;
-            this.label79.Location = new System.Drawing.Point(188, 57);
+            this.label79.Location = new System.Drawing.Point(186, 60);
             this.label79.Name = "label79";
             this.label79.Size = new System.Drawing.Size(96, 13);
             this.label79.TabIndex = 92;
@@ -6865,7 +6885,7 @@
             // 
             this.label60.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label60.AutoSize = true;
-            this.label60.Location = new System.Drawing.Point(447, 57);
+            this.label60.Location = new System.Drawing.Point(447, 60);
             this.label60.Name = "label60";
             this.label60.Size = new System.Drawing.Size(54, 13);
             this.label60.TabIndex = 85;
@@ -6873,9 +6893,9 @@
             // 
             // dateTimeGatewayOutbound_Date
             // 
-            this.dateTimeGatewayOutbound_Date.Location = new System.Drawing.Point(14, 77);
+            this.dateTimeGatewayOutbound_Date.Location = new System.Drawing.Point(10, 80);
             this.dateTimeGatewayOutbound_Date.Name = "dateTimeGatewayOutbound_Date";
-            this.dateTimeGatewayOutbound_Date.Size = new System.Drawing.Size(171, 20);
+            this.dateTimeGatewayOutbound_Date.Size = new System.Drawing.Size(170, 20);
             this.dateTimeGatewayOutbound_Date.TabIndex = 82;
             this.dateTimeGatewayOutbound_Date.TabStop = false;
             this.dateTimeGatewayOutbound_Date.Text = "Thursday, 29 December 2016";
@@ -6887,7 +6907,7 @@
             // 
             this.label61.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label61.AutoSize = true;
-            this.label61.Location = new System.Drawing.Point(11, 57);
+            this.label61.Location = new System.Drawing.Point(10, 60);
             this.label61.Name = "label61";
             this.label61.Size = new System.Drawing.Size(34, 13);
             this.label61.TabIndex = 83;
@@ -6937,7 +6957,7 @@
             this.gridGatewayInbound.MasterTemplate.AllowDragToGroup = false;
             this.gridGatewayInbound.MasterTemplate.AllowEditRow = false;
             this.gridGatewayInbound.MasterTemplate.ShowRowHeaderColumn = false;
-            this.gridGatewayInbound.MasterTemplate.ViewDefinition = tableViewDefinition13;
+            this.gridGatewayInbound.MasterTemplate.ViewDefinition = tableViewDefinition49;
             this.gridGatewayInbound.Name = "gridGatewayInbound";
             this.gridGatewayInbound.ShowItemToolTips = false;
             this.gridGatewayInbound.Size = new System.Drawing.Size(1086, 455);
@@ -6973,7 +6993,7 @@
             // cmbGI_FlightNo
             // 
             this.cmbGI_FlightNo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmbGI_FlightNo.Location = new System.Drawing.Point(627, 75);
+            this.cmbGI_FlightNo.Location = new System.Drawing.Point(627, 80);
             this.cmbGI_FlightNo.Name = "cmbGI_FlightNo";
             this.cmbGI_FlightNo.Size = new System.Drawing.Size(119, 20);
             this.cmbGI_FlightNo.TabIndex = 108;
@@ -6983,7 +7003,7 @@
             // 
             this.label142.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label142.AutoSize = true;
-            this.label142.Location = new System.Drawing.Point(624, 55);
+            this.label142.Location = new System.Drawing.Point(624, 60);
             this.label142.Name = "label142";
             this.label142.Size = new System.Drawing.Size(84, 13);
             this.label142.TabIndex = 107;
@@ -6991,8 +7011,8 @@
             // 
             // btnGatewayInbound_Print
             // 
-            this.btnGatewayInbound_Print.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnGatewayInbound_Print.Location = new System.Drawing.Point(974, 73);
+            this.btnGatewayInbound_Print.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.btnGatewayInbound_Print.Location = new System.Drawing.Point(992, 80);
             this.btnGatewayInbound_Print.Name = "btnGatewayInbound_Print";
             this.btnGatewayInbound_Print.Size = new System.Drawing.Size(70, 22);
             this.btnGatewayInbound_Print.TabIndex = 105;
@@ -7002,7 +7022,7 @@
             // 
             // txtBoxGatewayInbound_MasterAWB
             // 
-            this.txtBoxGatewayInbound_MasterAWB.Location = new System.Drawing.Point(752, 75);
+            this.txtBoxGatewayInbound_MasterAWB.Location = new System.Drawing.Point(752, 80);
             this.txtBoxGatewayInbound_MasterAWB.Name = "txtBoxGatewayInbound_MasterAWB";
             this.txtBoxGatewayInbound_MasterAWB.Size = new System.Drawing.Size(100, 20);
             this.txtBoxGatewayInbound_MasterAWB.TabIndex = 106;
@@ -7012,7 +7032,7 @@
             // 
             this.label93.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label93.AutoSize = true;
-            this.label93.Location = new System.Drawing.Point(749, 55);
+            this.label93.Location = new System.Drawing.Point(749, 60);
             this.label93.Name = "label93";
             this.label93.Size = new System.Drawing.Size(72, 13);
             this.label93.TabIndex = 105;
@@ -7021,7 +7041,7 @@
             // btnGatewayInbound_Search
             // 
             this.btnGatewayInbound_Search.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnGatewayInbound_Search.Location = new System.Drawing.Point(857, 73);
+            this.btnGatewayInbound_Search.Location = new System.Drawing.Point(857, 80);
             this.btnGatewayInbound_Search.Name = "btnGatewayInbound_Search";
             this.btnGatewayInbound_Search.Size = new System.Drawing.Size(70, 22);
             this.btnGatewayInbound_Search.TabIndex = 104;
@@ -7032,7 +7052,7 @@
             // dropDownGatewayInbound_Commodity
             // 
             this.dropDownGatewayInbound_Commodity.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.dropDownGatewayInbound_Commodity.Location = new System.Drawing.Point(476, 75);
+            this.dropDownGatewayInbound_Commodity.Location = new System.Drawing.Point(476, 80);
             this.dropDownGatewayInbound_Commodity.Name = "dropDownGatewayInbound_Commodity";
             this.dropDownGatewayInbound_Commodity.Size = new System.Drawing.Size(148, 20);
             this.dropDownGatewayInbound_Commodity.TabIndex = 103;
@@ -7043,7 +7063,7 @@
             // 
             this.label92.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label92.AutoSize = true;
-            this.label92.Location = new System.Drawing.Point(473, 55);
+            this.label92.Location = new System.Drawing.Point(473, 60);
             this.label92.Name = "label92";
             this.label92.Size = new System.Drawing.Size(93, 13);
             this.label92.TabIndex = 102;
@@ -7053,7 +7073,7 @@
             // 
             this.label89.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label89.AutoSize = true;
-            this.label89.Location = new System.Drawing.Point(313, 55);
+            this.label89.Location = new System.Drawing.Point(313, 60);
             this.label89.Name = "label89";
             this.label89.Size = new System.Drawing.Size(69, 13);
             this.label89.TabIndex = 101;
@@ -7062,7 +7082,7 @@
             // dropDownGatewayInbound_Origin
             // 
             this.dropDownGatewayInbound_Origin.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.dropDownGatewayInbound_Origin.Location = new System.Drawing.Point(316, 75);
+            this.dropDownGatewayInbound_Origin.Location = new System.Drawing.Point(316, 80);
             this.dropDownGatewayInbound_Origin.Name = "dropDownGatewayInbound_Origin";
             this.dropDownGatewayInbound_Origin.Size = new System.Drawing.Size(154, 20);
             this.dropDownGatewayInbound_Origin.TabIndex = 100;
@@ -7073,7 +7093,7 @@
             // 
             this.label85.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label85.AutoSize = true;
-            this.label85.Location = new System.Drawing.Point(187, 55);
+            this.label85.Location = new System.Drawing.Point(186, 60);
             this.label85.Name = "label85";
             this.label85.Size = new System.Drawing.Size(54, 13);
             this.label85.TabIndex = 97;
@@ -7082,7 +7102,7 @@
             // dropDownGatewayInbound_Gateway
             // 
             this.dropDownGatewayInbound_Gateway.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.dropDownGatewayInbound_Gateway.Location = new System.Drawing.Point(190, 75);
+            this.dropDownGatewayInbound_Gateway.Location = new System.Drawing.Point(189, 80);
             this.dropDownGatewayInbound_Gateway.Name = "dropDownGatewayInbound_Gateway";
             this.dropDownGatewayInbound_Gateway.Size = new System.Drawing.Size(120, 20);
             this.dropDownGatewayInbound_Gateway.TabIndex = 96;
@@ -7091,9 +7111,9 @@
             // 
             // dateTimePickerGatewayInbound_Date
             // 
-            this.dateTimePickerGatewayInbound_Date.Location = new System.Drawing.Point(11, 75);
+            this.dateTimePickerGatewayInbound_Date.Location = new System.Drawing.Point(10, 80);
             this.dateTimePickerGatewayInbound_Date.Name = "dateTimePickerGatewayInbound_Date";
-            this.dateTimePickerGatewayInbound_Date.Size = new System.Drawing.Size(171, 20);
+            this.dateTimePickerGatewayInbound_Date.Size = new System.Drawing.Size(170, 20);
             this.dateTimePickerGatewayInbound_Date.TabIndex = 94;
             this.dateTimePickerGatewayInbound_Date.TabStop = false;
             this.dateTimePickerGatewayInbound_Date.Text = "Thursday, 29 December 2016";
@@ -7105,7 +7125,7 @@
             // 
             this.label88.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label88.AutoSize = true;
-            this.label88.Location = new System.Drawing.Point(8, 55);
+            this.label88.Location = new System.Drawing.Point(10, 60);
             this.label88.Name = "label88";
             this.label88.Size = new System.Drawing.Size(34, 13);
             this.label88.TabIndex = 95;
@@ -7155,7 +7175,7 @@
             this.gridCargoTransfer.MasterTemplate.AllowDragToGroup = false;
             this.gridCargoTransfer.MasterTemplate.AllowEditRow = false;
             this.gridCargoTransfer.MasterTemplate.ShowRowHeaderColumn = false;
-            this.gridCargoTransfer.MasterTemplate.ViewDefinition = tableViewDefinition14;
+            this.gridCargoTransfer.MasterTemplate.ViewDefinition = tableViewDefinition50;
             this.gridCargoTransfer.Name = "gridCargoTransfer";
             this.gridCargoTransfer.ShowItemToolTips = false;
             this.gridCargoTransfer.Size = new System.Drawing.Size(1086, 455);
@@ -7200,7 +7220,7 @@
             // 
             // cmbCT_Batch
             // 
-            this.cmbCT_Batch.Location = new System.Drawing.Point(732, 76);
+            this.cmbCT_Batch.Location = new System.Drawing.Point(732, 80);
             this.cmbCT_Batch.Name = "cmbCT_Batch";
             this.cmbCT_Batch.Size = new System.Drawing.Size(115, 20);
             this.cmbCT_Batch.TabIndex = 100;
@@ -7218,7 +7238,7 @@
             // 
             // cmbCT_PlateNo
             // 
-            this.cmbCT_PlateNo.Location = new System.Drawing.Point(614, 76);
+            this.cmbCT_PlateNo.Location = new System.Drawing.Point(614, 80);
             this.cmbCT_PlateNo.Name = "cmbCT_PlateNo";
             this.cmbCT_PlateNo.Size = new System.Drawing.Size(115, 20);
             this.cmbCT_PlateNo.TabIndex = 98;
@@ -7228,7 +7248,7 @@
             // 
             this.label135.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label135.AutoSize = true;
-            this.label135.Location = new System.Drawing.Point(490, 61);
+            this.label135.Location = new System.Drawing.Point(490, 60);
             this.label135.Name = "label135";
             this.label135.Size = new System.Drawing.Size(79, 13);
             this.label135.TabIndex = 97;
@@ -7236,7 +7256,7 @@
             // 
             // cmbCT_RevenueUnit
             // 
-            this.cmbCT_RevenueUnit.Location = new System.Drawing.Point(493, 77);
+            this.cmbCT_RevenueUnit.Location = new System.Drawing.Point(493, 80);
             this.cmbCT_RevenueUnit.Name = "cmbCT_RevenueUnit";
             this.cmbCT_RevenueUnit.Size = new System.Drawing.Size(115, 20);
             this.cmbCT_RevenueUnit.TabIndex = 96;
@@ -7246,7 +7266,7 @@
             // 
             this.label134.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label134.AutoSize = true;
-            this.label134.Location = new System.Drawing.Point(341, 61);
+            this.label134.Location = new System.Drawing.Point(341, 60);
             this.label134.Name = "label134";
             this.label134.Size = new System.Drawing.Size(79, 13);
             this.label134.TabIndex = 95;
@@ -7254,7 +7274,7 @@
             // 
             // cmbCT_RevenueType
             // 
-            this.cmbCT_RevenueType.Location = new System.Drawing.Point(344, 77);
+            this.cmbCT_RevenueType.Location = new System.Drawing.Point(344, 80);
             this.cmbCT_RevenueType.Name = "cmbCT_RevenueType";
             this.cmbCT_RevenueType.Size = new System.Drawing.Size(143, 20);
             this.cmbCT_RevenueType.TabIndex = 94;
@@ -7265,7 +7285,7 @@
             // 
             this.label133.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label133.AutoSize = true;
-            this.label133.Location = new System.Drawing.Point(190, 61);
+            this.label133.Location = new System.Drawing.Point(186, 60);
             this.label133.Name = "label133";
             this.label133.Size = new System.Drawing.Size(96, 13);
             this.label133.TabIndex = 93;
@@ -7273,7 +7293,7 @@
             // 
             // cmbCT_BCO
             // 
-            this.cmbCT_BCO.Location = new System.Drawing.Point(193, 77);
+            this.cmbCT_BCO.Location = new System.Drawing.Point(189, 80);
             this.cmbCT_BCO.Name = "cmbCT_BCO";
             this.cmbCT_BCO.Size = new System.Drawing.Size(143, 20);
             this.cmbCT_BCO.TabIndex = 92;
@@ -7282,8 +7302,8 @@
             // 
             // btnCargoTransfer_Print
             // 
-            this.btnCargoTransfer_Print.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnCargoTransfer_Print.Location = new System.Drawing.Point(1001, 77);
+            this.btnCargoTransfer_Print.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.btnCargoTransfer_Print.Location = new System.Drawing.Point(992, 80);
             this.btnCargoTransfer_Print.Name = "btnCargoTransfer_Print";
             this.btnCargoTransfer_Print.Size = new System.Drawing.Size(70, 22);
             this.btnCargoTransfer_Print.TabIndex = 91;
@@ -7294,7 +7314,7 @@
             // btnCargoTransfer_Search
             // 
             this.btnCargoTransfer_Search.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnCargoTransfer_Search.Location = new System.Drawing.Point(853, 74);
+            this.btnCargoTransfer_Search.Location = new System.Drawing.Point(853, 80);
             this.btnCargoTransfer_Search.Name = "btnCargoTransfer_Search";
             this.btnCargoTransfer_Search.Size = new System.Drawing.Size(70, 22);
             this.btnCargoTransfer_Search.TabIndex = 87;
@@ -7304,9 +7324,9 @@
             // 
             // dateTimeCargoTransfer_Date
             // 
-            this.dateTimeCargoTransfer_Date.Location = new System.Drawing.Point(13, 76);
+            this.dateTimeCargoTransfer_Date.Location = new System.Drawing.Point(10, 80);
             this.dateTimeCargoTransfer_Date.Name = "dateTimeCargoTransfer_Date";
-            this.dateTimeCargoTransfer_Date.Size = new System.Drawing.Size(168, 20);
+            this.dateTimeCargoTransfer_Date.Size = new System.Drawing.Size(170, 20);
             this.dateTimeCargoTransfer_Date.TabIndex = 83;
             this.dateTimeCargoTransfer_Date.TabStop = false;
             this.dateTimeCargoTransfer_Date.Text = "Thursday, 29 December 2016";
@@ -7318,7 +7338,7 @@
             // 
             this.label50.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label50.AutoSize = true;
-            this.label50.Location = new System.Drawing.Point(10, 57);
+            this.label50.Location = new System.Drawing.Point(10, 60);
             this.label50.Name = "label50";
             this.label50.Size = new System.Drawing.Size(34, 13);
             this.label50.TabIndex = 84;
@@ -7368,7 +7388,7 @@
             this.gridSegregation.MasterTemplate.AllowDragToGroup = false;
             this.gridSegregation.MasterTemplate.AllowEditRow = false;
             this.gridSegregation.MasterTemplate.ShowRowHeaderColumn = false;
-            this.gridSegregation.MasterTemplate.ViewDefinition = tableViewDefinition15;
+            this.gridSegregation.MasterTemplate.ViewDefinition = tableViewDefinition51;
             this.gridSegregation.Name = "gridSegregation";
             this.gridSegregation.ShowItemToolTips = false;
             this.gridSegregation.Size = new System.Drawing.Size(1086, 455);
@@ -7402,7 +7422,7 @@
             // dropDownSegregation_PlateNo
             // 
             this.dropDownSegregation_PlateNo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.dropDownSegregation_PlateNo.Location = new System.Drawing.Point(475, 76);
+            this.dropDownSegregation_PlateNo.Location = new System.Drawing.Point(472, 80);
             this.dropDownSegregation_PlateNo.Name = "dropDownSegregation_PlateNo";
             this.dropDownSegregation_PlateNo.Size = new System.Drawing.Size(109, 20);
             this.dropDownSegregation_PlateNo.TabIndex = 114;
@@ -7412,7 +7432,7 @@
             // dropDownSegregation_Driver
             // 
             this.dropDownSegregation_Driver.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.dropDownSegregation_Driver.Location = new System.Drawing.Point(350, 77);
+            this.dropDownSegregation_Driver.Location = new System.Drawing.Point(353, 80);
             this.dropDownSegregation_Driver.Name = "dropDownSegregation_Driver";
             this.dropDownSegregation_Driver.Size = new System.Drawing.Size(109, 20);
             this.dropDownSegregation_Driver.TabIndex = 113;
@@ -7421,8 +7441,8 @@
             // 
             // btnSegregation_Print
             // 
-            this.btnSegregation_Print.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnSegregation_Print.Location = new System.Drawing.Point(989, 75);
+            this.btnSegregation_Print.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.btnSegregation_Print.Location = new System.Drawing.Point(992, 80);
             this.btnSegregation_Print.Name = "btnSegregation_Print";
             this.btnSegregation_Print.Size = new System.Drawing.Size(70, 22);
             this.btnSegregation_Print.TabIndex = 112;
@@ -7434,7 +7454,7 @@
             // 
             this.label83.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label83.AutoSize = true;
-            this.label83.Location = new System.Drawing.Point(475, 56);
+            this.label83.Location = new System.Drawing.Point(472, 56);
             this.label83.Name = "label83";
             this.label83.Size = new System.Drawing.Size(45, 13);
             this.label83.TabIndex = 111;
@@ -7443,7 +7463,7 @@
             // btnSegregation_Search
             // 
             this.btnSegregation_Search.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnSegregation_Search.Location = new System.Drawing.Point(732, 74);
+            this.btnSegregation_Search.Location = new System.Drawing.Point(719, 80);
             this.btnSegregation_Search.Name = "btnSegregation_Search";
             this.btnSegregation_Search.Size = new System.Drawing.Size(70, 22);
             this.btnSegregation_Search.TabIndex = 109;
@@ -7455,7 +7475,7 @@
             // 
             this.label36.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label36.AutoSize = true;
-            this.label36.Location = new System.Drawing.Point(606, 56);
+            this.label36.Location = new System.Drawing.Point(589, 56);
             this.label36.Name = "label36";
             this.label36.Size = new System.Drawing.Size(39, 13);
             this.label36.TabIndex = 108;
@@ -7464,7 +7484,7 @@
             // dropDownSegregation_BCO
             // 
             this.dropDownSegregation_BCO.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.dropDownSegregation_BCO.Location = new System.Drawing.Point(189, 76);
+            this.dropDownSegregation_BCO.Location = new System.Drawing.Point(189, 80);
             this.dropDownSegregation_BCO.Name = "dropDownSegregation_BCO";
             this.dropDownSegregation_BCO.Size = new System.Drawing.Size(155, 20);
             this.dropDownSegregation_BCO.TabIndex = 106;
@@ -7474,7 +7494,7 @@
             // dropDownSegregation_Batch
             // 
             this.dropDownSegregation_Batch.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.dropDownSegregation_Batch.Location = new System.Drawing.Point(609, 76);
+            this.dropDownSegregation_Batch.Location = new System.Drawing.Point(592, 80);
             this.dropDownSegregation_Batch.Name = "dropDownSegregation_Batch";
             this.dropDownSegregation_Batch.Size = new System.Drawing.Size(117, 20);
             this.dropDownSegregation_Batch.TabIndex = 107;
@@ -7495,7 +7515,7 @@
             // 
             this.label57.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label57.AutoSize = true;
-            this.label57.Location = new System.Drawing.Point(347, 56);
+            this.label57.Location = new System.Drawing.Point(350, 56);
             this.label57.Name = "label57";
             this.label57.Size = new System.Drawing.Size(37, 13);
             this.label57.TabIndex = 104;
@@ -7503,9 +7523,9 @@
             // 
             // dateTimeSegregation_Date
             // 
-            this.dateTimeSegregation_Date.Location = new System.Drawing.Point(12, 76);
+            this.dateTimeSegregation_Date.Location = new System.Drawing.Point(10, 80);
             this.dateTimeSegregation_Date.Name = "dateTimeSegregation_Date";
-            this.dateTimeSegregation_Date.Size = new System.Drawing.Size(171, 20);
+            this.dateTimeSegregation_Date.Size = new System.Drawing.Size(170, 20);
             this.dateTimeSegregation_Date.TabIndex = 101;
             this.dateTimeSegregation_Date.TabStop = false;
             this.dateTimeSegregation_Date.Text = "Thursday, 29 December 2016";
@@ -7517,7 +7537,7 @@
             // 
             this.label80.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label80.AutoSize = true;
-            this.label80.Location = new System.Drawing.Point(9, 56);
+            this.label80.Location = new System.Drawing.Point(10, 60);
             this.label80.Name = "label80";
             this.label80.Size = new System.Drawing.Size(34, 13);
             this.label80.TabIndex = 102;
@@ -7567,7 +7587,7 @@
             this.gridDailyTrip.MasterTemplate.AllowDragToGroup = false;
             this.gridDailyTrip.MasterTemplate.AllowEditRow = false;
             this.gridDailyTrip.MasterTemplate.ShowRowHeaderColumn = false;
-            this.gridDailyTrip.MasterTemplate.ViewDefinition = tableViewDefinition16;
+            this.gridDailyTrip.MasterTemplate.ViewDefinition = tableViewDefinition52;
             this.gridDailyTrip.Name = "gridDailyTrip";
             this.gridDailyTrip.ShowItemToolTips = false;
             this.gridDailyTrip.Size = new System.Drawing.Size(1086, 455);
@@ -7599,7 +7619,7 @@
             // cmbDTR_Batch
             // 
             this.cmbDTR_Batch.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmbDTR_Batch.Location = new System.Drawing.Point(356, 76);
+            this.cmbDTR_Batch.Location = new System.Drawing.Point(356, 80);
             this.cmbDTR_Batch.Name = "cmbDTR_Batch";
             this.cmbDTR_Batch.Size = new System.Drawing.Size(153, 20);
             this.cmbDTR_Batch.TabIndex = 97;
@@ -7609,7 +7629,7 @@
             // 
             this.label143.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label143.AutoSize = true;
-            this.label143.Location = new System.Drawing.Point(353, 56);
+            this.label143.Location = new System.Drawing.Point(353, 60);
             this.label143.Name = "label143";
             this.label143.Size = new System.Drawing.Size(39, 13);
             this.label143.TabIndex = 96;
@@ -7618,7 +7638,7 @@
             // btnDailyTrip_Print
             // 
             this.btnDailyTrip_Print.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnDailyTrip_Print.Location = new System.Drawing.Point(998, 74);
+            this.btnDailyTrip_Print.Location = new System.Drawing.Point(992, 80);
             this.btnDailyTrip_Print.Name = "btnDailyTrip_Print";
             this.btnDailyTrip_Print.Size = new System.Drawing.Size(70, 22);
             this.btnDailyTrip_Print.TabIndex = 94;
@@ -7629,7 +7649,7 @@
             // dropDownDailyTrip_PaymentMode
             // 
             this.dropDownDailyTrip_PaymentMode.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.dropDownDailyTrip_PaymentMode.Location = new System.Drawing.Point(518, 76);
+            this.dropDownDailyTrip_PaymentMode.Location = new System.Drawing.Point(518, 80);
             this.dropDownDailyTrip_PaymentMode.Name = "dropDownDailyTrip_PaymentMode";
             this.dropDownDailyTrip_PaymentMode.Size = new System.Drawing.Size(153, 20);
             this.dropDownDailyTrip_PaymentMode.TabIndex = 95;
@@ -7640,7 +7660,7 @@
             // 
             this.label124.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label124.AutoSize = true;
-            this.label124.Location = new System.Drawing.Point(515, 56);
+            this.label124.Location = new System.Drawing.Point(515, 60);
             this.label124.Name = "label124";
             this.label124.Size = new System.Drawing.Size(86, 13);
             this.label124.TabIndex = 94;
@@ -7649,7 +7669,7 @@
             // btnDailyTrip_Search
             // 
             this.btnDailyTrip_Search.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnDailyTrip_Search.Location = new System.Drawing.Point(677, 74);
+            this.btnDailyTrip_Search.Location = new System.Drawing.Point(677, 80);
             this.btnDailyTrip_Search.Name = "btnDailyTrip_Search";
             this.btnDailyTrip_Search.Size = new System.Drawing.Size(70, 22);
             this.btnDailyTrip_Search.TabIndex = 93;
@@ -7659,9 +7679,9 @@
             // 
             // dateTimeDailyTrip_Date
             // 
-            this.dateTimeDailyTrip_Date.Location = new System.Drawing.Point(11, 76);
+            this.dateTimeDailyTrip_Date.Location = new System.Drawing.Point(10, 80);
             this.dateTimeDailyTrip_Date.Name = "dateTimeDailyTrip_Date";
-            this.dateTimeDailyTrip_Date.Size = new System.Drawing.Size(171, 20);
+            this.dateTimeDailyTrip_Date.Size = new System.Drawing.Size(170, 20);
             this.dateTimeDailyTrip_Date.TabIndex = 89;
             this.dateTimeDailyTrip_Date.TabStop = false;
             this.dateTimeDailyTrip_Date.Text = "Thursday, 29 December 2016";
@@ -7673,7 +7693,7 @@
             // 
             this.label109.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label109.AutoSize = true;
-            this.label109.Location = new System.Drawing.Point(8, 56);
+            this.label109.Location = new System.Drawing.Point(10, 60);
             this.label109.Name = "label109";
             this.label109.Size = new System.Drawing.Size(34, 13);
             this.label109.TabIndex = 90;
@@ -7682,7 +7702,7 @@
             // dropDownDailyTrip_Area
             // 
             this.dropDownDailyTrip_Area.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.dropDownDailyTrip_Area.Location = new System.Drawing.Point(195, 76);
+            this.dropDownDailyTrip_Area.Location = new System.Drawing.Point(190, 80);
             this.dropDownDailyTrip_Area.Name = "dropDownDailyTrip_Area";
             this.dropDownDailyTrip_Area.Size = new System.Drawing.Size(153, 20);
             this.dropDownDailyTrip_Area.TabIndex = 88;
@@ -7693,7 +7713,7 @@
             // 
             this.label123.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label123.AutoSize = true;
-            this.label123.Location = new System.Drawing.Point(192, 56);
+            this.label123.Location = new System.Drawing.Point(187, 60);
             this.label123.Name = "label123";
             this.label123.Size = new System.Drawing.Size(33, 13);
             this.label123.TabIndex = 85;
@@ -7743,7 +7763,7 @@
             this.gridHoldCargo.MasterTemplate.AllowDragToGroup = false;
             this.gridHoldCargo.MasterTemplate.AllowEditRow = false;
             this.gridHoldCargo.MasterTemplate.ShowRowHeaderColumn = false;
-            this.gridHoldCargo.MasterTemplate.ViewDefinition = tableViewDefinition17;
+            this.gridHoldCargo.MasterTemplate.ViewDefinition = tableViewDefinition53;
             this.gridHoldCargo.Name = "gridHoldCargo";
             this.gridHoldCargo.ShowItemToolTips = false;
             this.gridHoldCargo.Size = new System.Drawing.Size(1086, 455);
@@ -7778,7 +7798,7 @@
             // 
             // cmbHC_Reason
             // 
-            this.cmbHC_Reason.Location = new System.Drawing.Point(808, 76);
+            this.cmbHC_Reason.Location = new System.Drawing.Point(808, 80);
             this.cmbHC_Reason.Name = "cmbHC_Reason";
             this.cmbHC_Reason.Size = new System.Drawing.Size(116, 20);
             this.cmbHC_Reason.TabIndex = 95;
@@ -7788,7 +7808,7 @@
             // 
             this.label146.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label146.AutoSize = true;
-            this.label146.Location = new System.Drawing.Point(805, 55);
+            this.label146.Location = new System.Drawing.Point(805, 60);
             this.label146.Name = "label146";
             this.label146.Size = new System.Drawing.Size(48, 13);
             this.label146.TabIndex = 94;
@@ -7798,7 +7818,7 @@
             // 
             this.label144.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label144.AutoSize = true;
-            this.label144.Location = new System.Drawing.Point(528, 55);
+            this.label144.Location = new System.Drawing.Point(528, 60);
             this.label144.Name = "label144";
             this.label144.Size = new System.Drawing.Size(79, 13);
             this.label144.TabIndex = 93;
@@ -7808,7 +7828,7 @@
             // 
             this.label145.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label145.AutoSize = true;
-            this.label145.Location = new System.Drawing.Point(377, 55);
+            this.label145.Location = new System.Drawing.Point(377, 60);
             this.label145.Name = "label145";
             this.label145.Size = new System.Drawing.Size(79, 13);
             this.label145.TabIndex = 92;
@@ -7821,7 +7841,7 @@
             radListDataItem2.Text = "Branch Satellite Office";
             this.cmbHC_Revenuetype.Items.Add(radListDataItem1);
             this.cmbHC_Revenuetype.Items.Add(radListDataItem2);
-            this.cmbHC_Revenuetype.Location = new System.Drawing.Point(380, 76);
+            this.cmbHC_Revenuetype.Location = new System.Drawing.Point(380, 80);
             this.cmbHC_Revenuetype.Name = "cmbHC_Revenuetype";
             this.cmbHC_Revenuetype.Size = new System.Drawing.Size(145, 20);
             this.cmbHC_Revenuetype.TabIndex = 91;
@@ -7830,7 +7850,7 @@
             // 
             // cmbHC_RevenueUnit
             // 
-            this.cmbHC_RevenueUnit.Location = new System.Drawing.Point(531, 76);
+            this.cmbHC_RevenueUnit.Location = new System.Drawing.Point(531, 80);
             this.cmbHC_RevenueUnit.Name = "cmbHC_RevenueUnit";
             this.cmbHC_RevenueUnit.Size = new System.Drawing.Size(151, 20);
             this.cmbHC_RevenueUnit.TabIndex = 90;
@@ -7838,8 +7858,8 @@
             // 
             // btnHoldCargo_Export
             // 
-            this.btnHoldCargo_Export.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnHoldCargo_Export.Location = new System.Drawing.Point(1013, 76);
+            this.btnHoldCargo_Export.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.btnHoldCargo_Export.Location = new System.Drawing.Point(1013, 80);
             this.btnHoldCargo_Export.Name = "btnHoldCargo_Export";
             this.btnHoldCargo_Export.Size = new System.Drawing.Size(70, 22);
             this.btnHoldCargo_Export.TabIndex = 88;
@@ -7859,7 +7879,7 @@
             // 
             // dateTimeHoldCargo_ToDate
             // 
-            this.dateTimeHoldCargo_ToDate.Location = new System.Drawing.Point(201, 76);
+            this.dateTimeHoldCargo_ToDate.Location = new System.Drawing.Point(200, 80);
             this.dateTimeHoldCargo_ToDate.Name = "dateTimeHoldCargo_ToDate";
             this.dateTimeHoldCargo_ToDate.Size = new System.Drawing.Size(169, 20);
             this.dateTimeHoldCargo_ToDate.TabIndex = 84;
@@ -7872,7 +7892,7 @@
             // btnHoldCargo_Search
             // 
             this.btnHoldCargo_Search.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnHoldCargo_Search.Location = new System.Drawing.Point(937, 75);
+            this.btnHoldCargo_Search.Location = new System.Drawing.Point(937, 80);
             this.btnHoldCargo_Search.Name = "btnHoldCargo_Search";
             this.btnHoldCargo_Search.Size = new System.Drawing.Size(70, 22);
             this.btnHoldCargo_Search.TabIndex = 87;
@@ -7882,9 +7902,9 @@
             // 
             // dateTimeHoldCargo_FromDate
             // 
-            this.dateTimeHoldCargo_FromDate.Location = new System.Drawing.Point(14, 78);
+            this.dateTimeHoldCargo_FromDate.Location = new System.Drawing.Point(10, 80);
             this.dateTimeHoldCargo_FromDate.Name = "dateTimeHoldCargo_FromDate";
-            this.dateTimeHoldCargo_FromDate.Size = new System.Drawing.Size(169, 20);
+            this.dateTimeHoldCargo_FromDate.Size = new System.Drawing.Size(170, 20);
             this.dateTimeHoldCargo_FromDate.TabIndex = 83;
             this.dateTimeHoldCargo_FromDate.TabStop = false;
             this.dateTimeHoldCargo_FromDate.Text = "Thursday, 29 December 2016";
@@ -7896,7 +7916,7 @@
             // 
             this.label40.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label40.AutoSize = true;
-            this.label40.Location = new System.Drawing.Point(11, 57);
+            this.label40.Location = new System.Drawing.Point(10, 60);
             this.label40.Name = "label40";
             this.label40.Size = new System.Drawing.Size(34, 13);
             this.label40.TabIndex = 84;
@@ -7904,7 +7924,7 @@
             // 
             // dropDownHoldCargo_Status
             // 
-            this.dropDownHoldCargo_Status.Location = new System.Drawing.Point(689, 76);
+            this.dropDownHoldCargo_Status.Location = new System.Drawing.Point(689, 80);
             this.dropDownHoldCargo_Status.Name = "dropDownHoldCargo_Status";
             this.dropDownHoldCargo_Status.Size = new System.Drawing.Size(116, 20);
             this.dropDownHoldCargo_Status.TabIndex = 81;
@@ -7915,7 +7935,7 @@
             // 
             this.label41.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label41.AutoSize = true;
-            this.label41.Location = new System.Drawing.Point(686, 55);
+            this.label41.Location = new System.Drawing.Point(686, 60);
             this.label41.Name = "label41";
             this.label41.Size = new System.Drawing.Size(42, 13);
             this.label41.TabIndex = 80;
@@ -7965,7 +7985,7 @@
             this.gridDeliveryStatus.MasterTemplate.AllowDragToGroup = false;
             this.gridDeliveryStatus.MasterTemplate.AllowEditRow = false;
             this.gridDeliveryStatus.MasterTemplate.ShowRowHeaderColumn = false;
-            this.gridDeliveryStatus.MasterTemplate.ViewDefinition = tableViewDefinition18;
+            this.gridDeliveryStatus.MasterTemplate.ViewDefinition = tableViewDefinition54;
             this.gridDeliveryStatus.Name = "gridDeliveryStatus";
             this.gridDeliveryStatus.ShowItemToolTips = false;
             this.gridDeliveryStatus.Size = new System.Drawing.Size(1086, 455);
@@ -7999,7 +8019,7 @@
             // cmbDS_Status
             // 
             this.cmbDS_Status.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmbDS_Status.Location = new System.Drawing.Point(700, 78);
+            this.cmbDS_Status.Location = new System.Drawing.Point(688, 80);
             this.cmbDS_Status.Name = "cmbDS_Status";
             this.cmbDS_Status.Size = new System.Drawing.Size(156, 20);
             this.cmbDS_Status.TabIndex = 97;
@@ -8008,7 +8028,7 @@
             // cmbDS_RevenueUnit
             // 
             this.cmbDS_RevenueUnit.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmbDS_RevenueUnit.Location = new System.Drawing.Point(354, 79);
+            this.cmbDS_RevenueUnit.Location = new System.Drawing.Point(354, 80);
             this.cmbDS_RevenueUnit.Name = "cmbDS_RevenueUnit";
             this.cmbDS_RevenueUnit.Size = new System.Drawing.Size(156, 20);
             this.cmbDS_RevenueUnit.TabIndex = 96;
@@ -8019,7 +8039,7 @@
             // 
             this.label140.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label140.AutoSize = true;
-            this.label140.Location = new System.Drawing.Point(535, 58);
+            this.label140.Location = new System.Drawing.Point(518, 60);
             this.label140.Name = "label140";
             this.label140.Size = new System.Drawing.Size(73, 13);
             this.label140.TabIndex = 95;
@@ -8029,7 +8049,7 @@
             // 
             this.label141.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label141.AutoSize = true;
-            this.label141.Location = new System.Drawing.Point(695, 58);
+            this.label141.Location = new System.Drawing.Point(683, 60);
             this.label141.Name = "label141";
             this.label141.Size = new System.Drawing.Size(42, 13);
             this.label141.TabIndex = 93;
@@ -8038,7 +8058,7 @@
             // cmbDS_DeliveredBy
             // 
             this.cmbDS_DeliveredBy.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmbDS_DeliveredBy.Location = new System.Drawing.Point(538, 78);
+            this.cmbDS_DeliveredBy.Location = new System.Drawing.Point(521, 80);
             this.cmbDS_DeliveredBy.Name = "cmbDS_DeliveredBy";
             this.cmbDS_DeliveredBy.Size = new System.Drawing.Size(156, 20);
             this.cmbDS_DeliveredBy.TabIndex = 92;
@@ -8048,7 +8068,7 @@
             // 
             this.label138.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label138.AutoSize = true;
-            this.label138.Location = new System.Drawing.Point(349, 58);
+            this.label138.Location = new System.Drawing.Point(349, 60);
             this.label138.Name = "label138";
             this.label138.Size = new System.Drawing.Size(79, 13);
             this.label138.TabIndex = 91;
@@ -8058,7 +8078,7 @@
             // 
             this.label139.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label139.AutoSize = true;
-            this.label139.Location = new System.Drawing.Point(189, 58);
+            this.label139.Location = new System.Drawing.Point(187, 60);
             this.label139.Name = "label139";
             this.label139.Size = new System.Drawing.Size(82, 13);
             this.label139.TabIndex = 89;
@@ -8067,7 +8087,7 @@
             // cmbDS_RevenueType
             // 
             this.cmbDS_RevenueType.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmbDS_RevenueType.Location = new System.Drawing.Point(192, 78);
+            this.cmbDS_RevenueType.Location = new System.Drawing.Point(190, 80);
             this.cmbDS_RevenueType.Name = "cmbDS_RevenueType";
             this.cmbDS_RevenueType.Size = new System.Drawing.Size(156, 20);
             this.cmbDS_RevenueType.TabIndex = 88;
@@ -8076,8 +8096,8 @@
             // 
             // btnDeliveryStatus_Print
             // 
-            this.btnDeliveryStatus_Print.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnDeliveryStatus_Print.Location = new System.Drawing.Point(991, 76);
+            this.btnDeliveryStatus_Print.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.btnDeliveryStatus_Print.Location = new System.Drawing.Point(992, 80);
             this.btnDeliveryStatus_Print.Name = "btnDeliveryStatus_Print";
             this.btnDeliveryStatus_Print.Size = new System.Drawing.Size(70, 22);
             this.btnDeliveryStatus_Print.TabIndex = 85;
@@ -8088,7 +8108,7 @@
             // btnDeliveryStatus_Search
             // 
             this.btnDeliveryStatus_Search.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnDeliveryStatus_Search.Location = new System.Drawing.Point(881, 76);
+            this.btnDeliveryStatus_Search.Location = new System.Drawing.Point(854, 80);
             this.btnDeliveryStatus_Search.Name = "btnDeliveryStatus_Search";
             this.btnDeliveryStatus_Search.Size = new System.Drawing.Size(70, 22);
             this.btnDeliveryStatus_Search.TabIndex = 84;
@@ -8098,9 +8118,9 @@
             // 
             // dateTimeDeliveryStatus_Date
             // 
-            this.dateTimeDeliveryStatus_Date.Location = new System.Drawing.Point(13, 78);
+            this.dateTimeDeliveryStatus_Date.Location = new System.Drawing.Point(10, 80);
             this.dateTimeDeliveryStatus_Date.Name = "dateTimeDeliveryStatus_Date";
-            this.dateTimeDeliveryStatus_Date.Size = new System.Drawing.Size(171, 20);
+            this.dateTimeDeliveryStatus_Date.Size = new System.Drawing.Size(170, 20);
             this.dateTimeDeliveryStatus_Date.TabIndex = 80;
             this.dateTimeDeliveryStatus_Date.TabStop = false;
             this.dateTimeDeliveryStatus_Date.Text = "Thursday, 29 December 2016";
@@ -8112,7 +8132,7 @@
             // 
             this.label117.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label117.AutoSize = true;
-            this.label117.Location = new System.Drawing.Point(10, 58);
+            this.label117.Location = new System.Drawing.Point(10, 60);
             this.label117.Name = "label117";
             this.label117.Size = new System.Drawing.Size(34, 13);
             this.label117.TabIndex = 81;
@@ -8152,26 +8172,6 @@
             // 
             this.backLoader.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backLoader_DoWork);
             this.backLoader.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backLoader_RunWorkerCompleted);
-            // 
-            // radGroupBox3
-            // 
-            this.radGroupBox3.AccessibleRole = System.Windows.Forms.AccessibleRole.Grouping;
-            this.radGroupBox3.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.radGroupBox3.Controls.Add(this.btnNew);
-            this.radGroupBox3.Controls.Add(this.btnSave);
-            this.radGroupBox3.Controls.Add(this.btnEdit);
-            this.radGroupBox3.Controls.Add(this.btnDelete);
-            this.radGroupBox3.Controls.Add(this.btnReset);
-            this.radGroupBox3.Controls.Add(this.btnAcceptance);
-            this.radGroupBox3.GroupBoxStyle = Telerik.WinControls.UI.RadGroupBoxStyle.Office;
-            this.radGroupBox3.HeaderText = "Controls";
-            this.radGroupBox3.Location = new System.Drawing.Point(834, 268);
-            this.radGroupBox3.Name = "radGroupBox3";
-            this.radGroupBox3.Size = new System.Drawing.Size(388, 108);
-            this.radGroupBox3.TabIndex = 43;
-            this.radGroupBox3.TabStop = false;
-            this.radGroupBox3.Text = "Controls";
-            this.radGroupBox3.ThemeName = "Office2010Black";
             // 
             // Main
             // 
@@ -8215,6 +8215,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.BookingGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radPanel3)).EndInit();
             this.radPanel3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.radGroupBox3)).EndInit();
+            this.radGroupBox3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.btnNew)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnSave)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnEdit)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnDelete)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnReset)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnAcceptance)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radGroupBox7)).EndInit();
             this.radGroupBox7.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.GroupRemarks)).EndInit();
@@ -8229,12 +8237,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.lstAssignedTo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lstBookingStatus)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lstBookingRemarks)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnEdit)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnAcceptance)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnReset)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnDelete)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnSave)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnNew)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.GroupConsignee)).EndInit();
             this.GroupConsignee.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
@@ -8685,8 +8687,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.btnDeliveryStatus_Print)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnDeliveryStatus_Search)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateTimeDeliveryStatus_Date)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radGroupBox3)).EndInit();
-            this.radGroupBox3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
 
