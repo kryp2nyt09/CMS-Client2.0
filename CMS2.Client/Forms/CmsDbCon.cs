@@ -25,6 +25,7 @@ using System.ServiceProcess;
 using System.IO;
 using System.Security.Permissions;
 using System.Net.Sockets;
+using CMS2.Entities.ReportModel;
 
 namespace CMS2.Client
 {
@@ -452,17 +453,15 @@ namespace CMS2.Client
                 }
                 radProgressBar1.Value1 = 0;
                 CheckTableState(Worker);
+               
+
             }
             else
             {
                 radProgressBar1.Value1 = 0;
                 CheckTableState(Worker);
+              
             }
-
-            
-
-           
-
         }
         private void btnCancel_Click(object sender, EventArgs e)
         {

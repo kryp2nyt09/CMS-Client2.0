@@ -129,6 +129,7 @@
     <Compile Include="ReportModel\HoldCargoViewModel.cs" />
     <Compile Include="ReportModel\PickupCargoManifestViewModel.cs" />
     <Compile Include="ReportModel\SegregationViewModel.cs" />
+    <Compile Include="ReportModel\StatusModel.cs" />
     <Compile Include="ReportModel\UnbundleViewModel.cs" />
     <Compile Include="Segregation.cs" />
     <Compile Include="ServiceType.cs" />

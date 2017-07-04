@@ -29,36 +29,36 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn37 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn38 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn39 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn40 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn41 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn42 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn43 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn44 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn45 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition73 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition74 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition75 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition76 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition77 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition78 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition79 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn1 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn2 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn3 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn4 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn5 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn6 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn7 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn8 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn9 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition1 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition2 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition3 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition4 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition5 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition6 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition7 = new Telerik.WinControls.UI.TableViewDefinition();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition80 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition81 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition82 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition83 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition84 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition85 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition86 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition87 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition88 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition89 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition8 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition9 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition10 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition11 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition12 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition13 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition14 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition15 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition16 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition17 = new Telerik.WinControls.UI.TableViewDefinition();
             Telerik.WinControls.UI.RadListDataItem radListDataItem1 = new Telerik.WinControls.UI.RadListDataItem();
             Telerik.WinControls.UI.RadListDataItem radListDataItem2 = new Telerik.WinControls.UI.RadListDataItem();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition90 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition18 = new Telerik.WinControls.UI.TableViewDefinition();
             this.office2010BlackTheme1 = new Telerik.WinControls.Themes.Office2010BlackTheme();
             this.radPanel1 = new Telerik.WinControls.UI.RadPanel();
             this.panel = new Telerik.WinControls.UI.RadPanel();
@@ -75,6 +75,10 @@
             this.BookingPage = new Telerik.WinControls.UI.RadPageViewPage();
             this.radPanel4 = new Telerik.WinControls.UI.RadPanel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.lblUpload = new System.Windows.Forms.Label();
+            this.lblDownload = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
             this.lblService = new System.Windows.Forms.Label();
             this.BookingGridView = new Telerik.WinControls.UI.RadGridView();
             this.radPanel3 = new Telerik.WinControls.UI.RadPanel();
@@ -615,6 +619,7 @@
             this.saveFileDialog2 = new System.Windows.Forms.SaveFileDialog();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.timer2 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.radPanel1)).BeginInit();
             this.radPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panel)).BeginInit();
@@ -1269,6 +1274,10 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.lblUpload);
+            this.panel2.Controls.Add(this.lblDownload);
+            this.panel2.Controls.Add(this.label23);
+            this.panel2.Controls.Add(this.label19);
             this.panel2.Controls.Add(this.panel1);
             this.panel2.Controls.Add(this.lbl_Status);
             this.panel2.Controls.Add(this.lblService);
@@ -1277,6 +1286,46 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1234, 20);
             this.panel2.TabIndex = 31;
+            // 
+            // lblUpload
+            // 
+            this.lblUpload.AutoSize = true;
+            this.lblUpload.Location = new System.Drawing.Point(487, 3);
+            this.lblUpload.Name = "lblUpload";
+            this.lblUpload.Size = new System.Drawing.Size(60, 13);
+            this.lblUpload.TabIndex = 42;
+            this.lblUpload.Text = "0.00 Mbps";
+            this.lblUpload.Visible = false;
+            // 
+            // lblDownload
+            // 
+            this.lblDownload.AutoSize = true;
+            this.lblDownload.Location = new System.Drawing.Point(285, 3);
+            this.lblDownload.Name = "lblDownload";
+            this.lblDownload.Size = new System.Drawing.Size(60, 13);
+            this.lblDownload.TabIndex = 41;
+            this.lblDownload.Text = "0.00 Mbps";
+            this.lblDownload.Visible = false;
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(435, 3);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(48, 13);
+            this.label23.TabIndex = 40;
+            this.label23.Text = "Upload:";
+            this.label23.Visible = false;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(219, 2);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(64, 13);
+            this.label19.TabIndex = 39;
+            this.label19.Text = "Download:";
+            this.label19.Visible = false;
             // 
             // lblService
             // 
@@ -1307,58 +1356,58 @@
             this.BookingGridView.MasterTemplate.AllowSearchRow = true;
             this.BookingGridView.MasterTemplate.AutoGenerateColumns = false;
             this.BookingGridView.MasterTemplate.AutoSizeColumnsMode = Telerik.WinControls.UI.GridViewAutoSizeColumnsMode.Fill;
-            gridViewTextBoxColumn37.FieldName = "BookingId";
-            gridViewTextBoxColumn37.HeaderText = "BookingID";
-            gridViewTextBoxColumn37.IsVisible = false;
-            gridViewTextBoxColumn37.Name = "BookingId";
-            gridViewTextBoxColumn38.FieldName = "DateBooked";
-            gridViewTextBoxColumn38.HeaderText = "Booking Date";
-            gridViewTextBoxColumn38.Name = "BookingDate";
-            gridViewTextBoxColumn38.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            gridViewTextBoxColumn38.Width = 152;
-            gridViewTextBoxColumn39.FieldName = "BookingNo";
-            gridViewTextBoxColumn39.HeaderText = "Booking Number";
-            gridViewTextBoxColumn39.Name = "BookingNo";
-            gridViewTextBoxColumn39.Width = 152;
-            gridViewTextBoxColumn40.Expression = "";
-            gridViewTextBoxColumn40.FieldName = "ShipperFullname";
-            gridViewTextBoxColumn40.HeaderText = "Shipper Name";
-            gridViewTextBoxColumn40.Name = "ShipperName";
-            gridViewTextBoxColumn40.Width = 152;
-            gridViewTextBoxColumn41.FieldName = "OriginCity.CityName";
-            gridViewTextBoxColumn41.HeaderText = "Origin City";
-            gridViewTextBoxColumn41.Name = "OriginCity";
-            gridViewTextBoxColumn41.Width = 152;
-            gridViewTextBoxColumn42.Expression = "";
-            gridViewTextBoxColumn42.FieldName = "ConsigneeFullname";
-            gridViewTextBoxColumn42.HeaderText = "Consignee Name";
-            gridViewTextBoxColumn42.Name = "ConsigneeName";
-            gridViewTextBoxColumn42.Width = 152;
-            gridViewTextBoxColumn43.FieldName = "DestinationCity.CityName";
-            gridViewTextBoxColumn43.HeaderText = "Destination City";
-            gridViewTextBoxColumn43.Name = "DestinationCity";
-            gridViewTextBoxColumn43.Width = 152;
-            gridViewTextBoxColumn44.FieldName = "BookedByFullname";
-            gridViewTextBoxColumn44.HeaderText = "Booked By";
-            gridViewTextBoxColumn44.Name = "BookedBy";
-            gridViewTextBoxColumn44.Width = 152;
-            gridViewTextBoxColumn45.FieldName = "BookingStatus.BookingStatusName";
-            gridViewTextBoxColumn45.HeaderText = "Booking Status";
-            gridViewTextBoxColumn45.Name = "BookingStatus";
-            gridViewTextBoxColumn45.Width = 156;
+            gridViewTextBoxColumn1.FieldName = "BookingId";
+            gridViewTextBoxColumn1.HeaderText = "BookingID";
+            gridViewTextBoxColumn1.IsVisible = false;
+            gridViewTextBoxColumn1.Name = "BookingId";
+            gridViewTextBoxColumn2.FieldName = "DateBooked";
+            gridViewTextBoxColumn2.HeaderText = "Booking Date";
+            gridViewTextBoxColumn2.Name = "BookingDate";
+            gridViewTextBoxColumn2.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            gridViewTextBoxColumn2.Width = 152;
+            gridViewTextBoxColumn3.FieldName = "BookingNo";
+            gridViewTextBoxColumn3.HeaderText = "Booking Number";
+            gridViewTextBoxColumn3.Name = "BookingNo";
+            gridViewTextBoxColumn3.Width = 152;
+            gridViewTextBoxColumn4.Expression = "";
+            gridViewTextBoxColumn4.FieldName = "ShipperFullname";
+            gridViewTextBoxColumn4.HeaderText = "Shipper Name";
+            gridViewTextBoxColumn4.Name = "ShipperName";
+            gridViewTextBoxColumn4.Width = 152;
+            gridViewTextBoxColumn5.FieldName = "OriginCity.CityName";
+            gridViewTextBoxColumn5.HeaderText = "Origin City";
+            gridViewTextBoxColumn5.Name = "OriginCity";
+            gridViewTextBoxColumn5.Width = 152;
+            gridViewTextBoxColumn6.Expression = "";
+            gridViewTextBoxColumn6.FieldName = "ConsigneeFullname";
+            gridViewTextBoxColumn6.HeaderText = "Consignee Name";
+            gridViewTextBoxColumn6.Name = "ConsigneeName";
+            gridViewTextBoxColumn6.Width = 152;
+            gridViewTextBoxColumn7.FieldName = "DestinationCity.CityName";
+            gridViewTextBoxColumn7.HeaderText = "Destination City";
+            gridViewTextBoxColumn7.Name = "DestinationCity";
+            gridViewTextBoxColumn7.Width = 152;
+            gridViewTextBoxColumn8.FieldName = "BookedByFullname";
+            gridViewTextBoxColumn8.HeaderText = "Booked By";
+            gridViewTextBoxColumn8.Name = "BookedBy";
+            gridViewTextBoxColumn8.Width = 152;
+            gridViewTextBoxColumn9.FieldName = "BookingStatus.BookingStatusName";
+            gridViewTextBoxColumn9.HeaderText = "Booking Status";
+            gridViewTextBoxColumn9.Name = "BookingStatus";
+            gridViewTextBoxColumn9.Width = 156;
             this.BookingGridView.MasterTemplate.Columns.AddRange(new Telerik.WinControls.UI.GridViewDataColumn[] {
-            gridViewTextBoxColumn37,
-            gridViewTextBoxColumn38,
-            gridViewTextBoxColumn39,
-            gridViewTextBoxColumn40,
-            gridViewTextBoxColumn41,
-            gridViewTextBoxColumn42,
-            gridViewTextBoxColumn43,
-            gridViewTextBoxColumn44,
-            gridViewTextBoxColumn45});
+            gridViewTextBoxColumn1,
+            gridViewTextBoxColumn2,
+            gridViewTextBoxColumn3,
+            gridViewTextBoxColumn4,
+            gridViewTextBoxColumn5,
+            gridViewTextBoxColumn6,
+            gridViewTextBoxColumn7,
+            gridViewTextBoxColumn8,
+            gridViewTextBoxColumn9});
             this.BookingGridView.MasterTemplate.EnableAlternatingRowColor = true;
             this.BookingGridView.MasterTemplate.EnableFiltering = true;
-            this.BookingGridView.MasterTemplate.ViewDefinition = tableViewDefinition73;
+            this.BookingGridView.MasterTemplate.ViewDefinition = tableViewDefinition1;
             this.BookingGridView.Name = "BookingGridView";
             this.BookingGridView.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.BookingGridView.Size = new System.Drawing.Size(1234, 208);
@@ -3686,7 +3735,7 @@
             this.gridPackage.MasterTemplate.EnableGrouping = false;
             this.gridPackage.MasterTemplate.MultiSelect = true;
             this.gridPackage.MasterTemplate.ShowFilteringRow = false;
-            this.gridPackage.MasterTemplate.ViewDefinition = tableViewDefinition74;
+            this.gridPackage.MasterTemplate.ViewDefinition = tableViewDefinition2;
             this.gridPackage.Name = "gridPackage";
             this.gridPackage.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.tableLayoutPanel14.SetRowSpan(this.gridPackage, 5);
@@ -4857,6 +4906,7 @@
             this.txtNetCollection.Text = "₱0.00";
             this.txtNetCollection.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtNetCollection.ThemeName = "Office2010Black";
+            this.txtNetCollection.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtNetCollection_KeyDown);
             // 
             // txtTaxWithheld
             // 
@@ -4900,6 +4950,7 @@
             this.txtAmountDue.Text = "₱0.00";
             this.txtAmountDue.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtAmountDue.ThemeName = "Office2010Black";
+            this.txtAmountDue.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtAmountDue_KeyDown);
             // 
             // radLabel30
             // 
@@ -4912,6 +4963,8 @@
             // 
             // cmb_PaymentRemarks
             // 
+            this.cmb_PaymentRemarks.Cursor = System.Windows.Forms.Cursors.Default;
+            this.cmb_PaymentRemarks.Enabled = false;
             this.cmb_PaymentRemarks.Location = new System.Drawing.Point(86, 341);
             this.cmb_PaymentRemarks.Name = "cmb_PaymentRemarks";
             this.cmb_PaymentRemarks.Size = new System.Drawing.Size(161, 20);
@@ -4924,7 +4977,7 @@
             this.Manifest.ItemSize = new System.Drawing.SizeF(71F, 30F);
             this.Manifest.Location = new System.Drawing.Point(12, 40);
             this.Manifest.Name = "Manifest";
-            this.Manifest.Size = new System.Drawing.Size(1237, 637);
+            this.Manifest.Size = new System.Drawing.Size(1234, 587);
             this.Manifest.Text = "Manifest";
             // 
             // gridManifest
@@ -4946,9 +4999,9 @@
             this.gridManifest.MasterTemplate.EnableFiltering = true;
             this.gridManifest.MasterTemplate.PageSize = 1;
             this.gridManifest.MasterTemplate.ShowGroupedColumns = true;
-            this.gridManifest.MasterTemplate.ViewDefinition = tableViewDefinition75;
+            this.gridManifest.MasterTemplate.ViewDefinition = tableViewDefinition3;
             this.gridManifest.Name = "gridManifest";
-            this.gridManifest.Size = new System.Drawing.Size(1237, 637);
+            this.gridManifest.Size = new System.Drawing.Size(1234, 587);
             this.gridManifest.TabIndex = 0;
             this.gridManifest.Text = "radGridView1";
             this.gridManifest.ThemeName = "Office2010Black";
@@ -5431,7 +5484,7 @@
             // 
             this.gridCorpAcctConsignee.MasterTemplate.AllowAddNewRow = false;
             this.gridCorpAcctConsignee.MasterTemplate.AllowDeleteRow = false;
-            this.gridCorpAcctConsignee.MasterTemplate.ViewDefinition = tableViewDefinition76;
+            this.gridCorpAcctConsignee.MasterTemplate.ViewDefinition = tableViewDefinition4;
             this.gridCorpAcctConsignee.Name = "gridCorpAcctConsignee";
             this.gridCorpAcctConsignee.Size = new System.Drawing.Size(794, 121);
             this.gridCorpAcctConsignee.TabIndex = 62;
@@ -5449,7 +5502,7 @@
             this.gridPrepaid.MasterTemplate.AllowColumnReorder = false;
             this.gridPrepaid.MasterTemplate.AllowColumnResize = false;
             this.gridPrepaid.MasterTemplate.AllowDeleteRow = false;
-            this.gridPrepaid.MasterTemplate.ViewDefinition = tableViewDefinition77;
+            this.gridPrepaid.MasterTemplate.ViewDefinition = tableViewDefinition5;
             this.gridPrepaid.Name = "gridPrepaid";
             this.gridPrepaid.Size = new System.Drawing.Size(794, 131);
             this.gridPrepaid.TabIndex = 60;
@@ -5621,7 +5674,7 @@
             this.gridFreightCollect.MasterTemplate.AllowAddNewRow = false;
             this.gridFreightCollect.MasterTemplate.AllowColumnResize = false;
             this.gridFreightCollect.MasterTemplate.AllowDeleteRow = false;
-            this.gridFreightCollect.MasterTemplate.ViewDefinition = tableViewDefinition78;
+            this.gridFreightCollect.MasterTemplate.ViewDefinition = tableViewDefinition6;
             this.gridFreightCollect.Name = "gridFreightCollect";
             this.gridFreightCollect.Size = new System.Drawing.Size(794, 127);
             this.gridFreightCollect.TabIndex = 61;
@@ -5751,7 +5804,7 @@
             this.gridPickupCargo.MasterTemplate.AllowDragToGroup = false;
             this.gridPickupCargo.MasterTemplate.AllowEditRow = false;
             this.gridPickupCargo.MasterTemplate.ShowRowHeaderColumn = false;
-            this.gridPickupCargo.MasterTemplate.ViewDefinition = tableViewDefinition79;
+            this.gridPickupCargo.MasterTemplate.ViewDefinition = tableViewDefinition7;
             this.gridPickupCargo.Name = "gridPickupCargo";
             this.gridPickupCargo.ShowItemToolTips = false;
             this.gridPickupCargo.Size = new System.Drawing.Size(1086, 455);
@@ -5954,7 +6007,7 @@
             this.gridBranchAcceptance.MasterTemplate.AllowDeleteRow = false;
             this.gridBranchAcceptance.MasterTemplate.AllowEditRow = false;
             this.gridBranchAcceptance.MasterTemplate.ShowRowHeaderColumn = false;
-            this.gridBranchAcceptance.MasterTemplate.ViewDefinition = tableViewDefinition80;
+            this.gridBranchAcceptance.MasterTemplate.ViewDefinition = tableViewDefinition8;
             this.gridBranchAcceptance.Name = "gridBranchAcceptance";
             this.gridBranchAcceptance.ShowItemToolTips = false;
             this.gridBranchAcceptance.Size = new System.Drawing.Size(1086, 455);
@@ -6129,7 +6182,7 @@
             this.gridBundle.MasterTemplate.AllowDragToGroup = false;
             this.gridBundle.MasterTemplate.AllowEditRow = false;
             this.gridBundle.MasterTemplate.ShowRowHeaderColumn = false;
-            this.gridBundle.MasterTemplate.ViewDefinition = tableViewDefinition81;
+            this.gridBundle.MasterTemplate.ViewDefinition = tableViewDefinition9;
             this.gridBundle.Name = "gridBundle";
             this.gridBundle.ShowItemToolTips = false;
             this.gridBundle.Size = new System.Drawing.Size(1086, 455);
@@ -6304,7 +6357,7 @@
             this.gridUnbundle.MasterTemplate.AllowDragToGroup = false;
             this.gridUnbundle.MasterTemplate.AllowEditRow = false;
             this.gridUnbundle.MasterTemplate.ShowRowHeaderColumn = false;
-            this.gridUnbundle.MasterTemplate.ViewDefinition = tableViewDefinition82;
+            this.gridUnbundle.MasterTemplate.ViewDefinition = tableViewDefinition10;
             this.gridUnbundle.Name = "gridUnbundle";
             this.gridUnbundle.ShowItemToolTips = false;
             this.gridUnbundle.Size = new System.Drawing.Size(1086, 455);
@@ -6456,7 +6509,7 @@
             this.gridGatewayTransmital.MasterTemplate.AllowDragToGroup = false;
             this.gridGatewayTransmital.MasterTemplate.AllowEditRow = false;
             this.gridGatewayTransmital.MasterTemplate.ShowRowHeaderColumn = false;
-            this.gridGatewayTransmital.MasterTemplate.ViewDefinition = tableViewDefinition83;
+            this.gridGatewayTransmital.MasterTemplate.ViewDefinition = tableViewDefinition11;
             this.gridGatewayTransmital.Name = "gridGatewayTransmital";
             this.gridGatewayTransmital.ShowItemToolTips = false;
             this.gridGatewayTransmital.Size = new System.Drawing.Size(1086, 455);
@@ -6696,7 +6749,7 @@
             this.gridGatewayOutbound.MasterTemplate.AllowDragToGroup = false;
             this.gridGatewayOutbound.MasterTemplate.AllowEditRow = false;
             this.gridGatewayOutbound.MasterTemplate.ShowRowHeaderColumn = false;
-            this.gridGatewayOutbound.MasterTemplate.ViewDefinition = tableViewDefinition84;
+            this.gridGatewayOutbound.MasterTemplate.ViewDefinition = tableViewDefinition12;
             this.gridGatewayOutbound.Name = "gridGatewayOutbound";
             this.gridGatewayOutbound.ShowItemToolTips = false;
             this.gridGatewayOutbound.Size = new System.Drawing.Size(1086, 455);
@@ -6932,7 +6985,7 @@
             this.gridGatewayInbound.MasterTemplate.AllowDragToGroup = false;
             this.gridGatewayInbound.MasterTemplate.AllowEditRow = false;
             this.gridGatewayInbound.MasterTemplate.ShowRowHeaderColumn = false;
-            this.gridGatewayInbound.MasterTemplate.ViewDefinition = tableViewDefinition85;
+            this.gridGatewayInbound.MasterTemplate.ViewDefinition = tableViewDefinition13;
             this.gridGatewayInbound.Name = "gridGatewayInbound";
             this.gridGatewayInbound.ShowItemToolTips = false;
             this.gridGatewayInbound.Size = new System.Drawing.Size(1086, 455);
@@ -7150,7 +7203,7 @@
             this.gridCargoTransfer.MasterTemplate.AllowDragToGroup = false;
             this.gridCargoTransfer.MasterTemplate.AllowEditRow = false;
             this.gridCargoTransfer.MasterTemplate.ShowRowHeaderColumn = false;
-            this.gridCargoTransfer.MasterTemplate.ViewDefinition = tableViewDefinition86;
+            this.gridCargoTransfer.MasterTemplate.ViewDefinition = tableViewDefinition14;
             this.gridCargoTransfer.Name = "gridCargoTransfer";
             this.gridCargoTransfer.ShowItemToolTips = false;
             this.gridCargoTransfer.Size = new System.Drawing.Size(1086, 455);
@@ -7363,7 +7416,7 @@
             this.gridSegregation.MasterTemplate.AllowDragToGroup = false;
             this.gridSegregation.MasterTemplate.AllowEditRow = false;
             this.gridSegregation.MasterTemplate.ShowRowHeaderColumn = false;
-            this.gridSegregation.MasterTemplate.ViewDefinition = tableViewDefinition87;
+            this.gridSegregation.MasterTemplate.ViewDefinition = tableViewDefinition15;
             this.gridSegregation.Name = "gridSegregation";
             this.gridSegregation.ShowItemToolTips = false;
             this.gridSegregation.Size = new System.Drawing.Size(1086, 455);
@@ -7562,7 +7615,7 @@
             this.gridDailyTrip.MasterTemplate.AllowDragToGroup = false;
             this.gridDailyTrip.MasterTemplate.AllowEditRow = false;
             this.gridDailyTrip.MasterTemplate.ShowRowHeaderColumn = false;
-            this.gridDailyTrip.MasterTemplate.ViewDefinition = tableViewDefinition88;
+            this.gridDailyTrip.MasterTemplate.ViewDefinition = tableViewDefinition16;
             this.gridDailyTrip.Name = "gridDailyTrip";
             this.gridDailyTrip.ShowItemToolTips = false;
             this.gridDailyTrip.Size = new System.Drawing.Size(1086, 455);
@@ -7738,7 +7791,7 @@
             this.gridHoldCargo.MasterTemplate.AllowDragToGroup = false;
             this.gridHoldCargo.MasterTemplate.AllowEditRow = false;
             this.gridHoldCargo.MasterTemplate.ShowRowHeaderColumn = false;
-            this.gridHoldCargo.MasterTemplate.ViewDefinition = tableViewDefinition89;
+            this.gridHoldCargo.MasterTemplate.ViewDefinition = tableViewDefinition17;
             this.gridHoldCargo.Name = "gridHoldCargo";
             this.gridHoldCargo.ShowItemToolTips = false;
             this.gridHoldCargo.Size = new System.Drawing.Size(1086, 455);
@@ -7960,7 +8013,7 @@
             this.gridDeliveryStatus.MasterTemplate.AllowDragToGroup = false;
             this.gridDeliveryStatus.MasterTemplate.AllowEditRow = false;
             this.gridDeliveryStatus.MasterTemplate.ShowRowHeaderColumn = false;
-            this.gridDeliveryStatus.MasterTemplate.ViewDefinition = tableViewDefinition90;
+            this.gridDeliveryStatus.MasterTemplate.ViewDefinition = tableViewDefinition18;
             this.gridDeliveryStatus.Name = "gridDeliveryStatus";
             this.gridDeliveryStatus.ShowItemToolTips = false;
             this.gridDeliveryStatus.Size = new System.Drawing.Size(1086, 455);
@@ -8146,6 +8199,11 @@
             // timer1
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // timer2
+            // 
+            this.timer2.Interval = 1000;
+            this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
             // Main
             // 
@@ -9223,5 +9281,10 @@
         private System.Windows.Forms.Label lblService;
         private Telerik.WinControls.UI.RadDropDownList dropDownSegregation_PlateNo;
         private Telerik.WinControls.UI.RadDropDownList dropDownSegregation_Driver;
+        private System.Windows.Forms.Label lblUpload;
+        private System.Windows.Forms.Label lblDownload;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Timer timer2;
     }
 }
