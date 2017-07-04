@@ -80,6 +80,8 @@
             this.lblProgressState = new Telerik.WinControls.UI.RadLabel();
             this.Worker = new System.ComponentModel.BackgroundWorker();
             this.OpenFile = new System.Windows.Forms.OpenFileDialog();
+            this.lblDown = new System.Windows.Forms.Label();
+            this.lblUp = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.label1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtLocalDbPassword)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtLocalDbUsername)).BeginInit();
@@ -516,7 +518,7 @@
             this.radPageView1.Controls.Add(this.radPageViewPage2);
             this.radPageView1.Location = new System.Drawing.Point(12, 12);
             this.radPageView1.Name = "radPageView1";
-            this.radPageView1.SelectedPage = this.radPageViewPage1;
+            this.radPageView1.SelectedPage = this.radPageViewPage2;
             this.radPageView1.Size = new System.Drawing.Size(399, 590);
             this.radPageView1.TabIndex = 2;
             this.radPageView1.ThemeName = "Office2010Black";
@@ -693,13 +695,33 @@
             this.OpenFile.InitialDirectory = "C:\\Program Files (x86)\\APCargo\\APCargo";
             this.OpenFile.RestoreDirectory = true;
             // 
+            // lblDown
+            // 
+            this.lblDown.AutoSize = true;
+            this.lblDown.Location = new System.Drawing.Point(172, 605);
+            this.lblDown.Name = "lblDown";
+            this.lblDown.Size = new System.Drawing.Size(44, 13);
+            this.lblDown.TabIndex = 24;
+            this.lblDown.Text = "label11";
+            // 
+            // lblUp
+            // 
+            this.lblUp.AutoSize = true;
+            this.lblUp.Location = new System.Drawing.Point(245, 605);
+            this.lblUp.Name = "lblUp";
+            this.lblUp.Size = new System.Drawing.Size(44, 13);
+            this.lblUp.TabIndex = 25;
+            this.lblUp.Text = "label11";
+            // 
             // CmsDbCon
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkGray;
             this.ClientSize = new System.Drawing.Size(421, 621);
+            this.Controls.Add(this.lblUp);
             this.Controls.Add(this.radPageView1);
+            this.Controls.Add(this.lblDown);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -769,6 +791,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.lblProgressState)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -822,5 +845,7 @@
         private System.ComponentModel.BackgroundWorker Worker;
         private Telerik.WinControls.UI.RadLabel lblProgressState;
         private System.Windows.Forms.OpenFileDialog OpenFile;
+        private System.Windows.Forms.Label lblUp;
+        private System.Windows.Forms.Label lblDown;
     }
 }

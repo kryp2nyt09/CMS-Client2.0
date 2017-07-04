@@ -18,6 +18,7 @@ using System.Data.Entity.Core.Objects;
 using System.Data.Entity.Core.Metadata.Edm;
 using System.ComponentModel;
 using CMS2.Entities;
+using CMS2.Entities.ReportModel;
 
 namespace CMS2.Client.SyncHelper
 {
@@ -299,6 +300,7 @@ namespace CMS2.Client.SyncHelper
         private SqlConnection _localConnection;
         private SqlConnection _serverConnection;
         private string _filter;
+        
         ThreadState State;
 
         public Synchronize(string tableName, string filter, ManualResetEvent currentEvent, SqlConnection localConnection, SqlConnection serverConnection)
@@ -311,17 +313,17 @@ namespace CMS2.Client.SyncHelper
         }
         public void PerformSync(Object obj)
         {
+
             State = (ThreadState)obj;
             SyncOrchestrator syncOrchestrator = new SyncOrchestrator();
             syncOrchestrator.LocalProvider = new SqlSyncProvider(_tableName + _filter, _localConnection);
             syncOrchestrator.RemoteProvider = new SqlSyncProvider(_tableName + _filter, _serverConnection);
             SyncOperationStatistics syncStats;
-
+            
             State.worker.ReportProgress(0, _tableName + " was synchronizing.");
-
+            
             switch (_tableName)
             {
-
                 case "Shipment":
                 case "PackageNumber":
                 case "PackageDimension":
@@ -344,16 +346,13 @@ namespace CMS2.Client.SyncHelper
                 case "Segregation":
                 case "CargoTransfer":
 
+                    
                     syncOrchestrator.Direction = SyncDirectionOrder.UploadAndDownload;
 
                     try
                     {
-
                         syncStats = syncOrchestrator.Synchronize();
-
-
                         Log.WriteLogs(_tableName + " Total Changes Uploaded: " + syncStats.UploadChangesTotal + " Total Changes Downloaded: " + syncStats.DownloadChangesTotal + " Total Changes applied: " + syncStats.DownloadChangesApplied + " Total Changes failed: " + syncStats.DownloadChangesFailed);
-
                         State.table.Status = TableStatus.Good;
                         State.table.isSelected = false;
                         State.worker.ReportProgress(1, _tableName + " was synchronized.");
@@ -382,6 +381,7 @@ namespace CMS2.Client.SyncHelper
                         syncStats = syncOrchestrator.Synchronize();
 
                         Log.WriteLogs(_tableName + " Total Changes Uploaded: " + syncStats.UploadChangesTotal + " Total Changes Downloaded: " + syncStats.DownloadChangesTotal + " Total Changes applied: " + syncStats.DownloadChangesApplied + " Total Changes failed: " + syncStats.DownloadChangesFailed);
+
                         State.table.Status = TableStatus.Good;
                         State.table.isSelected = false;
                         State.worker.ReportProgress(1, _tableName + " was synchronized.");
