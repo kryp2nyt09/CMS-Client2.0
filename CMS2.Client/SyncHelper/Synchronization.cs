@@ -300,15 +300,7 @@ namespace CMS2.Client.SyncHelper
         private SqlConnection _localConnection;
         private SqlConnection _serverConnection;
         private string _filter;
-
-        //Added
-        private static int changesUploaded = 0;
-        private static int changesDownloaded = 0;
-        private static int totalChangesUploaded = 0;
-        private static int totalChangesDownloaded = 0;
-    
-       
-
+        
         ThreadState State;
 
         public Synchronize(string tableName, string filter, ManualResetEvent currentEvent, SqlConnection localConnection, SqlConnection serverConnection)
