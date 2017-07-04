@@ -20,12 +20,11 @@ namespace CMS2.Client
         [STAThread]
         private static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            var cmsMainWindow = new Main();
-
+            //Application.EnableVisualStyles();
+            //Application.SetCompatibleTextRenderingDefault(false);
+           
             bool xBool = Convert.ToBoolean(ConfigurationManager.AppSettings["isSync"]);
-            if (xBool)
+            if (!xBool)
             {
                 Extract_Database extract = new Extract_Database();
                 Application.Run(extract);
@@ -33,16 +32,12 @@ namespace CMS2.Client
             }
             else
             {
+                var cmsMainWindow = new Main();
                 cmsMainWindow.Height = 755;
                 cmsMainWindow.Width = 1266;
                 Application.Run(cmsMainWindow);
             }
 
-        }
-        private static bool IsAdmin()
-        {
-            return (new WindowsPrincipal(WindowsIdentity.GetCurrent()))
-               .IsInRole(WindowsBuiltInRole.Administrator);
         }
     }
 }

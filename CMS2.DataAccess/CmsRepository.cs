@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using CMS2.Common.Enums;
 using CMS2.DataAccess.Interfaces;
 using CMS2.Entities;
-
+using CMS2.Common;
 namespace CMS2.DataAccess
 {
     // use internal since only the UnitOfWork will access this class
@@ -54,84 +54,224 @@ namespace CMS2.DataAccess
         // returns all records. includes inactive and deleted
         public List<TEntity> GetAll()
         {
-            return GetEntities().ToList();
+            List<TEntity> entities = new List<TEntity>();
+            try
+            {
+                entities = GetEntities().ToList();
+            }
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs("", "Cms Repository GetAll", ex.Message + Environment.NewLine + ex.InnerException.ToString());
+            }
+            return entities;
         }
 
         public async Task<List<TEntity>> GetAllAsync()
         {
-            return await GetEntities().ToListAsync();
+            List<TEntity> entities = new List<TEntity>();
+            try
+            {
+                entities = await GetEntities().ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs("", "Cms Repository GetAllAsync", ex.Message + Environment.NewLine + ex.InnerException.ToString());
+            }
+            return entities;
         }
 
         // returns all active records only
         public List<TEntity> FilterActive()
         {
-            return GetEntities().Where(x => x.RecordStatus == (int)RecordStatus.Active).ToList();
+            List<TEntity> entities = new List<TEntity>();
+            try
+            {
+                entities = GetEntities().Where(x => x.RecordStatus == (int)RecordStatus.Active).ToList();
+            }
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs("", "Cms Repository FilterActive", ex.Message + Environment.NewLine + ex.InnerException.ToString());
+            }
+            return entities;
+
         }
 
         public async Task<List<TEntity>> FilterActiveAsync()
         {
-            return await GetEntities().Where(x => x.RecordStatus == (int)RecordStatus.Active).ToListAsync();
+
+            List<TEntity> entities = new List<TEntity>();
+            try
+            {
+                entities = await GetEntities().Where(x => x.RecordStatus == (int)RecordStatus.Active).ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs("", "Cms Repository FilterActiveAsync", ex.Message + Environment.NewLine + ex.InnerException.ToString());
+            }
+            return entities;
         }
 
         // parameter: filter
         // returns filtered records by field and value
         public List<TEntity> FilterBy(Expression<Func<TEntity, bool>> filter)
         {
-            return GetEntities().Where(filter).ToList();
+
+            List<TEntity> entities = new List<TEntity>();
+            try
+            {
+                entities = GetEntities().Where(filter).ToList();
+            }
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs("", "Cms Repository FilterBy", ex.Message + Environment.NewLine + ex.InnerException.ToString());
+            }
+            return entities;
         }
 
         public async Task<List<TEntity>> FilterByAsync(Expression<Func<TEntity, bool>> filter)
         {
-            return await GetEntities().Where(filter).ToListAsync();
+            List<TEntity> entities = new List<TEntity>();
+            try
+            {
+                entities = await GetEntities().Where(filter).ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs("", "Cms Repository FilterByAsync", ex.Message + Environment.NewLine + ex.InnerException.ToString());
+            }
+            return entities;
+
         }
 
         // parameter: filter
         // returns active filtered records by field and value
         public List<TEntity> FilterActiveBy(Expression<Func<TEntity, bool>> filter)
         {
-            return GetEntities().Where(x => x.RecordStatus == (int)RecordStatus.Active).Where(filter).ToList();
+            List<TEntity> entities = new List<TEntity>();
+            try
+            {
+                entities = GetEntities().Where(x => x.RecordStatus == (int)RecordStatus.Active).Where(filter).ToList();
+            }
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs("", "Cms Repository FilterAciveBy", ex.Message + Environment.NewLine + ex.InnerException.ToString());
+            }
+            return entities;
+
         }
 
         public async Task<List<TEntity>> FilterActiveByAsync(Expression<Func<TEntity, bool>> filter)
         {
-            return await GetEntities().Where(x => x.RecordStatus == (int)RecordStatus.Active).Where(filter).ToListAsync();
+            List<TEntity> entities = new List<TEntity>();
+            try
+            {
+                entities = await GetEntities().Where(x => x.RecordStatus == (int)RecordStatus.Active).Where(filter).ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs("", "Cms Repository FilterActiveByAsync", ex.Message + Environment.NewLine + ex.InnerException.ToString());
+            }
+            return entities;
+
         }
 
         public bool IsExist(Expression<Func<TEntity, bool>> filter)
         {
-            if (_dbSet.Where(filter).Any())
-                return true;
+            try
+            {
+                if (_dbSet.Where(filter).Any())
+                    return true;
+
+            }
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs("", "Cms Repository isExist", ex.Message + Environment.NewLine + ex.InnerException.ToString());
+            }
             return false;
         }
 
         public TEntity GetById(Guid id)
         {
-            return _dbSet.Find(id);
+            TEntity entity = new TEntity();
+            try
+            {
+                entity = _dbSet.Find(id);
+            }
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs("", "Cms Repository IsExist", ex.Message + Environment.NewLine + ex.InnerException.ToString());
+            }
+            return entity;
         }
 
         public TEntity GetById(int id)
         {
-            return _dbSet.Find(id);
+            TEntity entity = new TEntity();
+            try
+            {
+                entity = _dbSet.Find(id);
+            }
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs("", "Cms Repository IsExist", ex.Message + Environment.NewLine + ex.InnerException.ToString());
+            }
+            return entity;
         }
 
         public TEntity GetById(long id)
         {
-            return _dbSet.Find(id);
+            TEntity entity = new TEntity();
+            try
+            {
+                entity = _dbSet.Find(id);
+            }
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs("", "Cms Repository IsExist", ex.Message + Environment.NewLine + ex.InnerException.ToString());
+            }
+            return entity;
         }
 
         public async Task<TEntity> GetByIdAsync(Guid id)
         {
-            return await _dbSet.FindAsync(id);
+            TEntity entity = new TEntity();
+            try
+            {
+                entity = await _dbSet.FindAsync(id);
+            }
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs("", "Cms Repository GetByIdAsync", ex.Message + Environment.NewLine + ex.InnerException.ToString());
+            }
+            return entity;
         }
 
         public async Task<TEntity> GetByIdAsync(int id)
         {
-            return await _dbSet.FindAsync(id);
+            TEntity entity = new TEntity();
+            try
+            {
+                entity = await _dbSet.FindAsync(id);
+            }
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs("", "Cms Repository GetByIdAsync", ex.Message + Environment.NewLine + ex.InnerException.ToString());
+            }
+            return entity;
         }
 
         public async Task<TEntity> GetByIdAsync(long id)
         {
-            return await _dbSet.FindAsync(id);
+            TEntity entity = new TEntity();
+            try
+            {
+                entity = await _dbSet.FindAsync(id);
+            }
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs("", "Cms Repository GetByIdAsync", ex.Message + Environment.NewLine + ex.InnerException.ToString());
+            }
+            return entity;
         }
 
         public void Create(TEntity entity)
@@ -142,105 +282,166 @@ namespace CMS2.DataAccess
             }
             catch (Exception ex)
             {
+                Logs.ErrorLogs("", "Cms Repository Create", ex.Message + Environment.NewLine + ex.InnerException.ToString());
             }
-            
+
         }
 
         public void Update(TEntity entity)
         {
-            string primaryKey = GetPrimaryKey(entity);
-
-            TEntity model = _dbSet.Find(GetEntityId(entity));
-            string propertyName = "";
-            foreach (PropertyInfo prop in model.GetType().GetProperties())
+            try
             {
-                propertyName = prop.Name;
-                var propertyAttributes = entity.GetType().GetProperty(propertyName).GetCustomAttributes(false);
-                bool isNotMapped = false;
-                foreach (var att in propertyAttributes)
+                string primaryKey = GetPrimaryKey(entity);
+
+                TEntity model = _dbSet.Find(GetEntityId(entity));
+                string propertyName = "";
+                foreach (PropertyInfo prop in model.GetType().GetProperties())
                 {
-                    if (att.GetType() == typeof (NotMappedAttribute))
+                    propertyName = prop.Name;
+                    var propertyAttributes = entity.GetType().GetProperty(propertyName).GetCustomAttributes(false);
+                    bool isNotMapped = false;
+                    foreach (var att in propertyAttributes)
                     {
-                        isNotMapped = true;
-                        break;
+                        if (att.GetType() == typeof(NotMappedAttribute))
+                        {
+                            isNotMapped = true;
+                            break;
+                        }
+                    }
+                    var propertyValue = entity.GetType().GetProperty(propertyName).GetValue(entity);
+                    if (propertyName.Equals(primaryKey) || // specific properties to be excluded
+                        propertyName.Contains("Created") ||
+                        propertyName.Equals("Record_Status") ||
+                        propertyName.Equals("RecordStatusString") ||
+                        propertyName.Equals("FullName") ||
+                        isNotMapped
+                        )
+                    {
+                    }
+                    else
+                    {
+                        prop.SetValue(model, propertyValue);
                     }
                 }
-                var propertyValue = entity.GetType().GetProperty(propertyName).GetValue(entity);
-                if (propertyName.Equals(primaryKey) || // specific properties to be excluded
-                    propertyName.Contains("Created") ||
-                    propertyName.Equals("Record_Status") ||
-                    propertyName.Equals("RecordStatusString") || 
-                    propertyName.Equals("FullName") ||
-                    isNotMapped
-                    ) 
-                {
-                }
-                else
-                {
-                    prop.SetValue(model, propertyValue);
-                }
+                _context.Entry(model).State = EntityState.Modified;
             }
-            _context.Entry(model).State = EntityState.Modified;
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs("", "Cms Repository Update", ex.Message + Environment.NewLine + ex.InnerException.ToString());
+            }
+
         }
 
         public void Delete(Guid id)
         {
-            TEntity entity = _dbSet.Find(id);
-            entity.RecordStatus = (int)RecordStatus.Deleted;
-            Update(entity);
+            try
+            {
+                TEntity entity = _dbSet.Find(id);
+                entity.RecordStatus = (int)RecordStatus.Deleted;
+                Update(entity);
+            }
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs("", "Cms Repository Delete", ex.Message + Environment.NewLine + ex.InnerException.ToString());
+            }
         }
 
         public void Delete(int id)
         {
-            TEntity entity = _dbSet.Find(id);
-            entity.RecordStatus = (int)RecordStatus.Deleted;
-            Update(entity);
+            try
+            {
+                TEntity entity = _dbSet.Find(id);
+                entity.RecordStatus = (int)RecordStatus.Deleted;
+                Update(entity);
+            }
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs("", "Cms Repository Delete", ex.Message + Environment.NewLine + ex.InnerException.ToString());
+            }
+
         }
 
         public void Delete(long id)
         {
-            TEntity entity = _dbSet.Find(id);
-            entity.RecordStatus = (int)RecordStatus.Deleted;
-            Update(entity);
+            try
+            {
+                TEntity entity = _dbSet.Find(id);
+                entity.RecordStatus = (int)RecordStatus.Deleted;
+                Update(entity);
+            }
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs("", "Cms Repository Delete", ex.Message + Environment.NewLine + ex.InnerException.ToString());
+            }
         }
 
         public void DeletePhysically(Guid id)
         {
-            TEntity entity = _dbSet.Find(id);
-            _dbSet.Remove(entity);
+
+            try
+            {
+                TEntity entity = _dbSet.Find(id);
+                _dbSet.Remove(entity);
+            }
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs("", "Cms Repository DeletePhysically", ex.Message + Environment.NewLine + ex.InnerException.ToString());
+            }
         }
 
         public void DeletePhysically(int id)
         {
-            TEntity entity = _dbSet.Find(id);
-            _dbSet.Remove(entity);
+            try
+            {
+                TEntity entity = _dbSet.Find(id);
+                _dbSet.Remove(entity);
+            }
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs("", "Cms Repository DeletePhysically", ex.Message + Environment.NewLine + ex.InnerException.ToString());
+            }
         }
 
         public void DeletePhysically(long id)
         {
-            TEntity entity = _dbSet.Find(id);
-            _dbSet.Remove(entity);
+            try
+            {
+                TEntity entity = _dbSet.Find(id);
+                _dbSet.Remove(entity);
+            }
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs("", "Cms Repository DeletePhysically", ex.Message + Environment.NewLine + ex.InnerException.ToString());
+            }
         }
 
         private dynamic GetEntityId(TEntity entity)
         {
-            string primaryKey = GetPrimaryKey(entity);
-            Type _type =
-                entity.GetType().GetProperties().Where(x => x.Name.Equals(primaryKey)).FirstOrDefault().PropertyType;
-
-            if (_type == typeof(Int32))
+            try
             {
-                return Convert.ToInt32(entity.GetType().GetProperties().Where(x => x.Name.Equals(primaryKey)).FirstOrDefault().GetValue(entity).ToString());
+                string primaryKey = GetPrimaryKey(entity);
+                Type _type =
+                    entity.GetType().GetProperties().Where(x => x.Name.Equals(primaryKey)).FirstOrDefault().PropertyType;
+
+                if (_type == typeof(Int32))
+                {
+                    return Convert.ToInt32(entity.GetType().GetProperties().Where(x => x.Name.Equals(primaryKey)).FirstOrDefault().GetValue(entity).ToString());
+                }
+
+                if (_type == typeof(Int64))
+                {
+                    return Convert.ToInt32(entity.GetType().GetProperties().Where(x => x.Name.Equals(primaryKey)).FirstOrDefault().GetValue(entity).ToString());
+                }
+
+                if (_type == typeof(Guid))
+                {
+                    return new Guid(entity.GetType().GetProperties().Where(x => x.Name.Equals(primaryKey)).FirstOrDefault().GetValue(entity).ToString());
+                }
+
             }
-
-            if (_type == typeof(Int64))
+            catch (Exception ex)
             {
-                return Convert.ToInt32(entity.GetType().GetProperties().Where(x => x.Name.Equals(primaryKey)).FirstOrDefault().GetValue(entity).ToString());
-            }
-
-            if (_type == typeof(Guid))
-            {
-                return new Guid(entity.GetType().GetProperties().Where(x => x.Name.Equals(primaryKey)).FirstOrDefault().GetValue(entity).ToString());
+                Logs.ErrorLogs("", "Cms Repository GetEntityId", ex.Message + Environment.NewLine + ex.InnerException.ToString());
             }
 
             return null;
@@ -248,12 +449,20 @@ namespace CMS2.DataAccess
 
         private string GetPrimaryKey(TEntity entity)
         {
-            var key =
-                entity.GetType()
-                    .GetProperties()
-                    .FirstOrDefault(x => x.GetCustomAttributes(typeof(KeyAttribute)).Any());
+            try
+            {
+                var key =
+                              entity.GetType()
+                                  .GetProperties()
+                                  .FirstOrDefault(x => x.GetCustomAttributes(typeof(KeyAttribute)).Any());
 
-            return key.Name;
+                return key.Name;
+            }
+            catch (Exception ex)
+            {
+                Logs.ErrorLogs("", "Cms Repository GetPrimaryKey", ex.Message + Environment.NewLine + ex.InnerException.ToString());
+            }
+            return "";
         }
     }
 }
