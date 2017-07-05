@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
@@ -114,6 +113,7 @@ namespace CMS2.Client
         private BindingSource bsEmployee;
         private BindingSource bsStatus;
         private BindingSource bsGTCommodityType;
+        private BindingSource bstrackRevenueUnitType;
         private BindingSource bstrackBARevenueUnitName;
         private BindingSource bsBundleBSO;
         private BindingSource bsUnbundleBCO;
@@ -126,7 +126,6 @@ namespace CMS2.Client
         private BindingSource bsCTBatch;
         private BindingSource bsSGBCO;
         private BindingSource bsSGBatch;
-        private BindingSource bsAirlines;
 
         private BranchAcceptanceBL branchAcceptanceService;
         private BatchBL batchService;
@@ -138,17 +137,14 @@ namespace CMS2.Client
         private CargoTransferBL cargotransferService;
         private SegregationBL segregationService;
         private StatusBL statusService;
-        private AirlinesBL airlineService;
 
-        private List<RevenueUnitType> revenueUnitTypes;
-        private List<Airlines> airlines;
-        private List<Batch> batches;
 
         #endregion
 
 
         #region Acceptance
-                
+
+        private BindingSource bsBCO;
         private ShipmentModel shipment;
         private PackageDimensionModel packageDimensionModel;
         private BindingSource bsCommodityType;
@@ -276,16 +272,7 @@ namespace CMS2.Client
 
         public Main()
         {
-            LoadInit();
-            AcceptanceLoadInit();
-            PaymentSummaryLoadInit();
-            TrackingLoadInit();
-
             InitializeComponent();
-            int style = NativeWinAPI.GetWindowLong(this.Handle, NativeWinAPI.GWL_EXSTYLE);
-            style |= NativeWinAPI.WS_EX_COMPOSITED;
-            NativeWinAPI.SetWindowLong(this.Handle, NativeWinAPI.GWL_EXSTYLE, style);
-
         }
 
         #endregion
@@ -318,10 +305,24 @@ namespace CMS2.Client
         }
         private void Main_Load(object sender, EventArgs e)
         {
-            //rs.FindAllControls(this);
+          
             timer1.Start();
+            
 
-            LoadBookingComponents();
+            GlobalVars.UnitOfWork = new CmsUoW();
+            areaService = new AreaBL(GlobalVars.UnitOfWork);
+            bsoService = new BranchSatOfficeBL(GlobalVars.UnitOfWork);
+            gatewaySatService = new GatewaySatOfficeBL(GlobalVars.UnitOfWork);
+            bcoService = new BranchCorpOfficeBL(GlobalVars.UnitOfWork);
+            revenueUnitService = new RevenueUnitBL(GlobalVars.UnitOfWork);
+
+            GlobalVars.DeviceRevenueUnitId = Guid.Parse(ConfigurationManager.AppSettings["RUId"]);
+            GlobalVars.DeviceBcoId = Guid.Parse(ConfigurationManager.AppSettings["BcoId"]);
+            GlobalVars.UnitOfWork = new CmsUoW();
+
+            LoadInit();
+            TrackingLoadInit();
+
             BookingResetAll();
             //PopulateGrid();
             BookingGridView.DataSource = bookingService.FilterActiveBy(x => x.AssignedToArea.City.BranchCorpOfficeId == GlobalVars.DeviceBcoId).OrderBy(x => x.DateBooked).OrderByDescending(x => x.CreatedDate).ToList();//bookingService.FilterActiveBy(x => x.AssignedToArea.City.BranchCorpOfficeId == GlobalVars.DeviceBcoId).ToList().OrderByDescending(x => x.CreatedDate);
@@ -338,6 +339,17 @@ namespace CMS2.Client
             switch (pageViewMain.SelectedPage.Text)
             {
                 case "Booking":
+                    isBookingPage = true;
+                    bsBookingStatus.ResetBindings(false);
+                    bsBookingRemark.ResetBindings(false);
+                    bsAreas.ResetBindings(false);
+                    bsOriginBco.ResetBindings(false);
+                    bsDestinationBco.ResetBindings(false);
+
+                    List<RevenueUnit> _areas = areas.Where(x => x.City.BranchCorpOfficeId == GlobalVars.DeviceBcoId).ToList();
+                    lstAssignedTo.DataSource = _areas;
+                    lstAssignedTo.DisplayMember = "RevenueUnitName";
+                    lstAssignedTo.ValueMember = "RevenueUnitId";
 
                     BookingResetAll();
                     PopulateGrid();
@@ -1268,6 +1280,10 @@ namespace CMS2.Client
 
         }
 
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            AsynchronousLoadBooking();
+        }
         #endregion
 
         #region Acceptance
@@ -1749,20 +1765,13 @@ namespace CMS2.Client
                     payment.PaymentDate = datePaymentDate.Value;
                     try
                     {
-                        if (txtAmountPaid.Value.ToString().Contains("Php"))
-                        {
-                            payment.Amount = decimal.Parse(txtAmountPaid.Value.ToString().Replace("Php", ""));
-                        }
-                        else
-                        {
-                            payment.Amount = decimal.Parse(txtAmountPaid.Value.ToString().Replace("₱", ""));
-                        }
-
-                        payment.TaxWithheld = decimal.Parse(txtTaxWithheld.Value.ToString());
+                        payment.Amount = decimal.Parse(txtAmountPaid.Value.ToString().Replace("₱", ""));
+                        payment.TaxWithheld = decimal.Parse(txtTaxWithheld.Value.ToString().Replace("%", "")) * (decimal)(.01) * shipment.TotalAmount;
                     }
                     catch (Exception)
                     {
-
+                        payment.Amount = decimal.Parse(txtAmountPaid.Value.ToString().Replace("Php", ""));
+                        payment.TaxWithheld = decimal.Parse(txtTaxWithheld.Value.ToString().Replace("Php", ""));
                     }
 
                     payment.PaymentTypeId = Guid.Parse(lstPaymentType.SelectedValue.ToString());
@@ -1783,7 +1792,6 @@ namespace CMS2.Client
                 else
                 {
                     MessageBox.Show("Invalid AWB No", "Data Error", MessageBoxButtons.OK);
-                    
                     return;
                 }
             }
@@ -2536,7 +2544,6 @@ namespace CMS2.Client
                 _userManager = new UserManager<IdentityUser, Guid>(new UserStore(GlobalVars.UnitOfWork));
 
                 User user = userService.GetUserByUsername(username);
-                
 
                 if (user != null)
                 {
@@ -2683,10 +2690,6 @@ namespace CMS2.Client
 
         private void LoadInit()
         {
-            GlobalVars.UnitOfWork = new CmsUoW();
-            GlobalVars.DeviceRevenueUnitId = Guid.Parse(ConfigurationManager.AppSettings["RUId"]);
-            GlobalVars.DeviceBcoId = Guid.Parse(ConfigurationManager.AppSettings["BcoId"]);
-
             bsBookingStatus = new BindingSource();
             bsBookingRemark = new BindingSource();
             bsAreas = new BindingSource();
@@ -2719,7 +2722,7 @@ namespace CMS2.Client
             branchCorpOffices = bcoService.FilterActive().OrderBy(x => x.BranchCorpOfficeName).ToList();
             areas = areaService.FilterActive().OrderBy(x => x.RevenueUnitName).ToList();
             clients = clientService.FilterActive();
-            //revenueUnits = revenueUnitService.FilterActive();
+            revenueUnits = revenueUnitService.FilterActive();
             cities = cityService.FilterActive().OrderBy(x => x.CityName).ToList();
             companies = companyService.FilterActive().OrderBy(x => x.CompanyName).ToList();
 
@@ -2763,7 +2766,7 @@ namespace CMS2.Client
             bsEmployee = new BindingSource();
             bsStatus = new BindingSource();
             bsGTCommodityType = new BindingSource();
-            bsRevenueUnitType = new BindingSource();
+            bstrackRevenueUnitType = new BindingSource();
             bstrackBARevenueUnitName = new BindingSource();
             bsBundleBSO = new BindingSource();
             bsUnbundleBCO = new BindingSource();
@@ -2776,7 +2779,6 @@ namespace CMS2.Client
             bsCTBatch = new BindingSource();
             bsSGBCO = new BindingSource();
             bsSGBatch = new BindingSource();
-            bsAirlines = new BindingSource();
 
             branchAcceptanceService = new BranchAcceptanceBL(GlobalVars.UnitOfWork);
             batchService = new BatchBL(GlobalVars.UnitOfWork);
@@ -2790,12 +2792,8 @@ namespace CMS2.Client
             cargotransferService = new CargoTransferBL(GlobalVars.UnitOfWork);
             segregationService = new SegregationBL(GlobalVars.UnitOfWork);
             statusService = new StatusBL(GlobalVars.UnitOfWork);
-            airlineService = new AirlinesBL(GlobalVars.UnitOfWork);
-
-            revenueUnitTypes = new List<RevenueUnitType>();
-            airlines = new List<Airlines>();
-            batches = new List<Batch>();
         }
+
 
         private void NewShipment()
         {
@@ -2903,14 +2901,10 @@ namespace CMS2.Client
 
         private void PopulateGrid()
         {
-            
-            List<Booking> books = bookingService.FilterActiveBy(x => x.AssignedToArea.City.BranchCorpOfficeId == GlobalVars.DeviceBcoId).OrderByDescending(x => x.DateBooked).ToList(); //bookingService.FilterActiveBy(x => x.AssignedToArea.City.BranchCorpOfficeId == GlobalVars.DeviceBcoId).ToList().OrderByDescending(x => x.CreatedDate);
-            if (books.Count > 0 && books != null)
-            {
-                BookingGridView.DataSource = null;
-                BookingGridView.DataSource = books;
-                BookingGridView.MasterTemplate.AutoSizeColumnsMode = GridViewAutoSizeColumnsMode.Fill;
-            }
+            BookingGridView.DataSource = null;
+            BookingGridView.DataSource = bookingService.FilterActiveBy(x => x.AssignedToArea.City.BranchCorpOfficeId == GlobalVars.DeviceBcoId).OrderBy(x => x.DateBooked).OrderByDescending(x => x.CreatedDate).ToList(); //bookingService.FilterActiveBy(x => x.AssignedToArea.City.BranchCorpOfficeId == GlobalVars.DeviceBcoId).ToList().OrderByDescending(x => x.CreatedDate);
+            BookingGridView.MasterTemplate.AutoSizeColumnsMode = GridViewAutoSizeColumnsMode.Fill;
+
         }
 
         private DataTable ConvertToDataTable(List<Booking> list)
@@ -3961,6 +3955,20 @@ namespace CMS2.Client
 
         }
 
+        private void AsynchronousLoadBooking()
+        {
+            while (isBookingPage)
+            {
+                System.Threading.Thread.Sleep(5000);
+                ManualResetEvent reset = new ManualResetEvent(false);
+                CMS2.Client.SyncHelper.ThreadState state = new SyncHelper.ThreadState();
+                state._event = reset;
+                state.worker = this.backgroundWorker1;
+                state.bindingList = _bookingBindingList;
+                ThreadPool.QueueUserWorkItem(new WaitCallback(RefreshGrid), state);
+                state._event.WaitOne();
+            }
+        }
 
         #endregion
 
@@ -4120,16 +4128,16 @@ namespace CMS2.Client
             lstHub.DisplayMember = "LegName";
             lstHub.ValueMember = "TransShipmentLegId";
 
-            //bsCommodityType.ResetBindings(false);
-            //bsCommodity.ResetBindings(false);
-            //bsServiceType.ResetBindings(false);
-            //bsServiceMode.ResetBindings(false);
-            //bsPaymentMode.ResetBindings(false);
-            //bsCrating.ResetBindings(false);
-            //bsPackaging.ResetBindings(false);
-            //bsGoodsDescription.ResetBindings(false);
-            //bsShipMode.ResetBindings(false);
-            //bsTranshipmentLeg.ResetBindings(false);
+            bsCommodityType.ResetBindings(false);
+            bsCommodity.ResetBindings(false);
+            bsServiceType.ResetBindings(false);
+            bsServiceMode.ResetBindings(false);
+            bsPaymentMode.ResetBindings(false);
+            bsCrating.ResetBindings(false);
+            bsPackaging.ResetBindings(false);
+            bsGoodsDescription.ResetBindings(false);
+            bsShipMode.ResetBindings(false);
+            bsTranshipmentLeg.ResetBindings(false);
 
             lstCommodityType.SelectedIndex = -1;
             lstCommodity.SelectedIndex = -1;
@@ -5085,9 +5093,10 @@ namespace CMS2.Client
                 txtNetCollection.Text = (amountdue - ((tax / (decimal)(100)) * amountdue)).ToString();
                 //txtNetCollection.Text = (decimal.Parse(txtAmountPaid.Value.ToString().Replace("₱", "")) - (decimal.Parse(txtTaxWithheld.Value.ToString().Replace("₱", "")))/ (decimal)(100) * (decimal.Parse(txtAmountPaid.Value.ToString().Replace("₱", "")));
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Logs.ErrorLogs("", "ComputeNetCollection", ex.Message.ToString() + Environment.NewLine + ex.InnerException.ToString());
+                //txtNetCollection.Text = (decimal.Parse(txtAmountPaid.Value.ToString().Replace("Php", "")) - (decimal.Parse(txtTaxWithheld.Value.ToString().Replace("Php", "")))).ToString();
+
             }
         }
 
@@ -5100,37 +5109,6 @@ namespace CMS2.Client
             }
         }
 
-        private void isPaidOrPartial()
-        {
-            decimal amountdue = 0;
-            decimal amountpaid = 0;
-            if (txtAmountDue.Value.ToString().Contains("₱"))
-            {
-                amountdue = decimal.Parse(txtAmountDue.Value.ToString().Replace("₱", ""));
-            }
-            else
-            {
-                amountdue = decimal.Parse(txtAmountDue.Value.ToString().Replace("Php", ""));
-            }
-
-            if (txtAmountPaid.Value.ToString().Contains("₱"))
-            {
-                amountpaid = decimal.Parse(txtAmountPaid.Value.ToString().Replace("₱", ""));
-            }
-            else
-            {
-                amountpaid = decimal.Parse(txtAmountPaid.Value.ToString().Replace("Php", ""));
-            }
-
-            if (amountdue == amountpaid || amountpaid > amountdue)
-            {
-                cmb_PaymentRemarks.SelectedValue = "Full";
-            }
-            else
-            {
-                cmb_PaymentRemarks.SelectedValue = "Partial";
-            }
-        }
 
         #endregion
 
@@ -9963,14 +9941,6 @@ namespace CMS2.Client
             List<RevenueUnitType> _revenueUnitType = revenueUnitTypeService.FilterActive().OrderBy(x => x.RevenueUnitTypeName).ToList();
             bstrackRevenueUnitType.DataSource = _revenueUnitType;
             cmb_RevenueUnitType.DataSource = bstrackRevenueUnitType;
-                        
-            if (revenueUnitTypes == null || revenueUnitTypes.Count <=0)
-            {
-                revenueUnitTypes = revenueUnitTypeService.FilterActiveBy(x => x.RecordStatus == 1).ToList();
-            }
-
-            bsRevenueUnitType.DataSource = revenueUnitTypes;           
-            cmb_RevenueUnitType.DataSource = bsRevenueUnitType;
             cmb_RevenueUnitType.DisplayMember = "RevenueUnitTypeName";
             cmb_RevenueUnitType.ValueMember = "RevenueUnitTypeId";
 
@@ -10037,31 +10007,19 @@ namespace CMS2.Client
             dropDownBranchAcceptance_Driver.ValueMember = "Driver";
             dropDownBranchAcceptance_Driver.SelectedValue = "All";
         }
-        
+
+
         public void BundleLoadData()
         {
             dateTimeBundle_Date.Value = DateTime.Now;
             List<BranchCorpOffice> _bco = bcoService.FilterActiveBy(x => x.RecordStatus == 1).OrderBy(x => x.BranchCorpOfficeName).ToList();
             bsBundleBSO.DataSource = _bco;
-
-            if (branchCorpOffices == null || branchCorpOffices.Count <= 0)
-            {
-                branchCorpOffices =bcoService.FilterActiveBy(x => x.RecordStatus == 1).OrderBy(x => x.BranchCorpOfficeName).ToList();
-            }
-
-            bsBundleBSO.DataSource = branchCorpOffices;
             dropDownBundle_BCO_BSO.DataSource = bsBundleBSO;
             dropDownBundle_BCO_BSO.DisplayMember = "BranchCorpOfficeName";
             dropDownBundle_BCO_BSO.ValueMember = "BranchCorpOfficeId";
             dropDownBundle_BCO_BSO.Items.Add("All");
             dropDownBundle_BCO_BSO.SelectedValue = "All";
-
-            //List<RevenueUnit> _revenueUnit = revenueUnitservice.GetAll().Where(x => x.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.RevenueUnitType.RevenueUnitTypeName == "Branch Satellite").OrderBy(x => x.RevenueUnitName).ToList();
-            //bsBundleBSO.DataSource = _revenueUnit;
-            //dropDownBundle_BCO_BSO.DataSource = bsBundleBSO;
-            //dropDownBundle_BCO_BSO.DisplayMember = "RevenueUnitName";
-            //dropDownBundle_BCO_BSO.ValueMember = "RevenueUnitId";
-        }
+         }
 
         public void UnbundleLoadData()
         {
@@ -10069,13 +10027,6 @@ namespace CMS2.Client
 
             List<BranchCorpOffice> _bco = bcoService.FilterActiveBy(x => x.RecordStatus == 1).OrderBy(x => x.BranchCorpOfficeName).ToList();
             bsUnbundleBCO.DataSource = _bco;
-
-            if (branchCorpOffices == null || branchCorpOffices.Count <=0 )
-            {
-                branchCorpOffices = bcoService.FilterActiveBy(x => x.RecordStatus == 1).OrderBy(x => x.BranchCorpOfficeName).ToList();
-            }
-
-            bsUnbundleBCO.DataSource = branchCorpOffices;
             dropDownUnbundle_BCO.DataSource = bsUnbundleBCO;
             dropDownUnbundle_BCO.DisplayMember = "BranchCorpOfficeName";
             dropDownUnbundle_BCO.ValueMember = "BranchCorpOfficeId";
@@ -10108,14 +10059,12 @@ namespace CMS2.Client
 
 
         }
-        
+
+
+
         public void GatewayTransmittalLoadData()
         {
             dateTimeGatewayTransmital_Date.Value = DateTime.Now;
-            if (branchCorpOffices == null || branchCorpOffices.Count <= 0)
-            {
-                branchCorpOffices =bcoService.FilterActiveBy(x => x.RecordStatus == 1).OrderBy(x => x.BranchCorpOfficeName).ToList();
-            }
 
             List<BranchCorpOffice> _bco = bcoService.FilterActiveBy(x => x.RecordStatus == 1).OrderBy(x => x.BranchCorpOfficeName).ToList();
             bsGTDestinationBCO.DataSource = _bco;
@@ -10159,7 +10108,9 @@ namespace CMS2.Client
             cmbGt_CommodityType.ValueMember = "CommodityTypeId";
             cmbGt_CommodityType.Items.Add("All");
             cmbGt_CommodityType.SelectedValue = "All";
-            
+
+
+
         }
 
         public void GatewayOutboundLoadData()
@@ -11094,237 +11045,237 @@ namespace CMS2.Client
         ToolTip toolTipMsg = new ToolTip();
         private void txtShipperLastName_Validating(object sender, CancelEventArgs e)
         {
-            if (String.IsNullOrEmpty(txtShipperLastName.Text))
-            {
-                e.Cancel = true;
-                //toolTipMsg.Show("Please enter Last Name", txtShipperLastName);
-                errorProviderMsg.SetError(txtShipperLastName, "Last Name is required");
-            }
-            else
-            {
-                errorProviderMsg.SetError(txtShipperLastName, "");
-            }
+            //if (String.IsNullOrEmpty(txtShipperLastName.Text))
+            //{
+            //    e.Cancel = true;
+            //    //toolTipMsg.Show("Please enter Last Name", txtShipperLastName);
+            //    errorProviderMsg.SetError(txtShipperLastName, "Last Name is required");
+            //}
+            //else
+            //{
+            //    errorProviderMsg.SetError(txtShipperLastName, "");
+            //}
         }
 
         private void txtShipperFirstName_Validating(object sender, CancelEventArgs e)
         {
-            if (String.IsNullOrEmpty(txtShipperFirstName.Text))
-            {
-                e.Cancel = true;
-                errorProviderMsg.SetError(txtShipperFirstName, "First Name is required");
-            }
-            else
-            {
-                errorProviderMsg.SetError(txtShipperFirstName, "");
-            }
+            //if (String.IsNullOrEmpty(txtShipperFirstName.Text))
+            //{
+            //    e.Cancel = true;
+            //    errorProviderMsg.SetError(txtShipperFirstName, "First Name is required");
+            //}
+            //else
+            //{
+            //    errorProviderMsg.SetError(txtShipperFirstName, "");
+            //}
         }
 
         
         private void txtShipperCompany_Validating(object sender, CancelEventArgs e)
         {
-            if (String.IsNullOrEmpty(txtShipperCompany.Text))
-            {
-                e.Cancel = true;
-                errorProviderMsg.SetError(txtShipperCompany, "Company is required");
-            }
-            else
-            {
-                errorProviderMsg.SetError(txtShipperCompany, "");
-            }
+            //if (String.IsNullOrEmpty(txtShipperCompany.Text))
+            //{
+            //    e.Cancel = true;
+            //    errorProviderMsg.SetError(txtShipperCompany, "Company is required");
+            //}
+            //else
+            //{
+            //    errorProviderMsg.SetError(txtShipperCompany, "");
+            //}
         }
         
         private void txtShipperAddress1_Validating(object sender, CancelEventArgs e)
         {
 
-            if (String.IsNullOrEmpty(txtShipperAddress1.Text))
-            {
-                e.Cancel = true;
-                errorProviderMsg.SetError(txtShipperAddress1, "House/Bldg# is required");
-            }
-            else
-            {
-                errorProviderMsg.SetError(txtShipperAddress1, "");
-            }
+            //if (String.IsNullOrEmpty(txtShipperAddress1.Text))
+            //{
+            //    e.Cancel = true;
+            //    errorProviderMsg.SetError(txtShipperAddress1, "House/Bldg# is required");
+            //}
+            //else
+            //{
+            //    errorProviderMsg.SetError(txtShipperAddress1, "");
+            //}
         }
 
         private void lstOriginBco_Validating(object sender, CancelEventArgs e)
         {
-            if (lstOriginBco.SelectedIndex < 0)
-            {
-                //if (lstOriginBco.Text.Trim() == "")
-                if (String.IsNullOrEmpty(lstOriginBco.Text))
-                {
-                    e.Cancel = true;
-                    errorProviderMsg.SetError(lstOriginBco, "Invalid Shipper BCO");
-                }
-                else
-                {
-                    errorProviderMsg.SetError(lstOriginBco, "");
-                }
+            //if (lstOriginBco.SelectedIndex < 0)
+            //{
+            //    //if (lstOriginBco.Text.Trim() == "")
+            //    if (String.IsNullOrEmpty(lstOriginBco.Text))
+            //    {
+            //        e.Cancel = true;
+            //        errorProviderMsg.SetError(lstOriginBco, "Invalid Shipper BCO");
+            //    }
+            //    else
+            //    {
+            //        errorProviderMsg.SetError(lstOriginBco, "");
+            //    }
 
-            }
-            else
-            {
-                errorProviderMsg.SetError(lstOriginBco, "");
-            }
+            //}
+            //else
+            //{
+            //    errorProviderMsg.SetError(lstOriginBco, "");
+            //}
         }
 
         private void lstOriginCity_Validating(object sender, CancelEventArgs e)
         {
-            if (lstOriginCity.SelectedIndex < 0)
-            {
-                //if (lstOriginBco.Text.Trim() == "")
-                if (String.IsNullOrEmpty(lstOriginCity.Text))
-                {
-                    e.Cancel = true;
-                    errorProviderMsg.SetError(lstOriginCity, "Invalid Shipper City");
-                }
-                else
-                {
-                    errorProviderMsg.SetError(lstOriginCity, "");
-                }
+            //if (lstOriginCity.SelectedIndex < 0)
+            //{
+            //    //if (lstOriginBco.Text.Trim() == "")
+            //    if (String.IsNullOrEmpty(lstOriginCity.Text))
+            //    {
+            //        e.Cancel = true;
+            //        errorProviderMsg.SetError(lstOriginCity, "Invalid Shipper City");
+            //    }
+            //    else
+            //    {
+            //        errorProviderMsg.SetError(lstOriginCity, "");
+            //    }
 
-            }
-            else
-            {
-                errorProviderMsg.SetError(lstOriginCity, "");
-            }
+            //}
+            //else
+            //{
+            //    errorProviderMsg.SetError(lstOriginCity, "");
+            //}
         }
 
         private void txtConsigneeLastName_Validating(object sender, CancelEventArgs e)
         {
-            if (String.IsNullOrEmpty(txtConsigneeLastName.Text))
-            {
-                e.Cancel = true;
-                errorProviderMsg.SetError(txtConsigneeLastName, "Last Name is required");
-            }
-            else
-            {
-                errorProviderMsg.SetError(txtConsigneeLastName, "");
-            }
+            //if (String.IsNullOrEmpty(txtConsigneeLastName.Text))
+            //{
+            //    e.Cancel = true;
+            //    errorProviderMsg.SetError(txtConsigneeLastName, "Last Name is required");
+            //}
+            //else
+            //{
+            //    errorProviderMsg.SetError(txtConsigneeLastName, "");
+            //}
         }
 
         private void txtConsigneeFirstName_Validating(object sender, CancelEventArgs e)
         {
-            if (String.IsNullOrEmpty(txtConsigneeFirstName.Text))
-            {
-                e.Cancel = true;
-                errorProviderMsg.SetError(txtConsigneeFirstName, "First Name is required");
-            }
-            else
-            {
-                errorProviderMsg.SetError(txtConsigneeFirstName, "");
-            }
+            //if (String.IsNullOrEmpty(txtConsigneeFirstName.Text))
+            //{
+            //    e.Cancel = true;
+            //    errorProviderMsg.SetError(txtConsigneeFirstName, "First Name is required");
+            //}
+            //else
+            //{
+            //    errorProviderMsg.SetError(txtConsigneeFirstName, "");
+            //}
         }
 
         private void txtConsigneeCompany_Validating(object sender, CancelEventArgs e)
         {
-            if (String.IsNullOrEmpty(txtConsigneeCompany.Text))
-            {
-                e.Cancel = true;
-                errorProviderMsg.SetError(txtConsigneeCompany, "Company is required");
-            }
-            else
-            {
-                errorProviderMsg.SetError(txtConsigneeCompany, "");
-            }
+            //if (String.IsNullOrEmpty(txtConsigneeCompany.Text))
+            //{
+            //    e.Cancel = true;
+            //    errorProviderMsg.SetError(txtConsigneeCompany, "Company is required");
+            //}
+            //else
+            //{
+            //    errorProviderMsg.SetError(txtConsigneeCompany, "");
+            //}
         }
 
         private void txtConsigneeAddress1_Validating(object sender, CancelEventArgs e)
         {
-            if (String.IsNullOrEmpty(txtConsigneeAddress1.Text))
-            {
-                e.Cancel = true;
-                errorProviderMsg.SetError(txtConsigneeAddress1, "House/Bldg# is required");
-            }
-            else
-            {
-                errorProviderMsg.SetError(txtConsigneeAddress1, "");
-            }
+            //if (String.IsNullOrEmpty(txtConsigneeAddress1.Text))
+            //{
+            //    e.Cancel = true;
+            //    errorProviderMsg.SetError(txtConsigneeAddress1, "House/Bldg# is required");
+            //}
+            //else
+            //{
+            //    errorProviderMsg.SetError(txtConsigneeAddress1, "");
+            //}
         }
 
         private void lstDestinationBco_Validating(object sender, CancelEventArgs e)
         {
-            if (lstDestinationBco.SelectedIndex < 0)
-            {
-                if (String.IsNullOrEmpty(lstDestinationBco.Text))
-                {
-                    e.Cancel = true;
-                    errorProviderMsg.SetError(lstDestinationBco, "Invalid Consignee BCO");
-                }
-                else
-                {
-                    errorProviderMsg.SetError(lstDestinationBco, "");
-                }
+            //if (lstDestinationBco.SelectedIndex < 0)
+            //{
+            //    if (String.IsNullOrEmpty(lstDestinationBco.Text))
+            //    {
+            //        e.Cancel = true;
+            //        errorProviderMsg.SetError(lstDestinationBco, "Invalid Consignee BCO");
+            //    }
+            //    else
+            //    {
+            //        errorProviderMsg.SetError(lstDestinationBco, "");
+            //    }
 
-            }
-            else
-            {
-                errorProviderMsg.SetError(lstDestinationBco, "");
-            }
+            //}
+            //else
+            //{
+            //    errorProviderMsg.SetError(lstDestinationBco, "");
+            //}
         }
 
         private void lstDestinationCity_Validating(object sender, CancelEventArgs e)
         {
-            if (lstDestinationCity.SelectedIndex < 0)
-            {
-                if (String.IsNullOrEmpty(lstDestinationCity.Text))
-                {
-                    e.Cancel = true;
-                    errorProviderMsg.SetError(lstDestinationCity, "Invalid Consignee City");
-                }
-                else
-                {
-                    errorProviderMsg.SetError(lstDestinationCity, "");
-                }
+            //if (lstDestinationCity.SelectedIndex < 0)
+            //{
+            //    if (String.IsNullOrEmpty(lstDestinationCity.Text))
+            //    {
+            //        e.Cancel = true;
+            //        errorProviderMsg.SetError(lstDestinationCity, "Invalid Consignee City");
+            //    }
+            //    else
+            //    {
+            //        errorProviderMsg.SetError(lstDestinationCity, "");
+            //    }
 
-            }
-            else
-            {
-                errorProviderMsg.SetError(lstDestinationCity, "");
-            }
+            //}
+            //else
+            //{
+            //    errorProviderMsg.SetError(lstDestinationCity, "");
+            //}
         }
 
         private void lstAssignedTo_Validating(object sender, CancelEventArgs e)
         {
-            if (lstAssignedTo.SelectedIndex < 0)
-            {
-                if (String.IsNullOrEmpty(lstAssignedTo.Text))
-                {
-                    e.Cancel = true;
-                    errorProviderMsg.SetError(lstAssignedTo, "Invalid Assigned Area");
-                }
-                else
-                {
-                    errorProviderMsg.SetError(lstAssignedTo, "");
-                }
+            //if (lstAssignedTo.SelectedIndex < 0)
+            //{
+            //    if (String.IsNullOrEmpty(lstAssignedTo.Text))
+            //    {
+            //        e.Cancel = true;
+            //        errorProviderMsg.SetError(lstAssignedTo, "Invalid Assigned Area");
+            //    }
+            //    else
+            //    {
+            //        errorProviderMsg.SetError(lstAssignedTo, "");
+            //    }
 
-            }
-            else
-            {
-                errorProviderMsg.SetError(lstAssignedTo, "");
-            }
+            //}
+            //else
+            //{
+            //    errorProviderMsg.SetError(lstAssignedTo, "");
+            //}
         }
 
         private void lstBookingStatus_Validating(object sender, CancelEventArgs e)
         {
-            if (lstBookingStatus.SelectedIndex < 0)
-            {
-                if (String.IsNullOrEmpty(lstBookingStatus.Text))
-                {
-                    e.Cancel = true;
-                    errorProviderMsg.SetError(lstBookingStatus, "Invalid Booking Status");
-                }
-                else
-                {
-                    errorProviderMsg.SetError(lstBookingStatus, "");
-                }
+            //if (lstBookingStatus.SelectedIndex < 0)
+            //{
+            //    if (String.IsNullOrEmpty(lstBookingStatus.Text))
+            //    {
+            //        e.Cancel = true;
+            //        errorProviderMsg.SetError(lstBookingStatus, "Invalid Booking Status");
+            //    }
+            //    else
+            //    {
+            //        errorProviderMsg.SetError(lstBookingStatus, "");
+            //    }
 
-        private void txtAmountPaid_TextChanged(object sender, EventArgs e)
-        {
-            txtNetCollection.Text = txtAmountPaid.Value.ToString();
-            isPaidOrPartial();
+            //}
+            //else
+            //{
+            //    errorProviderMsg.SetError(lstBookingStatus, "");
+            //}
         }
-
     }
 }
