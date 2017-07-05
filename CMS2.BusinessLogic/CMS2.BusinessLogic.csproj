@@ -77,6 +77,7 @@
     <Compile Include="AccountStatusBL.cs" />
     <Compile Include="AccountTypeBL.cs" />
     <Compile Include="AdjustmentReasonBL.cs" />
+    <Compile Include="AirlinesBL.cs" />
     <Compile Include="ApplicableRateBL.cs" />
     <Compile Include="ApplicationSettingBL.cs" />
     <Compile Include="ApprovingAuthorityBL.cs" />

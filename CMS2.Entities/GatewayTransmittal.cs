@@ -59,5 +59,7 @@ namespace CMS2.Entities
 
         [ForeignKey("BatchID")]
         public virtual Batch Batch { get; set; }
+        [ForeignKey("UserID")]
+        public virtual User User { get; set; }
     }
 }

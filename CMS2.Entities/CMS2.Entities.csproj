@@ -79,6 +79,7 @@
     <Compile Include="AccountStatus.cs" />
     <Compile Include="AccountType.cs" />
     <Compile Include="AdjustmentReason.cs" />
+    <Compile Include="Airlines.cs" />
     <Compile Include="ApplicableRate.cs" />
     <Compile Include="ApplicationSetting.cs" />
     <Compile Include="ApprovingAuthority.cs" />

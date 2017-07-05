@@ -114,7 +114,6 @@ namespace CMS2.Client
         private BindingSource bsEmployee;
         private BindingSource bsStatus;
         private BindingSource bsGTCommodityType;
-        private BindingSource bstrackRevenueUnitType;
         private BindingSource bstrackBARevenueUnitName;
         private BindingSource bsBundleBSO;
         private BindingSource bsUnbundleBCO;
@@ -127,6 +126,7 @@ namespace CMS2.Client
         private BindingSource bsCTBatch;
         private BindingSource bsSGBCO;
         private BindingSource bsSGBatch;
+        private BindingSource bsAirlines;
 
         private BranchAcceptanceBL branchAcceptanceService;
         private BatchBL batchService;
@@ -138,13 +138,16 @@ namespace CMS2.Client
         private CargoTransferBL cargotransferService;
         private SegregationBL segregationService;
         private StatusBL statusService;
+        private AirlinesBL airlineService;
 
+        private List<RevenueUnitType> revenueUnitTypes;
+        private List<Airlines> airlines;
+        private List<Batch> batches;
 
         #endregion
 
         #region Acceptance
-
-        private BindingSource bsBCO;
+                
         private ShipmentModel shipment;
         private PackageDimensionModel packageDimensionModel;
         private BindingSource bsCommodityType;
@@ -395,38 +398,36 @@ namespace CMS2.Client
                 case "Tracking":
 
                     dateTimePicker_PickupCargo.Value = DateTime.Now;
-                    dateTimePickerBranchAcceptance_Date.Value = DateTime.Now;
-                    getPickupCargoData();
-
-                    
-                    //dateTimeBundle_Date.Value = DateTime.Now;
-                    //dateTimeUnbunde_Date.Value = DateTime.Now;
-                    //dateTimeGatewayTransmital_Date.Value = DateTime.Now;
-                    //dateTimeGatewayOutbound_Date.Value = DateTime.Now;
-                    //dateTimePickerGatewayInbound_Date.Value = DateTime.Now;
-                    //dateTimeCargoTransfer_Date.Value = DateTime.Now;
-                    //dateTimeSegregation_Date.Value = DateTime.Now;
-                    //dateTimeDailyTrip_Date.Value = DateTime.Now;
-                    //dateTimeHoldCargo_FromDate.Value = DateTime.Now;
-                    //dateTimeDeliveryStatus_Date.Value = DateTime.Now;
+                    dateTimePickerBranchAcceptance_Date.Value = DateTime.Now;                   
+                    dateTimeBundle_Date.Value = DateTime.Now;
+                    dateTimeUnbunde_Date.Value = DateTime.Now;
+                    dateTimeGatewayTransmital_Date.Value = DateTime.Now;
+                    dateTimeGatewayOutbound_Date.Value = DateTime.Now;
+                    dateTimePickerGatewayInbound_Date.Value = DateTime.Now;
+                    dateTimeCargoTransfer_Date.Value = DateTime.Now;
+                    dateTimeSegregation_Date.Value = DateTime.Now;
+                    dateTimeDailyTrip_Date.Value = DateTime.Now;
+                    dateTimeHoldCargo_FromDate.Value = DateTime.Now;
+                    dateTimeDeliveryStatus_Date.Value = DateTime.Now;
 
                     /******** SET COMBOBOX (BRANCH) *******/
                     //dropDownBundle_Branch.SelectedIndex = 0;
                     //dropDownBranchAcceptance_Branch.SelectedIndex = 0;
 
-                    //PickupCargo
-                    //PickUpCargoLoadData();
-                    //BranchAcceptanceLoadData();
-                    //UnbundleLoadData();
-                    //BundleLoadData();
-                    //GatewayTransmittalLoadData();
-                    //GatewayOutboundLoadData();
-                    //GatewayInboundLoadData();
-                    //CargoTransferLoadData();
-                    //SegregationLoadData();
-                    //DailyTripLoadData();
-                    //HoldCargoLoadData();
-                    //DeliveryStatusLoadData();
+                    getPickupCargoData();
+                    PickUpCargoLoadData();
+
+                    BranchAcceptanceLoadData();
+                    UnbundleLoadData();
+                    BundleLoadData();
+                    GatewayTransmittalLoadData();
+                    GatewayOutboundLoadData();
+                    GatewayInboundLoadData();
+                    CargoTransferLoadData();
+                    SegregationLoadData();
+                    DailyTripLoadData();
+                    HoldCargoLoadData();
+                    DeliveryStatusLoadData();
 
                     break;
                 default:
@@ -1727,13 +1728,20 @@ namespace CMS2.Client
                     payment.PaymentDate = datePaymentDate.Value;
                     try
                     {
-                        payment.Amount = decimal.Parse(txtAmountPaid.Value.ToString().Replace("₱", ""));
-                        payment.TaxWithheld = decimal.Parse(txtTaxWithheld.Value.ToString().Replace("%", "")) * (decimal)(.01) * shipment.TotalAmount;
+                        if (txtAmountPaid.Value.ToString().Contains("Php"))
+                        {
+                            payment.Amount = decimal.Parse(txtAmountPaid.Value.ToString().Replace("Php", ""));
+                        }
+                        else
+                        {
+                            payment.Amount = decimal.Parse(txtAmountPaid.Value.ToString().Replace("₱", ""));
+                        }
+
+                        payment.TaxWithheld = decimal.Parse(txtTaxWithheld.Value.ToString());
                     }
                     catch (Exception)
                     {
-                        payment.Amount = decimal.Parse(txtAmountPaid.Value.ToString().Replace("Php", ""));
-                        payment.TaxWithheld = decimal.Parse(txtTaxWithheld.Value.ToString().Replace("Php", ""));
+
                     }
 
                     payment.PaymentTypeId = Guid.Parse(lstPaymentType.SelectedValue.ToString());
@@ -1754,6 +1762,7 @@ namespace CMS2.Client
                 else
                 {
                     MessageBox.Show("Invalid AWB No", "Data Error", MessageBoxButtons.OK);
+                    
                     return;
                 }
             }
@@ -2478,6 +2487,7 @@ namespace CMS2.Client
                 _userManager = new UserManager<IdentityUser, Guid>(new UserStore(GlobalVars.UnitOfWork));
 
                 User user = userService.GetUserByUsername(username);
+                
 
                 if (user != null)
                 {
@@ -2722,7 +2732,7 @@ namespace CMS2.Client
             bsEmployee = new BindingSource();
             bsStatus = new BindingSource();
             bsGTCommodityType = new BindingSource();
-            bstrackRevenueUnitType = new BindingSource();
+            bsRevenueUnitType = new BindingSource();
             bstrackBARevenueUnitName = new BindingSource();
             bsBundleBSO = new BindingSource();
             bsUnbundleBCO = new BindingSource();
@@ -2735,6 +2745,7 @@ namespace CMS2.Client
             bsCTBatch = new BindingSource();
             bsSGBCO = new BindingSource();
             bsSGBatch = new BindingSource();
+            bsAirlines = new BindingSource();
 
             branchAcceptanceService = new BranchAcceptanceBL(GlobalVars.UnitOfWork);
             batchService = new BatchBL(GlobalVars.UnitOfWork);
@@ -2748,8 +2759,12 @@ namespace CMS2.Client
             cargotransferService = new CargoTransferBL(GlobalVars.UnitOfWork);
             segregationService = new SegregationBL(GlobalVars.UnitOfWork);
             statusService = new StatusBL(GlobalVars.UnitOfWork);
-        }
+            airlineService = new AirlinesBL(GlobalVars.UnitOfWork);
 
+            revenueUnitTypes = new List<RevenueUnitType>();
+            airlines = new List<Airlines>();
+            batches = new List<Batch>();
+        }
 
         private void NewShipment()
         {
@@ -2857,8 +2872,8 @@ namespace CMS2.Client
 
         private void PopulateGrid()
         {
-            //GlobalVars.DeviceBcoId = Guid.Parse(ConfigurationManager.AppSettings["BcoId"]);
-            List<Booking> books = bookingService.FilterActiveBy(x => x.AssignedToArea.City.BranchCorpOfficeId == GlobalVars.DeviceBcoId).OrderBy(x => x.DateBooked).OrderByDescending(x => x.CreatedDate).ToList(); //bookingService.FilterActiveBy(x => x.AssignedToArea.City.BranchCorpOfficeId == GlobalVars.DeviceBcoId).ToList().OrderByDescending(x => x.CreatedDate);
+            
+            List<Booking> books = bookingService.FilterActiveBy(x => x.AssignedToArea.City.BranchCorpOfficeId == GlobalVars.DeviceBcoId).OrderByDescending(x => x.DateBooked).ToList(); //bookingService.FilterActiveBy(x => x.AssignedToArea.City.BranchCorpOfficeId == GlobalVars.DeviceBcoId).ToList().OrderByDescending(x => x.CreatedDate);
             if (books.Count > 0 && books != null)
             {
                 BookingGridView.DataSource = null;
@@ -3636,7 +3651,7 @@ namespace CMS2.Client
                         shipper.CompanyName = txtShipperCompany.Text.Trim();
                     }
                 }
-                
+
                 shipper.Address1 = txtShipperAddress1.Text.Trim();
                 shipper.Address2 = txtShipperAddress2.Text.Trim();
                 shipper.Street = txtShipperStreet.Text.Trim();
@@ -5006,13 +5021,12 @@ namespace CMS2.Client
                     amountdue = decimal.Parse(txtAmountDue.Value.ToString().Replace("Php", ""));
                 }
 
-                txtNetCollection.Text = (amountdue - ((tax / (decimal)(100)) * amountdue)).ToString();
-                //txtNetCollection.Text = (decimal.Parse(txtAmountPaid.Value.ToString().Replace("₱", "")) - (decimal.Parse(txtTaxWithheld.Value.ToString().Replace("₱", "")))/ (decimal)(100) * (decimal.Parse(txtAmountPaid.Value.ToString().Replace("₱", "")));
+                tax = decimal.Parse(txtTaxWithheld.Value.ToString());
+                txtNetCollection.Text = (amountdue - (tax * amountdue)).ToString();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                //txtNetCollection.Text = (decimal.Parse(txtAmountPaid.Value.ToString().Replace("Php", "")) - (decimal.Parse(txtTaxWithheld.Value.ToString().Replace("Php", "")))).ToString();
-
+                Logs.ErrorLogs("", "ComputeNetCollection", ex.Message.ToString() + Environment.NewLine + ex.InnerException.ToString());
             }
         }
 
@@ -5024,6 +5038,37 @@ namespace CMS2.Client
             }
         }
 
+        private void isPaidOrPartial()
+        {
+            decimal amountdue = 0;
+            decimal amountpaid = 0;
+            if (txtAmountDue.Value.ToString().Contains("₱"))
+            {
+                amountdue = decimal.Parse(txtAmountDue.Value.ToString().Replace("₱", ""));
+            }
+            else
+            {
+                amountdue = decimal.Parse(txtAmountDue.Value.ToString().Replace("Php", ""));
+            }
+
+            if (txtAmountPaid.Value.ToString().Contains("₱"))
+            {
+                amountpaid = decimal.Parse(txtAmountPaid.Value.ToString().Replace("₱", ""));
+            }
+            else
+            {
+                amountpaid = decimal.Parse(txtAmountPaid.Value.ToString().Replace("Php", ""));
+            }
+
+            if (amountdue == amountpaid || amountpaid > amountdue)
+            {
+                cmb_PaymentRemarks.SelectedValue = "Full";
+            }
+            else
+            {
+                cmb_PaymentRemarks.SelectedValue = "Partial";
+            }
+        }
 
         #endregion
 
@@ -10229,11 +10274,14 @@ namespace CMS2.Client
         #region Load Data- PickupCargo
         public void PickUpCargoLoadData()
         {
+                        
+            if (revenueUnitTypes == null || revenueUnitTypes.Count <=0)
+            {
+                revenueUnitTypes = revenueUnitTypeService.FilterActiveBy(x => x.RecordStatus == 1).ToList();
+            }
 
-            //bsRevenueUnitType = new BindingSource();
-            List<RevenueUnitType> _revenueUnitType = revenueUnitTypeService.GetAll().Where(x => x.RecordStatus == 1).ToList();
-            bstrackRevenueUnitType.DataSource = _revenueUnitType;
-            cmb_RevenueUnitType.DataSource = bstrackRevenueUnitType;
+            bsRevenueUnitType.DataSource = revenueUnitTypes;           
+            cmb_RevenueUnitType.DataSource = bsRevenueUnitType;
             cmb_RevenueUnitType.DisplayMember = "RevenueUnitTypeName";
             cmb_RevenueUnitType.ValueMember = "RevenueUnitTypeId";
 
@@ -10311,29 +10359,33 @@ namespace CMS2.Client
             // dropDownBranchAcceptance_Driver.Items.Add("All");
             dropDownBranchAcceptance_Driver.SelectedValue = "All";
         }
-
-
+        
         public void BundleLoadData()
         {
-            List<BranchCorpOffice> _bco = bcoService.GetAll().Where(x => x.RecordStatus == 1).OrderBy(x => x.BranchCorpOfficeName).ToList();
-            bsBundleBSO.DataSource = _bco;
+
+            if (branchCorpOffices == null || branchCorpOffices.Count <= 0)
+            {
+                branchCorpOffices =bcoService.FilterActiveBy(x => x.RecordStatus == 1).OrderBy(x => x.BranchCorpOfficeName).ToList();
+            }
+
+            bsBundleBSO.DataSource = branchCorpOffices;
             dropDownBundle_BCO_BSO.DataSource = bsBundleBSO;
             dropDownBundle_BCO_BSO.DisplayMember = "BranchCorpOfficeName";
             dropDownBundle_BCO_BSO.ValueMember = "BranchCorpOfficeId";
             dropDownBundle_BCO_BSO.Items.Add("All");
             dropDownBundle_BCO_BSO.SelectedValue = "All";
 
-            //List<RevenueUnit> _revenueUnit = revenueUnitservice.GetAll().Where(x => x.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.RevenueUnitType.RevenueUnitTypeName == "Branch Satellite").OrderBy(x => x.RevenueUnitName).ToList();
-            //bsBundleBSO.DataSource = _revenueUnit;
-            //dropDownBundle_BCO_BSO.DataSource = bsBundleBSO;
-            //dropDownBundle_BCO_BSO.DisplayMember = "RevenueUnitName";
-            //dropDownBundle_BCO_BSO.ValueMember = "RevenueUnitId";
         }
 
         public void UnbundleLoadData()
         {
-            List<BranchCorpOffice> _bco = bcoService.GetAll().Where(x => x.RecordStatus == 1).OrderBy(x => x.BranchCorpOfficeName).ToList();
-            bsUnbundleBCO.DataSource = _bco;
+
+            if (branchCorpOffices == null || branchCorpOffices.Count <=0 )
+            {
+                branchCorpOffices = bcoService.FilterActiveBy(x => x.RecordStatus == 1).OrderBy(x => x.BranchCorpOfficeName).ToList();
+            }
+
+            bsUnbundleBCO.DataSource = branchCorpOffices;
             dropDownUnbundle_BCO.DataSource = bsUnbundleBCO;
             dropDownUnbundle_BCO.DisplayMember = "BranchCorpOfficeName";
             dropDownUnbundle_BCO.ValueMember = "BranchCorpOfficeId";
@@ -10366,14 +10418,15 @@ namespace CMS2.Client
 
 
         }
-
-
-
+        
         public void GatewayTransmittalLoadData()
         {
+            if (branchCorpOffices == null || branchCorpOffices.Count <= 0)
+            {
+                branchCorpOffices =bcoService.FilterActiveBy(x => x.RecordStatus == 1).OrderBy(x => x.BranchCorpOfficeName).ToList();
+            }
 
-            List<BranchCorpOffice> _bco = bcoService.GetAll().Where(x => x.RecordStatus == 1).OrderBy(x => x.BranchCorpOfficeName).ToList();
-            bsGTDestinationBCO.DataSource = _bco;
+            bsGTDestinationBCO.DataSource = branchCorpOffices;
             dropDownGatewayTransmital_Destination.DataSource = bsGTDestinationBCO;
             dropDownGatewayTransmital_Destination.DisplayMember = "BranchCorpOfficeName";
             dropDownGatewayTransmital_Destination.ValueMember = "BranchCorpOfficeId";
@@ -10382,7 +10435,8 @@ namespace CMS2.Client
 
 
             List<GatewayTransmittal> _driver = gwTransmittalService.GetAll().Where(x => x.RecordStatus == 1).ToList();
-            //bsDriver.DataSource = _driver;
+                        
+           
             List<string> selectDriver = _driver.Select(x => x.Driver).Distinct().OrderBy(x => x).ToList();
             selectDriver.Add("All");
             cmbGT_Driver.DataSource = selectDriver;
@@ -10390,23 +10444,28 @@ namespace CMS2.Client
             cmbGT_Driver.ValueMember = "Driver";
             cmbGT_Driver.SelectedValue = "All";
 
-            List<GatewayTransmittal> _gatewayName = gwTransmittalService.GetAll().Where(x => x.RecordStatus == 1).ToList();
-            List<string> selectGateway = _gatewayName.Select(x => x.Gateway).Distinct().OrderBy(x => x).ToList();
-            selectGateway.Add("All");
-            dropDownGatewayTransmital_Gateway.DataSource = selectDriver;
-            dropDownGatewayTransmital_Gateway.DisplayMember = "Gateway";
-            dropDownGatewayTransmital_Gateway.ValueMember = "Gateway";
-            dropDownGatewayTransmital_Gateway.SelectedValue = "All";
 
+            if (airlines== null || airlines.Count <= 0)
+            {
+                airlines = airlineService.FilterActive().OrderBy(x => x.AirlineName).ToList();
+                bsAirlines.DataSource = airlines;
+            }
+            
+            dropDownGatewayTransmital_Gateway.DataSource = bsAirlines;
+            dropDownGatewayTransmital_Gateway.Items.Add("All");
+            dropDownGatewayTransmital_Gateway.DisplayMember = "AirlineName";
+            dropDownGatewayTransmital_Gateway.ValueMember = "AirlineID";
+            dropDownGatewayTransmital_Gateway.SelectedValue = "All";
+                        
             List<Batch> _batch = batchService.GetAll().Where(x => x.RecordStatus == 1 && x.BatchCode == "gatewaytransmittal").ToList();
+
             bsGTBatch.DataSource = _batch;
             dropDownGatewayTransmital_Batch.DataSource = bsGTBatch;
             dropDownGatewayTransmital_Batch.DisplayMember = "BatchName";
             dropDownGatewayTransmital_Batch.ValueMember = "BatchId";
             dropDownGatewayTransmital_Batch.Items.Add("All");
             dropDownGatewayTransmital_Batch.SelectedValue = "All";
-
-
+            
             List<CommodityType> _commodityType = commodityTypeService.GetAll().Where(x => x.RecordStatus == 1).ToList();
             bsGTCommodityType.DataSource = _commodityType;
             cmbGt_CommodityType.DataSource = bsGTCommodityType;
@@ -10414,9 +10473,7 @@ namespace CMS2.Client
             cmbGt_CommodityType.ValueMember = "CommodityTypeId";
             cmbGt_CommodityType.Items.Add("All");
             cmbGt_CommodityType.SelectedValue = "All";
-
-
-
+            
         }
 
         public void GatewayOutboundLoadData()
@@ -11123,7 +11180,9 @@ namespace CMS2.Client
 
         private void txtAmountPaid_TextChanged(object sender, EventArgs e)
         {
-            ComputeNetCollection();
+            txtNetCollection.Text = txtAmountPaid.Value.ToString();
+            isPaidOrPartial();
         }
+
     }
 }
