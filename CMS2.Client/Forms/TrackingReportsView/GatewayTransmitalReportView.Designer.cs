@@ -408,7 +408,7 @@ namespace CMS2.Client.Forms.TrackingReportsView
             this.textBox4.Style.Font.Name = "Century Gothic";
             this.textBox4.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(9D);
             this.textBox4.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
-            this.textBox4.TextWrap = true;
+            this.textBox4.TextWrap = false;
             this.textBox4.Value = "Area/Branch:";
             // 
             // txtGateway
@@ -469,11 +469,11 @@ namespace CMS2.Client.Forms.TrackingReportsView
             this.table1.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Inch(1.6692472696304321D)));
             this.table1.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Inch(1.5928760766983032D)));
             this.table1.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Inch(0.61096632480621338D)));
-            this.table1.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Inch(0.7746196985244751D)));
+            this.table1.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Inch(0.77461975812911987D)));
             this.table1.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Inch(1.047371506690979D)));
             this.table1.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Inch(1.047371506690979D)));
             this.table1.Body.Rows.Add(new Telerik.Reporting.TableBodyRow(Telerik.Reporting.Drawing.Unit.Inch(0.28000003099441528D)));
-            this.table1.Body.Rows.Add(new Telerik.Reporting.TableBodyRow(Telerik.Reporting.Drawing.Unit.Inch(0.40000006556510925D)));
+            this.table1.Body.Rows.Add(new Telerik.Reporting.TableBodyRow(Telerik.Reporting.Drawing.Unit.Inch(0.40000003576278687D)));
             this.table1.Body.SetCellContent(0, 0, this.textBox22);
             this.table1.Body.SetCellContent(0, 1, this.txtAwb);
             this.table1.Body.SetCellContent(0, 2, this.textBox11);
@@ -843,7 +843,7 @@ namespace CMS2.Client.Forms.TrackingReportsView
             this.textBox48.Style.Font.Name = "Century Gothic";
             this.textBox48.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(11D);
             this.textBox48.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
-            this.textBox48.TextWrap = false;
+            this.textBox48.TextWrap = true;
             this.textBox48.Value = "Scanned By:";
             // 
             // textBox47
@@ -899,7 +899,7 @@ namespace CMS2.Client.Forms.TrackingReportsView
             this.txtScannedBy.Style.Font.Name = "Century Gothic";
             this.txtScannedBy.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(11D);
             this.txtScannedBy.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
-            this.txtScannedBy.TextWrap = false;
+            this.txtScannedBy.TextWrap = true;
             this.txtScannedBy.Value = "   ";
             // 
             // txtRemarks

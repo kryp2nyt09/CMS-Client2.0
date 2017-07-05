@@ -24,9 +24,15 @@ namespace CMS2.Client.Forms.TrackingReports
             List<Shipment> shipments = shipmentService.FilterActive().Where(x => x.AcceptedBy.AssignedToArea.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.RecordStatus == 1 && x.Booking.BookingStatus.BookingStatusName == "Picked-up" && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
             List<BranchAcceptance> branchAcceptance = branchAcceptanceBl.FilterActive().Where(x => x.Users.Employee.AssignedToArea.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.RecordStatus == 1 && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
 
-            string bcoName = bcoService.GetAll().Find(x => x.BranchCorpOfficeId == GlobalVars.DeviceBcoId).BranchCorpOfficeName;
+            string bcoName = bcoService.FilterActive().Find(x => x.BranchCorpOfficeId == GlobalVars.DeviceBcoId).BranchCorpOfficeName;
 
-            List<BranchAcceptanceViewModel> list = Match(branchAcceptance, shipments).FindAll(x => x.BCO == bcoName && x.Area != "N/A");
+            List<BranchAcceptanceViewModel> list = Match(branchAcceptance, shipments).FindAll(x => x.BCO == bcoName 
+                    && x.Area != "N/A" && !x.Area.Contains("Walk-in"));
+
+           // List<BranchAcceptanceViewModel> list = Match(branchAcceptance, shipments).FindAll(x => x.BCO == bcoName
+                    //&& x.Area != "N/A");
+
+            // ((x.Driver == driver && x.Driver != "All") || (x.Driver == x.Driver && driver == "All"))
             //List<BranchAcceptanceViewModel> list = Match(branchAcceptance, shipments);
 
             DataTable dt = new DataTable();
@@ -128,7 +134,7 @@ namespace CMS2.Client.Forms.TrackingReports
                 && ((x.Driver == driver && x.Driver != "N/A") || (x.Driver == x.Driver && driver == "All"))
                 && ((x.Batch == batchname && x.Batch != "N/A") || (x.Batch == x.Batch && batchname == "All"))
                 && ((x.BCO == bcoName && x.BCO != "N/A") || (x.BCO == x.BCO && bcoName == ""))
-                );
+                && !x.Area.Contains("Walk-in"));
 
             //if (revenueUnitId != Guid.Empty && batchId !=Guid.Empty)
             //{
@@ -209,7 +215,7 @@ namespace CMS2.Client.Forms.TrackingReports
             //List<BranchAcceptance> branchAcceptance = branchAcceptanceBl.GetAll().Where(x => x.RecordStatus == 1 && x.Users.Employee.AssignedToArea.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.Users.Employee.AssignedToArea.RevenueUnitId == revenueUnitId && x.BatchID == batchId && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).Distinct().ToList();
             List<BranchAcceptance> branchAcceptance = branchAcceptanceBl.FilterActive().Where(x => x.RecordStatus == 1 && x.Users.Employee.AssignedToArea.RevenueUnitId == revenueUnitId && x.BatchID == batchId && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).Distinct().ToList();
 
-            List<BranchAcceptanceViewModel> list = Match(branchAcceptance, shipments);
+            List<BranchAcceptanceViewModel> list = Match(branchAcceptance, shipments).FindAll(x => x.Area != "N/A" && !x.Area.Contains("Walk-in"));
 
             DataTable dt = new DataTable();
             dt.Columns.Add(new DataColumn("No", typeof(string)));
@@ -268,7 +274,7 @@ namespace CMS2.Client.Forms.TrackingReports
 
             //List<BranchAcceptance> branchAcceptance = branchAcceptanceBl.GetAll().Where(x => x.RecordStatus == 1 && x.Users.Employee.AssignedToArea.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.Users.Employee.AssignedToArea.RevenueUnitId == revenueUnitId && x.Driver == driver && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).Distinct().ToList();
             List<BranchAcceptance> branchAcceptance = branchAcceptanceBl.FilterActive().Where(x => x.RecordStatus == 1 && x.Users.Employee.AssignedToArea.RevenueUnitId == revenueUnitId && x.Driver == driver && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).Distinct().ToList();
-            List<BranchAcceptanceViewModel> list = Match(branchAcceptance, shipments);
+            List<BranchAcceptanceViewModel> list = Match(branchAcceptance, shipments).FindAll(x => x.Area != "N/A" && !x.Area.Contains("Walk-in"));
 
             DataTable dt = new DataTable();
             dt.Columns.Add(new DataColumn("No", typeof(string)));
@@ -346,8 +352,8 @@ namespace CMS2.Client.Forms.TrackingReports
             //BranchAcceptanceBL _branchAcceptanceService = new BranchAcceptanceBL();
             List<BranchAcceptanceViewModel> _results = new List<BranchAcceptanceViewModel>();
             List<BranchAcceptanceViewModel> _resultsFilter = new List<BranchAcceptanceViewModel>();
-
-
+            //UserBL _userService = new UserBL();
+            UserStore _userService = new UserStore();
             foreach (Shipment shipment in _shipments)
             {
                 BranchAcceptanceViewModel model = new BranchAcceptanceViewModel();
@@ -396,7 +402,14 @@ namespace CMS2.Client.Forms.TrackingReports
                                 }
                                     
                             }
-                            model.ScannedBy = AppUser.User.Employee.FullName;
+                            model.ScannedBy = "N/A";
+                            //string employee = _userService.FilterActive().Find(x => x.UserId == _brachAcceptance.CreatedBy).Employee.FullName;
+                            string employee = _userService.FindById(_brachAcceptance.CreatedBy).Employee.FullName;
+                            if (employee != "")
+                            {
+                                model.ScannedBy = employee;
+                            }
+                            
                             model.Remarks = shipment.Remarks;
                             model.Notes = _brachAcceptance.Notes;
                             _results.Add(model);
@@ -450,7 +463,12 @@ namespace CMS2.Client.Forms.TrackingReports
                                 }
 
                             }
-                            model.ScannedBy = AppUser.User.Employee.FullName;
+                            model.ScannedBy = "N/A";
+                            //string employee = _userService.FilterActive().Find(x => x.UserId == _brachAcceptance.CreatedBy).Employee.FullName;
+                            //if (employee != "")
+                            //{
+                            //    model.ScannedBy = employee;
+                            //}
                             //model.Remarks = shipment.Remarks;
                             //model.Notes = _brachAcceptance.Notes;
                             _results.Add(model);

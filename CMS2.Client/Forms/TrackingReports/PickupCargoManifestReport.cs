@@ -70,13 +70,22 @@ namespace CMS2.Client.Forms.TrackingReports
         }
 
 
-        public DataTable getPickupCargoDataByRevenueUnit(DateTime date, Guid revenueUnitTypeId, Guid revenueUnitId)
+        public DataTable getPickupCargoDataByRevenueUnit(DateTime date, Guid? revenueUnitTypeId, Guid? revenueUnitId)
         {
             //GET LIST 
             ShipmentBL _shipmentService = new ShipmentBL();
-            List<Shipment> _shipments = _shipmentService.FilterActive().Where(x => x.Booking.BookingStatus.BookingStatusName == "Picked-up" && x.AcceptedBy.AssignedToArea.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.RecordStatus == 1 && (x.CreatedDate).ToShortDateString() == date.ToShortDateString() && x.AcceptedBy.AssignedToAreaId == revenueUnitId && x.AcceptedBy.AssignedToArea.RevenueUnitTypeId == revenueUnitTypeId).ToList();
+            List<Shipment> _shipments = _shipmentService.FilterActive().Where(x => x.Booking.BookingStatus.BookingStatusName == "Picked-up"
+            && x.AcceptedBy.AssignedToArea.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId
+            && x.RecordStatus == 1
+            && (x.CreatedDate).ToShortDateString() == date.ToShortDateString()
+            &&
+            //&& x.AcceptedBy.AssignedToAreaId == revenueUnitId
+            ((x.AcceptedBy.AssignedToAreaId == revenueUnitId && x.AcceptedBy.AssignedToAreaId != Guid.Empty) || (x.AcceptedBy.AssignedToAreaId == x.AcceptedBy.AssignedToAreaId && revenueUnitId == Guid.Empty))
+            //&& x.AcceptedBy.AssignedToArea.RevenueUnitTypeId == revenueUnitTypeId).ToList();
+            && ((x.AcceptedBy.AssignedToArea.RevenueUnitTypeId == revenueUnitTypeId && x.AcceptedBy.AssignedToArea.RevenueUnitTypeId != Guid.Empty) || (x.AcceptedBy.AssignedToArea.RevenueUnitTypeId == x.AcceptedBy.AssignedToArea.RevenueUnitTypeId && revenueUnitTypeId == Guid.Empty))
+            ).ToList();
 
-            List<PickupCargoManifestViewModel> modelList = Match(_shipments).OrderByDescending(x => x.AirwayBillNo).ToList();
+            List <PickupCargoManifestViewModel> modelList = Match(_shipments).OrderByDescending(x => x.AirwayBillNo).ToList();
 
             DataTable dt = new DataTable();
 

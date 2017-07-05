@@ -152,7 +152,6 @@
     <Compile Include="RemarkBL.cs" />
     <Compile Include="ReportModels\StatementOfAccountDataSet.cs">
       <DependentUpon>StatementOfAccountDataSet.xsd</DependentUpon>
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="ReportModels\StatementOfAccountDataSet.Designer.cs">
       <DependentUpon>StatementOfAccountDataSet.xsd</DependentUpon>
@@ -214,6 +213,7 @@
     <Compile Include="TruckAreaMappingBL.cs" />
     <Compile Include="TruckBL.cs" />
     <Compile Include="UnbundleBL.cs" />
+    <Compile Include="UserBL.cs" />
     <Compile Include="UserRoleBL.cs" />
     <Compile Include="UserStore.cs" />
     <Compile Include="WeightBreakBL.cs" />

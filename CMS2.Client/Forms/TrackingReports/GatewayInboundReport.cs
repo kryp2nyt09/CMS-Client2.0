@@ -28,7 +28,7 @@ namespace CMS2.Client.Forms.TrackingReports
             dt.Columns.Add(new DataColumn("MAWB", typeof(string)));
             dt.Columns.Add(new DataColumn("Flight #", typeof(string)));
             dt.Columns.Add(new DataColumn("Commodity Type", typeof(string)));
-            dt.Columns.Add(new DataColumn("AWB/Sack #", typeof(string)));
+            dt.Columns.Add(new DataColumn("AWB", typeof(string)));
             dt.Columns.Add(new DataColumn("CreatedDate", typeof(string)));
 
             dt.Columns.Add(new DataColumn("ScannedBy", typeof(string)));
@@ -164,6 +164,7 @@ namespace CMS2.Client.Forms.TrackingReports
             PackageNumber _packageNumber = new PackageNumber();
             BundleBL bundleService = new BundleBL();
             List<string> listCargo = new List<string>();
+            UserStore _userService = new UserStore();
 
             foreach (GatewayInbound inbound in _inbound)
             {
@@ -193,7 +194,13 @@ namespace CMS2.Client.Forms.TrackingReports
                                 model1.FlightNo = inbound.FlightNumber;
                                 model1.CommodityType = inbound.CommodityType.CommodityTypeName;
                                 model1.CreatedDate = inbound.CreatedDate;
-                                model1.ScannedBy = AppUser.User.Employee.FullName;
+                                //model1.ScannedBy = AppUser.User.Employee.FullName;
+                                model1.ScannedBy = "N/A";
+                                string employee = _userService.FindById(inbound.CreatedBy).Employee.FullName;
+                                if (employee != "")
+                                {
+                                    model1.ScannedBy = employee;
+                                }
                                 _results.Add(model1);
 
                             }
@@ -218,7 +225,13 @@ namespace CMS2.Client.Forms.TrackingReports
                             model.FlightNo = inbound.FlightNumber;
                             model.CommodityType = inbound.CommodityType.CommodityTypeName;
                             model.CreatedDate = inbound.CreatedDate;
-                            model.ScannedBy = AppUser.User.Employee.FullName;
+                            //model.ScannedBy = AppUser.User.Employee.FullName;
+                            model.ScannedBy = "N/A";
+                            string employee = _userService.FindById(inbound.CreatedBy).Employee.FullName;
+                            if (employee != "")
+                            {
+                                model.ScannedBy = employee;
+                            }
                             _results.Add(model);
 
                         }

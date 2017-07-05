@@ -400,8 +400,8 @@ namespace CMS2.Client.Forms.TrackingReportsView
             // 
             this.table1.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Inch(0.38403517007827759D)));
             this.table1.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Inch(1.2350243330001831D)));
-            this.table1.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Inch(1.0473700761795044D)));
-            this.table1.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Inch(1.0473700761795044D)));
+            this.table1.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Inch(1.047370195388794D)));
+            this.table1.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Inch(1.047370195388794D)));
             this.table1.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Inch(1.6692472696304321D)));
             this.table1.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Inch(1.5928760766983032D)));
             this.table1.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Inch(0.61096638441085815D)));
@@ -789,7 +789,7 @@ namespace CMS2.Client.Forms.TrackingReportsView
             this.textBox7.Style.Font.Name = "Century Gothic";
             this.textBox7.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(11D);
             this.textBox7.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
-            this.textBox7.TextWrap = false;
+            this.textBox7.TextWrap = true;
             this.textBox7.Value = "Scanned By:";
             // 
             // textBox10
@@ -845,7 +845,7 @@ namespace CMS2.Client.Forms.TrackingReportsView
             this.txtScannedBy.Style.Font.Name = "Century Gothic";
             this.txtScannedBy.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(11D);
             this.txtScannedBy.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
-            this.txtScannedBy.TextWrap = false;
+            this.txtScannedBy.TextWrap = true;
             this.txtScannedBy.Value = "";
             // 
             // txtRemarks

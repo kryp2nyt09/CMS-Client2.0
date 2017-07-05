@@ -155,7 +155,7 @@ namespace CMS2.Client.Forms.TrackingReports
             PackageNumberBL _packageNumberService = new PackageNumberBL();
 
             ShipmentBL shipmentService = new ShipmentBL();
-           
+            UserStore _userService = new UserStore();
             foreach (Segregation segregation in _segregation)
             {
                 SegregationViewModel model = new SegregationViewModel();
@@ -181,7 +181,13 @@ namespace CMS2.Client.Forms.TrackingReports
                     model.Qty++;
                     model.Area = shipmentService.GetAll().Find(x => x.AirwayBillNo == _airwaybill).DestinationCity.CityName;
                     model.CreatedDate = segregation.CreatedDate;
-                    model.ScannedBy = AppUser.User.Employee.FullName;
+                    //model.ScannedBy = AppUser.User.Employee.FullName;
+                    model.ScannedBy = "N/A";
+                    string employee = _userService.FindById(segregation.CreatedBy).Employee.FullName;
+                    if (employee != "")
+                    {
+                        model.ScannedBy = employee;
+                    }
                     _results.Add(model);
                 }
             }

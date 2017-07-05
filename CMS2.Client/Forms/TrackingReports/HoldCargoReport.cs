@@ -168,7 +168,7 @@ namespace CMS2.Client.Forms.TrackingReports
             UserRoleBL user = new UserRoleBL();
             ShipmentBL shipmentService = new ShipmentBL();
             List<Shipment> shipList = shipmentService.GetAll();
-
+            UserStore _userService = new UserStore();
             foreach (HoldCargo holdCargo in _holdcargo)
             {
                 HoldCargoViewModel model = new HoldCargoViewModel();
@@ -197,7 +197,13 @@ namespace CMS2.Client.Forms.TrackingReports
                         model.Reason = reason.GetById(holdCargo.ReasonID).ReasonName; // .Find(x => x.ReasonID == holdCargo.ReasonID).ReasonName;
                         model.EndorseBy = holdCargo.Endorsedby;
                         //model.ScannedBy = user.GetActiveRoles().Find(x => x.RoleId == AppUser.User.UserId).RoleName;
-                        model.ScannedBy = holdCargo.User.Employee.FullName;
+                        //model.ScannedBy = holdCargo.User.Employee.FullName;
+                        model.ScannedBy = "N/A";
+                        string employee = _userService.FindById(holdCargo.CreatedBy).Employee.FullName;
+                        if (employee != "")
+                        {
+                            model.ScannedBy = employee;
+                        }
                         //model.PreparedBy = user.GetAllUsers().Find(x => x.UserId == shi)
                         model.Aging = Math.Round((DateTime.Now - holdCargo.HoldCargoDate).TotalDays,2);
                         model.Branch = holdCargo.User.Employee.AssignedToArea.City.BranchCorpOffice.BranchCorpOfficeName;

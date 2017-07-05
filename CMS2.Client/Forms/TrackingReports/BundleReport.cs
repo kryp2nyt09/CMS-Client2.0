@@ -18,7 +18,7 @@ namespace CMS2.Client.Forms.TrackingReports
         {
             BundleBL bundleBl = new BundleBL();
 
-            List<Bundle> list = bundleBl.GetAll().Where(x => x.RecordStatus == 1 && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();                        
+            List<Bundle> list = bundleBl.FilterActive().Where(x => x.RecordStatus == 1 && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();                        
             List<BundleViewModel> bundleList = Match(list);
             
             DataTable dt = new DataTable();
@@ -187,12 +187,13 @@ namespace CMS2.Client.Forms.TrackingReports
             PackageNumberBL _packageNumberService = new PackageNumberBL();
             List<BundleViewModel> _results = new List<BundleViewModel>();
             ShipmentBL shipment = new ShipmentBL();
-
+            //UserBL _userService = new UserBL();
+            UserStore _userService = new UserStore();
             foreach (Bundle _bundle in bundle) {
                 BundleViewModel model = new BundleViewModel();
                 string _airwaybill = "";
                 try {
-                    _airwaybill = _packageNumberService.GetAll().Find(x => x.PackageNo == _bundle.Cargo).Shipment.AirwayBillNo;
+                    _airwaybill = _packageNumberService.FilterActive().Find(x => x.PackageNo == _bundle.Cargo).Shipment.AirwayBillNo;
                 }catch(Exception) { continue; }
 
                 BundleViewModel isExist = _results.Find(x => x.AirwayBillNo == _airwaybill);
@@ -205,7 +206,7 @@ namespace CMS2.Client.Forms.TrackingReports
                 else
                 {
                     model.AirwayBillNo = _airwaybill;
-                    List<Shipment> list = shipment.GetAll().Where(x => x.AirwayBillNo == _airwaybill).ToList();                    
+                    List<Shipment> list = shipment.FilterActive().Where(x => x.AirwayBillNo == _airwaybill).ToList();                    
                     foreach (Shipment ship in list)
                     {
                         model.Shipper = ship.Shipper.FullName;
@@ -225,7 +226,14 @@ namespace CMS2.Client.Forms.TrackingReports
                     }
                     model.SackNo = _bundle.SackNo;
                     model.BCO = _bundle.BranchCorpOffice.BranchCorpOfficeName;
-                    model.Scannedby = AppUser.User.Employee.FullName;
+                    //model.Scannedby = AppUser.User.Employee.FullName;
+                    model.Scannedby = "N/A";
+                    //string employee = _userService.FilterActive().Find(x => x.UserId == _bundle.CreatedBy).Employee.FullName;
+                    string employee = _userService.FindById(_bundle.CreatedBy).Employee.FullName;
+                    if (employee != "")
+                    {
+                        model.Scannedby = employee;
+                    }
                     _results.Add(model);
                 }
            }

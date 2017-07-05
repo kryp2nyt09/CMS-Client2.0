@@ -169,6 +169,7 @@ namespace CMS2.Client.Forms.TrackingReports
         {
             List<DailyTripViewModel> _results = new List<DailyTripViewModel>();
             PackageNumberBL _packageNumberService = new PackageNumberBL();
+            UserStore _userService = new UserStore();
            // ShipmentBL shipmentService = new ShipmentBL();
             foreach (Distribution distribution in _distribution) {
                 DailyTripViewModel model = new DailyTripViewModel();
@@ -200,7 +201,13 @@ namespace CMS2.Client.Forms.TrackingReports
                     model.Checker = distribution.Checker;
                     //model.BCO = distribution.Area.
                     model.PaymentCode = distribution.PaymentMode.PaymentModeCode;
-                    model.Scannedby = AppUser.User.Employee.FullName;
+                    //model.Scannedby = AppUser.User.Employee.FullName;
+                    model.Scannedby = "N/A";
+                    string employee = _userService.FindById(distribution.CreatedBy).Employee.FullName;
+                    if (employee != "")
+                    {
+                        model.Scannedby = employee;
+                    }
                     model.BatchName = distribution.Batch.BatchName;
                     _results.Add(model);
                 }

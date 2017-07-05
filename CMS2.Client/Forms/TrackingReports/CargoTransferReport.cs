@@ -30,7 +30,7 @@ namespace CMS2.Client.Forms.TrackingReports
             dt.Columns.Add(new DataColumn("Pieces", typeof(string)));
             dt.Columns.Add(new DataColumn("Plate #", typeof(string)));
             dt.Columns.Add(new DataColumn("Batch", typeof(string)));
-            dt.Columns.Add(new DataColumn("AWB/Sack #", typeof(string)));
+            dt.Columns.Add(new DataColumn("AWB", typeof(string)));
             dt.Columns.Add(new DataColumn("QTY", typeof(string)));
 
             dt.Columns.Add(new DataColumn("CreatedDate", typeof(string)));
@@ -107,7 +107,7 @@ namespace CMS2.Client.Forms.TrackingReports
             dt.Columns.Add(new DataColumn("Pieces", typeof(string)));
             dt.Columns.Add(new DataColumn("Plate #", typeof(string)));
             dt.Columns.Add(new DataColumn("Batch", typeof(string)));
-            dt.Columns.Add(new DataColumn("AWB/Sack #", typeof(string)));
+            dt.Columns.Add(new DataColumn("AWB", typeof(string)));
             dt.Columns.Add(new DataColumn("QTY", typeof(string)));
 
             dt.Columns.Add(new DataColumn("CreatedDate", typeof(string)));
@@ -178,7 +178,7 @@ namespace CMS2.Client.Forms.TrackingReports
             BundleBL bundleService = new BundleBL();
             PackageNumber _packageNumber = new PackageNumber();
             List<string> listCargo = new List<string>();
-
+            UserStore _userService = new UserStore();
             foreach (CargoTransfer cargoTransfer in _cargoTransfers)
             {
                 CargoTransferViewModel model = new CargoTransferViewModel();
@@ -221,7 +221,13 @@ namespace CMS2.Client.Forms.TrackingReports
                                 model1.BCO = cargoTransfer.BranchCorpOffice.BranchCorpOfficeName;
                                 model1.GATEWAY = cargoTransfer.RevenueUnit.RevenueUnitName;
                                 model1.SATELLITE = cargoTransfer.RevenueUnit.RevenueUnitName;
-                                model1.ScannedBy = AppUser.User.Employee.FullName;
+                                //model1.ScannedBy = AppUser.User.Employee.FullName;
+                                model1.ScannedBy = "N/A";
+                                string employee = _userService.FindById(cargoTransfer.CreatedBy).Employee.FullName;
+                                if (employee != "")
+                                {
+                                    model1.ScannedBy = employee;
+                                }
                                 _results.Add(model1);
 
                             }
@@ -261,7 +267,13 @@ namespace CMS2.Client.Forms.TrackingReports
                             //model.BCO = cargoTransfer.BranchCorpOffice.BranchCorpOfficeName;
                             model.GATEWAY = cargoTransfer.RevenueUnit.RevenueUnitName;
                             model.SATELLITE = cargoTransfer.RevenueUnit.RevenueUnitName;
-                            model.ScannedBy = AppUser.User.Employee.FullName;
+                            //model.ScannedBy = AppUser.User.Employee.FullName;
+                            model.ScannedBy = "N/A";
+                            string employee = _userService.FindById(cargoTransfer.CreatedBy).Employee.FullName;
+                            if (employee != "")
+                            {
+                                model.ScannedBy = employee;
+                            }
                             _results.Add(model);
 
                         }

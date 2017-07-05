@@ -462,7 +462,7 @@ namespace CMS2.Client.Forms.TrackingReportsView
             this.textBox48.Style.Font.Name = "Century Gothic";
             this.textBox48.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(11D);
             this.textBox48.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
-            this.textBox48.TextWrap = false;
+            this.textBox48.TextWrap = true;
             this.textBox48.Value = "Scanned By:";
             // 
             // txtRemarks
@@ -490,7 +490,7 @@ namespace CMS2.Client.Forms.TrackingReportsView
             this.txtScannedBy.Style.Font.Name = "Century Gothic";
             this.txtScannedBy.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(11D);
             this.txtScannedBy.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
-            this.txtScannedBy.TextWrap = false;
+            this.txtScannedBy.TextWrap = true;
             this.txtScannedBy.Value = "   ";
             // 
             // textBox39

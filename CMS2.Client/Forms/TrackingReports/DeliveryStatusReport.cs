@@ -200,7 +200,7 @@ namespace CMS2.Client.Forms.TrackingReports
             List<Distribution> distributions = distributionService.GetAll().ToList();
 
             List<DeliveryReceipt> deliveryReceipt = deliveryReceiptService.GetAll().ToList();
-
+            UserStore _userService = new UserStore();
             foreach (Delivery delivery in _deliveries)
             {               
 
@@ -242,7 +242,13 @@ namespace CMS2.Client.Forms.TrackingReports
                     model.Batch = dis.Batch.BatchName;
                     model.PlateNo = dis.PlateNo;
                     model.BCO = dis.Area.City.BranchCorpOffice.BranchCorpOfficeName;
-                    model.ScannedBy = AppUser.User.Employee.FullName;
+                    //model.ScannedBy = AppUser.User.Employee.FullName;
+                    model.ScannedBy = "N/A";
+                    string employee = _userService.FindById(dis.CreatedBy).Employee.FullName;
+                    if (employee != "")
+                    {
+                        model.ScannedBy = employee;
+                    }
                     model.ReceivedBy = "NA";
                     if (dReceipt !=null)
                     {

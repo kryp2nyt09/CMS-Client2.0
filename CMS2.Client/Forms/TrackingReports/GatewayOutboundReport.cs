@@ -215,6 +215,7 @@ namespace CMS2.Client.Forms.TrackingReports
             PackageNumber _packageNumber = new PackageNumber();
             List<string> listCargo = new List<string>();
             BundleBL bundleService = new BundleBL();
+            UserStore _userService = new UserStore();
             foreach (GatewayOutbound outbound in _outbound)
             {
 
@@ -247,7 +248,14 @@ namespace CMS2.Client.Forms.TrackingReports
                                     model1.TotalRecieved = listCargo.Count;
                                     model1.Total = model1.TotalRecieved;
                                     model1.Branch = outbound.BranchCorpOffice.BranchCorpOfficeName;
-                                    model1.ScannedBy = AppUser.User.Employee.FullName;
+                                    // model1.ScannedBy = AppUser.User.Employee.FullName;
+                                    model1.ScannedBy = "N/A";
+                                    //string employee = _userService.FilterActive().Find(x => x.UserId == _bundle.CreatedBy).Employee.FullName;
+                                    string employee = _userService.FindById(outbound.CreatedBy).Employee.FullName;
+                                    if (employee != "")
+                                    {
+                                        model1.ScannedBy = employee;
+                                    }
                                     model1.CommodityTypeName = "N/A";
                                     //model1.CommodityTypeName = _packageNumberService.FilterActiveBy(x => x.PackageNo == outbound.Cargo).First().Shipment.CommodityType.CommodityTypeName;
                                     _results.Add(model1);
@@ -270,7 +278,12 @@ namespace CMS2.Client.Forms.TrackingReports
                                     model1.TotalDiscrepency = listCargo.Count;
                                     model1.Total = model1.TotalDiscrepency;
                                     model1.Branch = outbound.BranchCorpOffice.BranchCorpOfficeName;
-                                    model1.ScannedBy = AppUser.User.Employee.FullName;
+                                    //model1.ScannedBy = "N/A";
+                                    string employee = _userService.FindById(outbound.CreatedBy).Employee.FullName;
+                                    if (employee != "")
+                                    {
+                                        model1.ScannedBy = employee;
+                                    }
                                     model1.CommodityTypeName = "N/A";
                                     //model1.CommodityTypeName = _packageNumberService.FilterActiveBy(x => x.PackageNo == outbound.Cargo).First().Shipment.CommodityType.CommodityTypeName;
                                     _results.Add(model1);
@@ -301,7 +314,12 @@ namespace CMS2.Client.Forms.TrackingReports
                                 model.TotalRecieved++;
                                 model.Total = model.TotalRecieved;
                                 model.Branch = outbound.BranchCorpOffice.BranchCorpOfficeName;
-                                model.ScannedBy = AppUser.User.Employee.FullName;
+                                //model.ScannedBy = AppUser.User.Employee.FullName;
+                                string employee = _userService.FindById(outbound.CreatedBy).Employee.FullName;
+                                if (employee != "")
+                                {
+                                    model.ScannedBy = employee;
+                                }
                                 //model.CommodityTypeName = _inbound.Where(x => x.Cargo == outbound.Cargo).Select(x => x.CommodityType.CommodityTypeName).ToString();
                                 // model.CommodityTypeName = _inbound.Find(x => x.Cargo == outbound.Cargo).CommodityType.CommodityTypeName;
                                 model.CommodityTypeName = _packageNumberService.FilterActiveBy(x => x.PackageNo == outbound.Cargo).First().Shipment.CommodityType.CommodityTypeName;
@@ -328,7 +346,11 @@ namespace CMS2.Client.Forms.TrackingReports
                                 model.TotalDiscrepency++;
                                 model.Total = model.TotalDiscrepency;
                                 model.Branch = outbound.BranchCorpOffice.BranchCorpOfficeName;
-                                model.ScannedBy = AppUser.User.Employee.FullName;
+                                string employee = _userService.FindById(outbound.CreatedBy).Employee.FullName;
+                                if (employee != "")
+                                {
+                                    model.ScannedBy = employee;
+                                }
                                 //model.CommodityTypeName = _inbound.Find(x => x.Cargo == outbound.Cargo).CommodityType.CommodityTypeName;
                                 // model.CommodityTypeName = _inbound.Where(x => x.Cargo == outbound.Cargo).Select(x => x.CommodityType.CommodityTypeName).ToString();
                                 model.CommodityTypeName = _packageNumberService.FilterActiveBy(x => x.PackageNo == outbound.Cargo).First().Shipment.CommodityType.CommodityTypeName;

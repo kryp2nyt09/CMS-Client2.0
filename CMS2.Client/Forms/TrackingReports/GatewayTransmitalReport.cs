@@ -17,7 +17,8 @@ namespace CMS2.Client.Forms.TrackingReports
         {
             GatewayTransmittalBL gatewayBl = new GatewayTransmittalBL();
 
-            List<GatewayTransmittal> list = gatewayBl.GetAll().Where(x => x.RecordStatus == 1 && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
+            //List<GatewayTransmittal> list = gatewayBl.FilterActive().Where(x => x.RecordStatus == 1 && x.CreatedDate.ToShortDateString() == date.ToShortDateString()).ToList();
+            List<GatewayTransmittal> list = gatewayBl.FilterActive().Where(x => x.RecordStatus == 1 && x.CreatedDate.ToShortDateString() == date.ToShortDateString() && x.TransmittalBy.Employee.AssignedToArea.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId).ToList();
             List<GatewayTransmitalViewModel> modelList = Match(list);
 
             DataTable dt = new DataTable();
@@ -87,7 +88,9 @@ namespace CMS2.Client.Forms.TrackingReports
             if (num == 0)
             {
                 //list = gatewayBl.GetAll().Where(x => x.RecordStatus == 1 && x.CreatedDate.ToShortDateString() == date.ToShortDateString() && x.MasterAirwayBillNo == mawb).ToList();
-                list = gatewayBl.GetAll().Where(x => x.RecordStatus == 1 && x.MasterAirwayBillNo == mawb).ToList();
+                list = gatewayBl.GetAll().Where(x => x.RecordStatus == 1 
+                                && x.MasterAirwayBillNo == mawb
+                                && x.TransmittalBy.Employee.AssignedToArea.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId).ToList();
             }
             else if (num == 1)
             {
@@ -99,6 +102,7 @@ namespace CMS2.Client.Forms.TrackingReports
                 && ((x.BatchID == batchid && x.BatchID != Guid.Empty) || (x.BatchID == x.BatchID && batchid == Guid.Empty))
                 && ((x.CommodityTypeID == commodityTypeId && x.CommodityTypeID != Guid.Empty) || (x.CommodityTypeID == x.CommodityTypeID && commodityTypeId == Guid.Empty))
                 && x.CreatedDate.ToShortDateString() == date.ToShortDateString()
+                && x.TransmittalBy.Employee.AssignedToArea.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId
                 ).ToList();
             }
 
@@ -106,7 +110,7 @@ namespace CMS2.Client.Forms.TrackingReports
 
             DataTable dt = new DataTable();
             dt.Columns.Add(new DataColumn("No", typeof(string)));
-            dt.Columns.Add(new DataColumn("AWB/Sack #", typeof(string)));
+            dt.Columns.Add(new DataColumn("AWB", typeof(string)));
             dt.Columns.Add(new DataColumn("Shipper", typeof(string)));
             dt.Columns.Add(new DataColumn("Consignee", typeof(string)));
             dt.Columns.Add(new DataColumn("Address", typeof(string)));
@@ -205,7 +209,7 @@ namespace CMS2.Client.Forms.TrackingReports
             ShipmentBL shipmentService = new ShipmentBL();
             PackageNumberBL _packageNumberService = new PackageNumberBL();
             BundleBL bundleService = new BundleBL();
-
+            UserStore _userService = new UserStore();
 
             foreach (GatewayTransmittal transmital in _transmital)
             {
@@ -219,10 +223,10 @@ namespace CMS2.Client.Forms.TrackingReports
                 decimal WeightOfCargo = 0;
                 decimal totalWeightOfCargo = 0;
                 _shipment = shipmentService.FilterActive().Where(x => x.AirwayBillNo == transmital.AirwayBillNo).FirstOrDefault();
-
+               // _shipment = shipmentService.FilterActive().Where(x => x.AirwayBillNo == transmital.AirwayBillNo && x.Booking.BookedBy.AssignedToArea.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId).FirstOrDefault();
                 if (_shipment == null)
                 {
-                    listofSack = bundleService.GetAll().Where(x => x.SackNo == transmital.AirwayBillNo).Select(x => new Tuple<string, decimal>(x.Cargo, x.Weight)).ToList();
+                    listofSack = bundleService.FilterActive().Where(x => x.SackNo == transmital.AirwayBillNo).Select(x => new Tuple<string, decimal>(x.Cargo, x.Weight)).ToList();
                     if(listofSack != null)
                     {
                         for (int i = 0; i < listofSack.Count; i++)
@@ -258,7 +262,14 @@ namespace CMS2.Client.Forms.TrackingReports
                             model1.CreatedDate = transmital.CreatedDate;
                             model1.PlateNo = transmital.PlateNo;
                             model1.MAWB = transmital.MasterAirwayBillNo;
-                            model1.ScannedBy = AppUser.User.Employee.FullName;
+                            //model1.ScannedBy = AppUser.User.Employee.FullName;
+                            model1.ScannedBy = "N/A";
+                            //string employee = _userService.FilterActive().Find(x => x.UserId == _bundle.CreatedBy).Employee.FullName;
+                            string employee = _userService.FindById(transmital.CreatedBy).Employee.FullName;
+                            if (employee != "")
+                            {
+                                model1.ScannedBy = employee;
+                            }
                             _results.Add(model1);
                         }
                     }
@@ -272,7 +283,7 @@ namespace CMS2.Client.Forms.TrackingReports
                     if (isExist != null)
                     {
                         isExist.QTY++;
-                        isExist.AGW += Convert.ToDecimal(shipmentService.GetAll().Find(x => x.AirwayBillNo == transmital.AirwayBillNo).Weight);
+                        isExist.AGW += Convert.ToDecimal(shipmentService.FilterActive().Find(x => x.AirwayBillNo == transmital.AirwayBillNo).Weight);
                     }
                     else
                     {
@@ -293,7 +304,14 @@ namespace CMS2.Client.Forms.TrackingReports
                         model.CreatedDate = transmital.CreatedDate;
                         model.PlateNo = transmital.PlateNo;
                         model.MAWB = transmital.MasterAirwayBillNo;
-                        model.ScannedBy = AppUser.User.Employee.FullName;
+                        //model.ScannedBy = AppUser.User.Employee.FullName;
+                        model.ScannedBy = "N/A";
+                        //string employee = _userService.FilterActive().Find(x => x.UserId == _bundle.CreatedBy).Employee.FullName;
+                        string employee = _userService.FindById(transmital.CreatedBy).Employee.FullName;
+                        if (employee != "")
+                        {
+                            model.ScannedBy = employee;
+                        }
                         _results.Add(model);
                     }
 
