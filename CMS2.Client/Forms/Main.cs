@@ -39,7 +39,7 @@ using System.Drawing.Drawing2D;
 using CMS2.Entities.ReportModel;
 using System.Net.Sockets;
 using System.Data.SqlClient;
-using System.Diagnostics;
+using System.Runtime.InteropServices;
 
 namespace CMS2.Client
 {
@@ -47,7 +47,7 @@ namespace CMS2.Client
     {
 
         #region Properties
-        
+
         #region Main
 
 
@@ -58,6 +58,7 @@ namespace CMS2.Client
         private BranchCorpOfficeBL bcoService;
         private RevenueUnitBL revenueUnitService;
         private UserStore userService;
+        private string LoaderUser = "Booking";
         //private Resizer rs = new Resizer();
         #endregion
 
@@ -106,7 +107,6 @@ namespace CMS2.Client
 
         #endregion
 
-
         #region track
         private BindingSource bsBCO1;
         private BindingSource bsDriver;
@@ -141,7 +141,6 @@ namespace CMS2.Client
 
 
         #endregion
-
 
         #region Acceptance
 
@@ -273,12 +272,19 @@ namespace CMS2.Client
 
         public Main()
         {
+            LoadInit();
+            AcceptanceLoadInit();
+            PaymentSummaryLoadInit();
+            TrackingLoadInit();
+
             InitializeComponent();
+            int style = NativeWinAPI.GetWindowLong(this.Handle, NativeWinAPI.GWL_EXSTYLE);
+            style |= NativeWinAPI.WS_EX_COMPOSITED;
+            NativeWinAPI.SetWindowLong(this.Handle, NativeWinAPI.GWL_EXSTYLE, style);
+
         }
 
         #endregion
-
-        int counter = 0;
 
         #region Events
 
@@ -306,33 +312,14 @@ namespace CMS2.Client
         }
         private void Main_Load(object sender, EventArgs e)
         {
-          
+            //rs.FindAllControls(this);
             timer1.Start();
-            
 
-            GlobalVars.UnitOfWork = new CmsUoW();
-            areaService = new AreaBL(GlobalVars.UnitOfWork);
-            bsoService = new BranchSatOfficeBL(GlobalVars.UnitOfWork);
-            gatewaySatService = new GatewaySatOfficeBL(GlobalVars.UnitOfWork);
-            bcoService = new BranchCorpOfficeBL(GlobalVars.UnitOfWork);
-            revenueUnitService = new RevenueUnitBL(GlobalVars.UnitOfWork);
-
-            GlobalVars.DeviceRevenueUnitId = Guid.Parse(ConfigurationManager.AppSettings["RUId"]);
-            GlobalVars.DeviceBcoId = Guid.Parse(ConfigurationManager.AppSettings["BcoId"]);
-            GlobalVars.UnitOfWork = new CmsUoW();
-
-            LoadInit();
-            TrackingLoadInit();
-
+            LoadBookingComponents();
             BookingResetAll();
-            //PopulateGrid();
-            BookingGridView.DataSource = bookingService.FilterActiveBy(x => x.AssignedToArea.City.BranchCorpOfficeId == GlobalVars.DeviceBcoId).OrderBy(x => x.DateBooked).OrderByDescending(x => x.CreatedDate).ToList();//bookingService.FilterActiveBy(x => x.AssignedToArea.City.BranchCorpOfficeId == GlobalVars.DeviceBcoId).ToList().OrderByDescending(x => x.CreatedDate);
-            BookingGridView.MasterTemplate.AutoSizeColumnsMode = GridViewAutoSizeColumnsMode.Fill;
-
+            PopulateGrid();
             AddDailyBooking();
 
-            AcceptanceLoadInit();
-            PaymentSummaryLoadInit();
         }
         private void radPageView1_SelectedPageChanged(object sender, EventArgs e)
         {
@@ -340,21 +327,9 @@ namespace CMS2.Client
             switch (pageViewMain.SelectedPage.Text)
             {
                 case "Booking":
-                    isBookingPage = true;
-                    bsBookingStatus.ResetBindings(false);
-                    bsBookingRemark.ResetBindings(false);
-                    bsAreas.ResetBindings(false);
-                    bsOriginBco.ResetBindings(false);
-                    bsDestinationBco.ResetBindings(false);
-
-                    List<RevenueUnit> _areas = areas.Where(x => x.City.BranchCorpOfficeId == GlobalVars.DeviceBcoId).ToList();
-                    lstAssignedTo.DataSource = _areas;
-                    lstAssignedTo.DisplayMember = "RevenueUnitName";
-                    lstAssignedTo.ValueMember = "RevenueUnitId";
 
                     BookingResetAll();
                     PopulateGrid();
-
 
                     break;
                 case "Acceptance":
@@ -367,7 +342,6 @@ namespace CMS2.Client
                     else
                     {
                         DisableForm();
-
                     }
 
                     break;
@@ -402,7 +376,6 @@ namespace CMS2.Client
                         txtAwb.Text = NewPayment.AwbSoa;
                         txtAmountDue.Text = NewPayment.AmountPaidString;
                         txtAmountPaid.Focus();
-                        ComputeNetCollection();
                     }
                     else
                     {
@@ -1281,10 +1254,6 @@ namespace CMS2.Client
 
         }
 
-        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
-        {
-            AsynchronousLoadBooking();
-        }
         #endregion
 
         #region Acceptance
@@ -1482,7 +1451,7 @@ namespace CMS2.Client
                 {
                     if (IsNumericOnly(8, 8, AcceptancetxtAirwayBill.Text.Trim()))
                     {
-                        if (shipmentService.GetAll().Where(x => x.AirwayBillNo == AcceptancetxtAirwayBill.Text).Count() > 0)
+                        if (shipmentService.FilterActiveBy(x => x.AirwayBillNo == AcceptancetxtAirwayBill.Text).Count() > 0)
                         {
                             MessageBox.Show("Airwaybill number already exist.", "Search Airwaybill Number", MessageBoxButtons.OK);
                             return;
@@ -1638,10 +1607,12 @@ namespace CMS2.Client
 
             RefreshGridPackages();
         }
-        private void AcceptancetxtAirwayBill_Enter(object sender, EventArgs e)
+        private async void AcceptancetxtAirwayBill_Enter(object sender, EventArgs e)
         {
             AirwayBill = new AutoCompleteStringCollection();
-            List<string> awbs = shipmentService.GetAll().Select(x => x.AirwayBillNo).ToList();
+            List<string> awbs = shipmentService.FilterActive().Select(x => x.AirwayBillNo).ToList();
+            //List<Shipment> shipments = await shipmentService.FilterActiveByAsync(x => x.Booking.AssignedToArea.City.BranchCorpOfficeId == GlobalVars.DeviceBcoId);
+            //List<string> awbs = shipments.Select(x => x.AirwayBillNo).ToList();
             foreach (string item in awbs)
             {
                 AirwayBill.Add(item);
@@ -1861,7 +1832,7 @@ namespace CMS2.Client
 
         private void txtTaxWithheld_Leave(object sender, EventArgs e)
         {
-           // ComputeNetCollection();
+            // ComputeNetCollection();
         }
 
         private void lstPaymentType_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
@@ -2684,6 +2655,17 @@ namespace CMS2.Client
             { return null; }
         }
 
+        internal static class NativeWinAPI
+        {
+            internal static readonly int GWL_EXSTYLE = -20;
+            internal static readonly int WS_EX_COMPOSITED = 0x02000000;
+
+            [DllImport("user32")]
+            internal static extern int GetWindowLong(IntPtr hWnd, int nIndex);
+
+            [DllImport("user32")]
+            internal static extern int SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
+        }
 
         #endregion
 
@@ -2691,6 +2673,10 @@ namespace CMS2.Client
 
         private void LoadInit()
         {
+            GlobalVars.UnitOfWork = new CmsUoW();
+            GlobalVars.DeviceRevenueUnitId = Guid.Parse(ConfigurationManager.AppSettings["RUId"]);
+            GlobalVars.DeviceBcoId = Guid.Parse(ConfigurationManager.AppSettings["BcoId"]);
+
             bsBookingStatus = new BindingSource();
             bsBookingRemark = new BindingSource();
             bsAreas = new BindingSource();
@@ -2717,16 +2703,23 @@ namespace CMS2.Client
             companyService = new CompanyBL(GlobalVars.UnitOfWork);
             userService = new UserStore(GlobalVars.UnitOfWork);
 
+            bsoService = new BranchSatOfficeBL(GlobalVars.UnitOfWork);
+            gatewaySatService = new GatewaySatOfficeBL(GlobalVars.UnitOfWork);
+            revenueUnitService = new RevenueUnitBL(GlobalVars.UnitOfWork);
+
 
             bookingStatus = bookingStatusService.FilterActive().OrderBy(x => x.BookingStatusName).ToList();
             bookingRemarks = bookingRemarkService.FilterActive().OrderBy(x => x.BookingRemarkName).ToList();
             branchCorpOffices = bcoService.FilterActive().OrderBy(x => x.BranchCorpOfficeName).ToList();
             areas = areaService.FilterActive().OrderBy(x => x.RevenueUnitName).ToList();
             clients = clientService.FilterActive();
-            revenueUnits = revenueUnitService.FilterActive();
+            //revenueUnits = revenueUnitService.FilterActive();
             cities = cityService.FilterActive().OrderBy(x => x.CityName).ToList();
             companies = companyService.FilterActive().OrderBy(x => x.CompanyName).ToList();
 
+        }
+        private void LoadBookingComponents()
+        {
             bsBookingStatus.DataSource = bookingStatus;
             bsBookingRemark.DataSource = bookingRemarks;
             bsAreas.DataSource = areas;
@@ -2757,8 +2750,12 @@ namespace CMS2.Client
             lstDestinationBco.ValueMember = "BranchCorpOfficeId";
             lstDestinationBco.SelectedIndex = -1;
 
-        }
+            List<RevenueUnit> _areas = areas.Where(x => x.City.BranchCorpOfficeId == GlobalVars.DeviceBcoId).ToList();
+            lstAssignedTo.DataSource = _areas;
+            lstAssignedTo.DisplayMember = "RevenueUnitName";
+            lstAssignedTo.ValueMember = "RevenueUnitId";
 
+        }
         private void TrackingLoadInit()
         {
             bsBCO1 = new BindingSource();
@@ -2902,10 +2899,14 @@ namespace CMS2.Client
 
         private void PopulateGrid()
         {
-            BookingGridView.DataSource = null;
-            BookingGridView.DataSource = bookingService.FilterActiveBy(x => x.AssignedToArea.City.BranchCorpOfficeId == GlobalVars.DeviceBcoId).OrderBy(x => x.DateBooked).OrderByDescending(x => x.CreatedDate).ToList(); //bookingService.FilterActiveBy(x => x.AssignedToArea.City.BranchCorpOfficeId == GlobalVars.DeviceBcoId).ToList().OrderByDescending(x => x.CreatedDate);
-            BookingGridView.MasterTemplate.AutoSizeColumnsMode = GridViewAutoSizeColumnsMode.Fill;
-
+            //GlobalVars.DeviceBcoId = Guid.Parse(ConfigurationManager.AppSettings["BcoId"]);
+            List<Booking> books = bookingService.FilterActiveBy(x => x.AssignedToArea.City.BranchCorpOfficeId == GlobalVars.DeviceBcoId).OrderBy(x => x.DateBooked).OrderByDescending(x => x.CreatedDate).ToList(); //bookingService.FilterActiveBy(x => x.AssignedToArea.City.BranchCorpOfficeId == GlobalVars.DeviceBcoId).ToList().OrderByDescending(x => x.CreatedDate);
+            if (books.Count > 0 && books != null)
+            {
+                BookingGridView.DataSource = null;
+                BookingGridView.DataSource = books;
+                BookingGridView.MasterTemplate.AutoSizeColumnsMode = GridViewAutoSizeColumnsMode.Fill;
+            }
         }
 
         private DataTable ConvertToDataTable(List<Booking> list)
@@ -3193,7 +3194,6 @@ namespace CMS2.Client
 
                 txtRemarks.Text = "";
                 dateDateBooked.Value = DateTime.Now;
-                // chkHasDailyBooking.Checked = false;
                 txtBookedBy.Text = "";
 
                 if (lstAssignedTo.Items.Count > 0)
@@ -3206,44 +3206,10 @@ namespace CMS2.Client
                 if (lstBookingRemarks.Items.Count > 0)
                     lstBookingRemarks.SelectedIndex = -1;
 
-                //txtShipperLastName.Enabled = true;
-                //txtShipperFirstName.Enabled = true;
-                //txtShipperCompany.Enabled = true;
-                //txtShipperAddress1.Enabled = true;
-                //txtShipperAddress2.Enabled = true;
-                //txtShipperStreet.Enabled = true;
-                //txtShipperBarangay.Enabled = true;
-                //lstOriginBco.Enabled = true;
-                //lstOriginCity.Enabled = true;
-                //txtShipperContactNo.Enabled = true;
-                //txtShipperMobile.Enabled = true;
-                //txtShipperEmail.Enabled = true;
-
-                //txtConsigneeLastName.Enabled = true;
-                //txtConsigneeFirstName.Enabled = true;
-                //txtConsigneeCompany.Enabled = true;
-                //txtConsigneeAddress1.Enabled = true;
-                //txtConsigneeAddress2.Enabled = true;
-                //txtConsgineeStreet.Enabled = true;
-                //txtConsigneeBarangay.Enabled = true;
-                //lstDestinationBco.Enabled = true;
-                //lstDestinationCity.Enabled = true;
-                //txtConsigneeContactNo.Enabled = true;
-                //txtConsigneeMobile.Enabled = true;
-                //txtConsigneeEmail.Enabled = true;
-
                 GroupShipper.Enabled = true;
                 GroupConsignee.Enabled = true;
                 GroupRemarks.Enabled = true;
-
-                //txtRemarks.Enabled = true;
-                //dateDateBooked.Enabled = true;
                 chkHasDailyBooking.Enabled = true;
-                //txtBookedBy.Enabled = true;
-                //txtBookingNo.Enabled = true;
-                //lstAssignedTo.Enabled = true;
-                //lstBookingStatus.Enabled = false;
-                //lstBookingRemarks.Enabled = false;
 
                 btnNew.Enabled = false;
                 btnEdit.Enabled = false;
@@ -3712,7 +3678,7 @@ namespace CMS2.Client
                         shipper.CompanyName = txtShipperCompany.Text.Trim();
                     }
                 }
-
+                
                 shipper.Address1 = txtShipperAddress1.Text.Trim();
                 shipper.Address2 = txtShipperAddress2.Text.Trim();
                 shipper.Street = txtShipperStreet.Text.Trim();
@@ -3956,20 +3922,6 @@ namespace CMS2.Client
 
         }
 
-        private void AsynchronousLoadBooking()
-        {
-            while (isBookingPage)
-            {
-                System.Threading.Thread.Sleep(5000);
-                ManualResetEvent reset = new ManualResetEvent(false);
-                CMS2.Client.SyncHelper.ThreadState state = new SyncHelper.ThreadState();
-                state._event = reset;
-                state.worker = this.backgroundWorker1;
-                state.bindingList = _bookingBindingList;
-                ThreadPool.QueueUserWorkItem(new WaitCallback(RefreshGrid), state);
-                state._event.WaitOne();
-            }
-        }
 
         #endregion
 
@@ -4129,16 +4081,16 @@ namespace CMS2.Client
             lstHub.DisplayMember = "LegName";
             lstHub.ValueMember = "TransShipmentLegId";
 
-            bsCommodityType.ResetBindings(false);
-            bsCommodity.ResetBindings(false);
-            bsServiceType.ResetBindings(false);
-            bsServiceMode.ResetBindings(false);
-            bsPaymentMode.ResetBindings(false);
-            bsCrating.ResetBindings(false);
-            bsPackaging.ResetBindings(false);
-            bsGoodsDescription.ResetBindings(false);
-            bsShipMode.ResetBindings(false);
-            bsTranshipmentLeg.ResetBindings(false);
+            //bsCommodityType.ResetBindings(false);
+            //bsCommodity.ResetBindings(false);
+            //bsServiceType.ResetBindings(false);
+            //bsServiceMode.ResetBindings(false);
+            //bsPaymentMode.ResetBindings(false);
+            //bsCrating.ResetBindings(false);
+            //bsPackaging.ResetBindings(false);
+            //bsGoodsDescription.ResetBindings(false);
+            //bsShipMode.ResetBindings(false);
+            //bsTranshipmentLeg.ResetBindings(false);
 
             lstCommodityType.SelectedIndex = -1;
             lstCommodity.SelectedIndex = -1;
@@ -4174,13 +4126,13 @@ namespace CMS2.Client
                 DisableForm();
 
                 AcceptancetxtAirwayBill.Focus();
-                btnSearchShipment.Enabled = false;
+                // btnSearchShipment.Enabled = false;
                 btnAcceptanceEdit.Enabled = false;
             }
             else
             {
                 AcceptancetxtAirwayBill.Focus();
-                btnSearchShipment.Enabled = true;
+                //btnSearchShipment.Enabled = true;
             }
         }
 
@@ -4387,8 +4339,15 @@ namespace CMS2.Client
                     AcceptancetxtShipperMobile.Text = shipment.Shipper.Mobile;
                     AcceptancetxtShipperEmail.Text = shipment.Shipper.Email;
                 }
+                if (shipment.OriginCity != null)
+                {
+                    AcceptancetxtShipperCity.Text = shipment.OriginCity.CityName;
+                }
+                else
+                {
+                    AcceptancetxtShipperCity.Text = "N/A";
+                }
 
-                AcceptancetxtShipperCity.Text = shipment.OriginCity.CityName;
 
                 if (shipment.Consignee != null)
                 {
@@ -4408,8 +4367,15 @@ namespace CMS2.Client
                     AcceptancetxtConsingneeMobile.Text = shipment.Consignee.Mobile;
                     AcceptancetxtConsigneeEmail.Text = shipment.Consignee.Email;
                 }
-                AcceptancetxtConsigneeCity.Text = shipment.DestinationCity.CityName;
 
+                if (shipment.OriginCity != null)
+                {
+                    AcceptancetxtConsigneeCity.Text = shipment.DestinationCity.CityName;
+                }
+                else
+                {
+                    AcceptancetxtConsigneeCity.Text = "N/A";
+                }
                 lstServiceType.SelectedIndex = -1;
                 lstServiceMode.SelectedIndex = -1;
                 lstPaymentMode.SelectedIndex = -1;
@@ -4433,6 +4399,7 @@ namespace CMS2.Client
                 }
                 if (shipment.GoodsDescriptionId != null && shipment.GoodsDescriptionId != Guid.Empty)
                     lstGoodsDescription.SelectedValue = shipment.GoodsDescriptionId;
+
                 txtQuantity.Text = shipment.Quantity.ToString();
                 txtWeight.Text = shipment.Weight.ToString("N");
                 txtDeclaredValue.Text = shipment.DeclaredValueString;
@@ -5010,8 +4977,6 @@ namespace CMS2.Client
             txtSumTotal.Text = "0.00";
             txtAmountDue.Text = "0.00";
             txtAmountPaid.Text = "0.00";
-            txtNetCollection.Text = "0.00";
-            txtTaxWithheld.Text = "0.00";
         }
         #endregion
 
@@ -6606,6 +6571,7 @@ namespace CMS2.Client
             try
             {
                 UnbundleReport bundle = new UnbundleReport();
+
                 DataTable dataTable = bundle.getBundleData(dateTimeUnbunde_Date.Value);
                 
                 gridUnbundle.DataSource = dataTable;
@@ -6814,6 +6780,7 @@ namespace CMS2.Client
             try
             {
                 GatewayOutboundReport gatewayOutbound = new GatewayOutboundReport();
+
                 DataTable dataTable = gatewayOutbound.getData(dateTimeGatewayOutbound_Date.Value);
                 gridGatewayOutbound.DataSource = dataTable;
                 TrackingReportGlobalModel.table = dataTable;
@@ -6926,6 +6893,7 @@ namespace CMS2.Client
             try
             {
                 GatewayInboundReport gatewayInbound = new GatewayInboundReport();
+
                 DataTable dataTable = gatewayInbound.getData(dateTimePickerGatewayInbound_Date.Value);
                 gridGatewayInbound.DataSource = dataTable;
                 TrackingReportGlobalModel.table = dataTable;
@@ -7045,6 +7013,7 @@ namespace CMS2.Client
             try
             {
                 CargoTransferReport cargoTransfer = new CargoTransferReport();
+
                 DataTable dataTable = cargoTransfer.getData(dateTimeCargoTransfer_Date.Value);
                 gridCargoTransfer.DataSource = dataTable;
                 TrackingReportGlobalModel.table = dataTable;
@@ -7337,6 +7306,7 @@ namespace CMS2.Client
             try
             {
                 HoldCargoReport holdCargo = new HoldCargoReport();
+
                 DataTable dataTable = holdCargo.getData(dateTimeHoldCargo_FromDate.Value, dateTimeHoldCargo_ToDate.Value);
                 gridHoldCargo.DataSource = dataTable;
                 TrackingReportGlobalModel.table = dataTable;
@@ -7355,6 +7325,8 @@ namespace CMS2.Client
 
                 }
                 #endregion Hold Cargo Grid Design
+
+
             }
             catch (Exception ex)
             {
@@ -7438,7 +7410,9 @@ namespace CMS2.Client
             try
             {
                 DeliveryStatusReport deliveryStatus = new DeliveryStatusReport();
+
                 DataTable dataTable = deliveryStatus.getData(dateTimeDeliveryStatus_Date.Value);
+
                 gridDeliveryStatus.DataSource = dataTable;
                 TrackingReportGlobalModel.table = dataTable;
 
@@ -10334,7 +10308,6 @@ namespace CMS2.Client
 
         public void DailyTripLoadData()
         {
-            dateTimeDailyTrip_Date.Value = DateTime.Now;
             List<RevenueUnit> _revenueUnit = revenueUnitservice.GetAll().Where(x => x.City.BranchCorpOffice.BranchCorpOfficeId == GlobalVars.DeviceBcoId && x.RevenueUnitType.RevenueUnitTypeName == "Area").OrderBy(x => x.RevenueUnitName).ToList();
             dropDownDailyTrip_Area.DataSource = _revenueUnit;
             dropDownDailyTrip_Area.DisplayMember = "RevenueUnitName";
@@ -10825,17 +10798,12 @@ namespace CMS2.Client
 
         private void txtTaxWithheld_TextChanged(object sender, EventArgs e)
         {
-           ComputeNetCollection();
+            ComputeNetCollection();
         }
 
 
 
         #endregion END MARK SANTOS REGION
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
@@ -10863,8 +10831,8 @@ namespace CMS2.Client
                     lbl_Status.Text = "Offline";
                     lbl_Status.ForeColor = Color.Red;
 
-                }
-            }
+            //    }
+            //}
 
             System.ServiceProcess.ServiceController sc = new System.ServiceProcess.ServiceController("Sychronization Service");
             bool xStatus = Convert.ToBoolean(ConfigurationManager.AppSettings["isSubserver"]);
@@ -10883,32 +10851,51 @@ namespace CMS2.Client
                         break;
                 }
 
-            }
-            else
-            {
-               lblService.Text = "";
-            }
+
         }
 
-
-
-        private void txtAmountDue_KeyDown(object sender, KeyEventArgs e)
+        private void backLoader_DoWork(object sender, DoWorkEventArgs e)
         {
-            if (e.KeyCode == Keys.Tab || e.KeyData == Keys.Tab)
-            {
-                ComputeNetCollection();
-            }
+            LoadInit();
+            AcceptanceLoadInit();
+            PaymentSummaryLoadInit();
+            TrackingLoadInit();
         }
 
-        private void txtNetCollection_KeyDown(object sender, KeyEventArgs e)
+        private void backLoader_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            if (e.KeyCode == Keys.Tab || e.KeyData == Keys.Tab)
+            switch (LoaderUser)
             {
-                ComputeNetCollection();
+                case "Booking":
+                    LoadBookingComponents();
+                    BookingResetAll();
+                    AddDailyBooking();
+                    PopulateGrid();
+                    Login();
+
+
+                    try
+                    {
+                        if (AppUser.User.UserName == "admin")
+                        {
+                            btnSettings.Enabled = true;
+                        }
+                        else
+                        {
+                            btnSettings.Enabled = false;
+                        }
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+                    break;
+                default:
+                    break;
             }
         }
 
-        private void timer2_Tick(object sender, EventArgs e)
+        private void txtAmountPaid_TextChanged(object sender, EventArgs e)
         {
             counter++;
             switch (pageViewTracking.SelectedPage.Text)

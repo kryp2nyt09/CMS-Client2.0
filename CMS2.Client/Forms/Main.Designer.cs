@@ -409,8 +409,6 @@
             this.radPanel14 = new Telerik.WinControls.UI.RadPanel();
             this.gridPickupCargo = new Telerik.WinControls.UI.RadGridView();
             this.radPanel13 = new Telerik.WinControls.UI.RadPanel();
-            this.label126 = new System.Windows.Forms.Label();
-            this.label96 = new System.Windows.Forms.Label();
             this.cmb_RevenueUnit = new Telerik.WinControls.UI.RadDropDownList();
             this.cmb_RevenueUnitType = new Telerik.WinControls.UI.RadDropDownList();
             this.btnPickupCargo_Export = new Telerik.WinControls.UI.RadDropDownButton();
@@ -424,6 +422,8 @@
             this.label76 = new System.Windows.Forms.Label();
             this.label68 = new System.Windows.Forms.Label();
             this.label67 = new System.Windows.Forms.Label();
+            this.label126 = new System.Windows.Forms.Label();
+            this.label96 = new System.Windows.Forms.Label();
             this.radPageViewPage8 = new Telerik.WinControls.UI.RadPageViewPage();
             this.gridBranchAcceptance = new Telerik.WinControls.UI.RadGridView();
             this.radPanel15 = new Telerik.WinControls.UI.RadPanel();
@@ -1223,7 +1223,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(20, 20);
             this.panel1.TabIndex = 37;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // radPanel2
             // 
@@ -1530,7 +1529,7 @@
             this.radGroupBox7.Controls.Add(this.GroupRemarks);
             this.radGroupBox7.GroupBoxStyle = Telerik.WinControls.UI.RadGroupBoxStyle.Office;
             this.radGroupBox7.HeaderText = "Additional Info";
-            this.radGroupBox7.Location = new System.Drawing.Point(836, 3);
+            this.radGroupBox7.Location = new System.Drawing.Point(834, 3);
             this.radGroupBox7.Name = "radGroupBox7";
             this.radGroupBox7.Size = new System.Drawing.Size(388, 261);
             this.radGroupBox7.TabIndex = 28;
@@ -1688,7 +1687,7 @@
             this.dateDateBooked.Size = new System.Drawing.Size(145, 20);
             this.dateDateBooked.TabIndex = 30;
             this.dateDateBooked.TabStop = false;
-            this.dateDateBooked.Text = "Friday, December 2, 2016";
+            this.dateDateBooked.Text = "Friday, 2 December 2016";
             this.dateDateBooked.ThemeName = "Office2010Black";
             this.dateDateBooked.Value = new System.DateTime(2016, 12, 2, 15, 47, 16, 261);
             // 
@@ -3914,7 +3913,7 @@
             this.txtRfa.Size = new System.Drawing.Size(94, 20);
             this.txtRfa.TabIndex = 25;
             this.txtRfa.TabStop = false;
-            this.txtRfa.Text = "0.00 %";
+            this.txtRfa.Text = "0.00%";
             this.txtRfa.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtRfa.ThemeName = "Office2010Black";
             // 
@@ -4583,7 +4582,7 @@
             this.dateAcceptedDate.Size = new System.Drawing.Size(202, 20);
             this.dateAcceptedDate.TabIndex = 4;
             this.dateAcceptedDate.TabStop = false;
-            this.dateAcceptedDate.Text = "11/26/2015";
+            this.dateAcceptedDate.Text = "26/11/2015";
             this.dateAcceptedDate.ThemeName = "Office2010Black";
             this.dateAcceptedDate.Value = new System.DateTime(2015, 11, 26, 0, 0, 0, 0);
             this.dateAcceptedDate.KeyUp += new System.Windows.Forms.KeyEventHandler(this.dateAcceptedDate_KeyUp);
@@ -4807,7 +4806,7 @@
             this.datePaymentDate.Size = new System.Drawing.Size(161, 20);
             this.datePaymentDate.TabIndex = 4;
             this.datePaymentDate.TabStop = false;
-            this.datePaymentDate.Text = "12/10/2016";
+            this.datePaymentDate.Text = "10/12/2016";
             this.datePaymentDate.ThemeName = "Office2010Black";
             this.datePaymentDate.Value = new System.DateTime(2016, 12, 10, 10, 55, 47, 86);
             // 
@@ -4863,7 +4862,7 @@
             this.radLabel44.Name = "radLabel44";
             this.radLabel44.Size = new System.Drawing.Size(77, 18);
             this.radLabel44.TabIndex = 14;
-            this.radLabel44.Text = "Net Collection";
+            this.radLabel44.Text = "Cash Collected";
             // 
             // radLabel45
             // 
@@ -4901,7 +4900,7 @@
             this.dateCheckDate.Size = new System.Drawing.Size(161, 20);
             this.dateCheckDate.TabIndex = 12;
             this.dateCheckDate.TabStop = false;
-            this.dateCheckDate.Text = "12/10/2016";
+            this.dateCheckDate.Text = "10/12/2016";
             this.dateCheckDate.ThemeName = "Office2010Black";
             this.dateCheckDate.Value = new System.DateTime(2016, 12, 10, 10, 55, 47, 14);
             // 
@@ -4959,7 +4958,7 @@
             this.txtTaxWithheld.Size = new System.Drawing.Size(161, 20);
             this.txtTaxWithheld.TabIndex = 7;
             this.txtTaxWithheld.TabStop = false;
-            this.txtTaxWithheld.Text = "0 %";
+            this.txtTaxWithheld.Text = "0%";
             this.txtTaxWithheld.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtTaxWithheld.ThemeName = "Office2010Black";
             this.txtTaxWithheld.TextChanged += new System.EventHandler(this.txtTaxWithheld_TextChanged);
@@ -4977,7 +4976,7 @@
             this.txtAmountPaid.Text = "₱0.00";
             this.txtAmountPaid.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtAmountPaid.ThemeName = "Office2010Black";
-            this.txtAmountPaid.TextChanged += new System.EventHandler(this.txtAmountPaid_Leave);
+            this.txtAmountPaid.TextChanged += new System.EventHandler(this.txtAmountPaid_TextChanged);
             // 
             // txtAmountDue
             // 
@@ -5583,7 +5582,7 @@
             this.dateCollectionDate.Size = new System.Drawing.Size(87, 20);
             this.dateCollectionDate.TabIndex = 3;
             this.dateCollectionDate.TabStop = false;
-            this.dateCollectionDate.Text = "12/29/2016";
+            this.dateCollectionDate.Text = "29/12/2016";
             this.dateCollectionDate.ThemeName = "Office2010Black";
             this.dateCollectionDate.Value = new System.DateTime(2016, 12, 29, 13, 24, 31, 594);
             // 
@@ -5789,6 +5788,7 @@
             // 
             // pageViewTracking
             // 
+            this.pageViewTracking.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.pageViewTracking.Controls.Add(this.radPageViewPage7);
             this.pageViewTracking.Controls.Add(this.radPageViewPage8);
             this.pageViewTracking.Controls.Add(this.radPageViewPage9);
@@ -5867,6 +5867,8 @@
             this.radPanel13.Controls.Add(this.label76);
             this.radPanel13.Controls.Add(this.label68);
             this.radPanel13.Controls.Add(this.label67);
+            this.radPanel13.Controls.Add(this.label126);
+            this.radPanel13.Controls.Add(this.label96);
             this.radPanel13.Dock = System.Windows.Forms.DockStyle.Top;
             this.radPanel13.Location = new System.Drawing.Point(0, 0);
             this.radPanel13.Name = "radPanel13";
@@ -5915,14 +5917,15 @@
             // 
             // btnPickupCargo_Export
             // 
+            this.btnPickupCargo_Export.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.btnPickupCargo_Export.Items.AddRange(new Telerik.WinControls.RadItem[] {
             this.btnPickupCargo_PDF,
             this.btnPickupCargo_Excel,
             this.btnPickupCargo_CSV,
             this.btnPickupCargo_Docs});
-            this.btnPickupCargo_Export.Location = new System.Drawing.Point(974, 50);
+            this.btnPickupCargo_Export.Location = new System.Drawing.Point(992, 51);
             this.btnPickupCargo_Export.Name = "btnPickupCargo_Export";
-            this.btnPickupCargo_Export.Size = new System.Drawing.Size(81, 22);
+            this.btnPickupCargo_Export.Size = new System.Drawing.Size(80, 22);
             this.btnPickupCargo_Export.TabIndex = 78;
             this.btnPickupCargo_Export.Text = "Export";
             this.btnPickupCargo_Export.ThemeName = "Office2010Black";
@@ -5964,10 +5967,10 @@
             // 
             // btnExport_PickupCargo
             // 
-            this.btnExport_PickupCargo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnExport_PickupCargo.Location = new System.Drawing.Point(974, 78);
+            this.btnExport_PickupCargo.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.btnExport_PickupCargo.Location = new System.Drawing.Point(992, 80);
             this.btnExport_PickupCargo.Name = "btnExport_PickupCargo";
-            this.btnExport_PickupCargo.Size = new System.Drawing.Size(81, 22);
+            this.btnExport_PickupCargo.Size = new System.Drawing.Size(80, 22);
             this.btnExport_PickupCargo.TabIndex = 77;
             this.btnExport_PickupCargo.Text = "Print";
             this.btnExport_PickupCargo.ThemeName = "Office2010Black";
@@ -5976,7 +5979,7 @@
             // btnSearch_PicupCargo
             // 
             this.btnSearch_PicupCargo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnSearch_PicupCargo.Location = new System.Drawing.Point(456, 76);
+            this.btnSearch_PicupCargo.Location = new System.Drawing.Point(460, 80);
             this.btnSearch_PicupCargo.Name = "btnSearch_PicupCargo";
             this.btnSearch_PicupCargo.Size = new System.Drawing.Size(70, 22);
             this.btnSearch_PicupCargo.TabIndex = 76;
@@ -5986,12 +5989,12 @@
             // 
             // dateTimePicker_PickupCargo
             // 
-            this.dateTimePicker_PickupCargo.Location = new System.Drawing.Point(13, 80);
+            this.dateTimePicker_PickupCargo.Location = new System.Drawing.Point(10, 80);
             this.dateTimePicker_PickupCargo.Name = "dateTimePicker_PickupCargo";
-            this.dateTimePicker_PickupCargo.Size = new System.Drawing.Size(171, 20);
+            this.dateTimePicker_PickupCargo.Size = new System.Drawing.Size(170, 20);
             this.dateTimePicker_PickupCargo.TabIndex = 70;
             this.dateTimePicker_PickupCargo.TabStop = false;
-            this.dateTimePicker_PickupCargo.Text = "Thursday, December 29, 2016";
+            this.dateTimePicker_PickupCargo.Text = "Thursday, 29 December 2016";
             this.dateTimePicker_PickupCargo.ThemeName = "Office2010Black";
             this.dateTimePicker_PickupCargo.Value = new System.DateTime(2016, 12, 29, 16, 31, 36, 782);
             this.dateTimePicker_PickupCargo.ValueChanged += new System.EventHandler(this.dateTimePicker_PickupCargo_ValueChanged);
@@ -6027,6 +6030,26 @@
             this.label67.Size = new System.Drawing.Size(223, 23);
             this.label67.TabIndex = 62;
             this.label67.Text = "Pickup Cargo Manifest";
+            // 
+            // label126
+            // 
+            this.label126.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label126.AutoSize = true;
+            this.label126.Location = new System.Drawing.Point(321, 63);
+            this.label126.Name = "label126";
+            this.label126.Size = new System.Drawing.Size(81, 14);
+            this.label126.TabIndex = 82;
+            this.label126.Text = "RevenueUnit:";
+            // 
+            // label96
+            // 
+            this.label96.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label96.AutoSize = true;
+            this.label96.Location = new System.Drawing.Point(184, 63);
+            this.label96.Name = "label96";
+            this.label96.Size = new System.Drawing.Size(113, 14);
+            this.label96.TabIndex = 81;
+            this.label96.Text = "RevenueUnit Type:";
             // 
             // radPageViewPage8
             // 
@@ -6080,10 +6103,10 @@
             // 
             // btnBranchAcceptance_Print
             // 
-            this.btnBranchAcceptance_Print.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnBranchAcceptance_Print.Location = new System.Drawing.Point(1001, 75);
+            this.btnBranchAcceptance_Print.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.btnBranchAcceptance_Print.Location = new System.Drawing.Point(992, 80);
             this.btnBranchAcceptance_Print.Name = "btnBranchAcceptance_Print";
-            this.btnBranchAcceptance_Print.Size = new System.Drawing.Size(70, 22);
+            this.btnBranchAcceptance_Print.Size = new System.Drawing.Size(80, 22);
             this.btnBranchAcceptance_Print.TabIndex = 80;
             this.btnBranchAcceptance_Print.Text = "Print";
             this.btnBranchAcceptance_Print.ThemeName = "Office2010Black";
@@ -6093,7 +6116,7 @@
             // 
             this.label100.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label100.AutoSize = true;
-            this.label100.Location = new System.Drawing.Point(186, 56);
+            this.label100.Location = new System.Drawing.Point(186, 60);
             this.label100.Name = "label100";
             this.label100.Size = new System.Drawing.Size(32, 13);
             this.label100.TabIndex = 82;
@@ -6101,7 +6124,7 @@
             // 
             // dropDownBranchAcceptance_Driver
             // 
-            this.dropDownBranchAcceptance_Driver.Location = new System.Drawing.Point(365, 79);
+            this.dropDownBranchAcceptance_Driver.Location = new System.Drawing.Point(365, 80);
             this.dropDownBranchAcceptance_Driver.Name = "dropDownBranchAcceptance_Driver";
             this.dropDownBranchAcceptance_Driver.Size = new System.Drawing.Size(135, 20);
             this.dropDownBranchAcceptance_Driver.TabIndex = 81;
@@ -6112,7 +6135,7 @@
             // 
             this.label97.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label97.AutoSize = true;
-            this.label97.Location = new System.Drawing.Point(362, 58);
+            this.label97.Location = new System.Drawing.Point(362, 60);
             this.label97.Name = "label97";
             this.label97.Size = new System.Drawing.Size(40, 13);
             this.label97.TabIndex = 80;
@@ -6121,7 +6144,7 @@
             // btnBranchAcceptance_Search
             // 
             this.btnBranchAcceptance_Search.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnBranchAcceptance_Search.Location = new System.Drawing.Point(628, 75);
+            this.btnBranchAcceptance_Search.Location = new System.Drawing.Point(628, 80);
             this.btnBranchAcceptance_Search.Name = "btnBranchAcceptance_Search";
             this.btnBranchAcceptance_Search.Size = new System.Drawing.Size(70, 22);
             this.btnBranchAcceptance_Search.TabIndex = 79;
@@ -6131,12 +6154,12 @@
             // 
             // dateTimePickerBranchAcceptance_Date
             // 
-            this.dateTimePickerBranchAcceptance_Date.Location = new System.Drawing.Point(13, 79);
+            this.dateTimePickerBranchAcceptance_Date.Location = new System.Drawing.Point(10, 80);
             this.dateTimePickerBranchAcceptance_Date.Name = "dateTimePickerBranchAcceptance_Date";
-            this.dateTimePickerBranchAcceptance_Date.Size = new System.Drawing.Size(168, 20);
+            this.dateTimePickerBranchAcceptance_Date.Size = new System.Drawing.Size(170, 20);
             this.dateTimePickerBranchAcceptance_Date.TabIndex = 75;
             this.dateTimePickerBranchAcceptance_Date.TabStop = false;
-            this.dateTimePickerBranchAcceptance_Date.Text = "Thursday, December 29, 2016";
+            this.dateTimePickerBranchAcceptance_Date.Text = "Thursday, 29 December 2016";
             this.dateTimePickerBranchAcceptance_Date.ThemeName = "Office2010Black";
             this.dateTimePickerBranchAcceptance_Date.Value = new System.DateTime(2016, 12, 29, 16, 31, 36, 782);
             this.dateTimePickerBranchAcceptance_Date.ValueChanged += new System.EventHandler(this.dateTimePickerBranchAcceptance_Date_ValueChanged);
@@ -6145,7 +6168,7 @@
             // 
             this.label48.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label48.AutoSize = true;
-            this.label48.Location = new System.Drawing.Point(10, 58);
+            this.label48.Location = new System.Drawing.Point(10, 60);
             this.label48.Name = "label48";
             this.label48.Size = new System.Drawing.Size(34, 13);
             this.label48.TabIndex = 76;
@@ -6153,7 +6176,7 @@
             // 
             // dropDownBranchAcceptance_BCO_BSO
             // 
-            this.dropDownBranchAcceptance_BCO_BSO.Location = new System.Drawing.Point(189, 79);
+            this.dropDownBranchAcceptance_BCO_BSO.Location = new System.Drawing.Point(189, 80);
             this.dropDownBranchAcceptance_BCO_BSO.Name = "dropDownBranchAcceptance_BCO_BSO";
             this.dropDownBranchAcceptance_BCO_BSO.Size = new System.Drawing.Size(170, 20);
             this.dropDownBranchAcceptance_BCO_BSO.TabIndex = 73;
@@ -6163,7 +6186,7 @@
             // 
             // dropDownBranchAcceptance_Batch
             // 
-            this.dropDownBranchAcceptance_Batch.Location = new System.Drawing.Point(506, 77);
+            this.dropDownBranchAcceptance_Batch.Location = new System.Drawing.Point(506, 80);
             this.dropDownBranchAcceptance_Batch.Name = "dropDownBranchAcceptance_Batch";
             this.dropDownBranchAcceptance_Batch.Size = new System.Drawing.Size(116, 20);
             this.dropDownBranchAcceptance_Batch.TabIndex = 70;
@@ -6174,7 +6197,7 @@
             // 
             this.label77.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label77.AutoSize = true;
-            this.label77.Location = new System.Drawing.Point(503, 56);
+            this.label77.Location = new System.Drawing.Point(503, 60);
             this.label77.Name = "label77";
             this.label77.Size = new System.Drawing.Size(36, 13);
             this.label77.TabIndex = 69;
@@ -6262,7 +6285,7 @@
             // btnBundle_Print
             // 
             this.btnBundle_Print.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnBundle_Print.Location = new System.Drawing.Point(978, 76);
+            this.btnBundle_Print.Location = new System.Drawing.Point(992, 80);
             this.btnBundle_Print.Name = "btnBundle_Print";
             this.btnBundle_Print.Size = new System.Drawing.Size(80, 22);
             this.btnBundle_Print.TabIndex = 88;
@@ -6275,9 +6298,9 @@
             this.btnBundle_Export.Items.AddRange(new Telerik.WinControls.RadItem[] {
             this.exportBundle_PDF,
             this.exportBundle_Excel});
-            this.btnBundle_Export.Location = new System.Drawing.Point(978, 27);
+            this.btnBundle_Export.Location = new System.Drawing.Point(992, 51);
             this.btnBundle_Export.Name = "btnBundle_Export";
-            this.btnBundle_Export.Size = new System.Drawing.Size(92, 22);
+            this.btnBundle_Export.Size = new System.Drawing.Size(80, 22);
             this.btnBundle_Export.TabIndex = 94;
             this.btnBundle_Export.Text = "Export";
             this.btnBundle_Export.ThemeName = "Office2010Black";
@@ -6297,7 +6320,7 @@
             // 
             this.label113.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label113.AutoSize = true;
-            this.label113.Location = new System.Drawing.Point(191, 57);
+            this.label113.Location = new System.Drawing.Point(186, 60);
             this.label113.Name = "label113";
             this.label113.Size = new System.Drawing.Size(96, 13);
             this.label113.TabIndex = 92;
@@ -6307,7 +6330,7 @@
             // 
             this.label101.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label101.AutoSize = true;
-            this.label101.Location = new System.Drawing.Point(351, 57);
+            this.label101.Location = new System.Drawing.Point(351, 60);
             this.label101.Name = "label101";
             this.label101.Size = new System.Drawing.Size(51, 13);
             this.label101.TabIndex = 89;
@@ -6316,7 +6339,7 @@
             // btnBundle_Search
             // 
             this.btnBundle_Search.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnBundle_Search.Location = new System.Drawing.Point(460, 79);
+            this.btnBundle_Search.Location = new System.Drawing.Point(460, 80);
             this.btnBundle_Search.Name = "btnBundle_Search";
             this.btnBundle_Search.Size = new System.Drawing.Size(70, 22);
             this.btnBundle_Search.TabIndex = 87;
@@ -6326,12 +6349,12 @@
             // 
             // dateTimeBundle_Date
             // 
-            this.dateTimeBundle_Date.Location = new System.Drawing.Point(14, 80);
+            this.dateTimeBundle_Date.Location = new System.Drawing.Point(10, 80);
             this.dateTimeBundle_Date.Name = "dateTimeBundle_Date";
-            this.dateTimeBundle_Date.Size = new System.Drawing.Size(168, 20);
+            this.dateTimeBundle_Date.Size = new System.Drawing.Size(170, 20);
             this.dateTimeBundle_Date.TabIndex = 83;
             this.dateTimeBundle_Date.TabStop = false;
-            this.dateTimeBundle_Date.Text = "Thursday, December 29, 2016";
+            this.dateTimeBundle_Date.Text = "Thursday, 29 December 2016";
             this.dateTimeBundle_Date.ThemeName = "Office2010Black";
             this.dateTimeBundle_Date.Value = new System.DateTime(2016, 12, 29, 16, 31, 36, 782);
             this.dateTimeBundle_Date.ValueChanged += new System.EventHandler(this.dateTimeBundle_Date_ValueChanged);
@@ -6340,7 +6363,7 @@
             // 
             this.label24.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(11, 57);
+            this.label24.Location = new System.Drawing.Point(10, 60);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(34, 13);
             this.label24.TabIndex = 84;
@@ -6348,7 +6371,7 @@
             // 
             // dropDownBundle_BCO_BSO
             // 
-            this.dropDownBundle_BCO_BSO.Location = new System.Drawing.Point(194, 80);
+            this.dropDownBundle_BCO_BSO.Location = new System.Drawing.Point(189, 80);
             this.dropDownBundle_BCO_BSO.Name = "dropDownBundle_BCO_BSO";
             this.dropDownBundle_BCO_BSO.Size = new System.Drawing.Size(153, 20);
             this.dropDownBundle_BCO_BSO.TabIndex = 82;
@@ -6428,7 +6451,7 @@
             // 
             // txtUnbundle_SackNo
             // 
-            this.txtUnbundle_SackNo.Location = new System.Drawing.Point(358, 77);
+            this.txtUnbundle_SackNo.Location = new System.Drawing.Point(358, 80);
             this.txtUnbundle_SackNo.Name = "txtUnbundle_SackNo";
             this.txtUnbundle_SackNo.Size = new System.Drawing.Size(100, 20);
             this.txtUnbundle_SackNo.TabIndex = 109;
@@ -6437,7 +6460,7 @@
             // 
             this.label127.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label127.AutoSize = true;
-            this.label127.Location = new System.Drawing.Point(355, 59);
+            this.label127.Location = new System.Drawing.Point(355, 60);
             this.label127.Name = "label127";
             this.label127.Size = new System.Drawing.Size(51, 13);
             this.label127.TabIndex = 108;
@@ -6445,8 +6468,8 @@
             // 
             // btnUnbundle_Print
             // 
-            this.btnUnbundle_Print.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnUnbundle_Print.Location = new System.Drawing.Point(982, 76);
+            this.btnUnbundle_Print.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.btnUnbundle_Print.Location = new System.Drawing.Point(992, 80);
             this.btnUnbundle_Print.Name = "btnUnbundle_Print";
             this.btnUnbundle_Print.Size = new System.Drawing.Size(70, 22);
             this.btnUnbundle_Print.TabIndex = 89;
@@ -6457,7 +6480,7 @@
             // btnUnbundle_Search
             // 
             this.btnUnbundle_Search.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnUnbundle_Search.Location = new System.Drawing.Point(464, 74);
+            this.btnUnbundle_Search.Location = new System.Drawing.Point(464, 80);
             this.btnUnbundle_Search.Name = "btnUnbundle_Search";
             this.btnUnbundle_Search.Size = new System.Drawing.Size(70, 22);
             this.btnUnbundle_Search.TabIndex = 88;
@@ -6469,7 +6492,7 @@
             // 
             this.label34.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label34.AutoSize = true;
-            this.label34.Location = new System.Drawing.Point(191, 57);
+            this.label34.Location = new System.Drawing.Point(186, 60);
             this.label34.Name = "label34";
             this.label34.Size = new System.Drawing.Size(69, 13);
             this.label34.TabIndex = 86;
@@ -6478,7 +6501,7 @@
             // dropDownUnbundle_BCO
             // 
             this.dropDownUnbundle_BCO.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.dropDownUnbundle_BCO.Location = new System.Drawing.Point(194, 78);
+            this.dropDownUnbundle_BCO.Location = new System.Drawing.Point(189, 80);
             this.dropDownUnbundle_BCO.Name = "dropDownUnbundle_BCO";
             this.dropDownUnbundle_BCO.Size = new System.Drawing.Size(156, 20);
             this.dropDownUnbundle_BCO.TabIndex = 85;
@@ -6487,12 +6510,12 @@
             // 
             // dateTimeUnbunde_Date
             // 
-            this.dateTimeUnbunde_Date.Location = new System.Drawing.Point(15, 78);
+            this.dateTimeUnbunde_Date.Location = new System.Drawing.Point(10, 80);
             this.dateTimeUnbunde_Date.Name = "dateTimeUnbunde_Date";
-            this.dateTimeUnbunde_Date.Size = new System.Drawing.Size(171, 20);
+            this.dateTimeUnbunde_Date.Size = new System.Drawing.Size(170, 20);
             this.dateTimeUnbunde_Date.TabIndex = 83;
             this.dateTimeUnbunde_Date.TabStop = false;
-            this.dateTimeUnbunde_Date.Text = "Thursday, December 29, 2016";
+            this.dateTimeUnbunde_Date.Text = "Thursday, 29 December 2016";
             this.dateTimeUnbunde_Date.ThemeName = "Office2010Black";
             this.dateTimeUnbunde_Date.Value = new System.DateTime(2016, 12, 29, 16, 31, 36, 782);
             this.dateTimeUnbunde_Date.ValueChanged += new System.EventHandler(this.dateTimeUnbunde_Date_ValueChanged);
@@ -6501,7 +6524,7 @@
             // 
             this.label51.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label51.AutoSize = true;
-            this.label51.Location = new System.Drawing.Point(12, 57);
+            this.label51.Location = new System.Drawing.Point(10, 60);
             this.label51.Name = "label51";
             this.label51.Size = new System.Drawing.Size(34, 13);
             this.label51.TabIndex = 84;
@@ -6590,7 +6613,7 @@
             // 
             this.label129.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label129.AutoSize = true;
-            this.label129.Location = new System.Drawing.Point(368, 55);
+            this.label129.Location = new System.Drawing.Point(368, 60);
             this.label129.Name = "label129";
             this.label129.Size = new System.Drawing.Size(40, 13);
             this.label129.TabIndex = 97;
@@ -6600,7 +6623,7 @@
             // 
             this.label128.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label128.AutoSize = true;
-            this.label128.Location = new System.Drawing.Point(707, 55);
+            this.label128.Location = new System.Drawing.Point(707, 60);
             this.label128.Name = "label128";
             this.label128.Size = new System.Drawing.Size(93, 13);
             this.label128.TabIndex = 96;
@@ -6609,7 +6632,7 @@
             // cmbGT_Driver
             // 
             this.cmbGT_Driver.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmbGT_Driver.Location = new System.Drawing.Point(368, 77);
+            this.cmbGT_Driver.Location = new System.Drawing.Point(368, 80);
             this.cmbGT_Driver.Name = "cmbGT_Driver";
             this.cmbGT_Driver.Size = new System.Drawing.Size(94, 20);
             this.cmbGT_Driver.TabIndex = 95;
@@ -6618,7 +6641,7 @@
             // cmbGt_CommodityType
             // 
             this.cmbGt_CommodityType.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmbGt_CommodityType.Location = new System.Drawing.Point(709, 77);
+            this.cmbGt_CommodityType.Location = new System.Drawing.Point(709, 80);
             this.cmbGt_CommodityType.Name = "cmbGt_CommodityType";
             this.cmbGt_CommodityType.Size = new System.Drawing.Size(117, 20);
             this.cmbGt_CommodityType.TabIndex = 94;
@@ -6626,8 +6649,8 @@
             // 
             // btnGatewayTransmital_Print
             // 
-            this.btnGatewayTransmital_Print.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnGatewayTransmital_Print.Location = new System.Drawing.Point(1013, 76);
+            this.btnGatewayTransmital_Print.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.btnGatewayTransmital_Print.Location = new System.Drawing.Point(1013, 80);
             this.btnGatewayTransmital_Print.Name = "btnGatewayTransmital_Print";
             this.btnGatewayTransmital_Print.Size = new System.Drawing.Size(70, 22);
             this.btnGatewayTransmital_Print.TabIndex = 84;
@@ -6638,7 +6661,7 @@
             // dropDownGatewayTransmital_Destination
             // 
             this.dropDownGatewayTransmital_Destination.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.dropDownGatewayTransmital_Destination.Location = new System.Drawing.Point(191, 78);
+            this.dropDownGatewayTransmital_Destination.Location = new System.Drawing.Point(189, 80);
             this.dropDownGatewayTransmital_Destination.Name = "dropDownGatewayTransmital_Destination";
             this.dropDownGatewayTransmital_Destination.Size = new System.Drawing.Size(169, 20);
             this.dropDownGatewayTransmital_Destination.TabIndex = 93;
@@ -6650,7 +6673,7 @@
             // 
             this.label59.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label59.AutoSize = true;
-            this.label59.Location = new System.Drawing.Point(188, 57);
+            this.label59.Location = new System.Drawing.Point(186, 60);
             this.label59.Name = "label59";
             this.label59.Size = new System.Drawing.Size(96, 13);
             this.label59.TabIndex = 92;
@@ -6660,7 +6683,7 @@
             // 
             this.label58.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label58.AutoSize = true;
-            this.label58.Location = new System.Drawing.Point(589, 58);
+            this.label58.Location = new System.Drawing.Point(589, 60);
             this.label58.Name = "label58";
             this.label58.Size = new System.Drawing.Size(39, 13);
             this.label58.TabIndex = 91;
@@ -6668,7 +6691,7 @@
             // 
             // txtGatewayTransmital_MAWB
             // 
-            this.txtGatewayTransmital_MAWB.Location = new System.Drawing.Point(832, 78);
+            this.txtGatewayTransmital_MAWB.Location = new System.Drawing.Point(832, 80);
             this.txtGatewayTransmital_MAWB.Name = "txtGatewayTransmital_MAWB";
             this.txtGatewayTransmital_MAWB.Size = new System.Drawing.Size(100, 20);
             this.txtGatewayTransmital_MAWB.TabIndex = 90;
@@ -6677,7 +6700,7 @@
             // dropDownGatewayTransmital_Batch
             // 
             this.dropDownGatewayTransmital_Batch.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.dropDownGatewayTransmital_Batch.Location = new System.Drawing.Point(587, 78);
+            this.dropDownGatewayTransmital_Batch.Location = new System.Drawing.Point(587, 80);
             this.dropDownGatewayTransmital_Batch.Name = "dropDownGatewayTransmital_Batch";
             this.dropDownGatewayTransmital_Batch.Size = new System.Drawing.Size(117, 20);
             this.dropDownGatewayTransmital_Batch.TabIndex = 85;
@@ -6688,7 +6711,7 @@
             // 
             this.label55.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label55.AutoSize = true;
-            this.label55.Location = new System.Drawing.Point(834, 55);
+            this.label55.Location = new System.Drawing.Point(834, 60);
             this.label55.Name = "label55";
             this.label55.Size = new System.Drawing.Size(72, 13);
             this.label55.TabIndex = 84;
@@ -6697,7 +6720,7 @@
             // btnGatewayTransmital_Search
             // 
             this.btnGatewayTransmital_Search.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnGatewayTransmital_Search.Location = new System.Drawing.Point(937, 76);
+            this.btnGatewayTransmital_Search.Location = new System.Drawing.Point(937, 80);
             this.btnGatewayTransmital_Search.Name = "btnGatewayTransmital_Search";
             this.btnGatewayTransmital_Search.Size = new System.Drawing.Size(70, 22);
             this.btnGatewayTransmital_Search.TabIndex = 83;
@@ -6709,7 +6732,7 @@
             // 
             this.label35.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label35.AutoSize = true;
-            this.label35.Location = new System.Drawing.Point(467, 58);
+            this.label35.Location = new System.Drawing.Point(467, 60);
             this.label35.Name = "label35";
             this.label35.Size = new System.Drawing.Size(54, 13);
             this.label35.TabIndex = 81;
@@ -6718,7 +6741,7 @@
             // dropDownGatewayTransmital_Gateway
             // 
             this.dropDownGatewayTransmital_Gateway.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.dropDownGatewayTransmital_Gateway.Location = new System.Drawing.Point(470, 78);
+            this.dropDownGatewayTransmital_Gateway.Location = new System.Drawing.Point(470, 80);
             this.dropDownGatewayTransmital_Gateway.Name = "dropDownGatewayTransmital_Gateway";
             this.dropDownGatewayTransmital_Gateway.Size = new System.Drawing.Size(113, 20);
             this.dropDownGatewayTransmital_Gateway.TabIndex = 80;
@@ -6727,12 +6750,12 @@
             // 
             // dateTimeGatewayTransmital_Date
             // 
-            this.dateTimeGatewayTransmital_Date.Location = new System.Drawing.Point(12, 78);
+            this.dateTimeGatewayTransmital_Date.Location = new System.Drawing.Point(10, 80);
             this.dateTimeGatewayTransmital_Date.Name = "dateTimeGatewayTransmital_Date";
-            this.dateTimeGatewayTransmital_Date.Size = new System.Drawing.Size(171, 20);
+            this.dateTimeGatewayTransmital_Date.Size = new System.Drawing.Size(170, 20);
             this.dateTimeGatewayTransmital_Date.TabIndex = 78;
             this.dateTimeGatewayTransmital_Date.TabStop = false;
-            this.dateTimeGatewayTransmital_Date.Text = "Thursday, December 29, 2016";
+            this.dateTimeGatewayTransmital_Date.Text = "Thursday, 29 December 2016";
             this.dateTimeGatewayTransmital_Date.ThemeName = "Office2010Black";
             this.dateTimeGatewayTransmital_Date.Value = new System.DateTime(2016, 12, 29, 16, 31, 36, 782);
             this.dateTimeGatewayTransmital_Date.ValueChanged += new System.EventHandler(this.dateTimeGatewayTransmital_Date_ValueChanged);
@@ -6741,7 +6764,7 @@
             // 
             this.label54.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label54.AutoSize = true;
-            this.label54.Location = new System.Drawing.Point(9, 57);
+            this.label54.Location = new System.Drawing.Point(10, 60);
             this.label54.Name = "label54";
             this.label54.Size = new System.Drawing.Size(34, 13);
             this.label54.TabIndex = 79;
@@ -6829,7 +6852,7 @@
             // dropDownGatewayOutbound_Gateway
             // 
             this.dropDownGatewayOutbound_Gateway.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.dropDownGatewayOutbound_Gateway.Location = new System.Drawing.Point(450, 76);
+            this.dropDownGatewayOutbound_Gateway.Location = new System.Drawing.Point(450, 80);
             this.dropDownGatewayOutbound_Gateway.Name = "dropDownGatewayOutbound_Gateway";
             this.dropDownGatewayOutbound_Gateway.Size = new System.Drawing.Size(117, 20);
             this.dropDownGatewayOutbound_Gateway.TabIndex = 109;
@@ -6838,7 +6861,7 @@
             // dropDownGatewayOutbound_BCO
             // 
             this.dropDownGatewayOutbound_BCO.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.dropDownGatewayOutbound_BCO.Location = new System.Drawing.Point(191, 76);
+            this.dropDownGatewayOutbound_BCO.Location = new System.Drawing.Point(189, 80);
             this.dropDownGatewayOutbound_BCO.Name = "dropDownGatewayOutbound_BCO";
             this.dropDownGatewayOutbound_BCO.Size = new System.Drawing.Size(153, 20);
             this.dropDownGatewayOutbound_BCO.TabIndex = 108;
@@ -6846,7 +6869,7 @@
             // 
             // txtGO_mawb
             // 
-            this.txtGO_mawb.Location = new System.Drawing.Point(822, 76);
+            this.txtGO_mawb.Location = new System.Drawing.Point(822, 80);
             this.txtGO_mawb.Name = "txtGO_mawb";
             this.txtGO_mawb.Size = new System.Drawing.Size(100, 20);
             this.txtGO_mawb.TabIndex = 107;
@@ -6855,7 +6878,7 @@
             // 
             this.label132.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label132.AutoSize = true;
-            this.label132.Location = new System.Drawing.Point(819, 53);
+            this.label132.Location = new System.Drawing.Point(819, 60);
             this.label132.Name = "label132";
             this.label132.Size = new System.Drawing.Size(72, 13);
             this.label132.TabIndex = 106;
@@ -6865,7 +6888,7 @@
             // 
             this.label130.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label130.AutoSize = true;
-            this.label130.Location = new System.Drawing.Point(350, 56);
+            this.label130.Location = new System.Drawing.Point(350, 60);
             this.label130.Name = "label130";
             this.label130.Size = new System.Drawing.Size(40, 13);
             this.label130.TabIndex = 105;
@@ -6875,7 +6898,7 @@
             // 
             this.label131.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label131.AutoSize = true;
-            this.label131.Location = new System.Drawing.Point(695, 53);
+            this.label131.Location = new System.Drawing.Point(695, 60);
             this.label131.Name = "label131";
             this.label131.Size = new System.Drawing.Size(93, 13);
             this.label131.TabIndex = 104;
@@ -6884,7 +6907,7 @@
             // cmbGO_Driver
             // 
             this.cmbGO_Driver.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmbGO_Driver.Location = new System.Drawing.Point(350, 77);
+            this.cmbGO_Driver.Location = new System.Drawing.Point(350, 80);
             this.cmbGO_Driver.Name = "cmbGO_Driver";
             this.cmbGO_Driver.Size = new System.Drawing.Size(94, 20);
             this.cmbGO_Driver.TabIndex = 103;
@@ -6893,7 +6916,7 @@
             // cmbGO_commoditType
             // 
             this.cmbGO_commoditType.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmbGO_commoditType.Location = new System.Drawing.Point(698, 75);
+            this.cmbGO_commoditType.Location = new System.Drawing.Point(698, 80);
             this.cmbGO_commoditType.Name = "cmbGO_commoditType";
             this.cmbGO_commoditType.Size = new System.Drawing.Size(117, 20);
             this.cmbGO_commoditType.TabIndex = 102;
@@ -6901,8 +6924,8 @@
             // 
             // btnGatewayOutbound_Print
             // 
-            this.btnGatewayOutbound_Print.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnGatewayOutbound_Print.Location = new System.Drawing.Point(1013, 75);
+            this.btnGatewayOutbound_Print.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.btnGatewayOutbound_Print.Location = new System.Drawing.Point(1004, 80);
             this.btnGatewayOutbound_Print.Name = "btnGatewayOutbound_Print";
             this.btnGatewayOutbound_Print.Size = new System.Drawing.Size(70, 22);
             this.btnGatewayOutbound_Print.TabIndex = 101;
@@ -6913,7 +6936,7 @@
             // btnGatewayOutbound_Search
             // 
             this.btnGatewayOutbound_Search.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnGatewayOutbound_Search.Location = new System.Drawing.Point(928, 77);
+            this.btnGatewayOutbound_Search.Location = new System.Drawing.Point(928, 80);
             this.btnGatewayOutbound_Search.Name = "btnGatewayOutbound_Search";
             this.btnGatewayOutbound_Search.Size = new System.Drawing.Size(70, 22);
             this.btnGatewayOutbound_Search.TabIndex = 100;
@@ -6925,7 +6948,7 @@
             // 
             this.label78.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label78.AutoSize = true;
-            this.label78.Location = new System.Drawing.Point(570, 56);
+            this.label78.Location = new System.Drawing.Point(570, 60);
             this.label78.Name = "label78";
             this.label78.Size = new System.Drawing.Size(39, 13);
             this.label78.TabIndex = 95;
@@ -6934,7 +6957,7 @@
             // dropDownGatewayOutbound_Batch
             // 
             this.dropDownGatewayOutbound_Batch.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.dropDownGatewayOutbound_Batch.Location = new System.Drawing.Point(573, 76);
+            this.dropDownGatewayOutbound_Batch.Location = new System.Drawing.Point(573, 80);
             this.dropDownGatewayOutbound_Batch.Name = "dropDownGatewayOutbound_Batch";
             this.dropDownGatewayOutbound_Batch.Size = new System.Drawing.Size(117, 20);
             this.dropDownGatewayOutbound_Batch.TabIndex = 94;
@@ -6945,7 +6968,7 @@
             // 
             this.label79.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label79.AutoSize = true;
-            this.label79.Location = new System.Drawing.Point(188, 57);
+            this.label79.Location = new System.Drawing.Point(186, 60);
             this.label79.Name = "label79";
             this.label79.Size = new System.Drawing.Size(96, 13);
             this.label79.TabIndex = 92;
@@ -6955,7 +6978,7 @@
             // 
             this.label60.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label60.AutoSize = true;
-            this.label60.Location = new System.Drawing.Point(447, 57);
+            this.label60.Location = new System.Drawing.Point(447, 60);
             this.label60.Name = "label60";
             this.label60.Size = new System.Drawing.Size(54, 13);
             this.label60.TabIndex = 85;
@@ -6963,12 +6986,12 @@
             // 
             // dateTimeGatewayOutbound_Date
             // 
-            this.dateTimeGatewayOutbound_Date.Location = new System.Drawing.Point(14, 77);
+            this.dateTimeGatewayOutbound_Date.Location = new System.Drawing.Point(10, 80);
             this.dateTimeGatewayOutbound_Date.Name = "dateTimeGatewayOutbound_Date";
-            this.dateTimeGatewayOutbound_Date.Size = new System.Drawing.Size(171, 20);
+            this.dateTimeGatewayOutbound_Date.Size = new System.Drawing.Size(170, 20);
             this.dateTimeGatewayOutbound_Date.TabIndex = 82;
             this.dateTimeGatewayOutbound_Date.TabStop = false;
-            this.dateTimeGatewayOutbound_Date.Text = "Thursday, December 29, 2016";
+            this.dateTimeGatewayOutbound_Date.Text = "Thursday, 29 December 2016";
             this.dateTimeGatewayOutbound_Date.ThemeName = "Office2010Black";
             this.dateTimeGatewayOutbound_Date.Value = new System.DateTime(2016, 12, 29, 16, 31, 36, 782);
             this.dateTimeGatewayOutbound_Date.ValueChanged += new System.EventHandler(this.dateTimeGatewayOutbound_Date_ValueChanged);
@@ -6977,7 +7000,7 @@
             // 
             this.label61.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label61.AutoSize = true;
-            this.label61.Location = new System.Drawing.Point(11, 57);
+            this.label61.Location = new System.Drawing.Point(10, 60);
             this.label61.Name = "label61";
             this.label61.Size = new System.Drawing.Size(34, 13);
             this.label61.TabIndex = 83;
@@ -7063,7 +7086,7 @@
             // cmbGI_FlightNo
             // 
             this.cmbGI_FlightNo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmbGI_FlightNo.Location = new System.Drawing.Point(627, 75);
+            this.cmbGI_FlightNo.Location = new System.Drawing.Point(627, 80);
             this.cmbGI_FlightNo.Name = "cmbGI_FlightNo";
             this.cmbGI_FlightNo.Size = new System.Drawing.Size(119, 20);
             this.cmbGI_FlightNo.TabIndex = 108;
@@ -7073,7 +7096,7 @@
             // 
             this.label142.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label142.AutoSize = true;
-            this.label142.Location = new System.Drawing.Point(624, 55);
+            this.label142.Location = new System.Drawing.Point(624, 60);
             this.label142.Name = "label142";
             this.label142.Size = new System.Drawing.Size(84, 13);
             this.label142.TabIndex = 107;
@@ -7081,8 +7104,8 @@
             // 
             // btnGatewayInbound_Print
             // 
-            this.btnGatewayInbound_Print.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnGatewayInbound_Print.Location = new System.Drawing.Point(974, 73);
+            this.btnGatewayInbound_Print.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.btnGatewayInbound_Print.Location = new System.Drawing.Point(992, 80);
             this.btnGatewayInbound_Print.Name = "btnGatewayInbound_Print";
             this.btnGatewayInbound_Print.Size = new System.Drawing.Size(70, 22);
             this.btnGatewayInbound_Print.TabIndex = 105;
@@ -7092,7 +7115,7 @@
             // 
             // txtBoxGatewayInbound_MasterAWB
             // 
-            this.txtBoxGatewayInbound_MasterAWB.Location = new System.Drawing.Point(752, 75);
+            this.txtBoxGatewayInbound_MasterAWB.Location = new System.Drawing.Point(752, 80);
             this.txtBoxGatewayInbound_MasterAWB.Name = "txtBoxGatewayInbound_MasterAWB";
             this.txtBoxGatewayInbound_MasterAWB.Size = new System.Drawing.Size(100, 20);
             this.txtBoxGatewayInbound_MasterAWB.TabIndex = 106;
@@ -7102,7 +7125,7 @@
             // 
             this.label93.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label93.AutoSize = true;
-            this.label93.Location = new System.Drawing.Point(749, 55);
+            this.label93.Location = new System.Drawing.Point(749, 60);
             this.label93.Name = "label93";
             this.label93.Size = new System.Drawing.Size(72, 13);
             this.label93.TabIndex = 105;
@@ -7111,7 +7134,7 @@
             // btnGatewayInbound_Search
             // 
             this.btnGatewayInbound_Search.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnGatewayInbound_Search.Location = new System.Drawing.Point(857, 73);
+            this.btnGatewayInbound_Search.Location = new System.Drawing.Point(857, 80);
             this.btnGatewayInbound_Search.Name = "btnGatewayInbound_Search";
             this.btnGatewayInbound_Search.Size = new System.Drawing.Size(70, 22);
             this.btnGatewayInbound_Search.TabIndex = 104;
@@ -7122,7 +7145,7 @@
             // dropDownGatewayInbound_Commodity
             // 
             this.dropDownGatewayInbound_Commodity.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.dropDownGatewayInbound_Commodity.Location = new System.Drawing.Point(476, 75);
+            this.dropDownGatewayInbound_Commodity.Location = new System.Drawing.Point(476, 80);
             this.dropDownGatewayInbound_Commodity.Name = "dropDownGatewayInbound_Commodity";
             this.dropDownGatewayInbound_Commodity.Size = new System.Drawing.Size(148, 20);
             this.dropDownGatewayInbound_Commodity.TabIndex = 103;
@@ -7133,7 +7156,7 @@
             // 
             this.label92.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label92.AutoSize = true;
-            this.label92.Location = new System.Drawing.Point(473, 55);
+            this.label92.Location = new System.Drawing.Point(473, 60);
             this.label92.Name = "label92";
             this.label92.Size = new System.Drawing.Size(93, 13);
             this.label92.TabIndex = 102;
@@ -7143,7 +7166,7 @@
             // 
             this.label89.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label89.AutoSize = true;
-            this.label89.Location = new System.Drawing.Point(313, 55);
+            this.label89.Location = new System.Drawing.Point(313, 60);
             this.label89.Name = "label89";
             this.label89.Size = new System.Drawing.Size(69, 13);
             this.label89.TabIndex = 101;
@@ -7152,7 +7175,7 @@
             // dropDownGatewayInbound_Origin
             // 
             this.dropDownGatewayInbound_Origin.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.dropDownGatewayInbound_Origin.Location = new System.Drawing.Point(316, 75);
+            this.dropDownGatewayInbound_Origin.Location = new System.Drawing.Point(316, 80);
             this.dropDownGatewayInbound_Origin.Name = "dropDownGatewayInbound_Origin";
             this.dropDownGatewayInbound_Origin.Size = new System.Drawing.Size(154, 20);
             this.dropDownGatewayInbound_Origin.TabIndex = 100;
@@ -7163,7 +7186,7 @@
             // 
             this.label85.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label85.AutoSize = true;
-            this.label85.Location = new System.Drawing.Point(187, 55);
+            this.label85.Location = new System.Drawing.Point(186, 60);
             this.label85.Name = "label85";
             this.label85.Size = new System.Drawing.Size(54, 13);
             this.label85.TabIndex = 97;
@@ -7172,7 +7195,7 @@
             // dropDownGatewayInbound_Gateway
             // 
             this.dropDownGatewayInbound_Gateway.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.dropDownGatewayInbound_Gateway.Location = new System.Drawing.Point(190, 75);
+            this.dropDownGatewayInbound_Gateway.Location = new System.Drawing.Point(189, 80);
             this.dropDownGatewayInbound_Gateway.Name = "dropDownGatewayInbound_Gateway";
             this.dropDownGatewayInbound_Gateway.Size = new System.Drawing.Size(120, 20);
             this.dropDownGatewayInbound_Gateway.TabIndex = 96;
@@ -7181,12 +7204,12 @@
             // 
             // dateTimePickerGatewayInbound_Date
             // 
-            this.dateTimePickerGatewayInbound_Date.Location = new System.Drawing.Point(11, 75);
+            this.dateTimePickerGatewayInbound_Date.Location = new System.Drawing.Point(10, 80);
             this.dateTimePickerGatewayInbound_Date.Name = "dateTimePickerGatewayInbound_Date";
-            this.dateTimePickerGatewayInbound_Date.Size = new System.Drawing.Size(171, 20);
+            this.dateTimePickerGatewayInbound_Date.Size = new System.Drawing.Size(170, 20);
             this.dateTimePickerGatewayInbound_Date.TabIndex = 94;
             this.dateTimePickerGatewayInbound_Date.TabStop = false;
-            this.dateTimePickerGatewayInbound_Date.Text = "Thursday, December 29, 2016";
+            this.dateTimePickerGatewayInbound_Date.Text = "Thursday, 29 December 2016";
             this.dateTimePickerGatewayInbound_Date.ThemeName = "Office2010Black";
             this.dateTimePickerGatewayInbound_Date.Value = new System.DateTime(2016, 12, 29, 16, 31, 36, 782);
             this.dateTimePickerGatewayInbound_Date.ValueChanged += new System.EventHandler(this.dateTimePickerGatewayInbound_Date_ValueChanged);
@@ -7195,7 +7218,7 @@
             // 
             this.label88.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label88.AutoSize = true;
-            this.label88.Location = new System.Drawing.Point(8, 55);
+            this.label88.Location = new System.Drawing.Point(10, 60);
             this.label88.Name = "label88";
             this.label88.Size = new System.Drawing.Size(34, 13);
             this.label88.TabIndex = 95;
@@ -7290,7 +7313,7 @@
             // 
             // cmbCT_Batch
             // 
-            this.cmbCT_Batch.Location = new System.Drawing.Point(732, 76);
+            this.cmbCT_Batch.Location = new System.Drawing.Point(732, 80);
             this.cmbCT_Batch.Name = "cmbCT_Batch";
             this.cmbCT_Batch.Size = new System.Drawing.Size(115, 20);
             this.cmbCT_Batch.TabIndex = 100;
@@ -7308,7 +7331,7 @@
             // 
             // cmbCT_PlateNo
             // 
-            this.cmbCT_PlateNo.Location = new System.Drawing.Point(614, 76);
+            this.cmbCT_PlateNo.Location = new System.Drawing.Point(614, 80);
             this.cmbCT_PlateNo.Name = "cmbCT_PlateNo";
             this.cmbCT_PlateNo.Size = new System.Drawing.Size(115, 20);
             this.cmbCT_PlateNo.TabIndex = 98;
@@ -7326,7 +7349,7 @@
             // 
             // cmbCT_RevenueUnit
             // 
-            this.cmbCT_RevenueUnit.Location = new System.Drawing.Point(493, 77);
+            this.cmbCT_RevenueUnit.Location = new System.Drawing.Point(493, 80);
             this.cmbCT_RevenueUnit.Name = "cmbCT_RevenueUnit";
             this.cmbCT_RevenueUnit.Size = new System.Drawing.Size(115, 20);
             this.cmbCT_RevenueUnit.TabIndex = 96;
@@ -7344,7 +7367,7 @@
             // 
             // cmbCT_RevenueType
             // 
-            this.cmbCT_RevenueType.Location = new System.Drawing.Point(344, 77);
+            this.cmbCT_RevenueType.Location = new System.Drawing.Point(344, 80);
             this.cmbCT_RevenueType.Name = "cmbCT_RevenueType";
             this.cmbCT_RevenueType.Size = new System.Drawing.Size(143, 20);
             this.cmbCT_RevenueType.TabIndex = 94;
@@ -7363,7 +7386,7 @@
             // 
             // cmbCT_BCO
             // 
-            this.cmbCT_BCO.Location = new System.Drawing.Point(193, 77);
+            this.cmbCT_BCO.Location = new System.Drawing.Point(189, 80);
             this.cmbCT_BCO.Name = "cmbCT_BCO";
             this.cmbCT_BCO.Size = new System.Drawing.Size(143, 20);
             this.cmbCT_BCO.TabIndex = 92;
@@ -7372,8 +7395,8 @@
             // 
             // btnCargoTransfer_Print
             // 
-            this.btnCargoTransfer_Print.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnCargoTransfer_Print.Location = new System.Drawing.Point(1001, 77);
+            this.btnCargoTransfer_Print.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.btnCargoTransfer_Print.Location = new System.Drawing.Point(992, 80);
             this.btnCargoTransfer_Print.Name = "btnCargoTransfer_Print";
             this.btnCargoTransfer_Print.Size = new System.Drawing.Size(70, 22);
             this.btnCargoTransfer_Print.TabIndex = 91;
@@ -7384,7 +7407,7 @@
             // btnCargoTransfer_Search
             // 
             this.btnCargoTransfer_Search.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnCargoTransfer_Search.Location = new System.Drawing.Point(853, 74);
+            this.btnCargoTransfer_Search.Location = new System.Drawing.Point(853, 80);
             this.btnCargoTransfer_Search.Name = "btnCargoTransfer_Search";
             this.btnCargoTransfer_Search.Size = new System.Drawing.Size(70, 22);
             this.btnCargoTransfer_Search.TabIndex = 87;
@@ -7394,12 +7417,12 @@
             // 
             // dateTimeCargoTransfer_Date
             // 
-            this.dateTimeCargoTransfer_Date.Location = new System.Drawing.Point(13, 76);
+            this.dateTimeCargoTransfer_Date.Location = new System.Drawing.Point(10, 80);
             this.dateTimeCargoTransfer_Date.Name = "dateTimeCargoTransfer_Date";
-            this.dateTimeCargoTransfer_Date.Size = new System.Drawing.Size(168, 20);
+            this.dateTimeCargoTransfer_Date.Size = new System.Drawing.Size(170, 20);
             this.dateTimeCargoTransfer_Date.TabIndex = 83;
             this.dateTimeCargoTransfer_Date.TabStop = false;
-            this.dateTimeCargoTransfer_Date.Text = "Thursday, December 29, 2016";
+            this.dateTimeCargoTransfer_Date.Text = "Thursday, 29 December 2016";
             this.dateTimeCargoTransfer_Date.ThemeName = "Office2010Black";
             this.dateTimeCargoTransfer_Date.Value = new System.DateTime(2016, 12, 29, 16, 31, 36, 782);
             this.dateTimeCargoTransfer_Date.ValueChanged += new System.EventHandler(this.dateTimeCargoTransfer_Date_ValueChanged);
@@ -7492,7 +7515,7 @@
             // dropDownSegregation_PlateNo
             // 
             this.dropDownSegregation_PlateNo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.dropDownSegregation_PlateNo.Location = new System.Drawing.Point(475, 76);
+            this.dropDownSegregation_PlateNo.Location = new System.Drawing.Point(472, 80);
             this.dropDownSegregation_PlateNo.Name = "dropDownSegregation_PlateNo";
             this.dropDownSegregation_PlateNo.Size = new System.Drawing.Size(109, 20);
             this.dropDownSegregation_PlateNo.TabIndex = 114;
@@ -7502,7 +7525,7 @@
             // dropDownSegregation_Driver
             // 
             this.dropDownSegregation_Driver.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.dropDownSegregation_Driver.Location = new System.Drawing.Point(350, 77);
+            this.dropDownSegregation_Driver.Location = new System.Drawing.Point(353, 80);
             this.dropDownSegregation_Driver.Name = "dropDownSegregation_Driver";
             this.dropDownSegregation_Driver.Size = new System.Drawing.Size(109, 20);
             this.dropDownSegregation_Driver.TabIndex = 113;
@@ -7511,8 +7534,8 @@
             // 
             // btnSegregation_Print
             // 
-            this.btnSegregation_Print.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnSegregation_Print.Location = new System.Drawing.Point(989, 75);
+            this.btnSegregation_Print.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.btnSegregation_Print.Location = new System.Drawing.Point(992, 80);
             this.btnSegregation_Print.Name = "btnSegregation_Print";
             this.btnSegregation_Print.Size = new System.Drawing.Size(70, 22);
             this.btnSegregation_Print.TabIndex = 112;
@@ -7524,7 +7547,7 @@
             // 
             this.label83.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label83.AutoSize = true;
-            this.label83.Location = new System.Drawing.Point(475, 56);
+            this.label83.Location = new System.Drawing.Point(472, 56);
             this.label83.Name = "label83";
             this.label83.Size = new System.Drawing.Size(45, 13);
             this.label83.TabIndex = 111;
@@ -7533,7 +7556,7 @@
             // btnSegregation_Search
             // 
             this.btnSegregation_Search.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnSegregation_Search.Location = new System.Drawing.Point(732, 74);
+            this.btnSegregation_Search.Location = new System.Drawing.Point(719, 80);
             this.btnSegregation_Search.Name = "btnSegregation_Search";
             this.btnSegregation_Search.Size = new System.Drawing.Size(70, 22);
             this.btnSegregation_Search.TabIndex = 109;
@@ -7545,7 +7568,7 @@
             // 
             this.label36.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label36.AutoSize = true;
-            this.label36.Location = new System.Drawing.Point(606, 56);
+            this.label36.Location = new System.Drawing.Point(589, 56);
             this.label36.Name = "label36";
             this.label36.Size = new System.Drawing.Size(39, 13);
             this.label36.TabIndex = 108;
@@ -7554,7 +7577,7 @@
             // dropDownSegregation_BCO
             // 
             this.dropDownSegregation_BCO.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.dropDownSegregation_BCO.Location = new System.Drawing.Point(189, 76);
+            this.dropDownSegregation_BCO.Location = new System.Drawing.Point(189, 80);
             this.dropDownSegregation_BCO.Name = "dropDownSegregation_BCO";
             this.dropDownSegregation_BCO.Size = new System.Drawing.Size(155, 20);
             this.dropDownSegregation_BCO.TabIndex = 106;
@@ -7564,7 +7587,7 @@
             // dropDownSegregation_Batch
             // 
             this.dropDownSegregation_Batch.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.dropDownSegregation_Batch.Location = new System.Drawing.Point(609, 76);
+            this.dropDownSegregation_Batch.Location = new System.Drawing.Point(592, 80);
             this.dropDownSegregation_Batch.Name = "dropDownSegregation_Batch";
             this.dropDownSegregation_Batch.Size = new System.Drawing.Size(117, 20);
             this.dropDownSegregation_Batch.TabIndex = 107;
@@ -7585,7 +7608,7 @@
             // 
             this.label57.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label57.AutoSize = true;
-            this.label57.Location = new System.Drawing.Point(347, 56);
+            this.label57.Location = new System.Drawing.Point(350, 56);
             this.label57.Name = "label57";
             this.label57.Size = new System.Drawing.Size(37, 13);
             this.label57.TabIndex = 104;
@@ -7593,12 +7616,12 @@
             // 
             // dateTimeSegregation_Date
             // 
-            this.dateTimeSegregation_Date.Location = new System.Drawing.Point(12, 76);
+            this.dateTimeSegregation_Date.Location = new System.Drawing.Point(10, 80);
             this.dateTimeSegregation_Date.Name = "dateTimeSegregation_Date";
-            this.dateTimeSegregation_Date.Size = new System.Drawing.Size(171, 20);
+            this.dateTimeSegregation_Date.Size = new System.Drawing.Size(170, 20);
             this.dateTimeSegregation_Date.TabIndex = 101;
             this.dateTimeSegregation_Date.TabStop = false;
-            this.dateTimeSegregation_Date.Text = "Thursday, December 29, 2016";
+            this.dateTimeSegregation_Date.Text = "Thursday, 29 December 2016";
             this.dateTimeSegregation_Date.ThemeName = "Office2010Black";
             this.dateTimeSegregation_Date.Value = new System.DateTime(2016, 12, 29, 16, 31, 36, 782);
             this.dateTimeSegregation_Date.ValueChanged += new System.EventHandler(this.dateTimeSegregation_Date_ValueChanged);
@@ -7607,7 +7630,7 @@
             // 
             this.label80.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label80.AutoSize = true;
-            this.label80.Location = new System.Drawing.Point(9, 56);
+            this.label80.Location = new System.Drawing.Point(10, 60);
             this.label80.Name = "label80";
             this.label80.Size = new System.Drawing.Size(34, 13);
             this.label80.TabIndex = 102;
@@ -7689,7 +7712,7 @@
             // cmbDTR_Batch
             // 
             this.cmbDTR_Batch.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmbDTR_Batch.Location = new System.Drawing.Point(356, 76);
+            this.cmbDTR_Batch.Location = new System.Drawing.Point(356, 80);
             this.cmbDTR_Batch.Name = "cmbDTR_Batch";
             this.cmbDTR_Batch.Size = new System.Drawing.Size(153, 20);
             this.cmbDTR_Batch.TabIndex = 97;
@@ -7699,7 +7722,7 @@
             // 
             this.label143.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label143.AutoSize = true;
-            this.label143.Location = new System.Drawing.Point(353, 56);
+            this.label143.Location = new System.Drawing.Point(353, 60);
             this.label143.Name = "label143";
             this.label143.Size = new System.Drawing.Size(39, 13);
             this.label143.TabIndex = 96;
@@ -7708,7 +7731,7 @@
             // btnDailyTrip_Print
             // 
             this.btnDailyTrip_Print.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnDailyTrip_Print.Location = new System.Drawing.Point(998, 74);
+            this.btnDailyTrip_Print.Location = new System.Drawing.Point(992, 80);
             this.btnDailyTrip_Print.Name = "btnDailyTrip_Print";
             this.btnDailyTrip_Print.Size = new System.Drawing.Size(70, 22);
             this.btnDailyTrip_Print.TabIndex = 94;
@@ -7719,7 +7742,7 @@
             // dropDownDailyTrip_PaymentMode
             // 
             this.dropDownDailyTrip_PaymentMode.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.dropDownDailyTrip_PaymentMode.Location = new System.Drawing.Point(518, 76);
+            this.dropDownDailyTrip_PaymentMode.Location = new System.Drawing.Point(518, 80);
             this.dropDownDailyTrip_PaymentMode.Name = "dropDownDailyTrip_PaymentMode";
             this.dropDownDailyTrip_PaymentMode.Size = new System.Drawing.Size(153, 20);
             this.dropDownDailyTrip_PaymentMode.TabIndex = 95;
@@ -7730,7 +7753,7 @@
             // 
             this.label124.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label124.AutoSize = true;
-            this.label124.Location = new System.Drawing.Point(515, 56);
+            this.label124.Location = new System.Drawing.Point(515, 60);
             this.label124.Name = "label124";
             this.label124.Size = new System.Drawing.Size(86, 13);
             this.label124.TabIndex = 94;
@@ -7739,7 +7762,7 @@
             // btnDailyTrip_Search
             // 
             this.btnDailyTrip_Search.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnDailyTrip_Search.Location = new System.Drawing.Point(677, 74);
+            this.btnDailyTrip_Search.Location = new System.Drawing.Point(677, 80);
             this.btnDailyTrip_Search.Name = "btnDailyTrip_Search";
             this.btnDailyTrip_Search.Size = new System.Drawing.Size(70, 22);
             this.btnDailyTrip_Search.TabIndex = 93;
@@ -7749,12 +7772,12 @@
             // 
             // dateTimeDailyTrip_Date
             // 
-            this.dateTimeDailyTrip_Date.Location = new System.Drawing.Point(11, 76);
+            this.dateTimeDailyTrip_Date.Location = new System.Drawing.Point(10, 80);
             this.dateTimeDailyTrip_Date.Name = "dateTimeDailyTrip_Date";
-            this.dateTimeDailyTrip_Date.Size = new System.Drawing.Size(171, 20);
+            this.dateTimeDailyTrip_Date.Size = new System.Drawing.Size(170, 20);
             this.dateTimeDailyTrip_Date.TabIndex = 89;
             this.dateTimeDailyTrip_Date.TabStop = false;
-            this.dateTimeDailyTrip_Date.Text = "Thursday, December 29, 2016";
+            this.dateTimeDailyTrip_Date.Text = "Thursday, 29 December 2016";
             this.dateTimeDailyTrip_Date.ThemeName = "Office2010Black";
             this.dateTimeDailyTrip_Date.Value = new System.DateTime(2016, 12, 29, 16, 31, 36, 782);
             this.dateTimeDailyTrip_Date.ValueChanged += new System.EventHandler(this.dateTimeDailyTrip_Date_ValueChanged);
@@ -7763,7 +7786,7 @@
             // 
             this.label109.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label109.AutoSize = true;
-            this.label109.Location = new System.Drawing.Point(8, 56);
+            this.label109.Location = new System.Drawing.Point(10, 60);
             this.label109.Name = "label109";
             this.label109.Size = new System.Drawing.Size(34, 13);
             this.label109.TabIndex = 90;
@@ -7772,7 +7795,7 @@
             // dropDownDailyTrip_Area
             // 
             this.dropDownDailyTrip_Area.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.dropDownDailyTrip_Area.Location = new System.Drawing.Point(195, 76);
+            this.dropDownDailyTrip_Area.Location = new System.Drawing.Point(190, 80);
             this.dropDownDailyTrip_Area.Name = "dropDownDailyTrip_Area";
             this.dropDownDailyTrip_Area.Size = new System.Drawing.Size(153, 20);
             this.dropDownDailyTrip_Area.TabIndex = 88;
@@ -7783,7 +7806,7 @@
             // 
             this.label123.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label123.AutoSize = true;
-            this.label123.Location = new System.Drawing.Point(192, 56);
+            this.label123.Location = new System.Drawing.Point(187, 60);
             this.label123.Name = "label123";
             this.label123.Size = new System.Drawing.Size(33, 13);
             this.label123.TabIndex = 85;
@@ -7868,7 +7891,7 @@
             // 
             // cmbHC_Reason
             // 
-            this.cmbHC_Reason.Location = new System.Drawing.Point(808, 76);
+            this.cmbHC_Reason.Location = new System.Drawing.Point(808, 80);
             this.cmbHC_Reason.Name = "cmbHC_Reason";
             this.cmbHC_Reason.Size = new System.Drawing.Size(116, 20);
             this.cmbHC_Reason.TabIndex = 95;
@@ -7878,7 +7901,7 @@
             // 
             this.label146.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label146.AutoSize = true;
-            this.label146.Location = new System.Drawing.Point(805, 55);
+            this.label146.Location = new System.Drawing.Point(805, 60);
             this.label146.Name = "label146";
             this.label146.Size = new System.Drawing.Size(48, 13);
             this.label146.TabIndex = 94;
@@ -7888,7 +7911,7 @@
             // 
             this.label144.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label144.AutoSize = true;
-            this.label144.Location = new System.Drawing.Point(528, 55);
+            this.label144.Location = new System.Drawing.Point(528, 60);
             this.label144.Name = "label144";
             this.label144.Size = new System.Drawing.Size(79, 13);
             this.label144.TabIndex = 93;
@@ -7898,7 +7921,7 @@
             // 
             this.label145.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label145.AutoSize = true;
-            this.label145.Location = new System.Drawing.Point(377, 55);
+            this.label145.Location = new System.Drawing.Point(377, 60);
             this.label145.Name = "label145";
             this.label145.Size = new System.Drawing.Size(79, 13);
             this.label145.TabIndex = 92;
@@ -7920,7 +7943,7 @@
             // 
             // cmbHC_RevenueUnit
             // 
-            this.cmbHC_RevenueUnit.Location = new System.Drawing.Point(531, 76);
+            this.cmbHC_RevenueUnit.Location = new System.Drawing.Point(531, 80);
             this.cmbHC_RevenueUnit.Name = "cmbHC_RevenueUnit";
             this.cmbHC_RevenueUnit.Size = new System.Drawing.Size(151, 20);
             this.cmbHC_RevenueUnit.TabIndex = 90;
@@ -7928,8 +7951,8 @@
             // 
             // btnHoldCargo_Export
             // 
-            this.btnHoldCargo_Export.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnHoldCargo_Export.Location = new System.Drawing.Point(1013, 76);
+            this.btnHoldCargo_Export.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.btnHoldCargo_Export.Location = new System.Drawing.Point(1013, 80);
             this.btnHoldCargo_Export.Name = "btnHoldCargo_Export";
             this.btnHoldCargo_Export.Size = new System.Drawing.Size(70, 22);
             this.btnHoldCargo_Export.TabIndex = 88;
@@ -7949,12 +7972,12 @@
             // 
             // dateTimeHoldCargo_ToDate
             // 
-            this.dateTimeHoldCargo_ToDate.Location = new System.Drawing.Point(201, 76);
+            this.dateTimeHoldCargo_ToDate.Location = new System.Drawing.Point(200, 80);
             this.dateTimeHoldCargo_ToDate.Name = "dateTimeHoldCargo_ToDate";
             this.dateTimeHoldCargo_ToDate.Size = new System.Drawing.Size(169, 20);
             this.dateTimeHoldCargo_ToDate.TabIndex = 84;
             this.dateTimeHoldCargo_ToDate.TabStop = false;
-            this.dateTimeHoldCargo_ToDate.Text = "Thursday, December 29, 2016";
+            this.dateTimeHoldCargo_ToDate.Text = "Thursday, 29 December 2016";
             this.dateTimeHoldCargo_ToDate.ThemeName = "Office2010Black";
             this.dateTimeHoldCargo_ToDate.Value = new System.DateTime(2016, 12, 29, 16, 31, 36, 782);
             this.dateTimeHoldCargo_ToDate.ValueChanged += new System.EventHandler(this.dateTimeHoldCargo_ToDate_ValueChanged);
@@ -7962,7 +7985,7 @@
             // btnHoldCargo_Search
             // 
             this.btnHoldCargo_Search.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnHoldCargo_Search.Location = new System.Drawing.Point(937, 75);
+            this.btnHoldCargo_Search.Location = new System.Drawing.Point(937, 80);
             this.btnHoldCargo_Search.Name = "btnHoldCargo_Search";
             this.btnHoldCargo_Search.Size = new System.Drawing.Size(70, 22);
             this.btnHoldCargo_Search.TabIndex = 87;
@@ -7972,12 +7995,12 @@
             // 
             // dateTimeHoldCargo_FromDate
             // 
-            this.dateTimeHoldCargo_FromDate.Location = new System.Drawing.Point(14, 78);
+            this.dateTimeHoldCargo_FromDate.Location = new System.Drawing.Point(10, 80);
             this.dateTimeHoldCargo_FromDate.Name = "dateTimeHoldCargo_FromDate";
-            this.dateTimeHoldCargo_FromDate.Size = new System.Drawing.Size(169, 20);
+            this.dateTimeHoldCargo_FromDate.Size = new System.Drawing.Size(170, 20);
             this.dateTimeHoldCargo_FromDate.TabIndex = 83;
             this.dateTimeHoldCargo_FromDate.TabStop = false;
-            this.dateTimeHoldCargo_FromDate.Text = "Thursday, December 29, 2016";
+            this.dateTimeHoldCargo_FromDate.Text = "Thursday, 29 December 2016";
             this.dateTimeHoldCargo_FromDate.ThemeName = "Office2010Black";
             this.dateTimeHoldCargo_FromDate.Value = new System.DateTime(2016, 12, 29, 16, 31, 36, 782);
             this.dateTimeHoldCargo_FromDate.ValueChanged += new System.EventHandler(this.dateTimeHoldCargo_FromDate_ValueChanged);
@@ -7986,7 +8009,7 @@
             // 
             this.label40.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label40.AutoSize = true;
-            this.label40.Location = new System.Drawing.Point(11, 57);
+            this.label40.Location = new System.Drawing.Point(10, 60);
             this.label40.Name = "label40";
             this.label40.Size = new System.Drawing.Size(34, 13);
             this.label40.TabIndex = 84;
@@ -7994,7 +8017,7 @@
             // 
             // dropDownHoldCargo_Status
             // 
-            this.dropDownHoldCargo_Status.Location = new System.Drawing.Point(689, 76);
+            this.dropDownHoldCargo_Status.Location = new System.Drawing.Point(689, 80);
             this.dropDownHoldCargo_Status.Name = "dropDownHoldCargo_Status";
             this.dropDownHoldCargo_Status.Size = new System.Drawing.Size(116, 20);
             this.dropDownHoldCargo_Status.TabIndex = 81;
@@ -8005,7 +8028,7 @@
             // 
             this.label41.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label41.AutoSize = true;
-            this.label41.Location = new System.Drawing.Point(686, 55);
+            this.label41.Location = new System.Drawing.Point(686, 60);
             this.label41.Name = "label41";
             this.label41.Size = new System.Drawing.Size(42, 13);
             this.label41.TabIndex = 80;
@@ -8089,7 +8112,7 @@
             // cmbDS_Status
             // 
             this.cmbDS_Status.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmbDS_Status.Location = new System.Drawing.Point(700, 78);
+            this.cmbDS_Status.Location = new System.Drawing.Point(688, 80);
             this.cmbDS_Status.Name = "cmbDS_Status";
             this.cmbDS_Status.Size = new System.Drawing.Size(156, 20);
             this.cmbDS_Status.TabIndex = 97;
@@ -8098,7 +8121,7 @@
             // cmbDS_RevenueUnit
             // 
             this.cmbDS_RevenueUnit.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmbDS_RevenueUnit.Location = new System.Drawing.Point(354, 79);
+            this.cmbDS_RevenueUnit.Location = new System.Drawing.Point(354, 80);
             this.cmbDS_RevenueUnit.Name = "cmbDS_RevenueUnit";
             this.cmbDS_RevenueUnit.Size = new System.Drawing.Size(156, 20);
             this.cmbDS_RevenueUnit.TabIndex = 96;
@@ -8109,7 +8132,7 @@
             // 
             this.label140.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label140.AutoSize = true;
-            this.label140.Location = new System.Drawing.Point(535, 58);
+            this.label140.Location = new System.Drawing.Point(518, 60);
             this.label140.Name = "label140";
             this.label140.Size = new System.Drawing.Size(73, 13);
             this.label140.TabIndex = 95;
@@ -8119,7 +8142,7 @@
             // 
             this.label141.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label141.AutoSize = true;
-            this.label141.Location = new System.Drawing.Point(695, 58);
+            this.label141.Location = new System.Drawing.Point(683, 60);
             this.label141.Name = "label141";
             this.label141.Size = new System.Drawing.Size(42, 13);
             this.label141.TabIndex = 93;
@@ -8128,7 +8151,7 @@
             // cmbDS_DeliveredBy
             // 
             this.cmbDS_DeliveredBy.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmbDS_DeliveredBy.Location = new System.Drawing.Point(538, 78);
+            this.cmbDS_DeliveredBy.Location = new System.Drawing.Point(521, 80);
             this.cmbDS_DeliveredBy.Name = "cmbDS_DeliveredBy";
             this.cmbDS_DeliveredBy.Size = new System.Drawing.Size(156, 20);
             this.cmbDS_DeliveredBy.TabIndex = 92;
@@ -8138,7 +8161,7 @@
             // 
             this.label138.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label138.AutoSize = true;
-            this.label138.Location = new System.Drawing.Point(349, 58);
+            this.label138.Location = new System.Drawing.Point(349, 60);
             this.label138.Name = "label138";
             this.label138.Size = new System.Drawing.Size(79, 13);
             this.label138.TabIndex = 91;
@@ -8148,7 +8171,7 @@
             // 
             this.label139.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label139.AutoSize = true;
-            this.label139.Location = new System.Drawing.Point(189, 58);
+            this.label139.Location = new System.Drawing.Point(187, 60);
             this.label139.Name = "label139";
             this.label139.Size = new System.Drawing.Size(82, 13);
             this.label139.TabIndex = 89;
@@ -8157,7 +8180,7 @@
             // cmbDS_RevenueType
             // 
             this.cmbDS_RevenueType.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmbDS_RevenueType.Location = new System.Drawing.Point(192, 78);
+            this.cmbDS_RevenueType.Location = new System.Drawing.Point(190, 80);
             this.cmbDS_RevenueType.Name = "cmbDS_RevenueType";
             this.cmbDS_RevenueType.Size = new System.Drawing.Size(156, 20);
             this.cmbDS_RevenueType.TabIndex = 88;
@@ -8166,8 +8189,8 @@
             // 
             // btnDeliveryStatus_Print
             // 
-            this.btnDeliveryStatus_Print.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnDeliveryStatus_Print.Location = new System.Drawing.Point(991, 76);
+            this.btnDeliveryStatus_Print.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.btnDeliveryStatus_Print.Location = new System.Drawing.Point(992, 80);
             this.btnDeliveryStatus_Print.Name = "btnDeliveryStatus_Print";
             this.btnDeliveryStatus_Print.Size = new System.Drawing.Size(70, 22);
             this.btnDeliveryStatus_Print.TabIndex = 85;
@@ -8178,7 +8201,7 @@
             // btnDeliveryStatus_Search
             // 
             this.btnDeliveryStatus_Search.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnDeliveryStatus_Search.Location = new System.Drawing.Point(881, 76);
+            this.btnDeliveryStatus_Search.Location = new System.Drawing.Point(854, 80);
             this.btnDeliveryStatus_Search.Name = "btnDeliveryStatus_Search";
             this.btnDeliveryStatus_Search.Size = new System.Drawing.Size(70, 22);
             this.btnDeliveryStatus_Search.TabIndex = 84;
@@ -8188,12 +8211,12 @@
             // 
             // dateTimeDeliveryStatus_Date
             // 
-            this.dateTimeDeliveryStatus_Date.Location = new System.Drawing.Point(13, 78);
+            this.dateTimeDeliveryStatus_Date.Location = new System.Drawing.Point(10, 80);
             this.dateTimeDeliveryStatus_Date.Name = "dateTimeDeliveryStatus_Date";
-            this.dateTimeDeliveryStatus_Date.Size = new System.Drawing.Size(171, 20);
+            this.dateTimeDeliveryStatus_Date.Size = new System.Drawing.Size(170, 20);
             this.dateTimeDeliveryStatus_Date.TabIndex = 80;
             this.dateTimeDeliveryStatus_Date.TabStop = false;
-            this.dateTimeDeliveryStatus_Date.Text = "Thursday, December 29, 2016";
+            this.dateTimeDeliveryStatus_Date.Text = "Thursday, 29 December 2016";
             this.dateTimeDeliveryStatus_Date.ThemeName = "Office2010Black";
             this.dateTimeDeliveryStatus_Date.Value = new System.DateTime(2016, 12, 29, 16, 31, 36, 782);
             this.dateTimeDeliveryStatus_Date.ValueChanged += new System.EventHandler(this.dateTimeDeliveryStatus_Date_ValueChanged);
@@ -8202,7 +8225,7 @@
             // 
             this.label117.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label117.AutoSize = true;
-            this.label117.Location = new System.Drawing.Point(10, 58);
+            this.label117.Location = new System.Drawing.Point(10, 60);
             this.label117.Name = "label117";
             this.label117.Size = new System.Drawing.Size(34, 13);
             this.label117.TabIndex = 81;
@@ -8238,10 +8261,12 @@
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // timer2
+            // backLoader
             // 
             this.timer2.Interval = 500;
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
+            this.backLoader.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backLoader_DoWork);
+            this.backLoader.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backLoader_RunWorkerCompleted);
             // 
             // errorProviderMsg
             // 
