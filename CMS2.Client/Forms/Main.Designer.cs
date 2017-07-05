@@ -1247,7 +1247,7 @@
             this.pageViewMain.Font = new System.Drawing.Font("Tahoma", 9F);
             this.pageViewMain.Location = new System.Drawing.Point(0, 0);
             this.pageViewMain.Name = "pageViewMain";
-            this.pageViewMain.SelectedPage = this.BookingPage;
+            this.pageViewMain.SelectedPage = this.TrackingPage;
             this.pageViewMain.Size = new System.Drawing.Size(1258, 639);
             this.pageViewMain.TabIndex = 0;
             this.pageViewMain.Text = "Manifest";
@@ -5004,8 +5004,6 @@
             // 
             // cmb_PaymentRemarks
             // 
-            this.cmb_PaymentRemarks.Cursor = System.Windows.Forms.Cursors.Default;
-            this.cmb_PaymentRemarks.Enabled = false;
             this.cmb_PaymentRemarks.Location = new System.Drawing.Point(86, 341);
             this.cmb_PaymentRemarks.Name = "cmb_PaymentRemarks";
             this.cmb_PaymentRemarks.Size = new System.Drawing.Size(161, 20);
@@ -6037,7 +6035,7 @@
             this.label126.AutoSize = true;
             this.label126.Location = new System.Drawing.Point(321, 63);
             this.label126.Name = "label126";
-            this.label126.Size = new System.Drawing.Size(81, 14);
+            this.label126.Size = new System.Drawing.Size(76, 13);
             this.label126.TabIndex = 82;
             this.label126.Text = "RevenueUnit:";
             // 
@@ -6047,7 +6045,7 @@
             this.label96.AutoSize = true;
             this.label96.Location = new System.Drawing.Point(184, 63);
             this.label96.Name = "label96";
-            this.label96.Size = new System.Drawing.Size(113, 14);
+            this.label96.Size = new System.Drawing.Size(101, 13);
             this.label96.TabIndex = 81;
             this.label96.Text = "RevenueUnit Type:";
             // 
@@ -7930,11 +7928,11 @@
             // cmbHC_Revenuetype
             // 
             this.cmbHC_Revenuetype.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            radListDataItem3.Text = "Branch Corporate Office";
-            radListDataItem4.Text = "Branch Satellite Office";
-            this.cmbHC_Revenuetype.Items.Add(radListDataItem3);
-            this.cmbHC_Revenuetype.Items.Add(radListDataItem4);
-            this.cmbHC_Revenuetype.Location = new System.Drawing.Point(380, 76);
+            radListDataItem1.Text = "Branch Corporate Office";
+            radListDataItem2.Text = "Branch Satellite Office";
+            this.cmbHC_Revenuetype.Items.Add(radListDataItem1);
+            this.cmbHC_Revenuetype.Items.Add(radListDataItem2);
+            this.cmbHC_Revenuetype.Location = new System.Drawing.Point(380, 80);
             this.cmbHC_Revenuetype.Name = "cmbHC_Revenuetype";
             this.cmbHC_Revenuetype.Size = new System.Drawing.Size(145, 20);
             this.cmbHC_Revenuetype.TabIndex = 91;
